@@ -8,13 +8,15 @@ Installing the plugin adds the Memolok skills and connects Claude to the Memolok
 opens a browser to sign in — there is no token to configure and nothing to paste. You will need a
 Memolok account; the plugin will offer to create your first **MDL** if you do not have one yet.
 
-Start with `/memolok:start`, or just describe a decision you are making.
+Start with `/memolok:start`, or just describe a decision you are making. If you would rather understand
+the thinking first, `/memolok:help` explains it.
 
 ## Skills
 
 | Skill | What it does |
 | --- | --- |
-| `/memolok:start` | Connect, pick or create a ledger, and get oriented |
+| `/memolok:help` | Use it any time to understand what Memolok is, why it records decisions the way it does, and what the words mean |
+| `/memolok:start` | Connect, sign in, and pick or create a ledger |
 | `/memolok:record-decision` | Record a decision — from a raw matter or a sharpened need |
 | `/memolok:save-matter` | Park something for later and carry on; pick it up in a later session |
 | `/memolok:commit-decision` | Seal a decision as **Accepted** or **Rejected** |

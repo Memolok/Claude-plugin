@@ -3,8 +3,8 @@ name: memolok-method
 description: >-
   Memolok's decision-recording methodology — the fish model, the Decision Transaction Principle, the
   Memolok Decision Record lifecycle and its well-formedness gates, prose format, and the facilitation
-  rules every Memolok skill follows. Load before any Memolok MCP write, and when a user asks what
-  Memolok is, what decision debt means, or why a record cannot be edited after commitment.
+  rules every Memolok skill follows. Load before any Memolok MCP write, and whenever another Memolok
+  skill routes here by name. Use the `help` skill to explain Memolok to a person.
 user-invocable: false
 ---
 

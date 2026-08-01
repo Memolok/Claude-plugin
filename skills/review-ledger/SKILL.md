@@ -129,8 +129,8 @@ Ledger residents only; a staged record has made no bets yet.
 
 ## What the ledger cannot tell you
 
-No tool exists for impact analysis, decision-decay or polluted-premise detection, stale-constraint
-review, cross-record open-question queries, or portfolio-wide outcome latency.
+> **Not built yet.** No tool exists for impact analysis, decision-decay or polluted-premise detection,
+> stale-constraint review, cross-record open-question queries, or portfolio-wide outcome latency.
 
 You can often *reason* toward these by reading records — that is fine, and useful. What is not fine is
 implying the ledger computed it. Say "reading through these, three records lean on that assumption"

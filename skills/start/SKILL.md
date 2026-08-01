@@ -1,10 +1,10 @@
 ---
 name: start
 description: >-
-  Get set up with Memolok — check the connection, pick or create a decision ledger, and see what the
-  plugin can do. Use when someone is trying Memolok for the first time, when a Memolok tool returns
-  an authentication error, when they need to choose between several ledgers or create their first
-  one, or when they ask what Memolok is for.
+  Get set up with Memolok — check the connection, sign in, and pick or create a decision ledger. Use
+  when someone is trying Memolok for the first time, when a Memolok tool returns an authentication
+  error, when Memolok "isn't connecting", or when they need to choose between several ledgers or
+  create their first one.
 ---
 
 # /memolok:start — Get set up
@@ -32,7 +32,8 @@ Briefly, and only if they have not used it before:
 > else you considered, and what you expected to happen. The point is that in six months the reasoning
 > is still there, not just the result.
 
-Do not lecture. One or two sentences, then move on.
+Do not lecture. One or two sentences, then move on. If what they actually want is to understand the
+methodology rather than get connected, hand to **`help`** — that is its whole job.
 
 ## Step 2 — Check the connection
 
@@ -98,6 +99,7 @@ Suggest a starting point based on what they came for:
 
 | They want to | Skill |
 | --- | --- |
+| Understand what Memolok is and why it works this way | **`help`** |
 | Record a decision they have made or are making | **`record-decision`** |
 | Be interviewed through a decision they have not worked out | **`grill-me`** |
 | Note a problem and get back to work | **`save-matter`** |
