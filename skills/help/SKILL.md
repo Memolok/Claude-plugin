@@ -5,7 +5,7 @@ description: >-
   something a decision, why a sealed record cannot be edited, what the vocabulary means, and what the
   product does not do yet. Use when someone asks "what is Memolok", "why can't I just fix that
   record", "why do I have to say what I expect to happen", "isn't this just ADRs", "why not point an
-  LLM at our wiki", or "what does t₀ / the wake / a matter actually mean".
+  LLM at our wiki", "what does t₀ / the wake / a matter actually mean", or "why is it even called that".
 argument-hint: "[what you want explained]"
 ---
 
@@ -30,14 +30,22 @@ Examples:
 - `/memolok:help what's t₀?`
 - `/memolok:help isn't this just ADRs with extra steps?`
 
-## Step 0 — Load the method only if the question is mechanical
+## Step 0 — Open a file before you answer
 
-Lifecycle, statuses, well-formedness gates, fish anatomy, prose format — load the **`memolok-method`**
-skill and answer from it.
+**This file does not answer; it routes.** The substance lives in `references/`, and the one-line answers
+in the map below are there to help you pick the right file — they are not the reply. If someone asked a
+real question, open the file the map points at and answer from what is in it.
 
-*Why does this exist*, *why is it strict*, *what does this word mean*, *how does it compare to X* — answer
-from here. Do **not** load the method for those; it is agent operating substrate and costs its whole
-length. This conditionality is deliberate.
+The failure mode this exists to prevent: skimming the map, recognizing the topic, and composing a
+plausible answer out of general knowledge without opening anything. It reads fluently and it is how you
+end up telling someone that Memolok has no answer to a question these files answer directly.
+
+If the map does not obviously cover the question, open the closest file anyway — and if the question is
+about a word, that is always `references/glossary.md` or `references/why-these-words.md`.
+
+Only when the question is **mechanical** — lifecycle, statuses, well-formedness gates, fish anatomy,
+prose format — load the **`memolok-method`** skill instead and answer from it. Do not load it for *why*
+questions; it is agent operating substrate and costs its whole length. That conditionality is deliberate.
 
 ## What Memolok is
 
@@ -57,8 +65,12 @@ That is the whole model. Everything else is consequence.
 
 ## How to answer
 
+- **Answer from the file, not from memory.** See Step 0. If you find yourself explaining a Memolok term
+  from general knowledge, you have skipped a step.
 - **Answer the question they asked**, one idea at a time. This is teaching, not a brochure. Nobody asked
   for the tour.
+- **"Why is it called that" is a real question with a real answer.** The vocabulary was chosen
+  deliberately and the reasons are recorded. Never treat a naming question as unknowable trivia.
 - **Use their domain.** Kafka examples are for people who use Kafka – but bathroom renovation is an equally
   valuable decision recording domain.
 - **Follow the jargon policy.** Do not introduce **MDR**, **Claim**, or t₀ unless they used the word first
@@ -83,7 +95,8 @@ attach a date or a roadmap position to anything unbuilt.
 
 ## Where the answers live
 
-Load one. Almost every question resolves to a single file.
+Open one. Almost every question resolves to a single file. The middle column is how you choose it, not
+what you say.
 
 ### The problem it exists for
 
@@ -132,7 +145,16 @@ Load one. Almost every question resolves to a single file.
 | --- | --- | --- |
 | Why not point an LLM at our wiki | You will get plausible prose, which is the problem | `references/why-not-a-wiki.md` |
 | Isn't this just ADRs / bureaucracy / overkill | Fair questions, answered without the sales pitch | `references/common-objections.md` |
-| What does *X* mean | Plain definitions | `references/glossary.md` |
+
+### Vocabulary
+
+Any question about a word lands here. Both files, if the question is both.
+
+| They asked | The short answer | Load |
+| --- | --- | --- |
+| What does *X* mean | Plain definitions of every term | `references/glossary.md` |
+| Why is it called *X* | The vocabulary was chosen deliberately; here is why | `references/why-these-words.md` |
+| Why a fish / why "the wake" / why "matter" and not "issue" | Same — the metaphors carry meaning | `references/why-these-words.md` |
 
 ## Then get out of the way
 

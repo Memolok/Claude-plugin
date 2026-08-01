@@ -8,6 +8,10 @@ Everything that happens afterwards is **the wake**: observations about the world
 their own right, each carrying its own date and linked to the decision that caused it. The wake sits
 beside the decision, never inside it.
 
+The name is the one a fish leaves in the water. A decision passes through the world and the world closes
+behind it — you can only see the disturbance once the thing has gone by, and you cannot alter it by
+swimming the stretch again. `why-these-words.md` has the rest of the vocabulary on the same footing.
+
 The two obvious shortcuts are both wrong. Editing the original record to note how it turned out destroys
 the evidence of what was known at commitment. Recording the result as an unrelated entry loses the
 connection, and an outcome nobody can trace back to a decision teaches nothing.

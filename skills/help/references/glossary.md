@@ -1,6 +1,7 @@
 # What the words mean
 
-Plain definitions, with what you would probably have called the thing yourself.
+Plain definitions, with what you would probably have called the thing yourself. For *why* a term is the
+word it is — the fish, the wake, matter rather than issue — see `why-these-words.md`.
 
 ## The two containers
 
