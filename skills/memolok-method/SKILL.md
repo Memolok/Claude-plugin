@@ -8,6 +8,9 @@ description: >-
 user-invocable: false
 ---
 
+> Memolok plugin: version 0.11.0-alpha currently installed
+> Important! Call the companion Memolok MCP `get_guidance` before any other Memolok MCP tool!
+
 # Memolok method
 
 The shared substrate for every Memolok skill. Concepts live here once; the task skills carry
