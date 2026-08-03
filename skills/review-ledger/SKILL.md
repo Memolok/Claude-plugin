@@ -58,6 +58,8 @@ that".
 | One record the user named — "what did MDR-7 say?" | `get_MDR(mdlGuid, mdrNumber=7)` |
 | Unprocessed intake | `list_matters(mdlGuid, status="MatterReceived")` |
 | One matter | `get_matter(mdlGuid, matterId)` |
+| What came of a matter | `get_matter`, then `get_MDR(mdrHandle)` |
+| Why a matter was dismissed | `get_analysis(mdlGuid, analysisId)` |
 | Premises the ledger reasons from | `list_world_facts(mdlGuid)` |
 | What happened after a decision | `list_observed_outcomes(mdlGuid, mdrHandle?)` |
 | Promises versus reality for one record | `get_MDR_learning_delta(mdlGuid, mdrHandle)` |
@@ -121,6 +123,19 @@ from the records, never from the purpose. And a record that looks unrelated to t
 not an anomaly worth flagging: intent is revised in place and often lags the work.
 
 `ledgerIntent: null` means nobody has written one. Say so plainly and offer **`revise-intent`**.
+
+### What came of a parked matter
+
+`get_matter` answers "did anything ever happen about X?" without a ledger-wide scan:
+
+| Response | Means |
+| --- | --- |
+| `analysisId: null` | Never analyzed — still raw bait |
+| `analysisId` set, `producesDecision: []` | Analyzed and dismissed |
+| `producesDecision: [{ mdrHandle }]` | Read the record with `get_MDR(mdrHandle)` |
+
+Answer with what the record decided, not the matter's status. Call `get_analysis` only when asked
+*why* — fetching it per matter turns one review into a dozen calls.
 
 ### The unprocessed inbox
 

@@ -67,7 +67,8 @@ one while meaning the other produces a confident answer to the wrong question.
 | `mdrHandle` | int | exactly one of the two |
 | `mdrNumber` | int | exactly one of the two |
 
-Returns the full record — fish body, `mdrHandle`, `mdrNumber`, `retractable`, and any graph edges.
+Returns the full record — fish body, `mdrHandle`, `mdrNumber`, `retractable`, and any graph edges,
+plus `promptedBy` and `analysisId` (both `null` on the expert path).
 
 Pass the handle when you have one. `mdrNumber` is here for the case where a person cites a number
 and you would otherwise scan `list_MDRs` to find its handle — one call instead of a ledger-wide read.
@@ -94,7 +95,11 @@ than an error, which reads as "no records". Send exact status names.
 | `mdlGuid` | string | yes |
 | `matterId` | string | yes |
 
-Returns `{ id, mdlGuid, status, description }`. Error: `Matter not found.`
+Returns `{ id, mdlGuid, status, description, analysisId, producesDecision }`.
+Error: `Matter not found.`
+
+`analysisId` is `null` until analyzed. `producesDecision` holds `{ mdrHandle, mdrNumber }` per record
+minted, `[]` when dismissed. No rationale here — that is `get_analysis`.
 
 ### `list_matters`
 
@@ -103,7 +108,8 @@ Returns `{ id, mdlGuid, status, description }`. Error: `Matter not found.`
 | `mdlGuid` | string | yes |
 | `status` | string | no |
 
-Returns `{ matters: [...] }` in registration order. Unlike `list_MDRs`, an unknown status raises:
+Returns `{ matters: [...] }` in registration order, rows shaped like `get_matter`. Unlike
+`list_MDRs`, an unknown status raises:
 
 ```
 Unknown matter status {x}. Use one of: ...
@@ -111,6 +117,18 @@ Unknown matter status {x}. Use one of: ...
 
 `list_matters(status="MatterReceived")` is the unprocessed-bait inbox — every matter parked
 but never analyzed.
+
+### `get_analysis`
+
+| Param | Type | Required |
+| --- | --- | --- |
+| `mdlGuid` | string | yes |
+| `analysisId` | string | yes |
+
+Returns `{ id, mdlGuid, analyzes, producesDecision, analysisRationale, performedBy }`.
+Error: `Analysis not found.`
+
+Point read; there is no `list_analyses`. Reach it by `analysisId` from `get_matter` or `get_MDR`.
 
 ### `get_world_fact` / `list_world_facts`
 
@@ -179,7 +197,8 @@ do not sharpen here.
 | `producesDecision` | bool | no (default `true`) |
 | `claimDescription` | `{ markdown, lang? }` | Path A only |
 
-Returns `{ analysis, mdr? }`. Path A mints the record at `New` with `promptedBy` set.
+Returns `{ analysis, mdr? }`. Path A mints the record at `New` with `promptedBy` set; Path B omits
+`mdr` entirely (absent, not null).
 
 ### `create_MDR`
 

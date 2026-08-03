@@ -13,6 +13,7 @@ records, or invented calls. Tell the user it is not available yet.
 | Matter intake | `register_matter` |
 | Matter reads | `get_matter`, `list_matters` |
 | Analysis, Path A and B | `create_analysis` |
+| Analysis reads | `get_analysis` (point read) |
 | Expert mint | `create_MDR` |
 | Record reads | `get_MDR`, `list_MDRs` |
 | Staged patch, including `hasContext` | `update_MDR` |

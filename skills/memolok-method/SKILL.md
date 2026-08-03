@@ -8,7 +8,7 @@ description: >-
 user-invocable: false
 ---
 
-> Memolok plugin: version 0.12.0-alpha currently installed
+> Memolok plugin: version 0.13.0-alpha currently installed
 > Important! Call the companion Memolok MCP `get_guidance` before any other Memolok MCP tool!
 
 # Memolok method
