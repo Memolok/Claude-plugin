@@ -39,6 +39,7 @@ ceremony, never bundled into a recap.
 - Say "captured" only after the write succeeded
 - Cite `mdrNumber` once admitted; never volunteer `mdrHandle` (Rule F)
 - Open questions do **not** block commit (Rule D)
+- The ledger's stated purpose bears on **nothing** here — never raise a mismatch with it before a seal
 
 ## The one precondition that matters
 

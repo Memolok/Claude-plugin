@@ -39,6 +39,7 @@ separate record instead of an edit.
 - The source record must be a ledger resident; staged records have made no bets
 - Say "captured" only after the write succeeded
 - Recording a wake usually **anchors** the source record
+- Judge the outcome against that record's expected outcomes — never against the ledger's stated purpose
 
 ## The core rule
 

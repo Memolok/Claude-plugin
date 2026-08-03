@@ -52,8 +52,10 @@ that".
 
 | The user wants | Call |
 | --- | --- |
+| What this ledger is *for* | `get_MDL(mdlGuid)` |
 | Everything, or a status slice | `list_MDRs(mdlGuid, status?)` |
 | One record in full | `get_MDR(mdlGuid, mdrHandle)` |
+| One record the user named — "what did MDR-7 say?" | `get_MDR(mdlGuid, mdrNumber=7)` |
 | Unprocessed intake | `list_matters(mdlGuid, status="MatterReceived")` |
 | One matter | `get_matter(mdlGuid, matterId)` |
 | Premises the ledger reasons from | `list_world_facts(mdlGuid)` |
@@ -62,6 +64,12 @@ that".
 
 `list_MDRs` returns `headClaimMarkdown` on each row, so a topic search usually means listing and
 matching on that rather than fetching every record.
+
+**When the user names a number, read it directly.** `get_MDR` takes `mdrNumber` in place of
+`mdrHandle` — exactly one of the two — so "what did MDR-7 say?" is one call, not a full listing to
+find a handle. Use the handle whenever you already have one, and use the handle the response carries
+for anything you do to the record afterwards. A number released by an uncommit can be taken by a
+later record, so read back what you got before answering on it.
 
 **The `status` filter on `list_MDRs` is not validated.** A typo returns an empty list, which reads as
 "nothing decided". Use exact status names, and treat a surprising empty result as suspect.
@@ -81,6 +89,7 @@ Not a table dump the user has to read for themselves.
 ### 4. Offer the next move
 
 - They want to change something admitted → **`revise-decision`**
+- The ledger's stated purpose is stale or missing → **`revise-intent`**
 - They want to seal something staged → **`commit-decision`**
 - Something is genuinely undecided → **`record-decision`**
 - Parked bait is worth picking up → **`record-decision`**, which sharpens it
@@ -100,6 +109,18 @@ There is no query for unsettled deferrals. Read the records and collect `openQue
 
 Say plainly that you assembled this by reading, not that the ledger surfaced it — Memolok has no
 open-question registry yet.
+
+### What the ledger says it is for
+
+`get_MDL(mdlGuid)` returns the ledger's stated purpose alongside its title and your role. Read it back
+as what it is — the ledger's own account of itself, written by a practitioner and revisable at any
+time.
+
+It is **not** evidence of what was decided. If someone asks what was decided about X, the answer comes
+from the records, never from the purpose. And a record that looks unrelated to the stated purpose is
+not an anomaly worth flagging: intent is revised in place and often lags the work.
+
+`ledgerIntent: null` means nobody has written one. Say so plainly and offer **`revise-intent`**.
 
 ### The unprocessed inbox
 

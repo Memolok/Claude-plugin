@@ -154,6 +154,9 @@ That question — *polluted premises*, decision decay — has no tool yet. You c
   move is a correcting successor.
 - If the user states a premise while working through a decision, admit it and cite it rather than
   folding it into the Verdict prose — it is reusable by every later record.
+- A fact is true regardless of what the ledger says it is for. Never decline one as off-purpose, and
+  never cite the ledger's stated purpose as context — only World Facts and prior Observed Outcomes are
+  citable.
 
 ## References
 

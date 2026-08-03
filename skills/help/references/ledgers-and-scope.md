@@ -25,6 +25,19 @@ most confusion about what belongs where:
 The last two are outside the ledger on purpose. A decision ledger that starts absorbing project artifacts
 becomes a document store, and the discipline that makes it worth having erodes.
 
+## Saying where the edge is
+
+A ledger can carry a short statement of what it is for — its **Ledger Intent**. That is usually the
+epistemic boundary written down in plain words: what this ledger covers, whose reasoning it holds,
+roughly where it is heading.
+
+It is worth writing precisely because the boundary is otherwise implicit. A ledger whose purpose is
+hard to state in three sentences is often two ledgers sharing a name, and the difficulty of writing it
+is the cheapest signal you will get of that.
+
+It informs and never constrains, though: a decision that falls outside the stated purpose is recorded
+like any other, and no decision ever cites it. `ledger-intent.md` covers why.
+
 ## Boundaries mean privacy
 
 Separating ledgers separates reasoning. A team's deliberation — the options it dismissed, the constraints

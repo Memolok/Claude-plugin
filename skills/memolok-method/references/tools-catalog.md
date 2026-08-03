@@ -7,11 +7,22 @@ Every tool except `ping` and `get_guidance` requires authentication. All ledger 
 
 | Field | When | Role |
 | --- | --- | --- |
-| `mdrHandle` | Every mint | Sole addressing key for record tools, including after admission |
-| `mdrNumber` | Admission only | Ledger citation; `null` while staged |
+| `mdrHandle` | Every mint | Addressing key for record tools, including after admission |
+| `mdrNumber` | Admission only | Ledger citation; `null` while staged. Accepted by `get_MDR` alone |
 | `retractable` | Computed at read | `null` staged; `true` uncommit-eligible; `false` anchored |
 
-Never invent either value. Never address a record tool by `mdrNumber` or by a raw database id.
+Never invent either value. Never address a record tool by a raw database id.
+
+**`mdrHandle` is the standard path whenever you have one** — it is what every record tool takes. `get_MDR` also accepts `mdrNumber`, for the one journey
+where someone cites "MDR-7" and you hold no handle: read it directly rather than scanning
+`list_MDRs`. Two things bound that exception:
+
+- **It is a read.** A number is not a durable address until anchoring — an uncommit releases it and the next
+  admission takes it. A read that lands on the wrong record announces itself, because the response
+  states both identifiers; a write would not, so no write tool accepts a number.
+- **The response carries `mdrHandle`.** Once you have read the record, use its handle for everything
+  else in that session — patches, transitions, wakes, an uncommit.
+
 **Read `retractable` before suggesting an uncommit.**
 
 All prose parameters use `{ markdown, lang? }` — see `prose-and-raci.md` for which are wrapped in a
@@ -29,16 +40,40 @@ No parameters. Returns `{ userId, givenName, familyName, mbox }`.
 
 ### `get_MDLs`
 
-No parameters. Returns `{ mdls: [{ mdlGuid, title, role }] }`.
+No parameters. Returns `{ mdls: [{ mdlGuid, title, role }] }`. A chooser across ledgers — it does not
+carry the Ledger Intent.
+
+### `get_MDL`
+
+| Param | Type | Required |
+| --- | --- | --- |
+| `mdlGuid` | string | yes |
+
+Returns `{ mdlGuid, title, role, ledgerIntent }`. `ledgerIntent` is `null` when the ledger has never
+stated a purpose — that is normal, not an error.
+
+**One ledger's own metadata, not its contents.** For what is inside, use `list_MDRs`, `list_matters`,
+`list_world_facts`, `list_observed_outcomes`.
+
+**Not `get_MDR`.** One letter apart, and completely different: `get_MDL` takes only `mdlGuid` and
+returns ledger metadata; `get_MDR` takes `mdlGuid` + a record key and returns a decision record. Reading
+one while meaning the other produces a confident answer to the wrong question.
 
 ### `get_MDR`
 
 | Param | Type | Required |
 | --- | --- | --- |
 | `mdlGuid` | string | yes |
-| `mdrHandle` | int | yes |
+| `mdrHandle` | int | exactly one of the two |
+| `mdrNumber` | int | exactly one of the two |
 
-Returns the full record — fish body, `mdrNumber`, `retractable`, and any graph edges.
+Returns the full record — fish body, `mdrHandle`, `mdrNumber`, `retractable`, and any graph edges.
+
+Pass the handle when you have one. `mdrNumber` is here for the case where a person cites a number
+and you would otherwise scan `list_MDRs` to find its handle — one call instead of a ledger-wide read.
+**Exactly one of them MUST be passed.** A number can have been released by an uncommit and taken by a
+later record, so check the record you get back is the one meant; the handle it returns is what you
+use for every other tool.
 
 ### `list_MDRs`
 
@@ -102,7 +137,27 @@ only.
 
 ### `create_MDL`
 
-`title` (string). Caller becomes `owner`.
+| Param | Type | Required |
+| --- | --- | --- |
+| `title` | string | yes |
+| `ledgerIntent` | `{ description: { markdown, lang? } }` | no |
+
+Caller becomes `owner`. Returns the same shape as `get_MDL`.
+
+Pass `ledgerIntent` when the user has agreed a purpose — one call, not create-then-set. Note the nested
+shape: `{ "description": { "markdown": "…" } }`, **not** a flat `{ markdown }`.
+
+### `set_ledger_intent`
+
+| Param | Type | Required |
+| --- | --- | --- |
+| `mdlGuid` | string | yes |
+| `ledgerIntent` | `{ description: { markdown, lang? } }` | yes |
+
+**Full replacement, not an append.** There is no history and no version. Read the current statement
+with `get_MDL` first, then send the complete new one.
+
+Requires `member` or above. Returns the same shape as `get_MDL`.
 
 ### `register_matter`
 

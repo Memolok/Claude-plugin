@@ -46,8 +46,16 @@ Transaction Principle, the lifecycle gates, and facilitation Rules A–G.
 ### 1. Establish the ledger
 
 Use the `mdlGuid` already in play. If there is none, check `.memolok/mdl.yml` in the project when
-files are available, then fall back to `get_MDLs`. If the user has no ledger, agree a title and call
-`create_MDL`.
+files are available, then fall back to `get_MDLs`.
+
+Then `get_MDL(mdlGuid)` — the ledger's stated purpose, when it has one, tells you what this ledger is
+usually about, which helps both the intake fork below and sharpening the Claim in the user's own domain
+language rather than generic phrasing. It is background, never a test: a decision that looks unrelated
+to the stated purpose is recorded exactly like any other, with no comment and no request to justify it.
+
+If the user has no ledger, agree a title and call `create_MDL`. Draft a purpose from what they have
+already told you and offer it in one line — *"I'll note this ledger is for the storage rebuild"* — and
+take a "skip" without asking twice. They came here to record a decision; never delay it for this.
 
 If there may be parked bait, `list_matters(status="MatterReceived")` shows it. If one matches
 what the user just raised, use that matter rather than registering a duplicate.

@@ -61,6 +61,16 @@ get_MDLs → { mdls: [{ mdlGuid, title, role }] }
 If project files are available, check `.memolok/mdl.yml` for a `mdlGuid` key first; that is the
 project's own answer and beats asking.
 
+Once the ledger is settled, read it:
+
+```
+get_MDL(mdlGuid) → { mdlGuid, title, role, ledgerIntent }
+```
+
+If it states a purpose, say it back in a line — that is the orientation the user came for. If
+`ledgerIntent` is `null`, mention that the ledger has not said what it is for and offer to write it;
+most ledgers have not, so this is an invitation, not a problem report.
+
 | Role | Means |
 | --- | --- |
 | `owner`, `admin` | Full access, including uncommitting records |
@@ -74,13 +84,27 @@ If they are a `visitor`, say so now rather than letting them build a decision th
 A ledger is an **epistemic boundary** — a set of decisions sharing a context and a worldview. One
 project, one team, one initiative. Not one per person, and not one per company.
 
-Agree a title with the user, then:
+Agree a title **and a purpose** before calling anything. This is the moment for it: setup is why the
+user is here, and stating it now costs one call instead of two. Load `ledger-intent.md` from
+**`memolok-method`** for how to draft one — briefly, and by proposing a draft rather than asking cold.
 
 ```json
-{ "title": "Media server rebuild" }
+{
+  "title": "Media server rebuild",
+  "ledgerIntent": {
+    "description": {
+      "markdown": "Rebuilding the home media server so it survives a drive failure and a house fire. One hobbyist, weekends only.",
+      "lang": "en"
+    }
+  }
+}
 ```
 
 They become `owner`. Adding anyone else is done by a Memolok administrator, not through this plugin.
+
+**The purpose is optional.** If the user does not want to write one now, create the ledger with the
+title alone and move on — it can be stated any time with **`revise-intent`**. Never hold up a ledger
+over it.
 
 ## Step 5 — Offer to remember it
 
@@ -106,6 +130,7 @@ Suggest a starting point based on what they came for:
 | See what is already on the ledger | **`review-ledger`** |
 | Seal a decision that is drafted | **`commit-decision`** |
 | Change something already sealed | **`revise-decision`** |
+| Say what the ledger itself is for, or update it | **`revise-intent`** |
 | Record how a past decision turned out | **`record-outcome`** |
 | State a premise the ledger should know | **`manage-almanac`** |
 

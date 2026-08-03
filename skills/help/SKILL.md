@@ -138,6 +138,7 @@ what you say.
 | --- | --- | --- |
 | Where do facts and assumptions go | The almanac — true regardless of any one decision | `references/world-almanac.md` |
 | How many ledgers should we have | One per shared worldview, not one per person | `references/ledgers-and-scope.md` |
+| Why does a ledger say what it is for | Because every session starts with no memory of the last | `references/ledger-intent.md` |
 
 ### Comparisons and pushback
 
@@ -154,7 +155,7 @@ Any question about a word lands here. Both files, if the question is both.
 | --- | --- | --- |
 | What does *X* mean | Plain definitions of every term | `references/glossary.md` |
 | Why is it called *X* | The vocabulary was chosen deliberately; here is why | `references/why-these-words.md` |
-| Why a fish / why "the wake" / why "matter" and not "issue" | Same — the metaphors carry meaning | `references/why-these-words.md` |
+| Why a fish / why "the wake" / why "matter" and not "issue" / why "intent" and not "mission" | Same — the metaphors carry meaning | `references/why-these-words.md` |
 
 ## Then get out of the way
 
@@ -164,5 +165,6 @@ Any question about a word lands here. Both files, if the question is both.
 | Record a decision they have made or are making | **`record-decision`** |
 | Be walked through one they have not worked out | **`grill-me`** |
 | See what the ledger already holds | **`review-ledger`** |
+| Write down what a ledger is for | **`revise-intent`** |
 
 Explaining is not the goal. Someone who understands Memolok and has recorded nothing has gained nothing.

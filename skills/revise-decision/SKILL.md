@@ -39,6 +39,7 @@ skill.
 - Never tell the user a committed record can be patched in place
 - Say "captured" only after the write succeeded
 - Cite `mdrNumber` for admitted records; never volunteer `mdrHandle` (Rule F)
+- **Never** propose a revision because a record no longer matches the ledger's stated purpose
 
 ## Workflow
 

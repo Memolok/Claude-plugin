@@ -8,7 +8,8 @@ records, or invented calls. Tell the user it is not available yet.
 | Capability | Tools |
 | --- | --- |
 | Auth and health | `ping`, `get_guidance`, `whoami` |
-| Ledger discovery and creation | `get_MDLs`, `create_MDL` |
+| Ledger discovery and creation | `get_MDLs`, `get_MDL`, `create_MDL` |
+| Ledger intent | `set_ledger_intent` (read it back with `get_MDL`) |
 | Matter intake | `register_matter` |
 | Matter reads | `get_matter`, `list_matters` |
 | Analysis, Path A and B | `create_analysis` |
@@ -102,5 +103,6 @@ There are no delete tools of any kind, for any entity.
 | `worldFactId`, `observedOutcomeId` | invented ledger numbers |
 | `mdlGuid` | `adlGuid` |
 
-Tools always take `mdrHandle`. In conversation, prefer `mdrNumber` once admitted and a head Claim
-paraphrase while staged.
+Tools take `mdrHandle`; as a convenience, `get_MDR` also accepts `mdrNumber` so a record someone cites by number can be read directly. Use the handle whenever you hold one.
+
+In conversation, prefer `mdrNumber` once admitted and a head Claim paraphrase while staged.

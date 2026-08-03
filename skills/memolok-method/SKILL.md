@@ -8,7 +8,7 @@ description: >-
 user-invocable: false
 ---
 
-> Memolok plugin: version 0.11.0-alpha currently installed
+> Memolok plugin: version 0.12.0-alpha currently installed
 > Important! Call the companion Memolok MCP `get_guidance` before any other Memolok MCP tool!
 
 # Memolok method
@@ -37,6 +37,7 @@ months, and a single stakeholder is effectively a team of *past-me*, *present-me
 | Term | Meaning |
 | --- | --- |
 | **Memolok Decision Ledger** (**MDL**) | The tenancy and epistemic boundary. Every call is scoped by `mdlGuid`. Also: *ledger* |
+| **Ledger Intent** | The ledger's own stated purpose. Orientation for new work; never cited, never binding |
 | **Memolok Decision Record** (**MDR**) | One decision. Also: *the fish*, *record* |
 | **handle** | Server-minted address, present from creation |
 | **number** | Ledger citation identity, assigned only on admission |
@@ -63,11 +64,44 @@ files; they are not the ledger and will be lost.
 ### Session invariants
 
 1. Unless an MDL GUID is already established, call `get_MDLs` before any write. Pick an `mdlGuid`
-   from the result. If the list is empty, agree a title with the user and call `create_MDL`.
+   from the result. If the list is empty, agree a title **and a purpose** with the user and call
+   `create_MDL` once, carrying both — at the elicitation posture your current skill allows
+   (`references/ledger-intent.md`).
 2. If a project folder is available, check `.memolok/mdl.yml` for key `mdlGuid` first. If the user
    names an MDL and no file exists, offer to save it there for next time.
 3. If recording decisions turns out to be relevant, **keep recording them.** You are only reading
    this because the user asked for it.
+
+## Ledger Intent
+
+A ledger may state its own purpose: what it is for, who it serves, roughly where it is heading. One
+short piece of prose per ledger, revised freely in place, read with `get_MDL`.
+
+It exists because you start every session cold. The ledger is the only thing that persists between
+them, so it is the only place that orientation can live.
+
+**It informs; it never gates.** Intent tells you what a new **Matter** is likely to be about, or which
+way to sharpen a head **Claim**. It is not policy. A decision that looks nothing like the stated
+purpose needs **no** more justification than any other — the intent may simply be stale, or the
+decision may be a legitimate case nobody anticipated. Never ask a user to defend a divergence, and
+never make a stated purpose a precondition for creating a ledger, parking a matter, or recording a
+decision.
+
+**Nothing may cite it.** No record, **Claim**, or **World Fact** points at a ledger's intent — it is
+not a premise, not evidence, and not a justification. **World Facts** are citable precisely because
+they freeze in substance when admitted; intent is perpetually revisable, so a record resting on it
+would be resting on a moving target. There is no id for it on the tool surface, so there is nothing to
+cite even by accident.
+
+**Prospective only — this is the line that matters.** Intent belongs to work that has not happened
+yet: what to raise, what to explore, how to sharpen. It has no place in **retrospective** work.
+
+> Never let a ledger's stated purpose influence whether a record is sealed, whether a sealed record
+> should be revised, or how an outcome is judged — **even when it is already in front of you** from
+> earlier in the session. Sealing is governed by the well-formedness gates and the user's explicit
+> commitment; revision by `retractable` and the record's own content; an outcome by the expected
+> outcomes that record committed to at t₀. Reading a past record through the ledger's *current* stated
+> purpose is a misreading: a record must stand on its own citations.
 
 ## The fish model
 
@@ -160,8 +194,8 @@ the user, never authored by you and handed down.
 
 | Key | Role |
 | --- | --- |
-| `mdrHandle` | Mint-time address. **Always** pass on record tools, including after admission. Do not volunteer in prose (Rule F); cite freely when asked |
-| `mdrNumber` | Ledger identity, assigned only at admission. `null` while staged. **Primary user-facing identifier once admitted** |
+| `mdrHandle` | Mint-time address. **Pass on record tools whenever you have one**, including after admission. Do not volunteer in prose (Rule F); cite freely when asked |
+| `mdrNumber` | Ledger identity, assigned only at admission. `null` while staged. **Primary user-facing identifier once admitted**; can be used with `get_MDR`, which also supports `mdrHandle` (and returns both). |
 | `retractable` | Computed uncommit eligibility: `null` staged; `true` committed and not anchored; `false` anchored. **Read before suggesting an uncommit** |
 
 ## Decision Transaction Principle
@@ -345,6 +379,7 @@ Load when the situation calls for it — not upfront.
 
 | File | Load when |
 | --- | --- |
+| `references/ledger-intent.md` | Drafting or revising a ledger's stated purpose, in any journey |
 | `references/lifecycle-and-gates.md` | A transition is refused, or you need the exact validator requirements |
 | `references/tools-catalog.md` | A tool errors, or you need exact parameter names and shapes |
 | `references/prose-and-raci.md` | Composing prose payloads, or attributing RACI roles |

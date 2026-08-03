@@ -60,6 +60,11 @@ user has final agency on everything, and you are not obliged to have a view on e
 
 Help where you genuinely can. Do not manufacture a recommendation to fill the slot.
 
+Where the ledger states a purpose, recommendations should sit comfortably with it — that is most of
+what reading it buys you. But it informs your suggestions only; it never constrains the user's answers.
+If they go somewhere the stated purpose did not anticipate, follow them there and record it. Do not
+point out the mismatch, and never ask them to justify it.
+
 ## Session loop
 
 ```
@@ -82,9 +87,13 @@ That is continue-versus-end theatre. The user knows how to say they are done.
 
 1. Establish the ledger: the `mdlGuid` in play, else `.memolok/mdl.yml`, else `get_MDLs`. If there are
    several, one question to pick.
-2. `list_MDRs` — surface related prior decisions. Flag duplicate head Claims before grilling a
+2. `get_MDL` — **before the first question.** The ledger's stated purpose tells you what this ledger is
+   driving at and which branches are likely to matter, which is worth several questions you now do not
+   have to ask. This is the *look things up rather than asking* rule doing its job: never spend an
+   interview turn asking what the ledger is for when a read answers it.
+3. `list_MDRs` — surface related prior decisions. Flag duplicate head Claims before grilling a
    question that is already settled.
-3. `list_matters(status="MatterReceived")` — parked bait may already cover this topic, and it is
+4. `list_matters(status="MatterReceived")` — parked bait may already cover this topic, and it is
    better raised now than re-elicited.
 
 **Allowed throughout:** every read tool, plus the filesystem and anything else that answers a factual
