@@ -54,6 +54,8 @@ Start with `ping`. It is the only tool that tells you about the connection rathe
 | Tools absent entirely | The server was never connected | Connect it in the client's settings |
 | Every call returns unauthorized | No valid credential | Re-run the browser sign-in, or check the token |
 | `Authenticated token has no linked Memolok user.` | The credential is valid but not linked to an account | Reconnect to sign in again, or the token needs an administrator |
+| `The access token carries a malformed Memolok user id.` | The credential is valid but its identity claim is unusable | Reconnect to sign in again; if it recurs, report it |
+| `This PAT's client id is malformed.` | The Personal Access Token is damaged or mistyped | Check the token, or an administrator issues a new one |
 | `Memolok Decision Ledger not found.` on a read | Authenticated, but not a member of that ledger | `get_MDLs` to see what they can actually reach |
 | `You are not a member of this Memolok Decision Ledger.` on a write | Reading is fine, writing is not | An administrator adds them |
 | Writes refused, reads fine | `visitor` role | An administrator changes the role |
@@ -61,6 +63,28 @@ Start with `ping`. It is the only tool that tells you about the connection rathe
 
 The key distinction: **not authenticated** is a connection problem, while **not a member** is a
 permissions problem. `ping` succeeding tells you which one you are looking at.
+
+## An error carrying a reference
+
+Two replies quote a `req_…` reference. They mean different things and only one is retryable.
+
+| Reply | What to do |
+| --- | --- |
+| `Invalid arguments for this tool: …` followed by field names | Your call was malformed. Fix the named fields and call again |
+| `Memolok hit an internal error and could not complete this request.` | Something failed on the server. **Do not retry, and do not diagnose** |
+
+The internal-error reply is deliberately empty of detail — the server keeps the cause in its own logs
+and hands out only the reference. There is nothing in the message to reason from, so an explanation
+built on it would be invented. Say plainly that the operation failed, give the user the reference
+verbatim, and offer to continue with something else. An administrator can resolve a reference to the
+exact failure.
+
+Retrying is worse than useless here. These are overwhelmingly deterministic faults — a rejected write
+shape, a misconfiguration — and an identical call fails identically while burning the user's time. If
+the same reference class appears twice in a session, stop and report rather than working around it.
+
+Do not let a failure here become a reason to write the user's decision somewhere else. A record that
+did not reach the ledger was not recorded.
 
 Reads on a ledger the user cannot access return `Memolok Decision Ledger not found.` — identical to a
 ledger that does not exist. That is deliberate, so existence is not leaked. Do not read it as proof

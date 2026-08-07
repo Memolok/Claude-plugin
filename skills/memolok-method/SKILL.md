@@ -8,7 +8,7 @@ description: >-
 user-invocable: false
 ---
 
-> Memolok plugin: version 0.13.0-alpha currently installed
+> Memolok plugin: version 0.14.0-alpha currently installed
 > Important! Call the companion Memolok MCP `get_guidance` before any other Memolok MCP tool!
 
 # Memolok method
@@ -372,6 +372,26 @@ or a plain *got it*.
 
 **Capture** is reserved for a successful server-side write. After one, saying the user's intent was
 captured is legitimate.
+
+### When a write fails with a reference
+
+A reply of the form *"Memolok hit an internal error and could not complete this request. Reference:
+`req_…`"* means the write did **not** happen. Nothing was captured, and the record you were shaping
+does not exist on the ledger.
+
+The message carries no detail on purpose — the cause is in the server's logs and the reference is the
+only handle on it. So there is nothing to reason from, and any explanation you offer for *why* it
+failed is invented. Tell the user plainly that it failed, give them the reference verbatim, and let
+them decide what to do next. An administrator can resolve it to the exact failure.
+
+Do not retry the identical call. These faults are overwhelmingly deterministic, so a second attempt
+fails the same way and the third looks like flailing. Above all, do not respond by writing the content
+to a local file — that is not the ledger, and a decision written there is a decision that was not
+recorded. Holding it in the conversation and offering to retry once the user has an answer is the
+honest fallback.
+
+*"Invalid arguments for this tool: …"* is the opposite case and **is** retryable — it names the fields
+that were wrong, so correct them and call again.
 
 ## References
 
