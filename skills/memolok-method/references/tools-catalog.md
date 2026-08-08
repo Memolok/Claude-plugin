@@ -261,6 +261,73 @@ wrong when admitted — never for ordinary world drift.
 There is no `observedAt` parameter — the server stamps the current time, so a wake cannot be
 backdated. Recording one typically Anchors the source record.
 
+## Scratchpad tools
+
+Disposable working notes. See the **`manage-notes`** skill for the journeys.
+
+**Identifiers are different here, on purpose.** A `scratchpadId` is `sp_` followed by 24 hex
+characters — `sp_6a761688013eff0dc9e8dee1` — not the bare id every other entity uses. The prefix is
+what lets every reference field refuse one *by name*: pass a `scratchpadId` to `hasContext`,
+`correctsFact`, `analyzes`, `tests.outcomeId` or `evidence` and the call fails telling you it is a
+scratchpad, rather than reading as a mistyped World Fact id. Do not treat the two as interchangeable
+in either direction.
+
+### `create_scratchpad`
+
+| Param | Type | Required |
+| --- | --- | --- |
+| `mdlGuid` | string | yes |
+| `description` | `{ markdown, lang? }` | yes |
+
+Flat prose, like `register_matter` — **not** the nested `{ description: { markdown } }` shape that
+`ledgerIntent` and `verdict` take. The body is the entry; there is no second level.
+
+Returns `{ scratchpadId, mdlGuid, description, createdAt, createdBy, modifiedAt, contributors }`.
+
+### `get_scratchpad`
+
+`mdlGuid` + `scratchpadId`. The only tool that returns a full body.
+
+### `replace_scratchpad`
+
+`mdlGuid`, `scratchpadId`, `description`. **Full replacement, not an append.** There is no partial
+update: read with `get_scratchpad`, compose the whole new body, send that. Adds the caller to
+`contributors` and advances `modifiedAt`.
+
+### `delete_scratchpad`
+
+`mdlGuid` + `scratchpadId`. **The only delete tool in Memolok.** Immediate and final — no recovery
+window. Returns `{ scratchpadId, mdlGuid, deleted: true }`.
+
+### `list_scratchpads`
+
+| Param | Type | Required |
+| --- | --- | --- |
+| `mdlGuid` | string | yes |
+| `limit` | int | no (default 25, clamped to 100) |
+| `offset` | int | no (default 0) |
+
+Returns `{ scratchpads: [...], total, limit, offset }`, most recently touched first. Rows are
+previews — `excerpt`, `truncated`, `length` — and **never carry a body**.
+
+### `search_scratchpads`
+
+| Param | Type | Required |
+| --- | --- | --- |
+| `mdlGuid` | string | yes |
+| `query` | string | yes |
+| `limit` | int | no (default 25) |
+
+Returns `{ scratchpads: [...], total, limit, matchMode }`. Rows add `matchExcerpt` — a window around
+the hit — and `score` when the text pass ranked them.
+
+`matchMode` is `text` (stemmed, relevance-ranked) or `regex` (the text pass found nothing, so a
+substring pass answered). An empty result means no note matched; it is not a cue to list everything.
+
+**Attribution.** `createdBy` is `{ userId, name? }`; `contributors` is a list of the same. The
+contributor set is cumulative and never shrinks, so it does **not** say who edited most recently —
+pair it with `modifiedAt`. Any of the four attribution facts may be absent, which is normal.
+
 ## Common errors
 
 | Message | Cause |
@@ -280,5 +347,9 @@ backdated. Recording one typically Anchors the source record.
 | `Observed Outcomes can only realizeFrom a ledger-resident Memolok Decision Record...` | Wake on a staged record |
 | `discoveryType Expected requires tests referencing an expectedOutcome.` | Missing `tests` |
 | `Analysis can only start from a Matter in MatterReceived status.` | Matter already analyzed |
+| `{field} is a scratchpad id.` | A `sp_…` value passed to a reference field. Nothing may cite a note — admit a World Fact instead |
+| `{field} must be a scratchpad id of the form 'sp_<24 hex characters>'.` | A bare id passed where a `scratchpadId` was expected |
+| `Scratchpad not found.` | Missing note, wrong ledger, or already deleted |
+| `A scratchpad body may be at most 65536 bytes;…` | Paste too large — split it, or keep a pointer to the source |
 | `claimDescription is required when analysis produces a Memolok Decision Record.` | Path A without a claim |
 | `A Memolok Decision Record cannot cite its own Observed Outcome in hasContext...` | DTP violation |

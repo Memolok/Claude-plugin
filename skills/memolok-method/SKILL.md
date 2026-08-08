@@ -8,7 +8,7 @@ description: >-
 user-invocable: false
 ---
 
-> Memolok plugin: version 0.14.0-alpha currently installed
+> Memolok plugin: version 0.15.0-alpha currently installed
 > Important! Call the companion Memolok MCP `get_guidance` before any other Memolok MCP tool!
 
 # Memolok method
@@ -44,6 +44,7 @@ months, and a single stakeholder is effectively a team of *past-me*, *present-me
 | **staged** | Preliminary status: **New**, **Deliberating**, **Proposed** |
 | **ledger resident** | Stable status: **Accepted**, **Rejected**, **Superseded** |
 | **bait** | A **Matter** — a raw input in the raiser's own words |
+| **Scratchpad** | A disposable working note. Freely edited and deleted; never citable. Also: *note* |
 | **the wake** | Everything observed after commitment |
 
 ### Jargon policy
@@ -102,6 +103,35 @@ yet: what to raise, what to explore, how to sharpen. It has no place in **retros
 > commitment; revision by `retractable` and the record's own content; an outcome by the expected
 > outcomes that record committed to at t₀. Reading a past record through the ledger's *current* stated
 > purpose is a misreading: a record must stand on its own citations.
+
+## Scratchpads
+
+A ledger may hold freeform working notes — a pasted quote, a scraped page, rough figures, a batch of
+observations that fit no typed entity. Created, edited and deleted freely at any time. They are the
+**only disposable construct in the model**; everything else is immutable on admission or sealed at t₀.
+
+The full journey — capture, retrieval, revision, deletion, promotion — belongs to the
+**`manage-notes`** skill. Two things live here because they bind every journey:
+
+**Routing.** *Does the user expect anyone to act on this?* and *would it be bad if this vanished?*
+If either is yes, it is not a note — it is a **Matter** or a **World Fact**. A scratchpad used as
+intake means real work is never processed; a Matter used as a notepad fills the queue with things
+nobody intends to decide. When genuinely ambiguous, prefer the note and say so in one clause.
+
+> **Scratchpads never argue for a decision.**
+>
+> You may read a note while helping someone think, exactly as you may read anything they show you in
+> conversation. You may **never** present its content as ledger grounding — not as `hasContext`, not
+> cited in a **Verdict**, not standing in for a premise nobody admitted. If material is load-bearing
+> for a decision, it must be admitted as a **World Fact** first.
+>
+> This is the single most important behavioural rule about scratchpads. The whole disposability
+> contract rests on it: a note is only safe to rewrite or bin freely because no record's reasoning
+> can be resting on one. The tools refuse a scratchpad id in every reference field, but the point is
+> not to avoid getting caught — it is that a decision must stand on premises somebody admitted.
+
+Content mined out of a note is authored **fresh** through its own ordinary path, with no link back.
+Tell the user that once, plainly, when it happens.
 
 ## The fish model
 

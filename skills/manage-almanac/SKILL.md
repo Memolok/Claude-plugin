@@ -56,6 +56,28 @@ The test: **would this still be true if the decision it relates to had never com
 If the user brought a *symptom* rather than a premise, that is bait — use **`save-matter`** or
 **`record-decision`** instead.
 
+### The almanac is not a notepad
+
+A World Fact is a **citable admission the ledger stands behind**, immutable in substance once
+admitted and correctable only by a successor. That discipline is the whole point, and it is the wrong
+container for material that does not want it.
+
+Raw working material — a pasted quote, a scraped page, a price list, a batch of observations that fit
+no typed entity — belongs in a **scratchpad** (**`manage-notes`**), not here. The pull toward
+bundling such material into one World Fact is real and should be resisted: it puts unstable content
+in the almanac, where every future record may cite it and no correction path fits.
+
+| The user brought | Where it goes |
+| --- | --- |
+| *"the vendor's SLA is 99.5%"* | **World Fact** — an assertion, checkable, worth standing behind |
+| *"here's their whole pricing page"* | **Scratchpad** — source material, not an admission |
+| *"legal requires seven-year retention"* | **World Fact** |
+| *"rough figures from an afternoon of digging"* | **Scratchpad** — nothing here is settled |
+
+The test: **is the user asserting this, or just keeping it?** If a decision could reasonably rest on
+it and they would stand behind it, admit it. Otherwise keep it as a note — and if it later turns out
+to matter, admit it *then*, freshly worded.
+
 ## Workflow
 
 ### 1. Establish the ledger

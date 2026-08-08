@@ -54,9 +54,32 @@ now**. "Log this and move on", "park it", "not now", "just so we don't forget".
 | User wants it noted, not decided | **This one** |
 | User wants to act on it now | **`record-decision`** |
 | User is unsure whether to act | **`record-decision`** — its intake fork handles that |
+| User wants it *kept*, with nobody expected to act on it | **`manage-notes`** — a scratchpad |
 
 If the user did not signal parking, do not assume it on their behalf because they seem busy. Silently
 downgrading a decision to a note loses the decision.
+
+### Matter or scratchpad?
+
+Both are one-turn captures; the difference is "actionability" – **whether anyone is expected to do something**.
+
+A Matter has an implied disposition, however distant — somebody will eventually look at it. A
+scratchpad has none: it is a pasted quote, a scraped page, rough figures, material worth keeping that
+nobody owes anything to.
+
+| The user brought | Entity |
+| --- | --- |
+| *"the CSV export mangles unicode"* | **Matter** — a defect somebody should fix |
+| *"here's the quote they sent"* | **Scratchpad** — no request in it |
+| *"we could probably drop the nightly rebuild"* | **Matter** — an idea with a disposition |
+| *"jotting this before I forget"* | **Scratchpad** |
+
+Getting it wrong costs in both directions: a scratchpad used as intake means real work is never
+processed, and a Matter used as a notepad fills the unprocessed-bait inbox with things nobody intends
+to decide — which is worse, because matters are immutable and cannot be deleted.
+
+When genuinely ambiguous, prefer the **scratchpad** and say so in one clause. It is the reversible
+choice: a note can be promoted into a matter later (albeit only via agent facilitation), whereas a matter can never be taken back.
 
 ## Workflow
 

@@ -8,10 +8,11 @@ Ask of whatever the user brought: **could some future observation settle whether
 - No, it describes a situation, a wish, an opportunity, or an open question → **bait**, matter branch.
 - No, it names a solution → the need has been amputated. Recover it before routing.
 
-Then two further exits, because not everything a user says is a decision at all:
+Then three further exits, because not everything a user says is a decision at all:
 
 - It is true regardless of any choice → **World Fact**.
 - It is something that happened after a decision already sealed → **wake**.
+- It asserts nothing and asks nothing — it is just material worth keeping → **Scratchpad**.
 
 ## Why this is worth getting right
 
@@ -95,6 +96,19 @@ confirm, stop. Do not analyze it, do not sharpen it, and do not offer to open a 
 
 It stays at `MatterReceived` and shows up later in
 `list_matters(status="MatterReceived")`.
+
+### 10. "Here's the quote they sent — 3 nodes at $412/mo, 12-month term."
+
+**A scratchpad.** No assertion the ledger should stand behind, and no request. Hand off to
+`manage-notes`: save it, say *saved*, carry on.
+
+The two questions that place it: *does the user expect anyone to act on this?* (no) and *would it be
+bad if this vanished?* (no — the quote is still in their inbox). Either yes would move it.
+
+Contrast with **"the vendor's SLA is 99.5%"**, which *is* a World Fact — an assertion a decision
+could rest on. The quote is source material; the SLA figure drawn out of it is a premise. If the
+figure later turns out to matter, admit it as a fact **then**, freshly worded, and say plainly that
+the ledger keeps no trail back to the note.
 
 ## Common failures
 

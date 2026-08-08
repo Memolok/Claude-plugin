@@ -139,6 +139,7 @@ what you say.
 | Where do facts and assumptions go | The almanac — true regardless of any one decision | `references/world-almanac.md` |
 | How many ledgers should we have | One per shared worldview, not one per person | `references/ledgers-and-scope.md` |
 | Why does a ledger say what it is for | Because every session starts with no memory of the last | `references/ledger-intent.md` |
+| Where do rough notes go / why can't I cite my note | Scratchpads — the one disposable thing, and why nothing may point at it | `references/scratchpads.md` |
 
 ### Comparisons and pushback
 

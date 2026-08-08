@@ -25,6 +25,7 @@ the thinking first, `/memolok:help` explains it.
 | `/memolok:revise-decision` | Uncommit, supersede, or settle an earlier open question |
 | `/memolok:record-outcome` | Record what actually happened, against what was promised |
 | `/memolok:manage-almanac` | Admit the world facts your decisions reason from |
+| `/memolok:manage-notes` | Scratchpad management: save, find and destroy working notes |
 | `/memolok:revise-intent` | Say what a ledger is for, or update it when the focus shifts |
 
 Memolok's methodology — the decision lifecycle, what seals at commitment, and how records are

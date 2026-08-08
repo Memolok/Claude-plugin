@@ -145,6 +145,18 @@ mostly matters parked through **`save-matter`** during other work.
 Present them as raw signal, in the words they were logged in. Do not sharpen them into needs while
 summarizing; that is the pickup session's job, with the user present.
 
+### Scratchpads are not ledger contents
+
+A review covers decisions, deferrals and unprocessed bait. **Scratchpads are none of those** — they
+carry no assertion, no disposition and no expectation, so they never belong in a sweep.
+
+Do not list them alongside matters as though they were waiting for something, and never surface one
+as stale, untouched or needing attention. **A note that has sat for a year is behaving correctly.**
+There is no review signal here to compute and none to invent.
+
+If the user asks about their notes specifically, that is the **`manage-notes`** journey — reach for
+`search_scratchpads`, not a review.
+
 ### Before changing a record
 
 `get_MDR` and read two fields:

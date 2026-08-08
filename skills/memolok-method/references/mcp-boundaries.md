@@ -22,6 +22,7 @@ records, or invented calls. Tell the user it is not available yet.
 | World almanac | `admit_world_fact`, `get_world_fact`, `list_world_facts` |
 | Wake | `record_observed_outcome`, `get_observed_outcome`, `list_observed_outcomes` |
 | Learning delta, one record | `get_MDR_learning_delta` |
+| Working notes | `create_scratchpad`, `get_scratchpad`, `replace_scratchpad`, `delete_scratchpad`, `list_scratchpads`, `search_scratchpads` |
 
 ### Graph edges, staged records only
 
@@ -92,7 +93,21 @@ Linking records to repository files, and freezing cited artifacts at t₀, are n
 
 ### Deletion
 
-There are no delete tools of any kind, for any entity.
+**`delete_scratchpad` is the only delete tool, for the only deletable entity.** Everything else is
+immutable on admission (`Matter`, `WorldFact` substance) or sealed at t₀ (`DecisionRecord`), and
+there is no delete for any of them — a matter registered by mistake is closed through Path B, a wrong
+fact gets a correcting successor, a regretted record is uncommitted or superseded.
+
+Do not generalise from the scratchpad tool. It exists only because a note is the one thing nothing
+else can depend on.
+
+### Scratchpad references
+
+Nothing may reference a scratchpad, permanently and by design. Passing a `sp_…` id to `hasContext`,
+`correctsFact`, `analyzes`, `tests.outcomeId` or `evidence` is refused by name.
+
+There is also no link the other way — no "promoted from", no provenance edge. Content mined out of a
+note is authored fresh with no trail back, and the user should be told that once.
 
 ## Naming
 
@@ -102,6 +117,7 @@ There are no delete tools of any kind, for any entity.
 | `mdrNumber` (`null` while staged) | `adrNumber` |
 | `matterId` | matter "number" |
 | `worldFactId`, `observedOutcomeId` | invented ledger numbers |
+| `scratchpadId` (`sp_`-prefixed) | a bare id — scratchpads alone carry a prefix, so a category error is refused by name |
 | `mdlGuid` | `adlGuid` |
 
 Tools take `mdrHandle`; as a convenience, `get_MDR` also accepts `mdrNumber` so a record someone cites by number can be read directly. Use the handle whenever you hold one.
