@@ -131,6 +131,25 @@ are what the wake will later be tested against.
 
 Drafting all of this while the record sits at **Deliberating** is normal pre-commit work.
 
+**Converging on a *no* is converging.** If the Verdict is turning into an explanation of what the user
+will **not** do, this is a **Rejected** record and `chosenAlternative` should stay unset. That holds
+even when other work is proceeding perfectly well — a Claim can be declined while something else
+ships, and that pair is two records, not one. The full set of situations, and the shaping rules the
+validators do not enforce, are in the `memolok-method` skill.
+
+#### Building against a staged record
+
+Where the decision is about something you can build, a spike is deliberation and belongs in the belly.
+The loop: draft to **Deliberating**, build against it, fold what building taught back into the record,
+*then* seal. Nothing about a staged record is fixed, so this costs only the patch.
+
+It is worth the round trip because a Verdict can name a mechanism the implementation then contradicts
+— and after t₀ that is a successor, not an edit. Finding it while staged costs one `update_MDR`.
+
+When building shows the draft was wrong, record the correction as a deliberation fact **if the wrong
+turn teaches something** — if it shows why the obvious approach fails. Otherwise just edit the draft;
+staged records are freely editable and most corrections are not interesting.
+
 ### 6. Name the open questions
 
 Record what this decision deliberately leaves unsettled as `openQuestions`. Prefer logging an
@@ -157,6 +176,11 @@ Confirming the preview is **not** t₀. Do not offer **Proposed** on informal wo
 If deliberation revealed a **second distinct decision**, open a separate record for it rather than
 folding both into one body. A record that converges twice is malformed.
 
+The commonest instance is a **declined Claim hiding inside an Accept** — the record does one thing and
+spends a paragraph explaining what it is not doing. That second decision is easy to miss precisely
+because a rejection may not be in mind as something you can produce, so it gets written as prose
+instead of as a record.
+
 ## Field quality
 
 **Head Claim.** Bad: *"we need better performance."* Good: *"P99 API latency must stay under 200ms at
@@ -179,8 +203,6 @@ Full worked correction arc: `references/need-vs-verdict-drift.md`.
 - A complete fish body may sit at **Deliberating** indefinitely. Completeness is not commitment.
 - Patches are incremental — send only the keys that changed.
 - Read the outcome ids (`eo-…`) back from the response; a later wake needs them.
-- **Rejected** is a first-class outcome. When deliberation shows no viable path, offer it as readily
-  as Accept.
 - If the user's need turns out to already be covered by an existing record, say so and offer
   `review-ledger` instead of minting a duplicate.
 
@@ -188,10 +210,10 @@ Full worked correction arc: `references/need-vs-verdict-drift.md`.
 
 | File | Load when |
 | --- | --- |
-| `references/intake-fork.md` | Step 2 is ambiguous, or the user pushed back on your routing |
-| `references/matter-payloads.md` | Running the bait branch |
-| `references/expert-payloads.md` | Running the expert branch |
-| `references/patch-payloads.md` | Building the `update_MDR` body |
-| `references/fish-preview.md` | Presenting the recap at step 7 |
-| `references/need-vs-verdict-drift.md` | The Need may have absorbed the answer |
+| `references/intake-fork.md` | Step 2 is ambiguous — mis-routing here is mint-frozen, and `promptedBy` can never be added afterwards |
+| `references/matter-payloads.md` | Before `register_matter` — the verbatim rule has edges, and a sharpened matter cannot be un-sharpened |
+| `references/expert-payloads.md` | Before your first `create_MDR` — it carries the two shape asymmetries that fail the call outright, and the allowed creation statuses |
+| `references/patch-payloads.md` | Before `update_MDR` — patches replace whole arrays rather than merging into them |
+| `references/fish-preview.md` | Presenting the recap at step 7, if you want the shape that reads back cleanly |
+| `references/need-vs-verdict-drift.md` | The Need may have absorbed the answer — the conflation survives light rewording, so spotting it needs the worked arc |
 | `references/matter-dispositions.md` | The user asks how a matter ends other than Path A or B |

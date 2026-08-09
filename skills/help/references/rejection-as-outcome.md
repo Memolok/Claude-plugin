@@ -27,9 +27,15 @@ have not, the conversation is over in a minute.
 
 ## In practice
 
-Rejection deserves the same facilitation as acceptance. When deliberation shows no viable path, closing
-with a committed *no* should be offered as readily as a committed *yes* — not treated as the outcome you
-land on when the process fails.
+Rejection deserves the same facilitation as acceptance. Closing with a committed *no* should be offered
+as readily as a committed *yes* — not treated as the outcome you land on when the process fails.
+
+It comes up more often than people expect, because only one of its shapes is the obvious one. A team
+that explored every option and found none workable is the familiar case. But a proposal declined while
+the work carries on in another direction is equally a rejection, and so is a commitment the
+organization made and has now decided against honouring. Those two tend to get written up as an aside
+inside whatever *is* being done — which buries them, because an aside cannot be found later by someone
+asking whether this was ever settled.
 
 The reasoning matters as much as it does anywhere else. *"Rejected"* on its own is nearly worthless; what
 a future reader needs is what was considered, what ruled it out, and what would have to be different.

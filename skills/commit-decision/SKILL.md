@@ -126,9 +126,13 @@ Then carry on with whatever the user was doing. Do not offer to end the session.
 **Rejected** is a first-class t₀ commitment: the organization will **not** proceed under this head
 Claim. It gets a ledger number, a Verdict, and the same permanence as an Accept.
 
-Offer it as readily as Accept when deliberation has shown no viable path. A sealed rejection prevents
-the same question being reopened every quarter, which is worth more than a weak Accept or an
-indefinite draft.
+Offer it as readily as Accept — and in more situations than an exhausted deliberation. A Claim
+declined while other work proceeds is still a Rejection, and that case is the one most often written
+as a paragraph inside an Accept instead of as its own record. The `memolok-method` skill carries the
+full set.
+
+A sealed rejection prevents the same question being reopened every quarter, which is worth more than
+a weak Accept or an indefinite draft.
 
 A Rejected record may not carry `supersedes`.
 
@@ -164,5 +168,5 @@ Never tell a user a committed record can be edited in place. If they want a chan
 
 | File | Load when |
 | --- | --- |
-| `references/ceremony.md` | Rejection, one-shot mint, or the user finds ceremony tiresome |
-| `references/transition-payloads.md` | Building the transition call, or a gate error needs decoding |
+| `references/ceremony.md` | Before sealing anything but a routine Accept — a rejection ceremony reads differently, and the terse variant still has one part that must never be dropped |
+| `references/transition-payloads.md` | A gate error needs decoding — the message names the missing field, and the fix is rarely the one the wording first suggests |

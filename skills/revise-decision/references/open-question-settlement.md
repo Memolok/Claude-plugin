@@ -55,6 +55,24 @@ so only a later Accepted record can close it retroactively.
 This is **not** a `settlesOpenQuestion` case, and forcing it produces an error — a staged record has no
 `mdrNumber` to target.
 
+## Both records authored in one sitting
+
+Common when one piece of work produces two decisions — one asking a question, one answering it. The
+holder's status still decides the route, but now you control that status, so sequence it deliberately:
+
+1. Draft **both** at `Deliberating`. Neither has a number yet.
+2. Seal the **holder** first. Admission mints its `mdrNumber` and freezes its `openQuestions`.
+3. Patch `settlesOpenQuestion` onto the still-staged resolver, using the number step 2 produced.
+4. Seal the resolver.
+
+Getting this backwards is the trap. Seal the resolver first and there is no number to name, the
+inverted path above is the only route left, and a genuine settlement edge has been lost to sequencing
+rather than to intent.
+
+The edge itself may be patched at any point while the resolver is staged — targets are resolved at
+the **resolver's admission**, not when the patch lands — so step 3 is not urgent. Step 2 preceding it
+is what matters.
+
 ## Consequences
 
 Settling **anchors** the holder: `retractable` becomes `false`, and it can no longer be uncommitted.

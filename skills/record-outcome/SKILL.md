@@ -119,6 +119,16 @@ a fresh look, at a new t₀.
 - They just want it noted → stop; recording it was the point
 - They want to change the original record → **`revise-decision`**, and expect it to be anchored now
 
+**The successor is often a Rejection, and that is easy to miss.** A `Violated` result frequently means
+the record's *promise* was wrong rather than the world — the decision shipped and stands, and what
+needs recording is that the organization declines the commitment it made. That is a **Rejected**
+record, even while the work it relates to proceeds untouched.
+
+It cannot supersede the original: a Rejection carries no `supersedes`, so the two stand side by side
+and the prose has to do the linking. Cite this wake in the successor's `hasContext` — that is how a
+later reader gets from the violated commitment to the decision about it. The `memolok-method` skill
+carries the shape.
+
 ## Conflicting observations
 
 Mint a new outcome. Never edit a prior one.
@@ -149,4 +159,4 @@ If the user may still want to revise the sealed record, do that **first** — se
 
 | File | Load when |
 | --- | --- |
-| `references/wake.md` | Building the call, or an outcome is refused |
+| `references/wake.md` | Before recording a wake — `Expected` needs two fields the others must not carry, and `correctsFact` is the one edge you cannot take back |

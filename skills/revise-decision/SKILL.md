@@ -121,6 +121,17 @@ happened*:
 | We recorded it wrong | Uncommit and re-admit — the record never should have said that |
 | We were right then, and the world changed | Supersede — both records are true at their own t₀ |
 | We were right then, and we now know we were wrong | Supersede — the original is honest evidence |
+| The decision stands and shipped; something it *promised* was wrong | **Neither.** Record a separate decision beside it — often a **Rejected** one declining the promise — and let the wake carry the gap |
+
+That fourth row is the one that gets forced into the wrong route. A record whose Verdict is sound and
+whose implementation is live does not need revising because one expected outcome was badly worded;
+uncommitting it would be revision of a decision nobody disputes, and superseding it would retire
+something still in force. What is actually being decided is whether to honour the commitment — a new
+question, at a new t₀.
+
+Expect no link back. If that separate record admits as **Rejected** it can carry neither `supersedes`
+nor `settlesOpenQuestion`, so the pair is connected only by the successor citing the wake in
+`hasContext` and naming what it declines in prose. Write that deliberately; nothing else will.
 
 Uncommitting to make a past decision look better is ledger fraud. The value of a record is its honesty,
 not its correctness: a well-reasoned decision that failed teaches more than one retrofitted to look
@@ -151,5 +162,5 @@ that superseding is the route, and that the original standing is what makes the 
 
 | File | Load when |
 | --- | --- |
-| `references/uncommit-and-readmit.md` | Running the uncommit route |
-| `references/open-question-settlement.md` | Deciding between `settlesOpenQuestion` and a direct edit |
+| `references/uncommit-and-readmit.md` | Before proposing an uncommit — it is governance-visible and costs the ledger number permanently, which the user should hear before agreeing |
+| `references/open-question-settlement.md` | Before authoring a settlement — the route turns on the holder's status, and sealing two related records in the wrong order destroys the edge |

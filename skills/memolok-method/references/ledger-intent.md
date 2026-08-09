@@ -60,6 +60,35 @@ The same elicitation is wrong in most of these. Match the journey the user is ac
 **Never a gate, in any of them.** No journey may refuse or defer creating a ledger, parking a matter, or
 recording a decision because the purpose has not been stated. An unstated purpose is a normal ledger.
 
+## Why nothing may cite it
+
+**World Facts** are citable precisely because they freeze in substance when admitted. Intent is
+perpetually revisable, so a record resting on it would be resting on a moving target — the reasoning
+would silently change meaning every time somebody tidied the purpose. There is no id for it on the tool
+surface, so there is nothing to cite even by accident, and that absence is deliberate rather than an
+oversight to work around.
+
+The practical consequence: material that is load-bearing for a decision has to be admitted as a World
+Fact. If a ledger's purpose is genuinely the reason a decision went one way, that reason is a fact
+about the organization and belongs in the almanac where a record can point at it.
+
+## Why it has no place in retrospective work
+
+Intent belongs to work that has not happened yet: what to raise, what to explore, which way to sharpen.
+It is orientation for a cold session, and orientation is prospective by nature.
+
+Reading a *past* record through a ledger's *current* stated purpose is a misreading. A record must stand
+on its own citations, and the purpose may have been rewritten a dozen times since it was sealed. So the
+stated purpose must never influence:
+
+- whether a record is sealed — that is the well-formedness gates and the user's explicit commitment;
+- whether a sealed record should be revised — that is `retractable` and the record's own content;
+- how an outcome is judged — that is the expected outcomes the record committed to at t₀.
+
+This holds **even when the intent is already in front of you** from earlier in the session, which is
+when it is most tempting and least noticed. Never ask a user to justify a decision that diverges from
+the stated purpose; the intent may simply be stale, or the decision may be a case nobody anticipated.
+
 ## Revising later
 
 `set_ledger_intent` **replaces the whole statement** — it does not append, and there is no history. Read

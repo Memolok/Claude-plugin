@@ -47,21 +47,26 @@ Only when the question is **mechanical** — lifecycle, statuses, well-formednes
 prose format — load the **`memolok-method`** skill instead and answer from it. Do not load it for *why*
 questions; it is agent operating substrate and costs its whole length. That conditionality is deliberate.
 
-## What Memolok is
+## Introduction
 
-Organizations, teams, and solo practitioners all forget *why*. The result survives — the contract, the
-code, the policy — while the reasoning that produced it evaporates. Memolok records the decision itself:
-the need that motivated it, the options weighed, the commitment made, and what the decider expected to
-happen as a result.
+If the user just called this skill explicitly without any parameters or context, help them get oriented
+with the following introductory text:
 
-It is **opinionated about how you record** decisions and **agnostic about how you make them** — consensus,
-hierarchy, committee, mandate, coin toss — and about domain: software, legal, medical, construction, a
-kitchen renovation.
+```md
+When decisions are made, organizations, teams, and solo practitioners remember the *what*, but they tend to forget the *why*. The result survives — the contract, the code, the policy — while the reasoning that produced it evaporates. **Memolok** records the decision itself: the need that motivated it, the options weighed, the commitment made, and what the decider expected to happen as a result.
 
-The shape is one decision per record. Each record seals at the moment of commitment and is not rewritten
-afterwards. What actually happens later is recorded separately and compared against what was promised.
+**Memolok** is *opinionated about how you record* decisions, but *agnostic about both how you make them* (consensus, hierarchy, committee, mandate, or coin toss), *and about domain* (software, legal, medical, construction, or a kitchen renovation.)
 
-That is the whole model. Everything else is consequence.
+The container for a collection of decisions is the *Memolok Decision Ledger*, a.k.a. *MDL* or *the ledger*. Create a ledger per project, a ledger per department if you want to record department-wide decisions somewhere, and/or a ledger per team, if you want the team's internal decisions recorded.
+
+The most important entities inside a ledger are as follows:
+- the *Memolok Decision Record*, a.k.a. *MDR* or *decision record* stores actual decisions – use it when you know what you want to decide on, before or after reaching a verdict; *MDRs* have a very specific structure you should try getting familiarized with;
+- *Matters* are things you know you will need to make decisions about, but you haven't gotten to analyzing them properly yet – a regulatory requirement, a request for improvement, or a bug report are all *matters*; (Matters prompt MDRs into existence via Analysis);
+- *World Facts*, the collection of which constitute *the ledger's world almanac* or *the almanac*, are things you know to be true in the world which are relevant to this ledger; admitting world facts into the almanac is a deliberate decision you are responsible for (since you are the domain expert for your ledger, so you're the only one able to judge which facts in the world are in fact relevant enough to be admitted.)
+- finally, each MDL can store any number of *scratchpads* – temporary "files" which may store anything you want to jot down for later. All of the other entries in the ledger are governed by specific and strict lifecycles – *scratchpads* are deliberately disposable and unstructured; use them however you see fit.
+
+Feel free to follow up with questions about any of these entities or related topics.
+```
 
 ## How to answer
 

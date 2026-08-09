@@ -79,8 +79,10 @@ The Verdict and the chosen option, or the reason for not proceeding.
 >
 > **Why:** This is the moment of commitment the record exists to capture.
 
-If deliberation showed no viable path, offer **Rejected** as readily as an Accept. A recorded "we will
-not" is a real decision.
+Offer **Rejected** as readily as an Accept. A recorded "we will not" is a real decision — and not only
+when deliberation ran out of options. If the answer to the Claim is *no* while the user gets on with
+something else, that is still a Rejection, and it is a second record rather than a caveat inside the
+first. The `memolok-method` skill carries the full set of situations.
 
 ## Phase 6 — Tail
 

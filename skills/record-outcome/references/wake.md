@@ -126,11 +126,23 @@ user. Ledger residents only.
 
 ```
 Matter₁ → Analysis₁ → MDR₁ → expected outcome → observed outcome (Violated)
-  → Matter₂ → Analysis₂ → MDR₂ (may supersede MDR₁ at a new t₀)
+  → Matter₂ → Analysis₂ → MDR₂ at a new t₀
 ```
 
 The wake becomes bait for the next fish. The original record stays exactly as it was at its own t₀ —
 that is what makes the loop legible in hindsight.
+
+MDR₂ closes in one of two shapes, and they are not interchangeable:
+
+| MDR₂ admits as | Link back | When |
+| --- | --- | --- |
+| **Accepted** | May carry `supersedes: [MDR₁]`, which flips MDR₁ to `Superseded` | A replacement decision is being made |
+| **Rejected** | **None.** A Rejection carries no `supersedes` and no `settlesOpenQuestion` | The commitment itself is being declined rather than replaced |
+
+The second is common when MDR₁'s decision shipped and holds, and only what it *promised* was wrong.
+Nothing structural connects the pair, so the successor must cite the wake in `hasContext` and say in
+its Verdict what it declines — otherwise a reader arriving at MDR₁ finds a violated commitment and no
+sign anyone answered it.
 
 ## What never happens
 
