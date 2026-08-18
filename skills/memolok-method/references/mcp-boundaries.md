@@ -47,18 +47,19 @@ This is operational metadata computed at read time. It is never exported.
 
 ## Not available — do not invent
 
-### Matter dispositions beyond Path A and B
+### Closing a matter as refused, blocked, or overtaken
 
-Only `MatterAnalyzed` (Path A) and `MatterDismissed` (Path B) are reachable. `MatterResolved`,
-`MatterUnresolved`, `MatterDeclined`, `MatterBlocked`, and `MatterMoot` exist in the model
-with no way to reach them.
+Analysis reaches two endings: it produces records, or it produces none. Recording that a matter was
+**refused** (valid, and we commit to not acting), **externally blocked**, or **overtaken by events**
+is modelled with no tool behind it.
 
-Until they land, record refusal or blockage rationale in the Verdict prose at t₀, and use Path B for
-honest non-decisions. Do not invent fields for `resolvesMatter`, `declinesMatter`,
-`blocksResolutionOf`, or `rendersMoot`.
+Until they land, record refusal or blockage rationale in the Verdict prose at t₀. Do not invent
+fields for `resolvesMatter`, `declinesMatter`, `blocksResolutionOf`, or `rendersMoot`, and do not
+substitute a Path B dismissal — "no decision warranted" says the investigation found nothing to
+decide, which is weaker and different from refusing a problem you agree is real.
 
-There is also no way to **re-analyze** a matter. One analysis per matter; a second look needs a
-new matter.
+Re-analysis, by contrast, **is** available: open a second analysis over the same matter, or attach it
+to an existing one. Nothing limits a matter to one analysis.
 
 ### Portfolio intelligence
 
@@ -95,7 +96,8 @@ Linking records to repository files, and freezing cited artifacts at t₀, are n
 
 **`delete_scratchpad` is the only delete tool, for the only deletable entity.** Everything else is
 immutable on admission (`Matter`, `WorldFact` substance) or sealed at t₀ (`DecisionRecord`), and
-there is no delete for any of them — a matter registered by mistake is closed through Path B, a wrong
+there is no delete for any of them — a matter registered by mistake is left unreferenced or closed
+through Path B, a wrong
 fact gets a correcting successor, a regretted record is uncommitted or superseded.
 
 Do not generalise from the scratchpad tool. It exists only because a note is the one thing nothing
@@ -104,7 +106,7 @@ else can depend on.
 ### Scratchpad references
 
 Nothing may reference a scratchpad, permanently and by design. Passing a `sp_…` id to `hasContext`,
-`correctsFact`, `analyzes`, `tests.outcomeId` or `evidence` is refused by name.
+`correctsFact`, `motivatedBy`, `tests.outcomeId` or `evidence` is refused by name.
 
 There is also no link the other way — no "promoted from", no provenance edge. Content mined out of a
 note is authored fresh with no trail back, and the user should be told that once.

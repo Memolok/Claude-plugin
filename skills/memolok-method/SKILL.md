@@ -8,7 +8,7 @@ description: >-
 user-invocable: false
 ---
 
-> Memolok plugin: version 0.16.0-alpha currently installed
+> Memolok plugin: version 0.17.0-alpha currently installed
 > Important! Call the companion Memolok MCP `get_guidance` before any other Memolok MCP tool!
 > N.B.: This skill is loaded very often; it's deliberately terse for token economy. Do not emulate this writing style.
 
@@ -134,19 +134,25 @@ specific the chosen mechanism is.
 
 | Path | `producesDecision` | Outcome |
 | --- | --- | --- |
-| **A — mint** | `true` + `claimDescription` | Matter → **New** record with `promptedBy` |
-| **B — honest dismissal** | `false` | Matter → **Dismissed**; no record; rationale explains why |
+| **A — mint** | `true` + `claimDescription` | **New** record(s); analysis concludes in the same call |
+| **B — honest dismissal** | `false` | No record; rationale explains why |
 
-**Expert path** bypasses the Matter entirely: `create_MDR` with a claim, no `promptedBy`.
-**`promptedBy` is set at mint and can never be patched** → a record minted on the expert path can never
-be given matter provenance afterwards. Intake routing → `record-decision`. Parking a matter unanalyzed
-→ `save-matter`; `list_matters(status="MatterReceived")` is the unprocessed-bait inbox.
+`motivatedBy` = **list**: every matter the reasoning took up. Fan-in/fan-out independent — *n* in,
+*m* out, no pairing asserted, none to invent. **Never ask which record answers which matter**;
+ordinarily no such fact. Matter recognized later → `attach_analysis_reference` (allowed
+post-conclusion, dated, reads as late).
+
+**Expert path** bypasses the Matter: `create_MDR` with a claim. Nothing on a record says which path
+minted it. Intake routing → `record-decision`. Parking unanalyzed → `save-matter`;
+`list_matters(untaken: true)` = unprocessed-bait inbox.
+
+**Matters carry no status** — no disposition, no vocabulary of endings. What became of one reads from
+its shape: who took it up, when, what they produced.
 
 **Chain of agency.** Anyone raises a Matter → Expert #1 analyzes it into a head Claim → Expert #2
-commits the Verdict at t₀. RACI fields (`authoredBy`, `decidedBy`, `consulted`, `informed`) record
-attribution, do not gate permissions. In solo sessions **"Expert #1" is not your private drafting
-seat**: with no separate human there you inherit it by name only, and the head Claim is still
-co-discovered with the user, never authored by you and handed down.
+commits the Verdict at t₀. In solo sessions **"Expert #1" is not your private drafting seat**: with
+no separate human there you inherit it by name only, and the head Claim is still co-discovered with
+the user, never authored by you and handed down.
 
 ## Identity
 
@@ -220,7 +226,7 @@ Shaping a fish *with* the user is deliberation. Unless formal governance applies
 or transition to **Proposed**, and do not offer **Accepted** or **Rejected**, without explicit user
 commitment (Rule C).
 
-**New** is exceptional — external import and matter Path A only, never a conversational outcome. A
+**New** is exceptional — external import and analysis Path A only, never a conversational outcome. A
 complete fish body may sit at **Deliberating**; completeness is not commitment. Never infer commitment
 from agent-authored Verdict prose, a firm-sounding draft, or a confirmed read-back.
 

@@ -12,34 +12,52 @@ comes back every planning cycle to be argued again from scratch.
 Both are failures of closure, not failures of decision-making. Closing an issue honestly is not
 administrative overhead; it is how you stop the bleeding.
 
-## The honest ways to close something
+## The honest ways matters come to rest
 
-A raised matter can end in several ways, and they are genuinely different:
+A raised matter can come to rest in several ways, and they are genuinely different:
 
-| Ending | The story it tells |
+| How it came to rest | The story it tells |
 | --- | --- |
-| **Resolved** | We decided to act, and later evidence confirms it worked |
-| **Declined** | We agree the problem is real and we are choosing not to act — here is who said so and why |
-| **Blocked** | We know what to do and cannot do it yet; an external constraint is in the way |
-| **Unresolved** | We do not have enough information to address this, and we are saying so rather than pretending |
-| **Dismissed** | We investigated and nothing here warrants a decision |
-| **Moot** | The world removed the problem before we got to it |
+| **Fixed** | We decided to act, and later evidence confirms it worked |
+| **Refused** | We agree the problem is real, but we are choosing not to act — here is who said so and why |
+| **Externally blocked** | We know what to do, but cannot do it yet; a constraint is in the way |
+| **No decision warranted** | We investigated, but nothing here needed deciding |
+| **Overtaken by events** | The world removed the problem before we got to it |
 
-The distinctions carry weight. **Declined** and **Blocked** both mean nothing is happening, but the first
-is an exercise of will and the second is a constraint — and a year later, that is the difference between
-"revisit if the cost changes" and "revisit when the regulation lifts". Both are commitments backed by real
-reasoning and an accountable decider.
+A matter with none of these is simply still open — which is exactly what the ledger says about it,
+without dressing it up as anything more settled.
 
-**Moot** is the one people feel guilty about, unnecessarily. Sometimes the world simply removes the
-problem: the customer sells the property before anyone looks at the cold living room. No investigation
-theatre is required to satisfy a methodology. A world event closes it cleanly. If the subject returns
-later, it returns as something new, not as a reopening.
+The distinctions carry weight. **Refused** and **externally blocked** both mean nothing is happening, but
+the first is an exercise of will and the second is a constraint — and a year later, that is the difference
+between "revisit if the cost changes" and "revisit when the regulation lifts". Both are commitments backed
+by real reasoning and an accountable decider.
 
-**Resolved** is stronger than it looks — it is not "we shipped the fix", it is "we shipped the fix and the
-world confirms it worked". The decision commits to act; resolution registers only when evidence arrives.
+**Overtaken by events** is the one people feel guilty about, unnecessarily. Sometimes the world simply
+removes the problem: the customer sells the property before anyone looks at the cold living room. No
+investigation theatre is required to satisfy a methodology. A world event closes it cleanly. If the
+subject returns later, it returns as something new, not as a reopening.
 
-> **Not built yet.** Only two of these closures are reachable through this plugin today: analysis that
-> concludes no decision is warranted, and analysis that produces a decision. Marking a matter declined,
-> blocked, unresolved, resolved, or moot is modelled but has no tool yet. Until it does, record the
+**Fixed** is stronger than it looks — it is not "we shipped the fix", it is "we shipped the fix and the
+world confirms it worked". The decision commits to act; confirmation registers only when evidence arrives.
+
+## These are readings, not labels
+
+Nothing writes one of these five words onto a matter. There is no status field to set, and no menu to
+pick from. Each reading is just what a particular shape of record looks like when you read it back: which
+analyses took the matter up, whether they concluded, and which decision or world event closed it.
+
+That is deliberate, and it costs something worth naming. You cannot ask the ledger "what is the status of
+this matter" and get one word back, because for a matter worked alongside three others, no single word
+would be true of it. What you get instead is the shape — who looked at it, when, what they concluded, and
+what has closed it since — which carries more than a label could, including *which* decision closed it and
+*when*.
+
+The practical consequence: two people reading the same matter may describe it slightly differently, and
+neither is wrong. What they cannot do is disagree about the underlying facts, because those are all
+recorded.
+
+> **Not built yet.** Only two of these are reachable through this plugin today: analysis that concludes no
+> decision is warranted, and analysis that produces a decision. Recording that a matter was refused,
+> externally blocked, or overtaken by events is modelled but has no tool yet. Until it is, record the
 > decision that closes the topic — the reasoning is the part that stops the zombie — and expect the matter
-> itself to keep showing up as unprocessed.
+> itself to keep showing up as one nobody has picked up.

@@ -80,7 +80,7 @@ processed; a `Matter` used as a notepad fills the queue with things nobody inten
 | The user is… | Entity | Tell |
 | --- | --- | --- |
 | stating something true that decisions should rest on | **`WorldFact`** | *"legal now requires seven-year retention"* — an assertion the ledger should stand behind |
-| raising something they expect to be looked at | **`Matter`** | *"we should probably deal with the login timeout"* — has an implied disposition, however far off |
+| raising something they expect to be looked at | **`Matter`** | *"we should probably deal with the login timeout"* — somebody is expected to look, however far off |
 | keeping material with no expectation attached | **`Scratchpad`** | *"here's the quote they sent"*, *"jotting this before I forget"* — no assertion, no request, no queue |
 | deciding something | **`DecisionRecord`** | a choice being made, with alternatives and a commitment |
 

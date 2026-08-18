@@ -68,7 +68,7 @@ one while meaning the other produces a confident answer to the wrong question.
 | `mdrNumber` | int | exactly one of the two |
 
 Returns the full record — fish body, `mdrHandle`, `mdrNumber`, `retractable`, and any graph edges,
-plus `promptedBy` and `analysisId` (both `null` on the expert path).
+plus `analysisId` (`null` when no analysis produced it).
 
 Pass the handle when you have one. `mdrNumber` is here for the case where a person cites a number
 and you would otherwise scan `list_MDRs` to find its handle — one call instead of a ledger-wide read.
@@ -95,28 +95,25 @@ than an error, which reads as "no records". Send exact status names.
 | `mdlGuid` | string | yes |
 | `matterId` | string | yes |
 
-Returns `{ id, mdlGuid, status, description, analysisId, producesDecision }`.
-Error: `Matter not found.`
+Returns `{ id, mdlGuid, description, takenUpBy }`. Error: `Matter not found.`
 
-`analysisId` is `null` until analyzed. `producesDecision` holds `{ mdrHandle, mdrNumber }` per record
-minted, `[]` when dismissed. No rationale here — that is `get_analysis`.
+`takenUpBy` is one entry per analysis that took this matter up — `{ referenceId, analysisId, created,
+concludedAt, late, producesDecision }` — and `[]` when nobody has. `producesDecision` holds
+`{ mdrHandle, mdrNumber }` per record **that analysis** minted; those records belong to the reasoning,
+not to this matter, and nothing says any of them answers it. No rationale here — that is
+`get_analysis`.
 
 ### `list_matters`
 
 | Param | Type | Required |
 | --- | --- | --- |
 | `mdlGuid` | string | yes |
-| `status` | string | no |
+| `untaken` | bool | no |
 
-Returns `{ matters: [...] }` in registration order, rows shaped like `get_matter`. Unlike
-`list_MDRs`, an unknown status raises:
+Returns `{ matters: [...] }` in registration order, rows shaped like `get_matter`.
 
-```
-Unknown matter status {x}. Use one of: ...
-```
-
-`list_matters(status="MatterReceived")` is the unprocessed-bait inbox — every matter parked
-but never analyzed.
+`list_matters(untaken: true)` is the unprocessed-bait inbox — every matter no analysis references.
+`untaken: false` gives the complement. There is no status filter, because a matter has no status.
 
 ### `get_analysis`
 
@@ -125,8 +122,13 @@ but never analyzed.
 | `mdlGuid` | string | yes |
 | `analysisId` | string | yes |
 
-Returns `{ id, mdlGuid, analyzes, producesDecision, analysisRationale, performedBy }`.
+Returns `{ id, mdlGuid, references, producesDecision, analysisRationale, performedBy, concludedAt }`.
 Error: `Analysis not found.`
+
+Each entry in `references` is `{ referenceId, motivatedBy, created, late }`. `late` true means the
+input was attached after `concludedAt`, so the rationale does not account for it; **`null` means
+unanswerable** — a backfilled reference with no date, or an analysis with no conclusion — and never
+"not late".
 
 Point read; there is no `list_analyses`. Reach it by `analysisId` from `get_matter` or `get_MDR`.
 
@@ -184,7 +186,7 @@ Requires `member` or above. Returns the same shape as `get_MDL`.
 | `mdlGuid` | string | yes |
 | `description` | `{ markdown, lang? }` | yes |
 
-Returns the matter with `status: MatterReceived`. Record the raiser's words **verbatim** —
+Returns `{ id, mdlGuid, description, takenUpBy: [] }`. Record the raiser's words **verbatim** —
 do not sharpen here.
 
 ### `create_analysis`
@@ -192,13 +194,53 @@ do not sharpen here.
 | Param | Type | Required |
 | --- | --- | --- |
 | `mdlGuid` | string | yes |
-| `analyzes` | string (matter id) | yes |
+| `motivatedBy` | string[] (matter ids) | yes |
 | `analysisRationale` | `{ markdown, lang? }` | yes |
 | `producesDecision` | bool | no (default `true`) |
 | `claimDescription` | `{ markdown, lang? }` | Path A only |
 
-Returns `{ analysis, mdr? }`. Path A mints the record at `New` with `promptedBy` set; Path B omits
-`mdr` entirely (absent, not null).
+`motivatedBy` is a list: pass **every** matter this reasoning took up. Empty raises. The analysis
+concludes in this call, stamping `concludedAt` with the same instant it dates the references, so
+they read as on time.
+
+Returns `{ analysis, mdr? }`. Path A mints the record at `New`; Path B omits `mdr` entirely (absent,
+not null).
+
+### `attach_analysis_reference`
+
+| Param | Type | Required |
+| --- | --- | --- |
+| `mdlGuid` | string | yes |
+| `analysisId` | string | yes |
+| `motivatedBy` | string (matter id) | yes |
+
+Takes up a matter the analysis did not originally reference. **Allowed after the analysis
+concluded** — that is what it is for. The reference is dated now, so it reads as `late: true` and the
+sealed rationale is untouched. Returns the reference.
+
+At most one reference per (matter, analysis) pair; a second raises rather than replacing the first,
+because two attachment times make lateness unanswerable.
+
+### `retract_analysis_reference`
+
+| Param | Type | Required |
+| --- | --- | --- |
+| `mdlGuid` | string | yes |
+| `referenceId` | string | yes |
+
+Withdraws a reference attached in error. Ungated, including against a committed record: an analysis
+must describe reasoning that occurred. Returns `{ retracted }`.
+
+### `reopen_analysis`
+
+| Param | Type | Required |
+| --- | --- | --- |
+| `mdlGuid` | string | yes |
+| `analysisId` | string | yes |
+
+Clears `concludedAt`. Refused once any produced record carries `decidedAt` — uncommit that record
+first. Use it when the reasoning genuinely was not finished; for scope that arrived afterwards, a
+late reference is the honest record, not a reopen.
 
 ### `create_MDR`
 
@@ -216,7 +258,7 @@ Returns `{ analysis, mdr? }`. Path A mints the record at `New` with `promptedBy`
 | `authoredBy`, `decidedBy` | string | no |
 | `consulted`, `informed` | string[] | no |
 
-Expert path only — there is no `promptedBy` parameter. Returns the record with a minted `mdrHandle`;
+Expert path only — there is no matter parameter. Returns the record with a minted `mdrHandle`;
 `mdrNumber` only if created at `Accepted` or `Rejected`.
 
 ### `update_MDR`
@@ -268,7 +310,7 @@ Disposable working notes. See the **`manage-notes`** skill for the journeys.
 **Identifiers are different here, on purpose.** A `scratchpadId` is `sp_` followed by 24 hex
 characters — `sp_6a761688013eff0dc9e8dee1` — not the bare id every other entity uses. The prefix is
 what lets every reference field refuse one *by name*: pass a `scratchpadId` to `hasContext`,
-`correctsFact`, `analyzes`, `tests.outcomeId` or `evidence` and the call fails telling you it is a
+`correctsFact`, `motivatedBy`, `tests.outcomeId` or `evidence` and the call fails telling you it is a
 scratchpad, rather than reading as a mistyped World Fact id. Do not treat the two as interchangeable
 in either direction.
 
@@ -346,7 +388,8 @@ pair it with `modifiedAt`. Any of the four attribution facts may be absent, whic
 | `Only Accepted or Rejected Memolok Decision Records may be Uncommitted.` | Wrong status for uncommit |
 | `Observed Outcomes can only realizeFrom a ledger-resident Memolok Decision Record...` | Wake on a staged record |
 | `discoveryType Expected requires tests referencing an expectedOutcome.` | Missing `tests` |
-| `Analysis can only start from a Matter in MatterReceived status.` | Matter already analyzed |
+| `An analysis must take up at least one input; motivatedBy is empty.` | Empty `motivatedBy` |
+| `That input is already referenced by this analysis.` | Duplicate attach — the existing reference stands |
 | `{field} is a scratchpad id.` | A `sp_…` value passed to a reference field. Nothing may cite a note — admit a World Fact instead |
 | `{field} must be a scratchpad id of the form 'sp_<24 hex characters>'.` | A bare id passed where a `scratchpadId` was expected |
 | `Scratchpad not found.` | Missing note, wrong ledger, or already deleted |

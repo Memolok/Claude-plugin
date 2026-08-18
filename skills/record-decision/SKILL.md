@@ -57,8 +57,9 @@ If the user has no ledger, agree a title and call `create_MDL`. Draft a purpose 
 already told you and offer it in one line — *"I'll note this ledger is for the storage rebuild"* — and
 take a "skip" without asking twice. They came here to record a decision; never delay it for this.
 
-If there may be parked bait, `list_matters(status="MatterReceived")` shows it. If one matches
-what the user just raised, use that matter rather than registering a duplicate.
+If there may be parked bait, `list_matters(untaken: true)` shows what nobody has picked up. If one
+matches what the user just raised, take that matter up rather than registering a duplicate — and if
+several do, take up all of them in one analysis.
 
 ### 2. Sort the intake
 
@@ -78,9 +79,9 @@ user's opening line decide it for you.
 user saying it is the only engineer on the project. Being solo does not convert a symptom into a need.
 
 **When it is ambiguous, ask — one question, then proceed.** Something like *"is that your own read of
-what needs to be true, or is it what someone reported was wrong?"* Do not guess: a record minted on
-the expert path can never be given matter provenance afterwards, because `promptedBy` is
-mint-frozen.
+what needs to be true, or is it what someone reported was wrong?"* Guessing is recoverable here: a
+matter you registered can be taken up later, and an analysis can take up an input it did not start
+with. What you cannot recover is the raiser's wording once you have sharpened it away.
 
 **If the user only wants to park it** — they noticed a problem but do not want to leave what they are
 doing — that is the `save-matter` skill. Do not drag them through a decision they did not ask for.
@@ -93,16 +94,17 @@ Worked examples of ambiguous intakes: `references/intake-fork.md`.
    translate into a target — the raw input is the point, and matters are immutable.
 2. Sharpen the need **with the user**, not for them. The head Claim is a falsifiable objective, and it
    must not name the mechanism you are about to choose (Rule G).
-3. `create_analysis` with `producesDecision: true` and the sharpened `claimDescription`. This mints
-   the record at **New** with `promptedBy` set.
+3. `create_analysis` with `producesDecision: true` and the sharpened `claimDescription`. Pass every
+   matter this reasoning took up in `motivatedBy` — not just the one that prompted the conversation.
+   This mints the record at **New** and concludes the analysis in the same call.
 4. `transition_MDR_status` to **Deliberating**, then continue at step 4.
 
 If sharpening shows there is no decision to make, that is **Path B**: `create_analysis` with
 `producesDecision: false` and a rationale explaining why. Confirm with the user first. No record is
 minted, and that is an honest outcome, not a failure.
 
-Payloads: `references/matter-payloads.md`. Terminal dispositions:
-`references/matter-dispositions.md`.
+Payloads: `references/matter-payloads.md`. How a matter comes to rest, and what is not yet
+recordable: `references/matter-closure.md`.
 
 ### 3b. Expert branch
 
@@ -210,10 +212,10 @@ Full worked correction arc: `references/need-vs-verdict-drift.md`.
 
 | File | Load when |
 | --- | --- |
-| `references/intake-fork.md` | Step 2 is ambiguous — mis-routing here is mint-frozen, and `promptedBy` can never be added afterwards |
+| `references/intake-fork.md` | Step 2 is ambiguous — sharpening bait away destroys the raiser's wording, and that is the part no later call can reconstruct |
 | `references/matter-payloads.md` | Before `register_matter` — the verbatim rule has edges, and a sharpened matter cannot be un-sharpened |
 | `references/expert-payloads.md` | Before your first `create_MDR` — it carries the two shape asymmetries that fail the call outright, and the allowed creation statuses |
 | `references/patch-payloads.md` | Before `update_MDR` — patches replace whole arrays rather than merging into them |
 | `references/fish-preview.md` | Presenting the recap at step 7, if you want the shape that reads back cleanly |
 | `references/need-vs-verdict-drift.md` | The Need may have absorbed the answer — the conflation survives light rewording, so spotting it needs the worked arc |
-| `references/matter-dispositions.md` | The user asks how a matter ends other than Path A or B |
+| `references/matter-closure.md` | Any analysis touching more than one matter, or a matter surfacing after the analysis concluded — passing one `motivatedBy` where several apply records reasoning that did not happen, and three of the five ways a matter comes to rest have no tool yet |

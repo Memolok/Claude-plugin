@@ -56,7 +56,7 @@ that".
 | Everything, or a status slice | `list_MDRs(mdlGuid, status?)` |
 | One record in full | `get_MDR(mdlGuid, mdrHandle)` |
 | One record the user named — "what did MDR-7 say?" | `get_MDR(mdlGuid, mdrNumber=7)` |
-| Unprocessed intake | `list_matters(mdlGuid, status="MatterReceived")` |
+| Unprocessed intake | `list_matters(mdlGuid, untaken: true)` |
 | One matter | `get_matter(mdlGuid, matterId)` |
 | What came of a matter | `get_matter`, then `get_MDR(mdrHandle)` |
 | Why a matter was dismissed | `get_analysis(mdlGuid, analysisId)` |
@@ -126,21 +126,29 @@ not an anomaly worth flagging: intent is revised in place and often lags the wor
 
 ### What came of a parked matter
 
-`get_matter` answers "did anything ever happen about X?" without a ledger-wide scan:
+`get_matter` answers "did anything ever happen about X?" without a ledger-wide scan. Read `takenUpBy`:
 
 | Response | Means |
 | --- | --- |
-| `analysisId: null` | Never analyzed — still raw bait |
-| `analysisId` set, `producesDecision: []` | Analyzed and dismissed |
-| `producesDecision: [{ mdrHandle }]` | Read the record with `get_MDR(mdrHandle)` |
+| `takenUpBy: []` | Nobody has picked it up — still raw bait |
+| An entry with `producesDecision: []` | Somebody looked and concluded nothing needed deciding |
+| An entry with `producesDecision: [{ mdrHandle }]` | Read the record with `get_MDR(mdrHandle)` |
+| An entry with `late: true` | Attached after that reasoning closed, so the rationale does not cover it |
 
-Answer with what the record decided, not the matter's status. Call `get_analysis` only when asked
-*why* — fetching it per matter turns one review into a dozen calls.
+More than one entry is normal, not a defect: a matter can be taken up by several analyses.
+
+**Answer with what the records decided, and do not claim any one of them was "for" this matter** —
+an analysis produces records for the reasoning as a whole, and one of them may exist because of
+something no raiser mentioned. Say what was decided and let the user draw the link. Call
+`get_analysis` only when asked *why* — fetching it per matter turns one review into a dozen calls.
+
+A matter with `late: true` entries and nothing closing it is worth surfacing on its own: somebody
+assumed existing work covered it, and nothing has confirmed that.
 
 ### The unprocessed inbox
 
-`list_matters(status="MatterReceived")` returns everything registered but never analyzed —
-mostly matters parked through **`save-matter`** during other work.
+`list_matters(untaken: true)` returns everything no analysis references — mostly matters parked
+through **`save-matter`** during other work.
 
 Present them as raw signal, in the words they were logged in. Do not sharpen them into needs while
 summarizing; that is the pickup session's job, with the user present.

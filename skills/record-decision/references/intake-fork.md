@@ -16,12 +16,15 @@ Then three further exits, because not everything a user says is a decision at al
 
 ## Why this is worth getting right
 
-`promptedBy` is set at mint and can never be patched. A record minted on the expert path can never be
-given matter provenance afterwards; the raiser's own words are simply not on the ledger.
+A record minted on the expert path cannot be given matter provenance afterwards. Not because
+anything is frozen on the record — it carries no matter link at all — but because an analysis names
+the records it produces at the moment *it* creates them, and nothing attaches an existing record to an
+analysis later. Register the matter afterwards and analyze it, and you get a *second* record. So the
+raiser's own words end up nowhere near the decision they caused.
 
-The reverse error is now recoverable — a matter registered by mistake can be found with
-`list_matters` and closed honestly through Path B. That asymmetry is a reason to ask rather than
-guess, not a licence to register matters speculatively.
+The reverse error is cheap: a matter registered by mistake can be found with `list_matters`, taken up
+whenever somebody gets to it, or closed honestly through Path B. That asymmetry is a reason to ask
+rather than guess, not a licence to register matters speculatively.
 
 ## Worked examples
 
@@ -94,8 +97,7 @@ its t₀, and rewriting the tail to match what happened is ledger fraud.
 **Bait, parked.** The user has explicitly declined to decide. Use `save-matter`: register verbatim,
 confirm, stop. Do not analyze it, do not sharpen it, and do not offer to open a decision.
 
-It stays at `MatterReceived` and shows up later in
-`list_matters(status="MatterReceived")`.
+Nothing references it, so it shows up later in `list_matters(untaken: true)`.
 
 ### 10. "Here's the quote they sent — 3 nodes at $412/mo, 12-month term."
 

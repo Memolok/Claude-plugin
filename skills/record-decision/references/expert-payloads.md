@@ -158,6 +158,6 @@ it by trying and you will have already committed to a body that reads as if the 
 
 ## Do not
 
-- Set `promptedBy` — there is no such parameter here, and matter provenance only comes from Path A
+- Look for a matter parameter — there is none, and provenance only comes from an analysis producing the record
 - Mint at `Accepted` because the Verdict you drafted reads convincingly
 - Offer `Proposed` on informal work

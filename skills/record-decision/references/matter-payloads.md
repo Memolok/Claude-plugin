@@ -16,15 +16,15 @@ The source actor's verbatim words. No sharpening at this step.
 }
 ```
 
-Returns `{ id, mdlGuid, status: "MatterReceived", description }`. Keep the `id` — the next call
-needs it. If it is lost, `list_matters(status="MatterReceived")` finds it again.
+Returns `{ id, mdlGuid, description, takenUpBy: [] }`. Keep the `id` — the next call needs it. If it
+is lost, `list_matters(untaken: true)` finds it again.
 
 ### 2. `create_analysis`
 
 ```json
 {
   "mdlGuid": "<mdlGuid>",
-  "analyzes": "<matterId>",
+  "motivatedBy": ["<matterId>", "<anotherMatterId>"],
   "analysisRationale": {
     "markdown": "The problem is initial page load latency, not API throughput.",
     "lang": "en"
@@ -37,10 +37,12 @@ needs it. If it is lost, `list_matters(status="MatterReceived")` finds it again.
 }
 ```
 
-Returns `{ analysis, mdr }`. The record is at **New**, with `promptedBy` set and `mdrNumber: null`.
-Read `mdr.mdrHandle` from the response.
+Returns `{ analysis, mdr }`. The record is at **New** with `mdrNumber: null`. Read `mdr.mdrHandle`
+from the response.
 
-The matter moves `MatterReceived` → `MatterAnalyzing` → `MatterAnalyzed`.
+`motivatedBy` is a **list**. Pass every matter this reasoning took up — three reports of one fault go
+in one call, not three. The analysis concludes here, and `analysis.references` comes back with each
+input dated and `late: false`.
 
 **The `claimDescription` here is the sharpened need, agreed with the user** — not a restatement of the
 matter, and not the mechanism you expect to choose.
@@ -64,7 +66,7 @@ Same `register_matter`, then:
 ```json
 {
   "mdlGuid": "<mdlGuid>",
-  "analyzes": "<matterId>",
+  "motivatedBy": ["<matterId>"],
   "analysisRationale": {
     "markdown": "Reported behaviour matches documented beta limitations; no decision warranted.",
     "lang": "en"
@@ -73,7 +75,8 @@ Same `register_matter`, then:
 }
 ```
 
-Returns `{ analysis }` with no `mdr`. The matter ends at `MatterDismissed`.
+Returns `{ analysis }` with no `mdr`. Nothing is written on the matter itself — the concluded
+analysis producing no record *is* the account.
 
 Omit `claimDescription` entirely — sending it with `producesDecision: false` is incoherent.
 
@@ -95,7 +98,8 @@ If the user weighed options and concluded "no", that is a **Rejected** record, n
 
 | Message | Cause |
 | --- | --- |
-| `Analysis can only start from a Matter in MatterReceived status.` | Already analyzed — one analysis per matter |
+| `An analysis must take up at least one input; motivatedBy is empty.` | Empty list |
+| `That input is already referenced by this analysis.` | Attaching a matter the analysis already references |
 | `claimDescription is required when analysis produces a Memolok Decision Record.` | Path A without a claim |
 | `Matter not found.` | Wrong id, or a matter from another ledger |
 | `You are not a member of this Memolok Decision Ledger.` | Write without membership |
@@ -103,6 +107,7 @@ If the user weighed options and concluded "no", that is a **Rejected** record, n
 ## Do not
 
 - Sharpen, summarize, or translate the matter text at registration
-- Call `create_MDR` with a hand-set `promptedBy` — only Path A can set it
-- Re-analyze a matter; a second look needs a new matter
+- Pass one `motivatedBy` where several apply — that records reasoning that did not happen
+- Split one act of reasoning into an analysis per matter to route around the list
+- Decide which produced record "belongs to" which matter; nothing asks, and usually nothing is true
 - Register a matter the user did not actually raise, to justify a decision they brought fully formed

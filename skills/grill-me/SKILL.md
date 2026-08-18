@@ -93,7 +93,7 @@ That is continue-versus-end theatre. The user knows how to say they are done.
    interview turn asking what the ledger is for when a read answers it.
 3. `list_MDRs` — surface related prior decisions. Flag duplicate head Claims before grilling a
    question that is already settled.
-4. `list_matters(status="MatterReceived")` — parked bait may already cover this topic, and it is
+4. `list_matters(untaken: true)` — parked bait may already cover this topic, and it is
    better raised now than re-elicited.
 
 **Allowed throughout:** every read tool, plus the filesystem and anything else that answers a factual

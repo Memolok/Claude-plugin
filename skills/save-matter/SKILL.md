@@ -11,7 +11,7 @@ argument-hint: "<what you noticed, in your own words>"
 # /memolok:save-matter — Park a matter
 
 Registers a Matter verbatim on the ledger and stops. No sharpening, no analysis, no decision. The
-matter waits at **MatterReceived** until some later session picks it up.
+matter waits, referenced by nothing, until some later session picks it up.
 
 A Matter is any pre-analytical input to possible decision work — a defect, a desired feature, an
 improvement, an opportunity, a mandate, or a question nobody has answered yet. It carries no
@@ -63,15 +63,15 @@ downgrading a decision to a note loses the decision.
 
 Both are one-turn captures; the difference is "actionability" – **whether anyone is expected to do something**.
 
-A Matter has an implied disposition, however distant — somebody will eventually look at it. A
-scratchpad has none: it is a pasted quote, a scraped page, rough figures, material worth keeping that
-nobody owes anything to.
+A Matter carries an expectation that somebody will eventually look at it, however distant. A
+scratchpad carries none: it is a pasted quote, a scraped page, rough figures, material worth keeping
+that nobody owes anything to.
 
 | The user brought | Entity |
 | --- | --- |
 | *"the CSV export mangles unicode"* | **Matter** — a defect somebody should fix |
 | *"here's the quote they sent"* | **Scratchpad** — no request in it |
-| *"we could probably drop the nightly rebuild"* | **Matter** — an idea with a disposition |
+| *"we could probably drop the nightly rebuild"* | **Matter** — an idea somebody should weigh |
 | *"jotting this before I forget"* | **Scratchpad** |
 
 Getting it wrong costs in both directions: a scratchpad used as intake means real work is never
@@ -95,11 +95,15 @@ at all. Holding the text in the conversation and offering to log it later is a r
 ### 2. Check for a duplicate
 
 ```
-list_matters(mdlGuid, status="MatterReceived")
+list_matters(mdlGuid, untaken: true)
 ```
 
 If the same thing is already parked, say so and stop — do not register a second one. Matters are
 immutable, and there is no way to merge or delete them.
+
+A duplicate that does get registered is not a disaster, and there is nothing to clean up: one
+analysis can take up every copy at once, which records what actually happened better than a merge
+would. Checking first is still cheaper than explaining three identical matters later.
 
 Skip this when the ledger is large and the user is clearly mid-flow; a duplicate is a smaller cost
 than an interruption.
@@ -137,9 +141,9 @@ to decide now, and do not summarize the methodology.
 
 ## What happens next
 
-The matter sits at **MatterReceived**. A later session finds it with
-`list_matters(status="MatterReceived")` — the unprocessed-bait inbox — and takes it through
-**`record-decision`**, which sharpens it into a head Claim and mints a record with `promptedBy` set.
+Nothing references the matter, which is what the unprocessed-bait inbox means. A later session finds
+it with `list_matters(untaken: true)` and takes it through **`record-decision`**, which sharpens it
+into a head Claim and mints a record.
 
 That deferred pickup is exactly why parking is safe: the provenance chain from the user's original
 words to the eventual decision stays intact, however long the gap.
@@ -158,5 +162,5 @@ If it turns out no decision was warranted, the pickup session closes it honestly
 
 ## References
 
-Terminal dispositions, the full matter lifecycle, and what is reachable today live in the
-**`record-decision`** skill's `matter-dispositions.md`.
+How a matter comes to rest, and which of those endings have no tool yet, are covered by
+**`record-decision`**. Load that skill rather than reaching into its files.

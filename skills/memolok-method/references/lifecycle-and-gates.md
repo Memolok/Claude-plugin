@@ -72,7 +72,7 @@ live high-water mark, publishes graph reciprocals, appends an audit event, and c
 ## Tier-1 fields (sealed on ledger residents)
 
 `hasNeed`, `hasContext`, `alternatives`, `deliberationFacts`, `expectedOutcomes`, `openQuestions`,
-`chosenAlternative`, `verdict`, `decidedAt`, `status`, `promptedBy`
+`chosenAlternative`, `verdict`, `decidedAt`, `status`
 
 ## Patchable
 
@@ -80,7 +80,7 @@ live high-water mark, publishes graph reciprocals, appends an audit event, and c
 | --- | --- |
 | Staged only | All tier-1 fish fields, plus `supersedes` and `settlesOpenQuestion` |
 | Any status | `authoredBy`, `decidedBy`, `consulted`, `informed` |
-| Never | `status` (use the transition tool), `promptedBy` (mint-frozen), `openQuestions[].settledIn`, `mdrHandle`, `mdrNumber`, `supersededBy` |
+| Never | `status` (use the transition tool), `openQuestions[].settledIn`, `mdrHandle`, `mdrNumber`, `supersededBy` |
 
 `hasContext` is `update_MDR`-only — it is not a `create_MDR` parameter — and takes an ordered list of
 World Fact or prior Observed Outcome ids.
@@ -104,20 +104,23 @@ target is the **older open-question holder**, not the closing record. If the hol
 has no number to target — update the holder in place instead. `supersededBy` and
 `openQuestions[].settledIn` are read-only.
 
-## Matter status chain
+## Matter shape, not matter status
 
-| Step | Resulting status |
+A matter has no status field. There is no chain to walk and no value to set — the read is the
+topology:
+
+| What you see | What it means |
 | --- | --- |
-| `register_matter` | `MatterReceived` |
-| `create_analysis` starts | `MatterAnalyzing` |
-| Path A completes | `MatterAnalyzed` |
-| Path B completes | `MatterDismissed` |
+| No reference points at it | Nobody has picked it up (`list_matters(untaken: true)`) |
+| Reference → analysis, `producesDecision: []` | Investigated, nothing warranted |
+| Reference → analysis with produced records | Decision work happened |
+| Reference `created` later than the analysis's `concludedAt` | Attached after the reasoning closed; the rationale does not account for it |
 
-Analysis may only start from a matter in `MatterReceived`, and there is one analysis per
-matter — re-analysis needs a new matter.
+Neither direction is bounded: an analysis may take up many matters, and a matter may be taken up by
+many analyses. Re-analysis does **not** need a new matter — open a second analysis over the same one.
 
-The remaining dispositions — `MatterResolved`, `MatterDeclined`, `MatterUnresolved`,
-`MatterBlocked`, `MatterMoot` — exist in the model but are not reachable through any tool yet.
+An analysis concludes in the call that creates it. `reopen_analysis` clears that conclusion, and is
+refused once any record it produced carries `decidedAt`.
 
 ## Posture summary
 

@@ -126,8 +126,13 @@ user. Ledger residents only.
 
 ```
 Matter₁ → Analysis₁ → MDR₁ → expected outcome → observed outcome (Violated)
-  → Matter₂ → Analysis₂ → MDR₂ at a new t₀
+  → Claim₂ ─┐
+            ├→ Analysis₂ → MDR₂ at a new t₀
+  Matter₂ ──┘
 ```
+
+Drawn as a single file for legibility only. The second analysis may take up the Claim carried out of
+the wake, fresh matters raised since, or both together — and may produce any number of records.
 
 The wake becomes bait for the next fish. The original record stays exactly as it was at its own t₀ —
 that is what makes the loop legible in hindsight.

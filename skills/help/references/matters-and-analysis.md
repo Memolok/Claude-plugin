@@ -27,14 +27,22 @@ thing somebody actually said.
 
 Analysis can also honestly conclude that no decision is warranted. That is a real outcome, not a failure.
 
+One analysis can take up several matters at once, and produce several decisions — or none. Three people
+reporting the same fault is one act of reasoning, not three; and two unrelated reports worked together
+routinely surface a problem neither person mentioned. Memolok never asks which decision answers which
+report, because in that situation there is often no honest answer. What it records is what the reasoning
+actually took up.
+
 ## Not everything starts as a matter
 
 An expert who already understands the problem can go straight to a sharpened need without any raw input in
 front of them. This is the ordinary path for anyone recording their own work, and there is nothing
 second-class about it.
 
-The one thing that cannot be done is going back. A decision minted from a matter carries that provenance
-permanently; a decision minted directly can never be given it afterwards. The choice is made once.
+The one thing that cannot be done is going back. An analysis names the decisions it produces at the
+moment it produces them, so a decision recorded directly cannot later be attached to the raw report
+that turned out to have prompted it. Register the matter afterwards and analyze it, and what you get
+is a second decision — not provenance for the first.
 
 ## Who does what
 
