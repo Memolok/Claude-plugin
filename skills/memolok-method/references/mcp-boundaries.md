@@ -23,6 +23,7 @@ records, or invented calls. Tell the user it is not available yet.
 | Wake | `record_observed_outcome`, `get_observed_outcome`, `list_observed_outcomes` |
 | Learning delta, one record | `get_MDR_learning_delta` |
 | Working notes | `create_scratchpad`, `get_scratchpad`, `replace_scratchpad`, `delete_scratchpad`, `list_scratchpads`, `search_scratchpads` |
+| Feedback to Memolok Inc | `submit_feedback`, `get_feedback`, `update_feedback` — see the `send-feedback` skill |
 
 ### Graph edges, staged records only
 
@@ -60,6 +61,15 @@ decide, which is weaker and different from refusing a problem you agree is real.
 
 Re-analysis, by contrast, **is** available: open a second analysis over the same matter, or attach it
 to an existing one. Nothing limits a matter to one analysis.
+
+### Feedback reports are not ledger entities
+
+`submit_feedback` sends the feedback to Memolok, not to the user's own ledger. A report has no `mdlGuid` tenancy,
+carries no Claim, cannot be cited, and never becomes a Matter. Mental model: write-only – there is
+**no list and no search**: a report is reachable only by an id its submitter still holds, and it may be
+deleted server-side during triage, so `get_feedback` legitimately returns not-found for something that existed.
+
+Do not simulate the missing enumeration by keeping a local index of what you sent.
 
 ### Portfolio intelligence
 

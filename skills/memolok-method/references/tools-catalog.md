@@ -370,6 +370,77 @@ substring pass answered). An empty result means no note matched; it is not a cue
 contributor set is cumulative and never shrinks, so it does **not** say who edited most recently —
 pair it with `modifiedAt`. Any of the four attribution facts may be absent, which is normal.
 
+## Feedback tools
+
+Feedback goes to **Memolok**, not to the user's ledger. No `mdlGuid` tenancy, no Claim, nothing
+citable. Journey and the standard a report is held to: the **`send-feedback`** skill.
+
+### `submit_feedback`
+
+| Param | Type | Required |
+| --- | --- | --- |
+| `reports` | array of report objects | yes |
+
+**A batch always** — a single report is a batch of one, and one call means one preview-and-confirm.
+Up to 25 per call. Validation is all-or-nothing: a malformed third report leaves the first two
+unwritten, and the error names the offender by index (`reports[2].evidence[0]: …`).
+
+Each item in `reports`:
+
+| Field | Type | Required |
+| --- | --- | --- |
+| `title` | string | yes |
+| `kind` | `bug` \| `suggestion` | yes |
+| `report` | `{ markdown, lang? }` | yes |
+| `userVerbatim` | `{ markdown, lang? }` | no |
+| `mdlGuid` | string | no |
+| `artifacts` | array of `{ kind, name, version? }` | no |
+| `evidence` | array of evidence items | no |
+| `expectation` | `{ markdown, lang? }` | no |
+
+`artifacts[].kind` is one of `skill`, `mcp_tool`, `mcp_server`, `plugin`, `model`. Artifacts name what
+was **in play**, not what is at fault — a skill contradicting a tool is two artifacts.
+
+An **evidence item** is either a call record or a citation, and must carry a `response` or an
+`excerpt`:
+
+| Field | Type | For |
+| --- | --- | --- |
+| `occurredAt` | ISO-8601 string | call record |
+| `toolName` | string | call record |
+| `request` / `response` | `{ markdown, lang? }` | call record |
+| `requestId` | string | call record (`X-Memolok-Request-Id`) |
+| `source` / `excerpt` | string / `{ markdown, lang? }` | citation |
+
+There is no `outcome` field and no report-class field. A call that returned 200 and did the wrong
+thing is the case worth catching, and a success/error flag would file it under "success".
+
+**Never send** `submittedBy`, `submittedAt`, `serverVersion` or `modelVersion` — the server records
+those and refuses a caller that sets them. `artifacts[].version` is yours to supply for what you can
+actually read (the plugin, a skill); the server stamps its own build.
+
+Returns `{ reports: [{ feedbackId, title, kind, submittedAt }, …] }` in submission order — a digest,
+not the bodies. Keep the ids.
+
+### `get_feedback`
+
+| Param | Type | Required |
+| --- | --- | --- |
+| `feedbackId` | string (`fb_<24 hex>`) | yes |
+
+Your own reports only. A stranger's id returns *not found* rather than a permission error, and so
+does a report deleted during triage.
+
+### `update_feedback`
+
+| Param | Type | Required |
+| --- | --- | --- |
+| `feedbackId` | string (`fb_<24 hex>`) | yes |
+| `patch` | object | yes |
+
+Owner-only, no time limit. Patchable: `title`, `kind`, `report`, `userVerbatim`, `mdlGuid`,
+`artifacts`, `evidence`, `expectation`. **Arrays replace, they do not merge** — send the full list.
+
 ## Common errors
 
 | Message | Cause |
@@ -396,3 +467,7 @@ pair it with `modifiedAt`. Any of the four attribution facts may be absent, whic
 | `A scratchpad body may be at most 65536 bytes;…` | Paste too large — split it, or keep a pointer to the source |
 | `claimDescription is required when analysis produces a Memolok Decision Record.` | Path A without a claim |
 | `A Memolok Decision Record cannot cite its own Observed Outcome in hasContext...` | DTP violation |
+| `{field} must be a feedback report id of the form 'fb_<24 hex characters>'.` | A ledger id passed to a feedback tool — different kinds of address |
+| `Feedback report not found.` | Not yours, wrong id, or deleted during triage |
+| `reports[n] may not set serverVersion, …` | The server records the build; a caller cannot claim one |
+| `reports[n].evidence[m] must carry either a response … or an excerpt` | An evidence item that asserts nothing |

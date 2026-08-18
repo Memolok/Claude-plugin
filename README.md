@@ -27,6 +27,7 @@ the thinking first, `/memolok:help` explains it.
 | `/memolok:manage-almanac` | Admit the world facts your decisions reason from |
 | `/memolok:manage-notes` | Scratchpad management: save, find and destroy working notes |
 | `/memolok:revise-intent` | Say what a ledger is for, or update it when the focus shifts |
+| `/memolok:send-feedback` | Report a Memolok bug or suggestion to Memolok — **not** to your own ledger! |
 
 Memolok's methodology — the decision lifecycle, what seals at commitment, and how records are
 written — is loaded automatically by the skills above; you do not invoke it directly.
