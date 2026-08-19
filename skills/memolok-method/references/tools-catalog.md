@@ -32,7 +32,19 @@ All prose parameters use `{ markdown, lang? }` — see `prose-and-raci.md` for w
 
 ### `ping` / `get_guidance`
 
-No parameters. `ping` returns `"pong"`; `get_guidance` returns the server's instruction text.
+`ping` takes no parameters and returns `"pong"`.
+
+`get_guidance` returns the server's instruction text. **Always pass `pluginVersion`** — the version
+stated at the top of `memolok-method` — so the server can say whether this pack still matches its
+tools:
+
+| Param | Type | Required |
+| --- | --- | --- |
+| `pluginVersion` | string | Send it always; older packs that cannot are still served |
+
+The reply names the newest pack available and the oldest this server accepts. If it says your pack
+is too old, its skills describe payloads the server now refuses — say so and recommend updating,
+rather than proceeding and hitting write errors that read as data problems.
 
 ### `whoami`
 
@@ -272,6 +284,14 @@ Expert path only — there is no matter parameter. Returns the record with a min
 Patch keys: `hasNeed`, `hasContext`, `alternatives`, `deliberationFacts`, `expectedOutcomes`,
 `openQuestions`, `verdict`, `chosenAlternative`, the four RACI fields, `supersedes`,
 `settlesOpenQuestion`. Patches may be incremental — send only what changed.
+
+**You name every id on `alternatives`, `expectedOutcomes`, `openQuestions`** — prefixed `alt-`,
+`eo-`, `oq-` for their list, unique within it, on `create_MDR` and `update_MDR` alike. Name them for
+what they are: `alt-cache-layer` is what a reader meets in `chosenAlternative` later. Omitting an id
+is refused, since these lists replace wholesale and an id-less item cannot say whether it is the old
+one or a new one; a missing prefix is refused with the correction rather than added for you, because
+rewriting an id would orphan references the patch does not carry. `chosenAlternative` and
+`deliberationFacts[].onAlternative` must name an alternative that exists once the patch lands.
 
 ### `transition_MDR_status`
 

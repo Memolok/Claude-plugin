@@ -58,16 +58,21 @@ verdict must be {description: {markdown, lang}}, not a flat {markdown, lang} obj
 Claim and sets `manifests` when you supply `description`, and hydrates it back to `description` on
 read, so the read shape differs from what you wrote.
 
-## Server-minted ids
+## Ids you choose, and later have to cite
 
-The server mints ids you will need later:
+**You** name every id on `alternatives`, `expectedOutcomes` and `openQuestions` — the server mints
+none of them. Each must carry its list's prefix and be unique within that list:
 
-| Embed | Id prefix | Needed for |
+| Embed | Prefix | Cited later by |
 | --- | --- | --- |
+| `alternatives[]` | `alt-…` | `chosenAlternative`, `deliberationFacts[].onAlternative` |
 | `expectedOutcomes[]` | `eo-…` | `record_observed_outcome`'s `tests.outcomeId` |
 | `openQuestions[]` | `oq-…` | `settlesOpenQuestion.openQuestionId` |
 
-Read them from the create or update response. Do not invent them.
+Two of those citations arrive in a *later* session, and one arrives in the same call — so name them
+for what they are. `alt-cache-layer` tells a reader what won; a generated id tells them nothing.
+
+Full contract and the refusals: `../record-decision/references/patch-payloads.md`.
 
 ## Alternatives
 

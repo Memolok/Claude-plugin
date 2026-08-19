@@ -8,8 +8,11 @@ description: >-
 user-invocable: false
 ---
 
-> Memolok plugin: version 0.18.0-alpha currently installed
-> Important! Call the companion Memolok MCP `get_guidance` before any other Memolok MCP tool!
+> Memolok plugin: version 0.19.0-alpha currently installed
+> Important! Call the companion Memolok MCP `get_guidance` before any other Memolok MCP tool —
+> and pass `pluginVersion: "0.19.0-alpha"`, the version on the line above. The server compares it
+> against the oldest pack it still accepts and tells you whether these skills match its tools. It
+> has no other way to know, and there is no second call in which to correct an omission.
 > N.B.: This skill is loaded very often; it's deliberately terse for token economy. Do not emulate this writing style.
 
 # Memolok method

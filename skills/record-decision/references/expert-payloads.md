@@ -35,7 +35,7 @@ When the conversation already produced most of the body, send it at create. **St
   "status": "Deliberating",
   "alternatives": [
     {
-      "id": "python",
+      "id": "alt-python",
       "label": "Python",
       "description": {
         "markdown": "pandas / numpy / scipy; the team has three people already fluent.",
@@ -43,7 +43,7 @@ When the conversation already produced most of the body, send it at create. **St
       }
     },
     {
-      "id": "r",
+      "id": "alt-r",
       "label": "R",
       "description": {
         "markdown": "Stronger native statistics, but nobody on the team writes it day to day.",
@@ -53,21 +53,21 @@ When the conversation already produced most of the body, send it at create. **St
   ],
   "deliberationFacts": [
     {
-      "onAlternative": "python",
+      "onAlternative": "alt-python",
       "description": {
         "markdown": "Existing ETL is already Python, so no second runtime enters the pipeline.",
         "lang": "en"
       }
     },
     {
-      "onAlternative": "r",
+      "onAlternative": "alt-r",
       "description": {
         "markdown": "Better modelling libraries, but would need a hand-off boundary mid-pipeline.",
         "lang": "en"
       }
     }
   ],
-  "chosenAlternative": "python",
+  "chosenAlternative": "alt-python",
   "verdict": {
     "description": {
       "markdown": "Python, because the ecosystem clears the bar and it avoids a second runtime in the pipeline.",
@@ -76,6 +76,7 @@ When the conversation already produced most of the body, send it at create. **St
   },
   "expectedOutcomes": [
     {
+      "id": "eo-methods-available",
       "description": {
         "markdown": "No statistical method needed in the first two quarters turns out to be unavailable or unmaintained.",
         "lang": "en"
@@ -84,6 +85,7 @@ When the conversation already produced most of the body, send it at create. **St
   ],
   "openQuestions": [
     {
+      "id": "oq-training-host",
       "description": {
         "markdown": "Whether model training later needs to move off the API host entirely.",
         "lang": "en"
@@ -143,7 +145,11 @@ helpful one.
 | --- | --- |
 | `Cannot create a Memolok Decision Record with status Superseded.` | Illegal creation status |
 | `At least one alternative is required before proposing…` | Created at `Proposed`/`Accepted` without a body |
-| `A chosen alternative must reference one of the record's alternatives.` | `chosenAlternative` does not match an `id` |
+| `A chosen alternative must reference one of the record's alternatives.` | `chosenAlternative` does not match an `id`, at the admission gate |
+| `The chosen alternative '…' does not name one of the record's alternatives.` | The same mismatch, caught at the write instead |
+| `…id is required.` | An item on `alternatives`, `expectedOutcomes` or `openQuestions` carries no `id` |
+| `…id '…' must start with '…' — did you mean '…'?` | Missing the list's prefix; the message names the correction |
+| `…id '…' is used twice in this list.` | Two items claiming one id |
 | `At least one expected outcome is required before accepting…` | Created at `Accepted` with no tail |
 | `Field required [type=missing]` naming `verdict.description` | Sent `verdict` as bare `{markdown, lang}` |
 
