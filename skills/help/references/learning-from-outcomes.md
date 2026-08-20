@@ -43,3 +43,7 @@ work, and you will not notice, because the records will look complete.
 > **Not built yet.** Memolok compares one decision's commitments against its own observations. Aggregating
 > that across a ledger to expose the pattern is not something the product does yet — the raw material is
 > all there, and reading it is manual.
+
+---
+
+When they want to record one: **`record-outcome`**.

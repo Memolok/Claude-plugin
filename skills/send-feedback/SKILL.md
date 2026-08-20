@@ -1,17 +1,18 @@
 ---
 name: send-feedback
 description: >-
-  Send feedback about Memolok itself to Memolok Inc — a bug you hit, an inconsistency you noticed, a
-  skill that contradicts a tool, something the user wanted and could not find. Use when a Memolok
-  tool fails or misbehaves mid-task, when the user says "report this to Memolok", "tell them this is
-  broken", "that's a bug", "they should add X", or at the end of a session where Memolok itself got
-  in the way. Not for the user's own ledger — this goes to Memolok.
+  Send feedback about Memolok to Memonos, the team behind the project — a bug you hit, an
+  inconsistency you noticed, a skill that contradicts a tool, something the user wanted
+  and could not find. Use when a Memolok tool fails or misbehaves mid-task, when the user
+  says "report this to Memolok", "tell them this is broken", "that's a bug", "they should add X",
+  or at the end of a session where Memolok itself got in the way.
+  Not for the user's own ledger — this only goes to Memonos.
 argument-hint: "<what went wrong, or what should exist>"
 ---
 
-# /memolok:send-feedback — Report to Memolok Inc
+# /memolok:send-feedback — Report to Memonos
 
-Sends bug reports and suggestions about **Memolok itself** to Memolok Inc, through the same
+Sends bug reports and suggestions about **Memolok itself** to Memonos, the team behind Memolok, through the same
 authenticated MCP surface everything else uses. Batched: a session's findings go in one call.
 
 This is the only journey in the pack that writes somewhere other than the user's ledger. Nothing here
@@ -28,7 +29,7 @@ Examples:
 - `/memolok:send-feedback update_MDR returned 200 but dropped my chosenAlternative`
 - `/memolok:send-feedback the record-decision skill says something the tools don't actually support`
 - `/memolok:send-feedback there's no way to rename a ledger after creating it`
-- `/memolok:send-feedback tell Memolok their error messages don't say which field failed`
+- `/memolok:send-feedback tell Memonos their error messages don't say which field failed`
 
 ## Step 0 — Load the method
 
@@ -161,7 +162,7 @@ drop it; do not file a reduced version instead.
 
 Give them the titles and their ids, and keep the ids in the session:
 
-> Sent two reports to Memolok — `fb_6a83…` *update_MDR orphans chosenAlternative*, and `fb_6a84…`
+> Sent two reports to Memonos — `fb_6a83…` *update_MDR orphans chosenAlternative*, and `fb_6a84…`
 > *No way to rename an MDL title*.
 
 ### 5. Correcting a report
@@ -171,7 +172,7 @@ id. **Arrays replace rather than merge**, exactly as `update_MDR` works: to add 
 send the whole list back.
 
 `get_feedback(feedbackId)` reads one back. Both may legitimately return not-found for a report that
-once existed — Memolok culls duplicates and noise by deleting — so treat an id as a handle, not a
+once existed — triage culls duplicates and noise by deleting — so treat an id as a handle, not a
 guarantee.
 
 ## Field quality
@@ -199,12 +200,13 @@ that Memolok has got *worse over time* — a skill that used to read better, a w
 smoother — is deliberately out of scope: you start each session cold and cannot honestly compare.
 
 **Duplicates are not your problem.** Do not check whether something was already reported; you have no
-way to, and Memolok collapses repeats during triage. File it.
+way to, and Memonos collapses repeats during triage. File it.
 
 ## Tips
 
 - Batch at the end of a working session rather than interrupting mid-task — unless the user asks for
-  it now, or the session is about to end.
+  it now, or the session is about to end. **`wrap-up`** is the skill that runs at that moment, and it
+  routes here as one destination among several.
 - A suggestion needs no evidence at all. `title`, `kind` and `report` are the whole requirement.
 - `mdlGuid` is worth including when the fault happened in a ledger context. It is stored as a
   reproduction hint and resolves nothing.

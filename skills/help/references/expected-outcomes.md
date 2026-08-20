@@ -40,3 +40,7 @@ including its own author.
 There is a discipline point here too. Expectations are recorded at commitment and not adjusted afterwards
 to match what happened. A tail quietly rewritten to fit the results is the most tempting and most
 destructive edit available, because the record still looks complete.
+
+---
+
+When they are ready to commit to their expectations: **`commit-decision`**.

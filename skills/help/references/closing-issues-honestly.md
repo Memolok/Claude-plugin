@@ -61,3 +61,8 @@ recorded.
 > externally blocked, or overtaken by events is modelled but has no tool yet. Until it is, record the
 > decision that closes the topic — the reasoning is the part that stops the zombie — and expect the matter
 > itself to keep showing up as one nobody has picked up.
+
+---
+
+When they want to record the decision that closes a topic: **`record-decision`**, then
+**`commit-decision`**.

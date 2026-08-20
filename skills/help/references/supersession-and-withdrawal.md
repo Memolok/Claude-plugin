@@ -41,3 +41,7 @@ it is worth naming because it is invisible from inside the conversation where it
 > **Not built yet.** Memolok does not scan the ledger for stale constraints. Superseding a decision records
 > the withdrawal accurately, but noticing that a later decision still leans on the retired one is
 > currently a human job.
+
+---
+
+When they want to supersede one: **`revise-decision`**.

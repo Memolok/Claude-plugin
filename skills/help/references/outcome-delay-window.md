@@ -36,3 +36,7 @@ latency is unmanaged risk.
 > decision is due for a look. Recording an observation is fully supported whenever you make one; noticing
 > that one is overdue is on you. Until it is automated, put the check in whatever calendar or tracker you
 > actually read — the decision that quietly never gets assessed is the one this is designed to catch.
+
+---
+
+When the moment comes to assess one: **`record-outcome`**.

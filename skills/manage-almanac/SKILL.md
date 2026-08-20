@@ -162,8 +162,9 @@ editing sealed history. When a fact is corrected, the records that cited it stay
 honest at their own t₀ — and the correction is what lets someone later ask which decisions rested on a
 premise that has since changed.
 
-That question — *polluted premises*, decision decay — has no tool yet. You can answer it by reading
-`hasContext` across records, but say that you read it rather than implying the ledger computed it.
+> **Not built yet.** That question — *polluted premises*, decision decay — has no tool. You can answer
+> it by reading `hasContext` across records, but say that you read it rather than implying the ledger
+> computed it.
 
 ## Tips
 

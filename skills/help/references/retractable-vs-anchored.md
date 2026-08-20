@@ -40,3 +40,7 @@ is never edit-in-place.
 
 Whether a specific record is still retractable is a fact the ledger computes rather than a judgment call.
 Read it before promising anyone that something can be taken back.
+
+---
+
+When they want to withdraw or replace a sealed decision: **`revise-decision`**.

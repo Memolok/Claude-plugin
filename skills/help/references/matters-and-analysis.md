@@ -60,3 +60,8 @@ control who may write to the ledger. Access is governed separately, by membershi
 Observations from an earlier decision are among the best sources of new matters. Something you committed
 to did not hold, or something nobody predicted turned up — that becomes raw input for the next decision,
 which is where the ledger stops being an archive and starts being a working instrument.
+
+---
+
+When they want to park one without deciding anything about it: **`save-matter`**. When they want to
+take one up and decide: **`record-decision`**.

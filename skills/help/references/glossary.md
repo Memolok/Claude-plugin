@@ -10,6 +10,7 @@ word it is — the fish, the wake, matter rather than issue — see `why-these-w
 | **Memolok Decision Record** (**MDR**) | One decision, complete: what it was for, what was considered, what was committed, what was expected. Sometimes called *the fish*, from its shape. You might have said "a decision record" or "an ADR" |
 | **Memolok Decision Ledger** (**MDL**) | The collection those records live in, together with the facts they reason from. An epistemic boundary, not a folder. You might have said "the project's decision log" |
 | **Ledger Intent** | A ledger's short statement of what it is for, who it serves, and roughly where it is heading. Rewritten freely; read for orientation before starting new work. No decision ever points at it |
+| **Scratchpad** | A freeform working note on a ledger — no title, no category, no status. The one thing here that can be edited and deleted at will, which is exactly why nothing may ever cite one. You might have said "a sticky note" |
 
 ## The parts of a decision
 
@@ -36,10 +37,13 @@ narrow at the commitment, wide again at the consequences.
 | **tₙ** | Any later moment, when the world has responded and can be observed |
 | **the wake** | Everything observed after the decision, recorded beside it rather than inside it |
 | **Observed Outcome** | One thing that actually happened, recorded as a dated fact and linked to the decision that caused it |
+| **Test Result** | The verdict an observation records against one specific expectation: **satisfied**, **violated**, or **inconclusive**. It belongs to the expectation being assessed, not to the observation event |
+| **Expected / Emergent / Deducible** | The three kinds of observation. **Expected**: it assesses something you committed to. **Emergent**: nobody could reasonably have predicted it. **Deducible**: it could have been predicted, and nobody wrote it down at the time |
 | **learning delta** | The comparison between what a decision promised and what the wake shows |
 | **staged** | Not yet committed — a draft. It has no ledger number, and nothing follows from it |
 | **ledger resident** | Committed: accepted, rejected, or superseded. Carries a number and can be cited |
 | **retractable** | Committed, but nothing relies on it yet, so it can still be withdrawn on the record |
+| **uncommit** | The act of withdrawing a retractable decision: it returns to draft, its number goes back into circulation, and both the commitment and the withdrawal stay visible. Not an edit — the substance is still not rewritten |
 | **anchored** | Something relies on it. Sealed; course correction now means a new decision |
 | **supersede** | To withdraw an earlier decision by committing a new one that replaces it. The original stays, permanently, at its own moment |
 

@@ -45,3 +45,7 @@ something true about the world: the information was incomplete, the assumption w
 underestimated. The second is fiction, and it will be believed.
 
 The value of a record is its honesty, not its correctness.
+
+---
+
+When they are ready to seal one: **`commit-decision`**.

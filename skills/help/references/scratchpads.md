@@ -95,3 +95,7 @@ Deleting a note deletes it. There is no recovery window and nothing to undo.
 That sounds harsh next to the rest of Memolok, where nothing can be deleted at all. It is the same
 principle seen from the other side: everything else is permanent because things depend on it, and a
 note can be deleted precisely because nothing can.
+
+---
+
+When they want to keep, find, revise or bin one: **`manage-notes`**.

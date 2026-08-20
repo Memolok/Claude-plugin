@@ -45,3 +45,7 @@ actually happened.
 Evidence that a bet did not pay off is evidence, nothing more. Whether to change course is a fresh
 decision with its own reasoning and its own moment of commitment. The wake supplies the input; it does not
 pull the trigger.
+
+---
+
+When they want to record one: **`record-outcome`**.

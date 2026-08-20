@@ -49,3 +49,7 @@ real, the assumptions they carried between projects, the facts they admitted and
 
 Without it, that walks out of the door with them, and one person quietly remains the only one who knows
 why things are the way they are.
+
+---
+
+When they want to admit or review a fact: **`manage-almanac`**.
