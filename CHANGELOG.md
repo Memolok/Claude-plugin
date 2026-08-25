@@ -18,6 +18,14 @@ matches — you are asked to update only when your pack genuinely stops working.
 > history rather than at the time, so they are terser than the ones after them. Nothing in them is
 > reconstructed beyond what the tags and their contents show.
 
+## Unreleased
+
+*Landed, not yet in a released pack.*
+
+- **`wrap-up` now looks for observed outcomes**, not only for content the session originated. It will
+  offer to record what you have learned about decisions already on your ledger — including records you
+  only read in passing, and outcomes nothing in the session caused.
+
 ## 0.20.0-beta — 2026-08-20
 
 First `-beta` pack; every earlier release was `-alpha`. The track change is a statement about
