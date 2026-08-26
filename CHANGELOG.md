@@ -20,7 +20,7 @@ matches — you are asked to update only when your pack genuinely stops working.
 
 ## Unreleased
 
-## 0.21.0-beta — 2026-08-27
+*Landed, not yet in a released pack.*
 
 **An analysis can now take up a world fact or a recorded outcome directly.** Until now the only thing
 an analysis could be about was a *matter* — raw input in someone's own words. So when a new
@@ -45,10 +45,9 @@ The skills now route those cases to the entry itself. What changes for you:
   took up; there is no read that answers "what did this fact lead to?", and the skills say so rather
   than implying the ledger computed it.
 
-Needs the Memolok server deployed on or after this date. An older pack keeps working against the new
-server — it simply does not know to offer any of this.
-
-Also in this release:
+Needs a Memolok server carrying the widened tool — **not yet deployed**, so none of this works
+against the server running today. That ordering is not optional: skills that offer these inputs
+against the current server would produce a "not found" on a live, correct id.
 
 - **`wrap-up` now looks for observed outcomes**, not only for content the session originated. It will
   offer to record what you have learned about decisions already on your ledger — including records you
