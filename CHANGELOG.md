@@ -25,6 +25,14 @@ matches — you are asked to update only when your pack genuinely stops working.
 - **`wrap-up` now looks for observed outcomes**, not only for content the session originated. It will
   offer to record what you have learned about decisions already on your ledger — including records you
   only read in passing, and outcomes nothing in the session caused.
+- **`help` answers instead of describing its own lookup.** It had picked up the habit of saying which
+  reference it was about to open before getting to the point, which put the agent's process in front of
+  your question. The reading is now invisible by rule, and the skill carries worked examples of what an
+  answer sounds like — it had none, alone among the skills in the pack.
+- **`help` also says what the agent is there to do.** Someone asking what Memolok is usually meets the
+  rigour before they meet the reason for it: records that seal, a commitment ceremony of its own,
+  expectations stated before the fact. Explained defensively that sounds like bureaucracy; explained as
+  protection for the decider it sounds like the point. The skill now names closing that gap as the job.
 
 ## 0.20.0-beta — 2026-08-20
 
