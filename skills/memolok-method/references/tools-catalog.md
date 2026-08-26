@@ -137,7 +137,9 @@ Returns `{ matters: [...] }` in registration order, rows shaped like `get_matter
 Returns `{ id, mdlGuid, references, producesDecision, analysisRationale, performedBy, concludedAt }`.
 Error: `Analysis not found.`
 
-Each entry in `references` is `{ referenceId, motivatedBy, created, late }`. `late` true means the
+Each entry in `references` is `{ referenceId, motivatedBy, motivatedByKind, created, late }`.
+`motivatedByKind` is `Matter`, `WorldFact` or `ObservedOutcome` — read it rather than
+guessing from the id, which carries no kind. Null only where the input has been deleted. `late` true means the
 input was attached after `concludedAt`, so the rationale does not account for it; **`null` means
 unanswerable** — a backfilled reference with no date, or an analysis with no conclusion — and never
 "not late".
@@ -206,14 +208,17 @@ do not sharpen here.
 | Param | Type | Required |
 | --- | --- | --- |
 | `mdlGuid` | string | yes |
-| `motivatedBy` | string[] (matter ids) | yes |
+| `motivatedBy` | string[] (matter / world fact / observed outcome ids) | yes |
 | `analysisRationale` | `{ markdown, lang? }` | yes |
 | `producesDecision` | bool | no (default `true`) |
 | `claimDescription` | `{ markdown, lang? }` | Path A only |
 
-`motivatedBy` is a list: pass **every** matter this reasoning took up. Empty raises. The analysis
-concludes in this call, stamping `concludedAt` with the same instant it dates the references, so
-they read as on time.
+`motivatedBy` is a list: pass **every** input this reasoning took up, in any mix of the three
+kinds. Empty raises. An admitted World Fact or Observed Outcome goes in as itself — do not register
+a Matter restating it, which records neither the entry as the input nor the link, and cannot be
+repaired later because Matters are immutable. Repeats of one id attach once, across kinds as within
+one. The analysis concludes in this call, stamping `concludedAt` with the same instant it dates the
+references, so they read as on time.
 
 Returns `{ analysis, mdr? }`. Path A mints the record at `New`; Path B omits `mdr` entirely (absent,
 not null).
@@ -224,13 +229,13 @@ not null).
 | --- | --- | --- |
 | `mdlGuid` | string | yes |
 | `analysisId` | string | yes |
-| `motivatedBy` | string (matter id) | yes |
+| `motivatedBy` | string (matter / world fact / observed outcome id) | yes |
 
-Takes up a matter the analysis did not originally reference. **Allowed after the analysis
+Takes up an input the analysis did not originally reference. **Allowed after the analysis
 concluded** — that is what it is for. The reference is dated now, so it reads as `late: true` and the
 sealed rationale is untouched. Returns the reference.
 
-At most one reference per (matter, analysis) pair; a second raises rather than replacing the first,
+At most one reference per (input, analysis) pair; a second raises rather than replacing the first,
 because two attachment times make lateness unanswerable.
 
 ### `retract_analysis_reference`

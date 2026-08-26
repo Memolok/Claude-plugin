@@ -115,7 +115,9 @@ two honest observations can disagree.
 A `Violated` result is **evidence for re-evaluation, not an automatic supersession**. What it earns is
 a fresh look, at a new t₀.
 
-- The user wants to act on it → **`record-decision`**; the wake becomes bait for the next fish
+- The user wants to act on it → **`record-decision`**; the wake becomes the input for the next
+  fish. Hand over the `observedOutcomeId`: the next analysis takes the wake up by that id, and
+  must not restate it as a Matter
 - They just want it noted → stop; recording it was the point
 - They want to change the original record → **`revise-decision`**, and expect it to be anchored now
 

@@ -20,7 +20,35 @@ matches — you are asked to update only when your pack genuinely stops working.
 
 ## Unreleased
 
-*Landed, not yet in a released pack.*
+## 0.21.0-beta — 2026-08-27
+
+**An analysis can now take up a world fact or a recorded outcome directly.** Until now the only thing
+an analysis could be about was a *matter* — raw input in someone's own words. So when a new
+regulation, or a result that missed what a decision promised, was what actually prompted fresh
+thinking, the only way to record that was to retype it as a matter. The ledger then held the same
+thing twice and no trace that either led to the other, and matters cannot be edited, so it could not
+be put right later.
+
+The skills now route those cases to the entry itself. What changes for you:
+
+- **Ask "what should we do about that?" of something already on your ledger, and the decision that
+  follows will point back at it.** A fact in the almanac, an observed outcome from an earlier
+  decision — the reasoning names it as what it took up, and a reader of the resulting record can
+  walk back to it.
+- **The intake fork stops treating premises and outcomes as exits.** Bringing up a world fact or a
+  wake used to end the decision conversation and hand you to a different skill. It is now a detour:
+  record it there, come back, decide.
+- **One analysis can still take up any number of things, and now in any mixture** — a fresh report,
+  the constraint that bounds the fix and the outcome that prompted someone to look, together in one
+  act of reasoning.
+- **Reviews are honest about the direction that is missing.** You can ask what a record's reasoning
+  took up; there is no read that answers "what did this fact lead to?", and the skills say so rather
+  than implying the ledger computed it.
+
+Needs the Memolok server deployed on or after this date. An older pack keeps working against the new
+server — it simply does not know to offer any of this.
+
+Also in this release:
 
 - **`wrap-up` now looks for observed outcomes**, not only for content the session originated. It will
   offer to record what you have learned about decisions already on your ledger — including records you

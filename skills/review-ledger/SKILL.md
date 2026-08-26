@@ -60,6 +60,7 @@ that".
 | One matter | `get_matter(mdlGuid, matterId)` |
 | What came of a matter | `get_matter`, then `get_MDR(mdrHandle)` |
 | Why a matter was dismissed | `get_analysis(mdlGuid, analysisId)` |
+| What a record's reasoning took up | `get_MDR` for `analysisId`, then `get_analysis` |
 | Premises the ledger reasons from | `list_world_facts(mdlGuid)` |
 | What happened after a decision | `list_observed_outcomes(mdlGuid, mdrHandle?)` |
 | Promises versus reality for one record | `get_MDR_learning_delta(mdlGuid, mdrHandle)` |
@@ -137,6 +138,10 @@ not an anomaly worth flagging: intent is revised in place and often lags the wor
 
 More than one entry is normal, not a defect: a matter can be taken up by several analyses.
 
+`takenUpBy` exists on matters only, though a world fact or observed outcome can equally be an
+analysis input — see *What the ledger cannot tell you* below before answering "what did this fact
+lead to?".
+
 **Answer with what the records decided, and do not claim any one of them was "for" this matter** —
 an analysis produces records for the reasoning as a whole, and one of them may exist because of
 something no raiser mentioned. Say what was decided and let the user draw the link. Call
@@ -147,8 +152,10 @@ assumed existing work covered it, and nothing has confirmed that.
 
 ### The unprocessed inbox
 
-`list_matters(untaken: true)` returns everything no analysis references — mostly matters parked
-through **`save-matter`** during other work.
+`list_matters(untaken: true)` returns every **matter** no analysis references — mostly ones parked
+through **`save-matter`** during other work. Almanac entries never appear here, whether or not any
+analysis has taken them up: there is no unprocessed-almanac inbox, because an admitted fact is not
+waiting on anybody.
 
 Present them as raw signal, in the words they were logged in. Do not sharpen them into needs while
 summarizing; that is the pickup session's job, with the user present.
@@ -186,7 +193,9 @@ Ledger residents only; a staged record has made no bets yet.
 ## What the ledger cannot tell you
 
 > **Not built yet.** No tool exists for impact analysis, decision-decay or polluted-premise detection,
-> stale-constraint review, cross-record open-question queries, or portfolio-wide outcome latency.
+> stale-constraint review, cross-record open-question queries, or portfolio-wide outcome latency. Nor
+> for reading an analysis input backwards: `get_matter` returns `takenUpBy`, but a world fact or an
+> observed outcome cannot report which analyses took *it* up.
 
 You can often *reason* toward these by reading records — that is fine, and useful. What is not fine is
 implying the ledger computed it. Say "reading through these, three records lean on that assumption"

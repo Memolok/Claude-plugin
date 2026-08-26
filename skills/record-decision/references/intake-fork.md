@@ -78,19 +78,24 @@ co-discovered with the user.
 ### 7. "Legal says we must retain records for seven years."
 
 **World Fact.** True whether or not anyone decides anything about it, so it is a premise rather than a
-decision. Hand off to `manage-almanac`.
+decision. Admit it through `manage-almanac` first.
 
-The decision it *provokes* — what to change so retention is met — is a separate fish, and it should
-cite this fact through `hasContext` while still staged.
+The decision it *provokes* — what to change so retention is met — is a separate fish, and the
+admitted fact is its **input**: pass the `worldFactId` in `motivatedBy`. Do not register a Matter
+saying "legal wants seven-year retention"; the fact is already recorded, and restating it loses the
+link permanently. Cite it through `hasContext` as well while the record is staged if the reasoning
+rests on it — being an input and being context are different claims, and a premise can be both.
 
 ### 8. "We decided last quarter to use Kafka and it's not working out."
 
 **A wake**, on a record already on the ledger. Hand off to `record-outcome` to register the observed
 outcome against the expected outcome it tests.
 
-Then it may well become fresh bait: a `Violated` result is exactly the kind of signal that starts the
-next matter. What it is *not* is a reason to edit the original record — that record was honest at
-its t₀, and rewriting the tail to match what happened is ledger fraud.
+Then it may well start the next fish: a `Violated` result is exactly that kind of signal. The wake
+itself is the input — pass the `observedOutcomeId` in `motivatedBy` — not a Matter retyping it,
+which would record neither the outcome as the input nor that anything connected the two. What it is
+*not* is a reason to edit the original record — that record was honest at its t₀, and rewriting the
+tail to match what happened is ledger fraud.
 
 ### 9. "Just noting that the CSV export mangles unicode — don't do anything about it now."
 

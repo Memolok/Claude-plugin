@@ -14,17 +14,19 @@ took it up, whether they concluded, and what they produced.
 These are descriptions, not values. Two of them can be true of one matter at once, because an
 analysis producing a record does not stop a second analysis from taking the same matter up later.
 
-## One analysis, any number of matters
+## One analysis, any number of inputs
 
-`create_analysis` takes `motivatedBy` as a **list**. Pass every matter the reasoning actually took
-up:
+`create_analysis` takes `motivatedBy` as a **list**, of matter, world fact and observed outcome ids
+in any mix. Pass every input the reasoning actually took up:
 
 - Three people report the same fault — one analysis over all three, not three analyses saying the
   same thing. Cloning one act of reasoning into copies describes work that did not happen.
 - Two unrelated reports triaged together, surfacing three faults — one analysis, three records, and
   no claim about which record belongs to which report.
+- A wake that missed its target, read against the constraint that bounds the fix — the observed
+  outcome and the world fact go in together, and neither is retyped as a matter first.
 
-**You will never be asked which record answers which matter, and you must not volunteer one.** In the
+**You will never be asked which record answers which input, and you must not volunteer one.** In the
 triage case there is frequently no true answer: a record may exist because of something the analysis
 noticed that neither raiser mentioned. The reference list answers the question that does have an
 answer — what this reasoning took up.

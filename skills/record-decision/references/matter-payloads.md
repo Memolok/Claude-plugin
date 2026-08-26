@@ -40,9 +40,11 @@ is lost, `list_matters(untaken: true)` finds it again.
 Returns `{ analysis, mdr }`. The record is at **New** with `mdrNumber: null`. Read `mdr.mdrHandle`
 from the response.
 
-`motivatedBy` is a **list**. Pass every matter this reasoning took up — three reports of one fault go
-in one call, not three. The analysis concludes here, and `analysis.references` comes back with each
-input dated and `late: false`.
+`motivatedBy` is a **list**, and its entries need not all be matters: a matter id, a `worldFactId`
+and an `observedOutcomeId` are equally valid, in any mix. Pass every input this reasoning took up —
+three reports of one fault go in one call, not three, and so do a fresh report and the recorded
+outcome that prompted someone to look. The analysis concludes here, and `analysis.references` comes
+back with each input dated, `late: false`, and its `motivatedByKind`.
 
 **The `claimDescription` here is the sharpened need, agreed with the user** — not a restatement of the
 matter, and not the mechanism you expect to choose.
@@ -108,6 +110,6 @@ If the user weighed options and concluded "no", that is a **Rejected** record, n
 
 - Sharpen, summarize, or translate the matter text at registration
 - Pass one `motivatedBy` where several apply — that records reasoning that did not happen
-- Split one act of reasoning into an analysis per matter to route around the list
+- Split one act of reasoning into an analysis per input to route around the list
 - Decide which produced record "belongs to" which matter; nothing asks, and usually nothing is true
 - Register a matter the user did not actually raise, to justify a decision they brought fully formed

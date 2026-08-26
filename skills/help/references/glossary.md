@@ -21,8 +21,8 @@ narrow at the commitment, wide again at the consequences.
 | --- | --- |
 | **Claim** | A single statement that could be true or false. The **head Claim** is the sharpened need a decision exists to satisfy — *"authentication must complete in under 50ms"*, not *"login is slow"* |
 | **Matter** | Raw input in the raiser's own words, before anyone analyzed it. A bug report, a complaint, an idea, an opportunity, an unanswered question. Carries no truth value and no polarity — it is not yet a claim about anything |
-| **Analysis** | The expert step that turns raw input into a sharpened need, recorded with who did it and what they concluded. It may also conclude that no decision is warranted |
-| **World Fact** | Something true regardless of this decision — the budget, the team's skills, a regulation. Lives in the almanac and is referenced, not copied in |
+| **Analysis** | The expert step that turns raw input into a sharpened need, recorded with who did it and what they concluded. Its inputs are matters, world facts and observed outcomes, in any mix. It may also conclude that no decision is warranted |
+| **World Fact** | Something true regardless of this decision — the budget, the team's skills, a regulation. Lives in the almanac and is referenced, not copied in; a decision can cite it as context, and an analysis can take it up as the input that prompted the work |
 | **Alternative** | An option that was considered. Includes the ones that lost, which are usually the informative ones |
 | **Deliberation Fact** | One argument about one option, for or against |
 | **Verdict** | The moment of agency: what was committed and why. Not the same as which option won — it is the reasoning that closed the deliberation |

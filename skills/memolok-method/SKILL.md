@@ -8,9 +8,9 @@ description: >-
 user-invocable: false
 ---
 
-> Memolok plugin: version 0.20.0-beta currently installed
+> Memolok plugin: version 0.21.0-beta currently installed
 > Important! Call the companion Memolok MCP `get_guidance` before any other Memolok MCP tool —
-> and pass `pluginVersion: "0.20.0-beta"`, the version on the line above. The server compares it
+> and pass `pluginVersion: "0.21.0-beta"`, the version on the line above. The server compares it
 > against the oldest pack it still accepts and tells you whether these skills match its tools. It
 > has no other way to know, and there is no second call in which to correct an omission.
 > N.B.: This skill is loaded very often; it's deliberately terse for token economy. Do not emulate this writing style.
@@ -133,21 +133,22 @@ outcome tested against a resulting expected outcome, or a corrected world fact �
 refute whether the chosen path satisfied it. Property of the **Need's own testability**, not of how
 specific the chosen mechanism is.
 
-**Analysis** = first-class bridge from Matter to sharpened need, preserving provenance:
+**Analysis** = first-class bridge from raw input to sharpened need, preserving provenance:
 
 | Path | `producesDecision` | Outcome |
 | --- | --- | --- |
 | **A — mint** | `true` + `claimDescription` | **New** record(s); analysis concludes in the same call |
 | **B — honest dismissal** | `false` | No record; rationale explains why |
 
-`motivatedBy` = **list**: every matter the reasoning took up. Fan-in/fan-out independent — *n* in,
-*m* out, no pairing asserted, none to invent. **Never ask which record answers which matter**;
-ordinarily no such fact. Matter recognized later → `attach_analysis_reference` (allowed
-post-conclusion, dated, reads as late).
+`motivatedBy` = **list**: every input taken up. Input = **Matter | WorldFact | ObservedOutcome**, any
+mix; cite the entry itself, never a Matter restating it — that loses the link, unrepairably.
+Fan-in/fan-out independent — *n* in, *m* out. **Never ask which record answers which input**;
+ordinarily no such fact, none to invent. Input recognized later → `attach_analysis_reference`
+(post-conclusion, dated, reads as late).
 
-**Expert path** bypasses the Matter: `create_MDR` with a claim. Nothing on a record says which path
+**Expert path** bypasses analysis: `create_MDR` with a claim. Nothing on a record says which path
 minted it. Intake routing → `record-decision`. Parking unanalyzed → `save-matter`;
-`list_matters(untaken: true)` = unprocessed-bait inbox.
+`list_matters(untaken: true)` = unprocessed-bait inbox, **matters only**.
 
 **Matters carry no status** — no disposition, no vocabulary of endings. What became of one reads from
 its shape: who took it up, when, what they produced.
