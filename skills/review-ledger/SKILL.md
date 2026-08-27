@@ -48,7 +48,41 @@ Use the `mdlGuid` in play, else `.memolok/mdl.yml`, else `get_MDLs`. If the user
 and has not said which, ask — reading the wrong ledger produces a confidently wrong "we never decided
 that".
 
-### 2. Pick the read
+### 2. Hand the sweep off, if you can
+
+**The ledger must be settled first.** That is why this step is here and not earlier: picking the
+ledger can need the user, and a scout cannot ask anyone anything.
+
+If an agent tool is available, spawn **`memolok:ledger-scout`** for reads that mean paging and
+reading several entries. It reads in a context that is thrown away and returns the answer, so the
+sweep never lands in the conversation the user is in.
+
+| The read | Where |
+| --- | --- |
+| A topic search across records or matters | **Scout** |
+| The open-question sweep — every record read for unsettled deferrals | **Scout** |
+| The unprocessed inbox on a ledger with more than a page of matters | **Scout** |
+| What came of a parked matter, chased through to the records | **Scout** |
+| A status slice with more matches than a page | **Scout** |
+| The user named a number — `get_MDR(mdrNumber=7)` | **Inline.** One call; spawning costs more |
+| `get_MDL` for the ledger's purpose | **Inline** |
+| `retractable` before a revision | **Inline.** Hold this first-hand, not on report |
+| One record in full, handle already known | **Inline** |
+
+**Handing off.** The scout has none of this conversation. Give it the `mdlGuid` explicitly, the
+user's question in their own words, and what you need back. Never hand it a ledger the user has not
+settled on.
+
+**Getting it back.** Cite `mdrNumber` to the user per Rule F and keep handles in tool arguments. The
+scout reports its coverage — pages read out of `total`, bodies opened — and **that coverage is
+part of your answer**: "nothing about X in all 68 records" and "nothing about X in the first 25" are
+different answers, and only one of them settles anything.
+
+**If no agent tool is available**, do the same reads inline. They are paged now, so this is ordinary
+work rather than a degraded path. Do not tell the user a scout was unavailable; it is not their
+problem.
+
+### 3. Pick the read
 
 | The user wants | Call |
 | --- | --- |
@@ -65,8 +99,18 @@ that".
 | What happened after a decision | `list_observed_outcomes(mdlGuid, mdrHandle?)` |
 | Promises versus reality for one record | `get_MDR_learning_delta(mdlGuid, mdrHandle)` |
 
-`list_MDRs` returns `headClaimMarkdown` on each row, so a topic search usually means listing and
-matching on that rather than fetching every record.
+**A topic search is `query`, not a listing you read yourself.** `list_MDRs(query="...")` searches the
+whole fish — head **Claim**, **Verdict**, alternatives, deliberation facts, expected outcomes, open
+questions — so a record is found by the reasoning inside it and not only by its Claim. Rows carry an
+excerpt of the Claim rather than the whole of it, so `get_MDR` before quoting one back.
+
+Search is lexical: terms are ORed and case-insensitive, there are no phrases or operators, and a
+record that discusses the topic in other words will not surface. **An empty result means no record
+used those words** — say which you tried, and treat it as weak evidence rather than as "we never
+decided that".
+
+Every listing pages: `limit` defaults to 25, and `total` counts the whole match. Read `total` before
+answering, and never let a first page stand in for the ledger.
 
 **When the user names a number, read it directly.** `get_MDR` takes `mdrNumber` in place of
 `mdrHandle` — exactly one of the two — so "what did MDR-7 say?" is one call, not a full listing to
@@ -74,10 +118,11 @@ find a handle. Use the handle whenever you already have one, and use the handle 
 for anything you do to the record afterwards. A number released by an uncommit can be taken by a
 later record, so read back what you got before answering on it.
 
-**The `status` filter on `list_MDRs` is not validated.** A typo returns an empty list, which reads as
-"nothing decided". Use exact status names, and treat a surprising empty result as suspect.
+**The `status` filter is validated now.** An unknown value is refused by name rather than answering
+with an empty list that read as "nothing decided". A genuinely empty result therefore means what it
+says — though only for the page you asked for, so check `total` before concluding anything from it.
 
-### 3. Answer the question that was asked
+### 4. Answer the question that was asked
 
 Lead with the answer, then the evidence.
 
@@ -89,7 +134,7 @@ Lead with the answer, then the evidence.
 
 Not a table dump the user has to read for themselves.
 
-### 4. Offer the next move
+### 5. Offer the next move
 
 - They want to change something admitted → **`revise-decision`**
 - The ledger's stated purpose is stale or missing → **`revise-intent`**
@@ -170,7 +215,7 @@ as stale, untouched or needing attention. **A note that has sat for a year is be
 There is no review signal here to compute and none to invent.
 
 If the user asks about their notes specifically, that is the **`manage-notes`** journey — reach for
-`search_scratchpads`, not a review.
+`list_scratchpads` with a `query`, not a review.
 
 ### Before changing a record
 
@@ -196,6 +241,10 @@ Ledger residents only; a staged record has made no bets yet.
 > stale-constraint review, cross-record open-question queries, or portfolio-wide outcome latency. Nor
 > for reading an analysis input backwards: `get_matter` returns `takenUpBy`, but a world fact or an
 > observed outcome cannot report which analyses took *it* up.
+
+**Delegating a sweep moves its cost; it does not turn it into a query.** A scout reads and reasons
+exactly as you would, in a context you do not have to pay for. Nothing above becomes available
+because one was used.
 
 You can often *reason* toward these by reading records — that is fine, and useful. What is not fine is
 implying the ledger computed it. Say "reading through these, three records lean on that assumption"

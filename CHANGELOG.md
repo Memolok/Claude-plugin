@@ -22,6 +22,37 @@ matches — you are asked to update only when your pack genuinely stops working.
 
 *Landed, not yet in a released pack.*
 
+*Nothing yet.*
+
+## 0.21.0-beta — 2026-08-27
+
+**Reading a ledger back no longer floods the conversation, and on large ledgers it works again at
+all.** Reviews used to pull every record and every parked matter into the chat to answer one
+question. Past a certain size that stopped fitting, and the answer never arrived.
+
+- **Ask about a topic and Memolok searches for it.** Records, matters, almanac facts, recorded
+  outcomes and notes are all searchable by content now, and a record is found by the reasoning
+  inside it — its verdict, an argument that was weighed, a consequence that was expected — not
+  only by the need at its head.
+- **Search finds words, not meaning.** A record that discusses your topic in different words will
+  not come back, and the skills now say which words were tried rather than reporting "nothing was
+  decided". Treat an empty result as *nobody wrote it that way*.
+- **Results arrive a page at a time**, with a count of everything that matched. When an answer rests
+  on part of a ledger, you are told which part.
+- **Rows are excerpts.** Listings show the opening of each entry rather than all of it, and the full
+  text is one read away. For your own parked matters this matters most: the excerpt is a trim of
+  your words, so anything quoted back to you should come from the whole entry.
+- **A new agent does the reading.** `memolok:ledger-scout` sweeps a ledger in its own workspace and
+  returns the answer with its sources, so the sweep never reaches your conversation. It only reads,
+  and it cannot ask you anything — which is why it never handles the parts where you are present.
+  On surfaces without agents the skills read directly instead.
+- **A mistyped status is refused instead of answered.** Asking for records in a status that does not
+  exist used to come back empty, which read as *nothing was decided*.
+- **Finding a note is one tool now**, not two. Browsing and searching your notes were separate calls
+  that disagreed with each other about how many results there were.
+
+**Needs the matching Memolok server**, which ships alongside this pack.
+
 **An analysis can now take up a world fact or a recorded outcome directly.** Until now the only thing
 an analysis could be about was a *matter* — raw input in someone's own words. So when a new
 regulation, or a result that missed what a decision promised, was what actually prompted fresh

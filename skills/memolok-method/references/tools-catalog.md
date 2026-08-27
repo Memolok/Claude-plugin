@@ -71,6 +71,37 @@ stated a purpose — that is normal, not an error.
 returns ledger metadata; `get_MDR` takes `mdlGuid` + a record key and returns a decision record. Reading
 one while meaning the other produces a confident answer to the wrong question.
 
+## Discovery reads: one shape, five tools
+
+`list_MDRs`, `list_matters`, `list_world_facts`, `list_observed_outcomes` and `list_scratchpads`
+share a shape. Learn it once.
+
+| Param | Type | Required |
+| --- | --- | --- |
+| `mdlGuid` | string | yes |
+| `query` | string | no |
+| `limit` | int | no (default 25, clamped to 100) |
+| `offset` | int | no (default 0) |
+
+Each returns `{ <entities>: [...], total, limit, offset }`. Every row carries `excerpt`, `truncated`
+and `length`; when `query` was sent, rows add `matchExcerpt` (a window around the hit) and `score`.
+
+**`total` is the whole match, not the page.** Holding fewer rows than `total` means you have not seen
+the ledger, and an answer that does not say so is claiming coverage it does not have.
+
+**Rows are previews. None of them carries the whole entry** — `get_MDR`, `get_matter`,
+`get_world_fact`, `get_observed_outcome` and `get_scratchpad` are the reads that do.
+
+**The query grammar is tiny, deliberately.** Whitespace-separated terms, **ORed**,
+case-insensitive. No operators, no phrases, no regex, no case toggle. Whole hyphenated tokens match;
+partial ones do not. An entry matching two terms outranks one matching a single term. Order is
+relevance when `query` is sent, each tool's natural order otherwise.
+
+**An empty result with a `query` means nothing matched those words** — not that nothing exists.
+Say which words you tried; do not fall back to enumerating everything.
+
+Per-tool filters and natural order are below. Nothing else about the shape varies.
+
 ### `get_MDR`
 
 | Param | Type | Required |
@@ -90,15 +121,20 @@ use for every other tool.
 
 ### `list_MDRs`
 
-| Param | Type | Required |
-| --- | --- | --- |
-| `mdlGuid` | string | yes |
-| `status` | string | no |
+Shared discovery params, plus `status` (string, optional). Ledger order: by number, then handle.
 
-Returns `{ mdrs: [{ mdrHandle, mdlGuid, mdrNumber, status, retractable, headClaimMarkdown }] }`.
+Rows: `{ mdrHandle, mdlGuid, mdrNumber, status, retractable, excerpt, truncated, length }`.
 
-**The `status` filter is not validated.** A typo or a non-status value returns an empty list rather
-than an error, which reads as "no records". Send exact status names.
+**The excerpt comes from the head Claim and is not the whole of it.** Read the record with `get_MDR`
+before quoting a Claim back to anyone.
+
+**Search covers the whole fish** — head **Claim**, **Verdict**, alternatives, deliberation facts,
+expected outcomes, open questions. So a record can match on reasoning the row does not show, and the
+row will look unrelated to the query. `matchExcerpt` is the window around whatever matched; quote it
+rather than the excerpt when explaining why a row is there.
+
+**`status` is validated.** An unknown value is refused by name, listing the valid statuses. It used
+to answer a typo with an empty list, which read as "no records".
 
 ### `get_matter`
 
@@ -117,12 +153,12 @@ not to this matter, and nothing says any of them answers it. No rationale here �
 
 ### `list_matters`
 
-| Param | Type | Required |
-| --- | --- | --- |
-| `mdlGuid` | string | yes |
-| `untaken` | bool | no |
+Shared discovery params, plus `untaken` (bool, optional). Registration order, oldest first.
 
-Returns `{ matters: [...] }` in registration order, rows shaped like `get_matter`.
+Rows: `{ id, mdlGuid, takenUpBy, excerpt, truncated, length }`. **Not `description`** — the raiser's
+words arrive trimmed, and `get_matter` is the read that returns them whole. That matters here more
+than elsewhere: a matter is bait in somebody's own words, and paraphrasing a trimmed excerpt back to
+them is how the words stop being theirs.
 
 `list_matters(untaken: true)` is the unprocessed-bait inbox — every matter no analysis references.
 `untaken: false` gives the complement. There is no status filter, because a matter has no status.
@@ -148,13 +184,25 @@ Point read; there is no `list_analyses`. Reach it by `analysisId` from `get_matt
 
 ### `get_world_fact` / `list_world_facts`
 
-`get_world_fact` takes `mdlGuid` + `worldFactId`; `list_world_facts` takes `mdlGuid` alone. Return
-`WorldFact` payloads carrying `worldFactId`, `manifests`, and optional `correctsFact`.
+`get_world_fact` takes `mdlGuid` + `worldFactId` and returns the whole admission —
+`worldFactId`, `manifests`, optional `correctsFact`.
+
+`list_world_facts` takes the shared discovery params. Admission order, oldest first. Rows:
+`{ worldFactId, mdlGuid, correctsFact, excerpt, truncated, length }`.
+
+**The almanac only ever grows.** A corrected fact stays on the ledger beside the one correcting it,
+so this listing returns superseded premises alongside live ones and there is no "live facts only"
+filter. A row's `correctsFact` says what that fact replaced, never whether it was itself replaced —
+the reverse direction does not exist. Page with that in mind, and do not present an old premise as
+current because it came back in a listing.
 
 ### `get_observed_outcome` / `list_observed_outcomes`
 
-`get_observed_outcome` takes `mdlGuid` + `observedOutcomeId`. `list_observed_outcomes` takes
-`mdlGuid` and an optional `mdrHandle` filter.
+`get_observed_outcome` takes `mdlGuid` + `observedOutcomeId`.
+
+`list_observed_outcomes` takes the shared discovery params, plus `mdrHandle` (int, optional) to
+narrow to one record's wake. Observation order, oldest first. Rows carry the preview trio plus
+`observedOutcomeId`, `mdrHandle`, `mdrNumber`, `discoveryType`, `testResult`, `observedAt`.
 
 ### `get_MDR_learning_delta`
 
@@ -368,28 +416,18 @@ window. Returns `{ scratchpadId, mdlGuid, deleted: true }`.
 
 ### `list_scratchpads`
 
-| Param | Type | Required |
-| --- | --- | --- |
-| `mdlGuid` | string | yes |
-| `limit` | int | no (default 25, clamped to 100) |
-| `offset` | int | no (default 0) |
+Shared discovery params. Most recently touched first. Rows carry the preview trio plus
+`scratchpadId`, timestamps and attribution, and **never carry a body**.
 
-Returns `{ scratchpads: [...], total, limit, offset }`, most recently touched first. Rows are
-previews — `excerpt`, `truncated`, `length` — and **never carry a body**.
+**`query` is how you answer "what did I save about X?"** Notes have no titles, so content search is
+the only way back to one; paging through everything to read it is what this shape exists to prevent.
 
-### `search_scratchpads`
+**The excerpt is a positional trim of the opening text.** It is a handle for naming the note, not a
+description of it, and a long note's excerpt says nothing about what the note argues. When the
+question is about content, `get_scratchpad` the body.
 
-| Param | Type | Required |
-| --- | --- | --- |
-| `mdlGuid` | string | yes |
-| `query` | string | yes |
-| `limit` | int | no (default 25) |
-
-Returns `{ scratchpads: [...], total, limit, matchMode }`. Rows add `matchExcerpt` — a window around
-the hit — and `score` when the text pass ranked them.
-
-`matchMode` is `text` (stemmed, relevance-ranked) or `regex` (the text pass found nothing, so a
-substring pass answered). An empty result means no note matched; it is not a cue to list everything.
+There is no separate search tool. There was until server `0.4.0`, and the two disagreed about their
+own `total`.
 
 **Attribution.** `createdBy` is `{ userId, name? }`; `contributors` is a list of the same. The
 contributor set is cumulative and never shrinks, so it does **not** say who edited most recently —

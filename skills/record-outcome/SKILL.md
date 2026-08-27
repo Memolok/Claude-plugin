@@ -53,8 +53,10 @@ erasing it destroys the only evidence of how good the team's forecasting is.
 
 ### 1. Find the source record
 
-`list_MDRs` and match on `headClaimMarkdown`, or `get_MDR` if the record is known. It must be
-**Accepted**, **Rejected**, or **Superseded** — a wake cannot attach to a staged record.
+`list_MDRs(query="...")` in the words the user used, or `get_MDR` if the record is known. Rows carry
+an excerpt of the head **Claim**, not the whole of it, so read the record before deciding it is the
+right one. It must be **Accepted**, **Rejected**, or **Superseded** — a wake cannot attach to a
+staged record.
 
 ### 2. Decide the discovery type
 

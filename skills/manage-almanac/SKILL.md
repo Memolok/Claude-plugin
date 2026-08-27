@@ -178,7 +178,10 @@ premise that has since changed.
 
 ## Tips
 
-- `get_world_fact(mdlGuid, worldFactId)` fetches one; `list_world_facts(mdlGuid)` lists all.
+- `get_world_fact(mdlGuid, worldFactId)` fetches one; `list_world_facts(mdlGuid, query?)` pages the
+  almanac, oldest first. Rows carry an excerpt, not the whole fact, and `total` counts every match
+  rather than the page. **Corrected facts stay in the listing** beside the ones correcting them, so a
+  row is not evidence that its premise is still current.
 - Observed outcomes are a **kind** of world fact — a record's `hasContext` can cite a prior wake, just
   never its own, and an analysis can take either up as an input by id.
 - Cross-team handoff works through this skill: admit another team's decision as a world fact in your

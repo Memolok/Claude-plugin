@@ -24,7 +24,7 @@ records, or invented calls. Tell the user it is not available yet.
 | World almanac | `admit_world_fact`, `get_world_fact`, `list_world_facts` |
 | Wake | `record_observed_outcome`, `get_observed_outcome`, `list_observed_outcomes` |
 | Learning delta, one record | `get_MDR_learning_delta` |
-| Working notes | `create_scratchpad`, `get_scratchpad`, `replace_scratchpad`, `delete_scratchpad`, `list_scratchpads`, `search_scratchpads` |
+| Working notes | `create_scratchpad`, `get_scratchpad`, `replace_scratchpad`, `delete_scratchpad`, `list_scratchpads` |
 | Feedback to Memonos, the team behind Memolok | `submit_feedback`, `get_feedback`, `update_feedback` — see the `send-feedback` skill |
 
 ### Graph edges, staged records only
