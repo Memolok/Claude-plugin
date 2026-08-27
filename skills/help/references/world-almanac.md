@@ -22,6 +22,14 @@ And if ten decisions all leaned on the old figure, embedding gives you no way to
 Referencing solves all three. The decision records that it relied on the budget as it stood; the almanac
 records what the budget was, and when that changed.
 
+## A fact can also start the work
+
+Being reasoned *from* is not the only thing a fact does. A new regulation, or a budget that just halved,
+is often the reason somebody sits down to decide anything at all — and Memolok records that too: the
+analysis names the admitted fact as the input it took up. The alternative would be retyping the fact as a
+raw complaint so that something could point at it, which would leave the ledger holding the same thing
+twice and no trace that either led to the other.
+
 ## Corrections, not edits
 
 Facts are admitted, never rewritten. When one turns out to be wrong — you discover the budget was actually

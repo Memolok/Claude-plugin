@@ -30,6 +30,22 @@ the thinking first, `/memolok:help` explains it.
 | `/memolok:send-feedback` | Report a Memolok bug or suggestion to Memonos — **not** to your own ledger! |
 | `/memolok:wrap-up` | Before a session ends, save what would otherwise be lost with it |
 
+## Agents
+
+| Agent | What it does |
+| --- | --- |
+| `memolok:ledger-scout` | Reads your ledger and answers one question about it, without the reading landing in your conversation |
+
+Reviewing a ledger of any size means paging through records and reading a lot of them. On a Claude
+surface that supports agents, the skills hand that off to the scout: it reads in its own workspace,
+which is discarded, and comes back with the answer and its sources. What reaches you is the answer,
+not the sweep.
+
+It **only ever reads.** It cannot record a decision, cannot change one, and cannot ask you anything
+— so it never stands in for the part of Memolok where you are present. Where agents are not
+available the skills simply do the reading themselves, and you should notice no difference beyond a
+longer conversation.
+
 Memolok's methodology — the decision lifecycle, what seals at commitment, and how records are
 written — is loaded automatically by the skills above; you do not invoke it directly.
 

@@ -5,7 +5,8 @@ description: >-
   need, capture the alternatives and reasoning behind the choice, and persist it as a Memolok
   Decision Record (MDR). Use when the user makes or describes a consequential choice, reports a
   problem they intend to act on, says "record this" or "log this decision", proposes a solution like
-  "we should switch to X", or works through options they want kept.
+  "we should switch to X", works through options they want kept, or acts on something the ledger
+  already holds — a world fact or a recorded outcome that now calls for a decision.
 argument-hint: "<the decision, problem, or choice>"
 ---
 
@@ -61,6 +62,11 @@ If there may be parked bait, `list_matters(untaken: true)` shows what nobody has
 matches what the user just raised, take that matter up rather than registering a duplicate — and if
 several do, take up all of them in one analysis.
 
+The same goes for the almanac. If what prompted this is a fact or an outcome already admitted —
+`list_world_facts`, `list_observed_outcomes` — take that entry up **as itself**. There is no inbox
+for the almanac and no "unused" state to scan for, so this is a lookup you do when the conversation
+points at one, not a sweep.
+
 ### 2. Sort the intake
 
 **This is the step that most often goes wrong.** Do not skip it, and do not let the phrasing of the
@@ -71,8 +77,13 @@ user's opening line decide it for you.
 | A symptom, in someone's words, no target | **bait** | Step 3a |
 | A target a future observation could settle | **head Claim** | Step 3b |
 | A mechanism with the need amputated | **a Verdict with no Need** | Back the need out, then re-sort |
-| A premise true regardless of any choice | **World Fact** | Hand off to `manage-almanac` |
-| An observation on an already-sealed record | **wake** | Hand off to `record-outcome` |
+| A premise true regardless of any choice | **World Fact** | Admit it via `manage-almanac` first |
+| An observation on an already-sealed record | **wake** | Record it via `record-outcome` first |
+
+The last two rows are a **detour, not an exit.** Admit the fact or record the outcome, then come
+back: if it calls for a decision, that entry is the analysis input — pass its id in `motivatedBy`.
+Do **not** register a Matter restating it. That records neither the entry as the input nor that
+anything connected the two, and Matters are immutable, so it cannot be repaired afterwards.
 
 **The discriminator is not who is speaking — it is whether a future observation could settle it.**
 *"P99 auth latency must stay under 50ms"* is a Claim. *"Login takes forever"* is bait, even when the
@@ -80,8 +91,8 @@ user saying it is the only engineer on the project. Being solo does not convert 
 
 **When it is ambiguous, ask — one question, then proceed.** Something like *"is that your own read of
 what needs to be true, or is it what someone reported was wrong?"* Guessing is recoverable here: a
-matter you registered can be taken up later, and an analysis can take up an input it did not start
-with. What you cannot recover is the raiser's wording once you have sharpened it away.
+matter you registered can be taken up later, and an analysis can take up an input of any kind it did
+not start with. What you cannot recover is the raiser's wording once you have sharpened it away.
 
 **If the user only wants to park it** — they noticed a problem but do not want to leave what they are
 doing — that is the `save-matter` skill. Do not drag them through a decision they did not ask for.
@@ -91,12 +102,15 @@ Worked examples of ambiguous intakes: `references/intake-fork.md`.
 ### 3a. Bait branch
 
 1. `register_matter` with the stakeholder's words **verbatim**. Do not sharpen, summarize, or
-   translate into a target — the raw input is the point, and matters are immutable.
+   translate into a target — the raw input is the point, and matters are immutable. Skip this step
+   entirely when the input is an already-admitted world fact or observed outcome: it is recorded, it
+   has an id, and it goes into step 3 as itself.
 2. Sharpen the need **with the user**, not for them. The head Claim is a falsifiable objective, and it
    must not name the mechanism you are about to choose (Rule G).
 3. `create_analysis` with `producesDecision: true` and the sharpened `claimDescription`. Pass every
-   matter this reasoning took up in `motivatedBy` — not just the one that prompted the conversation.
-   This mints the record at **New** and concludes the analysis in the same call.
+   input this reasoning took up in `motivatedBy` — not just the one that prompted the conversation,
+   and in whatever mix of matters, world facts and observed outcomes actually applies. This mints
+   the record at **New** and concludes the analysis in the same call.
 4. `transition_MDR_status` to **Deliberating**, then continue at step 4.
 
 If sharpening shows there is no decision to make, that is **Path B**: `create_analysis` with
@@ -218,4 +232,4 @@ Full worked correction arc: `references/need-vs-verdict-drift.md`.
 | `references/patch-payloads.md` | Before `update_MDR` — patches replace whole arrays rather than merging into them |
 | `references/fish-preview.md` | Presenting the recap at step 7, if you want the shape that reads back cleanly |
 | `references/need-vs-verdict-drift.md` | The Need may have absorbed the answer — the conflation survives light rewording, so spotting it needs the worked arc |
-| `references/matter-closure.md` | Any analysis touching more than one matter, or a matter surfacing after the analysis concluded — passing one `motivatedBy` where several apply records reasoning that did not happen, and three of the five ways a matter comes to rest have no tool yet |
+| `references/matter-closure.md` | Any analysis touching more than one input, or an input surfacing after the analysis concluded — passing one `motivatedBy` where several apply records reasoning that did not happen, and three of the five ways a matter comes to rest have no tool yet |

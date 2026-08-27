@@ -116,8 +116,11 @@ topology:
 | Reference → analysis with produced records | Decision work happened |
 | Reference `created` later than the analysis's `concludedAt` | Attached after the reasoning closed; the rationale does not account for it |
 
-Neither direction is bounded: an analysis may take up many matters, and a matter may be taken up by
-many analyses. Re-analysis does **not** need a new matter — open a second analysis over the same one.
+Neither direction is bounded: an analysis may take up many inputs, and one input may be taken up by
+many analyses. Inputs need not be matters: an admitted World Fact or Observed Outcome is taken up by
+its own id, and the table above reads only for matters — almanac entries have no inbox and no
+"unused" state. Re-analysis does **not** need a new matter — open a second analysis over the same
+input.
 
 An analysis concludes in the call that creates it. `reopen_analysis` clears that conclusion, and is
 refused once any record it produced carries `decidedAt`.

@@ -53,8 +53,10 @@ erasing it destroys the only evidence of how good the team's forecasting is.
 
 ### 1. Find the source record
 
-`list_MDRs` and match on `headClaimMarkdown`, or `get_MDR` if the record is known. It must be
-**Accepted**, **Rejected**, or **Superseded** — a wake cannot attach to a staged record.
+`list_MDRs(query="...")` in the words the user used, or `get_MDR` if the record is known. Rows carry
+an excerpt of the head **Claim**, not the whole of it, so read the record before deciding it is the
+right one. It must be **Accepted**, **Rejected**, or **Superseded** — a wake cannot attach to a
+staged record.
 
 ### 2. Decide the discovery type
 
@@ -115,7 +117,9 @@ two honest observations can disagree.
 A `Violated` result is **evidence for re-evaluation, not an automatic supersession**. What it earns is
 a fresh look, at a new t₀.
 
-- The user wants to act on it → **`record-decision`**; the wake becomes bait for the next fish
+- The user wants to act on it → **`record-decision`**; the wake becomes the input for the next
+  fish. Hand over the `observedOutcomeId`: the next analysis takes the wake up by that id, and
+  must not restate it as a Matter
 - They just want it noted → stop; recording it was the point
 - They want to change the original record → **`revise-decision`**, and expect it to be anchored now
 

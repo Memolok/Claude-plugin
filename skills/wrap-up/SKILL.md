@@ -76,6 +76,13 @@ The asymmetry is the point. World facts look like findings and are the cheap cla
 never looks like a finding — it is merely what the session was talking about — and it is the half with
 no recovery path at all.
 
+> **A wake is neither column, and question 2 will throw one away.** When what you are holding bears on
+> an expectation a sealed record already made, its value is not the fact and not the reasoning — it is
+> that *someone assessed it, at a time, against a prediction made before the outcome was known*.
+> `observedAt` is stamped by the server and cannot be backdated, so *"we could just re-run that
+> command"* is not a reason to drop it: re-running it next month produces a **different** datum, not
+> this one. Skip question 2 and route it.
+
 A decision settled in conversation and never recorded does not stay neutral. It becomes a **phantom
 decision**: everyone glides over it as though it were resolved, and nobody can say who decided or why.
 Preventing that is the entire product.
@@ -113,8 +120,8 @@ The user is writing for their future self, who needs to know what they were afra
 
 ## Where to look
 
-Two sweeps. Not a procedure to execute in order — the two places durable content comes from, matching
-the two rows above.
+Three sweeps. Not a procedure to execute in order — two are the places durable content comes from,
+matching the two rows above; the third is the one they structurally cannot reach.
 
 **Tool trace → mostly observed.** Walk the non-trivial commands run and files read. For each: did its
 *finding* land anywhere durable, or was it reported in prose and abandoned? Unpushed commits,
@@ -126,6 +133,52 @@ something else.
 
 The mapping is not clean — reading an implementation produces reasoned conclusions, and users report
 observations. Use both sweeps on everything.
+
+**Sealed records → wakes.** The other two sweeps sort what the session *produced*. This one sorts what
+the session **came to know**, which is a wider thing, and no amount of walking the trace will surface
+it: a wake is not something you noticed but a *join* between something you now know and a commitment
+made before you knew it. Half the candidate lives on the ledger, and that half is why neither other
+sweep can reach it.
+
+Run it from the ledger side, not the session side — and resist the two narrowings, because both are
+wrong and both feel like common sense.
+
+**Any sealed record you are holding evidence about is eligible.** Records read for *background* are
+the easiest to miss, because consulting one feels like taking input rather than like looking at a
+subject.
+
+**The outcome need not be anything this session caused.** A commitment realized months ago and never
+assessed still has no wake on the ledger, and that is exactly what this sweep is for — the wake is the
+assessment, not the event. *"Nothing we did today bears on this"* is the wrong question — the right
+one is *"Do I now know something about this that nobody has written down?"*
+
+This is **eligibility, not an inventory.** You are not being asked to walk the whole ledger; that
+instruction would be ignored, and rightly. The cheaper thing is to stop filtering: when you find
+yourself holding something that bears on a commitment, **recognise it as a candidate rather than
+discarding it as out of scope.** Where a record names its own test, notice when that test happens to
+run today, for whatever unrelated reason.
+
+Reading a record to do this is fine. The *"nothing to look up"* rule above is about this skill keeping
+no state of its own between runs; it does not stop you calling `get_MDR` or
+`get_MDR_learning_delta` on any record you have reason to think you can now speak to.
+
+Four traps to look out for:
+
+- **A met expectation looks like nothing at all.** *"The thing we predicted happened"* reads as a
+  non-event and produces no sense of discovery. Violated ones announce themselves; satisfied ones are
+  silent — but a ledger that only ever records disappointments is not measuring forecasting, it is a
+  filter for grievances.
+- **The record you didn't open.** Evidence about an old commitment arrives disguised as an unrelated
+  observation. It bears on a record you're just driving by, which is exactly why nothing prompts you
+  to make the connection.
+- **The obvious phrasing is not a wake.** *"Four of these five expectations are still untested"*
+  belongs in your closing report **and** means four candidates you have not yet checked. Writing the
+  sentence is not the same as running the join.
+- **A record's own test can be too narrow.** Running it and finding it passes while something adjacent
+  is wrong is itself the observation worth recording — more useful than the pass.
+
+If you find nothing, say so and move on. That's as legitimate a result as any, and it is different
+from not having looked.
 
 ## Routing
 
@@ -185,12 +238,14 @@ privileged closing prompt turns this skill into a feedback funnel and trains use
 
 ### 1. Sweep
 
-Both sweeps, silently. Do not narrate the sweep.
+All three sweeps, silently. Do not narrate the sweep. The third is the one that gets skipped,
+because the first two feel like they covered everything.
 
 ### 2. Extract
 
-Per candidate, run the two questions. Write down the *residue*, not what happened. If you cannot state
-a durable fact, there isn't one — a legitimate result, not a failure to try harder.
+Per candidate, run the two questions — except for wake candidates, where question 2 does not apply.
+Write down the *residue*, not what happened. If you cannot state a durable fact, there isn't one — a
+legitimate result, not a failure to try harder.
 
 ### 3. Propose, once
 
@@ -222,6 +277,7 @@ Writes, then drops. Nothing else.
 | --- | --- | --- |
 | **Session summary** | "Wrap up" invites narration | Ends in prose nobody reads, and no writes |
 | **Losing the reasoned half** | Decisions don't look like findings | Every write is a world fact or a file edit |
+| **Losing the wake half** | A met expectation feels like nothing happened | Every wake logged is about a record this session created |
 | **Narrative smoothing** | Tidy prose reads as good work | The record is cleaner than the session was |
 | **Almanac spam** | Recording work instead of premises | Entries that read like commit messages |
 | **Recording events** | Skipping the extraction step | An entry already false when admitted |

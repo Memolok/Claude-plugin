@@ -27,9 +27,14 @@ thing somebody actually said.
 
 Analysis can also honestly conclude that no decision is warranted. That is a real outcome, not a failure.
 
-One analysis can take up several matters at once, and produce several decisions — or none. Three people
+One analysis can take up several inputs at once, and produce several decisions — or none. Three people
 reporting the same fault is one act of reasoning, not three; and two unrelated reports worked together
-routinely surface a problem neither person mentioned. Memolok never asks which decision answers which
+routinely surface a problem neither person mentioned.
+
+Those inputs need not be matters. Something already in the ledger — a fact in the almanac, an outcome
+observed after an earlier decision — can be what the reasoning took up, cited as itself. Retyping it as
+a matter would look the same to a reader and record nothing: the ledger would hold two statements of one
+thing and no trace that either led to the other. Memolok never asks which decision answers which
 report, because in that situation there is often no honest answer. What it records is what the reasoning
 actually took up.
 
@@ -57,9 +62,11 @@ control who may write to the ledger. Access is governed separately, by membershi
 
 ## The loop closes
 
-Observations from an earlier decision are among the best sources of new matters. Something you committed
-to did not hold, or something nobody predicted turned up — that becomes raw input for the next decision,
-which is where the ledger stops being an archive and starts being a working instrument.
+Observations from an earlier decision are among the best sources of new work. Something you committed
+to did not hold, or something nobody predicted turned up — that observation is itself the input to the
+next decision, taken up as the recorded outcome it already is. That is where the ledger stops being an
+archive and starts being a working instrument: the link from what happened to what was decided next is
+recorded, not left for a reader to infer.
 
 ---
 

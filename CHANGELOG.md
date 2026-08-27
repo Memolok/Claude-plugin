@@ -18,6 +18,80 @@ matches — you are asked to update only when your pack genuinely stops working.
 > history rather than at the time, so they are terser than the ones after them. Nothing in them is
 > reconstructed beyond what the tags and their contents show.
 
+## Unreleased
+
+*Landed, not yet in a released pack.*
+
+*Nothing yet.*
+
+## 0.21.0-beta — 2026-08-27
+
+**Reading a ledger back no longer floods the conversation, and on large ledgers it works again at
+all.** Reviews used to pull every record and every parked matter into the chat to answer one
+question. Past a certain size that stopped fitting, and the answer never arrived.
+
+- **Ask about a topic and Memolok searches for it.** Records, matters, almanac facts, recorded
+  outcomes and notes are all searchable by content now, and a record is found by the reasoning
+  inside it — its verdict, an argument that was weighed, a consequence that was expected — not
+  only by the need at its head.
+- **Search finds words, not meaning.** A record that discusses your topic in different words will
+  not come back, and the skills now say which words were tried rather than reporting "nothing was
+  decided". Treat an empty result as *nobody wrote it that way*.
+- **Results arrive a page at a time**, with a count of everything that matched. When an answer rests
+  on part of a ledger, you are told which part.
+- **Rows are excerpts.** Listings show the opening of each entry rather than all of it, and the full
+  text is one read away. For your own parked matters this matters most: the excerpt is a trim of
+  your words, so anything quoted back to you should come from the whole entry.
+- **A new agent does the reading.** `memolok:ledger-scout` sweeps a ledger in its own workspace and
+  returns the answer with its sources, so the sweep never reaches your conversation. It only reads,
+  and it cannot ask you anything — which is why it never handles the parts where you are present.
+  On surfaces without agents the skills read directly instead.
+- **A mistyped status is refused instead of answered.** Asking for records in a status that does not
+  exist used to come back empty, which read as *nothing was decided*.
+- **Finding a note is one tool now**, not two. Browsing and searching your notes were separate calls
+  that disagreed with each other about how many results there were.
+
+**Needs the matching Memolok server**, which ships alongside this pack.
+
+**An analysis can now take up a world fact or a recorded outcome directly.** Until now the only thing
+an analysis could be about was a *matter* — raw input in someone's own words. So when a new
+regulation, or a result that missed what a decision promised, was what actually prompted fresh
+thinking, the only way to record that was to retype it as a matter. The ledger then held the same
+thing twice and no trace that either led to the other, and matters cannot be edited, so it could not
+be put right later.
+
+The skills now route those cases to the entry itself. What changes for you:
+
+- **Ask "what should we do about that?" of something already on your ledger, and the decision that
+  follows will point back at it.** A fact in the almanac, an observed outcome from an earlier
+  decision — the reasoning names it as what it took up, and a reader of the resulting record can
+  walk back to it.
+- **The intake fork stops treating premises and outcomes as exits.** Bringing up a world fact or a
+  wake used to end the decision conversation and hand you to a different skill. It is now a detour:
+  record it there, come back, decide.
+- **One analysis can still take up any number of things, and now in any mixture** — a fresh report,
+  the constraint that bounds the fix and the outcome that prompted someone to look, together in one
+  act of reasoning.
+- **Reviews are honest about the direction that is missing.** You can ask what a record's reasoning
+  took up; there is no read that answers "what did this fact lead to?", and the skills say so rather
+  than implying the ledger computed it.
+
+Needs a Memolok server carrying the widened tool — **not yet deployed**, so none of this works
+against the server running today. That ordering is not optional: skills that offer these inputs
+against the current server would produce a "not found" on a live, correct id.
+
+- **`wrap-up` now looks for observed outcomes**, not only for content the session originated. It will
+  offer to record what you have learned about decisions already on your ledger — including records you
+  only read in passing, and outcomes nothing in the session caused.
+- **`help` answers instead of describing its own lookup.** It had picked up the habit of saying which
+  reference it was about to open before getting to the point, which put the agent's process in front of
+  your question. The reading is now invisible by rule, and the skill carries worked examples of what an
+  answer sounds like — it had none, alone among the skills in the pack.
+- **`help` also says what the agent is there to do.** Someone asking what Memolok is usually meets the
+  rigour before they meet the reason for it: records that seal, a commitment ceremony of its own,
+  expectations stated before the fact. Explained defensively that sounds like bureaucracy; explained as
+  protection for the decider it sounds like the point. The skill now names closing that gap as the job.
+
 ## 0.20.0-beta — 2026-08-20
 
 First `-beta` pack; every earlier release was `-alpha`. The track change is a statement about

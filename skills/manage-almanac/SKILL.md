@@ -4,8 +4,8 @@ description: >-
   Admit and review the world facts a Memolok ledger reasons from — budgets, constraints, policies,
   team capabilities, anything true independently of a particular decision. Use when the user states a
   premise rather than a choice ("legal requires seven-year retention", "the budget is $10k", "nobody
-  here writes Rust"), wants to correct a fact that was wrong when admitted, or wants a decision to
-  cite its context before it is sealed.
+  here writes Rust"), wants to correct a fact that was wrong when admitted, wants a decision to cite
+  its context before it is sealed, or wants an admitted fact to prompt fresh decision work.
 argument-hint: "<the fact>"
 ---
 
@@ -137,7 +137,17 @@ Each prior admission accepts at most one direct corrector.
 
 ### 5. Cite it from a decision
 
-While the record is still **staged**:
+A fact reaches reasoning two ways, and they answer different questions. **`hasContext`** says the
+record reasoned *from* this premise. **`motivatedBy`** on an analysis says this entry is what the
+reasoning took up — the thing that prompted the work. A fact can be both, and a fact that starts new
+work is often only the second.
+
+To make a fact the input to fresh reasoning, hand the `worldFactId` to `record-decision` and pass it
+in `motivatedBy`. Never register a Matter restating an admitted fact: the fact is already recorded,
+and the restatement records neither it as the input nor the link, permanently — Matters cannot be
+edited.
+
+To cite it as context, while the record is still **staged**:
 
 ```json
 {
@@ -168,9 +178,12 @@ premise that has since changed.
 
 ## Tips
 
-- `get_world_fact(mdlGuid, worldFactId)` fetches one; `list_world_facts(mdlGuid)` lists all.
+- `get_world_fact(mdlGuid, worldFactId)` fetches one; `list_world_facts(mdlGuid, query?)` pages the
+  almanac, oldest first. Rows carry an excerpt, not the whole fact, and `total` counts every match
+  rather than the page. **Corrected facts stay in the listing** beside the ones correcting them, so a
+  row is not evidence that its premise is still current.
 - Observed outcomes are a **kind** of world fact — a record's `hasContext` can cite a prior wake, just
-  never its own.
+  never its own, and an analysis can take either up as an input by id.
 - Cross-team handoff works through this skill: admit another team's decision as a world fact in your
   ledger. A reference, not a merge. See `scopes-and-bridging.md` in **`memolok-method`**.
 - There is no way to delete or edit a fact. Facts are immutable in substance once admitted; the only

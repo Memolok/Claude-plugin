@@ -14,7 +14,7 @@ records, or invented calls. Tell the user it is not available yet.
 | Matter reads | `get_matter`, `list_matters` |
 | Analysis, Path A and B | `create_analysis` |
 | Analysis reads | `get_analysis` (point read) |
-| Analysis inputs, after conclusion | `attach_analysis_reference`, `retract_analysis_reference` |
+| Analysis inputs (matter, world fact or observed outcome), after conclusion | `attach_analysis_reference`, `retract_analysis_reference` |
 | Reopen a concluded analysis | `reopen_analysis` (refused once a produced record is committed) |
 | Expert mint | `create_MDR` |
 | Record reads | `get_MDR`, `list_MDRs` |
@@ -24,7 +24,7 @@ records, or invented calls. Tell the user it is not available yet.
 | World almanac | `admit_world_fact`, `get_world_fact`, `list_world_facts` |
 | Wake | `record_observed_outcome`, `get_observed_outcome`, `list_observed_outcomes` |
 | Learning delta, one record | `get_MDR_learning_delta` |
-| Working notes | `create_scratchpad`, `get_scratchpad`, `replace_scratchpad`, `delete_scratchpad`, `list_scratchpads`, `search_scratchpads` |
+| Working notes | `create_scratchpad`, `get_scratchpad`, `replace_scratchpad`, `delete_scratchpad`, `list_scratchpads` |
 | Feedback to Memonos, the team behind Memolok | `submit_feedback`, `get_feedback`, `update_feedback` — see the `send-feedback` skill |
 
 ### Graph edges, staged records only
@@ -70,8 +70,8 @@ you go looking for them:
 | `declinesMatter` | **Not in the data model at all** |
 | `blocksResolutionOf` | **Not in the data model at all** |
 
-Re-analysis, by contrast, **is** available: open a second analysis over the same matter, or attach it
-to an existing one. Nothing limits a matter to one analysis.
+Re-analysis, by contrast, **is** available: open a second analysis over the same input, or attach it
+to an existing one. Nothing limits an input to one analysis.
 
 ### Feedback reports are not ledger entities
 
