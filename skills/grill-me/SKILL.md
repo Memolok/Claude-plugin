@@ -98,6 +98,12 @@ That is continue-versus-end theatre. The user knows how to say they are done.
 4. `list_matters(untaken: true)` — parked bait may already cover this topic, and it is
    better raised now than re-elicited.
 
+Ledger reads are delegated — the **reading invariant** in **`memolok-method`**. Read inline instead
+and the pages land in the practitioner's own context, where they cannot be taken back out. That
+covers steps 3 and 4, **in preparation only**: `get_MDL` is one call and stays inline, and once the
+interview is running a spawn is a stall in a conversation whose whole value is rhythm. Do the reading
+before the first question, not between two of them.
+
 **Allowed throughout:** every read tool, plus the filesystem and anything else that answers a factual
 question.
 

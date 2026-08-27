@@ -37,9 +37,11 @@ the thinking first, `/memolok:help` explains it.
 | `memolok:ledger-scout` | Reads your ledger and answers one question about it, without the reading landing in your conversation |
 
 Reviewing a ledger of any size means paging through records and reading a lot of them. On a Claude
-surface that supports agents, the skills hand that off to the scout: it reads in its own workspace,
+surface that supports agents, that reading is handed to the scout: it reads in its own workspace,
 which is discarded, and comes back with the answer and its sources. What reaches you is the answer,
-not the sweep.
+not the sweep. This holds wherever a ledger is an input — reviewing one, finding the decision a
+result belongs to, or checking what is already settled before an interview — and it holds when the
+ledger is only one part of a larger job.
 
 It **only ever reads.** It cannot record a decision, cannot change one, and cannot ask you anything
 — so it never stands in for the part of Memolok where you are present. Where agents are not

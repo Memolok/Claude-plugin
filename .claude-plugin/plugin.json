@@ -1,7 +1,7 @@
 {
   "name": "memolok",
   "description": "Record decisions as durable institutional memory — a Memolok Decision Ledger facilitator with skills for capture, deliberation, commitment, review, and outcomes, plus authenticated MCP tools.",
-  "version": "0.21.0-beta",
+  "version": "0.21.1-beta",
   "author": {
     "name": "Memonos",
     "url": "https://www.memolok.ai"

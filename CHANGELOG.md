@@ -24,6 +24,16 @@ matches — you are asked to update only when your pack genuinely stops working.
 
 *Nothing yet.*
 
+## 0.21.1-beta — 2026-08-27
+
+**Reading a ledger is now delegated by default.** The scout shipped in 0.21.0-beta and almost nothing
+called it, so reviews went on being read inline — into your conversation — exactly as before the
+agent existed. Sweeps now go to it whatever the wider task is; short, bounded reads stay inline.
+
+**The scout no longer tells you how to fix a record.** It reports whether a decision can still be
+uncommitted and leaves the choice to you. It had been recommending a path, and on a sealed record
+that advice was wrong.
+
 ## 0.21.0-beta — 2026-08-27
 
 **Reading a ledger back no longer floods the conversation, and on large ledgers it works again at

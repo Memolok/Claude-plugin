@@ -58,6 +58,10 @@ an excerpt of the head **Claim**, not the whole of it, so read the record before
 right one. It must be **Accepted**, **Rejected**, or **Superseded** — a wake cannot attach to a
 staged record.
 
+Ledger reads are delegated — the **reading invariant** in **`memolok-method`**. Read inline instead
+and the pages land in the practitioner's own context, where they cannot be taken back out. Searching
+for the record goes to the scout; a handle you already hold does not.
+
 ### 2. Decide the discovery type
 
 | Type | Meaning |

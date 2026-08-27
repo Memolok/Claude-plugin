@@ -4,7 +4,10 @@ description: >-
   Read back what a Memolok ledger already holds — decisions, their status, unsettled deferrals, and
   parked matters nobody has picked up. Use when the user asks "what did we decide about X", wants
   a scan of records by status, asks which questions were left open, wants to know what is waiting to
-  be looked at, or needs a record's status before changing it.
+  be looked at, or needs a record's status before changing it. Also use before acting on any claim
+  that the ledger is missing something — importing material, checking whether a decision is already
+  recorded, working out what is still worth recording — including when the ledger is one input
+  among several in a larger task.
 argument-hint: "[status | topic]"
 ---
 
@@ -53,21 +56,22 @@ that".
 **The ledger must be settled first.** That is why this step is here and not earlier: picking the
 ledger can need the user, and a scout cannot ask anyone anything.
 
-If an agent tool is available, spawn **`memolok:ledger-scout`** for reads that mean paging and
-reading several entries. It reads in a context that is thrown away and returns the answer, so the
-sweep never lands in the conversation the user is in.
+Ledger reads are delegated — the **reading invariant** in **`memolok-method`**. Read inline instead
+and the pages land in the practitioner's own context, where they cannot be taken back out.
 
-| The read | Where |
+Almost every read on this journey is a sweep, so the useful half of the rule here is its floor. **The
+reading invariant, applied — what stays inline:**
+
+| The read | Why it stays |
 | --- | --- |
-| A topic search across records or matters | **Scout** |
-| The open-question sweep — every record read for unsettled deferrals | **Scout** |
-| The unprocessed inbox on a ledger with more than a page of matters | **Scout** |
-| What came of a parked matter, chased through to the records | **Scout** |
-| A status slice with more matches than a page | **Scout** |
-| The user named a number — `get_MDR(mdrNumber=7)` | **Inline.** One call; spawning costs more |
-| `get_MDL` for the ledger's purpose | **Inline** |
-| `retractable` before a revision | **Inline.** Hold this first-hand, not on report |
-| One record in full, handle already known | **Inline** |
+| The user named a number — `get_MDR(mdrNumber=7)` | One call; spawning costs more |
+| `get_MDL` for the ledger's purpose | One call, and the answer is the whole of it |
+| `retractable` before a revision | Hold this first-hand, not on report |
+| One record in full, handle already known | Bounded before you start |
+
+Everything else on this journey — a topic search, the open-question sweep, an inbox past one page, a
+status slice past one page, chasing a parked matter through to its records — is unbounded, and goes
+to the scout.
 
 **Handing off.** The scout has none of this conversation. Give it the `mdlGuid` explicitly, the
 user's question in their own words, and what you need back. Never hand it a ledger the user has not
@@ -78,9 +82,9 @@ scout reports its coverage — pages read out of `total`, bodies opened — and 
 part of your answer**: "nothing about X in all 68 records" and "nothing about X in the first 25" are
 different answers, and only one of them settles anything.
 
-**If no agent tool is available**, do the same reads inline. They are paged now, so this is ordinary
-work rather than a degraded path. Do not tell the user a scout was unavailable; it is not their
-problem.
+**If you cannot spawn one**, do the same reads inline. They are paged now, so this is ordinary work
+rather than a degraded path. Per the reading invariant: no agent tool is not the user's problem and
+goes unmentioned; a session whose own settings forbid spawning is theirs to change, so say it once.
 
 ### 3. Pick the read
 
@@ -111,6 +115,10 @@ decided that".
 
 Every listing pages: `limit` defaults to 25, and `total` counts the whole match. Read `total` before
 answering, and never let a first page stand in for the ledger.
+
+**Under a `query`, `total` counts matches — not the ledger.** A size question needs an unfiltered
+call. A filtered `total` quoted as a ledger size is wrong in the direction that makes the almanac look
+emptier than it is, which is how "I did not find it" becomes "it was never recorded".
 
 **When the user names a number, read it directly.** `get_MDR` takes `mdrNumber` in place of
 `mdrHandle` — exactly one of the two — so "what did MDR-7 say?" is one call, not a full listing to

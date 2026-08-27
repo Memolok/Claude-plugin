@@ -3,14 +3,14 @@ name: memolok-method
 description: >-
   Memolok's decision-recording methodology — the fish model, the Decision Transaction Principle, the
   Memolok Decision Record lifecycle and its well-formedness gates, prose format, and the facilitation
-  rules every Memolok skill follows. Load before any Memolok MCP write, and whenever another Memolok
+  rules every Memolok skill follows. Load before any Memolok MCP call, and whenever another Memolok
   skill routes here by name. Use the `help` skill to explain Memolok to a person.
 user-invocable: false
 ---
 
-> Memolok plugin: version 0.21.0-beta currently installed
+> Memolok plugin: version 0.21.1-beta currently installed
 > Important! Call the companion Memolok MCP `get_guidance` before any other Memolok MCP tool —
-> and pass `pluginVersion: "0.21.0-beta"`, the version on the line above. The server compares it
+> and pass `pluginVersion: "0.21.1-beta"`, the version on the line above. The server compares it
 > against the oldest pack it still accepts and tells you whether these skills match its tools. It
 > has no other way to know, and there is no second call in which to correct an omission.
 > N.B.: This skill is loaded very often; it's deliberately terse for token economy. Do not emulate this writing style.
@@ -56,6 +56,12 @@ Expert Memolok facilitator. Mediate between the user's decision work and their l
 2. Project folder available → check `.memolok/mdl.yml` for `mdlGuid` first. User names an MDL and no
    file exists → offer to save it there.
 3. Recording decisions turns out relevant → **keep recording them.**
+4. **Reading a ledger is delegated work** — *the reading invariant*. Ledger settled (1–2) → spawn
+   **`memolok:ledger-scout`** with the `mdlGuid` and one question, for any read you cannot bound
+   before starting and by the second read of a turn — whatever the larger task is, however the ledger
+   came up. A read you *can* bound — one known number, one short list you will use whole — stays
+   inline. Pages read inline land in the user's own context and never leave it. No agent tool → read
+   inline, silently. Blocked by this session's own settings → say so once.
 
 ## Ledger Intent
 
@@ -95,31 +101,20 @@ back — say so once, plainly.
 An **MDR** is one self-contained unit of reasoning — a fish:
 
 ```
-     head Claim          ← sharpened, falsifiable need (sealed at t₀; freely revisable while staged)
+     head Claim          ← sharpened, falsifiable need; `hasNeed` (sealed at t₀; revisable while staged)
     ╱──────────╲
-   alternatives          ← options the decider explored
-   deliberationFacts     ← arguments on those options (belly widens)
-   hasContext            ← world-fact / prior-wake refs (freezes at t₀)
+   alternatives          ← belly: options the decider explored
+   deliberationFacts     ← belly: arguments on those options (belly widens)
+   hasContext            ← context: world-fact / prior-wake refs (freezes at t₀)
     ╲──────────╱
-      Verdict            ← moment of agency ("we commit because…")
+      Verdict            ← waist: moment of agency ("we commit because…"); `verdict`, `chosenAlternative`
     ╱──────────╲
-   expectedOutcomes      ← tail commitments at t₀ (gains, costs, risks, deps)
-   openQuestions         ← explicit deferrals acknowledged at commitment
+   expectedOutcomes      ← tail: measurable bets at t₀ — gains, costs, risks, deps; assessed later
+                            against the wake
+   openQuestions         ← alongside: what this record explicitly does not settle
 ```
 
-| Region | Meaning | Field |
-| --- | --- | --- |
-| Head | Sharpened need motivating the decision | `hasNeed` |
-| Belly | Explored options + arguments on them | `alternatives`, `deliberationFacts` |
-| Context | Premises drawn from the world almanac | `hasContext` |
-| Waist | Recorded judgment and commitment | `verdict`, `chosenAlternative` |
-| Tail | Expected consequences of the chosen path | `expectedOutcomes` |
-| Alongside | What this record explicitly does *not* settle | `openQuestions` |
-
 Silhouette is a diagnostic: starts wide, converges twice, or has no tail → authoring broke down there.
-
-**Tail rigor.** At t₀ the decider commits not only to a Verdict but to measurable bets on gains, costs,
-risks, dependencies. Formal commitments, assessed later against the wake.
 
 ## Bait, Claim, and falsifiability
 
@@ -327,5 +322,5 @@ Load when the situation calls for it — not upfront.
 | `references/write-failures.md` | A write just failed → two failure shapes needing opposite responses, one of which must never be retried |
 | `references/ledger-intent.md` | Drafting or revising a ledger's purpose → the one thing nothing may cite, and treating it as a premise corrupts a record |
 | `references/mcp-boundaries.md` | User asks for something you suspect has no tool → offering a capability that does not exist costs more than checking |
-| `references/scopes-and-bridging.md` | Choosing between ledgers, or coordinating across teams |
-| `references/facilitation-examples.md` | Worked failure modes, and the quality bar per fish region |
+| `references/scopes-and-bridging.md` | Before answering on a ledger the user did not name → the wrong tenancy answers "we never decided that", confidently |
+| `references/facilitation-examples.md` | A region passes the gates but reads thin → gates check well-formedness, never quality |
