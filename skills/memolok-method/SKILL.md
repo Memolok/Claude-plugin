@@ -8,9 +8,9 @@ description: >-
 user-invocable: false
 ---
 
-> Memolok plugin: version 0.21.1-beta currently installed
+> Memolok plugin: version 0.22.0-beta currently installed
 > Important! Call the companion Memolok MCP `get_guidance` before any other Memolok MCP tool —
-> and pass `pluginVersion: "0.21.1-beta"`, the version on the line above. The server compares it
+> and pass `pluginVersion: "0.22.0-beta"`, the version on the line above. The server compares it
 > against the oldest pack it still accepts and tells you whether these skills match its tools. It
 > has no other way to know, and there is no second call in which to correct an omission.
 > N.B.: This skill is loaded very often; it's deliberately terse for token economy. Do not emulate this writing style.
@@ -143,7 +143,9 @@ ordinarily no such fact, none to invent. Input recognized later → `attach_anal
 
 **Expert path** bypasses analysis: `create_MDR` with a claim. Nothing on a record says which path
 minted it. Intake routing → `record-decision`. Parking unanalyzed → `save-matter`;
-`list_matters(untaken: true)` = unprocessed-bait inbox, **matters only**.
+`list_matters(untaken: true)` = unprocessed-bait inbox, **matters only**; `discover_matters` takes
+the same arguments and answers as prose carrying each matter's summary, which is the cheaper read
+when you are choosing rather than filtering.
 
 **Matters carry no status** — no disposition, no vocabulary of endings. What became of one reads from
 its shape: who took it up, when, what they produced.

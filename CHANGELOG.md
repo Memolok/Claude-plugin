@@ -24,6 +24,35 @@ matches — you are asked to update only when your pack genuinely stops working.
 
 *Nothing yet.*
 
+## 0.22.0-beta — 2026-09-02
+
+**Not every line on a matter row is the words somebody typed, and your agent now knows the
+difference.**
+
+A `list_matters` row can carry a short label Memolok supplies alongside the raiser's own trimmed
+words, and `get_matter` carries more of the same beside the full text. That reads exactly like a
+short quotation and nothing in the response distinguishes them — so a skill told to present parked
+matters *"in the words they were logged in"* would have begun presenting a paraphrase as somebody's
+own utterance, confidently and invisibly. That is a wording problem, which is why it is a pack
+release.
+
+- **`review-ledger`** now keeps the two apart when it reports the unprocessed inbox: quote the
+  excerpt when quoting the raiser, and `get_matter` is where the exact wording lives.
+- **The ledger scout** cites the excerpt rather than the label when reporting what a matter says.
+- **The tools reference** describes what a matter row and `get_matter` each carry, and states
+  plainly that a row is no longer shaped like a trimmed `get_matter`.
+
+**`discover_matters` is a new way to scan a queue.** It answers the same selection as `list_matters`
+— same arguments, same order, same ids — as prose rather than rows, so you can tell what is waiting
+without opening entries one at a time, and each page says which of its words are the raiser's.
+`review-ledger`, `record-decision`, `grill-me` and the ledger scout reach for it when they look for
+parked bait.
+
+**One thing you may notice.** Searching matters now reaches more than the raiser's own text, so a
+query can return a matter whose wording does not contain your term, and results come back in a
+different order than before. Nothing you do changes: no tool gained a parameter and no skill gained
+a step.
+
 ## 0.21.1-beta — 2026-08-27
 
 **Reading a ledger is now delegated by default.** The scout shipped in 0.21.0-beta and almost nothing

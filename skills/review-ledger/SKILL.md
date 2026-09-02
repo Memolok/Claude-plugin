@@ -213,6 +213,19 @@ waiting on anybody.
 Present them as raw signal, in the words they were logged in. Do not sharpen them into needs while
 summarizing; that is the pickup session's job, with the user present.
 
+**A row's words are not all the raiser's.** `excerpt` is their own opening, trimmed. `title`, where
+it appears, is Memolok's own label for the matter — nobody typed it, and nothing in the response says
+so. Reading a title back as what somebody logged presents a paraphrase as an utterance, which is the
+one thing this section exists to prevent.
+
+So: use the title to say *which* matters are waiting, and quote the excerpt when quoting the raiser.
+Where the exact wording carries the point, `get_matter` is where the words are.
+
+**`discover_matters(untaken: true)` is the better read for this section** — the same inbox, answered
+as prose with each matter's summary, so you can say what is waiting rather than only that something
+is. It labels which words are Memolok's and which are the raiser's, which is the distinction above
+made structural.
+
 ### Scratchpads are not ledger contents
 
 A review covers decisions, deferrals and unprocessed bait. **Scratchpads are none of those** — they

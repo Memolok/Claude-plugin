@@ -143,7 +143,11 @@ to answer a typo with an empty list, which read as "no records".
 | `mdlGuid` | string | yes |
 | `matterId` | string | yes |
 
-Returns `{ id, mdlGuid, description, takenUpBy }`. Error: `Matter not found.`
+Returns `{ id, mdlGuid, description, takenUpBy }`, plus `title`, `summary` and `subjects` where
+Memolok has derived them. Error: `Matter not found.`
+
+**`description` is the raiser's words; the other three are Memolok's reading of them.** Nothing
+in the response marks which is which. Quote `description` when you are quoting the person.
 
 `takenUpBy` is one entry per analysis that took this matter up — `{ referenceId, analysisId, created,
 concludedAt, late, producesDecision }` — and `[]` when nobody has. `producesDecision` holds
@@ -155,13 +159,50 @@ not to this matter, and nothing says any of them answers it. No rationale here �
 
 Shared discovery params, plus `untaken` (bool, optional). Registration order, oldest first.
 
-Rows: `{ id, mdlGuid, takenUpBy, excerpt, truncated, length }`. **Not `description`** — the raiser's
-words arrive trimmed, and `get_matter` is the read that returns them whole. That matters here more
-than elsewhere: a matter is bait in somebody's own words, and paraphrasing a trimmed excerpt back to
-them is how the words stop being theirs.
+Rows: `{ id, mdlGuid, takenUpBy, excerpt, truncated, length }`, plus `title` where one has been
+derived. **Not `description`** — the raiser's words arrive trimmed, and `get_matter` is the read that
+returns them whole. That matters here more than elsewhere: a matter is bait in somebody's own words,
+and paraphrasing a trimmed excerpt back to them is how the words stop being theirs.
+
+**`title` is not a shorter excerpt — it is Memolok's label for the matter, and nobody typed it.**
+The excerpt beside it is the raiser's own opening, and where nothing has been derived there is no
+`title` key at all. Use the title to *choose* a row; quote the excerpt, or `get_matter`, when the
+words themselves are what is wanted.
+
+A row is **not** a trimmed `get_matter` and does not share its shape: it never carries the body, and
+it carries no `summary` or `subjects` either. It exists so a reader can pick what to open.
+
+**Search reaches more than the raiser's words.** A query matches the derived title, subjects and
+summary too, so a matter can come back for a term nobody typed into it — which is the point, since
+the raiser was describing a problem rather than naming it.
+
+**A matter naming your term among its subjects ranks first.** Those are what Memolok picked out as
+what the matter is about, so they beat prose that merely repeats the word. Unprocessed matters are
+still found, lower down. `matchExcerpt` shows which text matched, and prefers the raiser's own.
 
 `list_matters(untaken: true)` is the unprocessed-bait inbox — every matter no analysis references.
-`untaken: false` gives the complement. There is no status filter, because a matter has no status.
+`untaken: false` gives the complement — matters an analysis **has** taken up, which is not the same
+as no filter at all. There is no status filter, because a matter has no status.
+
+### `discover_matters`
+
+Same parameters as `list_matters`, same selection, same order, same ids. Answers in **prose** rather
+than rows: per matter a heading, the subjects it names, its summary, and which analyses took it up
+with what they produced.
+
+**Reach for this in ledger exploration/discovery journeys, and for `list_matters` when you want
+rows to filter or page mechanically.** That is the whole distinction. A matter found here is read
+with `get_matter` without translating anything.
+
+It carries a summary, so you can judge a matter instead of merely recognising it, and allows you
+to precisely target relevant matters for follow-up `get_matter` calls.
+
+**The headings and summaries are Memolok's words.** Where a matter has not been summarised yet the
+heading is the raiser's own opening instead, and every page says which it is showing you. Quote the
+raiser from `get_matter`, or from a `list_matters` excerpt — never from a heading.
+
+The answer states its own totals, says when you are holding only part of the ledger, explains an
+empty result, and gives you the `offset` for the next page.
 
 ### `get_analysis`
 

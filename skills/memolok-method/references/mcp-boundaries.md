@@ -11,7 +11,7 @@ records, or invented calls. Tell the user it is not available yet.
 | Ledger discovery and creation | `get_MDLs`, `get_MDL`, `create_MDL` |
 | Ledger intent | `set_ledger_intent` (read it back with `get_MDL`) |
 | Matter intake | `register_matter` |
-| Matter reads | `get_matter`, `list_matters` |
+| Matter reads | `get_matter`, `list_matters` (rows), `discover_matters` (the same selection as prose, carrying each matter's summary) |
 | Analysis, Path A and B | `create_analysis` |
 | Analysis reads | `get_analysis` (point read) |
 | Analysis inputs (matter, world fact or observed outcome), after conclusion | `attach_analysis_reference`, `retract_analysis_reference` |
