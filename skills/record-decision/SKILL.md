@@ -58,9 +58,10 @@ If the user has no ledger, agree a title and call `create_MDL`. Draft a purpose 
 already told you and offer it in one line — *"I'll note this ledger is for the storage rebuild"* — and
 take a "skip" without asking twice. They came here to record a decision; never delay it for this.
 
-If there may be parked bait, `list_matters(untaken: true)` shows what nobody has picked up. If one
-matches what the user just raised, take that matter up rather than registering a duplicate — and if
-several do, take up all of them in one analysis.
+If there may be parked bait, `discover_matters(untaken: true)` shows what nobody has picked up, with
+enough of each to tell whether it is the same thing. If one matches what the user just raised, take
+that matter up rather than registering a duplicate — and if several do, take up all of them in one
+analysis.
 
 The same goes for the almanac. If what prompted this is a fact or an outcome already admitted —
 `list_world_facts`, `list_observed_outcomes` — take that entry up **as itself**. There is no inbox

@@ -95,8 +95,8 @@ That is continue-versus-end theatre. The user knows how to say they are done.
    duplicate head **Claim**s before grilling a question that is already settled. Search is lexical,
    so a record that settled this in different words will not surface: absence here is weak evidence,
    and worth one question rather than an assumption.
-4. `list_matters(untaken: true)` — parked bait may already cover this topic, and it is
-   better raised now than re-elicited.
+4. `discover_matters(untaken: true)` — parked bait may already cover this topic, and it is
+   better raised now than re-elicited. Prose rather than rows, so one read is enough to tell.
 
 Ledger reads are delegated — the **reading invariant** in **`memolok-method`**. Read inline instead
 and the pages land in the practitioner's own context, where they cannot be taken back out. That
