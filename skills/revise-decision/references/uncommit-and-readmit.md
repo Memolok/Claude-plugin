@@ -25,7 +25,9 @@ Confirm `retractable` is exactly `true`. Never call `uncommit_MDR` speculatively
 
 A record is anchored when another record's `supersedes`, `amends`, `dependsOn`, `enables`, or
 `conflictsWith` cites its number, when one of its open questions has been settled, or when any observed
-outcome was realized from it.
+outcome was realized from it — and, fourth, when someone has **declared** that something outside the
+ledger cites it. That declaration is `anchor_MDR`; the ledger cannot observe an external citation, so
+it is asserted rather than detected, and there is no way to withdraw one.
 
 ## Step 1 — Uncommit
 
@@ -109,4 +111,7 @@ turned out badly is evidence, not an error to be tidied — supersede it and let
 by then the user has been offered something that was never available.
 
 **Treating re-admission as resuming the original commitment.** It is a new t₀ with a new timestamp and
-a new number. Anything that cited the old number now cites nothing.
+a new number. Anything that cited the old number now cites nothing — or worse, comes to cite whichever
+record takes that number next. **This is what `anchor_MDR` exists to prevent**: a record declared as
+cited outside the ledger refuses the uncommit outright, so the citation can never go wrong. Declaring
+it is the writer's job at the moment of citing, not something anyone can add afterwards.

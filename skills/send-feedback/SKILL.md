@@ -162,7 +162,7 @@ drop it; do not file a reduced version instead.
 
 Give them the titles and their ids, and keep the ids in the session:
 
-> Sent two reports to Memonos — `fb_6a83…` *update_MDR orphans chosenAlternative*, and `fb_6a84…`
+> Sent two reports to Memonos — `fb_gt71…` *update_MDR orphans chosenAlternative*, and `fb_k39c…`
 > *No way to rename an MDL title*.
 
 ### 5. Correcting a report

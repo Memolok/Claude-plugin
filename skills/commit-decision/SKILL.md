@@ -37,7 +37,7 @@ ceremony, never bundled into a recap.
 - All prose is `{ "markdown": "...", "lang": "en" }`
 - **Commit only when the user asked to, in their own words** — never because your draft reads firm
 - Say "captured" only after the write succeeded
-- Cite `mdrNumber` once admitted; never volunteer `mdrHandle` (Rule F)
+- Cite `MDR-{n}` once admitted, `MDRh{handle}` while staged; never a bare handle (Rule F)
 - Open questions do **not** block commit (Rule D)
 - The ledger's stated purpose bears on **nothing** here — never raise a mismatch with it before a seal
 

@@ -93,8 +93,10 @@ subject of the question.
 **The two record identifiers.** `mdrNumber` is what a record is cited as, and it is durable once the
 record is anchored — `retractable: false`, a one-way transition. The one window where a number is not
 yet a stable address is while a record is still retractable: an uncommit releases it and a later
-admission can take it. `mdrHandle` is what the tools take, and `get_MDR` accepts exactly one of the
-two. Report both.
+admission can take it. Anchoring has four causes, three computed inside the ledger and one declared
+by `anchor_MDR` for a citation the ledger cannot see. `mdrHandle` is what the tools take, and
+`get_MDR` accepts exactly one of the two. Report both, as raw values — this is a data hand-off, so
+the `MDRh` prose form does not belong in it.
 
 **Do not fetch reasoning you were not asked for.** `get_analysis` per matter turns one review into a
 dozen calls. Fetch it when the question is *why*, not to be thorough.

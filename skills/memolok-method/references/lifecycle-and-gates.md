@@ -93,9 +93,14 @@ World Fact or prior Observed Outcome ids.
 | `true` | Uncommit (admin/owner), edit while staged, re-admit under a fresh number |
 | `false` | Anchored — mint a successor carrying `supersedes` |
 
-A record becomes Anchored when another record's `amends`/`supersedes`/`dependsOn`/`enables`/
-`conflictsWith` cites its number, when one of its open questions has been settled, or when any
-Observed Outcome was realized from it. Recording a wake therefore usually Anchors the source.
+A record becomes Anchored four ways. Three the ledger computes for itself: another record's
+`amends`/`supersedes`/`dependsOn`/`enables`/`conflictsWith` cites its number, one of its open
+questions has been settled, or an Observed Outcome was realized from it. Recording a wake therefore
+usually Anchors the source.
+
+The fourth is **declared**, by `anchor_MDR`, and says something outside the ledger cites the record —
+the ledger cannot see that for itself. It is not inferred from anything you write; you declare it.
+Form and precondition: the **`record-decision`** skill.
 
 ## Graph edges on staged records
 
