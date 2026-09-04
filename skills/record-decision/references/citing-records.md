@@ -59,8 +59,8 @@ declare a ledger, so a bare number there means nothing to whoever reads it next.
 out.
 
 > **Not built yet.** Following one of those addresses does not resolve to the record yet. The form is
-> correct and durable — write it — but a reader who clicks it today does not land on the decision.
-> Say so if you are handing a link to someone who will try it.
+> the correct one to write — but a reader who clicks it today does not land on the decision. Say so if
+> you are handing a link to someone who will try it.
 
 Never write `MDRh<handle>` outside the session. It names a provisional record, and whether it belongs
 in a document at all is unsettled.
