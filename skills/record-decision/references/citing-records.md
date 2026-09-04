@@ -35,7 +35,8 @@ Anchoring is member-level, so anyone who can write the citation can declare it.
 
 ## The form the citation takes
 
-Three channels, and the difference between them is what binds a bare number to a ledger.
+What binds a bare number to a ledger differs by where you are writing, and that is what decides the
+form.
 
 | Where | Write |
 | --- | --- |
