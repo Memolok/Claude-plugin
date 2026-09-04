@@ -7,7 +7,9 @@ behaviour change, and every shipped edit gets a version — including documentat
 
 - **Patch** — corrections that do not change what the agent does.
 - **Minor** — new skills, new tools reflected in the catalog, or changed facilitation behaviour.
-- **Major** — an installed invocation stops resolving.
+- **Major** — an installed invocation stops resolving. While the pack is pre-1.0 that rides in a
+  minor bump, on the ordinary 0.x convention; you are still told to update, because the server
+  publishes the oldest pack it accepts separately from the version number.
 
 The pack version is independent of the Memolok server's. You install the pack on your schedule; the
 server is deployed on ours, so the two cannot be held equal. The server publishes the oldest pack it
