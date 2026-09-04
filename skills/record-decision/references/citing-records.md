@@ -63,8 +63,8 @@ out.
 > the correct one to write — but a reader who clicks it today does not land on the decision. Say so if
 > you are handing a link to someone who will try it.
 
-Never write `MDRh<handle>` outside the session. It names a provisional record, and whether it belongs
-in a document at all is unsettled.
+Never write `MDRh<handle>` outside the session. It names a record that is still provisional and may
+never be admitted, so there is nothing durable for it to point at.
 
 ## What Memolok knows afterwards
 
