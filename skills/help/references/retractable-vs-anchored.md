@@ -6,13 +6,25 @@ usually get wrong in both directions.
 ## The two states after commitment
 
 **Retractable** — the decision is committed, but nothing else in the world has leaned on it yet. No other
-decision cites it, no artifact points at it as justification, no evidence has been attached to it, none of
+decision cites it, nobody has declared that something outside the ledger cites it, no evidence has been
+attached to it, none of
 its open questions have been settled. In that window, a privileged owner can withdraw the commitment: the
 record returns to draft, its public number goes back into circulation, and both the original commitment
 and its withdrawal stay permanently visible in the ledger's history.
 
 **Anchored** — something now relies on it. From that point the decision's substance is sealed. Changing
 course means a new decision that supersedes this one, not a rewrite of it.
+
+Three of those dependencies the ledger sees for itself, because they happen inside it. The fourth it
+cannot: a decision quoted in a design document, an email or a ticket is relied upon just as heavily,
+and nothing about that reaches Memolok. So it is **declared** — whoever writes the citation says that
+they have, and the record stops being withdrawable from then on. The declaration records only that a
+citation exists and roughly what kind of place it lives in. It never records where, because a stored
+location goes stale the moment a file moves and then reads as authoritative.
+
+There is no undoing a declaration, which is the point of making one. Nothing verifies it either —
+Memolok cannot see your files or your mail — so it is a commitment made in good faith, and it is
+worth exactly as much as the discipline behind it.
 
 ## Why it is called a transaction
 

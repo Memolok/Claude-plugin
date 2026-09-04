@@ -19,11 +19,40 @@ where someone cites "MDR-7" and you hold no handle: read it directly rather than
 
 - **It is a read.** A number is not a durable address until anchoring — an uncommit releases it and the next
   admission takes it. A read that lands on the wrong record announces itself, because the response
-  states both identifiers; a write would not, so no write tool accepts a number.
+  states both identifiers; a write would not, so no write tool accepts a number. **Anchoring is what
+  makes a number safe to write down**, and `anchor_MDR` is how you cause it deliberately.
 - **The response carries `mdrHandle`.** Once you have read the record, use its handle for everything
   else in that session — patches, transitions, wakes, an uncommit.
 
 **Read `retractable` before suggesting an uncommit.**
+
+### Every other entity carries a prefixed identifier
+
+**The prefix says what the value addresses**, so a value in the wrong *reference field* is refused by
+name — a Matter id in `correctsFact` fails as *a Matter*, not as malformed. Parameter names stay
+descriptive; none is called `publicId`.
+
+| Parameter | Shape |
+| --- | --- |
+| a Matter's `id`, `matterId` | `mt_` + 6 |
+| `worldFactId` | `wf_` + 6 |
+| `observedOutcomeId` | `oo_` + 6 |
+| `analysisId` | `an_` + 6 |
+| `scratchpadId` | `sp_` + 26 |
+| `feedbackId` | `fb_` + 16 |
+| `userId` | 16, no prefix |
+
+Bodies are Crockford base32 — the ten digits and the letters except `I`, `L`, `O`, `U` — lowercase on
+the wire, and a hyphen is refused rather than ignored. **Never construct, truncate, complete or
+pattern-match one.** Pass back exactly what you were handed.
+
+These replaced twenty-four hexadecimal characters, so an identifier quoted from an older session may
+not resolve. **A shape complaint is not a diagnosis.** `scratchpadId must be 'sp_' followed by 26
+Crockford base32 characters` is what you get for a typo *and* for a correctly-typed value from before
+the change — the message cannot tell them apart, so neither can you. Read the value back to the user
+and ask, rather than declaring it retired or repairing it by hand.
+
+**`mdlGuid` is not in this table and is not this shape.** It is opaque; reason about nothing in it.
 
 All prose parameters use `{ markdown, lang? }` — see `prose-and-raci.md` for which are wrapped in a
 `description` key.
@@ -149,7 +178,7 @@ Memolok has derived them. Error: `Matter not found.`
 **`description` is the raiser's words; the other three are Memolok's reading of them.** Nothing
 in the response marks which is which. Quote `description` when you are quoting the person.
 
-`takenUpBy` is one entry per analysis that took this matter up — `{ referenceId, analysisId, created,
+`takenUpBy` is one entry per analysis that took this matter up — `{ analysisId, created,
 concludedAt, late, producesDecision }` — and `[]` when nobody has. `producesDecision` holds
 `{ mdrHandle, mdrNumber }` per record **that analysis** minted; those records belong to the reasoning,
 not to this matter, and nothing says any of them answers it. No rationale here — that is
@@ -214,9 +243,11 @@ empty result, and gives you the `offset` for the next page.
 Returns `{ id, mdlGuid, references, producesDecision, analysisRationale, performedBy, concludedAt }`.
 Error: `Analysis not found.`
 
-Each entry in `references` is `{ referenceId, motivatedBy, motivatedByKind, created, late }`.
-`motivatedByKind` is `Matter`, `WorldFact` or `ObservedOutcome` — read it rather than
-guessing from the id, which carries no kind. Null only where the input has been deleted. `late` true means the
+Each entry in `references` is `{ motivatedBy, created, late }`. **`motivatedBy` carries its own kind
+in its prefix** — `mt_` a Matter, `wf_` a World Fact, `oo_` an Observed Outcome — so nothing has to
+be read alongside it to know what it addresses. It is **`null` where the input has been deleted**:
+the reference still says an input was taken up and when, and can no longer say which. A reference has
+no id of its own; it is addressed by the `{ analysisId, motivatedBy }` pair. `late` true means the
 input was attached after `concludedAt`, so the rationale does not account for it; **`null` means
 unanswerable** — a backfilled reference with no date, or an analysis with no conclusion — and never
 "not late".
@@ -297,7 +328,7 @@ do not sharpen here.
 | Param | Type | Required |
 | --- | --- | --- |
 | `mdlGuid` | string | yes |
-| `motivatedBy` | string[] (matter / world fact / observed outcome ids) | yes |
+| `motivatedBy` | string[] (`mt_` / `wf_` / `oo_` ids) | yes |
 | `analysisRationale` | `{ markdown, lang? }` | yes |
 | `producesDecision` | bool | no (default `true`) |
 | `claimDescription` | `{ markdown, lang? }` | Path A only |
@@ -318,7 +349,7 @@ not null).
 | --- | --- | --- |
 | `mdlGuid` | string | yes |
 | `analysisId` | string | yes |
-| `motivatedBy` | string (matter / world fact / observed outcome id) | yes |
+| `motivatedBy` | string (`mt_` / `wf_` / `oo_` id) | yes |
 
 Takes up an input the analysis did not originally reference. **Allowed after the analysis
 concluded** — that is what it is for. The reference is dated now, so it reads as `late: true` and the
@@ -332,10 +363,15 @@ because two attachment times make lateness unanswerable.
 | Param | Type | Required |
 | --- | --- | --- |
 | `mdlGuid` | string | yes |
-| `referenceId` | string | yes |
+| `analysisId` | string | yes |
+| `motivatedBy` | string (`mt_` / `wf_` / `oo_` id) | yes |
+
+**Addressed by the pair it joins**, because that pair is the reference's identity. There is no
+reference id anywhere on the surface to pass.
 
 Withdraws a reference attached in error. Ungated, including against a committed record: an analysis
-must describe reasoning that occurred. Returns `{ retracted }`.
+must describe reasoning that occurred. Returns `{ retracted: { analysisId, motivatedBy } }` — the
+pair echoed back, so retracting several in one turn stays correlatable.
 
 ### `reopen_analysis`
 
@@ -397,6 +433,31 @@ rewriting an id would orphan references the patch does not carry. `chosenAlterna
 `mdlGuid`, `mdrHandle`, optional `reason`. Requires `admin` or `owner`, status `Accepted` or
 `Rejected`, and `retractable: true`. Demotes to staged, clearing `mdrNumber` and `decidedAt`.
 
+### `anchor_MDR`
+
+| Param | Type | Required |
+| --- | --- | --- |
+| `mdlGuid` | string | yes |
+| `mdrHandle` | int | yes — must be a ledger resident |
+| `kind` | `project` \| `other` | yes |
+
+**Declares that something outside the ledger cites this record**, which stops an Uncommit releasing
+its number. Call it **before** writing the citation, not after — the **`record-decision`** skill
+carries when, and in what form the citation is written.
+Member-level, deliberately: gating it above the write it accompanies would leave the citation
+unanchored.
+
+`project` is a citation in a project artifact — a source file, a document in the repository. `other`
+is anywhere else one can go: an email, a chat message, a ticket, a slide. **Only the kind is
+recorded, never where the citation lives**, so there is no location parameter to look for and none to
+supply. Declaring the same kind twice is a no-op.
+
+**Permanent, and unverified.** There is no withdrawal — that is what makes it worth anything — and
+the server cannot see your files or your mail, so nothing checks the claim. Say so if a user asks to
+undo one: it is corrected by a later record, not by a call.
+
+Returns the record. A staged record has no number for anything to cite, so this refuses one.
+
 ### `admit_world_fact`
 
 `mdlGuid`, `claimDescription`, optional `correctsFact`. Use `correctsFact` only for a fact that was
@@ -421,12 +482,19 @@ backdated. Recording one typically Anchors the source record.
 
 Disposable working notes. See the **`manage-notes`** skill for the journeys.
 
-**Identifiers are different here, on purpose.** A `scratchpadId` is `sp_` followed by 24 hex
-characters — `sp_6a761688013eff0dc9e8dee1` — not the bare id every other entity uses. The prefix is
-what lets every reference field refuse one *by name*: pass a `scratchpadId` to `hasContext`,
-`correctsFact`, `motivatedBy`, `tests.outcomeId` or `evidence` and the call fails telling you it is a
-scratchpad, rather than reading as a mistyped World Fact id. Do not treat the two as interchangeable
-in either direction.
+**A `scratchpadId` is the longest identifier in the product** — `sp_` followed by **26** Crockford
+base32 characters, against six for a ledger entity — and that is deliberate rather than incidental.
+It is untypeable and unmemorable, which discourages citing a note in the one way a rule cannot: at
+the moment of writing, before anyone consults a rule.
+
+Pass a `scratchpadId` to `hasContext`, `correctsFact`, `motivatedBy`, `tests.outcomeId` or `evidence`
+and the call fails telling you the value **is a scratchpad** — a category error, not a typo. Nothing
+in a ledger may reference one; if the material matters to a decision, admit it as a World Fact and
+cite that.
+
+**Scratchpad ids were re-minted and the old form is gone.** A stale `sp_` + 24 hex value does not
+resolve. It comes back as a shape complaint, which is the same answer a typo gets — so do not tell a
+user their id is retired on the strength of that message; read it back to them and ask.
 
 ### `create_scratchpad`
 
@@ -530,7 +598,7 @@ not the bodies. Keep the ids.
 
 | Param | Type | Required |
 | --- | --- | --- |
-| `feedbackId` | string (`fb_<24 hex>`) | yes |
+| `feedbackId` | string (`fb_` + 16) | yes |
 
 Your own reports only. A stranger's id returns *not found* rather than a permission error, and so
 does a report deleted during triage.
@@ -539,7 +607,7 @@ does a report deleted during triage.
 
 | Param | Type | Required |
 | --- | --- | --- |
-| `feedbackId` | string (`fb_<24 hex>`) | yes |
+| `feedbackId` | string (`fb_` + 16) | yes |
 | `patch` | object | yes |
 
 Owner-only, no time limit. Patchable: `title`, `kind`, `report`, `userVerbatim`, `mdlGuid`,
@@ -559,19 +627,22 @@ Owner-only, no time limit. Patchable: `title`, `kind`, `report`, `userVerbatim`,
 | `No updatable fields were provided.` | Empty or no-op patch |
 | `Cannot transition a Memolok Decision Record from {from} to {to}.` | Illegal transition |
 | `supersedes may only target Accepted residents (MDR-{n} is {status}).` | Bad supersession target |
-| `This Memolok Decision Record is Anchored and cannot be Uncommitted.` | Uncommit on an anchored record |
+| `This Memolok Decision Record is Anchored ({kind}) and cannot be Uncommitted.` | Uncommit on an anchored record. **The kind is named** — `project` or `other` for a declared anchor, otherwise the ledger-derived cause |
 | `Only Accepted or Rejected Memolok Decision Records may be Uncommitted.` | Wrong status for uncommit |
+| `Only a ledger-resident Memolok Decision Record can be Anchored. A staged record has no ledger number for anything to cite.` | `anchor_MDR` on a staged record — wait for admission |
+| `kind must be one of project, other.` | `anchor_MDR` with anything else; the vocabulary is closed |
 | `Observed Outcomes can only realizeFrom a ledger-resident Memolok Decision Record...` | Wake on a staged record |
 | `discoveryType Expected requires tests referencing an expectedOutcome.` | Missing `tests` |
 | `An analysis must take up at least one input; motivatedBy is empty.` | Empty `motivatedBy` |
 | `That input is already referenced by this analysis.` | Duplicate attach — the existing reference stands |
 | `{field} is a scratchpad id.` | A `sp_…` value passed to a reference field. Nothing may cite a note — admit a World Fact instead |
-| `{field} must be a scratchpad id of the form 'sp_<24 hex characters>'.` | A bare id passed where a `scratchpadId` was expected |
+| `{field} must be 'sp_' followed by 26 Crockford base32 characters.` | Something that is not a scratchpad id passed where one was expected |
 | `Scratchpad not found.` | Missing note, wrong ledger, or already deleted |
 | `A scratchpad body may be at most 65536 bytes;…` | Paste too large — split it, or keep a pointer to the source |
 | `claimDescription is required when analysis produces a Memolok Decision Record.` | Path A without a claim |
 | `A Memolok Decision Record cannot cite its own Observed Outcome in hasContext...` | DTP violation |
-| `{field} must be a feedback report id of the form 'fb_<24 hex characters>'.` | A ledger id passed to a feedback tool — different kinds of address |
+| `{field} must be a feedback report id of the form 'fb_<16 Crockford base32 characters>'.` | A ledger id passed to a feedback tool — different kinds of address |
+| `{field} is a feedback report id.` | An `fb_…` value passed to a ledger reference field. A report is not a ledger entity |
 | `Feedback report not found.` | Not yours, wrong id, or deleted during triage |
 | `reports[n] may not set serverVersion, …` | The server records the build; a caller cannot claim one |
 | `reports[n].evidence[m] must carry either a response … or an excerpt` | An evidence item that asserts nothing |

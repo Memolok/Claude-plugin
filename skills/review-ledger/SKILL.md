@@ -39,9 +39,10 @@ are named back to the user.
 | State | Cite it as |
 | --- | --- |
 | Admitted (`mdrNumber` set) | **MDR-7** |
-| Staged (`mdrNumber` is `null`) | The head Claim, or a short paraphrase |
+| Staged (`mdrNumber` is `null`) | **MDRh7**, or the head Claim where prose reads better |
 
-Never volunteer `mdrHandle`. Cite it freely when the user asks for it.
+**The two are different addresses**, and `MDRh7` and `MDR-7` routinely name different records. Never
+write a bare handle — it reads as a number. Raw handles stay in tool arguments.
 
 ## Workflow
 
@@ -77,7 +78,7 @@ to the scout.
 user's question in their own words, and what you need back. Never hand it a ledger the user has not
 settled on.
 
-**Getting it back.** Cite `mdrNumber` to the user per Rule F and keep handles in tool arguments. The
+**Getting it back.** Name records to the user per Rule F and keep raw handles in tool arguments. The
 scout reports its coverage — pages read out of `total`, bodies opened — and **that coverage is
 part of your answer**: "nothing about X in all 68 records" and "nothing about X in the first 25" are
 different answers, and only one of them settles anything.

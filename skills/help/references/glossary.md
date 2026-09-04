@@ -44,7 +44,7 @@ narrow at the commitment, wide again at the consequences.
 | **ledger resident** | Committed: accepted, rejected, or superseded. Carries a number and can be cited |
 | **retractable** | Committed, but nothing relies on it yet, so it can still be withdrawn on the record |
 | **uncommit** | The act of withdrawing a retractable decision: it returns to draft, its number goes back into circulation, and both the commitment and the withdrawal stay visible. Not an edit — the substance is still not rewritten |
-| **anchored** | Something relies on it. Sealed; course correction now means a new decision |
+| **anchored** | Something relies on it. Sealed; course correction now means a new decision. Three kinds of reliance the ledger sees for itself; a citation outside it is **declared**, permanently, by whoever writes the citation |
 | **supersede** | To withdraw an earlier decision by committing a new one that replaces it. The original stays, permanently, at its own moment |
 
 ## Statuses

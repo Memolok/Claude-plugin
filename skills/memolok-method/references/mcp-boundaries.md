@@ -21,6 +21,7 @@ records, or invented calls. Tell the user it is not available yet.
 | Staged patch, including `hasContext` | `update_MDR` |
 | Lifecycle transition | `transition_MDR_status` |
 | Uncommit a retractable record | `uncommit_MDR` (admin/owner) |
+| Declare an external citation | `anchor_MDR` (member; permanent, and it makes an Uncommit impossible) |
 | World almanac | `admit_world_fact`, `get_world_fact`, `list_world_facts` |
 | Wake | `record_observed_outcome`, `get_observed_outcome`, `list_observed_outcomes` |
 | Learning delta, one record | `get_MDR_learning_delta` |
@@ -112,6 +113,8 @@ provisioned by a Memolok administrator.
 ### Project bridges
 
 Linking records to repository files, and freezing cited artifacts at t₀, are not on the tool surface.
+`anchor_MDR` is not that link: it records that an external citation exists and what kind of place it
+lives in, never where, so nothing resolves from a record back to a file.
 
 ### Deletion
 
@@ -127,7 +130,8 @@ else can depend on.
 ### Scratchpad references
 
 Nothing may reference a scratchpad, permanently and by design. Passing a `sp_…` id to `hasContext`,
-`correctsFact`, `motivatedBy`, `tests.outcomeId` or `evidence` is refused by name.
+`correctsFact`, `motivatedBy`, `tests.outcomeId` or `evidence` is refused by name — as is an `fb_…`
+feedback report id, which is not a ledger entity at all.
 
 There is also no link the other way — no "promoted from", no provenance edge. Content mined out of a
 note is authored fresh with no trail back, and the user should be told that once.
@@ -140,9 +144,10 @@ note is authored fresh with no trail back, and the user should be told that once
 | `mdrNumber` (`null` while staged) | `adrNumber` |
 | `matterId` | matter "number" |
 | `worldFactId`, `observedOutcomeId` | invented ledger numbers |
-| `scratchpadId` (`sp_`-prefixed) | a bare id — scratchpads alone carry a prefix, so a category error is refused by name |
+| `scratchpadId` (`sp_` + 26) | a bare id, or any other entity's prefix — every kind carries its own, so a category error is refused by name |
 | `mdlGuid` | `adlGuid` |
 
 Tools take `mdrHandle`; as a convenience, `get_MDR` also accepts `mdrNumber` so a record someone cites by number can be read directly. Use the handle whenever you hold one.
 
-In conversation, prefer `mdrNumber` once admitted and a head Claim paraphrase while staged.
+In conversation, cite `mdrNumber` as `MDR-{n}` once admitted; while staged, name the record
+`MDRh{handle}` or paraphrase its head Claim. Never a bare handle.

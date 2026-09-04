@@ -7,7 +7,9 @@ behaviour change, and every shipped edit gets a version — including documentat
 
 - **Patch** — corrections that do not change what the agent does.
 - **Minor** — new skills, new tools reflected in the catalog, or changed facilitation behaviour.
-- **Major** — an installed invocation stops resolving.
+- **Major** — an installed invocation stops resolving. While the pack is pre-1.0 that rides in a
+  minor bump, on the ordinary 0.x convention; you are still told to update, because the server
+  publishes the oldest pack it accepts separately from the version number.
 
 The pack version is independent of the Memolok server's. You install the pack on your schedule; the
 server is deployed on ours, so the two cannot be held equal. The server publishes the oldest pack it
@@ -23,6 +25,36 @@ matches — you are asked to update only when your pack genuinely stops working.
 *Landed, not yet in a released pack.*
 
 *Nothing yet.*
+
+## 0.23.0-beta — 2026-09-05
+
+**Update required, and this pack and the Memolok server go together.** From this release the server
+stops accepting older packs: an earlier one describes a call it refuses outright, and — the half that
+matters more — reads several responses confidently wrong rather than failing. There is no version of
+this worth staying on. If your agent reports that its pack is too old, or a call fails in a way its
+examples do not predict, update.
+
+**A matter, world fact, observed outcome or analysis now carries a short identifier of its own** — a
+nine-character value like `mt_3kf9xq` instead of twenty-four hexadecimal characters, with the prefix
+saying what it addresses. Nothing you type changes; the values
+your agent quotes back to you do. An identifier written down during an older session may no longer
+resolve, and your agent will now tell you that rather than guessing.
+
+- **Withdrawing an analysis reference names the two things it joins** — the analysis and the input —
+  instead of a reference id. There is no reference id anywhere on the surface any more.
+- **A staged record can now be named `MDRh7`** instead of only described by its claim. An admitted one
+  is still `MDR-7`, exactly as before. The two are different addresses and routinely point at different records, so the
+  provisional form is marked to stop it being read as a citation.
+- **New: your agent can declare that something outside the ledger cites a record.** Once declared,
+  that record's number can never be released, so a reference you wrote into a file, a document or an
+  email cannot come to mean a different decision later. The declaration records only that a citation
+  exists and roughly what kind of place it lives in — never where. It is permanent and nothing
+  verifies it.
+- **Your agent now knows how to write a citation.** In code, the bare number is enough, because the
+  project file that names your ledger binds it. In a document, either the frontmatter names the
+  ledger or each reference carries the full address. In mail or chat, where nothing can bind it, the
+  full address is the only correct form. Following one of those addresses does not resolve to the
+  record yet, and your agent will say so.
 
 ## 0.22.0-beta — 2026-09-02
 

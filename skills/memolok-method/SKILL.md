@@ -8,9 +8,9 @@ description: >-
 user-invocable: false
 ---
 
-> Memolok plugin: version 0.22.0-beta currently installed
+> Memolok plugin: version 0.23.0-beta currently installed
 > Important! Call the companion Memolok MCP `get_guidance` before any other Memolok MCP tool —
-> and pass `pluginVersion: "0.22.0-beta"`, the version on the line above. The server compares it
+> and pass `pluginVersion: "0.23.0-beta"`, the version on the line above. The server compares it
 > against the oldest pack it still accepts and tells you whether these skills match its tools. It
 > has no other way to know, and there is no second call in which to correct an omission.
 > N.B.: This skill is loaded very often; it's deliberately terse for token economy. Do not emulate this writing style.
@@ -159,7 +159,7 @@ the user, never authored by you and handed down.
 
 | Key | Role |
 | --- | --- |
-| `mdrHandle` | Mint-time address. **Pass on record tools whenever you have one**, including after admission. Do not volunteer in prose (Rule F); cite freely when asked |
+| `mdrHandle` | Mint-time address. **Pass on record tools whenever you have one**, including after admission. Raw in tool arguments; in prose it is written `MDRh{handle}` and names a staged record only (Rule F) |
 | `mdrNumber` | Ledger identity, assigned only at admission; `null` while staged. **Primary user-facing identifier once admitted**; accepted by `get_MDR` alongside `mdrHandle` |
 | `retractable` | Uncommit eligibility, computed: `null` staged; `true` committed and not anchored; `false` anchored. **Read before suggesting an uncommit** |
 
@@ -280,10 +280,30 @@ reasoning does. The prohibition is on options nobody explored, wherever the expl
 Decision about something buildable → draft at **Deliberating**, build against it, correct before t₀;
 mechanics in `record-decision`.
 
-### Rule F — Do not volunteer the handle; cite it when asked
+### Rule F — Cite the number; name a staged record as `MDRh<handle>`
 
-Admitted → cite **`mdrNumber`** ("MDR-3"). Staged → head Claim or a short paraphrase. Keep handles in
-tool arguments. User asks — debugging, internal reference → cite the handle freely and accurately.
+Admitted → cite **`mdrNumber`**: `MDR-3`. Unchanged and unmarked, because a number is the settled
+form.
+
+Staged → **`MDRh3`**, or a head Claim paraphrase where prose reads better. The inserted `h` and the
+missing separator are both deliberate: a corrupted handle fails loudly instead of degrading into a
+citation that looks valid. Never write a bare handle in prose — `MDR-3` and `3` both read as numbers,
+and a handle is not one.
+
+**The two are different addresses and a staged record has no number at all.** `MDRh3` says
+*provisional, and it may never be admitted*; `MDR-3` says *sealed, and it is safe to cite*.
+
+Keep raw handles in tool arguments, where they belong. User asks — debugging, internal reference →
+answer freely and accurately.
+
+**One exception, and it is a hand-off rather than prose.** The `memolok:ledger-scout` agent reports
+both identifiers raw, because its output is data for you and not words for the user. Convert to
+`MDR-{n}` or `MDRh{handle}` when you pass any of it on; a bare handle reaching the user is still a
+bare handle.
+
+**Session prose only.** Whether `MDRh` belongs in a file, a document or a message is not settled, so
+do not write one there. What may be cited outside a session is an **admitted** record, and the form
+plus the anchoring it requires are in **`record-decision`**.
 
 ### Rule G — The Need is not a running summary
 

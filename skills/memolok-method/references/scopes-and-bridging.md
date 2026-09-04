@@ -44,8 +44,14 @@ claim as a premise in your own almanac.
 - A project artifact cites the record that justifies it.
 - A Claim cites project artifacts as evidence.
 
-Memolok witnesses those links; it is not the repository. Neither direction is on the tool surface
-today.
+Memolok witnesses those links; it is not the repository.
+
+**The first direction is declarable.** `anchor_MDR` records that something outside the ledger cites a
+record — its kind only, never its location — which is what stops an Uncommit releasing the number the
+citation names. It is asserted by whoever writes the citation, not detected. Form and precondition:
+the **`record-decision`** skill.
+
+The second direction is not on the tool surface, and neither is freezing a cited artifact at t₀.
 
 ## Choosing a ledger
 
