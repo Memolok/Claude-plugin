@@ -13,11 +13,24 @@ Every tool except `ping` and `get_guidance` requires authentication. All ledger 
 
 Never invent either value. Never address a record tool by a raw database id.
 
+**`mdrHandle` is the standard path whenever you have one** — it is what every record tool takes. `get_MDR` also accepts `mdrNumber`, for the one journey
+where someone cites "MDR-7" and you hold no handle: read it directly rather than scanning
+`list_MDRs`. Two things bound that exception:
+
+- **It is a read.** A number is not a durable address until anchoring — an uncommit releases it and the next
+  admission takes it. A read that lands on the wrong record announces itself, because the response
+  states both identifiers; a write would not, so no write tool accepts a number. **Anchoring is what
+  makes a number safe to write down**, and `anchor_MDR` is how you cause it deliberately.
+- **The response carries `mdrHandle`.** Once you have read the record, use its handle for everything
+  else in that session — patches, transitions, wakes, an uncommit.
+
+**Read `retractable` before suggesting an uncommit.**
+
 ### Every other entity carries a prefixed identifier
 
-**The prefix says what the value addresses.** A value in the wrong field is refused by name — a
-Matter id in `correctsFact` fails as *a Matter*, not as malformed. Parameter names stay descriptive;
-none is called `publicId`.
+**The prefix says what the value addresses**, so a value in the wrong *reference field* is refused by
+name — a Matter id in `correctsFact` fails as *a Matter*, not as malformed. Parameter names stay
+descriptive; none is called `publicId`.
 
 | Parameter | Shape |
 | --- | --- |
@@ -33,25 +46,13 @@ Bodies are Crockford base32 — the ten digits and the letters except `I`, `L`, 
 the wire, and a hyphen is refused rather than ignored. **Never construct, truncate, complete or
 pattern-match one.** Pass back exactly what you were handed.
 
-These replaced twenty-four hexadecimal characters. An identifier quoted from an older session may not
-resolve; read it back to the user and ask them to re-read it rather than repairing it by hand. A
-stale `sp_` or `fb_` value is refused **by name** — that answer is telling you the value is retired,
-not that you mistyped it.
+These replaced twenty-four hexadecimal characters, so an identifier quoted from an older session may
+not resolve. **A shape complaint is not a diagnosis.** `scratchpadId must be 'sp_' followed by 26
+Crockford base32 characters` is what you get for a typo *and* for a correctly-typed value from before
+the change — the message cannot tell them apart, so neither can you. Read the value back to the user
+and ask, rather than declaring it retired or repairing it by hand.
 
 **`mdlGuid` is not in this table and is not this shape.** It is opaque; reason about nothing in it.
-
-**`mdrHandle` is the standard path whenever you have one** — it is what every record tool takes. `get_MDR` also accepts `mdrNumber`, for the one journey
-where someone cites "MDR-7" and you hold no handle: read it directly rather than scanning
-`list_MDRs`. Two things bound that exception:
-
-- **It is a read.** A number is not a durable address until anchoring — an uncommit releases it and the next
-  admission takes it. A read that lands on the wrong record announces itself, because the response
-  states both identifiers; a write would not, so no write tool accepts a number. **Anchoring is what
-  makes a number safe to write down**, and `anchor_MDR` is how you cause it deliberately.
-- **The response carries `mdrHandle`.** Once you have read the record, use its handle for everything
-  else in that session — patches, transitions, wakes, an uncommit.
-
-**Read `retractable` before suggesting an uncommit.**
 
 All prose parameters use `{ markdown, lang? }` — see `prose-and-raci.md` for which are wrapped in a
 `description` key.
@@ -492,7 +493,8 @@ in a ledger may reference one; if the material matters to a decision, admit it a
 cite that.
 
 **Scratchpad ids were re-minted and the old form is gone.** A stale `sp_` + 24 hex value does not
-resolve; it is refused by name, which is the useful half of keeping the old shape recognisable.
+resolve. It comes back as a shape complaint, which is the same answer a typo gets — so do not tell a
+user their id is retired on the strength of that message; read it back to them and ask.
 
 ### `create_scratchpad`
 
@@ -625,8 +627,10 @@ Owner-only, no time limit. Patchable: `title`, `kind`, `report`, `userVerbatim`,
 | `No updatable fields were provided.` | Empty or no-op patch |
 | `Cannot transition a Memolok Decision Record from {from} to {to}.` | Illegal transition |
 | `supersedes may only target Accepted residents (MDR-{n} is {status}).` | Bad supersession target |
-| `This Memolok Decision Record is Anchored and cannot be Uncommitted.` | Uncommit on an anchored record |
+| `This Memolok Decision Record is Anchored ({kind}) and cannot be Uncommitted.` | Uncommit on an anchored record. **The kind is named** — `project` or `other` for a declared anchor, otherwise the ledger-derived cause |
 | `Only Accepted or Rejected Memolok Decision Records may be Uncommitted.` | Wrong status for uncommit |
+| `Only a ledger-resident Memolok Decision Record can be Anchored. A staged record has no ledger number for anything to cite.` | `anchor_MDR` on a staged record — wait for admission |
+| `kind must be one of project, other.` | `anchor_MDR` with anything else; the vocabulary is closed |
 | `Observed Outcomes can only realizeFrom a ledger-resident Memolok Decision Record...` | Wake on a staged record |
 | `discoveryType Expected requires tests referencing an expectedOutcome.` | Missing `tests` |
 | `An analysis must take up at least one input; motivatedBy is empty.` | Empty `motivatedBy` |

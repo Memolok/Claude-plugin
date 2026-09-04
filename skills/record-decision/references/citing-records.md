@@ -43,7 +43,11 @@ form.
 | Code | `MDR-7`, bare |
 | Markdown declaring `mdlGuid` in frontmatter | `MDR-7`, bare, anywhere in the document |
 | Markdown without that frontmatter | A link: `[MDR-7](https://www.memolok.ai/mdl/<mdlGuid>/mdr/7)` |
-| Anything else — email, chat, a word processor | The full address, written out |
+| Anything else — email, chat, a word processor | The address bare: `https://www.memolok.ai/mdl/<mdlGuid>/mdr/7` |
+
+> **Not built yet.** Neither address form above resolves yet — not the Markdown link, not the bare
+> URL. Both are the correct thing to write and neither lands a reader on the decision today. Say so
+> when you hand one to somebody who will try it.
 
 **In code the binding is the tree.** `.memolok/mdl.yml` names the ledger for everything in the
 project, so a bare `MDR-7` in a source file is complete and unambiguous. That is the same file you
@@ -52,16 +56,12 @@ read to find out which ledger to talk to; it is doing double duty.
 **In Markdown the binding is frontmatter.** A document whose frontmatter carries `mdlGuid` licenses
 bare numbers throughout, meaning that ledger and no other. Without it, every reference must carry the
 full address — one document, one rule, so a reader never has to work out which convention is in
-force. Offer to add the frontmatter when a document will carry several references; it is cheaper than
-a link per citation.
+force. Where a document will carry several references, adding the frontmatter is cheaper than a link
+per citation — suggest it, and let the user decide; it is their document.
 
 **Everywhere else there is no binding at all.** Mail, chat and word processors have nowhere to
 declare a ledger, so a bare number there means nothing to whoever reads it next. Write the address
 out.
-
-> **Not built yet.** Following one of those addresses does not resolve to the record yet. The form is
-> the correct one to write — but a reader who clicks it today does not land on the decision. Say so if
-> you are handing a link to someone who will try it.
 
 Never write `MDRh<handle>` outside the session. It names a record that is still provisional and may
 never be admitted, so there is nothing durable for it to point at.

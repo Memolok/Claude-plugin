@@ -28,14 +28,15 @@ matches — you are asked to update only when your pack genuinely stops working.
 
 ## 0.23.0-beta — 2026-09-05
 
-**Update required.** The Memolok server no longer accepts packs older than this one. An earlier pack
-describes a call the server now refuses outright, and — the half that matters more — reads several
-responses confidently wrong rather than failing, so there is no version of this you would want to
-stay on.
+**Update required, and this pack and the Memolok server go together.** From this release the server
+stops accepting older packs: an earlier one describes a call it refuses outright, and — the half that
+matters more — reads several responses confidently wrong rather than failing. There is no version of
+this worth staying on. If your agent reports that its pack is too old, or a call fails in a way its
+examples do not predict, update.
 
-**Every entity now has a short identifier of its own.** A matter, world fact, observed outcome or
-analysis is named by a nine-character value like `mt_3kf9xq` instead of twenty-four hexadecimal
-characters, and the two-letter prefix says what it addresses. Nothing you type changes; the values
+**A matter, world fact, observed outcome or analysis now carries a short identifier of its own** — a
+nine-character value like `mt_3kf9xq` instead of twenty-four hexadecimal characters, with the prefix
+saying what it addresses. Nothing you type changes; the values
 your agent quotes back to you do. An identifier written down during an older session may no longer
 resolve, and your agent will now tell you that rather than guessing.
 

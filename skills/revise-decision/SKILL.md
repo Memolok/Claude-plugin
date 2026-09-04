@@ -152,8 +152,9 @@ that superseding is the route, and that the original standing is what makes the 
 ## Tips
 
 - Anchoring can also be **declared**, by `anchor_MDR`, when something outside the ledger cites the
-  record. It is permanent and unverifiable, so a record can be un-uncommittable for a reason nothing
-  in the ledger shows — read `retractable`, never infer it from the graph.
+  record. It is permanent and unverifiable, so a record can be un-uncommittable for a reason the
+  graph does not show — read `retractable`, never infer it from the edges. **The refusal names the
+  kind**, so `Anchored (project)` or `Anchored (other)` tells you it was declared rather than derived.
 - Recording a wake usually anchors its source record, so uncommit *before* registering outcomes if
   revision is still on the table.
 - `uncommit_MDR` needs admin or owner. A `member` gets a permission error and needs the ledger owner.

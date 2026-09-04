@@ -296,6 +296,11 @@ and a handle is not one.
 Keep raw handles in tool arguments, where they belong. User asks — debugging, internal reference →
 answer freely and accurately.
 
+**One exception, and it is a hand-off rather than prose.** The `memolok:ledger-scout` agent reports
+both identifiers raw, because its output is data for you and not words for the user. Convert to
+`MDR-{n}` or `MDRh{handle}` when you pass any of it on; a bare handle reaching the user is still a
+bare handle.
+
 **Session prose only.** Whether `MDRh` belongs in a file, a document or a message is not settled, so
 do not write one there. What may be cited outside a session is an **admitted** record, and the form
 plus the anchoring it requires are in **`record-decision`**.
