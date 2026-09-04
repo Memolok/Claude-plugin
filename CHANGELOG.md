@@ -41,8 +41,8 @@ resolve, and your agent will now tell you that rather than guessing.
 
 - **Withdrawing an analysis reference names the two things it joins** — the analysis and the input —
   instead of a reference id. There is no reference id anywhere on the surface any more.
-- **A staged record is now named `MDRh7`, not paraphrased.** An admitted one is still `MDR-7`, exactly
-  as before. The two are different addresses and routinely point at different records, so the
+- **A staged record can now be named `MDRh7`** instead of only described by its claim. An admitted one
+  is still `MDR-7`, exactly as before. The two are different addresses and routinely point at different records, so the
   provisional form is marked to stop it being read as a citation.
 - **New: your agent can declare that something outside the ledger cites a record.** Once declared,
   that record's number can never be released, so a reference you wrote into a file, a document or an
