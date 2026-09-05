@@ -24,7 +24,13 @@ matches — you are asked to update only when your pack genuinely stops working.
 
 *Landed, not yet in a released pack.*
 
-*Nothing yet.*
+**Corrected: a ledger address and a user identifier are the same shape.** The tools catalog told
+your agent that `mdlGuid` was *not* the shape listed for the other identifiers. Since ledger
+addresses were re-minted it is exactly the shape of a `userId` — sixteen Crockford base32
+characters, no prefix — and nothing about either string says which one it is. The advice is
+unchanged and now has a reason behind it: treat it as opaque, and never substitute one for the
+other. Your agent is also told that a ledger address quoted from an older session can fail in two
+different ways, neither of which means you lack access.
 
 ## 0.23.0-beta — 2026-09-05
 
