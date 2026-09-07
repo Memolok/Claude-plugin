@@ -50,6 +50,28 @@ the ledger and tells you the file has gone stale.
   offers to refresh the file it can see rather than leaving a copy behind that quietly disagrees. It
   will not go hunting through folders it was not working in.
 
+**Your agent can offer to tell the next session that this project uses Memolok, so you do not have
+to.** With your say-so it puts a single paragraph wherever this project's sessions actually read
+from. A session then reaches for the ledger without being told to, and finds out early if it cannot
+reach it at all, rather than at the first decision worth recording.
+
+- **Where it goes depends on where you work, because the same file is not read everywhere.** In
+  Claude Code it is a file of the plugin's own, `.claude/rules/memolok.md`. In a Cowork or chat
+  project your agent hands you the paragraph to paste into that project's instructions, and writes
+  nothing itself. In a Cowork session working from a bare connected folder it goes into that folder's
+  `CLAUDE.md`, between two marker comments, touching nothing else in the file. In a plain chat
+  nothing would reach a later session, so nothing is offered.
+- **You are asked separately, and told the cost.** One paragraph at the start of every session
+  in that project, whether or not that session touches Memolok. Agreeing to save a ledger id is not
+  agreeing to this; they are different questions and your agent asks them as two.
+- **Whatever it writes, it owns — and nothing beyond that.** A file of its own is rewritten whole; a
+  block in your `CLAUDE.md` is bounded by markers and nothing outside them is touched, ever.
+  **Removing what it wrote is how you turn it off.** It holds no ledger content — no name, no
+  purpose, no record numbers — so it never grows.
+- **It does nothing to anyone without the plugin.** A colleague who opens the project without Memolok
+  installed reads one clause that does not apply to them. Uninstalling leaves it in place,
+  harmlessly.
+
 ## 0.23.0-beta — 2026-09-05
 
 **Update required, and this pack and the Memolok server go together.** From this release the server

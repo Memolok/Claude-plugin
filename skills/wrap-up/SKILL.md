@@ -220,8 +220,11 @@ Propose both rather than picking.
 
 Three calls that are easy to get wrong:
 
-- **Project over memory** when anyone but you benefits. Memory helps you; a file in the repo helps
-  whoever is on call at 3am. Prefer the file whenever both would work.
+- **Project over memory** when anyone but you benefits — **and the project outlives the session**.
+  Memory helps you; a file in the repo helps whoever is on call at 3am. Prefer the file whenever both
+  would work. Where the working directory is discarded when the session ends, that inverts: the file
+  is the half that does not survive, and routing the session's most durable material into it puts it
+  in the one place guaranteed to lose it.
 - **World fact over scratchpad** when a decision might rest on it. Nothing may ever cite a note — that
   is what makes notes disposable — so load-bearing material has to be admitted properly.
 - **Memolok friction is easy to miss, because much of it not errored.** A call that returned 200 and
