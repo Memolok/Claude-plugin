@@ -22,7 +22,14 @@ matches — you are asked to update only when your pack genuinely stops working.
 
 ## Unreleased
 
-*Everything that has landed has shipped. This section is a placeholder.*
+**Ledger reads now say when things came into being, and the tool catalog says so.** Every discovery
+row carries `createdAt`, so *"what came in this week"* is answerable by filtering rows rather than
+opening each entry. `get_matter` and matter rows carry `raisedBy`; world-fact reads carry
+`createdBy`.
+
+The catalog is explicit that an absent `raisedBy` means *unrecorded*, never *anonymous* — entries
+made before the server recorded a raiser have none and never will, because nothing in storage could
+recover one and nothing was invented to fill the gap.
 
 ## 0.25.0-beta — 2026-09-07
 

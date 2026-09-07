@@ -119,8 +119,12 @@ share a shape. Learn it once.
 | `limit` | int | no (default 25, clamped to 100) |
 | `offset` | int | no (default 0) |
 
-Each returns `{ <entities>: [...], total, limit, offset }`. Every row carries `excerpt`, `truncated`
-and `length`; when `query` was sent, rows add `matchExcerpt` (a window around the hit) and `score`.
+Each returns `{ <entities>: [...], total, limit, offset }`. Every row carries `excerpt`, `truncated`,
+`length` and `createdAt`; when `query` was sent, rows add `matchExcerpt` (a window around the hit)
+and `score`.
+
+**`createdAt` is on the row, so *"what came in this week"* is answerable without opening
+anything.** It may be absent on an entry old enough to predate the field.
 
 **`total` is the whole match, not the page.** Holding fewer rows than `total` means you have not seen
 the ledger, and an answer that does not say so is claiming coverage it does not have.
@@ -159,7 +163,10 @@ use for every other tool.
 
 Shared discovery params, plus `status` (string, optional). Ledger order: by number, then handle.
 
-Rows: `{ mdrHandle, mdlGuid, mdrNumber, status, retractable, excerpt, truncated, length }`.
+Rows: `{ mdrHandle, mdlGuid, mdrNumber, status, retractable, createdAt, excerpt, truncated, length }`.
+
+**`createdAt` is when the record was minted, not when it was decided.** A staged record has one
+and has no `decidedAt` at all; an Uncommit removes `decidedAt` and leaves this untouched.
 
 **The excerpt comes from the head Claim and is not the whole of it.** Read the record with `get_MDR`
 before quoting a Claim back to anyone.
@@ -179,8 +186,12 @@ to answer a typo with an empty list, which read as "no records".
 | `mdlGuid` | string | yes |
 | `matterId` | string | yes |
 
-Returns `{ id, mdlGuid, description, takenUpBy }`, plus `title`, `summary` and `subjects` where
-Memolok has derived them. Error: `Matter not found.`
+Returns `{ id, mdlGuid, description, createdAt, raisedBy, takenUpBy }`, plus `title`, `summary`
+and `subjects` where Memolok has derived them. Error: `Matter not found.`
+
+**`raisedBy` absent means unrecorded, not anonymous.** Matters registered before the ledger
+recorded a raiser have none and never will — nothing in storage could recover one, so nothing
+was invented. Never read a missing `raisedBy` as evidence about who raised it.
 
 **`description` is the raiser's words; the other three are Memolok's reading of them.** Nothing
 in the response marks which is which. Quote `description` when you are quoting the person.
@@ -195,8 +206,8 @@ not to this matter, and nothing says any of them answers it. No rationale here �
 
 Shared discovery params, plus `untaken` (bool, optional). Registration order, oldest first.
 
-Rows: `{ id, mdlGuid, takenUpBy, excerpt, truncated, length }`, plus `title` where one has been
-derived. **Not `description`** — the raiser's words arrive trimmed, and `get_matter` is the read that
+Rows: `{ id, mdlGuid, raisedBy, takenUpBy, createdAt, excerpt, truncated, length }`, plus `title`
+where one has been derived. **Not `description`** — the raiser's words arrive trimmed, and `get_matter` is the read that
 returns them whole. That matters here more than elsewhere: a matter is bait in somebody's own words,
 and paraphrasing a trimmed excerpt back to them is how the words stop being theirs.
 
@@ -264,10 +275,13 @@ Point read; there is no `list_analyses`. Reach it by `analysisId` from `get_matt
 ### `get_world_fact` / `list_world_facts`
 
 `get_world_fact` takes `mdlGuid` + `worldFactId` and returns the whole admission —
-`worldFactId`, `manifests`, optional `correctsFact`.
+`worldFactId`, `manifests`, `createdAt`, `createdBy`, optional `correctsFact`.
 
 `list_world_facts` takes the shared discovery params. Admission order, oldest first. Rows:
-`{ worldFactId, mdlGuid, correctsFact, excerpt, truncated, length }`.
+`{ worldFactId, mdlGuid, createdBy, correctsFact, createdAt, excerpt, truncated, length }`.
+
+A world fact says `createdBy` where a matter says `raisedBy`. The two mean the same thing and are
+named for different ontology predicates; nothing turns on the difference when you are reading.
 
 **The almanac only ever grows.** A corrected fact stays on the ledger beside the one correcting it,
 so this listing returns superseded premises alongside live ones and there is no "live facts only"
@@ -327,8 +341,12 @@ Requires `member` or above. Returns the same shape as `get_MDL`.
 | `mdlGuid` | string | yes |
 | `description` | `{ markdown, lang? }` | yes |
 
-Returns `{ id, mdlGuid, description, takenUpBy: [] }`. Record the raiser's words **verbatim** —
-do not sharpen here.
+Returns `{ id, mdlGuid, description, createdAt, raisedBy, takenUpBy: [] }`. Record the raiser's
+words **verbatim** — do not sharpen here.
+
+`createdAt` and `raisedBy` are minted by the server from the call itself; there is no parameter
+for either. **`raisedBy` is the one thing here that cannot be recovered later** — the creation
+time survives in storage regardless, but who raised it is known only while the call is happening.
 
 ### `create_analysis`
 
