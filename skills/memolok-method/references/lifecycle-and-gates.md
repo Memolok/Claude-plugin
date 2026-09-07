@@ -44,7 +44,7 @@ merged document at its current status), and on `transition_MDR_status` (against 
 | All statuses | `hasNeed.description.markdown` non-empty |
 | Proposed, Accepted | ≥1 `alternatives`; `chosenAlternative` matches an `alternatives[].id`; non-empty `verdict.description.markdown` |
 | Accepted | ≥1 `expectedOutcomes`, each with `manifests.description.markdown`; `decidedAt` (server-stamped) |
-| Rejected | Verdict present; `decidedAt`; `supersedes` empty |
+| Rejected | Verdict present; `decidedAt`; `supersedes` **and** `amends` empty |
 
 Gate messages:
 
@@ -57,6 +57,7 @@ At least one expected outcome is required before accepting a Memolok Decision Re
 Each expected outcome must include description prose before accepting a Memolok Decision Record.
 A Verdict is required before rejecting a Memolok Decision Record.
 A Rejected Memolok Decision Record must not carry supersedes (every supersedes target must become Superseded at admission).
+A Rejected Memolok Decision Record must not carry amends (nothing it says is in force, so it changes nothing in the record it names).
 ```
 
 The practical ladder: **Deliberating** needs only a head Claim, so a fish can live there while the
@@ -78,25 +79,41 @@ live high-water mark, publishes graph reciprocals, appends an audit event, and c
 
 | Scope | Fields |
 | --- | --- |
-| Staged only | All tier-1 fish fields, plus `supersedes` and `settlesOpenQuestion` |
+| Staged only | All tier-1 fish fields, plus `amends`, `supersedes`, `dependsOn`, `conflictsWith` and `settlesOpenQuestion` |
 | Any status | `authoredBy`, `decidedBy`, `consulted`, `informed` |
-| Never | `status` (use the transition tool), `openQuestions[].settledIn`, `mdrHandle`, `mdrNumber`, `supersededBy` |
+| Never | `status` (use the transition tool), `openQuestions[].settledIn`, `mdrHandle`, `mdrNumber`, `amendedBy`, `supersededBy` |
 
 `hasContext` is `update_MDR`-only — it is not a `create_MDR` parameter — and takes an ordered list of
 World Fact or prior Observed Outcome ids.
 
 ## Post-admission correction
 
-| `retractable` | Action |
+Two questions, in this order. **How much of the record is wrong** picks the instrument; `retractable`
+only says whether one of them is still available.
+
+| What is wrong | Instrument |
+| --- | --- |
+| The record should never have said that | **Uncommit** — needs `retractable: true` |
+| Part of it; the rest still governs | **Amend** — a successor carrying `amends`; the original stays **Accepted** |
+| The whole thing; it is withdrawn | **Supersede** — a successor carrying `supersedes`; the original goes **Superseded** |
+
+| `retractable` | What it means |
 | --- | --- |
 | `null` | Staged — just patch it |
-| `true` | Uncommit (admin/owner), edit while staged, re-admit under a fresh number |
-| `false` | Anchored — mint a successor carrying `supersedes` |
+| `true` | Uncommit available (admin/owner): edit while staged, re-admit under a fresh number |
+| `false` | Anchored — amend or supersede |
+
+Amend and supersede work at either value. Only Uncommit needs `true`, so read it to route *that*
+decision and not the other one.
 
 A record becomes Anchored four ways. Three the ledger computes for itself: another record's
-`amends`/`supersedes`/`dependsOn`/`enables`/`conflictsWith` cites its number, one of its open
-questions has been settled, or an Observed Outcome was realized from it. Recording a wake therefore
-usually Anchors the source.
+`amends`/`supersedes`/`dependsOn`/`conflictsWith` cites its number, one of its open questions has
+been settled, or an Observed Outcome was realized from it. Recording a wake therefore usually Anchors
+the source.
+
+**Amending permanently anchors what you amend.** `conflictsWith` is heavier still: it
+is symmetric, so both records end up Anchored — *including the one that declares it* — and nothing
+dissolves the pair.
 
 The fourth is **declared**, by `anchor_MDR`, and says something outside the ledger cites the record —
 the ledger cannot see that for itself. It is not inferred from anything you write; you declare it.
@@ -104,10 +121,36 @@ Form and precondition: the **`record-decision`** skill.
 
 ## Graph edges on staged records
 
-`supersedes` and `settlesOpenQuestion` target admitted `mdrNumber`s. For `settlesOpenQuestion`, the
-target is the **older open-question holder**, not the closing record. If the holder is still staged it
-has no number to target — update the holder in place instead. `supersededBy` and
-`openQuestions[].settledIn` are read-only.
+`amends`, `supersedes`, `dependsOn` and `conflictsWith` take arrays of admitted `mdrNumber`s. Author
+them while the record is staged; once it is a resident, the field is refused, and that includes
+sending an empty `[]` — presence is what is refused, because clearing an edge after admission would
+undo something the ledger has published.
+
+| Edge | Says | Target's fate at your t₀ |
+| --- | --- | --- |
+| `amends` | that record stays valid *except* where this one changes or removes something | stays **Accepted**, Anchored |
+| `supersedes` | none of that record stays valid; only this one remains | becomes **Superseded** |
+| `dependsOn` | this decision operationally relies on that one | Anchored |
+| `conflictsWith` | the two stand in tension | Anchored — **and so is this record** |
+
+**`amends` and `supersedes` both need an `Accepted` record at each end**, because both act on content,
+and only an Accepted record has content in force. Amendment is **opt-out** (everything in the
+amended record stays valid but the deltas), while supersession is **opt-in** (retiring everything). A
+`Rejected` record can carry neither, and can't be named by either. `supersedes` additionally targets
+a record only once – a `Superseded` target has nothing left.
+
+`dependsOn` and `conflictsWith` assert a relation between records rather than operating on their
+contents, so they hold against any resident, including Rejected records. This may feel contradictory.
+An Accepted record can `dependsOn` a Rejected record: if that record was accepted, this record could
+not be accepted, so this record depends on that record's rejection. The other is even more strange,
+but equally valid: an Accepted record can also `conflictsWith` a Rejected record: the decision we
+just accepted conflicts with that rejection, e.g. accepting that our company opens a store in Tokyo
+after we rejected accessing the Asian market.
+
+For `settlesOpenQuestion`, the target is the **older open-question holder**, not the closing record.
+If the holder is still staged it has no number to target — update the holder in place instead.
+`amendedBy`, `supersededBy` and `openQuestions[].settledIn` are read-only; the server mints them at
+admission.
 
 ## Matter shape, not matter status
 

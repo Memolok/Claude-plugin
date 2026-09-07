@@ -13,7 +13,8 @@ record returns to draft, its public number goes back into circulation, and both 
 and its withdrawal stay permanently visible in the ledger's history.
 
 **Anchored** — something now relies on it. From that point the decision's substance is sealed. Changing
-course means a new decision that supersedes this one, not a rewrite of it.
+course means a new decision rather than a rewrite of this one: either amending the part that no longer
+holds, leaving the rest in force, or superseding the whole thing.
 
 Three of those dependencies the ledger sees for itself, because they happen inside it. The fourth it
 cannot: a decision quoted in a design document, an email or a ticket is relied upon just as heavily,
@@ -47,8 +48,10 @@ posting made in error, before anyone relied on it, should not force the ceremony
 decision — but it should still leave a trail.
 
 Nothing here softens the rule in the other direction. An anchored record is never patched to look better,
-and a retractable one is never silently rewritten. The choice is withdraw-on-the-record or supersede; it
-is never edit-in-place.
+and a retractable one is never silently rewritten. The choice is withdraw-on-the-record, amend, or
+supersede; it is never edit-in-place.
+
+Amending a decision is a form of relying on it, so amending a decision anchors it. If you might still want to take it back, take it back first.
 
 Whether a specific record is still retractable is a fact the ledger computes rather than a judgment call.
 Read it before promising anyone that something can be taken back.

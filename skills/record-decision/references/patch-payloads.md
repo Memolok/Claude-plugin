@@ -167,7 +167,7 @@ calls, so pick names that will still mean something by then:
 | `Field {field} cannot be updated on a Memolok Decision Record.` | Unknown or frozen key |
 | `No updatable fields were provided.` | Empty or no-op patch |
 | `Cannot change the {label} on a ledger-resident Memolok Decision Record ({status}).` | Record already admitted — see `revise-decision` |
-| `Inter-record graph links may only be authored on staged Memolok Decision Records.` | `supersedes` on a resident |
+| `Inter-record graph links may only be authored on staged Memolok Decision Records.` | `amends`, `supersedes`, `dependsOn`, `conflictsWith` or `settlesOpenQuestion` on a resident — **including an empty array**, since presence is what is refused |
 | `openQuestions[].settledIn cannot be set via MCP…` | Settlement is minted at admission, not patched |
 | `The chosen alternative '…' does not name one of the record's alternatives.` | `chosenAlternative` names nothing the record has — resend both sides together |
 | `deliberationFacts[…].onAlternative '…' does not name one of the record's alternatives.` | Same, for an argument attached to an option that is gone |

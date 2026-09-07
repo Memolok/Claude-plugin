@@ -45,7 +45,8 @@ narrow at the commitment, wide again at the consequences.
 | **retractable** | Committed, but nothing relies on it yet, so it can still be withdrawn on the record |
 | **uncommit** | The act of withdrawing a retractable decision: it returns to draft, its number goes back into circulation, and both the commitment and the withdrawal stay visible. Not an edit — the substance is still not rewritten |
 | **anchored** | Something relies on it. Sealed; course correction now means a new decision. Three kinds of reliance the ledger sees for itself; a citation outside it is **declared**, permanently, by whoever writes the citation |
-| **supersede** | To withdraw an earlier decision by committing a new one that replaces it. The original stays, permanently, at its own moment |
+| **amend** | To change part of an earlier decision by committing a new one. Everything in the original stays valid **except** what the amendment changes or removes, so you write only the difference. Any partial change counts — tightening a commitment, widening it, adding one, dropping one, or restating what it always meant. Amending counts as relying on the original, so it can no longer be withdrawn on the record afterwards |
+| **supersede** | To withdraw an earlier decision by committing a new one that replaces it. **Nothing** in the original stays valid; only the successor governs, which may say far less than the record it retired. The original stays in the ledger, permanently, at its own moment |
 
 ## Statuses
 
