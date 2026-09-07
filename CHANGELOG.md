@@ -22,9 +22,12 @@ matches — you are asked to update only when your pack genuinely stops working.
 
 ## Unreleased
 
-*Landed, not yet in a released pack.*
-
 *Nothing yet.*
+
+## 0.24.1-beta — 2026-09-07
+
+**Wrapping up a session offers again to tell the next session this project uses Memolok** — but only
+where the first offer went unanswered. Declining it still settles it.
 
 ## 0.24.0-beta — 2026-09-07
 

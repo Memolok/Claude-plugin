@@ -204,6 +204,13 @@ it, and a fact the project needs belongs *in the project*.
 | Operational knowledge someone on call will need | Runbook, README, docs |
 | A constraint the code should enforce or state | Code, config, comment |
 | The *why* behind work already done | Commit message |
+| The cold-start signal, offered this session and never answered | The project — **`memolok-method`** invariant 3 owns it |
+
+**An ignored offer is not a declined one.** Invariant 3 suppresses *repeating* the offer during the
+session — but the wrap-up is intended as a recap for the user, too. If they explicitly declined your
+offer, don't repeat it now — but if they just ignored it, raise it one last time during the wrap-up,
+as a soft reminder. If there are multiple wrap-up calls during the session, only remind them during
+the first one.
 
 **Outside both.** Neither scope covers these; be honest about that rather than forcing them in.
 
