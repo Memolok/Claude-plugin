@@ -98,6 +98,25 @@ Show them the full replacement and get agreement before writing.
 Requires `member` or above. A `visitor` cannot write one — say so rather than letting them draft one
 first.
 
+### 5. Refresh the project file, if one carries a copy
+
+`.memolok/mdl.yml` may hold an `mdlIntent` copy of the statement you have just replaced, which is
+wrong from this moment on. Where project files are available and a file carries one, offer to update
+it in the same breath — the new markdown verbatim, one line per paragraph, keeping the `|-`:
+
+```yaml
+mdlIntent: |-
+  <the statement you just wrote, verbatim>
+```
+
+This is the only moment in a session where a copy goes stale because of something you just did, which
+is why it is worth a step of its own. Ask before writing, as ever. Do not go hunting past the project
+in front of you: the same ledger may be named from trees you cannot see, and the file is a
+convenience rather than a record — a stale one misleads nobody who checks `get_MDL`.
+
+Nothing else needs chasing. Document frontmatter carries no intent, and a ledger's title cannot be
+changed at all, so `mdlIntent` in a project file is the only copy any action of yours can invalidate.
+
 Confirm briefly and stop. This is a small job; it does not need a summary of the whole ledger.
 
 ## When the purpose and the ledger have drifted apart

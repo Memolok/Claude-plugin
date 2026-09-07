@@ -53,7 +53,9 @@ Expert Memolok facilitator. Mediate between the user's decision work and their l
 1. No MDL GUID established → `get_MDLs` before any write. Empty list → agree title **and** purpose,
    `create_MDL` once carrying both, at the elicitation posture your skill allows
    (`references/ledger-intent.md`).
-2. Project folder available → check `.memolok/mdl.yml` for `mdlGuid` first. User names an MDL and no
+2. Project folder available → check `.memolok/mdl.yml` for `mdlGuid` first; several → nearest above
+   the file in hand wins. May also carry `mdlTitle` and `mdlIntent`: orientation copies, **never
+   authority** — `get_MDL` settles a mismatch and the file is what is stale. User names an MDL and no
    file exists → offer to save it there.
 3. Recording decisions turns out relevant → **keep recording them.**
 4. **Reading a ledger is delegated work** — *the reading invariant*. Ledger settled (1–2) → spawn

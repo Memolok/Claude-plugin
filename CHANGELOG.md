@@ -32,6 +32,24 @@ unchanged and now has a reason behind it: treat it as opaque, and never substitu
 other. Your agent is also told that a ledger address quoted from an older session can fail in two
 different ways, neither of which means you lack access.
 
+**The project file that names your ledger can now carry the ledger's name and purpose as well, so a
+session that opens cold is oriented before it asks you anything.** `.memolok/mdl.yml` takes
+`mdlTitle` and `mdlIntent` beside `mdlGuid`. Only `mdlGuid` decides which ledger you are on; the
+other two are copies kept for reading, and where one disagrees with the ledger your agent believes
+the ledger and tells you the file has gone stale.
+
+- **Your agent reads the nearest one, and offers to write it where it will still be found.** A folder
+  holding several repositories used to bind all of them from a single file above — which works until
+  somebody clones one repository on its own and every bare `MDR-7` inside it stops naming anything.
+  Your agent now offers the file inside the repository instead, and says what the alternative costs
+  rather than deciding for you. Keeping one file above several projects is still yours to choose.
+- **A document's own frontmatter now outranks the project file**, so a document kept in one project
+  can cite a decision recorded in another. Frontmatter takes `mdlTitle` beside `mdlGuid` too.
+- **Rewriting what a ledger is for now offers to update the copy in the same breath.** Revising the
+  purpose is the one action that makes a project file wrong the moment it succeeds, so your agent
+  offers to refresh the file it can see rather than leaving a copy behind that quietly disagrees. It
+  will not go hunting through folders it was not working in.
+
 ## 0.23.0-beta — 2026-09-05
 
 **Update required, and this pack and the Memolok server go together.** From this release the server
