@@ -24,6 +24,10 @@ matches — you are asked to update only when your pack genuinely stops working.
 
 *Landed, not yet in a released pack.*
 
+*Nothing yet.*
+
+## 0.24.0-beta — 2026-09-07
+
 **Corrected: a ledger address and a user identifier are the same shape.** The tools catalog told
 your agent that `mdlGuid` was *not* the shape listed for the other identifiers. Since ledger
 addresses were re-minted it is exactly the shape of a `userId` — sixteen Crockford base32
