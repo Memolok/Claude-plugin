@@ -59,11 +59,29 @@ What follows is judgement, not validation — the tools will not stop you.
 acceptance to every later reader. Alternatives may be present and unchosen; that is the record showing
 its work, and it is worth including when real options were weighed.
 
-**A Rejection is a leaf in the decision graph.** It cannot carry `supersedes`, it cannot carry
-`settlesOpenQuestion`, and nothing can supersede it. The only edge that works is `hasContext` —
-premises pointing *in*. So when a Rejection needs to be found from the record it relates to, prose and
-context are the only carriers, and they have to do that work deliberately: say in the Verdict what
-this declines and why, because no structure will say it for you.
+**A Rejection cannot change what another record put in force.** Nothing it says is in force itself,
+so it carries neither `supersedes` nor `amends` — it retires nothing and modifies nothing — nor
+`settlesOpenQuestion`, and nothing can amend or supersede it in turn. So when a Rejection stands
+against another record, prose and `hasContext` are the only carriers, and they have to do that work
+deliberately: say in the Verdict what this declines and why, because no structure will say it for you.
+
+The tempting exception is *we declined X, so here's what that decline covers*. But that is not an
+amendment: a Rejection put nothing in force, so there is nothing in it to leave standing. It could
+not un-reject anything — status is frozen, and amendment doesn't touch it — and if it re-scopes what
+was declined, that is a decision made today, not a modification of one made then. Record it as its
+own decision, citing the Rejection in `hasContext`, and reach for `conflictsWith` where the new
+decision genuinely collides with the old decline.
+
+Having said that, **`dependsOn` and `conflictsWith` are available**, in both directions. That reads
+as a contradiction until you see what is being pointed at. Those two relate the *records*, not
+their contents — and a Rejection's own act is perfectly real. What is not in force is the thing
+that was declined; the decline itself is a decision like any other, and later work can rest on it
+or collide with it.
+
+So an Accepted record may depend on a Rejection: *had that been accepted, this could not have been*,
+which makes this decision rest on the decline. And it may conflict with one: opening a store in Tokyo
+after declining the Asian market is a real tension between two real decisions, and the ledger should
+say so rather than leave the next reader to notice.
 
 **Give it a tail when it has one.** Expected outcomes and open questions are not required, but a
 rejection with consequences worth being wrong about should commit to them — *we expect nobody to raise

@@ -419,8 +419,19 @@ Expert path only — there is no matter parameter. Returns the record with a min
 | `patch` | object | yes |
 
 Patch keys: `hasNeed`, `hasContext`, `alternatives`, `deliberationFacts`, `expectedOutcomes`,
-`openQuestions`, `verdict`, `chosenAlternative`, the four RACI fields, `supersedes`,
-`settlesOpenQuestion`. Patches may be incremental — send only what changed.
+`openQuestions`, `verdict`, `chosenAlternative`, the four RACI fields, `amends`, `supersedes`,
+`dependsOn`, `conflictsWith`, `settlesOpenQuestion`. Patches may be incremental — send only what
+changed.
+
+The five graph keys are **staged-only**, and on a resident even `[]` is refused: presence is what is
+refused, because clearing an edge after admission would undo something the ledger has published. Each
+of them Anchors the record it names at admission, so that record can never be Uncommitted by anyone
+afterwards — `amends` included, which is the one that catches people out, since it sounds lighter
+than superseding and costs the target exactly the same.
+
+`amends` and `supersedes` additionally need an **Accepted** record at each end: both act on content,
+and only an Accepted record has content still in force. `amendedBy` and `supersededBy` are
+server-minted and refused on write.
 
 **You name every id on `alternatives`, `expectedOutcomes`, `openQuestions`** — prefixed `alt-`,
 `eo-`, `oq-` for their list, unique within it, on `create_MDR` and `update_MDR` alike. Name them for
@@ -633,8 +644,11 @@ Owner-only, no time limit. Patchable: `title`, `kind`, `report`, `userVerbatim`,
 | `Inter-record graph links may only be authored on staged Memolok Decision Records.` | Graph patch on a resident |
 | `No updatable fields were provided.` | Empty or no-op patch |
 | `Cannot transition a Memolok Decision Record from {from} to {to}.` | Illegal transition |
-| `supersedes may only target Accepted residents (MDR-{n} is {status}).` | Bad supersession target |
-| `This Memolok Decision Record is Anchored ({kind}) and cannot be Uncommitted.` | Uncommit on an anchored record. **The kind is named** — `project` or `other` for a declared anchor, otherwise the ledger-derived cause |
+| `supersedes may only target Accepted residents (MDR-{n} is {status}).` | Bad supersession target. A `Superseded` one has already been retired, so a second attempt has nothing to retire |
+| `amends may only target Accepted residents (MDR-{n} is {status}).` | Same rule, same reason: only an `Accepted` record has content for the amendment to leave standing |
+| `A Rejected Memolok Decision Record must not carry amends (…).` | `amends` on a record admitting as `Rejected` — nothing it says is in force, so it changes nothing |
+| `Field {x} cannot be authored over MCP: it is either minted by the server at admission or not yet writable.` | `amendedBy` / `supersededBy` on a patch |
+| `This Memolok Decision Record is Anchored ({kind}) and cannot be Uncommitted.` | Uncommit on an anchored record. **The kind is named** — `project` or `other` for a declared anchor, `conflict pair` when the record is held only by a `conflictsWith` edge (which anchors both sides, with no way to dissolve it), otherwise `ledger` for a derived cause |
 | `Only Accepted or Rejected Memolok Decision Records may be Uncommitted.` | Wrong status for uncommit |
 | `Only a ledger-resident Memolok Decision Record can be Anchored. A staged record has no ledger number for anything to cite.` | `anchor_MDR` on a staged record — wait for admission |
 | `kind must be one of project, other.` | `anchor_MDR` with anything else; the vocabulary is closed |

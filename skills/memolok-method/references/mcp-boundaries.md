@@ -30,9 +30,21 @@ records, or invented calls. Tell the user it is not available yet.
 
 ### Graph edges, staged records only
 
-`update_MDR` may patch `supersedes` and `settlesOpenQuestion`. Targets must be admitted `mdrNumber`s.
+`update_MDR` may patch `amends`, `supersedes`, `dependsOn`, `conflictsWith` and
+`settlesOpenQuestion`. Targets must be admitted `mdrNumber`s. On a resident the field is refused —
+including `[]`, since presence is what is refused. Reciprocals (`amendedBy`, `supersededBy`) publish
+at admission and are never writable.
+
 `supersedes` may only target `Accepted` residents, once each; admission flips them to `Superseded`.
-Reciprocals publish at admission.
+`amends` requires an `Accepted` record at each end too, for the same reason: amendment is opt-out
+over the anchor's surviving content, and a `Rejected` or `Superseded` record has none.
+
+`dependsOn` and `conflictsWith` carry no status gate, including against a `Rejected` record. They
+relate the records, not their contents, and a decline is a real decision even though what it declined
+is not in force — so a later decision can rest on it, or collide with it.
+
+**Every one of these Anchors its target at admission**, so amending a record ends its uncommit path.
+`conflictsWith` is symmetric and Anchors both endpoints, the author's own record included.
 
 ### Almanac context, staged records only
 
@@ -45,7 +57,7 @@ the same ledger. The list freezes at admission. A record may not cite its own wa
 | --- | --- |
 | `null` | Staged — patch freely; uncommit not applicable |
 | `true` | Committed and not anchored — **still not patchable**; uncommit first |
-| `false` | Anchored — mint a successor with `supersedes` |
+| `false` | Anchored — amend one clause, or supersede the whole record |
 
 This is operational metadata computed at read time. It is never exported.
 

@@ -21,13 +21,16 @@ Confirm `retractable` is exactly `true`. Never call `uncommit_MDR` speculatively
 | --- | --- |
 | `null` | Staged already — nothing to uncommit |
 | `true` | Eligible |
-| `false` | Anchored, or already Superseded — supersede instead |
+| `false` | Anchored — amend or supersede instead. Or already `Superseded`, which neither reaches: it has no content left to change or retire |
 
-A record is anchored when another record's `supersedes`, `amends`, `dependsOn`, `enables`, or
-`conflictsWith` cites its number, when one of its open questions has been settled, or when any observed
-outcome was realized from it — and, fourth, when someone has **declared** that something outside the
-ledger cites it. That declaration is `anchor_MDR`; the ledger cannot observe an external citation, so
-it is asserted rather than detected, and there is no way to withdraw one.
+A record is anchored when another record's `supersedes`, `amends`, `dependsOn` or `conflictsWith`
+cites its number, when one of its open questions has been settled, or when any observed outcome was
+realized from it — and, fourth, when someone has **declared** that something outside the ledger cites
+it. That declaration is `anchor_MDR`; the ledger cannot observe an external citation, so it is
+asserted rather than detected, and there is no way to withdraw one.
+
+Note the first of those: **amending a record Anchors it.** If you may want to Uncommit something
+later, amend it later too.
 
 ## Step 1 — Uncommit
 

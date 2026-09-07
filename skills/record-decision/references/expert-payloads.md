@@ -155,12 +155,14 @@ helpful one.
 
 ## What create_MDR cannot carry
 
-The fish body only. `hasContext`, `settlesOpenQuestion` and `supersedes` have **no parameter** on this
-tool — they are authored by a follow-up `update_MDR` while the record is still staged.
+The fish body only. `hasContext`, `settlesOpenQuestion` and the four inter-record edges — `amends`,
+`supersedes`, `dependsOn`, `conflictsWith` — have **no parameter** on this tool. They are authored by
+a follow-up `update_MDR` while the record is still staged.
 
 Worth knowing before you compose the call rather than after: a record that needs to cite a World Fact
-or a prior wake as context, or to name what it settles or supersedes, is a **two-call mint**. Discover
-it by trying and you will have already committed to a body that reads as if the context were there.
+or a prior wake as context, or to name what it amends, settles, supersedes, depends on or conflicts
+with, is a **two-call mint**. Discover it by trying and you will have already committed to a body
+that reads as if the context were there.
 
 ## Do not
 

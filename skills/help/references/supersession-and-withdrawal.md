@@ -14,7 +14,23 @@ some moment, concluded that the earlier commitment should no longer govern what 
 That act of withdrawal is itself a decision. It has a moment, a rationale, and someone accountable for it,
 and it deserves a record exactly as much as the original did.
 
-So withdrawal is done by **supersession**:
+Withdrawal is not always what you want. When a record still stands and part of it has changed,
+the honest move is to **amend** it: a new decision states the change, the original stays in force,
+and a reader who opens the original can see that something later modified it.
+
+Any partial change is an amendment. Tightening a commitment, widening it, adding one that was missed,
+dropping one that no longer applies, or simply saying what a clause was always meant to mean — what
+kind of change it is does not matter.
+
+What separates the two is what happens to everything you *did not* mention. **An amendment keeps it
+all**, minus what you changed. **A supersession keeps none of it**, and the successor may say far
+less than the record it retired without that being an oversight. So the two are different claims —
+*this part changed* against *this is over* — and they must not be used interchangeably.
+
+The practical consequence: **write only what changes.** Restating the untouched parts of a decision
+does not amend it, because they were never in question.
+
+Full withdrawal is done by **supersession**:
 
 - **The original stays.** It remains in the ledger at its original moment of commitment, preserving what
   was decided and why. Its status changes to reflect that it has been superseded.

@@ -186,6 +186,7 @@ what you say.
 | Why can't I edit a sealed record | Hindsight destroys the evidence the record exists to hold | `references/why-records-are-sealed.md` |
 | So it is permanent the second I commit | No — until something relies on it, it can be withdrawn on the record | `references/retractable-vs-anchored.md` |
 | Can't I just mark it obsolete | Nothing stops being true on its own; someone decided to stop | `references/supersession-and-withdrawal.md` |
+| Only part of it is wrong now | Amend that part; the rest of the decision keeps governing | `references/supersession-and-withdrawal.md` |
 | Why must I say what I expect | An unfalsifiable decision can never teach you anything | `references/expected-outcomes.md` |
 | What if I don't know everything yet | Name what you are not settling and commit anyway | `references/open-questions.md` |
 | Is rejecting it a failure | A sealed no is a real decision and kills the zombie | `references/rejection-as-outcome.md` |
@@ -243,7 +244,7 @@ Any question about a word lands here. Both files, if the question is both.
 | Admit a fact their decisions rest on | **`manage-almanac`** |
 | Keep, find or bin a working note | **`manage-notes`** |
 | Record what actually happened afterwards | **`record-outcome`** |
-| Withdraw, supersede, or settle an earlier open question | **`revise-decision`** |
+| Amend, withdraw, supersede, or settle an earlier open question | **`revise-decision`** |
 | See what the ledger already holds | **`review-ledger`** |
 | Write down what a ledger is for | **`revise-intent`** |
 | Save what this session worked out, before it is gone | **`wrap-up`** |

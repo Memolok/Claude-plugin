@@ -22,7 +22,60 @@ matches — you are asked to update only when your pack genuinely stops working.
 
 ## Unreleased
 
-*Nothing yet.*
+*Everything that has landed has shipped. This section is a placeholder.*
+
+## 0.25.0-beta — 2026-09-07
+
+**There are two ways to change a decision that is already sealed, and they differ in what happens to
+everything you did not mention.** An **amendment** keeps all of it, minus the part you changed. A
+**supersession** keeps none of it — the successor governs alone, and may say far less than the record
+it retired without that being an oversight. Whatever the new decision *adds* is valid either way, as
+in any record.
+
+**Amending is what is new here.** Until now a sealed record could only be taken back whole or
+replaced whole, so a decision that still stood with one part gone stale had no honest route: taking
+it back revised something nobody disputed, and replacing it retired something still in force. Now the
+original stays in force, and a reader who opens it can see that something later modified it.
+
+Because everything you leave alone carries forward, **write only what changes.** An amendment that
+restates the original is nonsensical. Your agent knows this and will draft the difference rather than
+a rewrite.
+
+That also settles which kind of change counts: all of them. Tightening a commitment, widening one,
+adding one that was missed, dropping one that no longer applies, or saying what a clause was always
+meant to mean are the same act. You never have to classify the change — only decide whether the rest
+of the record still governs.
+
+The new route needs a recent enough Memolok server. Against an older one the write is refused, and
+your agent tells you rather than failing quietly.
+
+- **`revise-decision` asks a different first question.** It used to route on whether a record could
+  still be withdrawn. It now asks how much of the record is wrong — nothing, part of it, or all of
+  it — and treats withdrawability as a separate fact that only rules one of the three answers in or
+  out. Asked the old way round, the ledger's state decided something only your situation can.
+- **The route that used to have no answer now has one.** *The decision stands and shipped, but
+  something it promised was wrong* previously landed on "neither route fits — record a separate
+  decision beside it and expect no link back". That's what amendment is for. It stays
+  link-less in one variant only: a follow-up that **declines** the promise rather than replacing it,
+  since a rejection puts nothing in force and so can change nothing.
+- **Amending is not the gentle option, and your agent now warns you before you take it.** Amending a
+  decision counts as relying on it, so from that moment it can no longer be withdrawn on the record
+  by anyone. It reads lighter than superseding and spends that option just as finally. If you might
+  want the original back, take it back first.
+- **Two more relationships can be recorded between decisions**: that one operationally relies on
+  another, and that two stand in tension. The second carries a sharp edge worth reading before you
+  use it — it applies to both records at once, including the one declaring it, and nothing undoes it.
+- **Both routes need a decision that is still in force, at each end** — which follows from the
+  distinction above, since one keeps that decision's content and the other retires it. So neither
+  applies to a rejection, which put nothing in force, or to an already-superseded record, which has
+  nothing left. The two new relationships are different: they relate the *decisions*, not
+  what those decisions put in force, so a rejection can carry them both. That is less strange than it
+  sounds — a decision to decline is still a decision, and later work can rest on it (*had we said yes
+  to that, we could not do this*) or collide with it (opening a store in Tokyo after declining the
+  Asian market).
+- **Corrected: a relationship that no longer exists was still being named** in two places listing
+  what makes a decision un-withdrawable. Your agent could have gone looking for something it would
+  never find.
 
 ## 0.24.1-beta — 2026-09-07
 

@@ -1,17 +1,18 @@
 ---
 name: revise-decision
 description: >-
-  Change a decision that is already sealed on the ledger — uncommit and re-admit a retractable
-  record, supersede it with a successor, or settle a question an earlier record left open. Use when
-  the user regrets a recent commitment, says a sealed record is now wrong or out of date, wants to
-  withdraw or replace a prior decision, or asks how to fix something they already accepted.
+  Change a decision that is already sealed on the ledger — amend part of it, supersede it with
+  a successor, uncommit and re-admit a retractable record, or settle a question an earlier record
+  left open. Use when the user regrets a recent commitment, says a sealed record is now wrong or out
+  of date, says part of it no longer holds, wants to withdraw or replace a prior decision, or asks
+  how to fix something they already accepted.
 argument-hint: "<record> <what changes>"
 ---
 
 # /memolok:revise-decision — Change a sealed decision
 
-Sealed records cannot be edited in place. This skill picks the honest route: uncommit and re-admit,
-or supersede with a successor.
+Sealed records cannot be edited in place. This skill picks the honest route: amend part of it,
+supersede with a successor, or uncommit and re-admit.
 
 ## Usage
 
@@ -49,16 +50,21 @@ skill.
 get_MDR(mdlGuid, mdrHandle)
 ```
 
-### 2. Route on `retractable`
+### 2. Route on how much is wrong
 
-| Value | State | Route |
-| --- | --- | --- |
-| `null` | Staged — never sealed | Just patch it; use **`record-decision`** |
-| `true` | Committed, nothing depends on it yet | **Uncommit** — step 3 |
-| `false` | Anchored, or already Superseded | **Supersede** — step 4 |
+**Ask this first.** `retractable` decides only whether one of the routes is still open; it does not
+decide which route is right.
 
-This is a read, not a guess. Proposing an uncommit on an anchored record wastes the user's time and
-implies the ledger is more malleable than it is.
+| How much of the record is wrong | Route |
+| --- | --- |
+| Staged — never sealed | Just patch it; use **`record-decision`** |
+| Nothing; it should never have said that | **Uncommit** — step 3, needs `retractable: true` |
+| Part of it; the rest still governs | **Amend** — step 4 |
+| All of it; the decision is withdrawn | **Supersede** — step 5 |
+
+Then read `retractable`, which is a read and not a guess. `null` staged, `true` uncommittable,
+`false` anchored. Proposing an uncommit on an anchored record wastes the user's time and implies the
+ledger is more malleable than it is. Amend and supersede work at either value.
 
 ### 3. Uncommit and re-admit
 
@@ -77,10 +83,46 @@ meant to be there — where nothing has come to depend on the record yet.
 
 Detail and payloads: `references/uncommit-and-readmit.md`.
 
-### 4. Supersede
+### 4. Amend
 
-The route for an anchored record, and the honest route whenever the world moved on rather than the
-record being wrong.
+For a record that still stands, where part of it has changed — and retiring the whole thing to say so
+would withdraw a decision nobody disputes.
+
+**Amendment is opt-out; supersession is opt-in.** Everything in the amended record stays valid except
+what your record explicitly changes or removes. Everything in a *superseded* record stops being valid
+and only the successor remains. Either way, whatever your record adds is valid, as in any record.
+
+Two things follow, and the second is the one that gets missed:
+
+- **Any partial change qualifies** — tightening a commitment, widening it, adding one that was
+  missed, dropping one that no longer applies, or saying what a clause always meant. There is no
+  separate instrument for clarifying; it is the same edge.
+- **Write the deltas only.** Because everything else carries forward, restating the original does not
+  amend it — it duplicates it. An amending record that reads like a rewrite of the original is doing
+  supersession's job with the wrong instrument.
+
+The original stays **Accepted** and keeps governing. A new record states the change and names what it
+changes.
+
+1. Mint a staged successor through **`record-decision`**. Its Need is the specific question — *what
+   should this part say now* — not a restatement of the original decision.
+2. Patch `amends: [7]` on the successor while it is still staged.
+3. Commit it. At admission the target gains `amendedBy` pointing back, so a reader who opens the
+   original sees that something later qualified it.
+
+**Say what it costs before writing it.** The amendment Anchors the record it names, permanently: the
+target can never be Uncommitted again by anyone. Amending sounds lighter than superseding and spends
+that option just as finally. If the user might still want to take the original back, amend later.
+
+Both ends must be **Accepted**, for the same reason. Only an Accepted record has content still in
+force for the opt-out default to carry forward. A **Rejected** record can neither amend nor be
+amended — nothing it says is in force, so there are no deltas to apply and nothing to apply them to —
+and a **Superseded** target has already had its whole content retired.
+
+### 5. Supersede
+
+The honest route whenever the world moved on rather than the record being wrong, or when the decision
+is withdrawn outright.
 
 The original stays exactly as it is — it was true at its own t₀, and that history is the point. A new
 record carries the new decision and names the old one.
@@ -91,12 +133,14 @@ record carries the new decision and names the old one.
 2. Patch `supersedes: [7]` on the successor while it is still staged.
 3. Commit it. At admission the target flips to **Superseded** and reciprocals publish.
 
-`supersedes` may only target **Accepted** residents, once each. A `Rejected` record cannot carry
-`supersedes`.
+`supersedes` may only target **Accepted** residents, and a `Rejected` record cannot carry one — the
+same requirement as amendment, for the same reason: only an Accepted record has content to retire.
+Once each, too, and that falls out of the rule rather than sitting beside it: superseding flips the
+target to **Superseded**, so a second attempt finds nothing left.
 
-### 5. Settle an open question
+### 6. Settle an open question
 
-Different from both routes above. The earlier record is not changing — a question it deliberately left
+Different from every route above. The earlier record is not changing — a question it deliberately left
 open is being answered by a later decision.
 
 | Holder's state | Route |
@@ -121,17 +165,19 @@ happened*:
 | We recorded it wrong | Uncommit and re-admit — the record never should have said that |
 | We were right then, and the world changed | Supersede — both records are true at their own t₀ |
 | We were right then, and we now know we were wrong | Supersede — the original is honest evidence |
-| The decision stands and shipped; something it *promised* was wrong | **Neither.** Record a separate decision beside it — often a **Rejected** one declining the promise — and let the wake carry the gap |
+| The decision stands and shipped; something it *promised* was wrong | **Amend.** The Verdict is sound and the implementation is live; one commitment is not |
 
 That fourth row is the one that gets forced into the wrong route. A record whose Verdict is sound and
 whose implementation is live does not need revising because one expected outcome was badly worded;
 uncommitting it would be revision of a decision nobody disputes, and superseding it would retire
 something still in force. What is actually being decided is whether to honour the commitment — a new
-question, at a new t₀.
+question, at a new t₀ — and `amends` is what says the new record answers it without retiring the old.
 
-Expect no link back. If that separate record admits as **Rejected** it can carry neither `supersedes`
-nor `settlesOpenQuestion`, so the pair is connected only by the successor citing the wake in
-`hasContext` and naming what it declines in prose. Write that deliberately; nothing else will.
+**One variant still has no link back.** If that new record admits as **Rejected** — declining the
+promise rather than replacing it — it can carry neither `amends` nor `supersedes`, because nothing it
+says is in force to change or retire anything with. The pair is then connected only by the successor
+citing the wake in `hasContext` and naming what it declines in prose. Write that deliberately;
+nothing else will.
 
 Uncommitting to make a past decision look better is ledger fraud. The value of a record is its honesty,
 not its correctness: a well-reasoned decision that failed teaches more than one retrofitted to look
@@ -144,8 +190,11 @@ that superseding is the route, and that the original standing is what makes the 
 
 - Editing a tier-1 field on a ledger resident. `retractable: true` does not mean patchable.
 - Deleting anything. There are no delete tools.
-- Uncommitting an anchored record — mint a successor instead.
-- Superseding a `Rejected` or already-`Superseded` record.
+- Uncommitting an anchored record — amend or supersede instead.
+- Amending or superseding anything but an `Accepted` record, or carrying either on a Rejection.
+- Superseding the same record twice.
+- Un-anchoring anything. Amending a record spends its Uncommit path for good.
+- Dissolving a `conflictsWith` pair. It Anchors both records, including the one that declared it.
 - Recovering the old number after re-admission.
 - Backdating anything. `decidedAt` is server-stamped.
 

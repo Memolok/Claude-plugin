@@ -8,13 +8,13 @@ description: >-
 user-invocable: false
 ---
 
-> Memolok plugin: version 0.24.1-beta currently installed.
+> Memolok plugin: version 0.25.0-beta currently installed.
 > *This is authoritative*, ignore conflicting caching folder names!
 >
 > Important! **Two things gate your first Memolok MCP call, not one.**
 >
 > Call the companion Memolok MCP `get_guidance` before any other Memolok MCP tool —
-> and pass `pluginVersion: "0.24.1-beta"`, the version on the line above. The server compares it
+> and pass `pluginVersion: "0.25.0-beta"`, the version on the line above. The server compares it
 > against the oldest pack it still accepts and tells you whether these skills match its tools. It
 > has no other way to know, and there is no second call in which to correct an omission.
 >
@@ -209,11 +209,15 @@ or anchored alike. **Retractable** means only that an uncommit can demote it to 
 re-admission; **anchored** cannot be uncommitted at all. **Never** tell a user a committed record can
 be patched in place.
 
-Before t₀: handle, no number, `retractable: null`. Staged records may author `supersedes` and
-`settlesOpenQuestion` edges; targets are admitted numbers.
+Before t₀: handle, no number, `retractable: null`. Staged records may author `amends`, `supersedes`,
+`dependsOn`, `conflictsWith` and `settlesOpenQuestion`; targets are admitted numbers.
 
-**Correction path:** read `retractable` → `true` → uncommit, edit staged, re-admit. `false` → explain
-anchoring, mint a successor. Operational detail → `revise-decision`.
+**Correction path** turns on how much is wrong, not on `retractable`: nothing, it should never have
+said that → uncommit (needs `true`); part of it → `amends`, original stays **Accepted**; all of it →
+`supersedes`. **Amend keeps everything you don't change; supersede keeps none of it** — so an
+amendment states deltas only, and restating the original is not amending it. Both need `Accepted` at
+each end. Amending Anchors what it amends, permanently, and reads gentler than it is. Detail →
+`revise-decision`.
 
 Value is **honesty, not correctness.** A well-reasoned decision that failed teaches more than one
 retrofitted to look prescient. Wake evidence showing a violated commitment → re-decide at a new t₀; the
