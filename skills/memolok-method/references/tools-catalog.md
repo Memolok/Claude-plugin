@@ -52,7 +52,14 @@ Crockford base32 characters` is what you get for a typo *and* for a correctly-ty
 the change — the message cannot tell them apart, so neither can you. Read the value back to the user
 and ask, rather than declaring it retired or repairing it by hand.
 
-**`mdlGuid` is not in this table and is not this shape.** It is opaque; reason about nothing in it.
+**`mdlGuid` is not in this table, and it is the one value that looks like another.** It is the same
+shape as `userId` — sixteen Crockford base32 characters, no prefix — so nothing about the string says
+which of the two you are holding. Never substitute one for the other, never infer the kind from the
+value, and reason about nothing in it.
+
+Ledger addresses were re-minted alongside the identifiers above, so one quoted from an older session
+can fail two ways: refused as malformed, or accepted and simply not found. Neither is a permissions
+problem and neither is a diagnosis — read the value back to the user.
 
 All prose parameters use `{ markdown, lang? }` — see `prose-and-raci.md` for which are wrapped in a
 `description` key.

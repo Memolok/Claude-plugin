@@ -8,11 +8,19 @@ description: >-
 user-invocable: false
 ---
 
-> Memolok plugin: version 0.23.0-beta currently installed
-> Important! Call the companion Memolok MCP `get_guidance` before any other Memolok MCP tool —
-> and pass `pluginVersion: "0.23.0-beta"`, the version on the line above. The server compares it
+> Memolok plugin: version 0.24.0-beta currently installed.
+> *This is authoritative*, ignore conflicting caching folder names!
+>
+> Important! **Two things gate your first Memolok MCP call, not one.**
+>
+> Call the companion Memolok MCP `get_guidance` before any other Memolok MCP tool —
+> and pass `pluginVersion: "0.24.0-beta"`, the version on the line above. The server compares it
 > against the oldest pack it still accepts and tells you whether these skills match its tools. It
 > has no other way to know, and there is no second call in which to correct an omission.
+>
+> And **answer invariant 3** in the same breath. It costs no call and no reading — you already hold
+> the answer. It is pinned here because it is the one obligation in this file with no natural moment
+> of its own, and an obligation with no moment is one that gets read, understood, and not done.
 > N.B.: This skill is loaded very often; it's deliberately terse for token economy. Do not emulate this writing style.
 
 # Memolok method
@@ -53,10 +61,38 @@ Expert Memolok facilitator. Mediate between the user's decision work and their l
 1. No MDL GUID established → `get_MDLs` before any write. Empty list → agree title **and** purpose,
    `create_MDL` once carrying both, at the elicitation posture your skill allows
    (`references/ledger-intent.md`).
-2. Project folder available → check `.memolok/mdl.yml` for `mdlGuid` first. User names an MDL and no
-   file exists → offer to save it there.
-3. Recording decisions turns out relevant → **keep recording them.**
-4. **Reading a ledger is delegated work** — *the reading invariant*. Ledger settled (1–2) → spawn
+2. **The pointer file**, yours to offer and never to write unasked. Project folder available → check
+   `.memolok/mdl.yml` for `mdlGuid` first; several → nearest above the file in hand wins. May also
+   carry `mdlTitle` and `mdlIntent`: orientation copies, **never authority** — `get_MDL` settles a
+   mismatch and the file is what is stale. User names an MDL and no file exists → offer to save it
+   there. **Resolving this fires 3, found or not** — it does not discharge it. Different file,
+   different job, and having this one is not evidence that one was ever done. If you have just
+   settled the ledger, 3 is now due.
+3. **The cold-start signal — a precondition on your first Memolok tool call, not an agenda item.**
+   Answer it beside `get_guidance`, before the call, the way you answer 1 and 2. It is not something
+   to reach later in the session: **there is no later.** This obligation has no moment of its own,
+   and one without a moment is read, understood, and not done. Owed in **every** journey, reads
+   included, on a one-line answer as much as on a day's work — a read that touches no project file
+   still leaves the next session as cold as this one started.
+   A paragraph telling the *next* session this project records decisions in Memolok.
+   **Did anything in your own initial context say so, before the user's first message?** Purely
+   introspective — you already hold the answer, it costs no reads, and it is the same question as *is
+   the signal working*. **A loaded Memolok server, a listed skill pack, and your own accumulated
+   notes about this user all say the plugin is installed. None of them says this project uses a
+   ledger**, which is the only thing being asked; the next person to open it has the first two and
+   not the third.
+   No → offer it, once (and *arriving here late still owes it*); what is suppressed is repeating it
+   in this session. **This is not scope creep and is expected to interrupt** — a question about the
+   project is not a widening of the user's question.
+   **Offer the outcome, never a mechanism, and never a filename.** You don't yet know where it goes,
+   and you're not meant to: *"Want me to set this project up so future sessions know it keeps a ledger,
+   without you having to say so? Short paragraph — I'd work out where it belongs."* **Name no file,
+   no directory, no format.** Any path you can see from here is one you have not read; naming it
+   turns their yes into consent for something you chose rather than something the pack selected.
+   Only on a yes: `references/cold-start-signal.md` decides the destination and the wording. It is
+   loaded **after** consent, never to reach it.
+4. Recording decisions turns out relevant → **keep recording them.**
+5. **Reading a ledger is delegated work** — *the reading invariant*. Ledger settled (1–3) → spawn
    **`memolok:ledger-scout`** with the `mdlGuid` and one question, for any read you cannot bound
    before starting and by the second read of a turn — whatever the larger task is, however the ledger
    came up. A read you *can* bound — one known number, one short list you will use whole — stays
@@ -343,6 +379,7 @@ Load when the situation calls for it — not upfront.
 | `references/prose-and-raci.md` | Composing prose payloads → the two-level shape is not uniform across fields, and a flat object is refused |
 | `references/write-failures.md` | A write just failed → two failure shapes needing opposite responses, one of which must never be retried |
 | `references/ledger-intent.md` | Drafting or revising a ledger's purpose → the one thing nothing may cite, and treating it as a premise corrupts a record |
+| `references/cold-start-signal.md` | **After** they accept the offer, never before it → where the paragraph goes differs by what this session can reach and the obvious target is inert on surfaces that hand you a copy of the project; the wording is fixed text you copy, and one written from memory names the ledger and goes stale where nothing refreshes it |
 | `references/mcp-boundaries.md` | User asks for something you suspect has no tool → offering a capability that does not exist costs more than checking |
 | `references/scopes-and-bridging.md` | Before answering on a ledger the user did not name → the wrong tenancy answers "we never decided that", confidently |
 | `references/facilitation-examples.md` | A region passes the gates but reads thin → gates check well-formedness, never quality |

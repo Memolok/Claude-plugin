@@ -108,14 +108,34 @@ over it.
 
 ## Step 5 — Offer to remember it
 
-If project files are writable and there is no `.memolok/mdl.yml`, offer to save the ledger id so
-future sessions skip this:
+If project files are writable and there is no `.memolok/mdl.yml` where one would be read, offer to
+save the ledger so future sessions skip this. Step 3 already fetched everything it needs:
 
 ```yaml
 mdlGuid: <the guid>
+mdlTitle: <the title>
+mdlIntent: |-
+  <ledgerIntent's markdown, verbatim>
 ```
 
+**`mdlGuid` is the only key that decides anything.** The other two spare a cold session a call, and
+they are copies rather than authority — `get_MDL` is what a session believes when the two differ.
+Copy them exactly as it returned them, one line per paragraph and no rewrapping, so a stale file
+shows up as a plain diff instead of needing a reader to judge whether the wording drifted. Omit
+`mdlIntent` when the ledger has not stated a purpose.
+
 Ask first. Writing files into someone's project uninvited is not yours to decide.
+
+**A yes here is a yes to this file only.** The cold-start signal in invariant 3 of
+**`memolok-method`** changes what every future session in the project does before anybody asks it
+anything, which is a different question and gets asked as one. This is the one journey where both
+offers can land in the same breath; a no on either leaves the other open.
+
+**Where to offer it, when the tree holds several repositories.** In the one the user is working in,
+not the folder above them. A bare `MDR-7` in a source file resolves through the nearest
+`.memolok/mdl.yml` above that file, and only a file inside the repository is still there for someone
+who cloned it on its own. A single file above several repositories is a legitimate arrangement and
+the user's to choose — say what it costs, once, and take their answer.
 
 ## Step 6 — Point at the work
 
@@ -147,6 +167,11 @@ Then hand off. Do not walk them through the whole list.
 - Non-members get `Memolok Decision Ledger not found.` rather than a permission error, deliberately —
   it does not reveal whether the ledger exists. If someone expected access, an administrator needs to
   add them.
+- The cold-start signal, where a project has one, lands wherever that project's sessions actually read
+  from, which differs by surface — `cold-start-signal.md` in **`memolok-method`** is what selects it,
+  and you do not need to know before offering. **Removing what was written is how they opt out**, and
+  it only comes back if they accept the offer again. Uninstalling the plugin leaves it in place,
+  harmlessly — it instructs nothing without the skills to act on it.
 
 ## References
 

@@ -26,6 +26,56 @@ matches — you are asked to update only when your pack genuinely stops working.
 
 *Nothing yet.*
 
+## 0.24.0-beta — 2026-09-07
+
+**Corrected: a ledger address and a user identifier are the same shape.** The tools catalog told
+your agent that `mdlGuid` was *not* the shape listed for the other identifiers. Since ledger
+addresses were re-minted it is exactly the shape of a `userId` — sixteen Crockford base32
+characters, no prefix — and nothing about either string says which one it is. The advice is
+unchanged and now has a reason behind it: treat it as opaque, and never substitute one for the
+other. Your agent is also told that a ledger address quoted from an older session can fail in two
+different ways, neither of which means you lack access.
+
+**The project file that names your ledger can now carry the ledger's name and purpose as well, so a
+session that opens cold is oriented before it asks you anything.** `.memolok/mdl.yml` takes
+`mdlTitle` and `mdlIntent` beside `mdlGuid`. Only `mdlGuid` decides which ledger you are on; the
+other two are copies kept for reading, and where one disagrees with the ledger your agent believes
+the ledger and tells you the file has gone stale.
+
+- **Your agent reads the nearest one, and offers to write it where it will still be found.** A folder
+  holding several repositories used to bind all of them from a single file above — which works until
+  somebody clones one repository on its own and every bare `MDR-7` inside it stops naming anything.
+  Your agent now offers the file inside the repository instead, and says what the alternative costs
+  rather than deciding for you. Keeping one file above several projects is still yours to choose.
+- **A document's own frontmatter now outranks the project file**, so a document kept in one project
+  can cite a decision recorded in another. Frontmatter takes `mdlTitle` beside `mdlGuid` too.
+- **Rewriting what a ledger is for now offers to update the copy in the same breath.** Revising the
+  purpose is the one action that makes a project file wrong the moment it succeeds, so your agent
+  offers to refresh the file it can see rather than leaving a copy behind that quietly disagrees. It
+  will not go hunting through folders it was not working in.
+
+**Your agent can offer to tell the next session that this project uses Memolok, so you do not have
+to.** With your say-so it puts a single paragraph wherever this project's sessions actually read
+from. A session then reaches for the ledger without being told to, and finds out early if it cannot
+reach it at all, rather than at the first decision worth recording.
+
+- **Where it goes depends on where you work, because the same file is not read everywhere.** In
+  Claude Code it is a file of the plugin's own, `.claude/rules/memolok.md`. In a Cowork or chat
+  project your agent hands you the paragraph to paste into that project's instructions, and writes
+  nothing itself. In a Cowork session working from a bare connected folder it goes into that folder's
+  `CLAUDE.md`, between two marker comments, touching nothing else in the file. In a plain chat
+  nothing would reach a later session, so nothing is offered.
+- **You are asked separately, and told the cost.** One paragraph at the start of every session
+  in that project, whether or not that session touches Memolok. Agreeing to save a ledger id is not
+  agreeing to this; they are different questions and your agent asks them as two.
+- **Whatever it writes, it owns — and nothing beyond that.** A file of its own is rewritten whole; a
+  block in your `CLAUDE.md` is bounded by markers and nothing outside them is touched, ever.
+  **Removing what it wrote is how you turn it off.** It holds no ledger content — no name, no
+  purpose, no record numbers — so it never grows.
+- **It does nothing to anyone without the plugin.** A colleague who opens the project without Memolok
+  installed reads one clause that does not apply to them. Uninstalling leaves it in place,
+  harmlessly.
+
 ## 0.23.0-beta — 2026-09-05
 
 **Update required, and this pack and the Memolok server go together.** From this release the server

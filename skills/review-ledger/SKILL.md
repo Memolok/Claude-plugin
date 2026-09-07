@@ -69,6 +69,11 @@ reading invariant, applied — what stays inline:**
 | `get_MDL` for the ledger's purpose | One call, and the answer is the whole of it |
 | `retractable` before a revision | Hold this first-hand, not on report |
 | One record in full, handle already known | Bounded before you start |
+| A count — any `list_*` with `limit: 1`, read from `total` | The answer is one number, and `limit: 1` buys it for one row |
+
+**Illustrative, not exhaustive.** The test is whether you can bound the read before starting, not
+whether it appears above. A read you can state the size of in advance is inline whether or not this
+table names it; when in doubt about a read you cannot size, hand it off.
 
 Everything else on this journey — a topic search, the open-question sweep, an inbox past one page, a
 status slice past one page, chasing a parked matter through to its records — is unbounded, and goes
