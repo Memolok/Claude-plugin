@@ -22,7 +22,7 @@ matches — you are asked to update only when your pack genuinely stops working.
 
 ## Unreleased
 
-*Nothing yet.*
+*Everything that has landed has shipped. This section is a placeholder.*
 
 ## 0.24.1-beta — 2026-09-07
 
