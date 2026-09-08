@@ -26,20 +26,6 @@ matches — you are asked to update only when your pack genuinely stops working.
 
 ## 0.26.0-beta — 2026-09-08
 
-**Every routing row that means *choose* now points at a prose read.** The last one still sending the
-unprocessed-matter inbox to rows has moved: picking what to work on from a queue is choosing, and an
-agent that wants one matter whole has `get_matter` for exactly that.
-
-**Both duplicate checks now read as prose.** Registering a matter and admitting a world fact each begin
-by asking whether the same thing is already there, which is a judgement about what an entry is *about* —
-and two people parking the same trouble rarely open with the same words, so a positional excerpt is the
-wrong evidence. The almanac's check moved first; the matter one had been left behind.
-
-**The cold-start signal says what to do when it is already there.** The invariant asked whether anything
-in the session's own context said this project keeps a ledger, and only spelled out the *no* branch.
-A yes now says so: ignore the section and do not mention it, because a signal working as intended is
-not news, and reporting it spends the user's attention on a question they never asked.
-
 **Decision records can be read as prose, which completes the set.** `discover_MDRs` answers the same
 selection as `list_MDRs` — `status` filter included — as a page carrying each record's summary, the
 terms it names, and its head Claim beside them. All four listings that hold typed entries now have a
@@ -84,9 +70,6 @@ Every page says which it is showing you, and where nothing has been derived the 
 admitter's own opening rather than a placeholder. `get_world_fact` remains the only source for the
 words somebody actually wrote.
 
-The almanac skill now checks for near-duplicates with the prose read rather than the row read, because
-that step is a judgement about whether a premise is already covered, and a row cannot support one.
-
 **Ledger reads now say when things came into being, and the tool catalog says so.** Every discovery
 row carries `createdAt`, so *"what came in this week"* is answerable by filtering rows rather than
 opening each entry. `get_matter` and matter rows carry `raisedBy`; world-fact reads carry
@@ -95,6 +78,23 @@ opening each entry. `get_matter` and matter rows carry `raisedBy`; world-fact re
 The catalog is explicit that an absent `raisedBy` means *unrecorded*, never *anonymous* — entries
 made before the server recorded a raiser have none and never will, because nothing in storage could
 recover one and nothing was invented to fill the gap.
+
+**Every routing row that means *choose* now points at a prose read.** The last one still sending the
+unprocessed-matter inbox to rows has moved: picking what to work on from a queue is choosing, and an
+agent that wants one matter whole has `get_matter` for exactly that.
+
+**Both duplicate checks now read as prose.** Registering a matter and admitting a world fact each begin
+by asking whether the same thing is already there, which is a judgement about what an entry is *about* —
+and two people parking the same trouble rarely open with the same words, so a positional excerpt is the
+wrong evidence. The almanac's check moved first; the matter one had been left behind.
+
+**The cold-start signal says what to do when it is already there.** The invariant asked whether anything
+in the session's own context said this project keeps a ledger, and only spelled out the *no* branch.
+A yes now says so: ignore the section and do not mention it, because a signal working as intended is
+not news, and reporting it spends the user's attention on a question they never asked.
+
+The almanac skill now checks for near-duplicates with the prose read rather than the row read, because
+that step is a judgement about whether a premise is already covered, and a row cannot support one.
 
 ## 0.25.0-beta — 2026-09-07
 
