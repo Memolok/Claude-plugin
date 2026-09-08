@@ -22,6 +22,10 @@ matches — you are asked to update only when your pack genuinely stops working.
 
 ## Unreleased
 
+**Every routing row that means *choose* now points at a prose read.** The last one still sending the
+unprocessed-matter inbox to rows has moved: picking what to work on from a queue is choosing, and an
+agent that wants one matter whole has `get_matter` for exactly that.
+
 **Both duplicate checks now read as prose.** Registering a matter and admitting a world fact each begin
 by asking whether the same thing is already there, which is a judgement about what an entry is *about* —
 and two people parking the same trouble rarely open with the same words, so a positional excerpt is the

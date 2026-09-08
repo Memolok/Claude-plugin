@@ -100,7 +100,7 @@ goes unmentioned; a session whose own settings forbid spawning is theirs to chan
 | Everything, or a status slice | `discover_MDRs(mdlGuid, status?)`, or `list_MDRs(mdlGuid, status?)` for rows |
 | One record in full | `get_MDR(mdlGuid, mdrHandle)` |
 | One record the user named — "what did MDR-7 say?" | `get_MDR(mdlGuid, mdrNumber=7)` |
-| Unprocessed intake | `list_matters(mdlGuid, untaken: true)` |
+| Unprocessed intake | `discover_matters(mdlGuid, untaken: true)`, or `list_matters(mdlGuid, untaken: true)` for rows |
 | One matter | `get_matter(mdlGuid, matterId)` |
 | What came of a matter | `get_matter`, then `get_MDR(mdrHandle)` |
 | Why a matter was dismissed | `get_analysis(mdlGuid, analysisId)` |
