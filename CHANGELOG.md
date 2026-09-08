@@ -22,6 +22,11 @@ matches — you are asked to update only when your pack genuinely stops working.
 
 ## Unreleased
 
+**Both duplicate checks now read as prose.** Registering a matter and admitting a world fact each begin
+by asking whether the same thing is already there, which is a judgement about what an entry is *about* —
+and two people parking the same trouble rarely open with the same words, so a positional excerpt is the
+wrong evidence. The almanac's check moved first; the matter one had been left behind.
+
 **The cold-start signal says what to do when it is already there.** The invariant asked whether anything
 in the session's own context said this project keeps a ledger, and only spelled out the *no* branch.
 A yes now says so: ignore the section and do not mention it, because a signal working as intended is

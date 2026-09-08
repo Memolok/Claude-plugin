@@ -108,7 +108,7 @@ choosing rather than filtering.
 returns ledger metadata; `get_MDR` takes `mdlGuid` + a record key and returns a decision record. Reading
 one while meaning the other produces a confident answer to the wrong question.
 
-## Discovery reads: one shape, five tools
+## Discovery reads: one shape, nine tools
 
 `list_MDRs`, `list_matters`, `list_world_facts`, `list_observed_outcomes` and `list_scratchpads`
 share a shape. Learn it once.
@@ -156,7 +156,12 @@ Per-tool filters and natural order are below. Nothing else about the shape varie
 | `mdrNumber` | int | exactly one of the two |
 
 Returns the full record — fish body, `mdrHandle`, `mdrNumber`, `retractable`, and any graph edges,
-plus `analysisId` (`null` when no analysis produced it).
+plus `analysisId` (`null` when no analysis produced it) — and the derived `title`, `summary` and
+`subjects` where Memolok has produced them.
+
+**Those three appear only on a sealed record**, because only sealed records are derived: a staged
+record's prose is still editable and nothing would notice a summary going stale against it. They are
+Memolok's reading of the record, never the decider's words — quote the fish body.
 
 Pass the handle when you have one. `mdrNumber` is here for the case where a person cites a number
 and you would otherwise scan `list_MDRs` to find its handle — one call instead of a ledger-wide read.
@@ -271,7 +276,7 @@ as no filter at all. There is no status filter, because a matter has no status.
 
 ### `discover_matters`
 
-Same parameters as `list_matters`, same selection, same order, same ids. Answers in **prose** rather
+Same parameters as `list_matters`, including `untaken`, same selection, same order, same ids. Answers in **prose** rather
 than rows: per matter a heading, the subjects it names, its summary, and which analyses took it up
 with what they produced.
 
