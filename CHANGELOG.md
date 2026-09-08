@@ -20,7 +20,7 @@ matches — you are asked to update only when your pack genuinely stops working.
 > history rather than at the time, so they are terser than the ones after them. Nothing in them is
 > reconstructed beyond what the tags and their contents show.
 
-## Unreleased
+## 0.26.0-beta — 2026-09-08
 
 **Every routing row that means *choose* now points at a prose read.** The last one still sending the
 unprocessed-matter inbox to rows has moved: picking what to work on from a queue is choosing, and an
