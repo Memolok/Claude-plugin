@@ -50,8 +50,9 @@ per spawn buys nothing.
 ## How to read
 
 **Page. Never try to take everything at once.** Every discovery read — `list_MDRs`, `list_matters`,
-`list_world_facts`, `list_observed_outcomes`, `list_scratchpads` — takes `limit` and `offset` and
-returns `total` beside its rows. `total` counts the whole match, not your page.
+`list_world_facts`, `list_observed_outcomes`, `list_scratchpads`, and the `discover_*` prose pair —
+takes `limit` and `offset` and returns `total` beside its rows. `total` counts the whole match, not
+your page.
 
 Read `total` first, then decide how far you have to go. Some questions have an early exit: *"what did
 we decide about storage?"* is answered as soon as you have the record. Some have none — an
@@ -70,12 +71,16 @@ in its belly, not only on its head **Claim**. The row previews the Claim, so a h
 to it; `matchExcerpt` is the window around whatever actually matched, and quoting it is what makes
 such a row make sense.
 
-**Matters.** A row carries the raiser's `excerpt` and, where Memolok has derived one, a `title`.
-They are not two versions of the same thing: the excerpt is what somebody typed and the title is a
-machine's label for it. Cite the excerpt when reporting what a matter says, and `get_matter` when the
-wording matters. A `list_matters` row carries no `summary` and no `subjects`. **`discover_matters` does** — same
-selection, answered as prose — and it is the cheaper read when the question is *which of these
-matters bears on X*. `get_matter` remains the only way to the raiser's full text.
+**Matters and world facts.** A row carries the writer's `excerpt` and, where Memolok has derived one,
+a `title`. They are not two versions of the same thing: the excerpt is what somebody typed and the
+title is a machine's label for it. Cite the excerpt when reporting what an entry says, and
+`get_matter` / `get_world_fact` when the wording matters. Neither row carries a `summary` or
+`subjects`. **`discover_matters` and `discover_world_facts` do** — same selection, answered as prose —
+and they are the cheaper read when the question is *which of these bears on X*.
+
+**On world facts, be stricter about it than anywhere else.** A world fact is a premise decisions are
+reasoned from, so handing back Memolok's paraphrase as the admitted claim misstates what the ledger
+rests on. Quote from `get_world_fact`.
 
 **Scratchpads.** A row's `excerpt` is a positional trim of the opening text — a handle for naming the
 note, not a description of it. It answers nothing about what a note *says*. When the question is

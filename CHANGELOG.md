@@ -22,6 +22,26 @@ matches — you are asked to update only when your pack genuinely stops working.
 
 ## Unreleased
 
+**World facts can be read the way matters can: as prose to choose from rather than rows to filter.**
+`discover_world_facts` answers the same selection as `list_world_facts`, in the same order, with the
+same identifiers — but as a page carrying each premise's summary and the terms it names. It is the
+read for *which of these bears on what I am doing*, and it saves opening every candidate to find out.
+`list_world_facts` rows now carry a derived title beside the admitter's excerpt, and `get_world_fact`
+returns the summary and subjects alongside the claim.
+
+Search reaches the derived title, summary and subjects as well as the admitted claim, so a premise can
+now be found by a term nobody typed into it.
+
+**A heading or summary on either read is Memolok's wording, not the admitter's — and on this
+collection that matters more than anywhere else.** A world fact is a premise decisions are reasoned
+from, so quoting a paraphrase of one back as the admitted claim misstates what the ledger rests on.
+Every page says which it is showing you, and where nothing has been derived the heading is the
+admitter's own opening rather than a placeholder. `get_world_fact` remains the only source for the
+words somebody actually wrote.
+
+The almanac skill now checks for near-duplicates with the prose read rather than the row read, because
+that step is a judgement about whether a premise is already covered, and a row cannot support one.
+
 **Ledger reads now say when things came into being, and the tool catalog says so.** Every discovery
 row carries `createdAt`, so *"what came in this week"* is answerable by filtering rows rather than
 opening each entry. `get_matter` and matter rows carry `raisedBy`; world-fact reads carry

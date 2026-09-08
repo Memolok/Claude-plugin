@@ -101,7 +101,8 @@ Returns `{ mdlGuid, title, role, ledgerIntent }`. `ledgerIntent` is `null` when 
 stated a purpose — that is normal, not an error.
 
 **One ledger's own metadata, not its contents.** For what is inside, use `list_MDRs`, `list_matters`,
-`list_world_facts`, `list_observed_outcomes`.
+`list_world_facts`, `list_observed_outcomes` — or `discover_matters` / `discover_world_facts` when you
+are choosing rather than filtering.
 
 **Not `get_MDR`.** One letter apart, and completely different: `get_MDL` takes only `mdlGuid` and
 returns ledger metadata; `get_MDR` takes `mdlGuid` + a record key and returns a decision record. Reading
@@ -111,6 +112,9 @@ one while meaning the other produces a confident answer to the wrong question.
 
 `list_MDRs`, `list_matters`, `list_world_facts`, `list_observed_outcomes` and `list_scratchpads`
 share a shape. Learn it once.
+
+Two of them have a prose sibling — `discover_matters` and `discover_world_facts` — taking the same
+parameters and returning the same selection as a page to read rather than rows to filter.
 
 | Param | Type | Required |
 | --- | --- | --- |
@@ -251,6 +255,24 @@ raiser from `get_matter`, or from a `list_matters` excerpt — never from a head
 The answer states its own totals, says when you are holding only part of the ledger, explains an
 empty result, and gives you the `offset` for the next page.
 
+### `discover_world_facts`
+
+Same parameters as `list_world_facts`, same selection, same order, same ids. Answers in **prose**
+rather than rows: per fact a heading, the terms it names, its summary, when it was admitted, and what
+it corrects if anything.
+
+**Reach for this when working out which premises bear on what you are doing**, and for
+`list_world_facts` when you want rows to filter or page mechanically. A fact found here is read with
+`get_world_fact` without translating anything.
+
+Search reaches the derived title, summary and subjects as well as the admitted claim, so a fact can
+match a term nobody typed into it.
+
+**The headings and summaries are Memolok's words, and on this collection that matters more than
+anywhere else.** A world fact is a premise decisions are reasoned from, so quoting a paraphrase of one
+back as the admitted claim misstates what the ledger rests on. Where a fact has not been summarised
+the heading is the admitter's own opening instead, and every page says which it is showing you.
+
 ### `get_analysis`
 
 | Param | Type | Required |
@@ -275,10 +297,17 @@ Point read; there is no `list_analyses`. Reach it by `analysisId` from `get_matt
 ### `get_world_fact` / `list_world_facts`
 
 `get_world_fact` takes `mdlGuid` + `worldFactId` and returns the whole admission —
-`worldFactId`, `manifests`, `createdAt`, `createdBy`, optional `correctsFact`.
+`worldFactId`, `manifests`, `createdAt`, `createdBy`, optional `correctsFact` — plus the derived
+`title`, `summary` and `subjects` where Memolok has produced them.
 
 `list_world_facts` takes the shared discovery params. Admission order, oldest first. Rows:
-`{ worldFactId, mdlGuid, createdBy, correctsFact, createdAt, excerpt, truncated, length }`.
+`{ worldFactId, mdlGuid, createdBy, correctsFact, createdAt, excerpt, truncated, length }`, plus a
+derived `title` where one exists. A row carries no `summary` and no `subjects`; `discover_world_facts`
+does.
+
+The `excerpt` is the admitter's own opening, trimmed. The `title` is Memolok's label for the whole
+claim. They are not two versions of one thing — **quote the excerpt, never the title**, and reach for
+`get_world_fact` when the wording has to be exact.
 
 A world fact says `createdBy` where a matter says `raisedBy`. The two mean the same thing and are
 named for different ontology predicates; nothing turns on the difference when you are reading.
