@@ -22,6 +22,11 @@ matches — you are asked to update only when your pack genuinely stops working.
 
 ## Unreleased
 
+**The cold-start signal says what to do when it is already there.** The invariant asked whether anything
+in the session's own context said this project keeps a ledger, and only spelled out the *no* branch.
+A yes now says so: ignore the section and do not mention it, because a signal working as intended is
+not news, and reporting it spends the user's attention on a question they never asked.
+
 **Decision records can be read as prose, which completes the set.** `discover_MDRs` answers the same
 selection as `list_MDRs` — `status` filter included — as a page carrying each record's summary, the
 terms it names, and its head Claim beside them. All four listings that hold typed entries now have a
