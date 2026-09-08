@@ -101,8 +101,8 @@ Returns `{ mdlGuid, title, role, ledgerIntent }`. `ledgerIntent` is `null` when 
 stated a purpose — that is normal, not an error.
 
 **One ledger's own metadata, not its contents.** For what is inside, use `list_MDRs`, `list_matters`,
-`list_world_facts`, `list_observed_outcomes` — or `discover_matters`, `discover_world_facts` and
-`discover_observed_outcomes` when you are choosing rather than filtering.
+`list_world_facts`, `list_observed_outcomes` — or their four `discover_*` siblings when you are
+choosing rather than filtering.
 
 **Not `get_MDR`.** One letter apart, and completely different: `get_MDL` takes only `mdlGuid` and
 returns ledger metadata; `get_MDR` takes `mdlGuid` + a record key and returns a decision record. Reading
@@ -113,9 +113,9 @@ one while meaning the other produces a confident answer to the wrong question.
 `list_MDRs`, `list_matters`, `list_world_facts`, `list_observed_outcomes` and `list_scratchpads`
 share a shape. Learn it once.
 
-Three of them have a prose sibling — `discover_matters`, `discover_world_facts` and
-`discover_observed_outcomes` — taking the same parameters and returning the same selection as a page
-to read rather than rows to filter. `list_MDRs` and `list_scratchpads` have none.
+Four of them have a prose sibling — `discover_MDRs`, `discover_matters`,
+`discover_world_facts` and `discover_observed_outcomes` — taking the same parameters and returning the
+same selection as a page to read rather than rows to filter. `list_scratchpads` has none.
 
 | Param | Type | Required |
 | --- | --- | --- |
@@ -183,6 +183,39 @@ rather than the excerpt when explaining why a row is there.
 
 **`status` is validated.** An unknown value is refused by name, listing the valid statuses. It used
 to answer a typo with an empty list, which read as "no records".
+
+Rows also carry a derived `title` where a record has been summarised — Memolok's label for the whole
+record, beside the excerpt rather than instead of it. The two are not versions of one thing: the
+excerpt is the decider's own head Claim. **Quote the excerpt, never the title.** A row carries no
+`summary` and no `subjects`; `discover_MDRs` does.
+
+### `discover_MDRs`
+
+Same parameters as `list_MDRs`, including `status`, same selection, same order, same identifiers.
+Answers in **prose**: per record a heading, the terms it names, its summary, what the ledger says
+its status is, and its head Claim beside them.
+
+**Reach for this when you are working out which decisions bear on what you are doing**, and for
+`list_MDRs` when you want rows to filter or page mechanically. A record found here is read with
+`get_MDR` without translating anything.
+
+**The heading and the summary were composed from the record's spine** — its head Claim, the
+alternative it chose, and its Verdict. They have not read the options it rejected or the arguments
+about them. Search reaches all of those, so a record can match on reasoning its summary never saw;
+the match window is what shows you where the hit came from, and a row that looks unrelated to your
+query is usually one of these rather than a mistake.
+
+**`Status:` is what the ledger says a record is, and `Rejected` is a commitment.** It means the
+decision was not to proceed — a real, sealed outcome and not an abandoned draft. `Superseded` means a
+later record replaced this one; what it decided still happened. Never report a rejected record as
+unfinished.
+
+**Only sealed records carry a derived artifact.** A staged record's prose is still editable and
+nothing would notice a summary going stale against it, so a recent record appearing with its head
+Claim as the heading is the ordinary state rather than a gap.
+
+Where a record has been summarised the heading is Memolok's wording; where it has not, the heading is
+the decider's own Claim. Every page says which it is showing you.
 
 ### `get_matter`
 

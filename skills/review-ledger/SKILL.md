@@ -97,7 +97,7 @@ goes unmentioned; a session whose own settings forbid spawning is theirs to chan
 | The user wants | Call |
 | --- | --- |
 | What this ledger is *for* | `get_MDL(mdlGuid)` |
-| Everything, or a status slice | `list_MDRs(mdlGuid, status?)` |
+| Everything, or a status slice | `discover_MDRs(mdlGuid, status?)`, or `list_MDRs(mdlGuid, status?)` for rows |
 | One record in full | `get_MDR(mdlGuid, mdrHandle)` |
 | One record the user named — "what did MDR-7 say?" | `get_MDR(mdlGuid, mdrNumber=7)` |
 | Unprocessed intake | `list_matters(mdlGuid, untaken: true)` |

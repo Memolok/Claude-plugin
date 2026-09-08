@@ -22,6 +22,22 @@ matches — you are asked to update only when your pack genuinely stops working.
 
 ## Unreleased
 
+**Decision records can be read as prose, which completes the set.** `discover_MDRs` answers the same
+selection as `list_MDRs` — `status` filter included — as a page carrying each record's summary, the
+terms it names, and its head Claim beside them. All four listings that hold typed entries now have a
+prose sibling. `list_MDRs` rows gain a derived title, and `get_MDR` returns the summary and subjects
+alongside the record.
+
+**A heading and summary on a record come from its spine**: the head Claim, the alternative it chose,
+and the Verdict. They have not read the options it rejected or the arguments about them, though search
+reaches all of those — so a record can match a query its summary never mentions, and the match window
+is what shows you why.
+
+**And the pack now says plainly what a status means.** `Rejected` is a sealed commitment — the decision
+was not to proceed — and `Superseded` means a later record replaced this one while what it decided
+still happened. Reporting either as an unfinished record misreads the ledger, so the catalog, the
+review skill and the scout all carry it.
+
 **The wake can be read as prose too.** `discover_observed_outcomes` answers the same selection as
 `list_observed_outcomes` — including narrowing to one record's wake with `mdrHandle` — as a page
 carrying each observation's summary and the terms it names. A record with a long tail of

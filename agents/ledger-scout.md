@@ -50,7 +50,7 @@ per spawn buys nothing.
 ## How to read
 
 **Page. Never try to take everything at once.** Every discovery read — `list_MDRs`, `list_matters`,
-`list_world_facts`, `list_observed_outcomes`, `list_scratchpads`, and the three `discover_*` prose
+`list_world_facts`, `list_observed_outcomes`, `list_scratchpads`, and the four `discover_*` prose
 siblings —
 takes `limit` and `offset` and returns `total` beside its rows. `total` counts the whole match, not
 your page.
@@ -76,8 +76,13 @@ such a row make sense.
 a `title`. They are not two versions of the same thing: the excerpt is what somebody typed and the
 title is a machine's label for it. Cite the excerpt when reporting what an entry says, and
 `get_matter` / `get_world_fact` when the wording matters. Neither row carries a `summary` or
-`subjects`. **`discover_matters`, `discover_world_facts` and `discover_observed_outcomes` do** — same selection,
-answered as prose — and they are the cheaper read when the question is *which of these bears on X*.
+`subjects`. **Their four `discover_*` siblings do** — same selection, answered as prose — and they are the cheaper
+read when the question is *which of these bears on X*.
+
+**On a record, report the status as the ledger states it.** `Rejected` is a sealed commitment meaning
+the decision was not to proceed, and `Superseded` means a later record replaced this one while what
+it decided still happened. Neither is an unfinished record, and reporting one as abandoned is the
+sharpest way to misread a ledger.
 
 **On an outcome, the heading is not a verdict.** It is derived from the observer's claim alone; the
 derivation never sees the expectation the entry tests. Report whether a promise held from

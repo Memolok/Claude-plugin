@@ -17,7 +17,7 @@ records, or invented calls. Tell the user it is not available yet.
 | Analysis inputs (matter, world fact or observed outcome), after conclusion | `attach_analysis_reference`, `retract_analysis_reference` |
 | Reopen a concluded analysis | `reopen_analysis` (refused once a produced record is committed) |
 | Expert mint | `create_MDR` |
-| Record reads | `get_MDR`, `list_MDRs` |
+| Record reads | `get_MDR`, `list_MDRs` (rows), `discover_MDRs` (the same selection as prose, carrying each record's summary) |
 | Staged patch, including `hasContext` | `update_MDR` |
 | Lifecycle transition | `transition_MDR_status` |
 | Uncommit a retractable record | `uncommit_MDR` (admin/owner) |
