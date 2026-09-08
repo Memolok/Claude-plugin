@@ -50,8 +50,9 @@ per spawn buys nothing.
 ## How to read
 
 **Page. Never try to take everything at once.** Every discovery read — `list_MDRs`, `list_matters`,
-`list_world_facts`, `list_observed_outcomes`, `list_scratchpads` — takes `limit` and `offset` and
-returns `total` beside its rows. `total` counts the whole match, not your page.
+`list_world_facts`, `list_observed_outcomes`, `list_scratchpads`, and the four `discover_*` prose
+siblings — takes `limit` and `offset` and returns `total` beside its rows. `total` counts the whole
+match, not your page.
 
 Read `total` first, then decide how far you have to go. Some questions have an early exit: *"what did
 we decide about storage?"* is answered as soon as you have the record. Some have none — an
@@ -70,12 +71,26 @@ in its belly, not only on its head **Claim**. The row previews the Claim, so a h
 to it; `matchExcerpt` is the window around whatever actually matched, and quoting it is what makes
 such a row make sense.
 
-**Matters.** A row carries the raiser's `excerpt` and, where Memolok has derived one, a `title`.
-They are not two versions of the same thing: the excerpt is what somebody typed and the title is a
-machine's label for it. Cite the excerpt when reporting what a matter says, and `get_matter` when the
-wording matters. A `list_matters` row carries no `summary` and no `subjects`. **`discover_matters` does** — same
-selection, answered as prose — and it is the cheaper read when the question is *which of these
-matters bears on X*. `get_matter` remains the only way to the raiser's full text.
+**A row's title is a label, not the entry.** Records, matters, world facts and observed outcomes all
+carry a derived `title` where Memolok has produced one, beside the writer's `excerpt`. The two are not
+versions of the same thing: the excerpt is what somebody typed and the title is a machine's label for
+it. Cite the excerpt when reporting what an entry says, and the entity's `get_*` when the wording
+matters. No row carries a `summary` or `subjects`. **The four `discover_*` siblings do** — same
+selection, answered as prose — and they are the cheaper read when the question is *which of these
+bears on X*.
+
+**On a record, report the status as the ledger states it.** `Rejected` is a sealed commitment meaning
+the decision was not to proceed, and `Superseded` means a later record replaced this one while what
+it decided still happened. Neither is an unfinished record, and reporting one as abandoned is the
+sharpest way to misread a ledger.
+
+**On an outcome, the heading is not a verdict.** It is derived from the observer's claim alone; the
+derivation never sees the expectation the entry tests. Report whether a promise held from
+`testResult`, never from how a heading sounds.
+
+**On world facts, be stricter about that attribution than anywhere else.** A world fact is a premise decisions are
+reasoned from, so handing back Memolok's paraphrase as the admitted claim misstates what the ledger
+rests on. Quote from `get_world_fact`.
 
 **Scratchpads.** A row's `excerpt` is a positional trim of the opening text — a handle for naming the
 note, not a description of it. It answers nothing about what a note *says*. When the question is

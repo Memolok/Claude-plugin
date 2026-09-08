@@ -162,6 +162,11 @@ If the user may still want to revise the sealed record, do that **first** — se
 - A `Rejected` record can carry a wake too — what happened after deciding *not* to act is just as
   informative.
 - `list_observed_outcomes(mdlGuid, mdrHandle)` shows everything already recorded against a record.
+  `discover_observed_outcomes` takes the same arguments and answers as prose carrying each outcome's
+  summary — the cheaper read when you are checking whether this observation is already there.
+- **A derived heading on either read is Memolok's wording and never a verdict.** It comes from the
+  observer's claim alone; nothing in the derivation has seen the expectation the entry tests. Read
+  `testResult` for whether a promise held, and quote the observer through `get_observed_outcome`.
 
 ## References
 

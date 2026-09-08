@@ -20,9 +20,77 @@ matches — you are asked to update only when your pack genuinely stops working.
 > history rather than at the time, so they are terser than the ones after them. Nothing in them is
 > reconstructed beyond what the tags and their contents show.
 
-## Unreleased
+## 0.26.0-beta — 2026-09-08
 
-*Everything that has landed has shipped. This section is a placeholder.*
+**Every routing row that means *choose* now points at a prose read.** The last one still sending the
+unprocessed-matter inbox to rows has moved: picking what to work on from a queue is choosing, and an
+agent that wants one matter whole has `get_matter` for exactly that.
+
+**Both duplicate checks now read as prose.** Registering a matter and admitting a world fact each begin
+by asking whether the same thing is already there, which is a judgement about what an entry is *about* —
+and two people parking the same trouble rarely open with the same words, so a positional excerpt is the
+wrong evidence. The almanac's check moved first; the matter one had been left behind.
+
+**The cold-start signal says what to do when it is already there.** The invariant asked whether anything
+in the session's own context said this project keeps a ledger, and only spelled out the *no* branch.
+A yes now says so: ignore the section and do not mention it, because a signal working as intended is
+not news, and reporting it spends the user's attention on a question they never asked.
+
+**Decision records can be read as prose, which completes the set.** `discover_MDRs` answers the same
+selection as `list_MDRs` — `status` filter included — as a page carrying each record's summary, the
+terms it names, and its head Claim beside them. All four listings that hold typed entries now have a
+prose sibling. `list_MDRs` rows gain a derived title, and `get_MDR` returns the summary and subjects
+alongside the record.
+
+**A heading and summary on a record come from its spine**: the head Claim, the alternative it chose,
+and the Verdict. They have not read the options it rejected or the arguments about them, though search
+reaches all of those — so a record can match a query its summary never mentions, and the match window
+is what shows you why.
+
+**And the pack now says plainly what a status means.** `Rejected` is a sealed commitment — the decision
+was not to proceed — and `Superseded` means a later record replaced this one while what it decided
+still happened. Reporting either as an unfinished record misreads the ledger, so the catalog, the
+review skill and the scout all carry it.
+
+**The wake can be read as prose too.** `discover_observed_outcomes` answers the same selection as
+`list_observed_outcomes` — including narrowing to one record's wake with `mdrHandle` — as a page
+carrying each observation's summary and the terms it names. A record with a long tail of
+observations is the case this saves the most on. `list_observed_outcomes` rows now carry a derived
+title, and `get_observed_outcome` returns the summary and subjects alongside the claim.
+
+**A heading on an outcome describes what was observed and never judges the decision.** The derivation
+is shown the observer's claim and nothing else — not the expectation the entry tests, not the record
+it came from. Whether a promise held is `testResult`, which every read still carries. The skills and
+the scout say so, because a heading that reads like a verdict is the one way this could mislead.
+
+**World facts can be read the way matters can: as prose to choose from rather than rows to filter.**
+`discover_world_facts` answers the same selection as `list_world_facts`, in the same order, with the
+same identifiers — but as a page carrying each premise's summary and the terms it names. It is the
+read for *which of these bears on what I am doing*, and it saves opening every candidate to find out.
+`list_world_facts` rows now carry a derived title beside the admitter's excerpt, and `get_world_fact`
+returns the summary and subjects alongside the claim.
+
+Search reaches the derived title, summary and subjects as well as the admitted claim, so a premise can
+now be found by a term nobody typed into it.
+
+**A heading or summary on either read is Memolok's wording, not the admitter's — and on this
+collection that matters more than anywhere else.** A world fact is a premise decisions are reasoned
+from, so quoting a paraphrase of one back as the admitted claim misstates what the ledger rests on.
+Every page says which it is showing you, and where nothing has been derived the heading is the
+admitter's own opening rather than a placeholder. `get_world_fact` remains the only source for the
+words somebody actually wrote.
+
+The almanac skill now checks for near-duplicates with the prose read rather than the row read, because
+that step is a judgement about whether a premise is already covered, and a row cannot support one.
+
+**Ledger reads now say when things came into being, and the tool catalog says so.** Every discovery
+row carries `createdAt`, so *"what came in this week"* is answerable by filtering rows rather than
+opening each entry. `get_matter` and matter rows carry `raisedBy`; world-fact reads carry
+`createdBy`.
+
+The catalog is explicit that an absent `raisedBy` means *unrecorded*, never *anonymous* — entries
+made before the server recorded a raiser have none and never will, because nothing in storage could
+recover one and nothing was invented to fill the gap.
 
 ## 0.25.0-beta — 2026-09-07
 

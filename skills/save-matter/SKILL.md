@@ -95,8 +95,14 @@ at all. Holding the text in the conversation and offering to log it later is a r
 ### 2. Check for a duplicate
 
 ```
-list_matters(mdlGuid, untaken: true)
+discover_matters(mdlGuid, untaken: true, query: "<the words the user just used>")
 ```
+
+**The prose read, because this is a judgement.** Whether the same thing is already parked is a
+question about what a matter is *about*, and a row's excerpt is a positional trim of somebody's
+opening words — two people parking the same trouble rarely open the same way. The prose read carries
+each matter's summary and the terms it names, and search reaches those, so a duplicate surfaces on a
+word neither person typed.
 
 If the same thing is already parked, say so and stop — do not register a second one. Matters are
 immutable, and there is no way to merge or delete them.

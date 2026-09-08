@@ -101,16 +101,21 @@ Returns `{ mdlGuid, title, role, ledgerIntent }`. `ledgerIntent` is `null` when 
 stated a purpose — that is normal, not an error.
 
 **One ledger's own metadata, not its contents.** For what is inside, use `list_MDRs`, `list_matters`,
-`list_world_facts`, `list_observed_outcomes`.
+`list_world_facts`, `list_observed_outcomes` — or their four `discover_*` siblings when you are
+choosing rather than filtering.
 
 **Not `get_MDR`.** One letter apart, and completely different: `get_MDL` takes only `mdlGuid` and
 returns ledger metadata; `get_MDR` takes `mdlGuid` + a record key and returns a decision record. Reading
 one while meaning the other produces a confident answer to the wrong question.
 
-## Discovery reads: one shape, five tools
+## Discovery reads: one shape, nine tools
 
 `list_MDRs`, `list_matters`, `list_world_facts`, `list_observed_outcomes` and `list_scratchpads`
 share a shape. Learn it once.
+
+Four of them have a prose sibling — `discover_MDRs`, `discover_matters`,
+`discover_world_facts` and `discover_observed_outcomes` — taking the same parameters and returning the
+same selection as a page to read rather than rows to filter. `list_scratchpads` has none.
 
 | Param | Type | Required |
 | --- | --- | --- |
@@ -119,8 +124,12 @@ share a shape. Learn it once.
 | `limit` | int | no (default 25, clamped to 100) |
 | `offset` | int | no (default 0) |
 
-Each returns `{ <entities>: [...], total, limit, offset }`. Every row carries `excerpt`, `truncated`
-and `length`; when `query` was sent, rows add `matchExcerpt` (a window around the hit) and `score`.
+Each returns `{ <entities>: [...], total, limit, offset }`. Every row carries `excerpt`, `truncated`,
+`length` and `createdAt`; when `query` was sent, rows add `matchExcerpt` (a window around the hit)
+and `score`.
+
+**`createdAt` is on the row, so *"what came in this week"* is answerable without opening
+anything.** It may be absent on an entry old enough to predate the field.
 
 **`total` is the whole match, not the page.** Holding fewer rows than `total` means you have not seen
 the ledger, and an answer that does not say so is claiming coverage it does not have.
@@ -147,7 +156,12 @@ Per-tool filters and natural order are below. Nothing else about the shape varie
 | `mdrNumber` | int | exactly one of the two |
 
 Returns the full record — fish body, `mdrHandle`, `mdrNumber`, `retractable`, and any graph edges,
-plus `analysisId` (`null` when no analysis produced it).
+plus `analysisId` (`null` when no analysis produced it) — and the derived `title`, `summary` and
+`subjects` where Memolok has produced them.
+
+**Those three appear only on a sealed record**, because only sealed records are derived: a staged
+record's prose is still editable and nothing would notice a summary going stale against it. They are
+Memolok's reading of the record, never the decider's words — quote the fish body.
 
 Pass the handle when you have one. `mdrNumber` is here for the case where a person cites a number
 and you would otherwise scan `list_MDRs` to find its handle — one call instead of a ledger-wide read.
@@ -159,7 +173,10 @@ use for every other tool.
 
 Shared discovery params, plus `status` (string, optional). Ledger order: by number, then handle.
 
-Rows: `{ mdrHandle, mdlGuid, mdrNumber, status, retractable, excerpt, truncated, length }`.
+Rows: `{ mdrHandle, mdlGuid, mdrNumber, status, retractable, createdAt, excerpt, truncated, length }`.
+
+**`createdAt` is when the record was minted, not when it was decided.** A staged record has one
+and has no `decidedAt` at all; an Uncommit removes `decidedAt` and leaves this untouched.
 
 **The excerpt comes from the head Claim and is not the whole of it.** Read the record with `get_MDR`
 before quoting a Claim back to anyone.
@@ -172,6 +189,39 @@ rather than the excerpt when explaining why a row is there.
 **`status` is validated.** An unknown value is refused by name, listing the valid statuses. It used
 to answer a typo with an empty list, which read as "no records".
 
+Rows also carry a derived `title` where a record has been summarised — Memolok's label for the whole
+record, beside the excerpt rather than instead of it. The two are not versions of one thing: the
+excerpt is the decider's own head Claim. **Quote the excerpt, never the title.** A row carries no
+`summary` and no `subjects`; `discover_MDRs` does.
+
+### `discover_MDRs`
+
+Same parameters as `list_MDRs`, including `status`, same selection, same order, same identifiers.
+Answers in **prose**: per record a heading, the terms it names, its summary, what the ledger says
+its status is, and its head Claim beside them.
+
+**Reach for this when you are working out which decisions bear on what you are doing**, and for
+`list_MDRs` when you want rows to filter or page mechanically. A record found here is read with
+`get_MDR` without translating anything.
+
+**The heading and the summary were composed from the record's spine** — its head Claim, the
+alternative it chose, and its Verdict. They have not read the options it rejected or the arguments
+about them. Search reaches all of those, so a record can match on reasoning its summary never saw;
+the match window is what shows you where the hit came from, and a row that looks unrelated to your
+query is usually one of these rather than a mistake.
+
+**`Status:` is what the ledger says a record is, and `Rejected` is a commitment.** It means the
+decision was not to proceed — a real, sealed outcome and not an abandoned draft. `Superseded` means a
+later record replaced this one; what it decided still happened. Never report a rejected record as
+unfinished.
+
+**Only sealed records carry a derived artifact.** A staged record's prose is still editable and
+nothing would notice a summary going stale against it, so a recent record appearing with its head
+Claim as the heading is the ordinary state rather than a gap.
+
+Where a record has been summarised the heading is Memolok's wording; where it has not, the heading is
+the decider's own Claim. Every page says which it is showing you.
+
 ### `get_matter`
 
 | Param | Type | Required |
@@ -179,8 +229,12 @@ to answer a typo with an empty list, which read as "no records".
 | `mdlGuid` | string | yes |
 | `matterId` | string | yes |
 
-Returns `{ id, mdlGuid, description, takenUpBy }`, plus `title`, `summary` and `subjects` where
-Memolok has derived them. Error: `Matter not found.`
+Returns `{ id, mdlGuid, description, createdAt, raisedBy, takenUpBy }`, plus `title`, `summary`
+and `subjects` where Memolok has derived them. Error: `Matter not found.`
+
+**`raisedBy` absent means unrecorded, not anonymous.** Matters registered before the ledger
+recorded a raiser have none and never will — nothing in storage could recover one, so nothing
+was invented. Never read a missing `raisedBy` as evidence about who raised it.
 
 **`description` is the raiser's words; the other three are Memolok's reading of them.** Nothing
 in the response marks which is which. Quote `description` when you are quoting the person.
@@ -195,8 +249,8 @@ not to this matter, and nothing says any of them answers it. No rationale here �
 
 Shared discovery params, plus `untaken` (bool, optional). Registration order, oldest first.
 
-Rows: `{ id, mdlGuid, takenUpBy, excerpt, truncated, length }`, plus `title` where one has been
-derived. **Not `description`** — the raiser's words arrive trimmed, and `get_matter` is the read that
+Rows: `{ id, mdlGuid, raisedBy, takenUpBy, createdAt, excerpt, truncated, length }`, plus `title`
+where one has been derived. **Not `description`** — the raiser's words arrive trimmed, and `get_matter` is the read that
 returns them whole. That matters here more than elsewhere: a matter is bait in somebody's own words,
 and paraphrasing a trimmed excerpt back to them is how the words stop being theirs.
 
@@ -222,7 +276,7 @@ as no filter at all. There is no status filter, because a matter has no status.
 
 ### `discover_matters`
 
-Same parameters as `list_matters`, same selection, same order, same ids. Answers in **prose** rather
+Same parameters as `list_matters`, including `untaken`, same selection, same order, same ids. Answers in **prose** rather
 than rows: per matter a heading, the subjects it names, its summary, and which analyses took it up
 with what they produced.
 
@@ -239,6 +293,42 @@ raiser from `get_matter`, or from a `list_matters` excerpt — never from a head
 
 The answer states its own totals, says when you are holding only part of the ledger, explains an
 empty result, and gives you the `offset` for the next page.
+
+### `discover_world_facts`
+
+Same parameters as `list_world_facts`, same selection, same order, same ids. Answers in **prose**
+rather than rows: per fact a heading, the terms it names, its summary, when it was admitted, and what
+it corrects if anything.
+
+**Reach for this when working out which premises bear on what you are doing**, and for
+`list_world_facts` when you want rows to filter or page mechanically. A fact found here is read with
+`get_world_fact` without translating anything.
+
+Search reaches the derived title, summary and subjects as well as the admitted claim, so a fact can
+match a term nobody typed into it.
+
+**The headings and summaries are Memolok's words, and on this collection that matters more than
+anywhere else.** A world fact is a premise decisions are reasoned from, so quoting a paraphrase of one
+back as the admitted claim misstates what the ledger rests on. Where a fact has not been summarised
+the heading is the admitter's own opening instead, and every page says which it is showing you.
+
+### `discover_observed_outcomes`
+
+Same parameters as `list_observed_outcomes`, including `mdrHandle`, same selection, same order, same
+ids. Answers in **prose**: per outcome a heading, the terms it names, its summary, how it was
+discovered, what it says about the promise it tests, and when it was observed.
+
+**Reach for this when working out which of a record's wake bears on what you are doing** — a long
+tail of observations against one record is exactly the case where opening each one to find out is
+the expensive way. `list_observed_outcomes` stays the read for rows to filter or page mechanically.
+
+**The heading describes what was observed. It never judges the decision.** The derivation is shown
+the observer's own claim and nothing else — not the expectation the entry tests, not the record it
+came from. A heading that sounds like a verdict is describing an observation that sounded like one.
+The verdict is `testResult`, rendered separately on every entry that has one, and it is the field to
+read when you want to know whether a promise held.
+
+Search reaches the derived title, summary and subjects as well as the observer's claim.
 
 ### `get_analysis`
 
@@ -264,10 +354,20 @@ Point read; there is no `list_analyses`. Reach it by `analysisId` from `get_matt
 ### `get_world_fact` / `list_world_facts`
 
 `get_world_fact` takes `mdlGuid` + `worldFactId` and returns the whole admission —
-`worldFactId`, `manifests`, optional `correctsFact`.
+`worldFactId`, `manifests`, `createdAt`, `createdBy`, optional `correctsFact` — plus the derived
+`title`, `summary` and `subjects` where Memolok has produced them.
 
 `list_world_facts` takes the shared discovery params. Admission order, oldest first. Rows:
-`{ worldFactId, mdlGuid, correctsFact, excerpt, truncated, length }`.
+`{ worldFactId, mdlGuid, createdBy, correctsFact, createdAt, excerpt, truncated, length }`, plus a
+derived `title` where one exists. A row carries no `summary` and no `subjects`; `discover_world_facts`
+does.
+
+The `excerpt` is the admitter's own opening, trimmed. The `title` is Memolok's label for the whole
+claim. They are not two versions of one thing — **quote the excerpt, never the title**, and reach for
+`get_world_fact` when the wording has to be exact.
+
+A world fact says `createdBy` where a matter says `raisedBy`. The two mean the same thing and are
+named for different ontology predicates; nothing turns on the difference when you are reading.
 
 **The almanac only ever grows.** A corrected fact stays on the ledger beside the one correcting it,
 so this listing returns superseded premises alongside live ones and there is no "live facts only"
@@ -277,11 +377,18 @@ current because it came back in a listing.
 
 ### `get_observed_outcome` / `list_observed_outcomes`
 
-`get_observed_outcome` takes `mdlGuid` + `observedOutcomeId`.
+`get_observed_outcome` takes `mdlGuid` + `observedOutcomeId` and returns the whole observation, plus
+the derived `title`, `summary` and `subjects` where Memolok has produced them.
 
 `list_observed_outcomes` takes the shared discovery params, plus `mdrHandle` (int, optional) to
 narrow to one record's wake. Observation order, oldest first. Rows carry the preview trio plus
-`observedOutcomeId`, `mdrHandle`, `mdrNumber`, `discoveryType`, `testResult`, `observedAt`.
+`observedOutcomeId`, `mdrHandle`, `mdrNumber`, `discoveryType`, `testResult`, `observedAt`, and a
+derived `title` where one exists. A row carries no `summary` and no `subjects`;
+`discover_observed_outcomes` does.
+
+The `excerpt` is the observer's own opening, trimmed. The `title` is Memolok's label — **quote the
+excerpt, never the title**, and reach for `get_observed_outcome` when the wording has to be exact.
+Neither one is the verdict: `testResult` is.
 
 ### `get_MDR_learning_delta`
 
@@ -327,8 +434,12 @@ Requires `member` or above. Returns the same shape as `get_MDL`.
 | `mdlGuid` | string | yes |
 | `description` | `{ markdown, lang? }` | yes |
 
-Returns `{ id, mdlGuid, description, takenUpBy: [] }`. Record the raiser's words **verbatim** —
-do not sharpen here.
+Returns `{ id, mdlGuid, description, createdAt, raisedBy, takenUpBy: [] }`. Record the raiser's
+words **verbatim** — do not sharpen here.
+
+`createdAt` and `raisedBy` are minted by the server from the call itself; there is no parameter
+for either. **`raisedBy` is the one thing here that cannot be recovered later** — the creation
+time survives in storage regardless, but who raised it is known only while the call is happening.
 
 ### `create_analysis`
 

@@ -81,6 +81,7 @@ Expert Memolok facilitator. Mediate between the user's decision work and their l
    notes about this user all say the plugin is installed. None of them says this project uses a
    ledger**, which is the only thing being asked; the next person to open it has the first two and
    not the third.
+   Yes → ignore this section, and don't advertise it to the user; its job was already done.
    No → offer it, once (and *arriving here late still owes it*); what is suppressed is repeating it
    in this session. **This is not scope creep and is expected to interrupt** — a question about the
    project is not a widening of the user's question.

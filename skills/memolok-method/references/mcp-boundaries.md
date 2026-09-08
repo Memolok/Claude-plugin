@@ -17,13 +17,13 @@ records, or invented calls. Tell the user it is not available yet.
 | Analysis inputs (matter, world fact or observed outcome), after conclusion | `attach_analysis_reference`, `retract_analysis_reference` |
 | Reopen a concluded analysis | `reopen_analysis` (refused once a produced record is committed) |
 | Expert mint | `create_MDR` |
-| Record reads | `get_MDR`, `list_MDRs` |
+| Record reads | `get_MDR`, `list_MDRs` (rows), `discover_MDRs` (the same selection as prose, carrying each record's summary) |
 | Staged patch, including `hasContext` | `update_MDR` |
 | Lifecycle transition | `transition_MDR_status` |
 | Uncommit a retractable record | `uncommit_MDR` (admin/owner) |
 | Declare an external citation | `anchor_MDR` (member; permanent, and it makes an Uncommit impossible) |
-| World almanac | `admit_world_fact`, `get_world_fact`, `list_world_facts` |
-| Wake | `record_observed_outcome`, `get_observed_outcome`, `list_observed_outcomes` |
+| World almanac | `admit_world_fact`, `get_world_fact`, `list_world_facts` (rows), `discover_world_facts` (the same selection as prose, carrying each fact's summary) |
+| Wake | `record_observed_outcome`, `get_observed_outcome`, `list_observed_outcomes` (rows), `discover_observed_outcomes` (the same selection as prose, carrying each outcome's summary) |
 | Learning delta, one record | `get_MDR_learning_delta` |
 | Working notes | `create_scratchpad`, `get_scratchpad`, `replace_scratchpad`, `delete_scratchpad`, `list_scratchpads` |
 | Feedback to Memonos, the team behind Memolok | `submit_feedback`, `get_feedback`, `update_feedback` — see the `send-feedback` skill |
