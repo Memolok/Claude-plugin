@@ -101,8 +101,8 @@ Returns `{ mdlGuid, title, role, ledgerIntent }`. `ledgerIntent` is `null` when 
 stated a purpose — that is normal, not an error.
 
 **One ledger's own metadata, not its contents.** For what is inside, use `list_MDRs`, `list_matters`,
-`list_world_facts`, `list_observed_outcomes` — or `discover_matters` / `discover_world_facts` when you
-are choosing rather than filtering.
+`list_world_facts`, `list_observed_outcomes` — or `discover_matters`, `discover_world_facts` and
+`discover_observed_outcomes` when you are choosing rather than filtering.
 
 **Not `get_MDR`.** One letter apart, and completely different: `get_MDL` takes only `mdlGuid` and
 returns ledger metadata; `get_MDR` takes `mdlGuid` + a record key and returns a decision record. Reading
@@ -113,8 +113,9 @@ one while meaning the other produces a confident answer to the wrong question.
 `list_MDRs`, `list_matters`, `list_world_facts`, `list_observed_outcomes` and `list_scratchpads`
 share a shape. Learn it once.
 
-Two of them have a prose sibling — `discover_matters` and `discover_world_facts` — taking the same
-parameters and returning the same selection as a page to read rather than rows to filter.
+Three of them have a prose sibling — `discover_matters`, `discover_world_facts` and
+`discover_observed_outcomes` — taking the same parameters and returning the same selection as a page
+to read rather than rows to filter. `list_MDRs` and `list_scratchpads` have none.
 
 | Param | Type | Required |
 | --- | --- | --- |
@@ -273,6 +274,24 @@ anywhere else.** A world fact is a premise decisions are reasoned from, so quoti
 back as the admitted claim misstates what the ledger rests on. Where a fact has not been summarised
 the heading is the admitter's own opening instead, and every page says which it is showing you.
 
+### `discover_observed_outcomes`
+
+Same parameters as `list_observed_outcomes`, including `mdrHandle`, same selection, same order, same
+ids. Answers in **prose**: per outcome a heading, the terms it names, its summary, how it was
+discovered, what it says about the promise it tests, and when it was observed.
+
+**Reach for this when working out which of a record's wake bears on what you are doing** — a long
+tail of observations against one record is exactly the case where opening each one to find out is
+the expensive way. `list_observed_outcomes` stays the read for rows to filter or page mechanically.
+
+**The heading describes what was observed. It never judges the decision.** The derivation is shown
+the observer's own claim and nothing else — not the expectation the entry tests, not the record it
+came from. A heading that sounds like a verdict is describing an observation that sounded like one.
+The verdict is `testResult`, rendered separately on every entry that has one, and it is the field to
+read when you want to know whether a promise held.
+
+Search reaches the derived title, summary and subjects as well as the observer's claim.
+
 ### `get_analysis`
 
 | Param | Type | Required |
@@ -320,11 +339,18 @@ current because it came back in a listing.
 
 ### `get_observed_outcome` / `list_observed_outcomes`
 
-`get_observed_outcome` takes `mdlGuid` + `observedOutcomeId`.
+`get_observed_outcome` takes `mdlGuid` + `observedOutcomeId` and returns the whole observation, plus
+the derived `title`, `summary` and `subjects` where Memolok has produced them.
 
 `list_observed_outcomes` takes the shared discovery params, plus `mdrHandle` (int, optional) to
 narrow to one record's wake. Observation order, oldest first. Rows carry the preview trio plus
-`observedOutcomeId`, `mdrHandle`, `mdrNumber`, `discoveryType`, `testResult`, `observedAt`.
+`observedOutcomeId`, `mdrHandle`, `mdrNumber`, `discoveryType`, `testResult`, `observedAt`, and a
+derived `title` where one exists. A row carries no `summary` and no `subjects`;
+`discover_observed_outcomes` does.
+
+The `excerpt` is the observer's own opening, trimmed. The `title` is Memolok's label — **quote the
+excerpt, never the title**, and reach for `get_observed_outcome` when the wording has to be exact.
+Neither one is the verdict: `testResult` is.
 
 ### `get_MDR_learning_delta`
 

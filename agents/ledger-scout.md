@@ -50,7 +50,8 @@ per spawn buys nothing.
 ## How to read
 
 **Page. Never try to take everything at once.** Every discovery read — `list_MDRs`, `list_matters`,
-`list_world_facts`, `list_observed_outcomes`, `list_scratchpads`, and the `discover_*` prose pair —
+`list_world_facts`, `list_observed_outcomes`, `list_scratchpads`, and the three `discover_*` prose
+siblings —
 takes `limit` and `offset` and returns `total` beside its rows. `total` counts the whole match, not
 your page.
 
@@ -75,8 +76,12 @@ such a row make sense.
 a `title`. They are not two versions of the same thing: the excerpt is what somebody typed and the
 title is a machine's label for it. Cite the excerpt when reporting what an entry says, and
 `get_matter` / `get_world_fact` when the wording matters. Neither row carries a `summary` or
-`subjects`. **`discover_matters` and `discover_world_facts` do** — same selection, answered as prose —
-and they are the cheaper read when the question is *which of these bears on X*.
+`subjects`. **`discover_matters`, `discover_world_facts` and `discover_observed_outcomes` do** — same selection,
+answered as prose — and they are the cheaper read when the question is *which of these bears on X*.
+
+**On an outcome, the heading is not a verdict.** It is derived from the observer's claim alone; the
+derivation never sees the expectation the entry tests. Report whether a promise held from
+`testResult`, never from how a heading sounds.
 
 **On world facts, be stricter about it than anywhere else.** A world fact is a premise decisions are
 reasoned from, so handing back Memolok's paraphrase as the admitted claim misstates what the ledger

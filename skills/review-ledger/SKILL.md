@@ -106,7 +106,7 @@ goes unmentioned; a session whose own settings forbid spawning is theirs to chan
 | Why a matter was dismissed | `get_analysis(mdlGuid, analysisId)` |
 | What a record's reasoning took up | `get_MDR` for `analysisId`, then `get_analysis` |
 | Premises the ledger reasons from | `discover_world_facts(mdlGuid)`, or `list_world_facts(mdlGuid)` for rows |
-| What happened after a decision | `list_observed_outcomes(mdlGuid, mdrHandle?)` |
+| What happened after a decision | `discover_observed_outcomes(mdlGuid, mdrHandle?)`, or `list_observed_outcomes(mdlGuid, mdrHandle?)` for rows |
 | Promises versus reality for one record | `get_MDR_learning_delta(mdlGuid, mdrHandle)` |
 
 **A topic search is `query`, not a listing you read yourself.** `list_MDRs(query="...")` searches the

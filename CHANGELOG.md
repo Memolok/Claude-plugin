@@ -22,6 +22,17 @@ matches — you are asked to update only when your pack genuinely stops working.
 
 ## Unreleased
 
+**The wake can be read as prose too.** `discover_observed_outcomes` answers the same selection as
+`list_observed_outcomes` — including narrowing to one record's wake with `mdrHandle` — as a page
+carrying each observation's summary and the terms it names. A record with a long tail of
+observations is the case this saves the most on. `list_observed_outcomes` rows now carry a derived
+title, and `get_observed_outcome` returns the summary and subjects alongside the claim.
+
+**A heading on an outcome describes what was observed and never judges the decision.** The derivation
+is shown the observer's claim and nothing else — not the expectation the entry tests, not the record
+it came from. Whether a promise held is `testResult`, which every read still carries. The skills and
+the scout say so, because a heading that reads like a verdict is the one way this could mislead.
+
 **World facts can be read the way matters can: as prose to choose from rather than rows to filter.**
 `discover_world_facts` answers the same selection as `list_world_facts`, in the same order, with the
 same identifiers — but as a page carrying each premise's summary and the terms it names. It is the

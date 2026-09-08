@@ -23,7 +23,7 @@ records, or invented calls. Tell the user it is not available yet.
 | Uncommit a retractable record | `uncommit_MDR` (admin/owner) |
 | Declare an external citation | `anchor_MDR` (member; permanent, and it makes an Uncommit impossible) |
 | World almanac | `admit_world_fact`, `get_world_fact`, `list_world_facts` (rows), `discover_world_facts` (the same selection as prose, carrying each fact's summary) |
-| Wake | `record_observed_outcome`, `get_observed_outcome`, `list_observed_outcomes` |
+| Wake | `record_observed_outcome`, `get_observed_outcome`, `list_observed_outcomes` (rows), `discover_observed_outcomes` (the same selection as prose, carrying each outcome's summary) |
 | Learning delta, one record | `get_MDR_learning_delta` |
 | Working notes | `create_scratchpad`, `get_scratchpad`, `replace_scratchpad`, `delete_scratchpad`, `list_scratchpads` |
 | Feedback to Memonos, the team behind Memolok | `submit_feedback`, `get_feedback`, `update_feedback` — see the `send-feedback` skill |
