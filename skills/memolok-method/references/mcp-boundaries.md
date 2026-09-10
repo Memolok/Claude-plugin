@@ -11,19 +11,19 @@ records, or invented calls. Tell the user it is not available yet.
 | Ledger discovery and creation | `get_MDLs`, `get_MDL`, `create_MDL` |
 | Ledger intent | `set_ledger_intent` (read it back with `get_MDL`) |
 | Matter intake | `register_matter` |
-| Matter reads | `get_matter`, `list_matters` (rows), `discover_matters` (the same selection as prose, carrying each matter's summary) |
+| Matter reads | `get_matter` (one, whole), `discover_matters` (the ledger's matters as prose, each with its summary, subjects and who took it up) |
 | Analysis, Path A and B | `create_analysis` |
 | Analysis reads | `get_analysis` (point read) |
 | Analysis inputs (matter, world fact or observed outcome), after conclusion | `attach_analysis_reference`, `retract_analysis_reference` |
 | Reopen a concluded analysis | `reopen_analysis` (refused once a produced record is committed) |
 | Expert mint | `create_MDR` |
-| Record reads | `get_MDR`, `list_MDRs` (rows), `discover_MDRs` (the same selection as prose, carrying each record's summary) |
+| Record reads | `get_MDR` (one, whole), `discover_MDRs` (the ledger's records as prose, each with its summary, status, handle and decision date) |
 | Staged patch, including `hasContext` | `update_MDR` |
 | Lifecycle transition | `transition_MDR_status` |
 | Uncommit a retractable record | `uncommit_MDR` (admin/owner) |
 | Declare an external citation | `anchor_MDR` (member; permanent, and it makes an Uncommit impossible) |
-| World almanac | `admit_world_fact`, `get_world_fact`, `list_world_facts` (rows), `discover_world_facts` (the same selection as prose, carrying each fact's summary) |
-| Wake | `record_observed_outcome`, `get_observed_outcome`, `list_observed_outcomes` (rows), `discover_observed_outcomes` (the same selection as prose, carrying each outcome's summary) |
+| World almanac | `admit_world_fact`, `get_world_fact` (one, whole), `discover_world_facts` (the almanac as prose, each fact with its summary and what it corrects) |
+| Wake | `record_observed_outcome`, `get_observed_outcome` (one, whole), `discover_observed_outcomes` (a ledger's wake as prose, each with its summary and recorded result) |
 | Learning delta, one record | `get_MDR_learning_delta` |
 | Working notes | `create_scratchpad`, `get_scratchpad`, `replace_scratchpad`, `delete_scratchpad`, `list_scratchpads` |
 | Feedback to Memonos, the team behind Memolok | `submit_feedback`, `get_feedback`, `update_feedback` — see the `send-feedback` skill |
@@ -108,7 +108,7 @@ Do not simulate the missing enumeration by keeping a local index of what you sen
 | Automatic supersession on a `Violated` result |
 
 `get_MDR_learning_delta` covers one record at a time. For anything portfolio-wide, read with
-`list_MDRs` and reason in conversation — do not claim the ledger surfaced it.
+`discover_MDRs` and reason in conversation — do not claim the ledger surfaced it.
 
 ### Ledger administration
 

@@ -65,7 +65,7 @@ that matter up rather than registering a duplicate — and if several do, take u
 analysis.
 
 The same goes for the almanac. If what prompted this is a fact or an outcome already admitted —
-`list_world_facts`, `list_observed_outcomes` — take that entry up **as itself**. There is no inbox
+`discover_world_facts`, `discover_observed_outcomes` — take that entry up **as itself**. There is no inbox
 for the almanac and no "unused" state to scan for, so this is a lookup you do when the conversation
 points at one, not a sweep.
 

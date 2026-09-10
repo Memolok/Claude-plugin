@@ -69,7 +69,7 @@ reading invariant, applied — what stays inline:**
 | `get_MDL` for the ledger's purpose | One call, and the answer is the whole of it |
 | `retractable` before a revision | Hold this first-hand, not on report |
 | One record in full, handle already known | Bounded before you start |
-| A count — any `list_*` with `limit: 1`, read from `total` | The answer is one number, and `limit: 1` buys it for one row |
+| A count — any discovery read with `limit: 1`, taken from the total it states | The answer is one number, and `limit: 1` buys it for one entry |
 
 **Illustrative, not exhaustive.** The test is whether you can bound the read before starting, not
 whether it appears above. A read you can state the size of in advance is inline whether or not this
@@ -97,19 +97,19 @@ goes unmentioned; a session whose own settings forbid spawning is theirs to chan
 | The user wants | Call |
 | --- | --- |
 | What this ledger is *for* | `get_MDL(mdlGuid)` |
-| Everything, or a status slice | `discover_MDRs(mdlGuid, status?)`, or `list_MDRs(mdlGuid, status?)` for rows |
+| Everything, or a status slice | `discover_MDRs(mdlGuid, status?)` |
 | One record in full | `get_MDR(mdlGuid, mdrHandle)` |
 | One record the user named — "what did MDR-7 say?" | `get_MDR(mdlGuid, mdrNumber=7)` |
-| Unprocessed intake | `discover_matters(mdlGuid, untaken: true)`, or `list_matters(mdlGuid, untaken: true)` for rows |
+| Unprocessed intake | `discover_matters(mdlGuid, untaken: true)` |
 | One matter | `get_matter(mdlGuid, matterId)` |
 | What came of a matter | `get_matter`, then `get_MDR(mdrHandle)` |
 | Why a matter was dismissed | `get_analysis(mdlGuid, analysisId)` |
 | What a record's reasoning took up | `get_MDR` for `analysisId`, then `get_analysis` |
-| Premises the ledger reasons from | `discover_world_facts(mdlGuid)`, or `list_world_facts(mdlGuid)` for rows |
-| What happened after a decision | `discover_observed_outcomes(mdlGuid, mdrHandle?)`, or `list_observed_outcomes(mdlGuid, mdrHandle?)` for rows |
+| Premises the ledger reasons from | `discover_world_facts(mdlGuid)` |
+| What happened after a decision | `discover_observed_outcomes(mdlGuid, mdrHandle?)` |
 | Promises versus reality for one record | `get_MDR_learning_delta(mdlGuid, mdrHandle)` |
 
-**A topic search is `query`, not a listing you read yourself.** `list_MDRs(query="...")` searches the
+**A topic search is `query`, not a listing you read yourself.** `discover_MDRs(query="...")` searches the
 whole fish — head **Claim**, **Verdict**, alternatives, deliberation facts, expected outcomes, open
 questions — so a record is found by the reasoning inside it and not only by its Claim. Rows carry an
 excerpt of the Claim rather than the whole of it, so `get_MDR` before quoting one back.
@@ -160,7 +160,7 @@ Not a table dump the user has to read for themselves.
 
 ### What is in flight
 
-`list_MDRs(status="Deliberating")` — records with a head Claim and no commitment yet. Some are live
+`discover_MDRs(status="Deliberating")` — records with a head Claim and no commitment yet. Some are live
 work; some are abandoned drafts that were never going anywhere. Both are legitimate; a staged record
 carries no obligation.
 
@@ -211,21 +211,24 @@ assumed existing work covered it, and nothing has confirmed that.
 
 ### The unprocessed inbox
 
-`list_matters(untaken: true)` returns every **matter** no analysis references — mostly ones parked
+`discover_matters(untaken: true)` returns every **matter** no analysis references — mostly ones parked
 through **`save-matter`** during other work. Almanac entries never appear here, whether or not any
 analysis has taken them up: there is no unprocessed-almanac inbox, because an admitted fact is not
 waiting on anybody.
 
-Present them as raw signal, in the words they were logged in. Do not sharpen them into needs while
-summarizing; that is the pickup session's job, with the user present.
+Present them as raw signal. Do not sharpen them into needs while summarizing; that is the pickup
+session's job, with the user present. **Raw signal means the raiser's own words, and those are not
+what the page hands you** — see below before quoting anything.
 
-**A row's words are not all the raiser's.** `excerpt` is their own opening, trimmed. `title`, where
-it appears, is Memolok's own label for the matter — nobody typed it, and nothing in the response says
-so. Reading a title back as what somebody logged presents a paraphrase as an utterance, which is the
-one thing this section exists to prevent.
+**The words on the page are not all the raiser's.** Where a matter has been summarised, its heading
+and summary are Memolok's own label for it — nobody typed them. Where it has not, the heading is the
+raiser's own opening, trimmed. Reading a heading back as what somebody logged presents a paraphrase
+as an utterance, which is the one thing this section exists to prevent; `get_matter` returns the
+body whole and is where a quotation comes from.
 
-So: use the title to say *which* matters are waiting, and quote the excerpt when quoting the raiser.
-Where the exact wording carries the point, `get_matter` is where the words are.
+So: use the heading to say *which* matters are waiting, and **quote the raiser only from
+`get_matter`.** A summarised matter shows no opening words on the page at all — the summary stands
+where they would be — so there is nothing there to quote even when it looks like there is.
 
 **`discover_matters(untaken: true)` is the better read for this section** — the same inbox, answered
 as prose with each matter's summary, so you can say what is waiting rather than only that something

@@ -53,9 +53,9 @@ erasing it destroys the only evidence of how good the team's forecasting is.
 
 ### 1. Find the source record
 
-`list_MDRs(query="...")` in the words the user used, or `get_MDR` if the record is known. Rows carry
-an excerpt of the head **Claim**, not the whole of it, so read the record before deciding it is the
-right one. It must be **Accepted**, **Rejected**, or **Superseded** — a wake cannot attach to a
+`discover_MDRs(query="...")` in the words the user used, or `get_MDR` if the record is known. Each
+entry carries a summary beside an excerpt of the head **Claim**, not the whole of it, so read the
+record before deciding it is the right one. It must be **Accepted**, **Rejected**, or **Superseded** — a wake cannot attach to a
 staged record.
 
 Ledger reads are delegated — the **reading invariant** in **`memolok-method`**. Read inline instead
@@ -161,9 +161,9 @@ If the user may still want to revise the sealed record, do that **first** — se
   year is worth surfacing.
 - A `Rejected` record can carry a wake too — what happened after deciding *not* to act is just as
   informative.
-- `list_observed_outcomes(mdlGuid, mdrHandle)` shows everything already recorded against a record.
-  `discover_observed_outcomes` takes the same arguments and answers as prose carrying each outcome's
-  summary — the cheaper read when you are checking whether this observation is already there.
+- `discover_observed_outcomes(mdlGuid, mdrHandle)` shows everything already recorded against a
+  record, each with its summary — which is what tells you whether this observation is already
+  there without opening every one.
 - **A derived heading on either read is Memolok's wording and never a verdict.** It comes from the
   observer's claim alone; nothing in the derivation has seen the expectation the entry tests. Read
   `testResult` for whether a promise held, and quote the observer through `get_observed_outcome`.

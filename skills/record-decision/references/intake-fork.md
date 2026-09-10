@@ -22,7 +22,7 @@ the records it produces at the moment *it* creates them, and nothing attaches an
 analysis later. Register the matter afterwards and analyze it, and you get a *second* record. So the
 raiser's own words end up nowhere near the decision they caused.
 
-The reverse error is cheap: a matter registered by mistake can be found with `list_matters`, taken up
+The reverse error is cheap: a matter registered by mistake can be found with `discover_matters`, taken up
 whenever somebody gets to it, or closed honestly through Path B. That asymmetry is a reason to ask
 rather than guess, not a licence to register matters speculatively.
 
@@ -102,7 +102,7 @@ tail to match what happened is ledger fraud.
 **Bait, parked.** The user has explicitly declined to decide. Use `save-matter`: register verbatim,
 confirm, stop. Do not analyze it, do not sharpen it, and do not offer to open a decision.
 
-Nothing references it, so it shows up later in `list_matters(untaken: true)`.
+Nothing references it, so it shows up later in `discover_matters(untaken: true)`.
 
 ### 10. "Here's the quote they sent — 3 nodes at $412/mo, 12-month term."
 

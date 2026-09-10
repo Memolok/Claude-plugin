@@ -6,7 +6,7 @@ took it up, whether they concluded, and what they produced.
 
 | Reading | The shape that produces it |
 | --- | --- |
-| Nobody has picked it up | No analysis references it. This is what `list_matters(untaken: true)` returns |
+| Nobody has picked it up | No analysis references it. This is what `discover_matters(untaken: true)` returns |
 | Investigated, nothing warranted | An analysis took it up and produced no record (Path B) |
 | A decision was made about it | An analysis took it up and produced one or more records |
 | Refused, externally blocked, overtaken by events | Not recordable yet — see the bottom of this file |

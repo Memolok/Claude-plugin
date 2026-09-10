@@ -5,7 +5,7 @@ description: >-
   distilled answer with citations and an explicit statement of what it covered. Use proactively
   whenever a ledger is an input, including when it is only one input among several in a larger task:
   what was decided about a topic, what is still open, what is parked unprocessed, what a note says.
-  Spawn it before the first `list_*` call and before a second `get_*` in a row — not once the reading
+  Spawn it before the first ledger read and before a second `get_*` in a row — not once the reading
   is under way, because by then the cost it exists to avoid has already been paid into the caller's
   context, where the practitioner cannot see it and it cannot be taken back out. Never writes to a
   ledger and never facilitates a decision.
@@ -49,15 +49,14 @@ per spawn buys nothing.
 
 ## How to read
 
-**Page. Never try to take everything at once.** Every discovery read — `list_MDRs`, `list_matters`,
-`list_world_facts`, `list_observed_outcomes`, `list_scratchpads`, and the four `discover_*` prose
-siblings — takes `limit` and `offset` and returns `total` beside its rows. `total` counts the whole
-match, not your page.
+**Never try to take everything at once; use paging.** Every discovery read — the four `discover_*` pages
+and `list_scratchpads` — takes `limit` and `offset`, and tells you the total for the whole match
+rather than for your page.
 
-Read `total` first, then decide how far you have to go. Some questions have an early exit: *"what did
+Read that total first, then decide how far you have to go. Some questions have an early exit: *"what did
 we decide about storage?"* is answered as soon as you have the record. Some have none — an
-open-question sweep is only correct when every record has been read, because a deferral is not on a
-discovery row. Walk until the question is answered or the ledger is covered, whichever that question
+open-question sweep is only correct when every record has been read, because a deferral never
+reaches a discovery page. Walk until the question is answered or the ledger is covered, whichever that question
 demands, and never present a partial walk as a complete one.
 
 **Search is lexical, and saying so is part of the answer.** `query` takes whitespace-separated terms,
@@ -66,18 +65,16 @@ match while partial ones do not. A record or note that discusses the topic in di
 not surface. When a search comes back empty, that is *no entry used these words* — report it that
 way rather than as *nothing was decided*, and say which words you tried.
 
-**Search reaches further than the row shows.** A record matches on its **Verdict** or on an argument
-in its belly, not only on its head **Claim**. The row previews the Claim, so a hit can look unrelated
-to it; `matchExcerpt` is the window around whatever actually matched, and quoting it is what makes
-such a row make sense.
+**Search reaches further than the page shows.** A record matches on its **Verdict** or on an argument
+in its belly, not only on its head **Claim**. The page shows the Claim beside a summary composed
+from the record's spine, so a hit can look unrelated to both; the match window is what shows where
+it came from, and quoting it is what makes such an entry make sense.
 
-**A row's title is a label, not the entry.** Records, matters, world facts and observed outcomes all
-carry a derived `title` where Memolok has produced one, beside the writer's `excerpt`. The two are not
-versions of the same thing: the excerpt is what somebody typed and the title is a machine's label for
-it. Cite the excerpt when reporting what an entry says, and the entity's `get_*` when the wording
-matters. No row carries a `summary` or `subjects`. **The four `discover_*` siblings do** — same
-selection, answered as prose — and they are the cheaper read when the question is *which of these
-bears on X*.
+**A heading is a label, not the entry.** Records, matters, world facts and observed outcomes each
+lead with a derived title where Memolok has produced one, and with the writer's own opening where it
+has not — every page says which it is showing you. The two are not versions of the same thing: one
+is what somebody typed and the other is a machine's label for it. Quote the writer from the entity's
+`get_*` when the wording matters, and never from a heading.
 
 **On a record, report the status as the ledger states it.** `Rejected` is a sealed commitment meaning
 the decision was not to proceed, and `Superseded` means a later record replaced this one while what
@@ -128,8 +125,8 @@ Your final message is the entire product. Nothing else survives.
 learn it. That pair is what decides between the two correction paths — which is why you report it and
 why you never draw the conclusion from it.
 
-**Your coverage, explicitly.** Which calls you made, how many rows out of `total`, which bodies you
-opened. *"Read all 68 records"* and *"read the first 25 of 140"* are different answers and the
+**Your coverage, explicitly.** Which calls you made, how many entries out of the total each read
+stated, which bodies you opened. *"Read all 68 records"* and *"read the first 25 of 140"* are different answers and the
 difference matters. **A "nothing found" is only acceptable beside the coverage that produced it** —
 without that, a gap in your reading is indistinguishable from a gap in the ledger.
 

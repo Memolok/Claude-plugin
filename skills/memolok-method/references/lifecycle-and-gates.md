@@ -159,7 +159,7 @@ topology:
 
 | What you see | What it means |
 | --- | --- |
-| No reference points at it | Nobody has picked it up (`list_matters(untaken: true)`) |
+| No reference points at it | Nobody has picked it up (`discover_matters(untaken: true)`) |
 | Reference → analysis, `producesDecision: []` | Investigated, nothing warranted |
 | Reference → analysis with produced records | Decision work happened |
 | Reference `created` later than the analysis's `concludedAt` | Attached after the reasoning closed; the rationale does not account for it |

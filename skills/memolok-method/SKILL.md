@@ -180,9 +180,8 @@ ordinarily no such fact, none to invent. Input recognized later → `attach_anal
 
 **Expert path** bypasses analysis: `create_MDR` with a claim. Nothing on a record says which path
 minted it. Intake routing → `record-decision`. Parking unanalyzed → `save-matter`;
-`list_matters(untaken: true)` = unprocessed-bait inbox, **matters only**; `discover_matters` takes
-the same arguments and answers as prose carrying each matter's summary, which is the cheaper read
-when you are choosing rather than filtering.
+`discover_matters(untaken: true)` = unprocessed-bait inbox, **matters only**, answered as prose
+carrying each matter's summary and subjects, so you can weigh candidates without opening one.
 
 **Matters carry no status** — no disposition, no vocabulary of endings. What became of one reads from
 its shape: who took it up, when, what they produced.
