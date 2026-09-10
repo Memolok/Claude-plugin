@@ -25,7 +25,7 @@ records, or invented calls. Tell the user it is not available yet.
 | World almanac | `admit_world_fact`, `get_world_fact` (one, whole), `discover_world_facts` (the almanac as prose, each fact with its summary and what it corrects) |
 | Wake | `record_observed_outcome`, `get_observed_outcome` (one, whole), `discover_observed_outcomes` (a ledger's wake as prose, each with its summary and recorded result) |
 | Learning delta, one record | `get_MDR_learning_delta` |
-| Working notes | `create_scratchpad`, `get_scratchpad` (one, whole), `replace_scratchpad`, `delete_scratchpad`, `discover_scratchpads` (a ledger's notes as prose, nothing derived onto any of them) |
+| Working notes | `create_scratchpad`, `get_scratchpad` (one, whole), `replace_scratchpad`, `delete_scratchpad`, `discover_scratchpads` (a ledger's notes as prose, each with the title and summary Memolok derived for it) |
 | Feedback to Memonos, the team behind Memolok | `submit_feedback`, `get_feedback`, `update_feedback` — see the `send-feedback` skill |
 
 ### Graph edges, staged records only

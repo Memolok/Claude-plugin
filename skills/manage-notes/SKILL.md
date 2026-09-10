@@ -97,7 +97,9 @@ worse, unstable content in the almanac.
 
 ## Getting it back
 
-Notes have no titles, so **content search is the way**, not enumeration.
+Nobody types a title for a note, so **content search is the way**, not enumeration — and search
+reaches the title and subjects Memolok derived as well as the words in the note, so a term the user
+never typed into it can still find it.
 
 ```
 discover_scratchpads(mdlGuid, query="redis pricing")
@@ -122,9 +124,10 @@ or say what you did not read.
 Fetch a full body with `get_scratchpad` only when you actually need the text. The excerpt is a trim
 of the note's opening words, not a description of it: it will not tell you what a long note argues.
 
-**Naming a note in prose.** There are no titles, so build a handle from the excerpt and the date —
-*"the Redis quote from the 7th"*, *"the scraped pricing page"*. Do not volunteer the `sp_` id; cite
-it if the user asks.
+**Naming a note in prose.** Use the derived title where the page shows one — it is there so a note
+can be referred to without anybody having invented a name for it. Where a note has none yet, build a
+handle from the excerpt and the date as before: *"the Redis quote from the 7th"*, *"the scraped
+pricing page"*. Do not volunteer the `sp_` id; cite it if the user asks.
 
 ## Revising
 

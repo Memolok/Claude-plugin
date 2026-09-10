@@ -622,16 +622,18 @@ Shared discovery params — they and the query grammar are in the discovery prea
 recently touched first, which is what the `Touched:` line on each entry states. **Never carries a
 body**: `get_scratchpad` is the only read that does.
 
-**Nothing here is derived.** Scratchpads are the one collection Memolok generates no title, summary
-or subjects onto, so every heading is a cut of what somebody typed — and the page says so, rather
-than leaving a reader waiting on a sweep this collection is not in.
+**A note's title is Memolok's, because a note has no other.** Nobody types one, so where nothing has
+been derived yet the heading is a cut of what somebody pasted — and the page says which of the two it
+is showing you.
 
-**`query` is how you answer "what did I save about X?"** With no titles, content search is the only
-way back to a note; paging through everything to read it is what this shape exists to prevent.
+**`query` is how you answer "what did I save about X?"** Search reaches the derived title, summary
+and subjects as well as the body, so a note can be found by a term it does not itself contain — which
+matters here more than anywhere, because whoever pasted a vendor's pricing page was not choosing
+search terms. Paging through everything to read it is what this shape exists to prevent.
 
-**The opening words are a positional trim.** They are a handle for naming the note, not a description
-of it, and a long note's opening says nothing about what the note argues. When the question is about
-content, `get_scratchpad` the body.
+**Where a note has no summary yet, the opening words are a positional trim.** They are a handle for
+naming the note, not a description of it, and a long note's opening says nothing about what the note
+argues. When the question is about content, `get_scratchpad` the body.
 
 ### `submit_feedback`
 

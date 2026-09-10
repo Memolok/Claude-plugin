@@ -31,12 +31,15 @@ pack older than this one names tools the server no longer has, and those calls f
 
 **The pages carry what you need to act on what you find.** A decision record shows its handle beside
 its number and the date it was decided; a matter names the analysis that took it up. Nothing has to
-be opened merely to get an identifier a write tool will ask for. Notes are the one collection with
-nothing derived onto them, so there `query` remains the only way back to what you kept.
+be opened merely to get an identifier a write tool will ask for.
 
-**A cut heading no longer leaves an asterisk showing.** Text opening with a bold lede used to render
-two literal asterisks when the 72-character heading cut landed inside them. Most visible on notes,
-where every heading is a cut.
+**Notes are findable by what they are about, not only by the words in them.** Each one now carries a
+title and a summary Memolok wrote, and search reaches those as well as the body — so a note can be
+found by a term nobody typed into it. Until a note has a title, its heading is its opening words, as
+before.
+
+**A cut heading no longer leaves an asterisk showing.** A heading trimmed part-way through a bold
+run used to render two literal asterisks.
 
 Every skill that used to reach for a listing tool now reaches for its page, `ledger-scout` included.
 

@@ -70,9 +70,10 @@ in its belly, not only on its head **Claim**. The page shows the Claim beside a 
 from the record's spine, so a hit can look unrelated to both; the match window is what shows where
 it came from, and quoting it is what makes such an entry make sense.
 
-**A heading is a label, not the entry.** Records, matters, world facts and observed outcomes each
-lead with a derived title where Memolok has produced one, and with the writer's own opening where it
-has not — every page says which it is showing you. The two are not versions of the same thing: one
+**A heading is a label, not the entry.** All five pages lead with a derived title where Memolok has
+produced one, and with the writer's own opening where it has not — every page says which it is
+showing you. On notes there is no third possibility: nobody types a title, so the heading is either
+Memolok's or a trim of what somebody pasted. The two are not versions of the same thing: one
 is what somebody typed and the other is a machine's label for it. Quote the writer from the entity's
 `get_*` when the wording matters, and never from a heading.
 
