@@ -41,7 +41,8 @@ Transaction Principle, the lifecycle gates, and facilitation Rules A–G.
 - Say "captured" only after a write succeeded — before that, say *drafting* or *got it*
 - Cite `MDR-{n}` when admitted, `MDRh{handle}` or a head Claim paraphrase while staged; never a bare handle (Rule F)
 - Check `retractable` before proposing an uncommit
-- Writing a record number outside this session → anchor it first (`references/citing-records.md`)
+- Writing an identifier anywhere that outlives this session → the **`memolok-citations`** skill; it
+  has to be anchored first, and it cannot be written before t₀ at all
 
 ## Workflow
 
@@ -168,6 +169,11 @@ When building shows the draft was wrong, record the correction as a deliberation
 turn teaches something** — if it shows why the obvious approach fails. Otherwise just edit the draft;
 staged records are freely editable and most corrections are not interesting.
 
+**The loop ends at the seal, not at the last commit.** Anything the work is going to cite cannot be
+written while the record is staged — there is no number yet, and a handle is not a citation — so the
+references are a separate pass afterwards. Say that to the user rather than sealing quietly to get
+one: the **`memolok-citations`** skill has the ordering and what the pass involves.
+
 ### 6. Name the open questions
 
 Record what this decision deliberately leaves unsettled as `openQuestions`. Prefer logging an
@@ -235,4 +241,3 @@ Full worked correction arc: `references/need-vs-verdict-drift.md`.
 | `references/fish-preview.md` | Presenting the recap at step 7, if you want the shape that reads back cleanly |
 | `references/need-vs-verdict-drift.md` | The Need may have absorbed the answer — the conflation survives light rewording, so spotting it needs the worked arc |
 | `references/matter-closure.md` | Any analysis touching more than one input, or an input surfacing after the analysis concluded — passing one `motivatedBy` where several apply records reasoning that did not happen, and three of the five ways a matter comes to rest have no tool yet |
-| `references/citing-records.md` | Before writing a record number into a file, a document or a message — the citation must be anchored *first*, and an unanchored number can come to name a different decision |

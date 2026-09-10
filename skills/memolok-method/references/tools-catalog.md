@@ -181,10 +181,10 @@ its status is, the terms it names, its summary and its head Claim.
 **This is the read for working out which decisions bear on what you are doing.** A record found here
 is read with `get_MDR` without translating anything.
 
-**Each record is named by its number and its handle** — `MDR-137 (handle 141)`. The number is what
+**Each record is named by its number and its handle** — `MDR-7 (handle 11)`. The number is what
 you cite in prose; the handle is what `update_MDR`, `transition_MDR_status`, `record_observed_outcome`
 and `get_MDR_learning_delta` all take, and none of them accepts a number. A staged record has no
-number and is named `MDRh141 (staged — no number yet)`.
+number and is named `MDRh12 (staged — no number yet)`.
 
 **`Decided:` is t₀, not when the record was minted.** A staged record shows no date line at all,
 because it has not been decided; `get_MDR` is where both that and `createdAt`, the mint time a staged
@@ -535,7 +535,7 @@ rewriting an id would orphan references the patch does not carry. `chosenAlterna
 | `kind` | `project` \| `other` | yes |
 
 **Declares that something outside the ledger cites this record**, which stops an Uncommit releasing
-its number. Call it **before** writing the citation, not after — the **`record-decision`** skill
+its number. Call it **before** writing the citation, not after — the **`memolok-citations`** skill
 carries when, and in what form the citation is written.
 Member-level, deliberately: gating it above the write it accompanies would leave the citation
 unanchored.

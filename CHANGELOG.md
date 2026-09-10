@@ -38,6 +38,27 @@ title and a summary Memolok wrote, and search reaches those as well as the body 
 found by a term nobody typed into it. Until a note has a title, its heading is its opening words, as
 before.
 
+**Your agent now knows where a citation goes in a line, not just what it has to say.** It had the
+address a reference must carry and nothing about the shape it takes in prose. It now puts the
+identifier at the end of the clause it explains, groups several into one parenthesis, says out loud
+when one decision narrows another, and leaves another project's decision numbers in that project's
+own notation. Commit messages are covered for the first time — the identifier belongs in the body,
+not the subject line — and all of it now lives in one place your agent can reach from any job,
+instead of only while it is recording a decision.
+
+**And it knows that citing comes after sealing.** Where you have it build against a decision that is
+still a draft, the code cannot name that decision, because a draft has no number. Writing the
+references in is a pass that begins once you have sealed it — so your agent will now tell you the
+build is done and the references are what remains, rather than quietly sealing early to get itself a
+number it can type. A draft is never referred to outside your conversation, for the same reason:
+there is nothing durable there to point at.
+
+**Writing a reference into your project commits your agent to protecting it.** Putting an identifier
+into code, documentation or a commit message obliges it to tell Memolok, so the identifier cannot
+later be released while your reference still points at it. Mentioning a decision elsewhere — a
+ticket, a message, a reply — does not: that declaration cannot be undone, and your agent will ask you
+rather than spend it on a passing mention.
+
 **A cut heading no longer leaves an asterisk showing.** A heading trimmed part-way through a bold
 run used to render two literal asterisks.
 

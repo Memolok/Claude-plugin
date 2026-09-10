@@ -325,10 +325,8 @@ mechanics in `record-decision`.
 Admitted → cite **`mdrNumber`**: `MDR-3`. Unchanged and unmarked, because a number is the settled
 form.
 
-Staged → **`MDRh3`**, or a head Claim paraphrase where prose reads better. The inserted `h` and the
-missing separator are both deliberate: a corrupted handle fails loudly instead of degrading into a
-citation that looks valid. Never write a bare handle in prose — `MDR-3` and `3` both read as numbers,
-and a handle is not one.
+Staged → **`MDRh3`**, or a head Claim paraphrase where prose reads better. Never write a bare handle
+in prose — `MDR-3` and `3` both read as numbers, and a handle is not one.
 
 **The two are different addresses and a staged record has no number at all.** `MDRh3` says
 *provisional, and it may never be admitted*; `MDR-3` says *sealed, and it is safe to cite*.
@@ -341,9 +339,10 @@ both identifiers raw, because its output is data for you and not words for the u
 `MDR-{n}` or `MDRh{handle}` when you pass any of it on; a bare handle reaching the user is still a
 bare handle.
 
-**Session prose only.** Whether `MDRh` belongs in a file, a document or a message is not settled, so
-do not write one there. What may be cited outside a session is an **admitted** record, and the form
-plus the anchoring it requires are in **`record-decision`**.
+**This rule is the session's half.** A staged record is never referred to outside the conversation:
+no number, may never get one, cannot be anchored — nothing can protect a reference to it. What an
+**admitted** entry looks like in a file, a document, a commit message or a message to a person, and
+the anchoring and timing that precede it, are the **`memolok-citations`** skill. Load it first.
 
 ### Rule G — The Need is not a running summary
 

@@ -49,6 +49,7 @@ available the skills simply do the reading themselves, and you should notice no 
 longer conversation.
 
 Memolok's methodology — the decision lifecycle, what seals at commitment, and how records are
-written — is loaded automatically by the skills above; you do not invoke it directly.
+written — and its rules for referring to a decision outside Memolok, in your code and documents and
+messages, are loaded automatically by the skills above; you do not invoke them directly.
 
 Documentation, accounts, and support: **[www.memolok.ai](https://www.memolok.ai)**

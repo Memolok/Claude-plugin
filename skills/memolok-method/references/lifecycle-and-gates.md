@@ -117,7 +117,7 @@ dissolves the pair.
 
 The fourth is **declared**, by `anchor_MDR`, and says something outside the ledger cites the record —
 the ledger cannot see that for itself. It is not inferred from anything you write; you declare it.
-Form and precondition: the **`record-decision`** skill.
+Form and precondition: the **`memolok-citations`** skill.
 
 ## Graph edges on staged records
 
