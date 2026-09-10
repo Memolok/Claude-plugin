@@ -125,8 +125,9 @@ prose you read rather than rows you filter.
 Each returns **Markdown, not an envelope**: a heading per entry, an identity line, the metadata lines
 that collection carries, and its derived summary. The page states its own totals, says when you are
 holding part of the ledger, and gives you the `offset` for the next one. Where an entry has nothing
-derived the heading is the writer's own opening instead, and every page says which it is showing you
-— permanently so on `discover_scratchpads`, which is the collection nothing derives onto.
+derived the heading is the writer's own opening instead, and every page says which it is showing you.
+On `discover_scratchpads` that fallback is a trim of whatever was pasted rather than an opening
+somebody wrote, because nobody types a title for a note.
 
 **Every page renders a date line** — `Decided:` on records, `Raised:` on matters, `Admitted:` on
 facts, `Observed:` on outcomes, `Touched:` on notes — so *"what came in this week"* is answerable without opening
