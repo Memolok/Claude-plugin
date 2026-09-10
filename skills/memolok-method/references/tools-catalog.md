@@ -110,11 +110,10 @@ one while meaning the other produces a confident answer to the wrong question.
 ## Discovery reads: one shape, five tools
 
 `discover_MDRs`, `discover_matters`, `discover_world_facts`, `discover_observed_outcomes` and
-`list_scratchpads` share a shape. Learn it once.
+`discover_scratchpads` share a shape. Learn it once.
 
-**One read per collection for choosing, and `get_*` for reading an entry whole.** The four
-`discover_*` tools answer as prose you read; `list_scratchpads` is the one member that still returns
-rows, scratchpads being the collection Memolok derives nothing onto.
+**One read per collection for choosing, and `get_*` for reading an entry whole.** All five answer as
+prose you read rather than rows you filter.
 
 | Param | Type | Required |
 | --- | --- | --- |
@@ -123,18 +122,14 @@ rows, scratchpads being the collection Memolok derives nothing onto.
 | `limit` | int | no (default 25, clamped to 100) |
 | `offset` | int | no (default 0) |
 
-A `discover_*` read returns **Markdown, not an envelope**: a heading per entry, an identity line, the
-metadata lines that collection carries, and its derived summary. The page states its own totals, says
-when you are holding part of the ledger, and gives you the `offset` for the next one. Where an entry
-has nothing derived the heading is the writer's own opening instead, and every page says which it is
-showing you.
+Each returns **Markdown, not an envelope**: a heading per entry, an identity line, the metadata lines
+that collection carries, and its derived summary. The page states its own totals, says when you are
+holding part of the ledger, and gives you the `offset` for the next one. Where an entry has nothing
+derived the heading is the writer's own opening instead, and every page says which it is showing you
+— permanently so on `discover_scratchpads`, which is the collection nothing derives onto.
 
-`list_scratchpads` returns `{ scratchpads: [...], total, limit, offset }`. Each row carries `excerpt`,
-`truncated`, `length` and `createdAt`; with a `query` it adds `matchExcerpt` (a window around the hit)
-and `score`.
-
-**Every prose page renders a date line** — `Decided:` on records, `Raised:` on matters, `Admitted:`
-on facts, `Observed:` on outcomes — so *"what came in this week"* is answerable without opening
+**Every page renders a date line** — `Decided:` on records, `Raised:` on matters, `Admitted:` on
+facts, `Observed:` on outcomes, `Touched:` on notes — so *"what came in this week"* is answerable without opening
 anything. It may be absent on an entry old enough to predate the field, and on a record it is absent
 whenever the record is staged, because `Decided:` is t₀ and a staged record has not reached one.
 
@@ -621,34 +616,22 @@ update: read with `get_scratchpad`, compose the whole new body, send that. Adds 
 `mdlGuid` + `scratchpadId`. **The only delete tool in Memolok.** Immediate and final — no recovery
 window. Returns `{ scratchpadId, mdlGuid, deleted: true }`.
 
-### `list_scratchpads`
+### `discover_scratchpads`
 
 Shared discovery params — they and the query grammar are in the discovery preamble above. Most
-recently touched first. Rows carry the preview trio plus `scratchpadId`, timestamps and
-attribution, and **never carry a body**.
+recently touched first, which is what the `Touched:` line on each entry states. **Never carries a
+body**: `get_scratchpad` is the only read that does.
 
-**The only discovery read that returns rows rather than prose.** Scratchpads are the one
-collection Memolok derives nothing onto — no title, no summary, no subjects — so there is nothing
-for a prose page to carry that a row does not.
+**Nothing here is derived.** Scratchpads are the one collection Memolok generates no title, summary
+or subjects onto, so every heading is a cut of what somebody typed — and the page says so, rather
+than leaving a reader waiting on a sweep this collection is not in.
 
-**`query` is how you answer "what did I save about X?"** Notes have no titles, so content search is
-the only way back to one; paging through everything to read it is what this shape exists to prevent.
+**`query` is how you answer "what did I save about X?"** With no titles, content search is the only
+way back to a note; paging through everything to read it is what this shape exists to prevent.
 
-**The excerpt is a positional trim of the opening text.** It is a handle for naming the note, not a
-description of it, and a long note's excerpt says nothing about what the note argues. When the
-question is about content, `get_scratchpad` the body.
-
-There is no separate search tool. There was until server `0.4.0`, and the two disagreed about their
-own `total`.
-
-**Attribution.** `createdBy` is `{ userId, name? }`; `contributors` is a list of the same. The
-contributor set is cumulative and never shrinks, so it does **not** say who edited most recently —
-pair it with `modifiedAt`. Any of the four attribution facts may be absent, which is normal.
-
-## Feedback tools
-
-Feedback goes to **Memolok**, not to the user's ledger. No `mdlGuid` tenancy, no Claim, nothing
-citable. Journey and the standard a report is held to: the **`send-feedback`** skill.
+**The opening words are a positional trim.** They are a handle for naming the note, not a description
+of it, and a long note's opening says nothing about what the note argues. When the question is about
+content, `get_scratchpad` the body.
 
 ### `submit_feedback`
 

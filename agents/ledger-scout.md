@@ -49,9 +49,9 @@ per spawn buys nothing.
 
 ## How to read
 
-**Never try to take everything at once; use paging.** Every discovery read — the four `discover_*` pages
-and `list_scratchpads` — takes `limit` and `offset`, and tells you the total for the whole match
-rather than for your page.
+**Never try to take everything at once; use paging.** Every discovery read — the five `discover_*`
+pages — takes `limit` and `offset`, and tells you the total for the whole match rather than for
+your page.
 
 Read that total first, then decide how far you have to go. Some questions have an early exit: *"what did
 we decide about storage?"* is answered as soon as you have the record. Some have none — an

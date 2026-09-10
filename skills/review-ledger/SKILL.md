@@ -245,7 +245,7 @@ as stale, untouched or needing attention. **A note that has sat for a year is be
 There is no review signal here to compute and none to invent.
 
 If the user asks about their notes specifically, that is the **`manage-notes`** journey — reach for
-`list_scratchpads` with a `query`, not a review.
+`discover_scratchpads` with a `query`, not a review.
 
 ### Before changing a record
 

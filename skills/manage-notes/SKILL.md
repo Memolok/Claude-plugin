@@ -100,10 +100,10 @@ worse, unstable content in the almanac.
 Notes have no titles, so **content search is the way**, not enumeration.
 
 ```
-list_scratchpads(mdlGuid, query="redis pricing")
+discover_scratchpads(mdlGuid, query="redis pricing")
 ```
 
-Same tool as browsing — `query` is a filter on it, not a separate call. Rows are previews: an
+Same tool as browsing — `query` is a filter on it, not a separate call. Entries are previews: an
 excerpt, a length, and `matchExcerpt` around the hit. Without `query` you get the whole ledger's
 notes, most recently touched first.
 
@@ -115,9 +115,9 @@ try different words rather than to start enumerating.
 An empty result means **no note used those words**. It does not mean the note is not there, and it
 does not mean "now list everything and read it". Say which words you tried.
 
-Read `total` before answering. It counts every match, not the rows on this page, so a page of 25 out
-of 60 is not the answer to *"what have I saved about this?"* — walk `offset` or say what you did
-not read.
+Read the total the page states before answering. It counts every match, not the notes on this page,
+so a page of 25 out of 60 is not the answer to *"what have I saved about this?"* — walk `offset`
+or say what you did not read.
 
 Fetch a full body with `get_scratchpad` only when you actually need the text. The excerpt is a trim
 of the note's opening words, not a description of it: it will not tell you what a long note argues.

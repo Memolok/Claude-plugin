@@ -22,19 +22,23 @@ matches — you are asked to update only when your pack genuinely stops working.
 
 ## Unreleased
 
-**Four listing tools are gone.** `list_MDRs`, `list_matters`, `list_world_facts` and
-`list_observed_outcomes` have been removed from the server. Each collection now has one read for
-choosing — `discover_MDRs`, `discover_matters`, `discover_world_facts`,
-`discover_observed_outcomes` — and its `get_*` for reading an entry whole. `list_scratchpads` is
-unaffected. **You must update:** a pack older than this one names tools the server no longer has, and
-those calls fail.
+**Five listing tools are gone, and every collection now has one read for choosing.** `list_MDRs`,
+`list_matters`, `list_world_facts`, `list_observed_outcomes` and `list_scratchpads` have been removed
+from the server. In their place `discover_MDRs`, `discover_matters`, `discover_world_facts`,
+`discover_observed_outcomes` and `discover_scratchpads` each answer as a page to read rather than an
+envelope of rows, with `get_*` still the read that returns an entry whole. **You must update:** a
+pack older than this one names tools the server no longer has, and those calls fail.
 
-**The prose pages carry what you need to act on what you find.** A decision record now shows its
-handle beside its number, and the date it was decided; a matter names the analysis that took it up.
-Nothing has to be opened just to get an identifier a write tool will ask for.
+**The pages carry what you need to act on what you find.** A decision record shows its handle beside
+its number and the date it was decided; a matter names the analysis that took it up. Nothing has to
+be opened merely to get an identifier a write tool will ask for. Notes are the one collection with
+nothing derived onto them, so there `query` remains the only way back to what you kept.
 
-Every skill that used to reach for a listing tool now reaches for the prose page, `ledger-scout`
-included.
+**A cut heading no longer leaves an asterisk showing.** Text opening with a bold lede used to render
+two literal asterisks when the 72-character heading cut landed inside them. Most visible on notes,
+where every heading is a cut.
+
+Every skill that used to reach for a listing tool now reaches for its page, `ledger-scout` included.
 
 ## 0.26.0-beta — 2026-09-08
 
