@@ -91,8 +91,8 @@ admitted in one ledger is invisible in another.
 discover_world_facts(mdlGuid, query: "<the terms your fact would name>")
 ```
 
-**`discover_world_facts` rather than `list_world_facts`, because this step is a judgement.** It
-answers as prose carrying each fact's summary and the terms it names, so you can tell a near-duplicate
+**This step is a judgement, and the read is built for it.** `discover_world_facts` answers as prose
+carrying each fact's summary and the terms it names, so you can tell a near-duplicate
 from a neighbour without opening every candidate. Search reaches the derived summary and subjects as
 well as the admitted claim, so a fact can match a term nobody typed into it — which is exactly what
 finds the duplicate you were about to create.
@@ -185,11 +185,10 @@ premise that has since changed.
 ## Tips
 
 - `get_world_fact(mdlGuid, worldFactId)` fetches one. `discover_world_facts(mdlGuid, query?)` reads
-  the almanac as prose to choose from; `list_world_facts(mdlGuid, query?)` gives rows to filter or page
-  mechanically. Both are admission order, oldest first, and `total` counts every match rather than the
-  page. **Corrected facts stay in the listing** beside the ones correcting them, so a row is not
-  evidence that its premise is still current.
-- **A heading or summary on either read is Memolok's wording, not the admitter's.** A premise is what
+  the almanac as prose to choose from. It is admission order, oldest first, and the total it states
+  counts every match rather than the page. **Corrected facts stay in the read** beside the ones
+  correcting them, so finding a premise there is not evidence that it is still current.
+- **A heading or summary is Memolok's wording, not the admitter's.** A premise is what
   decisions rest on, so quoting a paraphrase of one as the admitted claim moves what the ledger stands
   on. `get_world_fact` is the only source for the words somebody actually wrote.
 - Observed outcomes are a **kind** of world fact — a record's `hasContext` can cite a prior wake, just

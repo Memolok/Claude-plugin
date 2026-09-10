@@ -149,11 +149,14 @@ informal work, do not surface it at all.
 
 ## After t₀
 
-The body is sealed whether or not the record is retractable. `retractable: true` means only that an
-admin or owner can uncommit it back to staged — it does **not** mean it can be patched.
+The body is sealed, whether or not the record is retractable. `retractable: true` only means that
+an authorized user can uncommit it back to staged (via **`revise-decision`**) — it does **not** mean
+it can be patched in place.
 
-Never tell a user a committed record can be edited in place. If they want a change, route to
-**`revise-decision`**.
+**The record now has a number, which is the thing the work could not name pre-t₀.** If anything
+outside the ledger is going to cite it — code, documentation, a commit message, a message to
+somebody — this is the moment that becomes possible, and the citation has to be anchored before it
+is written. The **`memolok-citations`** skill carries the order and the form.
 
 ## Tips
 

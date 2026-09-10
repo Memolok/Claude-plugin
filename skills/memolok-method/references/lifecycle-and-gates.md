@@ -117,7 +117,7 @@ dissolves the pair.
 
 The fourth is **declared**, by `anchor_MDR`, and says something outside the ledger cites the record —
 the ledger cannot see that for itself. It is not inferred from anything you write; you declare it.
-Form and precondition: the **`record-decision`** skill.
+Form and precondition: the **`memolok-citations`** skill.
 
 ## Graph edges on staged records
 
@@ -159,7 +159,7 @@ topology:
 
 | What you see | What it means |
 | --- | --- |
-| No reference points at it | Nobody has picked it up (`list_matters(untaken: true)`) |
+| No reference points at it | Nobody has picked it up (`discover_matters(untaken: true)`) |
 | Reference → analysis, `producesDecision: []` | Investigated, nothing warranted |
 | Reference → analysis with produced records | Decision work happened |
 | Reference `created` later than the analysis's `concludedAt` | Attached after the reasoning closed; the rationale does not account for it |

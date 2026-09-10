@@ -17,7 +17,7 @@ The source actor's verbatim words. No sharpening at this step.
 ```
 
 Returns `{ id, mdlGuid, description, takenUpBy: [] }`. Keep the `id` — the next call needs it. If it
-is lost, `list_matters(untaken: true)` finds it again.
+is lost, `discover_matters(untaken: true)` finds it again.
 
 ### 2. `create_analysis`
 

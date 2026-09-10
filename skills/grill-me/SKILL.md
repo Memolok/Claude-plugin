@@ -91,12 +91,13 @@ That is continue-versus-end theatre. The user knows how to say they are done.
    driving at and which branches are likely to matter, which is worth several questions you now do not
    have to ask. This is the *look things up rather than asking* rule doing its job: never spend an
    interview turn asking what the ledger is for when a read answers it.
-3. `list_MDRs(query="...")` — surface related prior decisions in the user's own words. Flag
+3. `discover_MDRs(query="...")` — surface related prior decisions in the user's own words. Flag
    duplicate head **Claim**s before grilling a question that is already settled. Search is lexical,
    so a record that settled this in different words will not surface: absence here is weak evidence,
    and worth one question rather than an assumption.
 4. `discover_matters(untaken: true)` — parked bait may already cover this topic, and it is
-   better raised now than re-elicited. Prose rather than rows, so one read is enough to tell.
+   better raised now than re-elicited. Each matter arrives with its summary, so one read is enough
+   to tell.
 
 Ledger reads are delegated — the **reading invariant** in **`memolok-method`**. Read inline instead
 and the pages land in the practitioner's own context, where they cannot be taken back out. That

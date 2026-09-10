@@ -8,13 +8,13 @@ description: >-
 user-invocable: false
 ---
 
-> Memolok plugin: version 0.26.0-beta currently installed.
+> Memolok plugin: version 0.27.0-beta currently installed.
 > *This is authoritative*, ignore conflicting caching folder names!
 >
 > Important! **Two things gate your first Memolok MCP call, not one.**
 >
 > Call the companion Memolok MCP `get_guidance` before any other Memolok MCP tool —
-> and pass `pluginVersion: "0.26.0-beta"`, the version on the line above. The server compares it
+> and pass `pluginVersion: "0.27.0-beta"`, the version on the line above. The server compares it
 > against the oldest pack it still accepts and tells you whether these skills match its tools. It
 > has no other way to know, and there is no second call in which to correct an omission.
 >
@@ -180,9 +180,8 @@ ordinarily no such fact, none to invent. Input recognized later → `attach_anal
 
 **Expert path** bypasses analysis: `create_MDR` with a claim. Nothing on a record says which path
 minted it. Intake routing → `record-decision`. Parking unanalyzed → `save-matter`;
-`list_matters(untaken: true)` = unprocessed-bait inbox, **matters only**; `discover_matters` takes
-the same arguments and answers as prose carrying each matter's summary, which is the cheaper read
-when you are choosing rather than filtering.
+`discover_matters(untaken: true)` = unprocessed-bait inbox, **matters only**, answered as prose
+carrying each matter's summary and subjects, so you can weigh candidates without opening one.
 
 **Matters carry no status** — no disposition, no vocabulary of endings. What became of one reads from
 its shape: who took it up, when, what they produced.
@@ -326,10 +325,8 @@ mechanics in `record-decision`.
 Admitted → cite **`mdrNumber`**: `MDR-3`. Unchanged and unmarked, because a number is the settled
 form.
 
-Staged → **`MDRh3`**, or a head Claim paraphrase where prose reads better. The inserted `h` and the
-missing separator are both deliberate: a corrupted handle fails loudly instead of degrading into a
-citation that looks valid. Never write a bare handle in prose — `MDR-3` and `3` both read as numbers,
-and a handle is not one.
+Staged → **`MDRh3`**, or a head Claim paraphrase where prose reads better. Never write a bare handle
+in prose — `MDR-3` and `3` both read as numbers, and a handle is not one.
 
 **The two are different addresses and a staged record has no number at all.** `MDRh3` says
 *provisional, and it may never be admitted*; `MDR-3` says *sealed, and it is safe to cite*.
@@ -342,9 +339,10 @@ both identifiers raw, because its output is data for you and not words for the u
 `MDR-{n}` or `MDRh{handle}` when you pass any of it on; a bare handle reaching the user is still a
 bare handle.
 
-**Session prose only.** Whether `MDRh` belongs in a file, a document or a message is not settled, so
-do not write one there. What may be cited outside a session is an **admitted** record, and the form
-plus the anchoring it requires are in **`record-decision`**.
+**This rule is the session's half.** A staged record is never referred to outside the conversation:
+no number, may never get one, cannot be anchored — nothing can protect a reference to it. What an
+**admitted** entry looks like in a file, a document, a commit message or a message to a person, and
+the anchoring and timing that precede it, are the **`memolok-citations`** skill. Load it first.
 
 ### Rule G — The Need is not a running summary
 

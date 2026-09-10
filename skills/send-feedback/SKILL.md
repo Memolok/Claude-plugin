@@ -182,7 +182,7 @@ person reading this has none of your context and cannot ask you anything.
 
 **Thin, and typical:**
 
-> `list_scratchpads` seems broken, it didn't find my note.
+> `discover_scratchpads` seems broken, it didn't find my note.
 
 **What the same finding looks like as a handoff:**
 

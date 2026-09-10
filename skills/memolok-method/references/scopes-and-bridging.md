@@ -49,7 +49,7 @@ Memolok witnesses those links; it is not the repository.
 **The first direction is declarable.** `anchor_MDR` records that something outside the ledger cites a
 record — its kind only, never its location — which is what stops an Uncommit releasing the number the
 citation names. It is asserted by whoever writes the citation, not detected. Form and precondition:
-the **`record-decision`** skill.
+the **`memolok-citations`** skill.
 
 The second direction is not on the tool surface, and neither is freezing a cited artifact at t₀.
 

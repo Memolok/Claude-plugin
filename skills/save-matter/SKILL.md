@@ -99,10 +99,10 @@ discover_matters(mdlGuid, untaken: true, query: "<the words the user just used>"
 ```
 
 **The prose read, because this is a judgement.** Whether the same thing is already parked is a
-question about what a matter is *about*, and a row's excerpt is a positional trim of somebody's
-opening words — two people parking the same trouble rarely open the same way. The prose read carries
-each matter's summary and the terms it names, and search reaches those, so a duplicate surfaces on a
-word neither person typed.
+question about what a matter is *about*, and an excerpt is a positional trim of somebody's opening
+words — two people parking the same trouble rarely open the same way. The read carries each matter's
+summary and the terms it names, and search reaches those, so a duplicate surfaces on a word neither
+person typed.
 
 If the same thing is already parked, say so and stop — do not register a second one. Matters are
 immutable, and there is no way to merge or delete them.
@@ -148,7 +148,7 @@ to decide now, and do not summarize the methodology.
 ## What happens next
 
 Nothing references the matter, which is what the unprocessed-bait inbox means. A later session finds
-it with `list_matters(untaken: true)` and takes it through **`record-decision`**, which sharpens it
+it with `discover_matters(untaken: true)` and takes it through **`record-decision`**, which sharpens it
 into a head Claim and mints a record.
 
 That deferred pickup is exactly why parking is safe: the provenance chain from the user's original

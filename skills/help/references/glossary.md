@@ -10,7 +10,7 @@ word it is — the fish, the wake, matter rather than issue — see `why-these-w
 | **Memolok Decision Record** (**MDR**) | One decision, complete: what it was for, what was considered, what was committed, what was expected. Sometimes called *the fish*, from its shape. You might have said "a decision record" or "an ADR" |
 | **Memolok Decision Ledger** (**MDL**) | The collection those records live in, together with the facts they reason from. An epistemic boundary, not a folder. You might have said "the project's decision log" |
 | **Ledger Intent** | A ledger's short statement of what it is for, who it serves, and roughly where it is heading. Rewritten freely; read for orientation before starting new work. No decision ever points at it |
-| **Scratchpad** | A freeform working note on a ledger — no title, no category, no status. The one thing here that can be edited and deleted at will, which is exactly why nothing may ever cite one. You might have said "a sticky note" |
+| **Scratchpad** | A freeform working note on a ledger — no category, no status, and no title you have to think of (Memolok derives one automatically from the note). The one thing here that can be edited and deleted at will, which is exactly why nothing may ever cite one. You might have said "a sticky note" |
 
 ## The parts of a decision
 

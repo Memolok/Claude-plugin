@@ -1,7 +1,8 @@
 # Notes that promise nothing
 
-A scratchpad is a note on a ledger. Freeform text, no title, no category, no status. Write it,
-rewrite it, throw it away, whenever you like.
+A scratchpad is a note on a ledger. Freeform text, no category, no status, and no title you have to
+think of (Memolok derives one automatically). Write it, rewrite it, throw it away,
+whenever you like.
 
 It exists because everything else on a ledger is a commitment of some kind, and not everything worth
 keeping is a commitment.

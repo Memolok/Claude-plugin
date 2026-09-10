@@ -24,6 +24,46 @@ matches — you are asked to update only when your pack genuinely stops working.
 
 *Everything that has landed has shipped. This section is a placeholder.*
 
+## 0.27.0-beta — 2026-09-10
+
+**Five listing tools are gone, and every collection now has one read for choosing.** `list_MDRs`,
+`list_matters`, `list_world_facts`, `list_observed_outcomes` and `list_scratchpads` have been removed
+from the server. In their place `discover_MDRs`, `discover_matters`, `discover_world_facts`,
+`discover_observed_outcomes` and `discover_scratchpads` each answer as a page to read rather than an
+envelope of rows, with `get_*` still the read that returns an entry whole. **You must update:** a
+pack older than this one names tools the server no longer has, and those calls fail.
+
+**The pages carry what you need to act on what you find.** A decision record shows its handle beside
+its number and the date it was decided; a matter names the analysis that took it up. Nothing has to
+be opened merely to get an identifier a write tool will ask for.
+
+**Notes are findable by what they are about, not only by the words in them.** Each one now carries a
+title and a summary Memolok wrote, and search reaches those as well as the body — so a note can be
+found by a term nobody typed into it. Until a note has a title, its heading is its opening words, as
+before.
+
+**Your agent now knows where a citation goes in a line, not just what it has to say.** It puts the
+identifier at the end of the clause it explains, groups several into one parenthesis, says out loud
+when one decision narrows another, and leaves another project's decision numbers in that project's
+own notation. Commit messages are covered for the first time: the identifier belongs in the body, not
+the subject line.
+
+**And it knows that citing comes after sealing.** Where you have it build against a decision that is
+still a draft, the code cannot name that decision, because a draft has no number. Writing the
+references in is its own pass, begun once you have sealed — so your agent will tell you the build is
+done and the references are what remains, rather than sealing early to get itself a number it can
+type.
+
+**Writing a reference into your project commits your agent to protecting it.** Putting an identifier
+into code, documentation or a commit message obliges it to tell Memolok, so the number cannot later
+be released while your reference still points at it. Mentioning a decision in a ticket or a message
+does not — that declaration cannot be undone, so your agent will ask you first.
+
+**A cut heading no longer leaves an asterisk showing.** A heading trimmed part-way through a bold
+run used to render two literal asterisks.
+
+Every skill that used to reach for a listing tool now reaches for its page, `ledger-scout` included.
+
 ## 0.26.0-beta — 2026-09-08
 
 **Decision records can be read as prose, which completes the set.** `discover_MDRs` answers the same

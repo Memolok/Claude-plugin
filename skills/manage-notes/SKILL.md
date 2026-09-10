@@ -97,13 +97,15 @@ worse, unstable content in the almanac.
 
 ## Getting it back
 
-Notes have no titles, so **content search is the way**, not enumeration.
+Nobody types a title for a note, so **content search is the way**, not enumeration — and search
+reaches the title and subjects Memolok derived as well as the words in the note, so a term the user
+never typed into it can still find it.
 
 ```
-list_scratchpads(mdlGuid, query="redis pricing")
+discover_scratchpads(mdlGuid, query="redis pricing")
 ```
 
-Same tool as browsing — `query` is a filter on it, not a separate call. Rows are previews: an
+Same tool as browsing — `query` is a filter on it, not a separate call. Entries are previews: an
 excerpt, a length, and `matchExcerpt` around the hit. Without `query` you get the whole ledger's
 notes, most recently touched first.
 
@@ -115,16 +117,17 @@ try different words rather than to start enumerating.
 An empty result means **no note used those words**. It does not mean the note is not there, and it
 does not mean "now list everything and read it". Say which words you tried.
 
-Read `total` before answering. It counts every match, not the rows on this page, so a page of 25 out
-of 60 is not the answer to *"what have I saved about this?"* — walk `offset` or say what you did
-not read.
+Read the total the page states before answering. It counts every match, not the notes on this page,
+so a page of 25 out of 60 is not the answer to *"what have I saved about this?"* — walk `offset`
+or say what you did not read.
 
 Fetch a full body with `get_scratchpad` only when you actually need the text. The excerpt is a trim
 of the note's opening words, not a description of it: it will not tell you what a long note argues.
 
-**Naming a note in prose.** There are no titles, so build a handle from the excerpt and the date —
-*"the Redis quote from the 7th"*, *"the scraped pricing page"*. Do not volunteer the `sp_` id; cite
-it if the user asks.
+**Naming a note in prose.** Use the derived title where the page shows one — it is there so a note
+can be referred to without anybody having invented a name for it. Where a note has none yet, build a
+handle from the excerpt and the date as before: *"the Redis quote from the 7th"*, *"the scraped
+pricing page"*. Do not volunteer the `sp_` id; cite it if the user asks.
 
 ## Revising
 
