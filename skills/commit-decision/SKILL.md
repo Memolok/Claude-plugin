@@ -28,8 +28,8 @@ Examples:
 
 ## Step 0 — Load the method
 
-Load the **`memolok-method`** skill. Rule C governs this entire skill: t₀ is a separate, explicit
-ceremony, never bundled into a recap.
+Load the **`memolok-method`** skill and its `facilitation.md` reference. Rule C governs this entire
+skill: t₀ is a separate, explicit ceremony, never bundled into a recap.
 
 ## Non-negotiables
 
@@ -37,7 +37,7 @@ ceremony, never bundled into a recap.
 - All prose is `{ "markdown": "...", "lang": "en" }`
 - **Commit only when the user asked to, in their own words** — never because your draft reads firm
 - Say "captured" only after the write succeeded
-- Cite `MDR-{n}` once admitted, `MDRh{handle}` while staged; never a bare handle (Rule F)
+- Cite `MDR-{n}` once admitted (anywhere), `MDRh{handle}` or a head Claim paraphrase while staged (only in chat sessions and in transient plans); never a bare handle (Rule F)
 - Open questions do **not** block commit (Rule D)
 - The ledger's stated purpose bears on **nothing** here — never raise a mismatch with it before a seal
 
@@ -53,7 +53,7 @@ These are **not** commitment:
 - The record looking complete
 - The user saying "sounds good" about your summary
 
-If you are not certain, ask plainly: *"do you want this sealed on the ledger now, or left editable?"**
+If you are not certain, ask plainly: *"do you want this sealed on the ledger now, or left editable?"*
 Sealing is not reversible in place, so the cost of asking is far lower than the cost of guessing.
 
 ## Workflow
@@ -69,13 +69,8 @@ Confirm it is still staged. If `mdrNumber` is already set, it was sealed previou
 
 ### 2. Check the gates for the target
 
-| Target | Requires |
-| --- | --- |
-| **Accepted** | Head Claim · ≥1 alternative · `chosenAlternative` matching an alternative id · non-empty Verdict · ≥1 expected outcome |
-| **Rejected** | Head Claim · non-empty Verdict explaining why not to proceed |
-
-Anything missing gets patched **before** the ceremony, via `update_MDR` — see the `record-decision`
-skill. Do not start a ceremony you will have to interrupt.
+The gates are the method's lifecycle table. Anything missing gets patched **before** the ceremony, via
+`update_MDR` — see the `record-decision` skill. Do not start a ceremony you will have to interrupt.
 
 Open questions are never a gate. If the user wants to clear one first, that is their call, but do not
 propose it.
@@ -123,35 +118,11 @@ Then carry on with whatever the user was doing. Do not offer to end the session.
 
 ## Rejection is a real outcome
 
-**Rejected** is a first-class t₀ commitment: the organization will **not** proceed under this head
-Claim. It gets a ledger number, a Verdict, and the same permanence as an Accept.
-
-Offer it as readily as Accept — and in more situations than an exhausted deliberation. A Claim
-declined while other work proceeds is still a Rejection, and that case is the one most often written
-as a paragraph inside an Accept instead of as its own record. The `memolok-method` skill carries the
-full set.
-
-A sealed rejection prevents the same question being reopened every quarter, which is worth more than
-a weak Accept or an indefinite draft.
-
-A Rejected record may not carry `supersedes`.
-
-## Formal versus informal
-
-| Posture | Path |
-| --- | --- |
-| **Informal** (default) | Deliberating → **Accepted** or **Rejected** |
-| **Formal** | Deliberating → Proposed → **Accepted** or **Rejected** |
-
-**Proposed is not t₀.** It records that a candidate choice has been fixed, pending ratification. Use it
-only where there is real governance — distinct deciders, a committee vote, compliance sign-off. On
-informal work, do not surface it at all.
+Offer **Rejected** as readily as Accept, and in more situations than an exhausted deliberation — the
+`memolok-method` skill carries the full set. A Rejected record carries no `amends`, `supersedes` or
+`settlesOpenQuestion`: nothing it says is in force, so it changes, retires and settles nothing.
 
 ## After t₀
-
-The body is sealed, whether or not the record is retractable. `retractable: true` only means that
-an authorized user can uncommit it back to staged (via **`revise-decision`**) — it does **not** mean
-it can be patched in place.
 
 **The record now has a number, which is the thing the work could not name pre-t₀.** If anything
 outside the ledger is going to cite it — code, documentation, a commit message, a message to
@@ -162,10 +133,8 @@ is written. The **`memolok-citations`** skill carries the order and the form.
 
 - One-shot mint at `Accepted` or `Rejected` through `create_MDR` triggers the same seal. Run the
   ceremony first — the shortcut is in the tool call, not in the conversation.
-- `transition_MDR_status` accepts `Decided`, `Settled`, and `Committed` as aliases for `Accepted`.
-  `create_MDR` does not.
 - If the transition is refused, the message names the missing gate. Patch it and return to step 3.
-- Record the outcome ids (`eo-…`) from the response — a later wake needs them.
+- The `eo-…` ids you chose come back on every read; a later wake needs them.
 
 ## References
 

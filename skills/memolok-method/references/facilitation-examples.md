@@ -1,4 +1,4 @@
-# Facilitation failures and field quality
+# Facilitation failures
 
 ## Anti-patterns
 
@@ -48,32 +48,4 @@ or the head Claim where that reads better. The field name never appears, and nei
 *"a language must be chosen for statistical analysis, with a mature, well-supported library
 ecosystem"* — still falsifiable, still mechanism-neutral — and move the choice to the belly and
 Verdict.
-
-## Field quality
-
-**Head Claim.** Bad: *"we need better performance."* Good: *"P99 API latency must stay under 200ms at
-500 concurrent users."*
-
-**Sharpen ≠ resolve.** When the honest Need is mechanism-agnostic, a sharp Need stays that way:
-
-- Over-sharpened: *"…the project must use Python for its mature pandas/numpy/scipy stack."*
-- Correctly sharp: *"…the chosen language must have a mature, well-supported statistical-analysis
-  library ecosystem."*
-
-The second is falsifiable — a later observation can confirm or refute whether the ecosystem held up —
-without pre-committing to which language.
-
-**Alternatives.** `label` is a short handle; `description` is the option substance the user
-articulated. Arguments belong in `deliberationFacts`, not here.
-
-**Deliberation facts.** Pair each with `onAlternative`. Prefer arguments the user actually made over
-authored pros-and-cons.
-
-**Expected outcomes.** Measurable tail commitments as prose — gains, costs, risks, dependencies.
-
-**Open questions.** Deferral prose, not category labels. *"Should we transcode for mobile?"* is valid
-ledger prose on an Accepted fish.
-
-**Prose fields.** Always `{ "markdown": "...", "lang": "en" }`, including LaTeX via `$...$` and
-`$$...$$`. Detail in `references/prose-and-raci.md`.
 

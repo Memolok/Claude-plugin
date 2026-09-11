@@ -59,9 +59,9 @@ What follows is judgement, not validation — the tools will not stop you.
 acceptance to every later reader. Alternatives may be present and unchosen; that is the record showing
 its work, and it is worth including when real options were weighed.
 
-**A Rejection cannot change what another record put in force.** Nothing it says is in force itself,
-so it carries neither `supersedes` nor `amends` — it retires nothing and modifies nothing — nor
-`settlesOpenQuestion`, and nothing can amend or supersede it in turn. So when a Rejection stands
+**A Rejection cannot change what another record put in force.** It carries no `amends`, `supersedes`
+or `settlesOpenQuestion`: nothing it says is in force, so it changes, retires and settles nothing —
+and nothing can amend or supersede it in turn. So when a Rejection stands
 against another record, prose and `hasContext` are the only carriers, and they have to do that work
 deliberately: say in the Verdict what this declines and why, because no structure will say it for you.
 

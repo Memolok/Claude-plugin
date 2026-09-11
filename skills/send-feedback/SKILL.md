@@ -67,7 +67,7 @@ because nothing errors in any of them and no exception handler could catch them:
 
 1. **A call succeeded and did the wrong thing.** A patch returns 200 and silently drops a field. The
    status code says nothing is wrong; the state says otherwise.
-2. **Two successful calls disagree.** A record a listing just returned cannot be read back. A note
+2. **Two successful calls disagree.** A record a page just returned cannot be read back. A note
    that demonstrably exists is not found by search. Neither call failed — only their conjunction is
    wrong.
 3. **A skill contradicts a tool, or the design is simply absent.** An instruction promises something
@@ -104,7 +104,7 @@ One `submit_feedback` call carrying every finding, each as an item in `reports`:
       "report": { "markdown": "Patched `alternatives` with items that had no `id`. The response minted ids and `chosenAlternative` was gone.", "lang": "en" },
       "artifacts": [
         { "kind": "mcp_tool", "name": "update_MDR" },
-        { "kind": "mcp_server", "name": "Memolok MCP", "version": "0.2.0" }
+        { "kind": "mcp_server", "name": "Memolok MCP", "version": "<the version get_guidance reported>" }
       ],
       "evidence": [
         {

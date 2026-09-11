@@ -30,8 +30,9 @@ Examples:
 
 ## Step 0 — Load the method
 
-Load the **`memolok-method`** skill before any write. It carries the fish model, the Decision
-Transaction Principle, the lifecycle gates, and facilitation Rules A–G.
+Load the **`memolok-method`** skill and its `facilitation.md` reference before any write. Between them
+they carry the fish model, the Decision Transaction Principle, the lifecycle gates, and facilitation
+Rules A–G.
 
 ## Non-negotiables
 
@@ -39,7 +40,7 @@ Transaction Principle, the lifecycle gates, and facilitation Rules A–G.
 - All prose is `{ "markdown": "...", "lang": "en" }`
 - Default persist status is **Deliberating**; t₀ only on the user's explicit request (Rule C)
 - Say "captured" only after a write succeeded — before that, say *drafting* or *got it*
-- Cite `MDR-{n}` when admitted, `MDRh{handle}` or a head Claim paraphrase while staged; never a bare handle (Rule F)
+- Cite `MDR-{n}` once admitted (anywhere), `MDRh{handle}` or a head Claim paraphrase while staged (only in chat sessions and in transient plans); never a bare handle (Rule F)
 - Check `retractable` before proposing an uncommit
 - Writing an identifier anywhere that outlives this session → the **`memolok-citations`** skill; it
   has to be anchored first, and it cannot be written before t₀ at all
@@ -48,17 +49,10 @@ Transaction Principle, the lifecycle gates, and facilitation Rules A–G.
 
 ### 1. Establish the ledger
 
-Use the `mdlGuid` already in play. If there is none, check `.memolok/mdl.yml` in the project when
-files are available, then fall back to `get_MDLs`.
-
-Then `get_MDL(mdlGuid)` — the ledger's stated purpose, when it has one, tells you what this ledger is
-usually about, which helps both the intake fork below and sharpening the Claim in the user's own domain
-language rather than generic phrasing. It is background, never a test: a decision that looks unrelated
-to the stated purpose is recorded exactly like any other, with no comment and no request to justify it.
-
-If the user has no ledger, agree a title and call `create_MDL`. Draft a purpose from what they have
-already told you and offer it in one line — *"I'll note this ledger is for the storage rebuild"* — and
-take a "skip" without asking twice. They came here to record a decision; never delay it for this.
+Per the method's invariants. `get_MDL` gives the ledger's stated purpose, which helps sharpen the Claim
+in the user's own domain language; it is background, never a test. A missing ledger is created with a
+title and a one-line drafted purpose, taking a "skip" without asking twice — never delay the record
+for it.
 
 If there may be parked bait, `discover_matters(untaken: true)` shows what nobody has picked up, with
 enough of each to tell whether it is the same thing. If one matches what the user just raised, take
@@ -82,11 +76,13 @@ user's opening line decide it for you.
 | A mechanism with the need amputated | **a Verdict with no Need** | Back the need out, then re-sort |
 | A premise true regardless of any choice | **World Fact** | Admit it via `manage-almanac` first |
 | An observation on an already-sealed record | **wake** | Record it via `record-outcome` first |
+| Material worth keeping that asserts nothing and asks nothing | **Scratchpad** | Keep it via `manage-notes`; there is nothing to decide |
 
-The last two rows are a **detour, not an exit.** Admit the fact or record the outcome, then come
-back: if it calls for a decision, that entry is the analysis input — pass its id in `motivatedBy`.
+The World Fact and wake rows are a **detour, not an exit.** Admit the fact or record the outcome, then
+come back: if it calls for a decision, that entry is the analysis input — pass its id in `motivatedBy`.
 Do **not** register a Matter restating it. That records neither the entry as the input nor that
-anything connected the two, and Matters are immutable, so it cannot be repaired afterwards.
+anything connected the two, and Matters are immutable, so it cannot be repaired afterwards. The
+scratchpad row is an exit: nothing about it calls for a record.
 
 **The discriminator is not who is speaking — it is whether a future observation could settle it.**
 *"P99 auth latency must stay under 50ms"* is a Claim. *"Login takes forever"* is bait, even when the
@@ -105,9 +101,8 @@ Worked examples of ambiguous intakes: `references/intake-fork.md`.
 ### 3a. Bait branch
 
 1. `register_matter` with the stakeholder's words **verbatim**. Do not sharpen, summarize, or
-   translate into a target — the raw input is the point, and matters are immutable. Skip this step
-   entirely when the input is an already-admitted world fact or observed outcome: it is recorded, it
-   has an id, and it goes into step 3 as itself.
+   translate into a target — the raw input is the point, and matters are immutable. An already-admitted
+   world fact or observed outcome skips this step and goes into step 3 as itself.
 2. Sharpen the need **with the user**, not for them. The head Claim is a falsifiable objective, and it
    must not name the mechanism you are about to choose (Rule G).
 3. `create_analysis` with `producesDecision: true` and the sharpened `claimDescription`. Pass every
@@ -169,10 +164,8 @@ When building shows the draft was wrong, record the correction as a deliberation
 turn teaches something** — if it shows why the obvious approach fails. Otherwise just edit the draft;
 staged records are freely editable and most corrections are not interesting.
 
-**The loop ends at the seal, not at the last commit.** Anything the work is going to cite cannot be
-written while the record is staged — there is no number yet, and a handle is not a citation — so the
-references are a separate pass afterwards. Say that to the user rather than sealing quietly to get
-one: the **`memolok-citations`** skill has the ordering and what the pass involves.
+**The loop ends at the seal, not at the last commit.** The references the work will carry are a
+separate pass after t₀ — the **`memolok-citations`** skill has the ordering.
 
 ### 6. Name the open questions
 
@@ -200,11 +193,6 @@ Confirming the preview is **not** t₀. Do not offer **Proposed** on informal wo
 If deliberation revealed a **second distinct decision**, open a separate record for it rather than
 folding both into one body. A record that converges twice is malformed.
 
-The commonest instance is a **declined Claim hiding inside an Accept** — the record does one thing and
-spends a paragraph explaining what it is not doing. That second decision is easy to miss precisely
-because a rejection may not be in mind as something you can produce, so it gets written as prose
-instead of as a record.
-
 ## Field quality
 
 **Head Claim.** Bad: *"we need better performance."* Good: *"P99 API latency must stay under 200ms at
@@ -226,7 +214,7 @@ Full worked correction arc: `references/need-vs-verdict-drift.md`.
 
 - A complete fish body may sit at **Deliberating** indefinitely. Completeness is not commitment.
 - Patches are incremental — send only the keys that changed.
-- Read the outcome ids (`eo-…`) back from the response; a later wake needs them.
+- The ids you chose come back on every read; a later wake needs the `eo-…` ones.
 - If the user's need turns out to already be covered by an existing record, say so and offer
   `review-ledger` instead of minting a duplicate.
 

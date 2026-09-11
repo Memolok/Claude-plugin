@@ -70,3 +70,7 @@ toward one shared pipeline"* is fine, and would be a poor decision need.
 
 Rewriting it costs nothing and breaks nothing, because nothing depends on it. A ledger with no stated
 purpose is also perfectly normal — most start that way.
+
+---
+
+When they want to write or revise one: **`revise-intent`**.

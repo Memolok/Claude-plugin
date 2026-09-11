@@ -51,32 +51,12 @@ A world fact is a claim about the world that is true whether or not anyone decid
 | *"Nobody on the team writes Rust"* | *"Rust is too risky for us"* — a deliberation fact |
 | *"The vendor's SLA is 99.5%"* | *"The vendor is unreliable"* — a judgement, unless someone observed it |
 
-The test: **would this still be true if the decision it relates to had never come up?**
+| | *"Here's their whole pricing page"* — source material: a **scratchpad**, via `manage-notes` |
 
-If the user brought a *symptom* rather than a premise, that is bait — use **`save-matter`** or
-**`record-decision`** instead.
-
-### The almanac is not a notepad
-
-A World Fact is a **citable admission the ledger stands behind**, immutable in substance once
-admitted and correctable only by a successor. That discipline is the whole point, and it is the wrong
-container for material that does not want it.
-
-Raw working material — a pasted quote, a scraped page, a price list, a batch of observations that fit
-no typed entity — belongs in a **scratchpad** (**`manage-notes`**), not here. The pull toward
-bundling such material into one World Fact is real and should be resisted: it puts unstable content
-in the almanac, where every future record may cite it and no correction path fits.
-
-| The user brought | Where it goes |
-| --- | --- |
-| *"the vendor's SLA is 99.5%"* | **World Fact** — an assertion, checkable, worth standing behind |
-| *"here's their whole pricing page"* | **Scratchpad** — source material, not an admission |
-| *"legal requires seven-year retention"* | **World Fact** |
-| *"rough figures from an afternoon of digging"* | **Scratchpad** — nothing here is settled |
-
-The test: **is the user asserting this, or just keeping it?** If a decision could reasonably rest on
-it and they would stand behind it, admit it. Otherwise keep it as a note — and if it later turns out
-to matter, admit it *then*, freshly worded.
+Two tests: **would this still be true if the decision it relates to had never come up?** and **is the
+user asserting it, or just keeping it?** A symptom is bait — **`save-matter`** or **`record-decision`**.
+Material nobody is asserting is a note; if it later turns out to matter, admit it *then*, freshly
+worded.
 
 ## Workflow
 
@@ -149,9 +129,7 @@ reasoning took up — the thing that prompted the work. A fact can be both, and 
 work is often only the second.
 
 To make a fact the input to fresh reasoning, hand the `worldFactId` to `record-decision` and pass it
-in `motivatedBy`. Never register a Matter restating an admitted fact: the fact is already recorded,
-and the restatement records neither it as the input nor the link, permanently — Matters cannot be
-edited.
+in `motivatedBy` — as itself, never as a Matter restating it.
 
 To cite it as context, while the record is still **staged**:
 
@@ -171,26 +149,15 @@ t₀** — this is the record's epistemic snapshot, the premises it actually rea
 Do this **before** committing. There is no way to add context afterwards, and a record whose premises
 were never cited cannot later be found when one of those premises turns out to be wrong.
 
-## Why premises live outside records
-
-Facts live in the almanac rather than embedded in each record so that correcting one does not require
-editing sealed history. When a fact is corrected, the records that cited it stay exactly as they were —
-honest at their own t₀ — and the correction is what lets someone later ask which decisions rested on a
-premise that has since changed.
-
-> **Not built yet.** That question — *polluted premises*, decision decay — has no tool. You can answer
-> it by reading `hasContext` across records, but say that you read it rather than implying the ledger
-> computed it.
+> **Not built yet.** Asking which records rested on a premise that has since been corrected —
+> *polluted premises*, decision decay — has no tool. You can answer it by reading `hasContext` across
+> records, but say that you read it rather than implying the ledger computed it.
 
 ## Tips
 
-- `get_world_fact(mdlGuid, worldFactId)` fetches one. `discover_world_facts(mdlGuid, query?)` reads
-  the almanac as prose to choose from. It is admission order, oldest first, and the total it states
-  counts every match rather than the page. **Corrected facts stay in the read** beside the ones
-  correcting them, so finding a premise there is not evidence that it is still current.
-- **A heading or summary is Memolok's wording, not the admitter's.** A premise is what
-  decisions rest on, so quoting a paraphrase of one as the admitted claim moves what the ledger stands
-  on. `get_world_fact` is the only source for the words somebody actually wrote.
+- `get_world_fact(mdlGuid, worldFactId)` fetches one, and is the only source for the words somebody
+  actually wrote. **Corrected facts stay in the read** beside the ones correcting them, so finding a
+  premise there is not evidence that it is still current.
 - Observed outcomes are a **kind** of world fact — a record's `hasContext` can cite a prior wake, just
   never its own, and an analysis can take either up as an input by id.
 - Cross-team handoff works through this skill: admit another team's decision as a world fact in your
@@ -199,9 +166,6 @@ premise that has since changed.
   move is a correcting successor.
 - If the user states a premise while working through a decision, admit it and cite it rather than
   folding it into the Verdict prose — it is reusable by every later record.
-- A fact is true regardless of what the ledger says it is for. Never decline one as off-purpose, and
-  never cite the ledger's stated purpose as context — only World Facts and prior Observed Outcomes are
-  citable.
 
 ## References
 

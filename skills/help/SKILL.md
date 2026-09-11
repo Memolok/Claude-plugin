@@ -62,8 +62,9 @@ If the map does not obviously cover the question, open the closest file anyway �
 about a word, that is always `references/glossary.md` or `references/why-these-words.md`.
 
 Only when the question is **mechanical** — lifecycle, statuses, well-formedness gates, fish anatomy,
-prose format — load the **`memolok-method`** skill instead and answer from it. Do not load it for *why*
-questions; it is agent operating substrate and costs its whole length. That conditionality is deliberate.
+prose format — load the **`memolok-method`** skill and its `facilitation.md` reference instead and
+answer from them. Do not load them for *why* questions; they are agent operating substrate and cost
+their whole length. That conditionality is deliberate.
 
 Opening the file is a **precondition, not a step to report**. It happens before you speak, and the user
 never learns that it happened.
@@ -74,21 +75,22 @@ If the user just called this skill explicitly without any parameters or context,
 with the following introductory text:
 
 ```md
-When decisions are made, organizations, teams, and solo practitioners remember the *what*, but they tend to forget the *why*. The result survives — the contract, the code, the policy — while the reasoning that produced it evaporates. **Memolok** records the decision itself: the need that motivated it, the options weighed, the commitment made, and what the decider expected to happen as a result.
+When decisions are made, organizations, teams and solo practitioners remember the *what* and forget the *why*. The result survives — the contract, the code, the policy — while the reasoning that produced it evaporates. **Memolok** records the decision itself: the need that motivated it, the options weighed, the commitment made, and what the decider expected to happen.
 
-**Memolok** is *opinionated about how you record* decisions, but *agnostic about both how you make them* (consensus, hierarchy, committee, mandate, or coin toss), *and about domain* (software, legal, medical, construction, or a kitchen renovation.)
+**Memolok** is *opinionated about how you record* decisions and *agnostic about how you make them* (consensus, hierarchy, committee, mandate or coin toss) *and about domain* (software, legal, medical, construction or a kitchen renovation).
 
-The container for a collection of decisions is the *Memolok Decision Ledger*, a.k.a. *MDL* or *the ledger*. Create a ledger per project, a ledger per department if you want to record department-wide decisions somewhere, and/or a ledger per team, if you want the team's internal decisions recorded.
+Decisions live in a *Memolok Decision Ledger* — the *MDL*, or simply *the ledger*. Start with one per project or team: a ledger is a shared worldview, not a folder, and fewer is usually better.
 
-The most important entities inside a ledger are as follows:
-- the *Memolok Decision Record*, a.k.a. *MDR* or *decision record* stores actual decisions – use it when you know what you want to decide on (the sharpened need), before or after reaching a verdict; *MDRs* have a very specific structure you should try getting familiarized with;
-- *Matters* are things you know you will need to make decisions about, but you haven't gotten to analyzing them properly yet – a regulatory requirement, a request for improvement, or a bug report are all *matters*; (Matters prompt MDRs into existence via Analysis);
-- an *Analysis* is the recorded work of turning raw input into a sharpened need — it names who did the sharpening and why, and it may honestly conclude that no decision is warranted at all. Its inputs are *Matters*, *World Facts* and *Observed Outcomes*, in any combination: a fact already in the almanac or a result already observed can prompt fresh work as itself, without being retyped as a *Matter*;
-- *World Facts*, the collection of which constitute *the ledger's world almanac* or *the almanac*, are things you know to be true in the world which are relevant to this ledger; admitting world facts into the almanac is a deliberate decision you are responsible for (since you are the domain expert for your ledger, so you're the only one able to judge which facts in the world are in fact relevant enough to be admitted.)
-- *Observed Outcomes* are what the world actually did afterwards, a.k.a. *the wake* – they live outside the sealed record and are linked to it, because the record froze at the moment of commitment and what happens next cannot be written back into it;
-- finally, each MDL can store any number of *scratchpads* – temporary "files" which may store anything you want to jot down for later. All of the other entries in the ledger are governed by specific and strict lifecycles – *scratchpads* are deliberately disposable and unstructured; use them however you see fit.
+Inside a ledger:
 
-Feel free to follow up with questions about any of these entities or related topics.
+- a *Memolok Decision Record* (*MDR*) holds one decision — use it when you know what you are deciding about, before or after reaching a verdict; records have a specific structure worth getting familiar with;
+- *Matters* are things you know will need a decision but have not analyzed yet — a regulatory requirement, a request, a bug report; they prompt records into existence through analysis;
+- an *Analysis* is the recorded work of turning raw input into a sharpened need — who did the sharpening and why — and it may honestly conclude that no decision is warranted. Its inputs are matters, world facts and observed outcomes in any combination, taken up as themselves;
+- *World Facts* make up the ledger's *almanac*: things true in the world that this ledger reasons from. Admitting one is a deliberate act you are responsible for, since you are the domain expert who can judge which facts are relevant;
+- *Observed Outcomes* are what the world did afterwards — *the wake* — recorded beside the sealed record rather than inside it, because the record froze at commitment;
+- *scratchpads* are disposable notes with no lifecycle at all; use them however you see fit.
+
+Feel free to follow up with questions about any of these.
 ```
 
 ## How to answer
@@ -104,7 +106,7 @@ Feel free to follow up with questions about any of these entities or related top
   for the tour.
 - **"Why is it called that" is a real question with a real answer.** The vocabulary was chosen
   deliberately and the reasons are recorded. Never treat a naming question as unknowable trivia.
-- **Use their domain.** Kafka examples are for people who use Kafka – but bathroom renovation is an equally
+- **Use their domain.** Kafka examples are for people who use Kafka — but bathroom renovation is an equally
   valuable decision recording domain.
 - **Follow the jargon policy.** Do not introduce **MDR**, **Claim**, or t₀ unless they used the word first
   or the question is about the vocabulary itself.

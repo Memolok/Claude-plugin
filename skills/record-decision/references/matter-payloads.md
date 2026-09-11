@@ -16,7 +16,7 @@ The source actor's verbatim words. No sharpening at this step.
 }
 ```
 
-Returns `{ id, mdlGuid, description, takenUpBy: [] }`. Keep the `id` — the next call needs it. If it
+Returns `{ id, mdlGuid, description, createdAt, raisedBy, takenUpBy: [] }`. Keep the `id` — the next call needs it. If it
 is lost, `discover_matters(untaken: true)` finds it again.
 
 ### 2. `create_analysis`
@@ -40,11 +40,9 @@ is lost, `discover_matters(untaken: true)` finds it again.
 Returns `{ analysis, mdr }`. The record is at **New** with `mdrNumber: null`. Read `mdr.mdrHandle`
 from the response.
 
-`motivatedBy` is a **list**, and its entries need not all be matters: an `mt_` matter id, a `wf_`
-World Fact and an `oo_` Observed Outcome are equally valid, in any mix — the prefix on each says
-which. Pass every input this reasoning took up — three reports of one fault go in one call, not
-three, and so do a fresh report and the recorded outcome that prompted someone to look. The analysis
-concludes here, and `analysis.references` comes back with each input dated and `late: false`.
+`motivatedBy` is a **list** of `mt_`, `wf_` and `oo_` ids in any mix. Pass every input this reasoning
+took up — three reports of one fault go in one call, not three. The analysis concludes here, and
+`analysis.references` comes back with each input dated and `late: false`.
 
 **The `claimDescription` here is the sharpened need, agreed with the user** — not a restatement of the
 matter, and not the mechanism you expect to choose.

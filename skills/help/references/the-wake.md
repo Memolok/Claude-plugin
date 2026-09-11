@@ -29,8 +29,7 @@ not to the observation event, because the observation is simply a fact about the
 ## Observations are not overwritten either
 
 The wake follows the same discipline as the fish. What was observed — the fact, the result, how it was
-discovered, which decision it belongs to — cannot be edited after the fact. Typos and formatting can be
-fixed; substance cannot.
+discovered, which decision it belongs to — cannot be edited after the fact.
 
 When a new observation contradicts an earlier one because **the world changed**, record a new observation
 with its own date. Both stay. The same expectation can end up satisfied in March and violated in

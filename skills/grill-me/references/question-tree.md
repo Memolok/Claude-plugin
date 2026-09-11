@@ -12,8 +12,8 @@ One question, to sort what the user actually brought.
 > **Why:** It decides whether we start from the raw matter or straight from the objective, and the
 > two get recorded differently.
 
-Skip this entirely when the conversation already makes it obvious. The five-way routing lives in
-`record-decision`; the two that matter here are bait and head Claim.
+Skip this entirely when the conversation already makes it obvious. The full routing lives in
+`record-decision`; the two exits that matter here are bait and head Claim.
 
 If it is bait, capture the user's words **now**, verbatim, in the draft. They are the raw signal, and
 they will not survive three turns of paraphrase.

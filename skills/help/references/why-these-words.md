@@ -47,14 +47,8 @@ purpose and end state issued so that people who cannot reach headquarters can st
 That is closer to the job than *mission* or *vision*, both of which name a document an organization
 produces and files away. It was chosen over both for a second reason: a department's ledger tends to
 read like a mission and a project's like a vision, and forcing practitioners to pick a label for
-something they should just be able to write would be a tax with no return.
-
-The borrowing is not exact, and the difference is the interesting part. A commander states intent as
-insurance against *losing* contact with a chain of command that normally exists. An assistant reading
-your ledger has no such contact to lose — every session begins with no memory of the previous one. So
-intent here is not a contingency for a bad day; it is the ordinary way anyone arriving at the ledger
-finds out what it is for. It also does not expire with an operation the way military intent does: it
-persists, and gets rewritten in place, for as long as the ledger lives.
+something they should just be able to write would be a tax with no return. Why the borrowing is not
+exact, and why that matters, is in `ledger-intent.md`.
 
 **t₀** and **tₙ** are ordinary mathematical convention. Using notation instead of "created date" is a
 reminder that what is being marked is a *moment of agency*, and that the distance between the two is

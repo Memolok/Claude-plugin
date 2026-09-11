@@ -157,7 +157,11 @@ helpful one.
 
 The fish body only. `hasContext`, `settlesOpenQuestion` and the four inter-record edges — `amends`,
 `supersedes`, `dependsOn`, `conflictsWith` — have **no parameter** on this tool. They are authored by
-a follow-up `update_MDR` while the record is still staged.
+a follow-up `update_MDR` while the record is still staged:
+
+```json
+{ "mdlGuid": "<mdlGuid>", "mdrHandle": 1, "patch": { "hasContext": ["<worldFactId>"], "amends": [7] } }
+```
 
 Worth knowing before you compose the call rather than after: a record that needs to cite a World Fact
 or a prior wake as context, or to name what it amends, settles, supersedes, depends on or conflicts

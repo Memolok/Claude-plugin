@@ -37,7 +37,6 @@ drafted — the three elements, the two shapes, and the length.
 - All prose is `{ "markdown": "...", "lang": "en" }`, nested under `description`
 - **`set_ledger_intent` replaces the whole statement** — it never appends, and there is no history
 - Read the current statement before replacing it; a rewrite from memory loses what was there
-- Intent is never cited by a record and never justifies, blocks, or explains one
 - Say "captured" only after the write succeeded
 
 ## What this skill is not
@@ -72,12 +71,9 @@ not the whole thing, and they cannot tell you which clause if they cannot see it
 
 ### 3. Draft the replacement with them
 
-Follow `ledger-intent.md` in **`memolok-method`**. Two things that go wrong here:
-
-- **Sending a fragment.** The tool replaces everything. If the user says *"add that we also cover
-  billing now"*, you send the whole statement with billing in it — not the clause.
-- **Sharpening it into a Claim.** A purpose has no falsifiability bar. *"Heading toward one shared
-  pipeline"* is a good intent and would be a terrible head **Claim**. Rule G does not apply here.
+Follow `ledger-intent.md` in **`memolok-method`**. The thing that goes wrong here is **sending a
+fragment**: the tool replaces everything, so if the user says *"add that we also cover billing now"*,
+you send the whole statement with billing in it — not the clause.
 
 Show them the full replacement and get agreement before writing.
 
@@ -137,9 +133,8 @@ own reasoning, not on what the ledger says it is about today.
 
 - There is no way to remove a purpose once stated — only to replace it. If the user wants it gone,
   the honest move is prose that says the ledger's scope is currently open.
-- Nothing cites it, so revising it can never invalidate a record, pollute a premise, or affect any
-  outcome. It is one of the few things on a ledger that is genuinely safe to change.
 - If a ledger's purpose has to be long to be accurate, that is usually a sign of two ledgers wearing
   one name. See `scopes-and-bridging.md` in **`memolok-method`**.
-- Non-members get `Memolok Decision Ledger not found.` rather than a permission error — deliberate, so
-  it leaks nothing. If someone expected access, an administrator needs to add them.
+- `Memolok Decision Ledger not found.` does not distinguish a ledger the user cannot see from one that
+  is not there. Report it as ambiguous: they may not be a member, or this address may be stale. If
+  someone expected access, an administrator adds them.

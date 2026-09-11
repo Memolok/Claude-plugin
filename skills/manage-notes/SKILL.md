@@ -74,9 +74,6 @@ a scratchpad is the honest home. Do not stretch a `WorldFact` to hold it, and do
 
 ## Which entity is this?
 
-Getting this wrong is costly in both directions. A scratchpad used as intake means real work is never
-processed; a `Matter` used as a notepad fills the queue with things nobody intends to decide.
-
 | The user is… | Entity | Tell |
 | --- | --- | --- |
 | stating something true that decisions should rest on | **`WorldFact`** | *"legal now requires seven-year retention"* — an assertion the ledger should stand behind |
@@ -84,14 +81,8 @@ processed; a `Matter` used as a notepad fills the queue with things nobody inten
 | keeping material with no expectation attached | **`Scratchpad`** | *"here's the quote they sent"*, *"jotting this before I forget"* — no assertion, no request, no queue |
 | deciding something | **`DecisionRecord`** | a choice being made, with alternatives and a commitment |
 
-Two questions settle nearly every case:
-
-1. **Does the user expect anyone to act on this?** If yes, it is not a scratchpad.
-2. **Would it be bad if this vanished?** If yes, it is not a scratchpad.
-
-When the signal is genuinely ambiguous, **prefer the scratchpad** and mention the alternative in one
-clause. Under-committing is cheap and reversible; over-committing puts noise in the matter queue or,
-worse, unstable content in the almanac.
+The method's two routing questions decide it. When genuinely ambiguous, **prefer the scratchpad** and
+mention the alternative in one clause:
 
 > Saved as a note — say the word if you'd rather it went in as a matter for someone to pick up.
 
@@ -105,17 +96,15 @@ never typed into it can still find it.
 discover_scratchpads(mdlGuid, query="redis pricing")
 ```
 
-Same tool as browsing — `query` is a filter on it, not a separate call. Entries are previews: an
-excerpt, a length, and `matchExcerpt` around the hit. Without `query` you get the whole ledger's
-notes, most recently touched first.
+Same tool as browsing — `query` is a filter on it, not a separate call. The page carries each note's
+heading, when it was touched, its summary where one has been derived, and the match window. Without
+`query` you get the whole ledger's notes, most recently touched first.
 
-Search is stemmed and word-boundary based. Terms are ORed and case-insensitive; there are no
-operators and no phrases. Whole hyphenated tokens match, **a partial one does not** — somebody who
-remembers the middle of an identifier and not its start will not find it that way, and the fix is to
-try different words rather than to start enumerating.
-
-An empty result means **no note used those words**. It does not mean the note is not there, and it
-does not mean "now list everything and read it". Say which words you tried.
+Search is lexical: whitespace-separated terms, ORed, case-insensitive and English-stemmed; no
+operators, phrases or regex; a whole hyphenated token matches and a partial one does not. An empty
+result means no entry used those words — say which you tried. Somebody who remembers the middle of an
+identifier and not its start will not find it that way; the fix is to try different words rather than
+to start enumerating, and an empty result does not mean the note is not there.
 
 Read the total the page states before answering. It counts every match, not the notes on this page,
 so a page of 25 out of 60 is not the answer to *"what have I saved about this?"* — walk `offset`
@@ -126,7 +115,7 @@ of the note's opening words, not a description of it: it will not tell you what 
 
 **Naming a note in prose.** Use the derived title where the page shows one — it is there so a note
 can be referred to without anybody having invented a name for it. Where a note has none yet, build a
-handle from the excerpt and the date as before: *"the Redis quote from the 7th"*, *"the scraped
+handle from its opening words and the date: *"the Redis quote from the 7th"*, *"the scraped
 pricing page"*. Do not volunteer the `sp_` id; cite it if the user asks.
 
 ## Revising
@@ -169,22 +158,10 @@ Then tell them, once, plainly:
 > Admitted. Worth knowing: the ledger keeps no trail back to the note — the fact stands on its own
 > now, and the note stays a note.
 
-That is a deliberate property, not an oversight. Saying it once prevents a false expectation later.
-
 ## Scratchpads never argue for a decision
 
-You may read a scratchpad while helping someone think, exactly as you may read anything they show
-you in conversation.
-
-What you may **never** do is present its content as ledger grounding: offering it as `hasContext`,
-citing it in a Verdict, or letting it stand in for a premise nobody admitted. If material is
-load-bearing for a decision, it must be admitted properly first.
-
-The tools enforce this — a scratchpad id is refused by every reference field — but the point is not
-to get caught. **The whole disposability contract rests on this.** Notes are only safe to rewrite and
-delete freely because no record's reasoning can be resting on one.
-
-If a user asks you to cite a note, explain rather than just refusing:
+The method's rule, and the tools enforce it: a scratchpad id is refused by every reference field. If
+a user asks you to cite a note, explain rather than just refusing:
 
 > I can't point the record at the note — nothing in the ledger can reference one, precisely so you
 > can rewrite or bin it without breaking anything. If that pricing figure is a premise this decision

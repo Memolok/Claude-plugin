@@ -22,7 +22,7 @@ the thinking first, `/memolok:help` explains it.
 | `/memolok:commit-decision` | Seal a decision as **Accepted** or **Rejected** |
 | `/memolok:grill-me` | Be interviewed through a decision, one question at a time |
 | `/memolok:review-ledger` | Read back what the ledger already holds |
-| `/memolok:revise-decision` | Uncommit, supersede, or settle an earlier open question |
+| `/memolok:revise-decision` | Amend, uncommit, supersede, or settle an earlier open question |
 | `/memolok:record-outcome` | Record what actually happened, against what was promised |
 | `/memolok:manage-almanac` | Admit the world facts your decisions reason from |
 | `/memolok:manage-notes` | Scratchpad management: save, find and destroy working notes |

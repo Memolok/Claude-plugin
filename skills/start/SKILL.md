@@ -85,8 +85,14 @@ A ledger is an **epistemic boundary** — a set of decisions sharing a context a
 project, one team, one initiative. Not one per person, and not one per company.
 
 Agree a title **and a purpose** before calling anything. This is the moment for it: setup is why the
-user is here, and stating it now costs one call instead of two. Load `ledger-intent.md` from
-**`memolok-method`** for how to draft one — briefly, and by proposing a draft rather than asking cold.
+user is here, and stating it now costs one call instead of two. A purpose is three things in a short
+paragraph — what the ledger is for, whose reasoning it holds, roughly where it is heading — and it may
+read as a mission (*"Harmonizing recruitment across the three regional offices. Owned by People Ops."*)
+or as a vision (*"Rebuilding the home media server so it survives a drive failure. One hobbyist,
+weekends only."*); do not make the user choose between the two. It has no falsifiability bar: *"moving
+toward one shared pipeline"* is a good purpose and would be a poor head Claim. Propose a draft from
+what they have already said and let them correct it once; asked cold, *"what is this ledger for?"*
+produces a stall or a generic sentence.
 
 ```json
 {
@@ -126,10 +132,13 @@ shows up as a plain diff instead of needing a reader to judge whether the wordin
 
 Ask first. Writing files into someone's project uninvited is not yours to decide.
 
-**A yes here is a yes to this file only.** The cold-start signal in invariant 3 of
-**`memolok-method`** changes what every future session in the project does before anybody asks it
-anything, which is a different question and gets asked as one. This is the one journey where both
-offers can land in the same breath; a no on either leaves the other open.
+**A yes here is a yes to this file only.** The cold-start signal changes what every future session in
+the project does before anybody asks it anything, which is a different question and gets asked as
+one: *"Want me to set this project up so future sessions know it keeps a ledger, without you having
+to say so? Short paragraph — I'd work out where it belongs."* Name no file, directory or format. Only
+on a yes, load **`memolok-method`** and its `cold-start-signal.md`, which decide where it goes. This
+is the one journey where both offers can land in the same breath; a no on either leaves the other
+open.
 
 **Where to offer it, when the tree holds several repositories.** In the one the user is working in,
 not the folder above them. A bare `MDR-7` in a source file resolves through the nearest
@@ -167,11 +176,10 @@ Then hand off. Do not walk them through the whole list.
 - Non-members get `Memolok Decision Ledger not found.` rather than a permission error, deliberately —
   it does not reveal whether the ledger exists. If someone expected access, an administrator needs to
   add them.
-- The cold-start signal, where a project has one, lands wherever that project's sessions actually read
-  from, which differs by surface — `cold-start-signal.md` in **`memolok-method`** is what selects it,
-  and you do not need to know before offering. **Removing what was written is how they opt out**, and
-  it only comes back if they accept the offer again. Uninstalling the plugin leaves it in place,
-  harmlessly — it instructs nothing without the skills to act on it.
+- The cold-start signal lands wherever a project's sessions actually read from, which differs by
+  surface, and you do not need to know the place before offering. **Removing what was written is how
+  they opt out**, and it only comes back if they accept the offer again. Uninstalling the plugin
+  leaves it in place, harmlessly — it instructs nothing without the skills to act on it.
 
 ## References
 

@@ -9,7 +9,7 @@ usually get wrong in both directions.
 decision cites it, nobody has declared that something outside the ledger cites it, no evidence has been
 attached to it, none of
 its open questions have been settled. In that window, a privileged owner can withdraw the commitment: the
-record returns to draft, its public number goes back into circulation, and both the original commitment
+record returns to draft, its public number may be taken by a later decision, and both the original commitment
 and its withdrawal stay permanently visible in the ledger's history.
 
 **Anchored** — something now relies on it. From that point the decision's substance is sealed. Changing

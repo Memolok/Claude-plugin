@@ -30,22 +30,13 @@ under *Inside the session*.
 Analysis is cited by the id the server minted for it — `mt_…`, `wf_…`, `oo_…`, `an_…` — which says
 what kind of thing it is as well as which one.
 
-**Scratchpads: freely here, not into artifacts on your own initiative.** Name a note by its id
-whenever it helps — `sp_…` is how you and the practitioner agree which note you mean, and there is
-nothing delicate about saying it. What you should not do unasked is write one into a project
-artifact: a note is free to be rewritten or binned, so an artifact resting on one rests on something
-the ledger will not defend. The address is twenty-six characters and deliberately untypeable for
-that reason — the shape discourages the durable citation, not the conversational one.
-
-**But that is the practitioner's to overrule.** They may put a note's id into code or a document
-whenever they like, and nothing can (or should) stop them — so do it if they ask you to. Say once,
-without labouring it, that a note carries no promise of still saying the same thing later — then leave
-it with them.
-
-**"Never citable" is about the ledger's own reference fields, not about saying the id.** A note
-cannot be what a record's reasoning rests on; material that has to be load-bearing is admitted as a
-World Fact through its own path. That is what keeps a note disposable, and it is not a rule against
-naming one in conversation.
+**Scratchpads: freely here, not into artifacts on your own initiative.** Name a note by its `sp_…` id
+whenever it helps agree which note is meant; the address is deliberately untypeable to discourage the
+durable citation, not the spoken one. Do not write one into a project artifact unasked — a note is
+free to be rewritten or binned, so an artifact resting on one rests on something the ledger will not
+defend. The practitioner may overrule that whenever they like; say once that a note carries no promise
+of still saying the same thing later, and leave it with them. "Never citable" is about the ledger's
+own reference fields, which is what keeps a note disposable; it is not a rule against naming one.
 
 ## Build, seal, then cite
 
@@ -83,7 +74,7 @@ recorded. There is no location parameter, and that is deliberate: a stored path 
 a file moves, and a stale location reads as authoritative.
 
 Do it **before** the citation exists, not after. An unanchored number can be released by an Uncommit
-and taken by the next admission — at which point the reference you wrote silently names a different
+and taken by a later admission — at which point the reference you wrote silently names a different
 decision. Anchoring closes that off permanently: the record refuses an Uncommit from then on.
 
 **In a project artifact, this is mandatory.** Code, documentation, and commit messages all ship with
@@ -227,12 +218,8 @@ docstring beats the same parenthetical on six lines inside it.
 
 ## Inside the session
 
-Admitted → cite the number: `MDR-7`. Unchanged and unmarked, because a number is the settled form.
-
-Staged → `MDRh7`, or a head Claim paraphrase where prose reads better. The inserted `h` and the
-missing separator are both deliberate: a corrupted handle fails loudly instead of degrading into a
-citation that looks valid. Never write a bare handle in prose — `MDR-7` and `7` both read as numbers,
-and a handle is not one. The two are different addresses, and they routinely name different records.
+Rule F in the method governs naming here. The inserted `h` and the missing separator in `MDRh7` are
+deliberate: a corrupted handle fails loudly instead of degrading into a citation that looks valid.
 
 > **A staged record is not referred to outside the conversation.** `MDRh7` names it between you and
 > the practitioner and nowhere durable — not in a file, not in a document, not in a commit message,

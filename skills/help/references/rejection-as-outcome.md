@@ -45,3 +45,7 @@ nothing can supersede it. It is a closed question, permanently answered as of th
 
 A sealed rejection is often more honest than indefinite deliberation, and always more honest than a weak
 acceptance.
+
+---
+
+When they are ready to seal one: **`commit-decision`**.

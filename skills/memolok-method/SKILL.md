@@ -8,13 +8,13 @@ description: >-
 user-invocable: false
 ---
 
-> Memolok plugin: version 0.27.0-beta currently installed.
+> Memolok plugin: version 0.28.0-beta currently installed.
 > *This is authoritative*, ignore conflicting caching folder names!
 >
 > Important! **Two things gate your first Memolok MCP call, not one.**
 >
 > Call the companion Memolok MCP `get_guidance` before any other Memolok MCP tool —
-> and pass `pluginVersion: "0.27.0-beta"`, the version on the line above. The server compares it
+> and pass `pluginVersion: "0.28.0-beta"`, the version on the line above. The server compares it
 > against the oldest pack it still accepts and tells you whether these skills match its tools. It
 > has no other way to know, and there is no second call in which to correct an omission.
 >
@@ -65,33 +65,22 @@ Expert Memolok facilitator. Mediate between the user's decision work and their l
    `.memolok/mdl.yml` for `mdlGuid` first; several → nearest above the file in hand wins. May also
    carry `mdlTitle` and `mdlIntent`: orientation copies, **never authority** — `get_MDL` settles a
    mismatch and the file is what is stale. User names an MDL and no file exists → offer to save it
-   there. **Resolving this fires 3, found or not** — it does not discharge it. Different file,
-   different job, and having this one is not evidence that one was ever done. If you have just
-   settled the ledger, 3 is now due.
+   there. **Resolving this fires 3, found or not**: a different file and a different job, so having
+   this one is no evidence of that one.
 3. **The cold-start signal — a precondition on your first Memolok tool call, not an agenda item.**
-   Answer it beside `get_guidance`, before the call, the way you answer 1 and 2. It is not something
-   to reach later in the session: **there is no later.** This obligation has no moment of its own,
-   and one without a moment is read, understood, and not done. Owed in **every** journey, reads
-   included, on a one-line answer as much as on a day's work — a read that touches no project file
-   still leaves the next session as cold as this one started.
-   A paragraph telling the *next* session this project records decisions in Memolok.
-   **Did anything in your own initial context say so, before the user's first message?** Purely
-   introspective — you already hold the answer, it costs no reads, and it is the same question as *is
-   the signal working*. **A loaded Memolok server, a listed skill pack, and your own accumulated
-   notes about this user all say the plugin is installed. None of them says this project uses a
-   ledger**, which is the only thing being asked; the next person to open it has the first two and
-   not the third.
-   Yes → ignore this section, and don't advertise it to the user; its job was already done.
-   No → offer it, once (and *arriving here late still owes it*); what is suppressed is repeating it
-   in this session. **This is not scope creep and is expected to interrupt** — a question about the
-   project is not a widening of the user's question.
-   **Offer the outcome, never a mechanism, and never a filename.** You don't yet know where it goes,
-   and you're not meant to: *"Want me to set this project up so future sessions know it keeps a ledger,
-   without you having to say so? Short paragraph — I'd work out where it belongs."* **Name no file,
-   no directory, no format.** Any path you can see from here is one you have not read; naming it
-   turns their yes into consent for something you chose rather than something the pack selected.
-   Only on a yes: `references/cold-start-signal.md` decides the destination and the wording. It is
-   loaded **after** consent, never to reach it.
+   Answer it beside `get_guidance`, before the call, in **every** journey, reads included: a paragraph
+   telling the *next* session this project records decisions in Memolok. **Did anything in your own
+   initial context say so, before the user's first message?** Purely introspective — you already hold
+   the answer. A loaded Memolok server, a listed skill pack, and your notes about this user all say
+   the plugin is installed; none says this project uses a ledger, which is the only thing asked.
+   Yes → ignore this section and don't advertise it to the user; its job was already done.
+   No → offer it, once — arriving here late still owes it; what is suppressed is repeating it in this
+   session. It is expected to interrupt: a question about the project is not a widening of the user's
+   question. **Offer the outcome, never a mechanism, never a filename:** *"Want me to set this project
+   up so future sessions know it keeps a ledger, without you having to say so? Short paragraph — I'd
+   work out where it belongs."* Any path you can see is one you have not read; naming it turns their
+   yes into consent for something you chose. Only on a yes: `references/cold-start-signal.md` decides
+   the destination and the wording, loaded **after** consent, never to reach it.
 4. Recording decisions turns out relevant → **keep recording them.**
 5. **Reading a ledger is delegated work** — *the reading invariant*. Ledger settled (1–3) → spawn
    **`memolok:ledger-scout`** with the `mdlGuid` and one question, for any read you cannot bound
@@ -133,192 +122,34 @@ That rule is what makes disposability safe: a note is free to rewrite or bin onl
 reasoning rests on one. Content mined from a note is authored **fresh** through its own path, no link
 back — say so once, plainly.
 
-## The fish model
-
-An **MDR** is one self-contained unit of reasoning — a fish:
-
-```
-     head Claim          ← sharpened, falsifiable need; `hasNeed` (sealed at t₀; revisable while staged)
-    ╱──────────╲
-   alternatives          ← belly: options the decider explored
-   deliberationFacts     ← belly: arguments on those options (belly widens)
-   hasContext            ← context: world-fact / prior-wake refs (freezes at t₀)
-    ╲──────────╱
-      Verdict            ← waist: moment of agency ("we commit because…"); `verdict`, `chosenAlternative`
-    ╱──────────╲
-   expectedOutcomes      ← tail: measurable bets at t₀ — gains, costs, risks, deps; assessed later
-                            against the wake
-   openQuestions         ← alongside: what this record explicitly does not settle
-```
-
-Silhouette is a diagnostic: starts wide, converges twice, or has no tail → authoring broke down there.
-
-## Bait, Claim, and falsifiability
+## Bait and Claim
 
 **Matter** = raw input in the raiser's own words. A symptom (*"login takes forever"*), but equally a
 desired change, an opportunity, a mandate, an unanswered question. Carries **no truth value and no
 emotional polarity**. Head **Claim** = expert-sharpened, falsifiable objective (*"P99 auth latency must
-stay under 50ms"*). Never anchor a record on raw Matter prose.
-
-**Falsifiable, precisely:** a Need is falsifiable if and only if some future admission — an observed
-outcome tested against a resulting expected outcome, or a corrected world fact — could confirm or
-refute whether the chosen path satisfied it. Property of the **Need's own testability**, not of how
-specific the chosen mechanism is.
-
-**Analysis** = first-class bridge from raw input to sharpened need, preserving provenance:
-
-| Path | `producesDecision` | Outcome |
-| --- | --- | --- |
-| **A — mint** | `true` + `claimDescription` | **New** record(s); analysis concludes in the same call |
-| **B — honest dismissal** | `false` | No record; rationale explains why |
-
-`motivatedBy` = **list**: every input taken up. Input = **Matter | WorldFact | ObservedOutcome**, any
-mix; cite the entry itself, never a Matter restating it — that loses the link, unrepairably.
-Fan-in/fan-out independent — *n* in, *m* out. **Never ask which record answers which input**;
-ordinarily no such fact, none to invent. Input recognized later → `attach_analysis_reference`
-(post-conclusion, dated, reads as late).
-
-**Expert path** bypasses analysis: `create_MDR` with a claim. Nothing on a record says which path
-minted it. Intake routing → `record-decision`. Parking unanalyzed → `save-matter`;
-`discover_matters(untaken: true)` = unprocessed-bait inbox, **matters only**, answered as prose
-carrying each matter's summary and subjects, so you can weigh candidates without opening one.
-
-**Matters carry no status** — no disposition, no vocabulary of endings. What became of one reads from
-its shape: who took it up, when, what they produced.
-
-**Chain of agency.** Anyone raises a Matter → Expert #1 analyzes it into a head Claim → Expert #2
-commits the Verdict at t₀. In solo sessions **"Expert #1" is not your private drafting seat**: with
-no separate human there you inherit it by name only, and the head Claim is still co-discovered with
-the user, never authored by you and handed down.
+stay under 50ms"*). Never anchor a record on raw Matter prose. What a record is made of and how raw
+input becomes one — the fish, analysis, the chain of agency: `references/facilitation.md`.
 
 ## Identity
 
 | Key | Role |
 | --- | --- |
-| `mdrHandle` | Mint-time address. **Pass on record tools whenever you have one**, including after admission. Raw in tool arguments; in prose it is written `MDRh{handle}` and names a staged record only (Rule F) |
+| `mdrHandle` | Mint-time address. **Pass on record tools whenever you have one**, including after admission. In prose, Rule F |
 | `mdrNumber` | Ledger identity, assigned only at admission; `null` while staged. **Primary user-facing identifier once admitted**; accepted by `get_MDR` alongside `mdrHandle` |
 | `retractable` | Uncommit eligibility, computed: `null` staged; `true` committed and not anchored; `false` anchored. **Read before suggesting an uncommit** |
 
-## Decision Transaction Principle
+## Before any record write
 
-Effects project **forward only**. **t₀** = admission, the transition to **Accepted** or **Rejected**.
-At t₀ the server sets `decidedAt`, assigns `mdrNumber`, seals tier-1 fields.
-
-**Stable fish stay sealed.** After admission tier-1 fields are immutable via `update_MDR`, retractable
-or anchored alike. **Retractable** means only that an uncommit can demote it to staged for editing and
-re-admission; **anchored** cannot be uncommitted at all. **Never** tell a user a committed record can
-be patched in place.
-
-Before t₀: handle, no number, `retractable: null`. Staged records may author `amends`, `supersedes`,
-`dependsOn`, `conflictsWith` and `settlesOpenQuestion`; targets are admitted numbers.
-
-**Correction path** turns on how much is wrong, not on `retractable`: nothing, it should never have
-said that → uncommit (needs `true`); part of it → `amends`, original stays **Accepted**; all of it →
-`supersedes`. **Amend keeps everything you don't change; supersede keeps none of it** — so an
-amendment states deltas only, and restating the original is not amending it. Both need `Accepted` at
-each end. Amending Anchors what it amends, permanently, and reads gentler than it is. Detail →
-`revise-decision`.
-
-Value is **honesty, not correctness.** A well-reasoned decision that failed teaches more than one
-retrofitted to look prescient. Wake evidence showing a violated commitment → re-decide at a new t₀; the
-wake becomes bait for the next fish.
-
-## Lifecycle
-
-| From | To |
-| --- | --- |
-| New | Deliberating, Proposed |
-| Deliberating | Proposed, Accepted, Rejected |
-| Proposed | Accepted, Rejected |
-| Accepted, Rejected, Superseded | *terminal for transitions; retractable records may be uncommitted* |
-
-**Superseded** is never a transition target — a record reaches it when another admits carrying
-`supersedes`.
-
-| Target | Requires |
-| --- | --- |
-| Deliberating | head Claim |
-| Proposed | ≥1 alternative, `chosenAlternative` among their ids, non-empty Verdict |
-| Accepted | the above, plus ≥1 expected outcome |
-| Rejected | head Claim, Verdict |
-
-**Two commitment thresholds.** **Proposed** = formal governance waist gate, **not t₀**; informal work
-skips it. **Accepted** / **Rejected** = t₀.
-
-**Rejection is one of the two things a decision becomes at t₀** — not a failed draft, and available in
-far more situations than "we explored everything and nothing worked", including while other work
-proceeds perfectly well:
-
-> A Verdict that spends a paragraph on what you are **not** doing, inside a record about what you
-> **are** doing, is two records.
-
-A Rejection is easy to not think of at all → open `references/rejection.md` *before* deciding how work
-decomposes, not after.
-
-Full matrix and validator behaviour: `references/lifecycle-and-gates.md`.
+The fish model, analysis, the Decision Transaction Principle, the lifecycle and Rules A–E and G are
+`references/facilitation.md`, loaded at Step 0 by every skill that mints, patches, seals, revises a
+record or records a wake. Two of its rules bind even before it is loaded: **discussion is
+deliberation** — never mint at **Accepted** or **Rejected**, or transition to either, without the
+user's explicit ask in their own words; and **a committed record is never patched in place** —
+`retractable: true` means only that an uncommit is available.
 
 ## Facilitation rules
 
-Apply in **every** mode — casual conversation, expert mint, matter path, portfolio review, grill-me.
-
-### Rule A — Discussion is deliberation; default persist status is Deliberating
-
-Shaping a fish *with* the user is deliberation. Unless formal governance applies (Rule B): do not mint
-or transition to **Proposed**, and do not offer **Accepted** or **Rejected**, without explicit user
-commitment (Rule C).
-
-**New** is exceptional — external import and analysis Path A only, never a conversational outcome. A
-complete fish body may sit at **Deliberating**; completeness is not commitment. Never infer commitment
-from agent-authored Verdict prose, a firm-sounding draft, or a confirmed read-back.
-
-### Rule B — Proposed is the formal governance path
-
-| Posture | Signals | Path |
-| --- | --- | --- |
-| **Informal** (default) | Solo decider, hobby, small team without ratification | Deliberating → t₀; **skip Proposed** |
-| **Formal** | Distinct RACI deciders, committee vote, compliance sign-off | Deliberating → Proposed → t₀ |
-
-Infer posture from context. Unclear → **default informal**, and do not surface **Proposed** in
-user-facing choices.
-
-### Rule C — t₀ is a separate, explicit ceremony
-
-Two steps, never collapsed: **persist / recap** at Deliberating → **commit**, only when the user
-explicitly asks to seal.
-
-**Narrow exception:** one-shot mint at **Accepted** or **Rejected** when the user has unambiguously
-stated commitment in their own words ("accept this", "lock it in", "reject this path") — never because
-you drafted a convincing Verdict.
-
-Rejection deserves equal facilitation, in more situations than an exhausted deliberation — a Claim
-declined while other work proceeds is the case most often missed (`references/rejection.md`).
-
-### Rule D — Open questions keep scope tight; they do not block commit
-
-Open questions name what a record deliberately leaves unsettled — *"we have not validated vendor B's
-SLA under peak load"*. Scope boundaries acknowledged at commitment, not unfinished deliberation.
-Settlement requires a **later Accepted** record, never an edit to this one.
-
-**Default posture:** something falls outside this Claim → record it as an open question and proceed.
-Prefer a correctly scoped Accepted record with open questions over scope creep. **Never** treat a
-remaining open question as a gate.
-
-### Rule E — Record the explored process; do not stage theater
-
-Record the **user's** decisional process; do not run a workshop that invents a fuller-looking belly.
-
-**Draft first.** Mine what the user already said or implied — favoured path, discarded options, "vs
-doing nothing", constraints that ruled things out. Never invent options they did not explore.
-
-**Probe lightly, only for honesty gaps.** One short check suffices when a single favoured path has no
-acknowledgment of what else was in play. Not a gate. **Never stage the section** — no "now we move to
-alternatives" as form-filling.
-
-**Deliberation is not only conversational.** Building a spike, reading the implementation, probing a
-running system: real exploration, and what they establish belongs in the belly exactly as spoken
-reasoning does. The prohibition is on options nobody explored, wherever the exploring happened.
-Decision about something buildable → draft at **Deliberating**, build against it, correct before t₀;
-mechanics in `record-decision`.
+Rules A–E and G are in `references/facilitation.md`. Rule F applies to every journey, reads included.
 
 ### Rule F — Cite the number; name a staged record as `MDRh<handle>`
 
@@ -344,23 +175,6 @@ no number, may never get one, cannot be anchored — nothing can protect a refer
 **admitted** entry looks like in a file, a document, a commit message or a message to a person, and
 the anchoring and timing that precede it, are the **`memolok-citations`** skill. Load it first.
 
-### Rule G — The Need is not a running summary
-
-Rule E guards the belly against over-*invention*. This guards the head against over-*enrichment* with
-content that exists only because of downstream deliberation.
-
-**Proof analogy.** Need = hypothesis, Verdict = conclusion, belly = the proof connecting them. Two
-symmetric failures: **over-sharpening** smuggles the conclusion into the hypothesis, making everything
-downstream circular; **under-sharpening** leaves a hypothesis with no determinate truth conditions.
-
-**The test:** would this clause have been askable, word for word, before any alternative was discussed?
-A mechanism, technique, or scope boundary that became known only through exploring alternatives belongs
-in the belly or the Verdict — **no matter who said the words**.
-
-The Need is expected to be **walked back** as belly work proceeds; de-sharpening an over-specific Claim
-is correct, not a failure to hold a line. Caught the conflation after already restating it once →
-re-derive from *"what did we know before we explored anything?"*; it survives light rewording.
-
 ## Capture vs draft
 
 **Never** say "captured", "saved", or "logged" unless an MCP write for that content succeeded. Before
@@ -376,13 +190,14 @@ Load when the situation calls for it — not upfront.
 
 | File | Load when |
 | --- | --- |
+| `references/facilitation.md` | **At Step 0 of any skill that mints, patches, seals, revises a record or records a wake**, before the first such call → the fish model, analysis, the Decision Transaction Principle, the lifecycle and Rules A–E and G; an unloaded rule is an unenforced rule, and these govern writes to an immutable ledger |
 | `references/rejection.md` | Before deciding how work decomposes → a Rejection you never thought of gets written as a paragraph inside an Accept, and the second decision is lost |
 | `references/lifecycle-and-gates.md` | Before any transition → which fields seal at t₀, which a later patch refuses by name |
 | `references/tools-catalog.md` | Before a tool call you have not made this session → parameter names and shapes differ between tools that look symmetric |
 | `references/prose-and-raci.md` | Composing prose payloads → the two-level shape is not uniform across fields, and a flat object is refused |
 | `references/write-failures.md` | A write just failed → two failure shapes needing opposite responses, one of which must never be retried |
 | `references/ledger-intent.md` | Drafting or revising a ledger's purpose → the one thing nothing may cite, and treating it as a premise corrupts a record |
-| `references/cold-start-signal.md` | **After** they accept the offer, never before it → where the paragraph goes differs by what this session can reach and the obvious target is inert on surfaces that hand you a copy of the project; the wording is fixed text you copy, and one written from memory names the ledger and goes stale where nothing refreshes it |
+| `references/cold-start-signal.md` | **After** they accept the offer, never before → the destination differs by surface and the obvious one is inert on some; the wording is fixed text, and one written from memory goes stale where nothing refreshes it |
 | `references/mcp-boundaries.md` | User asks for something you suspect has no tool → offering a capability that does not exist costs more than checking |
 | `references/scopes-and-bridging.md` | Before answering on a ledger the user did not name → the wrong tenancy answers "we never decided that", confidently |
 | `references/facilitation-examples.md` | A region passes the gates but reads thin → gates check well-formedness, never quality |

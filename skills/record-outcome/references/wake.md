@@ -13,7 +13,7 @@ Requires both `tests` and `testResult`.
     "lang": "en"
   },
   "discoveryType": "Expected",
-  "tests": { "outcomeId": "eo-3f9a2c11" },
+  "tests": { "outcomeId": "eo-read-latency" },
   "testResult": "Violated"
 }
 ```
@@ -67,7 +67,7 @@ Only when the earlier reading was **wrong when it was made**:
     "lang": "en"
   },
   "discoveryType": "Expected",
-  "tests": { "outcomeId": "eo-3f9a2c11" },
+  "tests": { "outcomeId": "eo-read-latency" },
   "testResult": "Satisfied",
   "correctsFact": "<priorObservedOutcomeId>"
 }
@@ -95,7 +95,7 @@ get_MDR_learning_delta(mdlGuid, mdrHandle)
   "mdrNumber": 7,
   "expectedOutcomes": [
     {
-      "outcomeId": "eo-3f9a2c11",
+      "outcomeId": "eo-read-latency",
       "description": { "markdown": "P99 read latency stays under 200ms within 30 days.", "lang": "en" },
       "wakes": [
         { "observedOutcomeId": "...", "discoveryType": "Expected", "testResult": "Violated", "observedAt": "..." }
@@ -122,7 +122,7 @@ user. Ledger residents only.
 | `Learning delta is available for ledger-resident Memolok Decision Records only.` | Delta requested on a staged record |
 | `A Memolok Decision Record cannot cite its own Observed Outcome in hasContext (decision transaction principle).` | A record trying to cite its own wake as context |
 
-## The self-correcting loop
+## The learning loop
 
 ```
 Matter₁ → Analysis₁ → MDR₁ → expected outcome → observed outcome (Violated)
@@ -139,22 +139,6 @@ Matter retyping the observation would draw the same picture and record none of i
 The wake becomes bait for the next fish. The original record stays exactly as it was at its own t₀ —
 that is what makes the loop legible in hindsight.
 
-MDR₂ closes in one of two shapes, and they are not interchangeable:
-
-| MDR₂ admits as | Link back | When |
-| --- | --- | --- |
-| **Accepted** | May carry `supersedes: [MDR₁]`, which flips MDR₁ to `Superseded` | A replacement decision is being made |
-| **Rejected** | **None.** A Rejection carries no `supersedes` and no `settlesOpenQuestion` | The commitment itself is being declined rather than replaced |
-
-The second is common when MDR₁'s decision shipped and holds, and only what it *promised* was wrong.
-Nothing structural connects the pair, so the successor must cite the wake in `hasContext` and say in
-its Verdict what it declines — otherwise a reader arriving at MDR₁ finds a violated commitment and no
-sign anyone answered it.
-
-## What never happens
-
-- Editing an expected outcome so it matches the result
-- Editing a prior observation because a later one disagreed
-- Automatic supersession on a `Violated` result
-- Backdating an observation — there is no `observedAt` parameter
-- Deleting an outcome
+MDR₂ closes as **Accepted**, carrying `supersedes: [MDR₁]` when it replaces the decision, or as
+**Rejected** when it declines the commitment — step 6 of the skill says how the second is linked, since
+a Rejection carries no edge.

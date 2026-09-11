@@ -13,10 +13,6 @@ argument-hint: "<what you noticed, in your own words>"
 Registers a Matter verbatim on the ledger and stops. No sharpening, no analysis, no decision. The
 matter waits, referenced by nothing, until some later session picks it up.
 
-A Matter is any pre-analytical input to possible decision work — a defect, a desired feature, an
-improvement, an opportunity, a mandate, or a question nobody has answered yet. It carries no
-emotional polarity and no truth value; it is raw material, not a claim.
-
 ## Usage
 
 ```
@@ -61,11 +57,7 @@ downgrading a decision to a note loses the decision.
 
 ### Matter or scratchpad?
 
-Both are one-turn captures; the difference is "actionability" – **whether anyone is expected to do something**.
-
-A Matter carries an expectation that somebody will eventually look at it, however distant. A
-scratchpad carries none: it is a pasted quote, a scraped page, rough figures, material worth keeping
-that nobody owes anything to.
+Both are one-turn captures; the difference is whether anyone is expected to do something.
 
 | The user brought | Entity |
 | --- | --- |
@@ -74,19 +66,15 @@ that nobody owes anything to.
 | *"we could probably drop the nightly rebuild"* | **Matter** — an idea somebody should weigh |
 | *"jotting this before I forget"* | **Scratchpad** |
 
-Getting it wrong costs in both directions: a scratchpad used as intake means real work is never
-processed, and a Matter used as a notepad fills the unprocessed-bait inbox with things nobody intends
-to decide — which is worse, because matters are immutable and cannot be deleted.
-
-When genuinely ambiguous, prefer the **scratchpad** and say so in one clause. It is the reversible
-choice: a note can be promoted into a matter later (albeit only via agent facilitation), whereas a matter can never be taken back.
+The method's two routing questions decide it. When genuinely ambiguous, prefer the **scratchpad** and
+say so in one clause: a note can be promoted into a matter later, whereas a matter can never be taken
+back.
 
 ## Workflow
 
 ### 1. Establish the ledger
 
-Use the `mdlGuid` already in play. If there is none, check `.memolok/mdl.yml` when project files are
-available, then `get_MDLs`. Pick the ledger whose worldview the matter belongs to.
+Per the method's invariants; pick the ledger whose worldview the matter belongs to.
 
 **Do not create a ledger for a drive-by.** If the user has none, say the matter needs somewhere to
 live and offer `start` — but do not make them stop and name a ledger when they were trying not to stop
@@ -98,11 +86,9 @@ at all. Holding the text in the conversation and offering to log it later is a r
 discover_matters(mdlGuid, untaken: true, query: "<the words the user just used>")
 ```
 
-**The prose read, because this is a judgement.** Whether the same thing is already parked is a
-question about what a matter is *about*, and an excerpt is a positional trim of somebody's opening
-words — two people parking the same trouble rarely open the same way. The read carries each matter's
-summary and the terms it names, and search reaches those, so a duplicate surfaces on a word neither
-person typed.
+**This is a judgement about what a matter is *about*** — two people parking the same trouble rarely
+open the same way. The page carries each matter's summary and the terms it names, and search reaches
+those, so a duplicate surfaces on a word neither person typed.
 
 If the same thing is already parked, say so and stop — do not register a second one. Matters are
 immutable, and there is no way to merge or delete them.
@@ -147,14 +133,10 @@ to decide now, and do not summarize the methodology.
 
 ## What happens next
 
-Nothing references the matter, which is what the unprocessed-bait inbox means. A later session finds
-it with `discover_matters(untaken: true)` and takes it through **`record-decision`**, which sharpens it
-into a head Claim and mints a record.
-
-That deferred pickup is exactly why parking is safe: the provenance chain from the user's original
-words to the eventual decision stays intact, however long the gap.
-
-If it turns out no decision was warranted, the pickup session closes it honestly through Path B.
+A later session finds it in the unprocessed inbox and takes it through **`record-decision`**, which
+sharpens it into a head Claim and mints a record — the provenance chain from the user's original
+words to the eventual decision stays intact, however long the gap. If no decision was warranted, the
+pickup session closes it honestly through Path B.
 
 ## Tips
 

@@ -28,38 +28,14 @@ records, or invented calls. Tell the user it is not available yet.
 | Working notes | `create_scratchpad`, `get_scratchpad` (one, whole), `replace_scratchpad`, `delete_scratchpad`, `discover_scratchpads` (a ledger's notes as prose, each with the title and summary Memolok derived for it) |
 | Feedback to Memonos, the team behind Memolok | `submit_feedback`, `get_feedback`, `update_feedback` — see the `send-feedback` skill |
 
-### Graph edges, staged records only
+### Graph edges, almanac context, `retractable`
 
-`update_MDR` may patch `amends`, `supersedes`, `dependsOn`, `conflictsWith` and
-`settlesOpenQuestion`. Targets must be admitted `mdrNumber`s. On a resident the field is refused —
-including `[]`, since presence is what is refused. Reciprocals (`amendedBy`, `supersededBy`) publish
-at admission and are never writable.
-
-`supersedes` may only target `Accepted` residents, once each; admission flips them to `Superseded`.
-`amends` requires an `Accepted` record at each end too, for the same reason: amendment is opt-out
-over the anchor's surviving content, and a `Rejected` or `Superseded` record has none.
-
-`dependsOn` and `conflictsWith` carry no status gate, including against a `Rejected` record. They
-relate the records, not their contents, and a decline is a real decision even though what it declined
-is not in force — so a later decision can rest on it, or collide with it.
-
-**Every one of these Anchors its target at admission**, so amending a record ends its uncommit path.
-`conflictsWith` is symmetric and Anchors both endpoints, the author's own record included.
-
-### Almanac context, staged records only
-
-`update_MDR` may set `hasContext` to an ordered list of World Fact or prior Observed Outcome ids from
-the same ledger. The list freezes at admission. A record may not cite its own wake.
-
-### Retractable
-
-| Value | Meaning |
-| --- | --- |
-| `null` | Staged — patch freely; uncommit not applicable |
-| `true` | Committed and not anchored — **still not patchable**; uncommit first |
-| `false` | Anchored — amend one clause, or supersede the whole record |
-
-This is operational metadata computed at read time. It is never exported.
+The boundaries: the five graph keys and `hasContext` are patchable while a record is staged and refused
+on a resident, `[]` included; `amends` and `supersedes` need an **Accepted** record at each end; a
+record cannot cite its own wake; a resident's tier-1 fields are never patchable, whatever `retractable`
+says — `true` means only that an uncommit is available. What each edge does to its target, and what
+anchors: `lifecycle-and-gates.md`. `retractable` is operational metadata computed at read time and
+never exported.
 
 ## Not available — do not invent
 
@@ -89,7 +65,7 @@ to an existing one. Nothing limits an input to one analysis.
 ### Feedback reports are not ledger entities
 
 `submit_feedback` sends the feedback to Memonos, not to the user's own ledger. A report has no `mdlGuid` tenancy,
-carries no Claim, cannot be cited, and never becomes a Matter. Mental model: write-only – there is
+carries no Claim, cannot be cited, and never becomes a Matter. Mental model: write-only — there is
 **no list and no search**: a report is reachable only by an id its submitter still holds, and it may be
 deleted server-side during triage, so `get_feedback` legitimately returns not-found for something that existed.
 
@@ -133,8 +109,8 @@ lives in, never where, so nothing resolves from a record back to a file.
 **`delete_scratchpad` is the only delete tool, for the only deletable entity.** Everything else is
 immutable on admission (`Matter`, `WorldFact` substance) or sealed at t₀ (`DecisionRecord`), and
 there is no delete for any of them — a matter registered by mistake is left unreferenced or closed
-through Path B, a wrong
-fact gets a correcting successor, a regretted record is uncommitted or superseded.
+through Path B, a wrong fact gets a correcting successor, a regretted record is uncommitted or
+superseded.
 
 Do not generalise from the scratchpad tool. It exists only because a note is the one thing nothing
 else can depend on.
@@ -159,7 +135,5 @@ note is authored fresh with no trail back, and the user should be told that once
 | `scratchpadId` (`sp_` + 26) | a bare id, or any other entity's prefix — every kind carries its own, so a category error is refused by name |
 | `mdlGuid` | `adlGuid` |
 
-Tools take `mdrHandle`; as a convenience, `get_MDR` also accepts `mdrNumber` so a record someone cites by number can be read directly. Use the handle whenever you hold one.
-
-In conversation, cite `mdrNumber` as `MDR-{n}` once admitted; while staged, name the record
-`MDRh{handle}` or paraphrase its head Claim. Never a bare handle.
+Tools take `mdrHandle`; as a convenience, `get_MDR` also accepts `mdrNumber` so a record someone cites
+by number can be read directly. Use the handle whenever you hold one.

@@ -41,13 +41,10 @@ where the block began.
 
 ## Rewriting and removing
 
-- **Rewrite between the markers**, when what is there differs from the paragraph. Replace the region
-  whole; never merge, never append.
-- **Removal is deleting the block**, not the file. Everything else in `CLAUDE.md` stays exactly as it
-  was, including the blank lines around where the block used to be.
-- **If the block is absent and the practitioner's prose says nothing about Memolok**, they removed
-  it. That is an answer: offer again on the ordinary trigger, and take a second no as you took the
-  first.
+As at rung 2 — replace the region whole, never merge or append, and an absent block is an answer to
+offer again only on the ordinary trigger — with one difference: **removal deletes the block, not the
+file.** Everything else in `CLAUDE.md` stays exactly as it was, including the blank lines around where
+the block used to be.
 
 ## Asking, which is a heavier ask here
 
