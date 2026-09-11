@@ -18,7 +18,8 @@ Returns the full record with `decidedAt` set, `mdrNumber` assigned, graph recipr
 Needs a head Claim and a non-empty Verdict. Alternatives, `chosenAlternative`, and expected outcomes
 are **not** required — though belly content from real deliberation is welcome evidence.
 
-A record admitting as `Rejected` must not carry `supersedes`.
+A Rejected record carries no `amends`, `supersedes` or `settlesOpenQuestion`: nothing it says is in
+force, so it changes, retires and settles nothing.
 
 ## Proposed — formal governance only
 
@@ -36,25 +37,6 @@ no number, still fully editable. Skip it entirely on informal work.
 `create_MDR` does **not**. Sending `"status": "Committed"` there fails with a raw error that bypasses
 the friendly error mapping, so always send canonical values at creation.
 
-## Legal transitions
-
-| From | To |
-| --- | --- |
-| New | Deliberating, Proposed |
-| Deliberating | Proposed, Accepted, Rejected |
-| Proposed | Accepted, Rejected |
-| Accepted, Rejected, Superseded | — |
-
-```
-Cannot transition a Memolok Decision Record from {from} to {to}.
-```
-
-**Proposed cannot go back to Deliberating.** If a proposal needs rework, either patch it in place —
-it is still staged — or reject it and mint a fresh record.
-
-**Superseded is not a transition target.** A record reaches it only when a *different* record admits
-carrying `supersedes` naming it.
-
 ## Gate errors
 
 | Message | Fix |
@@ -67,6 +49,9 @@ carrying `supersedes` naming it.
 | `Each expected outcome must include description prose before accepting…` | An outcome is missing its prose |
 | `A Verdict is required before rejecting a Memolok Decision Record.` | Rejection still needs its reasoning |
 | `A Rejected Memolok Decision Record must not carry supersedes…` | Clear `supersedes`, or admit as Accepted |
+| `A Rejected Memolok Decision Record must not carry amends…` | Clear `amends`, or admit as Accepted |
+| `Only Accepted Memolok Decision Records may carry settlesOpenQuestion.` | Clear `settlesOpenQuestion`, or admit as Accepted |
+| `Cannot transition a Memolok Decision Record from {from} to {to}.` | The matrix is the method's lifecycle table. The usual case is Proposed back to Deliberating, which is not allowed: patch it in place — it is still staged — or reject it and mint a fresh record |
 
 Every one of these is fixable with an `update_MDR` while the record is still staged. Patch, then
 return to the ceremony.

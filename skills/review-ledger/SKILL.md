@@ -34,16 +34,6 @@ Examples:
 Load the **`memolok-method`** skill for the lifecycle vocabulary and Rule F, which governs how records
 are named back to the user.
 
-## How to name records
-
-| State | Cite it as |
-| --- | --- |
-| Admitted (`mdrNumber` set) | **MDR-7** |
-| Staged (`mdrNumber` is `null`) | **MDRh7**, or the head Claim where prose reads better |
-
-**The two are different addresses**, and `MDRh7` and `MDR-7` routinely name different records. Never
-write a bare handle — it reads as a number. Raw handles stay in tool arguments.
-
 ## Workflow
 
 ### 1. Establish the ledger
@@ -83,14 +73,10 @@ to the scout.
 user's question in their own words, and what you need back. Never hand it a ledger the user has not
 settled on.
 
-**Getting it back.** Name records to the user per Rule F and keep raw handles in tool arguments. The
-scout reports its coverage — pages read out of `total`, bodies opened — and **that coverage is
-part of your answer**: "nothing about X in all 68 records" and "nothing about X in the first 25" are
-different answers, and only one of them settles anything.
-
-**If you cannot spawn one**, do the same reads inline. They are paged now, so this is ordinary work
-rather than a degraded path. Per the reading invariant: no agent tool is not the user's problem and
-goes unmentioned; a session whose own settings forbid spawning is theirs to change, so say it once.
+**Getting it back.** Name records to the user per Rule F. The scout reports its coverage — pages read
+out of `total`, bodies opened — and **that coverage is part of your answer**: "nothing about X in all
+68 records" and "nothing about X in the first 25" are different answers, and only one of them settles
+anything.
 
 ### 3. Pick the read
 
@@ -109,17 +95,17 @@ goes unmentioned; a session whose own settings forbid spawning is theirs to chan
 | What happened after a decision | `discover_observed_outcomes(mdlGuid, mdrHandle?)` |
 | Promises versus reality for one record | `get_MDR_learning_delta(mdlGuid, mdrHandle)` |
 
-**A topic search is `query`, not a listing you read yourself.** `discover_MDRs(query="...")` searches the
+**A topic search is `query`, not a page you read yourself.** `discover_MDRs(query="...")` searches the
 whole fish — head **Claim**, **Verdict**, alternatives, deliberation facts, expected outcomes, open
-questions — so a record is found by the reasoning inside it and not only by its Claim. Rows carry an
-excerpt of the Claim rather than the whole of it, so `get_MDR` before quoting one back.
+questions — so a record is found by the reasoning inside it and not only by its Claim. The page
+carries an excerpt of the Claim rather than the whole of it, so `get_MDR` before quoting one back.
 
-Search is lexical: terms are ORed and case-insensitive, there are no phrases or operators, and a
-record that discusses the topic in other words will not surface. **An empty result means no record
-used those words** — say which you tried, and treat it as weak evidence rather than as "we never
-decided that".
+Search is lexical: whitespace-separated terms, ORed, case-insensitive and English-stemmed; no
+operators, phrases or regex; a whole hyphenated token matches and a partial one does not. An empty
+result means no entry used those words — say which you tried. Treat it as weak evidence rather than
+as "we never decided that".
 
-Every listing pages: `limit` defaults to 25, and `total` counts the whole match. Read `total` before
+Every read pages: `limit` defaults to 25, and `total` counts the whole match. Read `total` before
 answering, and never let a first page stand in for the ledger.
 
 **Under a `query`, `total` counts matches — not the ledger.** A size question needs an unfiltered
@@ -127,14 +113,14 @@ call. A filtered `total` quoted as a ledger size is wrong in the direction that 
 emptier than it is, which is how "I did not find it" becomes "it was never recorded".
 
 **When the user names a number, read it directly.** `get_MDR` takes `mdrNumber` in place of
-`mdrHandle` — exactly one of the two — so "what did MDR-7 say?" is one call, not a full listing to
-find a handle. Use the handle whenever you already have one, and use the handle the response carries
+`mdrHandle` — exactly one of the two — so "what did MDR-7 say?" is one call, not a sweep to find a
+handle. Use the handle whenever you already have one, and use the handle the response carries
 for anything you do to the record afterwards. A number released by an uncommit can be taken by a
 later record, so read back what you got before answering on it.
 
-**The `status` filter is validated now.** An unknown value is refused by name rather than answering
-with an empty list that read as "nothing decided". A genuinely empty result therefore means what it
-says — though only for the page you asked for, so check `total` before concluding anything from it.
+**The `status` filter is validated.** An unknown value is refused by name. A genuinely empty result
+means what it says — though only for the page you asked for, so check `total` before concluding
+anything from it.
 
 ### 4. Answer the question that was asked
 
@@ -228,12 +214,8 @@ body whole and is where a quotation comes from.
 
 So: use the heading to say *which* matters are waiting, and **quote the raiser only from
 `get_matter`.** A summarised matter shows no opening words on the page at all — the summary stands
-where they would be — so there is nothing there to quote even when it looks like there is.
-
-**`discover_matters(untaken: true)` is the better read for this section** — the same inbox, answered
-as prose with each matter's summary, so you can say what is waiting rather than only that something
-is. It labels which words are Memolok's and which are the raiser's, which is the distinction above
-made structural.
+where they would be — so there is nothing there to quote even when it looks like there is. The page
+says which of the two it is showing you.
 
 ### Scratchpads are not ledger contents
 
@@ -249,14 +231,8 @@ If the user asks about their notes specifically, that is the **`manage-notes`** 
 
 ### Before changing a record
 
-`get_MDR` and read two fields:
-
-| Field | Means |
-| --- | --- |
-| `mdrNumber` | `null` → staged, patch it freely |
-| `retractable` | `true` → committed but uncommittable; `false` → anchored, needs a successor |
-
-This read is what decides between the two paths in `revise-decision`. Do not guess it.
+`get_MDR` and read `mdrNumber` and `retractable`; the method's identity table says what each value
+means. This read is what decides between the routes in `revise-decision`. Do not guess it.
 
 ### How a decision actually turned out
 
@@ -282,8 +258,9 @@ rather than "the ledger flags three affected records".
 
 ## Tips
 
-- Non-members get `Memolok Decision Ledger not found.` on reads — deliberately identical to a missing
-  ledger, so it leaks nothing. If the user expected access, they need to be added by an administrator.
+- `Memolok Decision Ledger not found.` does not distinguish a ledger the user cannot see from one that
+  is not there. Report it as ambiguous: they may not be a member, or this address may be stale. If the
+  user expected access, an administrator adds them.
 - `visitor` role can read everything and write nothing.
 - A `Superseded` record is history, not a mistake. It records what was true and in force at its own t₀.
 - When a search finds nothing, say so plainly and offer to record the decision now rather than

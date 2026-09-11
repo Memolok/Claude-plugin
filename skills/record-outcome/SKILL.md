@@ -28,8 +28,8 @@ Examples:
 
 ## Step 0 — Load the method
 
-Load the **`memolok-method`** skill. The Decision Transaction Principle is what makes the wake a
-separate record instead of an edit.
+Load the **`memolok-method`** skill and its `facilitation.md` reference. The Decision Transaction
+Principle is what makes the wake a separate record instead of an edit.
 
 ## Non-negotiables
 
@@ -96,7 +96,7 @@ The ledger is not a monitoring system. Do not funnel raw metrics into it.
     "lang": "en"
   },
   "discoveryType": "Expected",
-  "tests": { "outcomeId": "eo-3f9a2c11" },
+  "tests": { "outcomeId": "eo-read-latency" },
   "testResult": "Violated"
 }
 ```
@@ -147,8 +147,8 @@ a new observation that coexists with the old one.
 
 ## Anchoring
 
-Recording a wake sets `realizedFrom` on the source, which typically makes it **anchored**
-(`retractable: false`). After that it can only be changed by a successor carrying `supersedes`.
+Recording a wake links it to the source record, which typically makes the record **anchored**
+(`retractable: false`). After that it is amended or superseded, never uncommitted.
 
 If the user may still want to revise the sealed record, do that **first** — see `revise-decision`.
 

@@ -67,9 +67,3 @@ confirmation from being mistaken for commitment.
 
 **Ask one closing question and wait.** If the answer is no, return to the region that was wrong — do
 not persist a draft the user has not endorsed.
-
-## What not to put in the footer
-
-Do not offer **Proposed** on informal work, and do not offer **Accepted** unless the user has already
-raised sealing. A preview footer that reads *"…or shall I mint this straight to Accepted?"* infers
-commitment from your own draft.

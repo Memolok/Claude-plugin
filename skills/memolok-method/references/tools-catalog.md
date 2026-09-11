@@ -57,10 +57,6 @@ shape as `userId` — sixteen Crockford base32 characters, no prefix — so noth
 which of the two you are holding. Never substitute one for the other, never infer the kind from the
 value, and reason about nothing in it.
 
-Ledger addresses were re-minted alongside the identifiers above, so one quoted from an older session
-can fail two ways: refused as malformed, or accepted and simply not found. Neither is a permissions
-problem and neither is a diagnosis — read the value back to the user.
-
 All prose parameters use `{ markdown, lang? }` — see `prose-and-raci.md` for which are wrapped in a
 `description` key.
 
@@ -127,7 +123,10 @@ that collection carries, and its derived summary. The page states its own totals
 holding part of the ledger, and gives you the `offset` for the next one. Where an entry has nothing
 derived the heading is the writer's own opening instead, and every page says which it is showing you.
 On `discover_scratchpads` that fallback is a trim of whatever was pasted rather than an opening
-somebody wrote, because nobody types a title for a note.
+somebody wrote, because nobody types a title for a note. **A heading or summary is Memolok's wording,
+never the author's: quote a person only from the `get_*` read that returns the entry whole.** On world
+facts that matters most, because a paraphrase quoted as the admitted claim misstates what the ledger
+rests on.
 
 **Every page renders a date line** — `Decided:` on records, `Raised:` on matters, `Admitted:` on
 facts, `Observed:` on outcomes, `Touched:` on notes — so *"what came in this week"* is answerable without opening
@@ -140,13 +139,13 @@ not seen the ledger, and an answer that does not say so is claiming coverage it 
 **A discovery read is for choosing. None of them returns a whole entry** — `get_MDR`, `get_matter`,
 `get_world_fact`, `get_observed_outcome` and `get_scratchpad` are the reads that do.
 
-**The query grammar is tiny, deliberately.** Whitespace-separated terms, **ORed**,
-case-insensitive. No operators, no phrases, no regex, no case toggle. Whole hyphenated tokens match;
-partial ones do not. An entry matching two terms outranks one matching a single term. Order is
-relevance when `query` is sent, each tool's natural order otherwise.
-
-**An empty result with a `query` means nothing matched those words** — not that nothing exists.
-Say which words you tried; do not fall back to enumerating everything.
+**The query grammar is tiny, deliberately.** Search is lexical: whitespace-separated terms, ORed,
+case-insensitive and English-stemmed; no operators, phrases or regex; a whole hyphenated token matches
+and a partial one does not. An empty result means no entry used those words — say which you tried.
+An entry matching two terms outranks one matching a single term. Order is relevance when `query` is
+sent, each tool's natural order otherwise; do not fall back to enumerating everything. Search reaches
+the derived title, subjects and summary as well as the author's words, so an entry can match a term
+nobody typed into it, and an entry naming your term among its subjects ranks first.
 
 Per-tool filters and natural order are below. Nothing else about the shape varies.
 
@@ -158,64 +157,28 @@ Per-tool filters and natural order are below. Nothing else about the shape varie
 | `mdrHandle` | int | exactly one of the two |
 | `mdrNumber` | int | exactly one of the two |
 
-Returns the full record — fish body, `mdrHandle`, `mdrNumber`, `retractable`, and any graph edges,
-plus `analysisId` (`null` when no analysis produced it) — and the derived `title`, `summary` and
-`subjects` where Memolok has produced them.
+Returns the full record — fish body, `mdrHandle`, `mdrNumber`, `retractable`, `createdAt`,
+`decidedAt` once admitted, and any graph edges, plus `analysisId` (`null` when no analysis produced
+it) — and the derived `title`, `summary` and `subjects` where Memolok has produced them.
 
 **Those three appear only on a sealed record**, because only sealed records are derived: a staged
-record's prose is still editable and nothing would notice a summary going stale against it. They are
-Memolok's reading of the record, never the decider's words — quote the fish body.
+record's prose is still editable and nothing would notice a summary going stale against it.
 
-Pass the handle when you have one. `mdrNumber` is here for the case where a person cites a number
-and you would otherwise sweep `discover_MDRs` to find its handle — one call instead of a
-ledger-wide read.
-**Exactly one of them MUST be passed.** A number can have been released by an uncommit and taken by a
-later record, so check the record you get back is the one meant; the handle it returns is what you
+Pass the handle when you have one. **Exactly one of the two MUST be passed**; the identity section
+above says why a number is a read-only convenience, and the handle the response carries is what you
 use for every other tool.
 
 ### `discover_MDRs`
 
-Shared discovery params, plus `status` (string, optional). Ledger order: by number, then handle.
-Answers in **prose**: per record a heading, its identity, when it was decided, what the ledger says
-its status is, the terms it names, its summary and its head Claim.
+Shared discovery params, plus `status` (string, optional; an unknown value is refused by name). Ledger
+order: by number, then handle. Per record: a heading, `MDR-7 (handle 11)` or `MDRh12 (staged — no
+number yet)`, `Decided:` (t₀ — absent while staged, and removed by an Uncommit), `Status:`, the terms
+it names, its summary and an excerpt of its head Claim.
 
-**This is the read for working out which decisions bear on what you are doing.** A record found here
-is read with `get_MDR` without translating anything.
-
-**Each record is named by its number and its handle** — `MDR-7 (handle 11)`. The number is what
-you cite in prose; the handle is what `update_MDR`, `transition_MDR_status`, `record_observed_outcome`
-and `get_MDR_learning_delta` all take, and none of them accepts a number. A staged record has no
-number and is named `MDRh12 (staged — no number yet)`.
-
-**`Decided:` is t₀, not when the record was minted.** A staged record shows no date line at all,
-because it has not been decided; `get_MDR` is where both that and `createdAt`, the mint time a staged
-record does have, can be read. An Uncommit removes `decidedAt` and leaves `createdAt` untouched, so a
-demoted record loses the line.
-
-**`status` is validated.** An unknown value is refused by name, listing the valid statuses. It used
-to answer a typo with an empty list, which read as "no records".
-
-**The search _query_ covers the whole fish** — head **Claim**, **Verdict**, alternatives, deliberation facts,
-expected outcomes, open questions. So a record can match on reasoning that no heading shows, and the entry
-will look unrelated to the query. The match window is what shows where the hit came from; quote that
-rather than the Claim when explaining why an entry is there.
-
-**The heading and the summary were composed from the record's spine** — its head Claim, the
-alternative it chose, and its Verdict. They have not read the options it rejected or the arguments
-about them. That asymmetry is deliberate: search is generous, the label is decisive.
-
-**`Status:` is what the ledger says a record is, and `Rejected` is a commitment.** It means the
-decision was not to proceed — a real, sealed outcome and not an abandoned draft. `Superseded` means a
-later record replaced this one; what it decided still happened. Never report a rejected record as
-unfinished.
-
-**Only sealed records carry a derived artifact.** A staged record's prose is still editable and
-nothing would notice a summary going stale against it, so a recent record appearing with its head
-Claim as the heading is the ordinary state rather than a gap.
-
-Where a record has been summarised the heading is Memolok's wording; where it has not, the heading is
-the decider's own Claim. Every page says which it is showing you. **Quote the decider from `get_MDR`,
-never from a heading.**
+**Search covers the whole fish** — Claim, Verdict, alternatives, deliberation facts, expected
+outcomes, open questions — so a hit can look unrelated to its heading; the match window shows where it
+came from. **`Rejected` is a sealed commitment not to proceed and `Superseded` means a later record
+replaced this one**; neither is an unfinished record.
 
 ### `get_matter`
 
@@ -242,75 +205,30 @@ not to this matter, and nothing says any of them answers it. No rationale here �
 
 ### `discover_matters`
 
-Shared discovery params, plus `untaken` (bool, optional). Registration order, oldest first. Answers in
-**prose**: per matter a heading, its id, when it was raised, the subjects it names, its summary, and
-which analyses took it up — each named by its `analysisId` — with what they produced.
-
-**This is the read for deciding what to work on.** A matter found here is read with `get_matter`
-without translating anything, and the analysis id can go straight to `get_analysis` without opening
-the matter first.
-
-`untaken: true` is the unprocessed-bait inbox — every matter no analysis references. `untaken: false`
-gives the complement — matters an analysis **has** taken up, which is not the same as no filter at
-all. There is no status filter, because **a matter has no status**: what became of one reads from its
-shape.
-
-**Search reaches more than the raiser's words.** A query matches the derived title, subjects and
-summary too, so a matter can come back for a term nobody typed into it — which is the point, since
-the raiser was describing a problem rather than naming it.
-
-**A matter naming your term among its subjects ranks first.** Those are what Memolok picked out as
-what the matter is about, so they beat prose that merely repeats the word. Unprocessed matters are
-still found, lower down. The match window shows which text matched, and prefers the raiser's own.
-
-**A heading is Memolok's label, and nobody typed it.** Where a matter has not been summarised the
-heading is the raiser's own opening instead, and every page says which it is showing you. That
-matters here more than elsewhere: a matter is bait in somebody's own words, and paraphrasing a
-machine's label back to them is how the words stop being theirs. **Quote the raiser from
-`get_matter`** — the read that returns the body whole — never from a heading.
-
-The answer states its own totals, says when you are holding only part of the ledger, explains an
-empty result, and gives you the `offset` for the next page.
+Shared discovery params, plus `untaken` (bool, optional): `true` is the unprocessed-bait inbox — every
+matter no analysis references; `false` is the complement, which is not the same as no filter. There is
+no status filter, because **a matter has no status**. Registration order, oldest first. Per matter: a
+heading, its id, `Raised:`, subjects, summary, and which analyses took it up — each named by its
+`analysisId` — with what they produced. The match window prefers the raiser's own words.
 
 ### `discover_world_facts`
 
-Shared discovery params. Admission order, oldest first. Answers in **prose**: per fact a heading,
-its id, when it was admitted, the terms it names, its summary, and what it corrects if anything.
+Shared discovery params. Admission order, oldest first. Per fact: a heading, its id, `Admitted:`,
+subjects, summary, and `Corrects:` where it corrects an earlier fact.
 
-**This is the read for working out which premises bear on what you are doing.** A fact found here is
-read with `get_world_fact` without translating anything.
-
-**The almanac only ever grows.** A corrected fact stays on the ledger beside the one correcting it,
-so this read returns superseded premises alongside live ones and there is no live-facts-only filter.
-An entry's `Corrects:` line says what it replaced, never whether it *was* replaced — nothing can yet
-answer that. Do not present an old premise as current merely because it came back in a read.
-
-Search reaches the derived title, summary and subjects as well as the admitted claim, so a fact can
-match a term nobody typed into it.
-
-**The headings and summaries are Memolok's words, and on this collection that matters more than
-anywhere else.** A world fact is a premise decisions are reasoned from, so quoting a paraphrase of one
-back as the admitted claim misstates what the ledger rests on. Where a fact has not been summarised
-the heading is the admitter's own opening instead, and every page says which it is showing you.
+**The almanac only ever grows.** A corrected fact stays beside the one correcting it, there is no
+live-facts-only filter, and `Corrects:` says what an entry replaced, never whether it *was* replaced —
+nothing can yet answer that. Do not present an old premise as current merely because it came back.
 
 ### `discover_observed_outcomes`
 
 Shared discovery params, plus `mdrHandle` (int, optional), which narrows to one record's wake.
-Observation order, oldest first. Answers in **prose**: per outcome a heading, its id, the record it
-was realized from in both keys, how it was discovered, what it says about the promise it tests, when
-it was observed, the terms it names and its summary.
+Observation order, oldest first. Per outcome: a heading, its id, the record it was realized from in
+both keys, how it was discovered, `testResult` where it tests a promise, `Observed:`, subjects and
+summary.
 
-**This is the read for working out which of a record's wake bears on what you are doing** — a long
-tail of observations against one record is exactly the case where opening each one to find out is
-the expensive way.
-
-**The heading describes what was observed. It never judges the decision.** The derivation is shown
-the observer's own claim and nothing else — not the expectation the entry tests, not the record it
-came from. A heading that sounds like a verdict is describing an observation that sounded like one.
-The verdict is `testResult`, rendered separately on every entry that has one, and it is the field to
-read when you want to know whether a promise held.
-
-Search reaches the derived title, summary and subjects as well as the observer's claim.
+**The heading never judges the decision**: the derivation sees the observer's claim alone, not the
+expectation the entry tests. Whether a promise held is `testResult`, nothing else.
 
 ### `get_analysis`
 
@@ -339,21 +257,13 @@ Point read; there is no `list_analyses`. Reach it by `analysisId` from `get_matt
 `worldFactId`, `manifests`, `createdAt`, `createdBy`, optional `correctsFact` — plus the derived
 `title`, `summary` and `subjects` where Memolok has produced them.
 
-It is the read that returns the admitted claim whole, and therefore **the only one to quote a premise
-from**. A heading on a discovery page is Memolok's label for the claim, not the claim.
-
-A world fact says `createdBy` where a matter says `raisedBy`. The two mean the same thing and are
-named for different ontology predicates; nothing turns on the difference when you are reading. Neither
-is rendered on a discovery page — both are bare IRIs, and what a readable form would be is an open
-question rather than a settled one.
+A world fact says `createdBy` where a matter says `raisedBy`; the two mean the same thing. Neither is
+rendered on a discovery page.
 
 ### `get_observed_outcome`
 
 `get_observed_outcome` takes `mdlGuid` + `observedOutcomeId` and returns the whole observation, plus
 the derived `title`, `summary` and `subjects` where Memolok has produced them.
-
-The read that returns the observer's wording whole — **quote an observer from here**, never from a
-heading. And neither a heading nor a summary is the verdict: `testResult` is.
 
 ### `get_MDR_learning_delta`
 
@@ -474,10 +384,10 @@ late reference is the honest record, not a reopen.
 | `mdlGuid` | string | yes |
 | `claimDescription` | `{ markdown, lang? }` | yes |
 | `status` | string | yes — canonical values only |
-| `alternatives` | `[{ id?, label?, description, satisfies? }]` | no |
+| `alternatives` | `[{ id, label?, description, satisfies? }]` | no |
 | `deliberationFacts` | `[{ onAlternative?, description }]` | no |
-| `expectedOutcomes` | `[{ id?, description }]` | no |
-| `openQuestions` | `[{ id?, description }]` | no |
+| `expectedOutcomes` | `[{ id, description }]` | no |
+| `openQuestions` | `[{ id, description }]` | no |
 | `verdict` | `{ description }` | no |
 | `chosenAlternative` | string | no |
 | `authoredBy`, `decidedBy` | string | no |
@@ -499,23 +409,21 @@ Patch keys: `hasNeed`, `hasContext`, `alternatives`, `deliberationFacts`, `expec
 `dependsOn`, `conflictsWith`, `settlesOpenQuestion`. Patches may be incremental — send only what
 changed.
 
-The five graph keys are **staged-only**, and on a resident even `[]` is refused: presence is what is
-refused, because clearing an edge after admission would undo something the ledger has published. Each
-of them Anchors the record it names at admission, so that record can never be Uncommitted by anyone
-afterwards — `amends` included, which is the one that catches people out, since it sounds lighter
-than superseding and costs the target exactly the same.
+| Key | Value |
+| --- | --- |
+| `hasContext` | ordered `string[]` of `wf_`/`oo_` ids from this ledger |
+| `amends`, `supersedes`, `dependsOn`, `conflictsWith` | `int[]` of admitted `mdrNumber`s |
+| `settlesOpenQuestion` | `[{ hostMdrNumber, openQuestionId }]` |
 
-`amends` and `supersedes` additionally need an **Accepted** record at each end: both act on content,
-and only an Accepted record has content still in force. `amendedBy` and `supersededBy` are
-server-minted and refused on write.
+The five graph keys and `hasContext` are **staged-only** — on a resident even `[]` is refused — and a
+Rejected record carries no `amends`, `supersedes` or `settlesOpenQuestion`. What each edge does to its
+target, and what anchors: `lifecycle-and-gates.md`. `amendedBy` and `supersededBy` are server-minted
+and refused on write.
 
-**You name every id on `alternatives`, `expectedOutcomes`, `openQuestions`** — prefixed `alt-`,
-`eo-`, `oq-` for their list, unique within it, on `create_MDR` and `update_MDR` alike. Name them for
-what they are: `alt-cache-layer` is what a reader meets in `chosenAlternative` later. Omitting an id
-is refused, since these lists replace wholesale and an id-less item cannot say whether it is the old
-one or a new one; a missing prefix is refused with the correction rather than added for you, because
-rewriting an id would orphan references the patch does not carry. `chosenAlternative` and
-`deliberationFacts[].onAlternative` must name an alternative that exists once the patch lands.
+You name every id on `alternatives`, `expectedOutcomes` and `openQuestions`: prefixed `alt-`, `eo-`,
+`oq-`, unique in its list, required on every item, and named for what it is — `prose-and-raci.md` has
+the rule and the refusals. `chosenAlternative` and `deliberationFacts[].onAlternative` must name an
+alternative that exists once the patch lands.
 
 ### `transition_MDR_status`
 
@@ -576,19 +484,10 @@ backdated. Recording one typically Anchors the source record.
 
 Disposable working notes. See the **`manage-notes`** skill for the journeys.
 
-**A `scratchpadId` is the longest identifier in the product** — `sp_` followed by **26** Crockford
-base32 characters, against six for a ledger entity — and that is deliberate rather than incidental.
-It is untypeable and unmemorable, which discourages citing a note in the one way a rule cannot: at
-the moment of writing, before anyone consults a rule.
-
 Pass a `scratchpadId` to `hasContext`, `correctsFact`, `motivatedBy`, `tests.outcomeId` or `evidence`
 and the call fails telling you the value **is a scratchpad** — a category error, not a typo. Nothing
 in a ledger may reference one; if the material matters to a decision, admit it as a World Fact and
 cite that.
-
-**Scratchpad ids were re-minted and the old form is gone.** A stale `sp_` + 24 hex value does not
-resolve. It comes back as a shape complaint, which is the same answer a typo gets — so do not tell a
-user their id is retired on the strength of that message; read it back to them and ask.
 
 ### `create_scratchpad`
 
@@ -623,18 +522,8 @@ Shared discovery params — they and the query grammar are in the discovery prea
 recently touched first, which is what the `Touched:` line on each entry states. **Never carries a
 body**: `get_scratchpad` is the only read that does.
 
-**A note's title is Memolok's, because a note has no other.** Nobody types one, so where nothing has
-been derived yet the heading is a cut of what somebody pasted — and the page says which of the two it
-is showing you.
-
-**`query` is how you answer "what did I save about X?"** Search reaches the derived title, summary
-and subjects as well as the body, so a note can be found by a term it does not itself contain — which
-matters here more than anywhere, because whoever pasted a vendor's pricing page was not choosing
-search terms. Paging through everything to read it is what this shape exists to prevent.
-
-**Where a note has no summary yet, the opening words are a positional trim.** They are a handle for
-naming the note, not a description of it, and a long note's opening says nothing about what the note
-argues. When the question is about content, `get_scratchpad` the body.
+`query` is how you answer *"what did I save about X?"*; browsing a queue of pasted material answers
+nothing.
 
 ### `submit_feedback`
 
@@ -706,7 +595,7 @@ Owner-only, no time limit. Patchable: `title`, `kind`, `report`, `userVerbatim`,
 
 | Message | Cause |
 | --- | --- |
-| `Memolok Decision Ledger not found.` | Bad `mdlGuid`, or a read by a non-member (deliberate — no existence leak) |
+| `Memolok Decision Ledger not found.` | Does not distinguish a ledger the user cannot see from one that is not there. Report it as ambiguous: they may not be a member, or this address may be stale |
 | `You are not a member of this Memolok Decision Ledger.` | Write without membership |
 | `Memolok Decision Record not found.` | Missing record, or non-member read |
 | `The {field} reference belongs to a different Memolok Decision Ledger.` | Cross-ledger reference |

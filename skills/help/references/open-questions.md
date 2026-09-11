@@ -30,10 +30,10 @@ Not by editing the original record, and not by attaching later evidence to it. A
 a **later committed decision** covers it, and the ledger records the forward link from the question to the
 decision that answered it.
 
-The covering decision does not need to have known the deferral existed. Somebody scanning the ledger
-months later can recognize that a question raised in one decision was in fact answered by another, and
-record that — without rewriting either. Both keep their original wording; only the link is new. The same
-freedom applies to removing a link that turns out to be wrong.
+The covering decision names the question while it is still being drafted, and the link takes effect
+when it commits; neither record's wording changes. Once both are sealed the link is what it is — a
+later reader who notices that one decision answered another's question has found something worth a
+new decision, not a link to add.
 
 Deferrals on a rejected decision work differently: they are archaeology, not live topology. They tell you
 what *would* have been left open had you gone ahead, which is genuinely useful when a topic comes back
@@ -42,3 +42,8 @@ questions waiting to be answered.
 
 > **Not built yet.** There is no query that lists every unsettled deferral across a ledger. The links are
 > recorded faithfully; assembling the picture means reading the records.
+
+---
+
+When they want to name one on a decision: **`record-decision`**. When a later decision settles one:
+**`revise-decision`**.

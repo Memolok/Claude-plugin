@@ -3,7 +3,7 @@ name: wrap-up
 description: >-
   Wrap up this interactive agent session by systematically saving what would be lost from
   the agent context into a durable place. Use when the user says "wrap up", "we're
-  done here", "before I close this",  "end of session", or asks "any loose ends?",
+  done here", "before I close this", "end of session", or asks "any loose ends?",
   "anything else worth saving?", or is clearly preparing to finish up this work session.
 argument-hint: "(nothing — the session is the input)"
 ---
@@ -60,9 +60,9 @@ Two questions, in order:
 1. **What is the durable fact behind this?** No residue → nothing to record.
 2. **Is it already recoverable from something that outlives the session — and at what cost?**
 
-The second is a cost, not a yes/no, because the two kinds of content sit at opposite ends of MDR-O's
-own dynamicity ordering — the fish sealed at t₀ is the least dynamic thing in the model, the world the
-most.
+The second is a cost, not a yes/no, because the two kinds of content sit at opposite ends of the four
+scopes' own ordering (`scopes-and-bridging.md` in the method) — the fish sealed at t₀ is the least
+dynamic thing in the model, the world the most.
 
 | | **Observed** | **Reasoned** |
 | --- | --- | --- |
@@ -182,8 +182,8 @@ from not having looked.
 
 ## Routing
 
-MDR-O sorts the world into four scopes, and they are the routing question: **is this about the fish,
-the ledger, the project, or the world?** Each destination is owned by something else. Hand over; do
+The method's four scopes are the routing question: **is this about the fish, the ledger, the project,
+or the world?** Each destination is owned by something else. Hand over; do
 not reimplement.
 
 **Ledger — MDR and MDL scope.** Sealed reasoning and the epistemic substrate around it.
@@ -232,17 +232,10 @@ Three calls that are easy to get wrong:
   would work. Where the working directory is discarded when the session ends, that inverts: the file
   is the half that does not survive, and routing the session's most durable material into it puts it
   in the one place guaranteed to lose it.
-- **World fact over scratchpad** when a decision might rest on it. Nothing may ever cite a note — that
-  is what makes notes disposable — so load-bearing material has to be admitted properly.
-- **Memolok friction is easy to miss, because much of it not errored.** A call that returned 200 and
-  did the wrong thing, or two calls that only disagree with each other, leaves no obvious failure to notice —
-  and you are the only party still holding the evidence, since the user will not write it up and the
-  next session starts cold. `send-feedback` already treats the end of a working session as its
-  batching moment, so this is a handoff it expects, not an intrusion. It owns its own permission and
-  preview rules — do not restate them.
-
-That last one still sits as **one row, not a finale**. It earns its place on the merits; making it a
-privileged closing prompt turns this skill into a feedback funnel and trains users to skip it.
+- **World fact over scratchpad** when a decision might rest on it — the method's scratchpad rule.
+- **Memolok friction is easy to miss, because much of it never errors.** `send-feedback` treats the end
+  of a working session as its batching moment, so this is a handoff it expects, and it owns its own
+  preview rules.
 
 ## Workflow
 

@@ -24,6 +24,19 @@ matches — you are asked to update only when your pack genuinely stops working.
 
 *Everything that has landed has shipped. This section is a placeholder.*
 
+## 0.28.0-beta — 2026-09-11
+
+**Corrections.** `help` no longer promises three things the ledger refuses: settling an open question
+between two sealed records, editing an observation, and a withdrawn number returning to circulation.
+The commit skill decodes two more refusals at the seal, and an anchored record is described as
+amendable, not only supersedable.
+
+**The scout can no longer spawn sub-agents.**
+
+**Less to read on every journey.** The method is split so that reading, parking and note-keeping load
+about half of it, the tool catalog is a fifth shorter, and search is described the same way
+everywhere, stemming included.
+
 ## 0.27.0-beta — 2026-09-10
 
 **Five listing tools are gone, and every collection now has one read for choosing.** `list_MDRs`,

@@ -44,7 +44,7 @@ merged document at its current status), and on `transition_MDR_status` (against 
 | All statuses | `hasNeed.description.markdown` non-empty |
 | Proposed, Accepted | ≥1 `alternatives`; `chosenAlternative` matches an `alternatives[].id`; non-empty `verdict.description.markdown` |
 | Accepted | ≥1 `expectedOutcomes`, each with `manifests.description.markdown`; `decidedAt` (server-stamped) |
-| Rejected | Verdict present; `decidedAt`; `supersedes` **and** `amends` empty |
+| Rejected | Verdict present; `decidedAt`; carries no `amends`, `supersedes` or `settlesOpenQuestion` |
 
 Gate messages:
 
@@ -137,15 +137,11 @@ undo something the ledger has published.
 and only an Accepted record has content in force. Amendment is **opt-out** (everything in the
 amended record stays valid but the deltas), while supersession is **opt-in** (retiring everything). A
 `Rejected` record can carry neither, and can't be named by either. `supersedes` additionally targets
-a record only once – a `Superseded` target has nothing left.
+a record only once — a `Superseded` target has nothing left.
 
 `dependsOn` and `conflictsWith` assert a relation between records rather than operating on their
-contents, so they hold against any resident, including Rejected records. This may feel contradictory.
-An Accepted record can `dependsOn` a Rejected record: if that record was accepted, this record could
-not be accepted, so this record depends on that record's rejection. The other is even more strange,
-but equally valid: an Accepted record can also `conflictsWith` a Rejected record: the decision we
-just accepted conflicts with that rejection, e.g. accepting that our company opens a store in Tokyo
-after we rejected accessing the Asian market.
+contents, so they hold against any resident, including Rejected records — an Accepted record can rest
+on a rejection, or collide with one; `rejection.md` has the worked case.
 
 For `settlesOpenQuestion`, the target is the **older open-question holder**, not the closing record.
 If the holder is still staged it has no number to target — update the holder in place instead.

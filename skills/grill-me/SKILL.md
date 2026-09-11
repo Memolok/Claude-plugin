@@ -28,8 +28,8 @@ Examples:
 
 ## Step 0 — Load the method
 
-Load the **`memolok-method`** skill. Rules A–G govern every turn of the interview, and Rule G governs
-the head-sharpening phase specifically.
+Load the **`memolok-method`** skill and its `facilitation.md` reference. Rules A–G govern every turn
+of the interview, and Rule G governs the head-sharpening phase specifically.
 
 ## Non-negotiables
 
@@ -71,7 +71,7 @@ point out the mismatch, and never ask them to justify it.
 grill one fish → preview → confirm → persist at Deliberating → next fish → …
 ```
 
-t₀ is separate, and only when the user asks. **After a seal the session does not end.**
+t₀ is separate, and only when the user asks.
 
 **Continue by default.** After each fish, move straight into the next branch — usually an open question
 from the fish just logged, or the next dependency in the tree. Open it with a normal question turn, not
@@ -85,16 +85,17 @@ That is continue-versus-end theatre. The user knows how to say they are done.
 
 ## Setup — read only
 
-1. Establish the ledger: the `mdlGuid` in play, else `.memolok/mdl.yml`, else `get_MDLs`. If there are
-   several, one question to pick.
+1. Establish the ledger per the method's invariants. If there are several, one question to pick.
 2. `get_MDL` — **before the first question.** The ledger's stated purpose tells you what this ledger is
    driving at and which branches are likely to matter, which is worth several questions you now do not
    have to ask. This is the *look things up rather than asking* rule doing its job: never spend an
    interview turn asking what the ledger is for when a read answers it.
 3. `discover_MDRs(query="...")` — surface related prior decisions in the user's own words. Flag
-   duplicate head **Claim**s before grilling a question that is already settled. Search is lexical,
-   so a record that settled this in different words will not surface: absence here is weak evidence,
-   and worth one question rather than an assumption.
+   duplicate head **Claim**s before grilling a question that is already settled. Search is lexical:
+   whitespace-separated terms, ORed, case-insensitive and English-stemmed; no operators, phrases or
+   regex; a whole hyphenated token matches and a partial one does not. An empty result means no entry
+   used those words — say which you tried. Absence here is weak evidence, worth one question rather
+   than an assumption.
 4. `discover_matters(untaken: true)` — parked bait may already cover this topic, and it is
    better raised now than re-elicited. Each matter arrives with its summary, so one read is enough
    to tell.
@@ -130,8 +131,8 @@ the belly.
 | 7 | Alongside | What this decision does *not* settle | Scope boundaries named |
 | 8 | Persist | Default Deliberating | Preview confirmed |
 
-Phase 1 is the intake fork — the full five-way routing lives in **`record-decision`**, and it applies
-here unchanged.
+Phase 1 is the intake fork — the full routing lives in **`record-decision`**, and it applies here
+unchanged.
 
 Full phase-by-phase detail, turn formats, and worked openers: `references/question-tree.md`.
 
@@ -179,7 +180,6 @@ If the user asks to seal, that is **`commit-decision`** — ceremony first.
 2. Pick the next target: an open question from that fish, the next unresolved branch, or an adjacent
    area worth probing.
 3. Open the next question tree immediately.
-4. Do not ask whether to stop.
 
 ## Anti-patterns
 
@@ -187,12 +187,6 @@ If the user asks to seal, that is **`commit-decision`** — ceremony first.
 there wastes the user's turn on something you could have answered.
 
 **Batching questions.** Five at once gets five shallow answers.
-
-**Staging the belly.** *"Now we move to alternatives — what other approaches could you take?"* turns
-recording into form-filling and pushes the user to invent options for the ledger.
-
-**Recommending a mechanism during head sharpening.** Phase 2's recommended answer is about framing. A
-mechanism there is Rule G failing in advance.
 
 **Treating open questions as homework.** They are scope boundaries. Name them and move on.
 

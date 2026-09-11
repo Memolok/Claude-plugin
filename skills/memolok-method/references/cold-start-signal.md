@@ -113,8 +113,8 @@ instruction files it knows nothing about, so a bare "this" or "the above" can bi
 different author wrote. That is why it says *the Memolok skills* and *the paragraph above* where one
 word would read more smoothly.
 
-**The not-found line is the ninth place the pack states this**, and the only copy that has left the
-building — no grep will find it here if the phrasing changes elsewhere. That is a deliberate
+**The not-found line is one the pack states in several places**, and this is the only copy that has
+left the building — no grep will find it here if the phrasing changes elsewhere. That is a deliberate
 exception, taken because it is the one thing a reader cannot get from the server: the message is
 uninformative by design, so it answers identically for a ledger you cannot see, one that never
 existed, and an address that has gone stale. Reporting it as ambiguous is the whole of the

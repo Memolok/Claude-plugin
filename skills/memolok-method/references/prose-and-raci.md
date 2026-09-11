@@ -60,8 +60,9 @@ read, so the read shape differs from what you wrote.
 
 ## Ids you choose, and later have to cite
 
-**You** name every id on `alternatives`, `expectedOutcomes` and `openQuestions` — the server mints
-none of them. Each must carry its list's prefix and be unique within that list:
+You name every id on `alternatives`, `expectedOutcomes` and `openQuestions`: prefixed `alt-`, `eo-`,
+`oq-`, unique in its list, required on every item, and named for what it is. The server mints none of
+them:
 
 | Embed | Prefix | Cited later by |
 | --- | --- | --- |
@@ -72,16 +73,15 @@ none of them. Each must carry its list's prefix and be unique within that list:
 Two of those citations arrive in a *later* session, and one arrives in the same call — so name them
 for what they are. `alt-cache-layer` tells a reader what won; a generated id tells them nothing.
 
-Full contract and the refusals: `../record-decision/references/patch-payloads.md`.
+Omitting an id is refused: the lists replace wholesale, and an id-less item cannot say whether it is
+the old one or a new one. A missing prefix is refused with the correction rather than added, because
+rewriting an id would orphan references the patch does not carry.
 
 ## Alternatives
 
-`label` is a short handle; `description` is the option's **substance** — the approach, the sketch,
-what the option actually is. Arguments *about* an option belong in `deliberationFacts`, paired with
-`onAlternative` matching the alternative's `id`.
-
-Alternatives are passed through to schema validation unchanged, accepting
-`{ id?, label?, description, satisfies? }` and nothing else.
+`label` is a short handle; `description` is the option's **substance**; arguments *about* an option
+belong in `deliberationFacts`, paired with `onAlternative`. Schema: `{ id, label?, description,
+satisfies? }` and nothing else.
 
 ## Agent IRIs
 

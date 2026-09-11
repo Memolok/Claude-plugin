@@ -56,7 +56,7 @@ Start with `ping`. It is the only tool that tells you about the connection rathe
 | `Authenticated token has no linked Memolok user.` | The credential is valid but not linked to an account | Reconnect to sign in again, or the token needs an administrator |
 | `The access token carries a malformed Memolok user id.` | The credential is valid but its identity claim is unusable | Reconnect to sign in again; if it recurs, report it |
 | `This PAT's client id is malformed.` | The Personal Access Token is damaged or mistyped | Check the token, or an administrator issues a new one |
-| `Memolok Decision Ledger not found.` on a read | Authenticated, but not a member of that ledger | `get_MDLs` to see what they can actually reach |
+| `Memolok Decision Ledger not found.` on a read | Does not distinguish a ledger the user cannot see from one that is not there. Report it as ambiguous: they may not be a member, or this address may be stale | `get_MDLs` to see what they can actually reach |
 | `You are not a member of this Memolok Decision Ledger.` on a write | Reading is fine, writing is not | An administrator adds them |
 | Writes refused, reads fine | `visitor` role | An administrator changes the role |
 | "Automatic client registration isn't supported" | Server-side registration issue | Not fixable by the user; report it |
@@ -85,10 +85,6 @@ the same reference class appears twice in a session, stop and report rather than
 
 Do not let a failure here become a reason to write the user's decision somewhere else. A record that
 did not reach the ledger was not recorded.
-
-Reads on a ledger the user cannot access return `Memolok Decision Ledger not found.` — identical to a
-ledger that does not exist. That is deliberate, so existence is not leaked. Do not read it as proof
-the ledger is gone; run `get_MDLs` and see what is actually reachable.
 
 ## Connections made elsewhere
 

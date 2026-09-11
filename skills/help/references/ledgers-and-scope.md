@@ -58,3 +58,7 @@ somewhere you cannot see.
 > type or subject, and any cross-ledger view are modelled but not available. Today a ledger is a closed
 > world: what it knows, it knows on its own. Plan boundaries accordingly, and prefer fewer ledgers than
 > feels tidy.
+
+---
+
+When they want to create one: **`start`**.

@@ -29,8 +29,8 @@ Examples:
 
 ## Step 0 — Load the method
 
-Load the **`memolok-method`** skill. The Decision Transaction Principle is the whole subject of this
-skill.
+Load the **`memolok-method`** skill and its `facilitation.md` reference. The Decision Transaction
+Principle is the whole subject of this skill.
 
 ## Non-negotiables
 
@@ -39,7 +39,7 @@ skill.
 - **Read `retractable` before proposing anything** — it decides the route
 - Never tell the user a committed record can be patched in place
 - Say "captured" only after the write succeeded
-- Cite `MDR-{n}` for admitted records, `MDRh{handle}` for staged ones; never a bare handle (Rule F)
+- Cite `MDR-{n}` once admitted (anywhere), `MDRh{handle}` or a head Claim paraphrase while staged (only in chat sessions and in transient plans); never a bare handle (Rule F)
 - **Never** propose a revision because a record no longer matches the ledger's stated purpose
 
 ## Workflow
@@ -62,9 +62,9 @@ decide which route is right.
 | Part of it; the rest still governs | **Amend** — step 4 |
 | All of it; the decision is withdrawn | **Supersede** — step 5 |
 
-Then read `retractable`, which is a read and not a guess. `null` staged, `true` uncommittable,
-`false` anchored. Proposing an uncommit on an anchored record wastes the user's time and implies the
-ledger is more malleable than it is. Amend and supersede work at either value.
+Then read `retractable`, which is a read and not a guess. Proposing an uncommit on an anchored record
+wastes the user's time and implies the ledger is more malleable than it is. Amend and supersede work
+at either value.
 
 ### 3. Uncommit and re-admit
 
@@ -88,9 +88,8 @@ Detail and payloads: `references/uncommit-and-readmit.md`.
 For a record that still stands, where part of it has changed — and retiring the whole thing to say so
 would withdraw a decision nobody disputes.
 
-**Amendment is opt-out; supersession is opt-in.** Everything in the amended record stays valid except
-what your record explicitly changes or removes. Everything in a *superseded* record stops being valid
-and only the successor remains. Either way, whatever your record adds is valid, as in any record.
+**Amendment is opt-out; supersession is opt-in** — the method's correction path. Whatever your record
+adds is valid either way, as in any record.
 
 Two things follow, and the second is the one that gets missed:
 
@@ -133,10 +132,9 @@ record carries the new decision and names the old one.
 2. Patch `supersedes: [7]` on the successor while it is still staged.
 3. Commit it. At admission the target flips to **Superseded** and reciprocals publish.
 
-`supersedes` may only target **Accepted** residents, and a `Rejected` record cannot carry one — the
-same requirement as amendment, for the same reason: only an Accepted record has content to retire.
-Once each, too, and that falls out of the rule rather than sitting beside it: superseding flips the
-target to **Superseded**, so a second attempt finds nothing left.
+`supersedes` has the same requirement as amendment, for the same reason: an **Accepted** record at each
+end, since only one has content to retire. Once each, too: superseding flips the target to
+**Superseded**, so a second attempt finds nothing left.
 
 ### 6. Settle an open question
 
@@ -189,9 +187,9 @@ that superseding is the route, and that the original standing is what makes the 
 ## What is never possible
 
 - Editing a tier-1 field on a ledger resident. `retractable: true` does not mean patchable.
-- Deleting anything. There are no delete tools.
+- Deleting a record. Nothing on the ledger is deletable except a scratchpad.
 - Uncommitting an anchored record — amend or supersede instead.
-- Amending or superseding anything but an `Accepted` record, or carrying either on a Rejection.
+- Amending or superseding anything but an `Accepted` record.
 - Superseding the same record twice.
 - Un-anchoring anything. Amending a record spends its Uncommit path for good.
 - Dissolving a `conflictsWith` pair. It Anchors both records, including the one that declared it.
@@ -200,10 +198,9 @@ that superseding is the route, and that the original standing is what makes the 
 
 ## Tips
 
-- Anchoring can also be **declared**, by `anchor_MDR`, when something outside the ledger cites the
-  record. It is permanent and unverifiable, so a record can be un-uncommittable for a reason the
-  graph does not show — read `retractable`, never infer it from the edges. **The refusal names the
-  kind**, so `Anchored (project)` or `Anchored (other)` tells you it was declared rather than derived.
+- A record can be un-uncommittable for a reason the graph does not show — a **declared** anchor — so
+  read `retractable`, never infer it from the edges. **The refusal names the kind**: `Anchored (project)`
+  or `Anchored (other)` means it was declared rather than derived.
 - Recording a wake usually anchors its source record, so uncommit *before* registering outcomes if
   revision is still on the table.
 - `uncommit_MDR` needs admin or owner. A `member` gets a permission error and needs the ledger owner.

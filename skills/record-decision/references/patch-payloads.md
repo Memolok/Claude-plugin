@@ -70,8 +70,9 @@ An alternative may carry only `id` and `label` when the user never elaborated on
 
 ## You name every id
 
-`alternatives`, `expectedOutcomes` and `openQuestions` replace wholesale, so each item has to say
-which one it is. You choose the id, on `create_MDR` and `update_MDR` alike:
+You name every id on `alternatives`, `expectedOutcomes` and `openQuestions`: prefixed `alt-`, `eo-`,
+`oq-`, unique in its list, required on every item, and named for what it is. The lists replace
+wholesale, so each item has to say which one it is, on `create_MDR` and `update_MDR` alike:
 
 | Rule | |
 | --- | --- |
@@ -84,13 +85,7 @@ which one it is. You choose the id, on `create_MDR` and `update_MDR` alike:
 months later, and in every deliberation fact arguing about it. You know what the option is; a
 generated `alt-kmzp0u1f` would carry none of that.
 
-Omitting an `id` is refused. On a list that replaces wholesale it reads equally as *keep this* and
-*add this*, and the server used to resolve it as the second — minting fresh ids and leaving
-`chosenAlternative` pointing at an option that no longer existed, on a write that reported success.
-
-A missing prefix is refused too, naming the corrected form. The server will not add it for you:
-rewriting an id you chose would orphan any reference to it that the same patch does not carry, which
-is the very failure the rule exists to prevent.
+Omitting an id, or its prefix, is refused — `prose-and-raci.md` in the method says why.
 
 ## Revising the Need
 

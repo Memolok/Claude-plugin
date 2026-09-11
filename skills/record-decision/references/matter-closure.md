@@ -24,7 +24,7 @@ in any mix. Pass every input the reasoning actually took up:
 - Two unrelated reports triaged together, surfacing three faults — one analysis, three records, and
   no claim about which record belongs to which report.
 - A wake that missed its target, read against the constraint that bounds the fix — the observed
-  outcome and the world fact go in together, and neither is retyped as a matter first.
+  outcome and the world fact go in together, as themselves.
 
 **You will never be asked which record answers which input, and you must not volunteer one.** In the
 triage case there is frequently no true answer: a record may exist because of something the analysis

@@ -23,7 +23,8 @@ first.
 ```
 
 `hostMdrNumber` is the **holder's** number — the record that asked the question — not the resolver's.
-`openQuestionId` is the server-minted `oq-…` value; read it from the holder with `get_MDR`.
+`openQuestionId` is the `oq-…` id the holder's author gave the question; read it from the holder with
+`get_MDR`.
 
 This is the right mechanism because the holder crossed t₀. Its open question is frozen ledger history,
 so only a later Accepted record can close it retroactively.
@@ -75,8 +76,8 @@ is what matters.
 
 ## Consequences
 
-Settling **anchors** the holder: `retractable` becomes `false`, and it can no longer be uncommitted.
-Only a successor carrying `supersedes` can change it after that.
+Settling **anchors** the holder: `retractable` becomes `false`, and it can no longer be uncommitted —
+only amended or superseded.
 
 `settledIn` is read-only. It is minted at the resolver's admission and cannot be patched:
 
