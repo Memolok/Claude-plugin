@@ -24,6 +24,12 @@ matches — you are asked to update only when your pack genuinely stops working.
 
 *Everything that has landed has shipped. This section is a placeholder.*
 
+## 0.28.1-beta — 2026-09-11
+
+- **The ledger's name now sits above its id** in `.memolok/mdl.yml` and in a document's frontmatter,
+  so a file you open says which ledger it belongs to before it says the identifier. Nothing about how
+  either file works has changed, and one written in the old order keeps working.
+
 ## 0.28.0-beta — 2026-09-11
 
 **Corrections.** `help` no longer promises three things the ledger refuses: settling an open question

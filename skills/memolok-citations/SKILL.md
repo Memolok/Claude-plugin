@@ -163,14 +163,15 @@ document.
 
 ```yaml
 ---
-mdlGuid: <the guid>
 mdlTitle: <the title>
+mdlGuid: <the guid>
 ---
 ```
 
-`mdlGuid` is what binds. `mdlTitle` is there so a reader can see which ledger without resolving
-anything, and it is optional. Add them alongside whatever keys the document already carries — the
-`mdl` prefix keeps them clear of the `title` a renderer has almost certainly claimed already.
+`mdlTitle` is there so a reader can see which ledger without resolving anything, and it is optional.
+`mdlGuid` is what binds. Add them *in that order* alongside whatever keys the document already
+carries — the `mdl` prefix keeps them clear of the `title` a renderer has almost certainly claimed
+already.
 
 **Everywhere else there is no binding at all.** Mail, chat, tickets and word processors have nowhere
 to declare a ledger, so a bare identifier there means nothing to whoever reads it next. Write the
