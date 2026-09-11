@@ -118,14 +118,14 @@ If project files are writable and there is no `.memolok/mdl.yml` where one would
 save the ledger so future sessions skip this. Step 3 already fetched everything it needs:
 
 ```yaml
-mdlGuid: <the guid>
 mdlTitle: <the title>
+mdlGuid: <the guid>
 mdlIntent: |-
   <ledgerIntent's markdown, verbatim>
 ```
 
-**`mdlGuid` is the only key that decides anything.** The other two spare a cold session a call, and
-they are copies rather than authority — `get_MDL` is what a session believes when the two differ.
+**`mdlGuid` is the only key that actually decides anything.** The other two spare a cold session a call,
+and they are copies rather than authority — `get_MDL` is what a session believes when the two differ.
 Copy them exactly as it returned them, one line per paragraph and no rewrapping, so a stale file
 shows up as a plain diff instead of needing a reader to judge whether the wording drifted. Omit
 `mdlIntent` when the ledger has not stated a purpose.
