@@ -24,6 +24,15 @@ matches — you are asked to update only when your pack genuinely stops working.
 
 *Everything that has landed has shipped. This section is a placeholder.*
 
+## 0.28.2-beta — 2026-09-12
+
+- **The references a build owes a decision no longer get dropped at the seal.** Where you have your
+  agent build against a decision still in draft, the code cannot name that decision — a draft has no
+  number — so writing the references in is a pass that follows sealing. Three places now say so where
+  only one did: the rule that licenses building against a draft, the wrap-up sweep, which lists a
+  build whose references were never written as a loose end, and the seal itself, which tells you the
+  number the work was waiting for has arrived.
+
 ## 0.28.1-beta — 2026-09-11
 
 - **The ledger's name now sits above its id** in `.memolok/mdl.yml` and in a document's frontmatter,

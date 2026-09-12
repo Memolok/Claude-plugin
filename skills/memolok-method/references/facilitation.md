@@ -174,8 +174,10 @@ alternatives" as form-filling.
 **Deliberation is not only conversational.** Building a spike, reading the implementation, probing a
 running system: real exploration, and what they establish belongs in the belly exactly as spoken
 reasoning does. The prohibition is on options nobody explored, wherever the exploring happened.
-Decision about something buildable → draft at **Deliberating**, build against it, correct before t₀;
-mechanics in `record-decision`.
+Decision about something buildable → draft at **Deliberating**, build against it, correct before t₀,
+**then** write the references in — a staged record has no number, so nothing you build can cite the
+decision it implements, and sealing early to buy one spends the correction window. Build loop →
+`record-decision`; the reference pass and the anchoring before it → **`memolok-citations`**.
 
 ### Rule G — The Need is not a running summary
 

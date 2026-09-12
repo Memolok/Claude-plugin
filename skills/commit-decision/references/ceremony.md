@@ -66,6 +66,10 @@ Occasionally a little more, when the decision was hard-won or long-running:
 Then continue. Do not offer to end the session, and do not follow a seal with a menu of what to do
 next unless the user asked for one.
 
+**A build waiting on its references is not a menu.** Where work already written is going to cite this
+record, the number it was waiting for has just arrived, and saying so belongs in the same beat — the
+skill's *After t₀* section has it.
+
 ## What ceremony is for
 
 Not formalism. It exists because t₀ is the one irreversible moment in the whole model, and a user who
