@@ -26,7 +26,7 @@ where someone cites "MDR-7" and you hold no handle: read it directly rather than
 
 **Read `retractable` before suggesting an uncommit.**
 
-### Every other entity carries a prefixed identifier
+### Every entity carries a prefixed identifier
 
 **The prefix says what the value addresses**, so a value in the wrong *reference field* is refused by
 name — a Matter id in `correctsFact` fails as *a Matter*, not as malformed. Parameter names stay
@@ -38,24 +38,15 @@ descriptive; none is called `publicId`.
 | `worldFactId` | `wf_` + 6 |
 | `observedOutcomeId` | `oo_` + 6 |
 | `analysisId` | `an_` + 6 |
-| `scratchpadId` | `sp_` + 26 |
-| `feedbackId` | `fb_` + 16 |
-| `userId` | 16, no prefix |
+| `scratchpadId` | `msp_` + 26 |
+| `feedbackId` | `mfb_` + 16 |
+| `mdlGuid` | `mdl_` + 16 |
+| `userId` | `musr_` + 16 |
 
-Bodies are Crockford base32 — the ten digits and the letters except `I`, `L`, `O`, `U` — lowercase on
-the wire, and a hyphen is refused rather than ignored. **Never construct, truncate, complete or
-pattern-match one.** Pass back exactly what you were handed.
-
-These replaced twenty-four hexadecimal characters, so an identifier quoted from an older session may
-not resolve. **A shape complaint is not a diagnosis.** `scratchpadId must be 'sp_' followed by 26
-Crockford base32 characters` is what you get for a typo *and* for a correctly-typed value from before
-the change — the message cannot tell them apart, so neither can you. Read the value back to the user
-and ask, rather than declaring it retired or repairing it by hand.
-
-**`mdlGuid` is not in this table, and it is the one value that looks like another.** It is the same
-shape as `userId` — sixteen Crockford base32 characters, no prefix — so nothing about the string says
-which of the two you are holding. Never substitute one for the other, never infer the kind from the
-value, and reason about nothing in it.
+Every kind can be told apart by its prefix. Bodies are Crockford base32 — the ten digits and the
+letters except `I`, `L`, `O`, `U` — lowercase on the wire, and a hyphen is refused rather than
+ignored. **Never construct, truncate, complete or pattern-match one.** Pass back exactly what you
+were handed.
 
 All prose parameters use `{ markdown, lang? }` — see `prose-and-raci.md` for which are wrapped in a
 `description` key.
@@ -576,7 +567,7 @@ not the bodies. Keep the ids.
 
 | Param | Type | Required |
 | --- | --- | --- |
-| `feedbackId` | string (`fb_` + 16) | yes |
+| `feedbackId` | string (`mfb_` + 16) | yes |
 
 Your own reports only. A stranger's id returns *not found* rather than a permission error, and so
 does a report deleted during triage.
@@ -585,7 +576,7 @@ does a report deleted during triage.
 
 | Param | Type | Required |
 | --- | --- | --- |
-| `feedbackId` | string (`fb_` + 16) | yes |
+| `feedbackId` | string (`mfb_` + 16) | yes |
 | `patch` | object | yes |
 
 Owner-only, no time limit. Patchable: `title`, `kind`, `report`, `userVerbatim`, `mdlGuid`,
@@ -616,14 +607,14 @@ Owner-only, no time limit. Patchable: `title`, `kind`, `report`, `userVerbatim`,
 | `discoveryType Expected requires tests referencing an expectedOutcome.` | Missing `tests` |
 | `An analysis must take up at least one input; motivatedBy is empty.` | Empty `motivatedBy` |
 | `That input is already referenced by this analysis.` | Duplicate attach — the existing reference stands |
-| `{field} is a scratchpad id.` | A `sp_…` value passed to a reference field. Nothing may cite a note — admit a World Fact instead |
-| `{field} must be 'sp_' followed by 26 Crockford base32 characters.` | Something that is not a scratchpad id passed where one was expected |
+| `{field} is a scratchpad id.` | A `msp_…` value passed to a reference field. Nothing may cite a note — admit a World Fact instead |
+| `{field} must be 'msp_' followed by 26 Crockford base32 characters.` | Something that is not a scratchpad id passed where one was expected |
 | `Scratchpad not found.` | Missing note, wrong ledger, or already deleted |
 | `A scratchpad body may be at most 65536 bytes;…` | Paste too large — split it, or keep a pointer to the source |
 | `claimDescription is required when analysis produces a Memolok Decision Record.` | Path A without a claim |
 | `A Memolok Decision Record cannot cite its own Observed Outcome in hasContext...` | DTP violation |
-| `{field} must be a feedback report id of the form 'fb_<16 Crockford base32 characters>'.` | A ledger id passed to a feedback tool — different kinds of address |
-| `{field} is a feedback report id.` | An `fb_…` value passed to a ledger reference field. A report is not a ledger entity |
+| `{field} must be a feedback report id of the form 'mfb_<16 Crockford base32 characters>'.` | A ledger id passed to a feedback tool — different kinds of address |
+| `{field} is a feedback report id.` | An `mfb_…` value passed to a ledger reference field. A report is not a ledger entity |
 | `Feedback report not found.` | Not yours, wrong id, or deleted during triage |
 | `reports[n] may not set serverVersion, …` | The server records the build; a caller cannot claim one |
 | `reports[n].evidence[m] must carry either a response … or an excerpt` | An evidence item that asserts nothing |

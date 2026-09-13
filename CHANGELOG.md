@@ -22,7 +22,20 @@ matches — you are asked to update only when your pack genuinely stops working.
 
 ## Unreleased
 
-*Everything that has landed has shipped. This section is a placeholder.*
+- **Every kind of Memolok identifier is now guaranteed to carry a prefix**, including two that did
+  not before: a ledger address becomes `mdl_` in front of the same sixteen characters it always had,
+  and a user id `musr_`. Scratchpads and feedback reports change prefix, `sp_` to `msp_` and `fb_` to
+  `mfb_`. Matters, World Facts, Observed Outcomes and Analyses are untouched.
+- **Why.** A ledger address and a user id were the same shape, so neither you nor your agent could
+  tell one from the other by looking. Identifiers get pasted into conversations and carried between
+  sessions; the reader at the far end has only the string. Now it says what it is.
+- **The old forms stop resolving, deliberately** — rather than quietly finding the wrong thing. Where
+  a value is only missing its prefix, the error names the one to add and following it is safe,
+  because the part after the prefix never changed. Anything else your agent cannot tell apart from a
+  typo, so it will read the value back to you and ask instead of repairing it.
+- **Update your `.memolok/mdl.yml`**: the ledger address in it needs `mdl_` in front, or a session in
+  that folder cannot find your ledger. **And reconnect once** — sessions established beforehand carry
+  the old form of your user id and will be refused. Personal access tokens keep working.
 
 ## 0.28.2-beta — 2026-09-12
 

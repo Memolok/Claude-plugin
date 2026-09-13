@@ -117,8 +117,8 @@ else can depend on.
 
 ### Scratchpad references
 
-Nothing may reference a scratchpad, permanently and by design. Passing a `sp_…` id to `hasContext`,
-`correctsFact`, `motivatedBy`, `tests.outcomeId` or `evidence` is refused by name — as is an `fb_…`
+Nothing may reference a scratchpad, permanently and by design. Passing a `msp_…` id to `hasContext`,
+`correctsFact`, `motivatedBy`, `tests.outcomeId` or `evidence` is refused by name — as is an `mfb_…`
 feedback report id, which is not a ledger entity at all.
 
 There is also no link the other way — no "promoted from", no provenance edge. Content mined out of a
@@ -132,7 +132,7 @@ note is authored fresh with no trail back, and the user should be told that once
 | `mdrNumber` (`null` while staged) | `adrNumber` |
 | `matterId` | matter "number" |
 | `worldFactId`, `observedOutcomeId` | invented ledger numbers |
-| `scratchpadId` (`sp_` + 26) | a bare id, or any other entity's prefix — every kind carries its own, so a category error is refused by name |
+| `scratchpadId` (`msp_` + 26) | a bare id, or any other entity's prefix — every kind carries its own, so a category error is refused by name |
 | `mdlGuid` | `adlGuid` |
 
 Tools take `mdrHandle`; as a convenience, `get_MDR` also accepts `mdrNumber` so a record someone cites

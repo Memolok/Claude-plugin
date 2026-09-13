@@ -162,7 +162,7 @@ drop it; do not file a reduced version instead.
 
 Give them the titles and their ids, and keep the ids in the session:
 
-> Sent two reports to Memonos — `fb_gt71…` *update_MDR orphans chosenAlternative*, and `fb_k39c…`
+> Sent two reports to Memonos — `mfb_gt71…` *update_MDR orphans chosenAlternative*, and `mfb_k39c…`
 > *No way to rename an MDL title*.
 
 ### 5. Correcting a report
@@ -187,7 +187,7 @@ person reading this has none of your context and cannot ask you anything.
 **What the same finding looks like as a handoff:**
 
 > Created a scratchpad, then searched for a distinctive word from its body and got an empty result.
-> Both calls returned 200. Evidence: the create response with the minted `sp_` id, and the search
+> Both calls returned 200. Evidence: the create response with the minted `msp_` id, and the search
 > response with `total: 0` and zero rows. Expected: a note created in this ledger seconds earlier is
 > findable by a word in its body.
 

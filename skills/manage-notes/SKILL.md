@@ -116,7 +116,7 @@ of the note's opening words, not a description of it: it will not tell you what 
 **Naming a note in prose.** Use the derived title where the page shows one — it is there so a note
 can be referred to without anybody having invented a name for it. Where a note has none yet, build a
 handle from its opening words and the date: *"the Redis quote from the 7th"*, *"the scraped
-pricing page"*. Do not volunteer the `sp_` id; cite it if the user asks.
+pricing page"*. Do not volunteer the `msp_` id; cite it if the user asks.
 
 ## Revising
 
