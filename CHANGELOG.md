@@ -22,13 +22,16 @@ matches — you are asked to update only when your pack genuinely stops working.
 
 ## Unreleased
 
+*Everything that has landed has shipped. This section is a placeholder.*
+
+## 0.29.0-beta — 2026-09-13
+
 - **Every kind of Memolok identifier is now guaranteed to carry a prefix**, including two that did
   not before: a ledger address becomes `mdl_` in front of the same sixteen characters it always had,
   and a user id `musr_`. Scratchpads and feedback reports change prefix, `sp_` to `msp_` and `fb_` to
   `mfb_`. Matters, World Facts, Observed Outcomes and Analyses are untouched.
 - **Why.** A ledger address and a user id were the same shape, so neither you nor your agent could
-  tell one from the other by looking. Identifiers get pasted into conversations and carried between
-  sessions; the reader at the far end has only the string. Now it says what it is.
+  tell one from the other by looking. Now the string says what it is.
 - **The old forms stop resolving, deliberately** — rather than quietly finding the wrong thing. Where
   a value is only missing its prefix, the error names the one to add and following it is safe,
   because the part after the prefix never changed. Anything else your agent cannot tell apart from a
