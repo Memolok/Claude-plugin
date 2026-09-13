@@ -30,7 +30,7 @@ under *Inside the session*.
 Analysis is cited by the id the server minted for it — `mt_…`, `wf_…`, `oo_…`, `an_…` — which says
 what kind of thing it is as well as which one.
 
-**Scratchpads: freely here, not into artifacts on your own initiative.** Name a note by its `sp_…` id
+**Scratchpads: freely here, not into artifacts on your own initiative.** Name a note by its `msp_…` id
 whenever it helps agree which note is meant; the address is deliberately untypeable to discourage the
 durable citation, not the spoken one. Do not write one into a project artifact unasked — a note is
 free to be rewritten or binned, so an artifact resting on one rests on something the ledger will not
@@ -108,7 +108,7 @@ Anchoring is member-level, so anyone who can write the citation can declare it.
 | World Fact | `https://www.memolok.ai/mdl/<mdlGuid>/fact/<wf_…>` |
 | Observed Outcome | `https://www.memolok.ai/mdl/<mdlGuid>/outcome/<oo_…>` |
 | Analysis | `https://www.memolok.ai/mdl/<mdlGuid>/analysis/<an_…>` |
-| Scratchpad | `https://www.memolok.ai/mdl/<mdlGuid>/scratchpad/<sp_…>` — say it here, don't ship it |
+| Scratchpad | `https://www.memolok.ai/mdl/<mdlGuid>/scratchpad/<msp_…>` — say it here, don't ship it |
 
 Identity sits in the path rather than the hostname, so the resolver can move without invalidating a
 citation already written.
