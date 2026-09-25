@@ -608,12 +608,12 @@ Owner-only, no time limit. Patchable: `title`, `kind`, `report`, `userVerbatim`,
 | `An analysis must take up at least one input; motivatedBy is empty.` | Empty `motivatedBy` |
 | `That input is already referenced by this analysis.` | Duplicate attach — the existing reference stands |
 | `{field} is a scratchpad id.` | A `msp_…` value passed to a reference field. Nothing may cite a note — admit a World Fact instead |
-| `{field} must be 'msp_' followed by 26 Crockford base32 characters.` | Something that is not a scratchpad id passed where one was expected |
+| `{field} is not a well-formed {kind} identifier. Pass it back exactly as Memolok returned it.` | The value is not an identifier of the kind the field takes: mistyped, truncated or edited. The sentence is the same whatever is wrong, so fetch the value again and pass it back unchanged |
+| `{field} is a {kind} identifier, which does not address {kind}.` | A real identifier of another kind — a Matter where a World Fact belongs, or a ledger id passed to a feedback tool. Pass the kind the field takes |
 | `Scratchpad not found.` | Missing note, wrong ledger, or already deleted |
 | `A scratchpad body may be at most 65536 bytes;…` | Paste too large — split it, or keep a pointer to the source |
 | `claimDescription is required when analysis produces a Memolok Decision Record.` | Path A without a claim |
 | `A Memolok Decision Record cannot cite its own Observed Outcome in hasContext...` | DTP violation |
-| `{field} must be a feedback report id of the form 'mfb_<16 Crockford base32 characters>'.` | A ledger id passed to a feedback tool — different kinds of address |
 | `{field} is a feedback report id.` | An `mfb_…` value passed to a ledger reference field. A report is not a ledger entity |
 | `Feedback report not found.` | Not yours, wrong id, or deleted during triage |
 | `reports[n] may not set serverVersion, …` | The server records the build; a caller cannot claim one |

@@ -22,7 +22,9 @@ matches — you are asked to update only when your pack genuinely stops working.
 
 ## Unreleased
 
-*Everything that has landed has shipped. This section is a placeholder.*
+- **Identifier refusals, as the server now words them.** The tools catalog lists one sentence for
+  a malformed identifier, the same whatever is wrong with it, and one naming the kind when an
+  identifier of another kind arrives. Either way, pass back the value a tool returned, unchanged.
 
 ## 0.29.0-beta — 2026-09-13
 
