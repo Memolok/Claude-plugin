@@ -23,8 +23,8 @@ reason to keep a decision in draft. A correctly scoped commitment with three hon
 sprawling one that tried to settle everything and committed to nothing.
 
 If something this decision could be taken to settle stays unsettled, name it and proceed. Waiting until
-nothing is unsettled means waiting forever, and the waiting is not free — the alternative to deciding with acknowledged gaps is
-usually deciding with unacknowledged ones.
+nothing is unsettled means waiting forever, and the waiting is not free — the alternative to deciding
+with acknowledged gaps is usually deciding with unacknowledged ones.
 
 ## How one gets settled
 
