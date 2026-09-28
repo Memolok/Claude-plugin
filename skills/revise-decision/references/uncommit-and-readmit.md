@@ -99,7 +99,7 @@ Then wait.
 | --- | --- |
 | `Only Accepted or Rejected Memolok Decision Records may be Uncommitted.` | Record is staged already |
 | `This Memolok Decision Record is Anchored ({kind}) and cannot be Uncommitted. Use amend or supersede instead.` | Something depends on it |
-| A permission error | Caller is a `member`, not `admin` or `owner` |
+| `You do not have the necessary permissions to uncommit decision records on this ledger.` | Caller is a `member`, not `admin` or `owner` |
 | `Cannot change the {label} on a ledger-resident Memolok Decision Record ({status}).` | Patch attempted before the uncommit landed |
 
 ## Anti-patterns

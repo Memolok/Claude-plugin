@@ -13,16 +13,16 @@ an off-device backup — full RAID-level redundancy is not required.
 
 | id | label | summary |
 | --- | --- | --- |
-| `alt-backup` | Single drive + scheduled backup | Library on one repurposed drive; off-device backup on a schedule |
-| `alt-raid` | Software RAID1 mirror | Mirror on existing hardware; no separate backup |
-| `alt-naked` | Single drive, no backup | Accept full loss risk |
+| ❌ `alt-raid` | Software RAID1 mirror | Mirror on existing hardware; no separate backup |
+| ✅ `alt-backup` | Single drive + scheduled backup | Library on one repurposed drive; off-device backup on a schedule |
+| ❌ `alt-naked` | Single drive, no backup | Accept full loss risk |
 
 **Deliberation:**
 
-- `alt-backup` — Works with hardware on hand; backup covers fire, theft, and deletion. Requires an
-  ongoing backup habit.
 - `alt-raid` — Survives one drive failure locally. No protection against fire, theft, or accidental
   deletion; more complexity.
+- `alt-backup` — Works with hardware on hand; backup covers fire, theft, and deletion. Requires an
+  ongoing backup habit.
 - `alt-naked` — Violates the survivability intent in the head Claim.
 
 **Verdict:** Run the library on a single repurposed drive and rely on a scheduled off-device backup
@@ -54,6 +54,11 @@ an over-sharpened Need obvious — if it already names the chosen mechanism, you
 
 **Show alternatives as a table** when there are three or more, as a list when there are one or two. An
 alternative with no `description` is fine; it means the user named the option without elaborating.
+
+**Mark the chosen alternative ✅ and the others ❌** once `chosenAlternative` is set; with none
+chosen, mark nothing. Keep the order the record holds them in, here and in the deliberation — the
+chosen one need not be first, and a preview reordered around it no longer matches the record the
+user will read later.
 
 **Attribute the deliberation to the options**, not to a generic pros-and-cons split. Each line should
 be traceable to something the user actually said.

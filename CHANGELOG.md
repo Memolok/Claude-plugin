@@ -22,9 +22,17 @@ matches — you are asked to update only when your pack genuinely stops working.
 
 ## Unreleased
 
+- **Refusals that name what your role does not allow.** The pack lists what creating, editing,
+  sealing, anchoring or uncommitting a decision record, or configuring a ledger, answers when your
+  role on the ledger does not allow it. Someone not on the ledger at all is told it was not found. A
+  record you authored stays editable wherever you can create records.
+- **Changing a ledger's title or purpose takes an admin or owner.** The pack said a member could, and
+  the server refuses one.
 - **Identifier refusals, as the server now words them.** The tools catalog lists one sentence for
   a malformed identifier, the same whatever is wrong with it, and one naming the kind when an
   identifier of another kind arrives. Either way, pass back the value a tool returned, unchanged.
+- **Decision previews mark the chosen alternative.** Once one is chosen, the recap before a write
+  marks it ✅ and the others ❌, in the order the record holds them.
 
 ## 0.29.0-beta — 2026-09-13
 

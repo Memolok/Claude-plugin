@@ -133,7 +133,8 @@ is written. The **`memolok-citations`** skill carries the order and the form.
 
 - One-shot mint at `Accepted` or `Rejected` through `create_MDR` triggers the same seal. Run the
   ceremony first — the shortcut is in the tool call, not in the conversation.
-- If the transition is refused, the message names the missing gate. Patch it and return to step 3.
+- If the transition is refused, the message names the missing gate. Patch it and return to step 3 —
+  unless it names your permissions, which no patch fixes.
 - The `eo-…` ids you chose come back on every read; a later wake needs them.
 
 ## References

@@ -56,6 +56,10 @@ the friendly error mapping, so always send canonical values at creation.
 Every one of these is fixable with an `update_MDR` while the record is still staged. Patch, then
 return to the ceremony.
 
+`You do not have the necessary permissions to edit this decision record.` is not a gate. The caller's
+role does not let them change this record's status, and no patch fixes that — an administrator
+changes the role.
+
 ## Settling an open question at admission
 
 A staged record can close a question left open on an **already-admitted** record:

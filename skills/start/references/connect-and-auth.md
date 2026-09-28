@@ -56,8 +56,9 @@ Start with `ping`. It is the only tool that tells you about the connection rathe
 | `Authenticated token has no linked Memolok user.` | The credential is valid but not linked to an account | Reconnect to sign in again, or the token needs an administrator |
 | `The access token carries a malformed Memolok user id.` | The credential is valid but its identity claim is unusable | Reconnect to sign in again; if it recurs, report it |
 | `This PAT's client id is malformed.` | The Personal Access Token is damaged or mistyped | Check the token, or an administrator issues a new one |
-| `Memolok Decision Ledger not found.` on a read | Does not distinguish a ledger the user cannot see from one that is not there. Report it as ambiguous: they may not be a member, or this address may be stale | `get_MDLs` to see what they can actually reach |
-| `You are not a member of this Memolok Decision Ledger.` on a write | Reading is fine, writing is not | An administrator adds them |
+| `Memolok Decision Ledger not found.` | Does not distinguish a ledger the user cannot see from one that is not there. Report it as ambiguous: they may not be a member, or this address may be stale | `get_MDLs` to see what they can actually reach |
+| `You are not a member of this Memolok Decision Ledger.` on a write | They are not on the ledger, or their role does not write | An administrator adds them, or changes the role |
+| `You do not have the necessary permissions to …` on a write | Their role on the ledger does not allow that write | An administrator changes the role |
 | Writes refused, reads fine | `visitor` role | An administrator changes the role |
 | "Automatic client registration isn't supported" | Server-side registration issue | Not fixable by the user; report it |
 

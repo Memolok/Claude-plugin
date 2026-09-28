@@ -91,8 +91,8 @@ Show them the full replacement and get agreement before writing.
 }
 ```
 
-Requires `member` or above. A `visitor` cannot write one — say so rather than letting them draft one
-first.
+Requires `admin` or `owner`. A `member` or `visitor` cannot write one — say so rather than letting
+them draft one first.
 
 ### 5. Refresh the project file, if one carries a copy
 

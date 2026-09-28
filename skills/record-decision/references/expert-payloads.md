@@ -151,7 +151,7 @@ helpful one.
 | `…id '…' must start with '…' — did you mean '…'?` | Missing the list's prefix; the message names the correction |
 | `…id '…' is used twice in this list.` | Two items claiming one id |
 | `At least one expected outcome is required before accepting…` | Created at `Accepted` with no tail |
-| `Field required [type=missing]` naming `verdict.description` | Sent `verdict` as bare `{markdown, lang}` |
+| `verdict must be {description: {markdown, lang}}, not a flat {markdown, lang} object.` | Sent `verdict` as bare `{markdown, lang}`. The same sentence names `alternatives[n]` and the other wrapped lists |
 
 ## What create_MDR cannot carry
 

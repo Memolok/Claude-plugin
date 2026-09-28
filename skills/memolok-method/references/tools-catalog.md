@@ -291,7 +291,7 @@ shape: `{ "description": { "markdown": "…" } }`, **not** a flat `{ markdown }`
 **Full replacement, not an append.** There is no history and no version. Read the current statement
 with `get_MDL` first, then send the complete new one.
 
-Requires `member` or above. Returns the same shape as `get_MDL`.
+Requires `admin` or `owner`. Returns the same shape as `get_MDL`.
 
 ### `register_matter`
 
@@ -587,8 +587,12 @@ Owner-only, no time limit. Patchable: `title`, `kind`, `report`, `userVerbatim`,
 | Message | Cause |
 | --- | --- |
 | `Memolok Decision Ledger not found.` | Does not distinguish a ledger the user cannot see from one that is not there. Report it as ambiguous: they may not be a member, or this address may be stale |
-| `You are not a member of this Memolok Decision Ledger.` | Write without membership |
-| `Memolok Decision Record not found.` | Missing record, or non-member read |
+| `You are not a member of this Memolok Decision Ledger.` | A write to a matter, analysis, World Fact, Observed Outcome or scratchpad by someone not on the ledger, or whose role does not write, such as a visitor. Decision-record writes and ledger configuration answer a non-member `Memolok Decision Ledger not found.` instead |
+| `You do not have the necessary permissions to create decision records on this ledger.` | `create_MDR` by someone whose role on the ledger does not let them create records, such as a visitor |
+| `You do not have the necessary permissions to edit this decision record.` | `update_MDR`, `transition_MDR_status` or `anchor_MDR` by someone whose role does not let them edit that record |
+| `You do not have the necessary permissions to uncommit decision records on this ledger.` | `uncommit_MDR` by someone whose role does not let them uncommit, such as a member |
+| `You do not have the necessary permissions to configure this ledger.` | `set_MDL_title` or `set_ledger_intent` by someone on the ledger whose role does not let them configure it |
+| `Memolok Decision Record not found.` | No record under that key on a ledger you can read. A ledger you cannot read answers `Memolok Decision Ledger not found.` instead |
 | `The {field} reference belongs to a different Memolok Decision Ledger.` | Cross-ledger reference |
 | `Use transition_MDR_status to change Memolok Decision Record status.` | `status` in a patch |
 | `Cannot change the {label} on a ledger-resident Memolok Decision Record ({status}).` | Tier-1 patch after t₀ |
