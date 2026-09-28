@@ -22,6 +22,10 @@ matches — you are asked to update only when your pack genuinely stops working.
 
 ## Unreleased
 
+- **Where a draft decision's handle may go is stated once, and plainly.** It still never goes into
+  code, a document, a commit message or anything sent; the pack now says so the same way everywhere,
+  and says an `MDRh…` handle is fine in chat and in session notes nobody commits or sends, such as a
+  hand-off pasted into the next session.
 - **A seal or an uncommit that failed part-way is finished by repeating it.** Your agent repeats the
   identical call rather than reporting a fault, and does not tell you the change happened until the
   repeat succeeds. A reply saying the data service is unavailable is retried after a pause.

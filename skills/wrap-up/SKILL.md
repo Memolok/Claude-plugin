@@ -205,6 +205,7 @@ it, and a fact the project needs belongs *in the project*.
 | A constraint the code should enforce or state | Code, config, comment |
 | The *why* behind work already done | Commit message |
 | A record sealed this session that work in the repo implements, not cited there yet | Code, docs, commit message — **`memolok-citations`** owns the form and the anchor |
+| A draft record's `MDRh…` you remember writing into a file or a message this session — think back, don't search | Load **`memolok-citations`** and decide how to fix it |
 | The cold-start signal, offered this session and never answered | The project — **`memolok-method`** invariant 3 owns it |
 
 **An ignored offer is not a declined one.** Invariant 3 suppresses *repeating* the offer during the

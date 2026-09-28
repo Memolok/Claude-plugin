@@ -1,11 +1,13 @@
 ---
 name: memolok-citations
 description: >-
-  How to write a citation referencing an entry on a Memolok ledger: IRIs/URIs, notation, what binds
-  a compact form in code, in a document, in a commit message, and in a chat message to a user — and
-  the anchoring and the timing that come first.
-  Load before writing any ledger identifier, especially anywhere that outlives this session (and
-  whenever another Memolok skill routes here by name).
+  How to reference a Memolok ledger entry from anything committed to a repository or sent to
+  someone: code, a comment, a document, a commit message, a ticket, a message. You MUST NOT write
+  such a reference to any ledger entry without first loading this skill, once per session. A draft
+  decision record is never referenced there at all, not even as `MDRh…`; and `MDR-` is followed
+  only by a record's number, never by its handle. Naming entries in chat with the user, or in your
+  own session notes that are neither committed nor sent, is exempt — unless those notes draft text
+  that will be copied into one.
 user-invocable: false
 ---
 
@@ -23,8 +25,8 @@ In this skill, `MDR-7` names nothing; it just illustrates a shape.
 ## What can be cited
 
 **Decision records: only the admitted ones.** A staged record (`MDRh42`) has no number, may never
-get one, and is not referred to outside the conversation at all — the rule and its reason are below,
-under *Inside the session*.
+get one, and is not referred to in anything committed or sent at all — the rule and its reason are
+below, under *Inside the session*.
 
 **The durable prose entries carry their own addresses.** A Matter, World Fact, Observed Outcome or
 Analysis is cited by the id the server minted for it — `mt_…`, `wf_…`, `oo_…`, `an_…` — which says
@@ -222,9 +224,14 @@ docstring beats the same parenthetical on six lines inside it.
 Rule F in the method governs naming here. The inserted `h` and the missing separator in `MDRh7` are
 deliberate: a corrupted handle fails loudly instead of degrading into a citation that looks valid.
 
-> **A staged record is not referred to outside the conversation.** `MDRh7` names it between you and
-> the practitioner and nowhere durable — not in a file, not in a document, not in a commit message,
-> not in a payload you hand to another tool.
+> **A staged record's handle stays in your sessions.** `MDRh7` names it in chat and in session notes
+> that are neither committed nor sent — a plan nobody commits, a hand-off pasted into the next
+> session. It never goes into anything committed to a repository or sent to anyone: not a source
+> file, a document, a commit message, a ticket, or a payload you hand to another tool.
+
+The test is where the text will live, decided when you write it, not what kind of document it is. A
+hand-off that gets committed is a project artifact, and text a note drafts for copying into one is
+judged by where it will land.
 
 Three things make that a rule rather than a caution. It has no number. It may never acquire one, so
 the reference can end up naming something that never became a decision. And it cannot be anchored —
@@ -232,8 +239,10 @@ the declaration that makes a citation safe is refused for a staged record, becau
 for anything to cite — so a reference to one is a dependency nothing can protect, pointing at prose
 still free to change underneath it.
 
-Where staged work has to be named outside the conversation, paraphrase its head Claim. That carries
-the meaning and promises nothing the ledger has not promised.
+None of the three binds a note that is thrown away: a handle stays a valid address to look the
+record up by, and nothing depends on the note. Where staged work has to be named in committed or
+sent text, paraphrase its head Claim. That carries the meaning and promises nothing the ledger has
+not promised.
 
 ## What Memolok knows afterwards
 

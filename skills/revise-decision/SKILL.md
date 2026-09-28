@@ -39,7 +39,7 @@ Principle is the whole subject of this skill.
 - **Read `retractable` before proposing anything** — it decides the route
 - Never tell the user a committed record can be patched in place
 - Say "captured" only after the write succeeded
-- Cite `MDR-{n}` once admitted (anywhere), `MDRh{handle}` or a head Claim paraphrase while staged (only in chat sessions and in transient plans); never a bare handle (Rule F)
+- Cite `MDR-{n}` once admitted (anywhere), `MDRh{handle}` or a head Claim paraphrase while staged (only in chat and in session notes nobody commits or sends); never a bare handle (Rule F)
 - **Never** propose a revision because a record no longer matches the ledger's stated purpose
 
 ## Workflow
