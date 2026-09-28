@@ -26,6 +26,16 @@ matches — you are asked to update only when your pack genuinely stops working.
 
 *Everything that has landed has shipped. This section is a placeholder.*
 
+## 0.32.0-beta — 2026-09-29
+
+- **Your agent records what happened after a decision, and lists it, by the record's number**, the
+  way the decision is cited. The server no longer accepts a handle for either, so an agent on an
+  older pack is refused and told to update.
+- **An observed outcome is read only by the identifier Memolok gave it**, and names the expected
+  outcome it tests and nothing else.
+- **Recording an outcome takes a role that writes to the ledger.** A visitor reads outcomes and is
+  told it may not record one.
+
 ## 0.31.1-beta — 2026-09-28
 
 - **Every draft decision is shown to you in one layout**, from the first preview of a session, headed

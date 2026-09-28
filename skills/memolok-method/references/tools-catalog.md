@@ -8,21 +8,28 @@ Every tool except `ping` and `get_guidance` requires authentication. All ledger 
 | Field | When | Role |
 | --- | --- | --- |
 | `mdrHandle` | Every mint | Addressing key for record tools, including after admission |
-| `mdrNumber` | Admission only | Ledger citation; `null` while staged. Accepted by `get_MDR` alone |
+| `mdrNumber` | Admission only | Ledger citation; `null` while staged. Accepted by `get_MDR`, and taken alone by the tools that only a ledger resident has anything for |
 | `retractable` | Computed at read | `null` staged; `true` uncommit-eligible; `false` anchored |
 
 Never invent either value. Never address a record tool by a raw database id.
 
-**`mdrHandle` is the standard path whenever you have one** — it is what every record tool takes. `get_MDR` also accepts `mdrNumber`, for the one journey
-where someone cites "MDR-7" and you hold no handle: read it directly rather than scanning
-`discover_MDRs`. Two things bound that exception:
+**`mdrHandle` is the standard path whenever you have one** — it is what every tool that changes a
+record takes. `get_MDR` also accepts `mdrNumber`, for the one journey where someone cites "MDR-7" and
+you hold no handle: read it directly rather than scanning `discover_MDRs`. Two things bound that
+exception:
 
 - **It is a read.** A number is not a durable address until anchoring — an uncommit releases it and the next
   admission takes it. A read that lands on the wrong record announces itself, because the response
-  states both identifiers; a write would not, so no write tool accepts a number. **Anchoring is what
-  makes a number safe to write down**, and `anchor_MDR` is how you cause it deliberately.
+  states both identifiers; a write would not, so no tool that changes a record accepts a number.
+  **Anchoring is what makes a number safe to write down**, and `anchor_MDR` is how you cause it
+  deliberately.
 - **The response carries `mdrHandle`.** Once you have read the record, use its handle for everything
-  else in that session — patches, transitions, wakes, an uncommit.
+  else in that session — patches, transitions, an uncommit.
+
+**Three tools take `mdrNumber` alone**, because only a ledger resident has anything for them:
+`get_MDR_learning_delta`, `discover_observed_outcomes` narrowed to one record, and
+`record_observed_outcome`. Recording an outcome changes no record; it adds an entry beside one, and
+anchors it. Holding only a handle, read the number off `get_MDR`.
 
 **Read `retractable` before suggesting an uncommit.**
 
@@ -213,7 +220,7 @@ nothing can yet answer that. Do not present an old premise as current merely bec
 
 ### `discover_observed_outcomes`
 
-Shared discovery params, plus `mdrHandle` (int, optional), which narrows to one record's wake.
+Shared discovery params, plus `mdrNumber` (int, optional), which narrows to one record's wake.
 Observation order, oldest first. Per outcome: a heading, its id, the record it was realized from in
 both keys, how it was discovered, `testResult` where it tests a promise, `Observed:`, subjects and
 summary.
@@ -477,15 +484,16 @@ wrong when admitted — never for ordinary world drift.
 | Param | Type | Required |
 | --- | --- | --- |
 | `mdlGuid` | string | yes |
-| `mdrHandle` | int | yes — must be a ledger resident |
+| `mdrNumber` | int | yes — a ledger resident's number |
 | `claimDescription` | `{ markdown, lang? }` | yes |
 | `discoveryType` | `Expected` \| `Emergent` \| `Deducible` | yes |
-| `tests` | `{ outcomeId }` or an id string | Required when `Expected` |
+| `tests` | `{ outcomeId }` or an id string, and nothing else | Required when `Expected` |
 | `testResult` | `Satisfied` \| `Violated` \| `Inconclusive` | Required when `Expected` |
 | `observedBy`, `correctsFact` | string | no |
 
 There is no `observedAt` parameter — the server stamps the current time, so a wake cannot be
-backdated. Recording one typically Anchors the source record.
+backdated. Recording one typically Anchors the source record. A visitor may read outcomes and may not
+record one.
 
 ## Scratchpad tools
 
@@ -603,9 +611,10 @@ Owner-only, no time limit. Patchable: `title`, `kind`, `report`, `userVerbatim`,
 | Message | Cause |
 | --- | --- |
 | `Memolok Decision Ledger not found.` | Does not distinguish a ledger the user cannot see from one that is not there. Report it as ambiguous: they may not be a member, or this address may be stale |
-| `You are not a member of this Memolok Decision Ledger.` | A write to a matter, analysis, World Fact, Observed Outcome or scratchpad by someone not on the ledger, or whose role does not write, such as a visitor. Decision-record writes and ledger configuration answer a non-member `Memolok Decision Ledger not found.` instead |
+| `You are not a member of this Memolok Decision Ledger.` | A write to a matter, analysis, World Fact or scratchpad by someone not on the ledger, or whose role does not write, such as a visitor. Decision-record writes, recording an outcome and ledger configuration answer a non-member `Memolok Decision Ledger not found.` instead |
 | `You do not have the necessary permissions to create decision records on this ledger.` | `create_MDR` by someone whose role on the ledger does not let them create records, such as a visitor |
 | `You do not have the necessary permissions to edit this decision record.` | `update_MDR`, `transition_MDR_status` or `anchor_MDR` by someone whose role does not let them edit that record |
+| `You do not have the necessary permissions to record observed outcomes on this ledger.` | `record_observed_outcome` by someone whose role does not let them record, such as a visitor |
 | `You do not have the necessary permissions to uncommit decision records on this ledger.` | `uncommit_MDR` by someone whose role does not let them uncommit, such as a member |
 | `You do not have the necessary permissions to configure this ledger.` | `set_MDL_title` or `set_ledger_intent` by someone on the ledger whose role does not let them configure it |
 | `Memolok Decision Record not found.` | No record under that key on a ledger you can read. A ledger you cannot read answers `Memolok Decision Ledger not found.` instead |
@@ -623,7 +632,6 @@ Owner-only, no time limit. Patchable: `title`, `kind`, `report`, `userVerbatim`,
 | `Only Accepted or Rejected Memolok Decision Records may be Uncommitted.` | Wrong status for uncommit |
 | `Only a ledger-resident Memolok Decision Record can be Anchored. A staged record has no ledger number for anything to cite.` | `anchor_MDR` on a staged record — wait for admission |
 | `kind must be one of project, other.` | `anchor_MDR` with anything else; the vocabulary is closed |
-| `Observed Outcomes can only realizeFrom a ledger-resident Memolok Decision Record...` | Wake on a staged record |
 | `discoveryType Expected requires tests referencing an expectedOutcome.` | Missing `tests` |
 | `An analysis must take up at least one input; motivatedBy is empty.` | Empty `motivatedBy` |
 | `That input is already referenced by this analysis.` | Duplicate attach — the existing reference stands |

@@ -33,7 +33,7 @@ Principle is what makes the wake a separate record instead of an edit.
 
 ## Non-negotiables
 
-- Never invent `mdlGuid`, `mdrHandle`, or `observedOutcomeId` — the server mints them
+- Never invent `mdlGuid`, `mdrNumber`, or `observedOutcomeId` — the server mints them
 - All prose is `{ "markdown": "...", "lang": "en" }`
 - **Never rewrite the tail to match what happened** — that is ledger fraud
 - The source record must be a ledger resident; staged records have made no bets
@@ -90,7 +90,7 @@ The ledger is not a monitoring system. Do not funnel raw metrics into it.
 ```json
 {
   "mdlGuid": "<mdlGuid>",
-  "mdrHandle": 1,
+  "mdrNumber": 7,
   "claimDescription": {
     "markdown": "P99 read latency measured 410ms during the December peak, against a 200ms target.",
     "lang": "en"
@@ -100,6 +100,9 @@ The ledger is not a monitoring system. Do not funnel raw metrics into it.
   "testResult": "Violated"
 }
 ```
+
+The record is named by its **number**, the way the decision is cited: only a ledger resident takes an
+outcome, and every ledger resident has one. Holding only a handle, read the number off `get_MDR`.
 
 `testResult` is `Satisfied`, `Violated`, or `Inconclusive` — and it belongs to the **expectation** being
 assessed, not to the observation event.
@@ -112,8 +115,7 @@ Payloads and error cases: `references/wake.md`.
 get_MDR_learning_delta(mdlGuid, mdrNumber)
 ```
 
-It takes the record's **number**, not the handle you recorded the outcome with: only a ledger
-resident has a wake, and every ledger resident has a number.
+It takes the record's number too, the one you recorded the outcome against.
 
 Returns each expected outcome with the wakes that tested it, plus every Emergent and Deducible
 outcome again on its own. Coexisting assessments all come back — there is no single current result,
@@ -164,7 +166,7 @@ If the user may still want to revise the sealed record, do that **first** — se
   year is worth surfacing.
 - A `Rejected` record can carry a wake too — what happened after deciding *not* to act is just as
   informative.
-- `discover_observed_outcomes(mdlGuid, mdrHandle)` shows everything already recorded against a
+- `discover_observed_outcomes(mdlGuid, mdrNumber)` shows everything already recorded against a
   record, each with its summary — which is what tells you whether this observation is already
   there without opening every one.
 - **A derived heading on either read is Memolok's wording and never a verdict.** It comes from the
