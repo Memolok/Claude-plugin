@@ -169,9 +169,9 @@ separate pass after t₀ — the **`memolok-citations`** skill has the ordering.
 
 ### 6. Name the open questions
 
-Record what this decision deliberately leaves unsettled as `openQuestions`. Prefer logging an
-out-of-scope item and moving on over expanding the record to resolve it (Rule D). They never block
-anything.
+Record what this decision deliberately leaves unsettled as `openQuestions`, rather than expanding the
+record to settle it. Rule D's test decides what qualifies: something a reader of this record could
+believe it settled. They never block anything.
 
 ### 7. Preview and persist
 

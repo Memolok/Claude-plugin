@@ -61,8 +61,8 @@ rather than RAID.
 
 **Intended status:** Deliberating — the record stays editable on the ledger
 
-> Does this cover what we discussed? Out-of-scope items stay as open questions; we do not need to
-> settle them to record this, or to Accept it later.
+> Does this cover what we discussed? The open questions are what this decision deliberately leaves
+> unsettled; we do not need to settle them to record this, or to Accept it later.
 
 ---
 

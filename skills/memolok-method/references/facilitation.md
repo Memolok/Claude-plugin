@@ -150,15 +150,19 @@ you drafted a convincing Verdict.
 Rejection deserves equal facilitation, in more situations than an exhausted deliberation — a Claim
 declined while other work proceeds is the case most often missed (`rejection.md`).
 
-### Rule D — Open questions keep scope tight; they do not block commit
+### Rule D — Open questions mark this record's edges; they do not block commit
 
 Open questions name what a record deliberately leaves unsettled — *"we have not validated vendor B's
-SLA under peak load"*. Scope boundaries acknowledged at commitment, not unfinished deliberation.
+SLA under peak load"*. Negative epistemic space of **this** decision at t₀: an edge of its own scope,
+an unknown its commitment carries, a topic consciously left undiscussed. Not unfinished deliberation.
 Settlement requires a **later Accepted** record, never an edit to this one.
 
-**Default posture:** something falls outside this Claim → record it as an open question and proceed.
-Prefer a correctly scoped Accepted record with open questions over scope creep. **Never** treat a
-remaining open question as a gate.
+**The test:** would a reader of this record plausibly believe it settled this? Yes → name it and
+proceed; prefer a correctly scoped Accepted record with open questions over scope creep. No → not an
+open question, however near the topic: how another decision will go, whether a rule will bind other
+things later, what a future change might replace. Each open question joins the ledger's unsettled
+deferrals, so one this decision never held open is debt it never incurred. If it matters, it is a
+**Matter** or a record of its own. **Never** treat a remaining open question as a gate.
 
 ### Rule E — Record the explored process; do not stage theater
 

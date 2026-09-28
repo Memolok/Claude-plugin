@@ -12,7 +12,9 @@ It is not an argument still being weighed — that belongs with the deliberation
 chosen path — that belongs with the expected outcomes. And it is not a substitute for honest reasoning; a
 record cannot defer the actual decision it exists to make.
 
-It is a boundary marker: this record settles *this*, and consciously not *that*.
+It is a boundary marker: this record settles *this*, and consciously not *that*. The *that* is always
+something a reader could have taken this record to settle. How some other decision will go later is
+not a gap in this one; if it matters, it is a question of its own.
 
 ## It never blocks commitment
 
@@ -20,8 +22,8 @@ This is the rule people most often get backwards. An acknowledged gap is not an 
 reason to keep a decision in draft. A correctly scoped commitment with three honest deferrals beats a
 sprawling one that tried to settle everything and committed to nothing.
 
-If something falls outside what you are deciding, name it and proceed. Waiting until nothing is unsettled
-means waiting forever, and the waiting is not free — the alternative to deciding with acknowledged gaps is
+If something this decision could be taken to settle stays unsettled, name it and proceed. Waiting until
+nothing is unsettled means waiting forever, and the waiting is not free — the alternative to deciding with acknowledged gaps is
 usually deciding with unacknowledged ones.
 
 ## How one gets settled

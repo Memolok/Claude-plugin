@@ -25,6 +25,9 @@ matches — you are asked to update only when your pack genuinely stops working.
 - **Every draft decision is shown to you in one layout**, from the first preview of a session, headed
   by its **Need**. A record amending or superseding another is previewed too, saying what it changes,
   and so are the world facts and records it rests on or points at.
+- **Open questions stay on what the decision itself leaves unsettled.** Your agent no longer proposes
+  ones about how other decisions might go later; anything like that worth keeping is parked as a
+  matter instead.
 
 ## 0.31.0-beta — 2026-09-28
 
