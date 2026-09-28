@@ -10,6 +10,7 @@ records, or invented calls. Tell the user it is not available yet.
 | Auth and health | `ping`, `get_guidance`, `whoami` |
 | Ledger discovery and creation | `get_MDLs`, `get_MDL`, `create_MDL` |
 | Ledger intent | `set_ledger_intent` (read it back with `get_MDL`) |
+| Rename a ledger | `set_MDL_title` (admin/owner; its identifier does not change) |
 | Matter intake | `register_matter` |
 | Matter reads | `get_matter` (one, whole), `discover_matters` (the ledger's matters as prose, each with its summary, subjects and who took it up) |
 | Analysis, Path A and B | `create_analysis` |

@@ -28,7 +28,7 @@ Examples:
 
 - `/memolok:send-feedback update_MDR returned 200 but dropped my chosenAlternative`
 - `/memolok:send-feedback the record-decision skill says something the tools don't actually support`
-- `/memolok:send-feedback there's no way to rename a ledger after creating it`
+- `/memolok:send-feedback there's no way to move a decision to another ledger`
 - `/memolok:send-feedback tell Memonos their error messages don't say which field failed`
 
 ## Step 0 — Load the method
@@ -163,7 +163,7 @@ drop it; do not file a reduced version instead.
 Give them the titles and their ids, and keep the ids in the session:
 
 > Sent two reports to Memonos — `mfb_gt71…` *update_MDR orphans chosenAlternative*, and `mfb_k39c…`
-> *No way to rename an MDL title*.
+> *No way to move a record between ledgers*.
 
 ### 5. Correcting a report
 

@@ -293,6 +293,19 @@ with `get_MDL` first, then send the complete new one.
 
 Requires `admin` or `owner`. Returns the same shape as `get_MDL`.
 
+### `set_MDL_title`
+
+| Param | Type | Required |
+| --- | --- | --- |
+| `mdlGuid` | string | yes |
+| `title` | string | yes |
+
+Renames the ledger. Its `mdlGuid`, and every citation of it or of its entries, stay as they are.
+Requires `admin` or `owner`. Returns the same shape as `get_MDL`.
+
+A `.memolok/mdl.yml` carrying `mdlTitle` holds the old name from this moment on — where project
+files are available, offer to update it.
+
 ### `register_matter`
 
 | Param | Type | Required |

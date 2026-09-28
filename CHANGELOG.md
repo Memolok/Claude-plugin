@@ -22,24 +22,25 @@ matches — you are asked to update only when your pack genuinely stops working.
 
 ## Unreleased
 
-- **Where a draft decision's handle may go is stated once, and plainly.** It still never goes into
-  code, a document, a commit message or anything sent; the pack now says so the same way everywhere,
-  and says an `MDRh…` handle is fine in chat and in session notes nobody commits or sends, such as a
-  hand-off pasted into the next session.
+*Everything that has landed has shipped. This section is a placeholder.*
+
+## 0.30.0-beta — 2026-09-28
+
 - **A seal or an uncommit that failed part-way is finished by repeating it.** Your agent repeats the
   identical call rather than reporting a fault, and does not tell you the change happened until the
   repeat succeeds. A reply saying the data service is unavailable is retried after a pause.
-- **Refusals that name what your role does not allow.** The pack lists what creating, editing,
-  sealing, anchoring or uncommitting a decision record, or configuring a ledger, answers when your
-  role on the ledger does not allow it. Someone not on the ledger at all is told it was not found. A
-  record you authored stays editable wherever you can create records.
-- **Changing a ledger's title or purpose takes an admin or owner.** The pack said a member could, and
-  the server refuses one.
-- **Identifier refusals, as the server now words them.** The tools catalog lists one sentence for
-  a malformed identifier, the same whatever is wrong with it, and one naming the kind when an
-  identifier of another kind arrives. Either way, pass back the value a tool returned, unchanged.
-- **Decision previews mark the chosen alternative.** Once one is chosen, the recap before a write
-  marks it ✅ and the others ❌, in the order the record holds them.
+- **Refusals that name what your role does not allow**, for creating, editing, sealing, anchoring or
+  uncommitting a decision record, and for configuring a ledger. Someone not on the ledger at all is
+  told it was not found.
+- **Your agent can rename a ledger.** Its address, and every citation of it, stay as they are.
+  Renaming it or changing its purpose takes an admin or owner; the pack had said a member could.
+- **Where a draft decision's handle may go, stated once.** Never into code, a document, a commit
+  message or anything sent; fine in chat and in session notes nobody commits or sends, such as a
+  hand-off pasted into the next session.
+- **Identifier refusals, as the server now words them:** one sentence for a malformed identifier,
+  and one naming the kind when an identifier of another kind arrives.
+- **Decision previews mark the chosen alternative** ✅ and the others ❌, in the order the record
+  holds them.
 
 ## 0.29.0-beta — 2026-09-13
 
