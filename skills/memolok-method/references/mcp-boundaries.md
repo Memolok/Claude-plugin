@@ -124,5 +124,6 @@ note is authored fresh with no trail back, and the user should be told that once
 | `scratchpadId` (`msp_` + 26) | a bare id, or any other entity's prefix — every kind carries its own, so a category error is refused by name |
 | `mdlGuid` | `adlGuid` |
 
-Tools take `mdrHandle`; as a convenience, `get_MDR` also accepts `mdrNumber` so a record someone cites
-by number can be read directly. Use the handle whenever you hold one.
+Tools take `mdrHandle`; as a convenience, `get_MDR` also accepts `mdrNumber` so a record someone
+cites by number can be read directly. Use the handle whenever you hold one. The exception is
+`get_MDR_learning_delta`, which takes `mdrNumber` alone, since only a numbered record has one.

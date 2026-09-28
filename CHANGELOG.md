@@ -24,6 +24,12 @@ matches — you are asked to update only when your pack genuinely stops working.
 
 *Everything that has landed has shipped. This section is a placeholder.*
 
+## 0.31.0-beta — 2026-09-28
+
+- **Your agent compares a record's promises with what happened by the record's number**, the way
+  the decision is cited. The server no longer accepts a handle for it, so an agent on an older pack
+  asks by handle, is refused, and is told to update.
+
 ## 0.30.0-beta — 2026-09-28
 
 - **A seal or an uncommit that failed part-way is finished by repeating it.** Your agent repeats the
