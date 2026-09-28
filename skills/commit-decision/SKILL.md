@@ -48,7 +48,7 @@ commit it".
 
 These are **not** commitment:
 
-- A confirmed fish preview — that endorses accuracy, not commitment
+- A confirmed record preview — that endorses accuracy, not commitment
 - A Verdict you drafted that sounds decisive
 - The record looking complete
 - The user saying "sounds good" about your summary

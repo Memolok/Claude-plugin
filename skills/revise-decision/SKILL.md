@@ -104,7 +104,8 @@ The original stays **Accepted** and keeps governing. A new record states the cha
 changes.
 
 1. Mint a staged successor through **`record-decision`**. Its Need is the specific question — *what
-   should this part say now* — not a restatement of the original decision.
+   should this part say now* — not a restatement of the original decision. Its preview is in the
+   shape the **`record-preview`** skill fixes, and names what it amends.
 2. Patch `amends: [7]` on the successor while it is still staged.
 3. Commit it. At admission the target gains `amendedBy` pointing back, so a reader who opens the
    original sees that something later qualified it.
@@ -128,7 +129,8 @@ record carries the new decision and names the old one.
 
 1. Mint a staged successor through **`record-decision`**, with its own Need, alternatives, and Verdict.
    A supersession is a real decision and needs real deliberation — including when the intent is simply
-   to retire something with no replacement.
+   to retire something with no replacement. Its preview is in the shape the **`record-preview`**
+   skill fixes, and names what it supersedes.
 2. Patch `supersedes: [7]` on the successor while it is still staged.
 3. Commit it. At admission the target flips to **Superseded** and reciprocals publish.
 
