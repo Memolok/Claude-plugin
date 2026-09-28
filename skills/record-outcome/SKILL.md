@@ -109,11 +109,14 @@ Payloads and error cases: `references/wake.md`.
 ### 5. Read the delta
 
 ```
-get_MDR_learning_delta(mdlGuid, mdrHandle)
+get_MDR_learning_delta(mdlGuid, mdrNumber)
 ```
 
-Returns each expected outcome with the wakes that tested it, plus unmatched Emergent and Deducible
-outcomes. Coexisting assessments all come back — there is no single current result, by design, because
+It takes the record's **number**, not the handle you recorded the outcome with: only a ledger
+resident has a wake, and every ledger resident has a number.
+
+Returns each expected outcome with the wakes that tested it, plus every Emergent and Deducible
+outcome again on its own. Coexisting assessments all come back — there is no single current result, by design, because
 two honest observations can disagree.
 
 ### 6. Offer what follows

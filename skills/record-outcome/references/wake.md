@@ -85,7 +85,7 @@ This World Fact already has a direct corrector (at most one correctsFact edge pe
 ## Reading back
 
 ```
-get_MDR_learning_delta(mdlGuid, mdrHandle)
+get_MDR_learning_delta(mdlGuid, mdrNumber)
 ```
 
 ```json

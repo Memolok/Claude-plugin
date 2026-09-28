@@ -261,11 +261,14 @@ the derived `title`, `summary` and `subjects` where Memolok has produced them.
 | Param | Type | Required |
 | --- | --- | --- |
 | `mdlGuid` | string | yes |
-| `mdrHandle` | int | yes |
+| `mdrNumber` | int | yes |
 
-Returns each expected outcome with the wakes that test it, plus unmatched Emergent and Deducible
-wakes. Coexisting assessments are all returned — there is no "current result" field. Ledger residents
-only.
+Takes the record's number and no handle: only a ledger resident has a learning delta, and every one
+is numbered. Holding only a handle, read the number from `get_MDR` or any listing row first.
+
+Returns each expected outcome with the wakes that test it, plus every Emergent and Deducible wake
+again on its own, so one that tests an outcome appears in both places. Coexisting assessments are all
+returned — there is no "current result" field.
 
 ## Write tools
 
