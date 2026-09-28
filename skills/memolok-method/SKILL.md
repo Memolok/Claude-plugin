@@ -195,7 +195,7 @@ Load when the situation calls for it — not upfront.
 | `references/lifecycle-and-gates.md` | Before any transition → which fields seal at t₀, which a later patch refuses by name |
 | `references/tools-catalog.md` | Before a tool call you have not made this session → parameter names and shapes differ between tools that look symmetric |
 | `references/prose-and-raci.md` | Composing prose payloads → the two-level shape is not uniform across fields, and a flat object is refused |
-| `references/write-failures.md` | A write just failed → two failure shapes needing opposite responses, one of which must never be retried |
+| `references/write-failures.md` | A write just failed → a reference in the reply does not settle whether to repeat it: one failure must never be retried, and a change only partly made is finished only by repeating it |
 | `references/ledger-intent.md` | Drafting or revising a ledger's purpose → the one thing nothing may cite, and treating it as a premise corrupts a record |
 | `references/cold-start-signal.md` | **After** they accept the offer, never before → the destination differs by surface and the obvious one is inert on some; the wording is fixed text, and one written from memory goes stale where nothing refreshes it |
 | `references/mcp-boundaries.md` | User asks for something you suspect has no tool → offering a capability that does not exist costs more than checking |

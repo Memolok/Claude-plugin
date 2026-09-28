@@ -22,6 +22,9 @@ matches — you are asked to update only when your pack genuinely stops working.
 
 ## Unreleased
 
+- **A seal or an uncommit that failed part-way is finished by repeating it.** Your agent repeats the
+  identical call rather than reporting a fault, and does not tell you the change happened until the
+  repeat succeeds. A reply saying the data service is unavailable is retried after a pause.
 - **Refusals that name what your role does not allow.** The pack lists what creating, editing,
   sealing, anchoring or uncommitting a decision record, or configuring a ledger, answers when your
   role on the ledger does not allow it. Someone not on the ledger at all is told it was not found. A

@@ -67,11 +67,14 @@ permissions problem. `ping` succeeding tells you which one you are looking at.
 
 ## An error carrying a reference
 
-Two replies quote a `req_…` reference. They mean different things and only one is retryable.
+Several replies quote a `req_…` reference. They mean different things, and only one must not be
+repeated.
 
 | Reply | What to do |
 | --- | --- |
 | `Invalid arguments for this tool: …` followed by field names | Your call was malformed. Fix the named fields and call again |
+| `Memolok's data service is temporarily unavailable. Try again shortly.` | An outage; nothing was written. Repeat the same call after a short pause |
+| `This change to the Memolok Decision Record was only partly made: …` | Part of a status change or an uncommit landed. Repeat the identical call to complete it |
 | `Memolok hit an internal error and could not complete this request.` | Something failed on the server. **Do not retry, and do not diagnose** |
 
 The internal-error reply is deliberately empty of detail — the server keeps the cause in its own logs

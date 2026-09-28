@@ -60,6 +60,10 @@ return to the ceremony.
 role does not let them change this record's status, and no patch fixes that — an administrator
 changes the role.
 
+A reply saying the change was **only partly made** is not a gate either, and not a fault to report:
+repeat the identical call, and it completes the seal. The record is not sealed until it does.
+`write-failures.md` in the method has the refusals that name an earlier call to repeat first.
+
 ## Settling an open question at admission
 
 A staged record can close a question left open on an **already-admitted** record:
