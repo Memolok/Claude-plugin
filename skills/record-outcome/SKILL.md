@@ -116,8 +116,8 @@ It takes the record's **number**, not the handle you recorded the outcome with: 
 resident has a wake, and every ledger resident has a number.
 
 Returns each expected outcome with the wakes that tested it, plus every Emergent and Deducible
-outcome again on its own. Coexisting assessments all come back — there is no single current result, by design, because
-two honest observations can disagree.
+outcome again on its own. Coexisting assessments all come back — there is no single current result,
+by design, because two honest observations can disagree.
 
 ### 6. Offer what follows
 
