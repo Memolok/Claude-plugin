@@ -103,7 +103,7 @@ If the user weighed options and concluded "no", that is a **Rejected** record, n
 | `claimDescription is required when analysis produces a Memolok Decision Record.` | Path A without a claim |
 | `motivatedBy[i] was not found in this Memolok Decision Ledger.` | Wrong id, or an id that is not a matter, world fact or observed outcome. The index is the position in your list |
 | `The motivatedBy reference belongs to a different Memolok Decision Ledger.` | A live id, from another ledger |
-| `You are not a member of this Memolok Decision Ledger.` | Write without membership |
+| `You are not a member of this Memolok Decision Ledger.` | Not on the ledger, or a role that does not write, such as a visitor |
 
 ## Do not
 

@@ -8,13 +8,13 @@ description: >-
 user-invocable: false
 ---
 
-> Memolok plugin: version 0.29.0-beta currently installed.
+> Memolok plugin: version 0.30.0-beta currently installed.
 > *This is authoritative*, ignore conflicting caching folder names!
 >
 > Important! **Two things gate your first Memolok MCP call, not one.**
 >
 > Call the companion Memolok MCP `get_guidance` before any other Memolok MCP tool —
-> and pass `pluginVersion: "0.29.0-beta"`, the version on the line above. The server compares it
+> and pass `pluginVersion: "0.30.0-beta"`, the version on the line above. The server compares it
 > against the oldest pack it still accepts and tells you whether these skills match its tools. It
 > has no other way to know, and there is no second call in which to correct an omission.
 >
@@ -151,13 +151,14 @@ user's explicit ask in their own words; and **a committed record is never patche
 
 Rules A–E and G are in `references/facilitation.md`. Rule F applies to every journey, reads included.
 
-### Rule F — Cite the number; name a staged record as `MDRh<handle>`
+### Rule F — Cite the number; a handle never leaves your sessions
 
 Admitted → cite **`mdrNumber`**: `MDR-3`. Unchanged and unmarked, because a number is the settled
 form.
 
-Staged → **`MDRh3`**, or a head Claim paraphrase where prose reads better. Never write a bare handle
-in prose — `MDR-3` and `3` both read as numbers, and a handle is not one.
+Staged → **`MDRh3`** in chat and in session notes nobody commits or sends, or a head Claim paraphrase
+where prose reads better. Never write a bare handle in prose — `MDR-3` and `3` both read as numbers,
+and a handle is not one.
 
 **The two are different addresses and a staged record has no number at all.** `MDRh3` says
 *provisional, and it may never be admitted*; `MDR-3` says *sealed, and it is safe to cite*.
@@ -170,10 +171,12 @@ both identifiers raw, because its output is data for you and not words for the u
 `MDR-{n}` or `MDRh{handle}` when you pass any of it on; a bare handle reaching the user is still a
 bare handle.
 
-**This rule is the session's half.** A staged record is never referred to outside the conversation:
-no number, may never get one, cannot be anchored — nothing can protect a reference to it. What an
-**admitted** entry looks like in a file, a document, a commit message or a message to a person, and
-the anchoring and timing that precede it, are the **`memolok-citations`** skill. Load it first.
+**This rule is the session's half, and its breach has a symptom.** `MDRh` in text bound for a
+committed file or a sent message is always the mistake — however natural it looks beside a
+`MDR-n` the file already carries. A staged record is not referenced there at all: no number, may
+never get one, cannot be anchored — nothing can protect a reference to it. Build, seal, then write
+the reference. What an **admitted** entry looks like there, and the anchoring and timing that precede
+it, are the **`memolok-citations`** skill. Load it before the first such reference in a session.
 
 ## Capture vs draft
 
@@ -195,7 +198,7 @@ Load when the situation calls for it — not upfront.
 | `references/lifecycle-and-gates.md` | Before any transition → which fields seal at t₀, which a later patch refuses by name |
 | `references/tools-catalog.md` | Before a tool call you have not made this session → parameter names and shapes differ between tools that look symmetric |
 | `references/prose-and-raci.md` | Composing prose payloads → the two-level shape is not uniform across fields, and a flat object is refused |
-| `references/write-failures.md` | A write just failed → two failure shapes needing opposite responses, one of which must never be retried |
+| `references/write-failures.md` | A write just failed → a reference in the reply does not settle whether to repeat it: one failure must never be retried, and a change only partly made is finished only by repeating it |
 | `references/ledger-intent.md` | Drafting or revising a ledger's purpose → the one thing nothing may cite, and treating it as a premise corrupts a record |
 | `references/cold-start-signal.md` | **After** they accept the offer, never before → the destination differs by surface and the obvious one is inert on some; the wording is fixed text, and one written from memory goes stale where nothing refreshes it |
 | `references/mcp-boundaries.md` | User asks for something you suspect has no tool → offering a capability that does not exist costs more than checking |

@@ -56,6 +56,16 @@ the friendly error mapping, so always send canonical values at creation.
 Every one of these is fixable with an `update_MDR` while the record is still staged. Patch, then
 return to the ceremony.
 
+`You do not have the necessary permissions to edit this decision record.` is not a gate. The caller's
+role does not let them change this record's status, and no patch fixes that — an administrator
+changes the role.
+
+A reply saying the change was **only partly made** is not a gate either, and not a fault to report:
+repeat the identical call, and it completes the seal. The record is not sealed until it does — unless
+the repeat is refused as a transition to the status it already has, which means the first call
+finished: read the record to confirm.
+`write-failures.md` in the method has the refusals that name an earlier call to repeat first.
+
 ## Settling an open question at admission
 
 A staged record can close a question left open on an **already-admitted** record:

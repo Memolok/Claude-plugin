@@ -10,6 +10,7 @@ records, or invented calls. Tell the user it is not available yet.
 | Auth and health | `ping`, `get_guidance`, `whoami` |
 | Ledger discovery and creation | `get_MDLs`, `get_MDL`, `create_MDL` |
 | Ledger intent | `set_ledger_intent` (read it back with `get_MDL`) |
+| Rename a ledger | `set_MDL_title` (admin/owner; its identifier does not change) |
 | Matter intake | `register_matter` |
 | Matter reads | `get_matter` (one, whole), `discover_matters` (the ledger's matters as prose, each with its summary, subjects and who took it up) |
 | Analysis, Path A and B | `create_analysis` |
@@ -34,8 +35,7 @@ The boundaries: the five graph keys and `hasContext` are patchable while a recor
 on a resident, `[]` included; `amends` and `supersedes` need an **Accepted** record at each end; a
 record cannot cite its own wake; a resident's tier-1 fields are never patchable, whatever `retractable`
 says — `true` means only that an uncommit is available. What each edge does to its target, and what
-anchors: `lifecycle-and-gates.md`. `retractable` is operational metadata computed at read time and
-never exported.
+anchors: `lifecycle-and-gates.md`.
 
 ## Not available — do not invent
 
@@ -43,21 +43,11 @@ never exported.
 
 Analysis reaches two endings: it produces records, or it produces none. Recording that a matter was
 **refused** (valid, and we commit to not acting), **externally blocked**, or **overtaken by events**
-is modelled with no tool behind it.
+has no tool. **Do not invent fields for any of these.**
 
-Until they land, record refusal or blockage rationale in the Verdict prose at t₀, and do not
-substitute a Path B dismissal — "no decision warranted" says the investigation found nothing to
-decide, which is weaker and different from refusing a problem you agree is real.
-
-**Do not invent fields for any of these**, but they are absent in two different ways, which matters if
-you go looking for them:
-
-| Field | Why it is unreachable |
-| --- | --- |
-| `resolvesMatter` | Exists in storage; **forbidden by name** on the MCP surface |
-| `rendersMoot` | Exists in storage; not patchable and not a mint parameter |
-| `declinesMatter` | **Not in the data model at all** |
-| `blocksResolutionOf` | **Not in the data model at all** |
+Record refusal or blockage rationale in the Verdict prose at t₀ instead, and do not substitute a
+Path B dismissal — "no decision warranted" says the investigation found nothing to decide, which is
+weaker and different from refusing a problem you agree is real.
 
 Re-analysis, by contrast, **is** available: open a second analysis over the same input, or attach it
 to an existing one. Nothing limits an input to one analysis.
@@ -93,7 +83,6 @@ Do not simulate the missing enumeration by keeping a local index of what you sen
 | Managing membership |
 | Decision-record-type taxonomy |
 | Concern hierarchy |
-| Setting `typeId` or `concernIds` |
 
 `create_MDL` is open to any authenticated user, who becomes owner. Everything else about membership is
 provisioned by a Memolok administrator.

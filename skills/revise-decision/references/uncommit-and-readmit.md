@@ -99,8 +99,10 @@ Then wait.
 | --- | --- |
 | `Only Accepted or Rejected Memolok Decision Records may be Uncommitted.` | Record is staged already |
 | `This Memolok Decision Record is Anchored ({kind}) and cannot be Uncommitted. Use amend or supersede instead.` | Something depends on it |
-| A permission error | Caller is a `member`, not `admin` or `owner` |
+| `You do not have the necessary permissions to uncommit decision records on this ledger.` | Caller is a `member`, not `admin` or `owner` |
 | `Cannot change the {label} on a ledger-resident Memolok Decision Record ({status}).` | Patch attempted before the uncommit landed |
+| `This change to the Memolok Decision Record was only partly made: …` | The uncommit failed part-way. Repeat the identical call: it completes what was begun, and the record is not staged until it does. A repeat refused because the record is already staged means the first call finished — read it to confirm |
+| `An earlier uncommit of this Memolok Decision Record was only partly made. …` | A later call on a record whose uncommit is unfinished. Repeat that uncommit first |
 
 ## Anti-patterns
 

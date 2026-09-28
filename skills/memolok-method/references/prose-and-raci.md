@@ -45,10 +45,11 @@ Some parameters take the prose atom **directly**; others take it wrapped in a `d
 | `create_analysis.analysisRationale` | `alternatives[]` |
 | `create_analysis.claimDescription` | |
 
-Getting it backwards fails with `Field required [type=missing]` naming the wrapped path, or:
+A wrapped field sent bare is refused by name, with its index in a list:
 
 ```
 verdict must be {description: {markdown, lang}}, not a flat {markdown, lang} object.
+alternatives[0] must be {description: {markdown, lang}}, not a flat {markdown, lang} object.
 ```
 
 `update_MDR`'s `hasNeed` accepts **either** form.
@@ -100,18 +101,16 @@ Get `userId` from `whoami` when attributing a human.
 ## RACI is narrative, not permission
 
 RACI fields are stored for governance narrative. They do **not** gate writes. Access is decided by
-MDL membership alone:
+your role on the ledger:
 
-| Role | Reads | Writes | Uncommit |
-| --- | --- | --- | --- |
-| `visitor` | yes | no | no |
-| `member` | yes | yes | no |
-| `admin`, `owner` | yes | yes | yes |
+| Role | Reads | Writes | Uncommit | Title and intent |
+| --- | --- | --- | --- | --- |
+| `visitor` | yes | no | no | no |
+| `member` | yes | yes | no | no |
+| `admin`, `owner` | yes | yes | yes | yes |
+
+If your role lets you create records, you can edit the ones you authored — `authoredBy` names you
+unless you set someone else, and a patch that changes it hands the record over. Whether you can edit
+anyone else's depends on your role. Changing a record's status and anchoring it count as editing.
 
 If no RACI roles are assigned, Memolok assumes the artifact's author is responsible and accountable.
-
-## Valence fields are not yours to set
-
-`deliberationValence` (`Supports`, `Against`, `Neutral`) and `outcomeValence` (`ExpectedGain`,
-`ExpectedCost`, `ExpectedRisk`, `ExpectedDependency`) exist in the model but are tooling-inferred and
-rejected if sent. Express the same information in the prose instead.

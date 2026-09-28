@@ -2,7 +2,10 @@
 
 The Memolok plugin for Claude. It turns decision work into recorded, reviewable institutional
 memory: Claude facilitates capture, and the result lands in your **Memolok Decision Ledger** (**MDL**)
-as durable **Memolok Decision Records** (**MDRs**) rather than as notes in a chat log.
+as durable **Memolok Decision Records** (**MDRs**) rather than as notes in a chat log. Each MDR
+captures the *need*, the *alternatives* weighed, and the *reasoning behind the verdict*, and commits
+to the *expected outcomes* when it is sealed, after which it cannot be edited. What is actually
+*observed* later is recorded separately and linked back to the record it tests.
 
 Installing the plugin adds the Memolok skills and connects Claude to the Memolok server. Connecting
 opens a browser to sign in — there is no token to configure and nothing to paste. You will need a

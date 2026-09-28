@@ -291,7 +291,20 @@ shape: `{ "description": { "markdown": "…" } }`, **not** a flat `{ markdown }`
 **Full replacement, not an append.** There is no history and no version. Read the current statement
 with `get_MDL` first, then send the complete new one.
 
-Requires `member` or above. Returns the same shape as `get_MDL`.
+Requires `admin` or `owner`. Returns the same shape as `get_MDL`.
+
+### `set_MDL_title`
+
+| Param | Type | Required |
+| --- | --- | --- |
+| `mdlGuid` | string | yes |
+| `title` | string | yes |
+
+Renames the ledger. Its `mdlGuid`, and every citation of it or of its entries, stay as they are.
+Requires `admin` or `owner`. Returns the same shape as `get_MDL`.
+
+A `.memolok/mdl.yml` carrying `mdlTitle` holds the old name from this moment on — where project
+files are available, offer to update it.
 
 ### `register_matter`
 
@@ -587,8 +600,12 @@ Owner-only, no time limit. Patchable: `title`, `kind`, `report`, `userVerbatim`,
 | Message | Cause |
 | --- | --- |
 | `Memolok Decision Ledger not found.` | Does not distinguish a ledger the user cannot see from one that is not there. Report it as ambiguous: they may not be a member, or this address may be stale |
-| `You are not a member of this Memolok Decision Ledger.` | Write without membership |
-| `Memolok Decision Record not found.` | Missing record, or non-member read |
+| `You are not a member of this Memolok Decision Ledger.` | A write to a matter, analysis, World Fact, Observed Outcome or scratchpad by someone not on the ledger, or whose role does not write, such as a visitor. Decision-record writes and ledger configuration answer a non-member `Memolok Decision Ledger not found.` instead |
+| `You do not have the necessary permissions to create decision records on this ledger.` | `create_MDR` by someone whose role on the ledger does not let them create records, such as a visitor |
+| `You do not have the necessary permissions to edit this decision record.` | `update_MDR`, `transition_MDR_status` or `anchor_MDR` by someone whose role does not let them edit that record |
+| `You do not have the necessary permissions to uncommit decision records on this ledger.` | `uncommit_MDR` by someone whose role does not let them uncommit, such as a member |
+| `You do not have the necessary permissions to configure this ledger.` | `set_MDL_title` or `set_ledger_intent` by someone on the ledger whose role does not let them configure it |
+| `Memolok Decision Record not found.` | No record under that key on a ledger you can read. A ledger you cannot read answers `Memolok Decision Ledger not found.` instead |
 | `The {field} reference belongs to a different Memolok Decision Ledger.` | Cross-ledger reference |
 | `Use transition_MDR_status to change Memolok Decision Record status.` | `status` in a patch |
 | `Cannot change the {label} on a ledger-resident Memolok Decision Record ({status}).` | Tier-1 patch after t₀ |
@@ -608,12 +625,12 @@ Owner-only, no time limit. Patchable: `title`, `kind`, `report`, `userVerbatim`,
 | `An analysis must take up at least one input; motivatedBy is empty.` | Empty `motivatedBy` |
 | `That input is already referenced by this analysis.` | Duplicate attach — the existing reference stands |
 | `{field} is a scratchpad id.` | A `msp_…` value passed to a reference field. Nothing may cite a note — admit a World Fact instead |
-| `{field} must be 'msp_' followed by 26 Crockford base32 characters.` | Something that is not a scratchpad id passed where one was expected |
+| `{field} is not a well-formed {kind} identifier. Pass it back exactly as Memolok returned it.` | The value is not an identifier of the kind the field takes: mistyped, truncated or edited. The sentence is the same whatever is wrong, so fetch the value again and pass it back unchanged |
+| `{field} is a {kind} identifier, which does not address {kind}.` | A real identifier of another kind — a Matter where a World Fact belongs, or a ledger id passed to a feedback tool. Pass the kind the field takes |
 | `Scratchpad not found.` | Missing note, wrong ledger, or already deleted |
 | `A scratchpad body may be at most 65536 bytes;…` | Paste too large — split it, or keep a pointer to the source |
 | `claimDescription is required when analysis produces a Memolok Decision Record.` | Path A without a claim |
 | `A Memolok Decision Record cannot cite its own Observed Outcome in hasContext...` | DTP violation |
-| `{field} must be a feedback report id of the form 'mfb_<16 Crockford base32 characters>'.` | A ledger id passed to a feedback tool — different kinds of address |
 | `{field} is a feedback report id.` | An `mfb_…` value passed to a ledger reference field. A report is not a ledger entity |
 | `Feedback report not found.` | Not yours, wrong id, or deleted during triage |
 | `reports[n] may not set serverVersion, …` | The server records the build; a caller cannot claim one |
