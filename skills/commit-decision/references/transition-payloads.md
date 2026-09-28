@@ -61,7 +61,9 @@ role does not let them change this record's status, and no patch fixes that — 
 changes the role.
 
 A reply saying the change was **only partly made** is not a gate either, and not a fault to report:
-repeat the identical call, and it completes the seal. The record is not sealed until it does.
+repeat the identical call, and it completes the seal. The record is not sealed until it does — unless
+the repeat is refused as a transition to the status it already has, which means the first call
+finished: read the record to confirm.
 `write-failures.md` in the method has the refusals that name an earlier call to repeat first.
 
 ## Settling an open question at admission

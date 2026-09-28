@@ -37,6 +37,11 @@ identical call** — same record, same status or reason. It completes exactly wh
 second change. The seal or the uncommit has not happened until the repeat succeeds, so do not report
 it as done before then.
 
+Rarely, the first call did finish and only its answer was lost. The repeat is then refused as a fresh
+call would be — `Cannot transition a Memolok Decision Record from Accepted to Accepted.`, or an
+uncommit refused because the record is already staged. That refusal means the change landed: read the
+record to confirm, and report it done.
+
 Until it is repeated, any other change to that record is refused with a sentence naming the call:
 
 ```
