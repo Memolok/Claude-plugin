@@ -175,11 +175,9 @@ anything.
 
 ### 7. Preview and persist
 
-Show the fish back — head, alternatives, deliberation, verdict, expected outcomes, open questions,
-intended status — and ask whether it covers what was discussed. Wait for a yes.
+Show the draft back in the shape the **`record-preview`** skill fixes, and wait for a yes.
 
-Then `update_MDR` with the body. Format: `references/fish-preview.md`. Payloads:
-`references/patch-payloads.md`.
+Then `update_MDR` with the body. Payloads: `references/patch-payloads.md`.
 
 Confirming the preview is **not** t₀. Do not offer **Proposed** on informal work, and do not offer
 **Accepted** unless the user has raised sealing themselves.
@@ -226,6 +224,5 @@ Full worked correction arc: `references/need-vs-verdict-drift.md`.
 | `references/matter-payloads.md` | Before `register_matter` — the verbatim rule has edges, and a sharpened matter cannot be un-sharpened |
 | `references/expert-payloads.md` | Before your first `create_MDR` — it carries the two shape asymmetries that fail the call outright, and the allowed creation statuses |
 | `references/patch-payloads.md` | Before `update_MDR` — patches replace whole arrays rather than merging into them |
-| `references/fish-preview.md` | Presenting the recap at step 7, if you want the shape that reads back cleanly |
 | `references/need-vs-verdict-drift.md` | The Need may have absorbed the answer — the conflation survives light rewording, so spotting it needs the worked arc |
 | `references/matter-closure.md` | Any analysis touching more than one input, or an input surfacing after the analysis concluded — passing one `motivatedBy` where several apply records reasoning that did not happen, and three of the five ways a matter comes to rest have no tool yet |

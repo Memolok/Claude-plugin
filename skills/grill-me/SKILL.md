@@ -35,7 +35,7 @@ of the interview, and Rule G governs the head-sharpening phase specifically.
 
 - Never invent `mdlGuid`, `mdrHandle`, or `mdrNumber` — the server mints them
 - All prose is `{ "markdown": "...", "lang": "en" }`
-- **No writes until the user confirms a fish preview** — reads are fine throughout
+- **No writes until the user confirms a record preview** — reads are fine throughout
 - Default persist status is **Deliberating**; t₀ only on explicit request (Rule C)
 - Say "captured" only after a write succeeded — mid-interview, say *drafting* or *got it*
 - **Never offer to end the session**
@@ -163,11 +163,8 @@ not folded into the Need.
 
 ## Preview and persist
 
-Present the fish — head, alternatives, deliberation, verdict, expected outcomes, open questions,
-intended status — and ask whether it covers what was discussed. Wait for an explicit yes. If no, return
-to the region that was wrong.
-
-Format: the `fish-preview.md` reference in **`record-decision`**.
+Present the draft in the shape the **`record-preview`** skill fixes, and wait for an explicit yes. If
+no, return to the region that was wrong.
 
 Then persist through **`record-decision`**, at **Deliberating**. Do not offer Proposed or Accepted in
 the preview footer unless the user has already raised sealing.
