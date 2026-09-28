@@ -92,7 +92,7 @@ anything.
 | Why a matter was dismissed | `get_analysis(mdlGuid, analysisId)` |
 | What a record's reasoning took up | `get_MDR` for `analysisId`, then `get_analysis` |
 | Premises the ledger reasons from | `discover_world_facts(mdlGuid)` |
-| What happened after a decision | `discover_observed_outcomes(mdlGuid, mdrHandle?)` |
+| What happened after a decision | `discover_observed_outcomes(mdlGuid, mdrNumber?)` |
 | Promises versus reality for one record | `get_MDR_learning_delta(mdlGuid, mdrNumber)` |
 
 **A topic search is `query`, not a page you read yourself.** `discover_MDRs(query="...")` searches the

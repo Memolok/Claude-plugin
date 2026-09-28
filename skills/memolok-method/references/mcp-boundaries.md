@@ -125,5 +125,6 @@ note is authored fresh with no trail back, and the user should be told that once
 | `mdlGuid` | `adlGuid` |
 
 Tools take `mdrHandle`; as a convenience, `get_MDR` also accepts `mdrNumber` so a record someone
-cites by number can be read directly. Use the handle whenever you hold one. The exception is
-`get_MDR_learning_delta`, which takes `mdrNumber` alone, since only a numbered record has one.
+cites by number can be read directly. Use the handle whenever you hold one. The exceptions take
+`mdrNumber` alone, since only a numbered record has anything for them: `get_MDR_learning_delta`,
+`discover_observed_outcomes` narrowed to one record, and `record_observed_outcome`.
