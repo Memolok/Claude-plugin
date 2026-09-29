@@ -261,7 +261,7 @@ rather than "the ledger flags three affected records".
 - `Memolok Decision Ledger not found.` does not distinguish a ledger the user cannot see from one that
   is not there. Report it as ambiguous: they may not be a member, or this address may be stale. If the
   user expected access, an administrator adds them.
-- `visitor` role can read everything and write nothing.
+- `visitor` role can read everything except for notes, and write nothing.
 - A `Superseded` record is history, not a mistake. It records what was true and in force at its own t₀.
 - When a search finds nothing, say so plainly and offer to record the decision now rather than
   speculating about what might have been decided elsewhere.

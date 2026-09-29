@@ -109,6 +109,9 @@ your role on the ledger:
 | `member` | yes | yes | no | no |
 | `admin`, `owner` | yes | yes | yes | yes |
 
+Notes differ: a visitor reads none, only a note's author replaces it, and its author or an `admin` or
+`owner` deletes it.
+
 If your role lets you create records, you can edit the ones you authored — `authoredBy` names you
 unless you set someone else, and a patch that changes it hands the record over. Whether you can edit
 anyone else's depends on your role. Changing a record's status and anchoring it count as editing.

@@ -510,6 +510,10 @@ record one.
 
 Disposable working notes. See the **`manage-notes`** skill for the journeys.
 
+A note is its author's. Members, admins and owners read every note; a visitor reads none and keeps
+none. Only the author replaces a note; the author, or an admin or owner, deletes one. To build on
+somebody else's, read it and create a note of your own.
+
 Pass a `scratchpadId` to `hasContext`, `correctsFact`, `motivatedBy`, `tests.outcomeId` or `evidence`
 and the call fails telling you the value **is a scratchpad** — a category error, not a typo. Nothing
 in a ledger may reference one; if the material matters to a decision, admit it as a World Fact and
@@ -534,13 +538,14 @@ Returns `{ scratchpadId, mdlGuid, description, createdAt, createdBy, modifiedAt,
 ### `replace_scratchpad`
 
 `mdlGuid`, `scratchpadId`, `description`. **Full replacement, not an append.** There is no partial
-update: read with `get_scratchpad`, compose the whole new body, send that. Adds the caller to
-`contributors` and advances `modifiedAt`.
+update: read with `get_scratchpad`, compose the whole new body, send that. Advances `modifiedAt`.
+Only the note's author may call it, whatever anyone else's role; `createdBy` on `get_scratchpad` says
+who that is.
 
 ### `delete_scratchpad`
 
 `mdlGuid` + `scratchpadId`. **The only delete tool in Memolok.** Immediate and final — no recovery
-window. Returns `{ scratchpadId, mdlGuid, deleted: true }`.
+window. The note's author, or an admin or owner. Returns `{ scratchpadId, mdlGuid, deleted: true }`.
 
 ### `discover_scratchpads`
 
@@ -622,7 +627,10 @@ Owner-only, no time limit. Patchable: `title`, `kind`, `report`, `userVerbatim`,
 | Message | Cause |
 | --- | --- |
 | `Memolok Decision Ledger not found.` | Does not distinguish a ledger the user cannot see from one that is not there. Report it as ambiguous: they may not be a member, or this address may be stale |
-| `You are not a member of this Memolok Decision Ledger.` | A write to a matter, World Fact or scratchpad by someone not on the ledger, or whose role does not write, such as a visitor. Decision-record writes, analysis writes, recording an outcome and ledger configuration answer a non-member `Memolok Decision Ledger not found.` instead |
+| `You do not have the necessary permissions to … matters on this ledger.`, `… world facts …` | The role does not allow it: a visitor reads matters and world facts, and registers or admits neither |
+| `You do not have the necessary permissions to … scratchpads on this ledger.` | A visitor, who reads no notes and keeps none |
+| `You do not have the necessary permissions to replace a scratchpad you did not create. Read it and create your own instead.` | `replace_scratchpad` on somebody else's note, whatever the caller's role. Offer the copy |
+| `You do not have the necessary permissions to delete a scratchpad you did not create.` | A member deleting somebody else's note. An admin or owner may |
 | `You do not have the necessary permissions to … analyses on this ledger.` | The role does not allow it. Performing and attaching need a member, admin or owner; retracting and reopening need an admin or owner, even on an analysis the caller performed |
 | `You do not have the necessary permissions to create decision records on this ledger.` | `create_MDR` by someone whose role on the ledger does not let them create records, such as a visitor |
 | `You do not have the necessary permissions to edit this decision record.` | `update_MDR`, `transition_MDR_status` or `anchor_MDR` by someone whose role does not let them edit that record |
@@ -655,6 +663,7 @@ Owner-only, no time limit. Patchable: `title`, `kind`, `report`, `userVerbatim`,
 | `{field} is a {kind} identifier, which does not address {kind}.` | A real identifier of another kind — a Matter where a World Fact belongs, or a ledger id passed to a feedback tool. Pass the kind the field takes |
 | `Scratchpad not found.` | Missing note, wrong ledger, or already deleted |
 | `A scratchpad body may be at most 65536 bytes;…` | Paste too large — split it, or keep a pointer to the source |
+| `This Memolok Decision Ledger already holds {n} scratchpads, …` | The ledger's note limit. The user deletes notes of theirs they no longer need; an admin or owner can delete anyone's |
 | `claimDescription is required when analysis produces a Memolok Decision Record.` | Path A without a claim |
 | `A Memolok Decision Record cannot cite its own Observed Outcome in hasContext...` | DTP violation |
 | `{field} is a feedback report id.` | An `mfb_…` value passed to a ledger reference field. A report is not a ledger entity |

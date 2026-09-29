@@ -75,7 +75,7 @@ most ledgers have not, so this is an invitation, not a problem report.
 | --- | --- |
 | `owner`, `admin` | Full access, including uncommitting records and changing the ledger's title and purpose |
 | `member` | Can read and write, but not change the ledger's title or purpose |
-| `visitor` | Read-only — writes will be refused |
+| `visitor` | Read-only, and sees no notes — writes will be refused |
 
 If they are a `visitor`, say so now rather than letting them build a decision they cannot save.
 
