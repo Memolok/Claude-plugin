@@ -80,14 +80,24 @@ own text.
 ## What it is not
 
 It is not a document store, a wiki, or a filing system. There are no folders, no tags, no versions,
-and no history of who changed what. You get the note as it is now, when it was made, when it last
-changed, and everyone who has ever edited it.
+and no history of changes. You get the note as it is now, who wrote it, when it was made, and when it
+last changed.
 
 Nothing reviews notes. Nothing reminds you about them. Nothing marks one stale. A note untouched for
 a year is behaving exactly as intended — that is what a place for things that promise nothing means.
 
-And notes belong to the ledger, not to you personally: anyone on the ledger can read, edit and delete
-them.
+## Yours to change, everyone's to read
+
+A note is not private: every member of the ledger can read it. But it is yours. Only you can change
+it, and only you or the ledger's administrators can delete it. Visitors see no notes at all.
+
+So when someone else's note is the starting point you need, you take a copy. Read it, keep your
+version as a note of your own, and edit yours at will; theirs stays exactly as they left it. Two
+people can work from the same material without either of them rewriting the other's.
+
+Notes outlive their authors' interest in them, and nothing clears them away on its own. Tidying a
+ledger of notes nobody needs any more is the administrators' job, which is why they can delete any
+note.
 
 ## Deleting
 

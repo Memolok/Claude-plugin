@@ -26,6 +26,16 @@ matches — you are asked to update only when your pack genuinely stops working.
 
 *Everything that has landed has shipped. This section is a placeholder.*
 
+## 0.34.0-beta — 2026-09-29
+
+- **A note is its author's.** Everyone working on the ledger reads every note, but only the person who
+  created one can change it, and only they or the ledger's admins and owners can delete it. Your agent
+  checks whose a note is before changing it.
+- **To build on somebody else's note, your agent takes a copy**: it reads the note and saves your
+  version as a new note of yours, leaving theirs as it was.
+- **Visitors no longer see notes.** Everything else stays readable to them.
+- The server refuses older packs, so an agent on one is told to update.
+
 ## 0.33.0-beta — 2026-09-29
 
 - **Only a ledger's admins and owners reopen an analysis or retract one of its inputs**, whoever

@@ -4,8 +4,9 @@ description: >-
   The ledger's scratchpads: keep, find, revise and throw-away freeform working notes inside MDLs — pasted quotes,
   scraped pages, rough figures, anything worth keeping that nobody is required to act on. Use when
   the user wants to "keep this", "save this somewhere", "jot this down", "what did I save about X?",
-  "show me my notes", "add this to that note", or "delete that note". Also use when you have
-  produced material that fits no typed entity and needs an honest home.
+  "show me my notes", "add this to that note", "copy their note so I can change it", or "delete
+  that note". Also use when you have produced material that fits no typed entity and needs an
+  honest home.
 argument-hint: "<what to keep, or what you're looking for>"
 ---
 
@@ -118,13 +119,28 @@ can be referred to without anybody having invented a name for it. Where a note h
 handle from its opening words and the date: *"the Redis quote from the 7th"*, *"the scraped
 pricing page"*. Do not volunteer the `msp_` id; cite it if the user asks.
 
+## A note is its author's
+
+Everyone working on the ledger reads every note (not visitors). Only the person who created a note can
+change it, and only they or the ledger's admins and owners can delete it. A visitor sees no notes at
+all.
+
+**Building on somebody else's note is a copy, not an edit.** It is one of the things you produce here:
+read the note with `get_scratchpad`, compose the body with the user's changes, and keep it with
+`create_scratchpad` as a new note of their own. The original stays exactly as its author left it.
+
+> Their note stays as it is — I've saved your version as a new note of yours.
+
+`get_scratchpad` names a note's author in `createdBy`, so when the user asks to change a note, check
+whose it is first. If it is not theirs, offer the copy rather than attempting the replace; a replace
+is refused, whatever their role, with a sentence that says to read the note and create your own.
+
 ## Revising
 
 Read it, compose the new body, replace it. `replace_scratchpad` is a **full replacement** — there is
 no append and no splice.
 
-No version prompt, no change justification, no diff review unless the user asks for one. The
-contributor set grows silently; do not narrate it.
+No version prompt, no change justification, no diff review unless the user asks for one.
 
 A note may legitimately be edited into something unrecognizable. That is not an error.
 
@@ -137,6 +153,10 @@ consequences, because there are none.
 
 Say that last part. There is **no recovery window**, and a user who assumes there is a trash can will
 find out at the worst moment.
+
+A member can delete only their own notes. An admin or owner can delete anyone's, which is how a
+ledger is tidied of notes nobody needs any more — and then say whose note it is in that one line,
+because its author was not asked.
 
 An agent that treats deletion as risky has misunderstood the entity: nothing may reference a
 scratchpad, so nothing breaks downstream, ever. But the note is the user's, so **never delete one
@@ -170,8 +190,8 @@ a user asks you to cite a note, explain rather than just refusing:
 ## Tips
 
 - A ledger with no scratchpads is entirely normal, not a gap.
-- Notes are **MDL-shared**: anyone on the ledger can read, edit and delete them. Do not describe them
-  as private.
+- Notes are **read ledger-wide and owned by their author**. Do not describe them as private: every
+  member, admin and owner can read them.
 - Notes are scoped to one ledger. There are no account-level or cross-ledger notes.
 - Bodies cap at 64 KB. If a paste is refused, offer to split it or to keep a pointer to where the
   source lives, rather than silently truncating.

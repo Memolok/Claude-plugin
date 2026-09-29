@@ -8,13 +8,13 @@ description: >-
 user-invocable: false
 ---
 
-> Memolok plugin: version 0.33.0-beta currently installed.
+> Memolok plugin: version 0.34.0-beta currently installed.
 > *This is authoritative*, ignore conflicting caching folder names!
 >
 > Important! **Two things gate your first Memolok MCP call, not one.**
 >
 > Call the companion Memolok MCP `get_guidance` before any other Memolok MCP tool —
-> and pass `pluginVersion: "0.33.0-beta"`, the version on the line above. The server compares it
+> and pass `pluginVersion: "0.34.0-beta"`, the version on the line above. The server compares it
 > against the oldest pack it still accepts and tells you whether these skills match its tools. It
 > has no other way to know, and there is no second call in which to correct an omission.
 >
@@ -43,7 +43,7 @@ it preserves is what a wiki loses. Explaining that to a **person** → `help` sk
 | **staged** | Preliminary: **New**, **Deliberating**, **Proposed** |
 | **ledger resident** | Stable: **Accepted**, **Rejected**, **Superseded** |
 | **bait** | A **Matter** — raw input in raiser's own words |
-| **Scratchpad** | Disposable working note. Freely edited and deleted; never citable. Also: *note* |
+| **Scratchpad** | Disposable working note. Freely edited and deleted by its author; never citable. Also: *note* |
 | **the wake** | Everything observed after commitment |
 
 **Jargon policy.** This vocabulary exists for precision; most users are not trained in it. Unless the
@@ -105,9 +105,9 @@ Drafting, elicitation posture, reasoning behind the prohibitions: `references/le
 
 ## Scratchpads
 
-Freeform working notes — pasted quote, rough figures, anything fitting no typed entity. Created,
-edited, deleted freely; the **only disposable construct in the model**. Full journey → **`manage-notes`**
-skill. Two things bind every journey:
+Freeform working notes — pasted quote, rough figures, anything fitting no typed entity. Created
+freely, edited and deleted by their author; the **only disposable construct in the model**. Full
+journey → **`manage-notes`** skill. Two things bind every journey:
 
 **Routing.** *Does anyone expect to act on this?* *Would it be bad if it vanished?* Either yes → it is
 a **Matter** or a **World Fact**, not a note. Scratchpad used as intake → real work never processed.
