@@ -561,6 +561,7 @@ nothing.
 | Param | Type | Required |
 | --- | --- | --- |
 | `reports` | array of report objects | yes |
+| `pluginVersion` | string | Send it always: the pack version, as for `get_guidance` |
 
 **A batch always** — a single report is a batch of one, and one call means one preview-and-confirm.
 Up to 25 per call. Validation is all-or-nothing: a malformed third report leaves the first two
@@ -596,9 +597,10 @@ An **evidence item** is either a call record or a citation, and must carry a `re
 There is no `outcome` field and no report-class field. A call that returned 200 and did the wrong
 thing is the case worth catching, and a success/error flag would file it under "success".
 
-**Never send** `submittedBy`, `submittedAt`, `serverVersion` or `modelVersion` — the server records
-those and refuses a caller that sets them. `artifacts[].version` is yours to supply for what you can
-actually read (the plugin, a skill); the server stamps its own build.
+**Never send** `submittedBy`, `submittedAt`, `serverVersion`, `modelVersion` or `apiVersion` in a
+report — the servers record those and refuse a caller that sets them. The pack's own version goes in
+`pluginVersion`, beside `reports` and never inside one; `artifacts[].version` is for anything else you
+can actually read, such as a skill's.
 
 Returns `{ reports: [{ feedbackId, title, kind, submittedAt }, …] }` in submission order — a digest,
 not the bodies. Keep the ids.
@@ -621,6 +623,7 @@ does a report deleted during triage.
 
 Owner-only, no time limit. Patchable: `title`, `kind`, `report`, `userVerbatim`, `mdlGuid`,
 `artifacts`, `evidence`, `expectation`. **Arrays replace, they do not merge** — send the full list.
+`pluginVersion` is recorded at submission and cannot be patched.
 
 ## Common errors
 
@@ -666,7 +669,7 @@ Owner-only, no time limit. Patchable: `title`, `kind`, `report`, `userVerbatim`,
 | `This Memolok Decision Ledger already holds {n} scratchpads, …` | The ledger's note limit. The user deletes notes of theirs they no longer need; an admin or owner can delete anyone's |
 | `claimDescription is required when analysis produces a Memolok Decision Record.` | Path A without a claim |
 | `A Memolok Decision Record cannot cite its own Observed Outcome in hasContext...` | DTP violation |
-| `{field} is a feedback report id.` | An `mfb_…` value passed to a ledger reference field. A report is not a ledger entity |
 | `Feedback report not found.` | Not yours, wrong id, or deleted during triage |
 | `reports[n] may not set serverVersion, …` | The server records the build; a caller cannot claim one |
+| `This batch of feedback reports was only partly written: …` | The service failed after sending the batch, so some reports may be stored. Tell the user; repeating may store them twice, which triage cleans up |
 | `reports[n].evidence[m] must carry either a response … or an excerpt` | An evidence item that asserts nothing |

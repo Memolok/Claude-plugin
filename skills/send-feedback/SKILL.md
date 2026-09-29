@@ -44,7 +44,7 @@ a decision and has no Need, Verdict or tail.
 - Never invent a `feedbackId` — the server mints them
 - All prose is `{ "markdown": "...", "lang": "en" }`
 - Never put the user's dictated words through your own phrasing — they go in `userVerbatim` intact
-- Never claim a version you did not read; the server records its own
+- Pass the pack version you read in `memolok-method` as `pluginVersion`; never claim a server's version — the servers record their own
 - Say "sent" only after the write succeeded
 - Keep the returned ids in the session — nothing lists or searches reports
 
@@ -93,10 +93,12 @@ reconstruction.
 
 ### 2. Compose the batch
 
-One `submit_feedback` call carrying every finding, each as an item in `reports`:
+One `submit_feedback` call carrying every finding, each as an item in `reports`, and the pack version
+beside them:
 
 ```json
 {
+  "pluginVersion": "<the version memolok-method states>",
   "reports": [
     {
       "title": "update_MDR orphans chosenAlternative when it mints an alternative id",
@@ -132,6 +134,9 @@ afterwards. Make it recognisable standing alone — *"update_MDR orphans chosenA
 
 **`artifacts` names what was in play, never what is at fault.** A skill contradicting a tool is
 **two** artifacts. Do not pick a culprit; the pair is the report.
+
+**`pluginVersion` belongs to the batch**, never inside a report: it tells Memonos which pack every
+report in the call came from. It is the same value you passed to `get_guidance`.
 
 **`evidence` items come in two shapes**, and both may appear in one report:
 

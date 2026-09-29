@@ -26,6 +26,13 @@ matches — you are asked to update only when your pack genuinely stops working.
 
 *Everything that has landed has shipped. This section is a placeholder.*
 
+## 0.34.1-beta — 2026-09-29
+
+- **Feedback reports now say which pack sent them.** `send-feedback` passes the pack version with
+  every batch, so Memonos can tell a fault in an old pack from one in the current pack.
+- **The tool catalog lists the refusal for a feedback batch that failed part-way**, and drops a
+  refusal no tool sends any more.
+
 ## 0.34.0-beta — 2026-09-29
 
 - **A note is its author's.** Everyone working on the ledger reads every note, but only the person who
