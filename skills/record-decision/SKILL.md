@@ -171,7 +171,9 @@ separate pass after t₀ — the **`memolok-citations`** skill has the ordering.
 
 Record what this decision deliberately leaves unsettled as `openQuestions`, rather than expanding the
 record to settle it. Rule D's test decides what qualifies: something a reader of this record could
-believe it settled. They never block anything.
+believe it settled, and that acting on the decision can go ahead without. A question the user's next
+step waits on naturally belongs in this deliberation; if they defer it anyway, say once what it leaves
+waiting, then record it. Open questions never block the seal.
 
 ### 7. Preview and persist
 

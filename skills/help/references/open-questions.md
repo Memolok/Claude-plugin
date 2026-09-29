@@ -10,7 +10,9 @@ published figures only."*
 
 It is not an argument still being weighed — that belongs with the deliberation. It is not a bet about the
 chosen path — that belongs with the expected outcomes. And it is not a substitute for honest reasoning; a
-record cannot defer the actual decision it exists to make.
+record cannot defer the actual decision it exists to make. Nor does it comfortably hold what the very
+next piece of work waits on: your agent will point that out and offer to settle it now, though
+deferring it stays your call.
 
 It is a boundary marker: this record settles *this*, and consciously not *that*. The *that* is always
 something a reader could have taken this record to settle. How some other decision will go later is

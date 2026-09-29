@@ -167,7 +167,8 @@ its own id, and the table above reads only for matters — almanac entries have 
 input.
 
 An analysis concludes in the call that creates it. `reopen_analysis` clears that conclusion, and is
-refused once any record it produced carries `decidedAt`.
+refused once any record it produced carries `decidedAt`. Only a ledger's admins and owners may
+reopen an analysis or retract its inputs.
 
 ## Posture summary
 

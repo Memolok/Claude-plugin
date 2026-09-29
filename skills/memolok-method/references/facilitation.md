@@ -157,12 +157,22 @@ SLA under peak load"*. Negative epistemic space of **this** decision at t₀: an
 an unknown its commitment carries, a topic consciously left undiscussed. Not unfinished deliberation.
 Settlement requires a **later Accepted** record, never an edit to this one.
 
-**The test:** would a reader of this record plausibly believe it settled this? Yes → name it and
-proceed; prefer a correctly scoped Accepted record with open questions over scope creep. No → not an
-open question, however near the topic: how another decision will go, whether a rule will bind other
-things later, what a future change might replace. Each open question joins the ledger's unsettled
-deferrals, so one this decision never held open is debt it never incurred. If it matters, it is a
-**Matter** or a record of its own. **Never** treat a remaining open question as a gate.
+**The test, two parts:** would a reader of this record plausibly believe it settled this — and can
+acting on the decision go ahead without the answer? Both yes → name it and proceed; prefer a
+correctly scoped Accepted record with open questions over scope creep.
+
+No to the first → not an open question, however near the topic: how another decision will go, whether
+a rule will bind other things later, what a future change might replace. Each open question joins the
+ledger's unsettled deferrals, so one this decision never held open is debt it never incurred. If it
+matters, it is a **Matter** or a record of its own.
+
+No to the second → flag it to the user as something that should probably be settled now and folded
+into this record: the next thing the practitioner means to do waits on it. Offer to deliberate it in
+this record, and don't propose it yourself as an open question. Deferring it anyway is the
+practitioner's call — maybe they need time to research, or they want a deliberation of its own. Say
+once what it leaves waiting, but don't push.
+
+**Never** treat a remaining open question as a gate.
 
 ### Rule E — Record the explored process; do not stage theater
 
