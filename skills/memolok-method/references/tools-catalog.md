@@ -235,8 +235,8 @@ expectation the entry tests. Whether a promise held is `testResult`, nothing els
 | `mdlGuid` | string | yes |
 | `analysisId` | string | yes |
 
-Returns `{ id, mdlGuid, references, producesDecision, analysisRationale, performedBy, concludedAt }`.
-Error: `Analysis not found.`
+Returns `{ id, mdlGuid, references, producesDecision, analysisRationale, performedBy, createdAt,
+concludedAt }`. Error: `Analysis not found.` Every role on the ledger may read an analysis.
 
 Each entry in `references` is `{ motivatedBy, created, late }`. **`motivatedBy` carries its own kind
 in its prefix** — `mt_` a Matter, `wf_` a World Fact, `oo_` an Observed Outcome — so nothing has to
@@ -345,10 +345,17 @@ kinds. Empty raises. An admitted World Fact or Observed Outcome goes in as itsel
 a Matter restating it, which records neither the entry as the input nor the link, and cannot be
 repaired later because Matters are immutable. Repeats of one id attach once, across kinds as within
 one. The analysis concludes in this call, stamping `concludedAt` with the same instant it dates the
-references, so they read as on time.
+references, so they read as on time. The whole body is checked before anything is written, so a
+refused call leaves nothing behind.
 
-Returns `{ analysis, mdr? }`. Path A mints the record at `New`; Path B omits `mdr` entirely (absent,
-not null).
+Returns `{ analysis, mdr? }`. Path A mints the record at `New`, naming the analysis in its
+`analysisId`; Path B omits `mdr` entirely (absent, not null). Performing an analysis is for members,
+admins and owners, and Path A also needs the permission to create decision records.
+
+**A call that fails part-way says so**: the analysis was only partly created, and repeating the call
+creates a separate analysis rather than finishing this one. Do not repeat it on your own. Tell the
+user, quote the Reference the error carries, and check `get_matter`'s `takenUpBy` for what was
+written before deciding anything.
 
 ### `attach_analysis_reference`
 
@@ -362,8 +369,9 @@ Takes up an input the analysis did not originally reference. **Allowed after the
 concluded** — that is what it is for. The reference is dated now, so it reads as `late: true` and the
 sealed rationale is untouched. Returns the reference.
 
-At most one reference per (input, analysis) pair; a second raises rather than replacing the first,
-because two attachment times make lateness unanswerable.
+At most one reference per (input, analysis) pair. Attaching an input the analysis already references
+changes nothing and answers the reference as it stands, with the time it was first attached, so a
+repeated call is safe.
 
 ### `retract_analysis_reference`
 
@@ -376,9 +384,12 @@ because two attachment times make lateness unanswerable.
 **Addressed by the pair it joins**, because that pair is the reference's identity. There is no
 reference id anywhere on the surface to pass.
 
-Withdraws a reference attached in error. Ungated, including against a committed record: an analysis
-must describe reasoning that occurred. Returns `{ retracted: { analysisId, motivatedBy } }` — the
-pair echoed back, so retracting several in one turn stays correlatable.
+Withdraws a reference attached in error, including against a committed record: an analysis must
+describe reasoning that occurred. Returns `{ retracted: { analysisId, motivatedBy } }` — the pair
+echoed back, so retracting several in one turn stays correlatable. A pair that is not attached answers
+`Analysis reference not found.`, on the first call and on every repeat.
+
+**Admins and owners only**, whoever performed the analysis: a member is refused, even on their own.
 
 ### `reopen_analysis`
 
@@ -389,7 +400,7 @@ pair echoed back, so retracting several in one turn stays correlatable.
 
 Clears `concludedAt`. Refused once any produced record carries `decidedAt` — uncommit that record
 first. Use it when the reasoning genuinely was not finished; for scope that arrived afterwards, a
-late reference is the honest record, not a reopen.
+late reference is the honest record, not a reopen. **Admins and owners only**, as for retracting.
 
 ### `create_MDR`
 
@@ -611,7 +622,8 @@ Owner-only, no time limit. Patchable: `title`, `kind`, `report`, `userVerbatim`,
 | Message | Cause |
 | --- | --- |
 | `Memolok Decision Ledger not found.` | Does not distinguish a ledger the user cannot see from one that is not there. Report it as ambiguous: they may not be a member, or this address may be stale |
-| `You are not a member of this Memolok Decision Ledger.` | A write to a matter, analysis, World Fact or scratchpad by someone not on the ledger, or whose role does not write, such as a visitor. Decision-record writes, recording an outcome and ledger configuration answer a non-member `Memolok Decision Ledger not found.` instead |
+| `You are not a member of this Memolok Decision Ledger.` | A write to a matter, World Fact or scratchpad by someone not on the ledger, or whose role does not write, such as a visitor. Decision-record writes, analysis writes, recording an outcome and ledger configuration answer a non-member `Memolok Decision Ledger not found.` instead |
+| `You do not have the necessary permissions to … analyses on this ledger.` | The role does not allow it. Performing and attaching need a member, admin or owner; retracting and reopening need an admin or owner, even on an analysis the caller performed |
 | `You do not have the necessary permissions to create decision records on this ledger.` | `create_MDR` by someone whose role on the ledger does not let them create records, such as a visitor |
 | `You do not have the necessary permissions to edit this decision record.` | `update_MDR`, `transition_MDR_status` or `anchor_MDR` by someone whose role does not let them edit that record |
 | `You do not have the necessary permissions to record observed outcomes on this ledger.` | `record_observed_outcome` by someone whose role does not let them record, such as a visitor |
@@ -634,7 +646,10 @@ Owner-only, no time limit. Patchable: `title`, `kind`, `report`, `userVerbatim`,
 | `kind must be one of project, other.` | `anchor_MDR` with anything else; the vocabulary is closed |
 | `discoveryType Expected requires tests referencing an expectedOutcome.` | Missing `tests` |
 | `An analysis must take up at least one input; motivatedBy is empty.` | Empty `motivatedBy` |
-| `That input is already referenced by this analysis.` | Duplicate attach — the existing reference stands |
+| `motivatedBy[i] was not found in this Memolok Decision Ledger. An analysis input is a Matter, a World Fact or an Observed Outcome.` | An input the ledger does not hold. The index is the position in your list; nothing was written |
+| `Analysis reference not found.` | Retracting a pair that is not attached, or no longer is |
+| `This analysis produced MDR-{n}, which has been committed. Uncommit that record before reopening the reasoning it was committed on.` | `reopen_analysis` once a produced record is sealed |
+| `This analysis was only partly created: …` | See `create_analysis` above: do not repeat it on your own |
 | `{field} is a scratchpad id.` | A `msp_…` value passed to a reference field. Nothing may cite a note — admit a World Fact instead |
 | `{field} is not a well-formed {kind} identifier. Pass it back exactly as Memolok returned it.` | The value is not an identifier of the kind the field takes: mistyped, truncated or edited. The sentence is the same whatever is wrong, so fetch the value again and pass it back unchanged |
 | `{field} is a {kind} identifier, which does not address {kind}.` | A real identifier of another kind — a Matter where a World Fact belongs, or a ledger id passed to a feedback tool. Pass the kind the field takes |

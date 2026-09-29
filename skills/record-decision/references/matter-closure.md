@@ -50,7 +50,8 @@ any produced record has been committed. A late attachment is not a defect to be 
 reference with no closure yet is exactly how the ledger registers coverage nobody has verified.
 
 If a reference turns out to be wrong — nobody actually took that matter up — retract it with
-`retract_analysis_reference`. That is always allowed, including after commitment.
+`retract_analysis_reference`, which works after commitment too. Retracting and reopening are for a
+ledger's admins and owners; a member asks one of them.
 
 > **Not built yet.** Recording that a matter was **refused** (valid, and we commit to not acting),
 > **externally blocked** (we know what to do and cannot yet), or **overtaken by events** (the world

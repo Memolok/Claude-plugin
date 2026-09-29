@@ -112,7 +112,9 @@ What this decision deliberately does not settle.
 > **Why:** Recording it as an open question keeps this decision tight instead of letting it sprawl.
 
 Frame these as **scope protection**, never as a to-do list. If the user starts trying to clear them,
-say plainly that they travel with the record and do not block anything.
+say plainly that they travel with the record and do not block anything. One that the user's next step
+waits on is not scope protection: say so, and offer to take it into this fish's deliberation before
+persisting.
 
 ## Phase 8 — Persist
 

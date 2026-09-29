@@ -26,6 +26,19 @@ matches — you are asked to update only when your pack genuinely stops working.
 
 *Everything that has landed has shipped. This section is a placeholder.*
 
+## 0.33.0-beta — 2026-09-29
+
+- **Only a ledger's admins and owners reopen an analysis or retract one of its inputs**, whoever
+  performed it. Your agent tells a member to ask one of them rather than trying.
+- **Attaching an input an analysis already took up is safe to repeat**: it answers the reference as
+  first attached instead of refusing.
+- **If creating an analysis fails part-way, your agent stops and tells you**, since repeating the call
+  would create a second analysis.
+- **Your agent no longer suggests leaving open a question your next step depends on.** It offers to
+  settle it in the decision now. If you defer it anyway, it says once what is left waiting, then
+  records it.
+- The server refuses older packs, so an agent on one is told to update.
+
 ## 0.32.0-beta — 2026-09-29
 
 - **Your agent records what happened after a decision, and lists it, by the record's number**, the

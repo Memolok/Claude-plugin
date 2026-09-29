@@ -15,8 +15,8 @@ records, or invented calls. Tell the user it is not available yet.
 | Matter reads | `get_matter` (one, whole), `discover_matters` (the ledger's matters as prose, each with its summary, subjects and who took it up) |
 | Analysis, Path A and B | `create_analysis` |
 | Analysis reads | `get_analysis` (point read) |
-| Analysis inputs (matter, world fact or observed outcome), after conclusion | `attach_analysis_reference`, `retract_analysis_reference` |
-| Reopen a concluded analysis | `reopen_analysis` (refused once a produced record is committed) |
+| Analysis inputs (matter, world fact or observed outcome), after conclusion | `attach_analysis_reference`, `retract_analysis_reference` (admin/owner) |
+| Reopen a concluded analysis | `reopen_analysis` (admin/owner; refused once a produced record is committed) |
 | Expert mint | `create_MDR` |
 | Record reads | `get_MDR` (one, whole), `discover_MDRs` (the ledger's records as prose, each with its summary, status, handle and decision date) |
 | Staged patch, including `hasContext` | `update_MDR` |

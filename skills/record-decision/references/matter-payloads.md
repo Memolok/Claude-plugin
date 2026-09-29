@@ -99,11 +99,11 @@ If the user weighed options and concluded "no", that is a **Rejected** record, n
 | Message | Cause |
 | --- | --- |
 | `An analysis must take up at least one input; motivatedBy is empty.` | Empty list |
-| `That input is already referenced by this analysis.` | Attaching an input the analysis already references |
 | `claimDescription is required when analysis produces a Memolok Decision Record.` | Path A without a claim |
-| `motivatedBy[i] was not found in this Memolok Decision Ledger.` | Wrong id, or an id that is not a matter, world fact or observed outcome. The index is the position in your list |
-| `The motivatedBy reference belongs to a different Memolok Decision Ledger.` | A live id, from another ledger |
-| `You are not a member of this Memolok Decision Ledger.` | Not on the ledger, or a role that does not write, such as a visitor |
+| `motivatedBy[i] was not found in this Memolok Decision Ledger.` | Wrong id, an id from another ledger, or an id that is not a matter, world fact or observed outcome. The index is the position in your list |
+| `You do not have the necessary permissions to perform analyses on this ledger.` | A role that does not perform analyses, such as a visitor |
+| `Memolok Decision Ledger not found.` | Not on the ledger, or a ledger id that is wrong |
+| `This analysis was only partly created: …` | The call failed part-way. Repeating it creates a separate analysis, so tell the user rather than retrying |
 
 ## Do not
 

@@ -26,6 +26,15 @@ Only wrong when no write just succeeded. After a successful write the same wordi
 
 Log them, seal the scoped decision, settle later in a new record.
 
+**Avoid deferring what the next step needs:**
+
+> *"I'll record the move to a message queue, with the choice of broker as an open question."*
+
+Wrong when the user's next task is building against the queue: nothing can be built without a
+broker, so the choice is still part of this decision. Offer to settle it now and absorb it in this
+record, explaining that it's a blocker for the work ahead. Be gentle: this is a judgement call,
+and the user ultimately owns their ledger.
+
 **Never settle in advance:**
 
 > *"MDR-3 is admitted now, so I can link it back to settle that open question on your staged record."*
