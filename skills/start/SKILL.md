@@ -109,8 +109,8 @@ produces a stall or a generic sentence.
 They become `owner`. Adding anyone else is done by a Memolok administrator, not through this plugin.
 
 **The purpose is optional.** If the user does not want to write one now, create the ledger with the
-title alone and move on — it can be stated any time with **`revise-intent`**. Never hold up a ledger
-over it.
+title alone and move on — they can state it any time with **`revise-intent`**, as owner, and so can
+an admin. Never hold up a ledger over it.
 
 ## Step 5 — Offer to remember it
 

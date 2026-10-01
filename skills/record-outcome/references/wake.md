@@ -19,8 +19,7 @@ Requires both `tests` and `testResult`.
 ```
 
 `tests` also accepts a bare id string, and names nothing but the expected outcome: the record is the
-one `mdrNumber` names. Get the `eo-…` value from `get_MDR` on the source record, or from the response
-that created the outcomes.
+one `mdrNumber` names. Get the `eo-…` value from `get_MDR_learning_delta` on the source record.
 
 ## Emergent — nobody saw it coming
 

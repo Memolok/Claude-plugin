@@ -119,12 +119,16 @@ record is anchored — `retractable: false`, a one-way transition. The one windo
 yet a stable address is while a record is still retractable: an uncommit releases it and a later
 admission can take it. Anchoring has four causes, three computed inside the ledger and one declared
 by `anchor_MDR` for a citation the ledger cannot see. `mdrHandle` is what most tools take, and
-`get_MDR` accepts exactly one of the two; `get_MDR_learning_delta` and `discover_observed_outcomes`
+`get_MDR` and `get_MDR_details` accept exactly one of the two; `get_MDR_learning_delta` and
+`discover_observed_outcomes`
 take the number, since only a numbered record has a wake. Report both, as raw values — this is a data hand-off, so
 the `MDRh` prose form does not belong in it.
 
-**Do not fetch reasoning you were not asked for.** `get_analysis` per matter turns one review into a
-dozen calls. Fetch it when the question is *why*, not to be thorough.
+**Do not fetch reasoning you were not asked for.** `get_MDR` answers what a record decided;
+`get_MDR_details` answers why and how. Read records with `get_MDR` — an open-question sweep included,
+since it carries every open question whole — and reach for `get_MDR_details` when the question is why
+or how, or when the caller wants a record's argument quoted. `get_analysis` per matter likewise turns
+one review into a dozen calls. Fetch either when the question is *why*, not to be thorough.
 
 ## What you send back
 

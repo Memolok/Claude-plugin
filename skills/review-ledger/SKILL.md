@@ -58,7 +58,7 @@ reading invariant, applied — what stays inline:**
 | The user named a number — `get_MDR(mdrNumber=7)` | One call; spawning costs more |
 | `get_MDL` for the ledger's purpose | One call, and the answer is the whole of it |
 | `retractable` before a revision | Hold this first-hand, not on report |
-| One record in full, handle already known | Bounded before you start |
+| One record, handle already known | Bounded before you start |
 | A count — any discovery read with `limit: 1`, taken from the total it states | The answer is one number, and `limit: 1` buys it for one entry |
 
 **Illustrative, not exhaustive.** The test is whether you can bound the read before starting, not
@@ -84,8 +84,9 @@ anything.
 | --- | --- |
 | What this ledger is *for* | `get_MDL(mdlGuid)` |
 | Everything, or a status slice | `discover_MDRs(mdlGuid, status?)` |
-| One record in full | `get_MDR(mdlGuid, mdrHandle)` |
+| What one record decided | `get_MDR(mdlGuid, mdrHandle)` |
 | One record the user named — "what did MDR-7 say?" | `get_MDR(mdlGuid, mdrNumber=7)` |
+| Why a record decided it — the options weighed, the arguments, what it expected to follow | `get_MDR_details(mdlGuid, mdrHandle)` |
 | Unprocessed intake | `discover_matters(mdlGuid, untaken: true)` |
 | One matter | `get_matter(mdlGuid, matterId)` |
 | What came of a matter | `get_matter`, then `get_MDR(mdrHandle)` |
@@ -94,6 +95,10 @@ anything.
 | Premises the ledger reasons from | `discover_world_facts(mdlGuid)` |
 | What happened after a decision | `discover_observed_outcomes(mdlGuid, mdrNumber?)` |
 | Promises versus reality for one record | `get_MDR_learning_delta(mdlGuid, mdrNumber)` |
+
+`get_MDR` answers what a record decided; `get_MDR_details` answers why and how. Start with `get_MDR`,
+and go deeper only when the question is about the reasoning: answering *why* from a Verdict alone
+invents an argument the record may not make.
 
 **A topic search is `query`, not a page you read yourself.** `discover_MDRs(query="...")` searches the
 whole fish — head **Claim**, **Verdict**, alternatives, deliberation facts, expected outcomes, open
@@ -132,7 +137,8 @@ Lead with the answer, then the evidence.
 >
 > Still open on that record: the backup destination and schedule.
 
-Not a table dump the user has to read for themselves.
+Not a table dump the user has to read for themselves. The *grounds* in that answer came from
+`get_MDR_details`; `get_MDR` alone gives the Verdict and what is still open.
 
 ### 5. Offer the next move
 
@@ -153,7 +159,8 @@ carries no obligation.
 ### What was left open
 
 There is no query for unsettled deferrals. Read the records and collect `openQuestions` where
-`settledIn` is absent.
+`settledIn` is absent; `get_MDR` carries every open question whole, so this sweep needs no deeper
+read.
 
 Say plainly that you assembled this by reading, not that the ledger surfaced it — Memolok has no
 open-question registry yet.

@@ -129,7 +129,9 @@ not a retreat.
 }
 ```
 
-Array fields **replace**, they do not append. Send the full intended list for any array you touch.
+Array fields **replace**, they do not append. Send the full intended list for any array you touch,
+starting from `get_MDR_details` for any you did not just draft: `get_MDR` carries only `openQuestions`,
+and a write's reply carries identity and a `body` count, not the record.
 
 ## Attribution
 
@@ -148,7 +150,7 @@ RACI fields stay patchable after t₀ — they are the only ones that do.
 
 ## Ids you will need later
 
-The ids you chose are stored verbatim and come back on every read. Two of them are cited by later
+The ids you chose are stored verbatim and come back from `get_MDR_details`. Two of them are cited by later
 calls, so pick names that will still mean something by then:
 
 - `expectedOutcomes[].id` (`eo-…`) — cited by a later wake's `tests.outcomeId`

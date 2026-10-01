@@ -8,15 +8,15 @@ Every tool except `ping` and `get_guidance` requires authentication. All ledger 
 | Field | When | Role |
 | --- | --- | --- |
 | `mdrHandle` | Every mint | Addressing key for record tools, including after admission |
-| `mdrNumber` | Admission only | Ledger citation; `null` while staged. Accepted by `get_MDR`, and taken alone by the tools that only a ledger resident has anything for |
+| `mdrNumber` | Admission only | Ledger citation; `null` while staged. Accepted by both record reads, and taken alone by the tools that only a ledger resident has anything for |
 | `retractable` | Computed at read | `null` staged; `true` uncommit-eligible; `false` anchored |
 
 Never invent either value. Never address a record tool by a raw database id.
 
 **`mdrHandle` is the standard path whenever you have one** — it is what every tool that changes a
-record takes. `get_MDR` also accepts `mdrNumber`, for the one journey where someone cites "MDR-7" and
-you hold no handle: read it directly rather than scanning `discover_MDRs`. Two things bound that
-exception:
+record takes. `get_MDR` and `get_MDR_details` also accept `mdrNumber`, for the one journey where
+someone cites "MDR-7" and you hold no handle: read it directly rather than scanning `discover_MDRs`.
+Two things bound that exception:
 
 - **It is a read.** A number is not a durable address until anchoring — an uncommit releases it and the next
   admission takes it. A read that lands on the wrong record announces itself, because the response
@@ -134,8 +134,9 @@ whenever the record is staged, because `Decided:` is t₀ and a staged record ha
 **The total is the whole match, not the page.** Holding fewer entries than it states means you have
 not seen the ledger, and an answer that does not say so is claiming coverage it does not have.
 
-**A discovery read is for choosing. None of them returns a whole entry** — `get_MDR`, `get_matter`,
-`get_world_fact`, `get_observed_outcome` and `get_scratchpad` are the reads that do.
+**A discovery read is for choosing. None of them returns a whole entry** — `get_MDR_details`,
+`get_matter`, `get_world_fact`, `get_observed_outcome` and `get_scratchpad` are the reads that do.
+`get_MDR` returns what a record decided, which is usually what you want.
 
 **The query grammar is tiny, deliberately.** Search is lexical: whitespace-separated terms, ORed,
 case-insensitive and English-stemmed; no operators, phrases or regex; a whole hyphenated token matches
@@ -155,16 +156,27 @@ Per-tool filters and natural order are below. Nothing else about the shape varie
 | `mdrHandle` | int | exactly one of the two |
 | `mdrNumber` | int | exactly one of the two |
 
-Returns the full record — fish body, `mdrHandle`, `mdrNumber`, `retractable`, `createdAt`,
-`decidedAt` once admitted, and any graph edges, plus `analysisId` (`null` when no analysis produced
-it) — and the derived `title`, `summary` and `subjects` where Memolok has produced them.
-
-**Those three appear only on a sealed record**, because only sealed records are derived: a staged
-record's prose is still editable and nothing would notice a summary going stale against it.
+**`get_MDR` answers what a record decided; `get_MDR_details` answers why and how.** This is the read
+for finding out about a record. Returns `mdrHandle`, `mdlGuid`, `mdrNumber`, `status`, `retractable`,
+`title`, `createdAt`, `decidedAt`, `hasNeed`, `verdict`, every open question whole, and every edge —
+`hasContext`, `analysisId`, `supersedes`, `supersededBy`, `amends`, `amendedBy`, `dependsOn`,
+`conflictsWith`, `settlesOpenQuestion` — plus a `details` key sizing the prose it leaves out.
 
 Pass the handle when you have one. **Exactly one of the two MUST be passed**; the identity section
 above says why a number is a read-only convenience, and the handle the response carries is what you
 use for every other tool.
+
+### `get_MDR_details`
+
+Same parameters and rule as `get_MDR`. Returns the whole record: `get_MDR`'s fields less `details`,
+plus `alternatives`, `deliberationFacts`, `chosenAlternative`, `expectedOutcomes`, the four RACI
+fields, and the derived `summary` and `subjects` — those two only on a sealed record, since a staged
+one's prose may still change.
+
+**Read it when the question is why or how** — the options weighed, the arguments, what was expected
+— never reconstructing an argument from the Verdict's wording; and **before patching an array you did
+not just draft**, since a patch replaces it whole. Its output can be sent back through `update_MDR`
+as it stands.
 
 ### `discover_MDRs`
 
@@ -279,6 +291,13 @@ returned — there is no "current result" field.
 
 ## Write tools
 
+**A write answers with an acknowledgement, never the entry it wrote**: the entry's identifiers, its
+lifecycle state, the times the server stamped, and a `body` key — `"2,432 characters, not echoed;
+get_MDR reads it"` — giving how much prose the entry now holds. The count is a sanity check: roughly
+what you sent, or whether a patch grew or shrank the record. Read the entry with the tool `body`
+names when you need what landed; a field missing from an acknowledgement is not a fault. The
+exceptions are named where they occur.
+
 ### `create_MDL`
 
 | Param | Type | Required |
@@ -323,8 +342,8 @@ files are available, offer to update it.
 | `mdlGuid` | string | yes |
 | `description` | `{ markdown, lang? }` | yes |
 
-Returns `{ id, mdlGuid, description, createdAt, raisedBy, takenUpBy: [] }`. Record the raiser's
-words **verbatim** — do not sharpen here.
+Returns `{ id, mdlGuid, createdAt, body }`. Record the raiser's words **verbatim** — do not sharpen
+here.
 
 `createdAt` and `raisedBy` are minted by the server from the call itself; there is no parameter
 for either. **`raisedBy` is the one thing here that cannot be recovered later** — the creation
@@ -348,9 +367,11 @@ one. The analysis concludes in this call, stamping `concludedAt` with the same i
 references, so they read as on time. The whole body is checked before anything is written, so a
 refused call leaves nothing behind.
 
-Returns `{ analysis, mdr? }`. Path A mints the record at `New`, naming the analysis in its
-`analysisId`; Path B omits `mdr` entirely (absent, not null). Performing an analysis is for members,
-admins and owners, and Path A also needs the permission to create decision records.
+Returns `{ analysis, mdr? }`: `analysis` is `{ id, mdlGuid, createdAt, concludedAt, references,
+body }`, and `mdr` is the record acknowledgement `create_MDR` returns. Path A mints the record at
+`New`, naming the analysis in its `analysisId`; Path B omits `mdr` entirely (absent, not null).
+Performing an analysis is for members, admins and owners, and Path A also needs the permission to
+create decision records.
 
 **A call that fails part-way says so**: the analysis was only partly created, and repeating the call
 creates a separate analysis rather than finishing this one. Do not repeat it on your own. Tell the
@@ -401,6 +422,7 @@ echoed back, so retracting several in one turn stays correlatable. A pair that i
 Clears `concludedAt`. Refused once any produced record carries `decidedAt` — uncommit that record
 first. Use it when the reasoning genuinely was not finished; for scope that arrived afterwards, a
 late reference is the honest record, not a reopen. **Admins and owners only**, as for retracting.
+Returns the analysis acknowledgement `create_analysis` returns.
 
 ### `create_MDR`
 
@@ -418,8 +440,10 @@ late reference is the honest record, not a reopen. **Admins and owners only**, a
 | `authoredBy`, `decidedBy` | string | no |
 | `consulted`, `informed` | string[] | no |
 
-Expert path only — there is no matter parameter. Returns the record with a minted `mdrHandle`;
-`mdrNumber` only if created at `Accepted` or `Rejected`.
+Expert path only — there is no matter parameter. Returns the **record acknowledgement**,
+`{ mdrHandle, mdlGuid, mdrNumber, status, retractable, createdAt, decidedAt, body }`, with a minted
+`mdrHandle`; `mdrNumber` only if created at `Accepted` or `Rejected`. Every record write returns this
+shape.
 
 ### `update_MDR`
 
@@ -450,15 +474,19 @@ You name every id on `alternatives`, `expectedOutcomes` and `openQuestions`: pre
 the rule and the refusals. `chosenAlternative` and `deliberationFacts[].onAlternative` must name an
 alternative that exists once the patch lands.
 
+Returns the record acknowledgement. An array you did not just draft starts from `get_MDR_details`.
+
 ### `transition_MDR_status`
 
 `mdlGuid`, `mdrHandle`, `status`. Admission to `Accepted` or `Rejected` sets `decidedAt`, assigns
-`mdrNumber`, and mints reciprocals.
+`mdrNumber`, and mints reciprocals on the records it names. Returns the record acknowledgement, which
+carries all three of `status`, `decidedAt` and `mdrNumber` to confirm the move by.
 
 ### `uncommit_MDR`
 
 `mdlGuid`, `mdrHandle`, optional `reason`. Requires `admin` or `owner`, status `Accepted` or
 `Rejected`, and `retractable: true`. Demotes to staged, clearing `mdrNumber` and `decidedAt`.
+Returns the record acknowledgement.
 
 ### `anchor_MDR`
 
@@ -483,12 +511,14 @@ supply. Declaring the same kind twice is a no-op.
 the server cannot see your files or your mail, so nothing checks the claim. Say so if a user asks to
 undo one: it is corrected by a later record, not by a call.
 
-Returns the record. A staged record has no number for anything to cite, so this refuses one.
+Returns the record acknowledgement. A staged record has no number for anything to cite, so this
+refuses one.
 
 ### `admit_world_fact`
 
 `mdlGuid`, `claimDescription`, optional `correctsFact`. Use `correctsFact` only for a fact that was
-wrong when admitted — never for ordinary world drift.
+wrong when admitted — never for ordinary world drift. Returns `{ worldFactId, mdlGuid, createdAt,
+body }`.
 
 ### `record_observed_outcome`
 
@@ -504,7 +534,8 @@ wrong when admitted — never for ordinary world drift.
 
 There is no `observedAt` parameter — the server stamps the current time, so a wake cannot be
 backdated. Recording one typically Anchors the source record. A visitor may read outcomes and may not
-record one.
+record one. Returns `{ observedOutcomeId, mdlGuid, mdrHandle, mdrNumber, createdAt, observedAt,
+body }`.
 
 ## Scratchpad tools
 
@@ -529,7 +560,7 @@ cite that.
 Flat prose, like `register_matter` — **not** the nested `{ description: { markdown } }` shape that
 `ledgerIntent` and `verdict` take. The body is the entry; there is no second level.
 
-Returns `{ scratchpadId, mdlGuid, description, createdAt, createdBy, modifiedAt, contributors }`.
+Returns `{ scratchpadId, mdlGuid, createdAt, modifiedAt, body }`.
 
 ### `get_scratchpad`
 
@@ -540,7 +571,7 @@ Returns `{ scratchpadId, mdlGuid, description, createdAt, createdBy, modifiedAt,
 `mdlGuid`, `scratchpadId`, `description`. **Full replacement, not an append.** There is no partial
 update: read with `get_scratchpad`, compose the whole new body, send that. Advances `modifiedAt`.
 Only the note's author may call it, whatever anyone else's role; `createdBy` on `get_scratchpad` says
-who that is.
+who that is. Returns what `create_scratchpad` returns.
 
 ### `delete_scratchpad`
 
@@ -623,7 +654,8 @@ does a report deleted during triage.
 
 Owner-only, no time limit. Patchable: `title`, `kind`, `report`, `userVerbatim`, `mdlGuid`,
 `artifacts`, `evidence`, `expectation`. **Arrays replace, they do not merge** — send the full list.
-`pluginVersion` is recorded at submission and cannot be patched.
+`pluginVersion` is recorded at submission and cannot be patched. Returns `{ feedbackId, title, kind,
+modifiedAt, body }`; `get_feedback` shows what landed.
 
 ## Common errors
 

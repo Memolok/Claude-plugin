@@ -77,7 +77,9 @@ names the record and says how much of it this one replaces:
 > **What it changes:** Supersedes MDR-7 whole. The library moves off the repurposed drive.
 
 An amendment's preview shows its deltas and nothing carried forward: the rest of the original still
-governs, so restating it in the preview would present a rewrite the record is not making.
+governs, so restating it in the preview would present a rewrite the record is not making. Read the
+original with `get_MDR_details` before drafting either line — what it changes may sit in an
+alternative, an argument or an expected outcome.
 
 **Context and links** goes after the deliberation. It lists what the record rests on and points at:
 the world facts and earlier outcomes it cites as context, the records it depends on or conflicts
@@ -125,4 +127,6 @@ preview confirmation from being mistaken for commitment.
 wrong; do not persist a draft the user has not endorsed.
 
 **A correction shows only the regions it changed**, under the same labels and in the same order,
-and says the rest stands. A second full preview for a one-line fix buries the fix.
+and says the rest stands. A second full preview for a one-line fix buries the fix. On a persisted
+draft, take the regions from `get_MDR_details` rather than from memory: a write's reply does not carry
+them.

@@ -70,7 +70,8 @@ for the record goes to the scout; a handle you already hold does not.
 | **Deducible** | Could have been foreseen at t₀ but was not written down |
 | **Emergent** | Nobody could reasonably have predicted it |
 
-For **Expected**, read the outcome id (`eo-…`) from `get_MDR` — you need it for `tests`.
+For **Expected**, read the outcome id (`eo-…`) from `get_MDR_learning_delta` — you need it for
+`tests`, and that read lists each expected outcome beside the wakes already testing it.
 
 The split between Deducible and Emergent is an honest judgement, and it matters: a pattern of
 Deducible outcomes says the team's forecasting has a blind spot, while Emergent ones are just the world

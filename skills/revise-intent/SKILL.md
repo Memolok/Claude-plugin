@@ -44,6 +44,7 @@ drafted — the three elements, the two shapes, and the length.
 | The user wants to change | Skill |
 | --- | --- |
 | What this ledger is *for* | **This one** |
+| What the ledger is *called* | No skill: `set_MDL_title(mdlGuid, title)`, one call, `admin` or `owner`. The identifier stays |
 | A decision already sealed on the ledger | **`revise-decision`** |
 | A premise the ledger reasons from | **`manage-almanac`** |
 
@@ -110,8 +111,10 @@ is why it is worth a step of its own. Ask before writing, as ever. Do not go hun
 in front of you: the same ledger may be named from trees you cannot see, and the file is a
 convenience rather than a record — a stale one misleads nobody who checks `get_MDL`.
 
-Nothing else needs chasing. Document frontmatter carries no intent, and a ledger's title cannot be
-changed at all, so `mdlIntent` in a project file is the only copy any action of yours can invalidate.
+Nothing else needs chasing. Document frontmatter carries no intent, so `mdlIntent` in a project file
+is the only copy this step can invalidate. A purpose that moved often takes the title with it; if the
+user renames the ledger too, that is `set_MDL_title`, and an `mdlTitle` copy in the project file or in
+a document's frontmatter goes stale the same way.
 
 Confirm briefly and stop. This is a small job; it does not need a summary of the whole ledger.
 

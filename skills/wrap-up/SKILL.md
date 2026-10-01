@@ -159,8 +159,9 @@ discarding it as out of scope.** Where a record names its own test, notice when 
 run today, for whatever unrelated reason.
 
 Reading a record to do this is fine. The *"nothing to look up"* rule above is about this skill keeping
-no state of its own between runs; it does not stop you calling `get_MDR` or
-`get_MDR_learning_delta` on any record you have reason to think you can now speak to.
+no state of its own between runs; it does not stop you calling `get_MDR_learning_delta` on any
+record you have reason to think you can now speak to — it lists what the record promised and what has
+been observed against it.
 
 Four traps to look out for:
 
