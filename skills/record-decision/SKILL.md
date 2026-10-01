@@ -179,7 +179,10 @@ waiting, then record it. Open questions never block the seal.
 
 Show the draft back in the shape the **`record-preview`** skill fixes, and wait for a yes.
 
-Then `update_MDR` with the body. Payloads: `references/patch-payloads.md`.
+Then `update_MDR` with the body. Payloads: `references/patch-payloads.md`. A patch replaces each array
+it carries whole, so an array you did not just draft starts from `get_MDR_details`, not from memory.
+`get_MDR` answers what a record decided; `get_MDR_details` answers why and how — and the arrays are the
+how.
 
 Confirming the preview is **not** t₀. Do not offer **Proposed** on informal work, and do not offer
 **Accepted** unless the user has raised sealing themselves.
@@ -214,7 +217,8 @@ Full worked correction arc: `references/need-vs-verdict-drift.md`.
 
 - A complete fish body may sit at **Deliberating** indefinitely. Completeness is not commitment.
 - Patches are incremental — send only the keys that changed.
-- The ids you chose come back on every read; a later wake needs the `eo-…` ones.
+- The ids you chose come back from `get_MDR_details`, and the `eo-…` ones a later wake needs from
+  `get_MDR_learning_delta` too.
 - If the user's need turns out to already be covered by an existing record, say so and offer
   `review-ledger` instead of minting a duplicate.
 

@@ -26,6 +26,20 @@ matches — you are asked to update only when your pack genuinely stops working.
 
 *Everything that has landed has shipped. This section is a placeholder.*
 
+## 0.35.0-beta — 2026-10-02
+
+- **Records are read at two depths.** Your agent reads what a decision decided by default, and
+  fetches the alternatives, the arguments and what it expected only when you ask why or how, before
+  quoting its reasoning, or before changing it. Answers about a record cost about a third of what
+  they did.
+- **Writes no longer send back what your agent just wrote.** Each save is confirmed with its
+  identifiers, its state and the size of what was saved, so recording a decision, a fact, an outcome
+  or a note no longer fills your agent's context with its own words.
+- **Renaming a ledger is covered.** Your agent knows a ledger's title can be changed, by its admins
+  and owners, and no longer tells you it cannot.
+- **Update required.** The server's new reads and replies need this version; older packs are told to
+  update.
+
 ## 0.34.1-beta — 2026-09-29
 
 - **Feedback reports now say which pack sent them.** `send-feedback` passes the pack version with

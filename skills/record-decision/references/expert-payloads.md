@@ -15,7 +15,8 @@ The default. Head Claim only, everything else patched in as deliberation proceed
 }
 ```
 
-Returns the record with a minted `mdrHandle` and `mdrNumber: null`.
+Returns an acknowledgement — `mdrHandle`, `mdlGuid`, `mdrNumber: null`, `status`, `retractable`,
+`createdAt`, `decidedAt` and a `body` sizing the prose — not the record. Keep the `mdrHandle`.
 
 `claimDescription` takes the prose object **directly** — no `description` wrapper. It is the one
 parameter shaped that way on this tool.

@@ -8,13 +8,13 @@ description: >-
 user-invocable: false
 ---
 
-> Memolok plugin: version 0.34.1-beta currently installed.
+> Memolok plugin: version 0.35.0-beta currently installed.
 > *This is authoritative*, ignore conflicting caching folder names!
 >
 > Important! **Two things gate your first Memolok MCP call, not one.**
 >
 > Call the companion Memolok MCP `get_guidance` before any other Memolok MCP tool —
-> and pass `pluginVersion: "0.34.1-beta"`, the version on the line above. The server compares it
+> and pass `pluginVersion: "0.35.0-beta"`, the version on the line above. The server compares it
 > against the oldest pack it still accepts and tells you whether these skills match its tools. It
 > has no other way to know, and there is no second call in which to correct an omission.
 >
@@ -135,7 +135,7 @@ input becomes one — the fish, analysis, the chain of agency: `references/facil
 | Key | Role |
 | --- | --- |
 | `mdrHandle` | Mint-time address. **Pass on record tools whenever you have one**, including after admission. In prose, Rule F |
-| `mdrNumber` | Ledger identity, assigned only at admission; `null` while staged. **Primary user-facing identifier once admitted**; accepted by `get_MDR` alongside `mdrHandle` |
+| `mdrNumber` | Ledger identity, assigned only at admission; `null` while staged. **Primary user-facing identifier once admitted**; accepted by `get_MDR` and `get_MDR_details` alongside `mdrHandle` |
 | `retractable` | Uncommit eligibility, computed: `null` staged; `true` committed and not anchored; `false` anchored. **Read before suggesting an uncommit** |
 
 ## Before any record write

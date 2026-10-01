@@ -6,8 +6,8 @@
 { "mdlGuid": "<mdlGuid>", "mdrHandle": 1, "status": "Accepted" }
 ```
 
-Returns the full record with `decidedAt` set, `mdrNumber` assigned, graph reciprocals published, and
-`retractable` computed.
+Returns the record's acknowledgement: `status`, `decidedAt` set, `mdrNumber` assigned, and
+`retractable` computed, beside its identity — not its prose.
 
 ## Rejected — t₀
 
@@ -91,7 +91,7 @@ number and nothing frozen to settle — update the holder directly instead. Full
 
 ## Verifying the seal
 
-After the transition, `get_MDR` and check:
+Check the transition's own reply:
 
 | Field | Expected |
 | --- | --- |
@@ -99,7 +99,6 @@ After the transition, `get_MDR` and check:
 | `mdrNumber` | An integer — this is now the user-facing name |
 | `decidedAt` | A timestamp |
 | `retractable` | `true` if nothing anchors it yet; `false` if something already does |
-| `expectedOutcomes[].id` | `eo-…` values — a later wake needs these |
 
 A tier-1 `update_MDR` should now fail. That failure is the Decision Transaction Principle working
 correctly, not a bug to route around.

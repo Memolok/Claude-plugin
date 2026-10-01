@@ -50,6 +50,10 @@ Principle is the whole subject of this skill.
 get_MDR(mdlGuid, mdrHandle)
 ```
 
+`get_MDR` answers what a record decided; `get_MDR_details` answers why and how. What it decided is
+enough to route. Read `get_MDR_details` before drafting an amendment or a successor: what it changes
+may sit in an alternative, an argument or an expected outcome, and `get_MDR` carries none of those.
+
 ### 2. Route on how much is wrong
 
 **Ask this first.** `retractable` decides only whether one of the routes is still open; it does not

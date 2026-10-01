@@ -61,11 +61,12 @@ Sealing is not reversible in place, so the cost of asking is far lower than the 
 ### 1. Read the record
 
 ```
-get_MDR(mdlGuid, mdrHandle)
+get_MDR_details(mdlGuid, mdrHandle)
 ```
 
-Confirm it is still staged. If `mdrNumber` is already set, it was sealed previously — route to
-**`revise-decision`** instead.
+The whole record, because the gates and the ceremony both need what it argued and expected, not only
+what it decided. Confirm it is still staged. If `mdrNumber` is already set, it was sealed previously —
+route to **`revise-decision`** instead.
 
 ### 2. Check the gates for the target
 
@@ -109,7 +110,8 @@ Payloads and the formal-governance `Proposed` step: `references/transition-paylo
 
 ### 5. Verify and mark it
 
-`get_MDR` and confirm `status`, `decidedAt`, `mdrNumber`, and `retractable`. Then one positive beat,
+The transition's reply carries `status`, `decidedAt`, `mdrNumber` and `retractable`: confirm them
+there, with no further read. Then one positive beat,
 citing the number the record now has:
 
 > **MDR-7 is Accepted** — sealed just now. That's on the ledger.
@@ -136,7 +138,8 @@ is written. The **`memolok-citations`** skill carries the order and the form.
 - If the transition is refused, the message names the missing gate. Patch it and return to step 3 —
   unless it names your permissions, which no patch fixes, or says the change was only partly made,
   which only repeating the identical call completes.
-- The `eo-…` ids you chose come back on every read; a later wake needs them.
+- The `eo-…` ids you chose come back from `get_MDR_details` and `get_MDR_learning_delta`; a later
+  wake needs them.
 
 ## References
 

@@ -66,7 +66,8 @@ The obvious case is a call that failed. Three less obvious ones are the reason t
 because nothing errors in any of them and no exception handler could catch them:
 
 1. **A call succeeded and did the wrong thing.** A patch returns 200 and silently drops a field. The
-   status code says nothing is wrong; the state says otherwise.
+   status code says nothing is wrong; the read-back says otherwise. A write's reply does not carry
+   the entry, so it is the read that shows the drop.
 2. **Two successful calls disagree.** A record a page just returned cannot be read back. A note
    that demonstrably exists is not found by search. Neither call failed — only their conjunction is
    wrong.
@@ -103,7 +104,7 @@ beside them:
     {
       "title": "update_MDR orphans chosenAlternative when it mints an alternative id",
       "kind": "bug",
-      "report": { "markdown": "Patched `alternatives` with items that had no `id`. The response minted ids and `chosenAlternative` was gone.", "lang": "en" },
+      "report": { "markdown": "Patched `alternatives` with items that had no `id`. The patch was accepted; reading the record back showed minted ids and no `chosenAlternative`.", "lang": "en" },
       "artifacts": [
         { "kind": "mcp_tool", "name": "update_MDR" },
         { "kind": "mcp_server", "name": "Memolok MCP", "version": "<the version get_guidance reported>" }
@@ -113,13 +114,13 @@ beside them:
           "occurredAt": "2026-08-18T09:12:44Z",
           "toolName": "update_MDR",
           "request": { "markdown": "```json\n{\"alternatives\": [{\"label\": \"A\"}]}\n```", "lang": "en" },
-          "response": { "markdown": "200; alternatives gained ids, chosenAlternative absent", "lang": "en" },
+          "response": { "markdown": "200; acknowledged", "lang": "en" },
           "requestId": "req_abc123"
         },
         {
           "occurredAt": "2026-08-18T09:12:59Z",
-          "toolName": "get_MDR",
-          "response": { "markdown": "chosenAlternative: null", "lang": "en" }
+          "toolName": "get_MDR_details",
+          "response": { "markdown": "alternatives carry ids nobody sent; chosenAlternative absent", "lang": "en" }
         }
       ],
       "expectation": { "markdown": "chosenAlternative names an alternative that still exists after a patch.", "lang": "en" }

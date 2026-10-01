@@ -16,8 +16,8 @@ The source actor's verbatim words. No sharpening at this step.
 }
 ```
 
-Returns `{ id, mdlGuid, description, createdAt, raisedBy, takenUpBy: [] }`. Keep the `id` — the next call needs it. If it
-is lost, `discover_matters(untaken: true)` finds it again.
+Returns `{ id, mdlGuid, createdAt, body }`. Keep the `id` — the next call needs it. If it is lost,
+`discover_matters(untaken: true)` finds it again.
 
 ### 2. `create_analysis`
 
@@ -37,8 +37,8 @@ is lost, `discover_matters(untaken: true)` finds it again.
 }
 ```
 
-Returns `{ analysis, mdr }`. The record is at **New** with `mdrNumber: null`. Read `mdr.mdrHandle`
-from the response.
+Returns `{ analysis, mdr }`, each an acknowledgement rather than the entry. The record is at **New**
+with `mdrNumber: null`. Read `mdr.mdrHandle` from the response.
 
 `motivatedBy` is a **list** of `mt_`, `wf_` and `oo_` ids in any mix. Pass every input this reasoning
 took up — three reports of one fault go in one call, not three. The analysis concludes here, and

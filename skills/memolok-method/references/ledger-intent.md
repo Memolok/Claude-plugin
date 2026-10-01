@@ -92,7 +92,8 @@ the stated purpose; the intent may simply be stale, or the decision may be a cas
 ## Revising later
 
 `set_ledger_intent` **replaces the whole statement** — it does not append, and there is no history. Read
-the current one with `get_MDL` first, then write the full replacement, not just the changed clause.
+the current one with `get_MDL` first, then write the full replacement, not just the changed clause. It
+takes `admin` or `owner`; a `member` cannot revise the purpose, and neither can a `visitor`.
 
 Revision is expected and cheap: as the project, team, or industry moves, the intent moves with it. There
 is no version to bump and no correction chain to maintain.

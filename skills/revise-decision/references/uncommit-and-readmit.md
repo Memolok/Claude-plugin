@@ -50,6 +50,9 @@ and the uncommit permanently, and a blank reason makes that history useless.
 
 ## Step 2 — Edit while staged
 
+A fix touching `alternatives`, `deliberationFacts`, `expectedOutcomes` or `openQuestions` starts from
+`get_MDR_details`: a patch replaces the whole array, and the record's current one is there.
+
 ```json
 {
   "mdlGuid": "<mdlGuid>",

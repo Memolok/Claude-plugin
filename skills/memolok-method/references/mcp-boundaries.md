@@ -18,7 +18,7 @@ records, or invented calls. Tell the user it is not available yet.
 | Analysis inputs (matter, world fact or observed outcome), after conclusion | `attach_analysis_reference`, `retract_analysis_reference` (admin/owner) |
 | Reopen a concluded analysis | `reopen_analysis` (admin/owner; refused once a produced record is committed) |
 | Expert mint | `create_MDR` |
-| Record reads | `get_MDR` (one, whole), `discover_MDRs` (the ledger's records as prose, each with its summary, status, handle and decision date) |
+| Record reads | `get_MDR` (one, what it decided), `get_MDR_details` (one, whole: why and how), `discover_MDRs` (the ledger's records as prose, each with its summary, status, handle and decision date) |
 | Staged patch, including `hasContext` | `update_MDR` |
 | Lifecycle transition | `transition_MDR_status` |
 | Uncommit a retractable record | `uncommit_MDR` (admin/owner) |
@@ -124,7 +124,7 @@ note is authored fresh with no trail back, and the user should be told that once
 | `scratchpadId` (`msp_` + 26) | a bare id, or any other entity's prefix — every kind carries its own, so a category error is refused by name |
 | `mdlGuid` | `adlGuid` |
 
-Tools take `mdrHandle`; as a convenience, `get_MDR` also accepts `mdrNumber` so a record someone
-cites by number can be read directly. Use the handle whenever you hold one. The exceptions take
+Tools take `mdrHandle`; as a convenience, `get_MDR` and `get_MDR_details` also accept `mdrNumber` so
+a record someone cites by number can be read directly. Use the handle whenever you hold one. The exceptions take
 `mdrNumber` alone, since only a numbered record has anything for them: `get_MDR_learning_delta`,
 `discover_observed_outcomes` narrowed to one record, and `record_observed_outcome`.

@@ -39,7 +39,7 @@ When the user committed before any record existed, surface the same implication 
 > Before I write this — minting it as **Accepted** seals it immediately. The Verdict and the expected
 > outcomes become immutable the moment it lands, same as any commitment. Happy to go ahead?
 
-Then mint, then verify with `get_MDR`.
+Then mint, then verify from what the mint returns: `status`, `decidedAt` and `mdrNumber` are in it.
 
 ## Terse mode
 
