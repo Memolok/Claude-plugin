@@ -84,8 +84,9 @@ Do not simulate the missing enumeration by keeping a local index of what you sen
 | Decision-record-type taxonomy |
 | Concern hierarchy |
 
-`create_MDL` is open to any authenticated user, who becomes owner. Everything else about membership is
-provisioned by a Memolok administrator.
+`create_MDL` is open to any user whose account allows it, which every account does from the day it
+is created, and the creator becomes owner. Everything else about membership is provisioned by a
+Memolok administrator.
 
 ### Project bridges
 

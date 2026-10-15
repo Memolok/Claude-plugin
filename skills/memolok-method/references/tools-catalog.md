@@ -307,6 +307,10 @@ exceptions are named where they occur.
 
 Caller becomes `owner`. Returns the same shape as `get_MDL`.
 
+Refused with `You do not have the necessary permissions to create ledgers.` when the user's account
+is not allowed to create one. Every account can from the day it is created, so this is an
+administrator's matter: say so, and do not retry.
+
 Pass `ledgerIntent` when the user has agreed a purpose — one call, not create-then-set. Note the nested
 shape: `{ "description": { "markdown": "…" } }`, **not** a flat `{ markdown }`.
 
@@ -672,6 +676,7 @@ modifiedAt, body }`; `get_feedback` shows what landed.
 | `You do not have the necessary permissions to record observed outcomes on this ledger.` | `record_observed_outcome` by someone whose role does not let them record, such as a visitor |
 | `You do not have the necessary permissions to uncommit decision records on this ledger.` | `uncommit_MDR` by someone whose role does not let them uncommit, such as a member |
 | `You do not have the necessary permissions to configure this ledger.` | `set_MDL_title` or `set_ledger_intent` by someone on the ledger whose role does not let them configure it |
+| `You do not have the necessary permissions to create ledgers.` | `create_MDL` by someone whose account is not allowed to create one. Every account is from the day it is created, so an administrator changes it; do not retry |
 | `Memolok Decision Record not found.` | No record under that key on a ledger you can read. A ledger you cannot read answers `Memolok Decision Ledger not found.` instead |
 | `The {field} reference belongs to a different Memolok Decision Ledger.` | Cross-ledger reference |
 | `Use transition_MDR_status to change Memolok Decision Record status.` | `status` in a patch |
