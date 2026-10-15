@@ -307,6 +307,10 @@ exceptions are named where they occur.
 
 Caller becomes `owner`. Returns the same shape as `get_MDL`.
 
+Refused with `You do not have the necessary permissions to create ledgers.` when the user's account
+is not allowed to create one. Every account can from the day it is created, so this is an
+administrator's matter: say so, and do not retry.
+
 Pass `ledgerIntent` when the user has agreed a purpose — one call, not create-then-set. Note the nested
 shape: `{ "description": { "markdown": "…" } }`, **not** a flat `{ markdown }`.
 
