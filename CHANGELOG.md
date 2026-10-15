@@ -24,6 +24,10 @@ matches — you are asked to update only when your pack genuinely stops working.
 
 ## Unreleased
 
+*Everything that has landed has shipped. This section is a placeholder.*
+
+## 0.35.1-beta — 2026-10-15
+
 - **Creating a ledger can be refused.** If your account is not allowed to create one, your agent
   says so and that an administrator can change it, rather than trying again. Every account is
   allowed from the day it is created.
