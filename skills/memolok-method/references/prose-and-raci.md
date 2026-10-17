@@ -90,13 +90,15 @@ Non-empty strings identifying people or systems.
 
 | Field | Cardinality | Default |
 | --- | --- | --- |
-| `authoredBy` | 0–1 | `https://www.memolok.ai/users/{userId}` |
+| `authoredBy` | 0–1 | `https://app.memolok.ai/m/{userId}#id` |
 | `decidedBy` | 0–1 | none |
 | `consulted` | 0–n | `[]` |
 | `informed` | 0–n | `[]` |
 | `performedBy` (Analysis) | 1 | caller |
 
-Get `userId` from `whoami` when attributing a human.
+Get `userId` from `whoami` when attributing a Memolok user, and write them as
+`https://app.memolok.ai/m/{userId}#id` — the form their own records carry. Anyone else is written as
+whatever identifies them: a name, an address, their own URI.
 
 ## RACI is narrative, not permission
 
