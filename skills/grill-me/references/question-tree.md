@@ -24,8 +24,9 @@ Sharpen the Need into something a future observation could settle, without namin
 
 > **Question:** What would have to be true for this to count as solved?
 >
-> **Recommended answer:** Something like *"the library must survive a single drive failure without
-> data loss"* — a property, not a particular setup.
+> **Recommended answer:** Something like *"the media server's FLAC library must survive a single
+> drive failure without data loss"* — a property, not a particular setup, and it says what it is
+> about.
 >
 > **Why:** That's the head of the record, and it needs to be checkable later without pre-committing to
 > how we get there.
@@ -35,6 +36,10 @@ Sharpen the Need into something a future observation could settle, without namin
 
 Watch for the user handing you a mechanism. *"I need to set up RAID"* is a Verdict looking for a Need —
 ask what it would protect against and let the real Need surface.
+
+Watch for a Need pointing at the present, too. *"Keep it as reliable as it is now"* names the
+current state of the project, which someone would later need to reconstruct — instead, ask what
+*reliable* consists of, and put that in the Need.
 
 **This gate is provisional.** If phase 4 reveals the Need absorbed something only discovered during
 deliberation, walk it back. See the `need-vs-verdict-drift.md` reference in `record-decision`.

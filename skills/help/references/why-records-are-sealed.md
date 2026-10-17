@@ -31,6 +31,24 @@ Learning from a bad decision means reconstructing why it looked good. Poor judgm
 Available data nobody looked at? Pressure from someone senior? None of that survives in a record that has
 been exposed to the future.
 
+## It makes changing your mind cheap
+
+A racing car's brakes are not there to make it slow. They are there so the driver can carry speed
+into the corner, knowing the car will stop when it has to. A sealed record works the same way.
+
+The usual reason to hesitate before overturning an old decision is that nobody remembers why it was
+made. A fence across a field might be keeping something in, so you leave it standing until you learn
+why it was put up — Chesterton's fence. That caution is sound but expensive: it is how teams end up
+living with choices nobody would make today.
+
+Memolok's immutable ledger is meant to answer the questions that caution would be waiting on. The
+reasons are on the record, as they stood when the decision was made. You can check whether they still
+hold, and if they do not, change course the same day. The change is a new decision recorded beside the
+old one; nothing is lost, and the old one needs no defending.
+
+So a sealed record is not a reason to keep doing something. On the contrary: it is what allows you to
+change course safely at speed — just like the racing car's brakes.
+
 ## The retroactive edit
 
 When a decision turns out badly the reflex is to go back and improve the documentation: soften the

@@ -75,6 +75,15 @@ amendment states deltas only, and restating the original is not amending it. Bot
 each end. Amending Anchors what it amends, permanently, and reads gentler than it is. Detail →
 `revise-decision`.
 
+**The seal is what makes changing course cheap.** The original keeps its reasoning → a successor
+costs one deliberation and loses no evidence. A sealed record keeps why the fence went up: there to
+be checked and re-evaluated, not a reason to keep the fence in and of itself. Practitioner changing
+direction → offer the amendment or supersession readily; never ask them to justify the change, nor
+frame it as a failure; instead, use the existing record to contextualize the change. What turns
+expensive at t₀ is rewriting what a record *says* — hence building against a staged record
+(`record-decision`) — never changing what you do. The ledger is there to support the practitioner's
+work on the project, not the other way around.
+
 Value is **honesty, not correctness.** A well-reasoned decision that failed teaches more than one
 retrofitted to look prescient. Wake evidence showing a violated commitment → re-decide at a new t₀; the
 wake becomes bait for the next fish.
@@ -209,3 +218,17 @@ in the belly or the Verdict — **no matter who said the words**.
 The Need is expected to be **walked back** as belly work proceeds; de-sharpening an over-specific Claim
 is correct, not a failure to hold a line. Caught the conflation after already restating it once →
 re-derive from *"what did we know before we explored anything?"*; it survives light rewording.
+
+**Under-sharpening's two common shapes.** A head Claim is read cold — years on, by someone who was
+not in this session, usually arriving by search. Both shapes read fine to the session that wrote
+them. Each symptom is a prompt to check, not a ban.
+
+- **Points at the present.** *now, today, current, existing, as it is, keeps, still, no worse than*
+  → the reference state is not on the record, so no later admission can test against it; fails the
+  falsifiability definition above. Name the properties themselves. Decided earlier → cite that
+  admitted record, `(MDR-n)`; staged → state the property outright. A premise → **World Fact** in
+  `hasContext`. Never the Ledger Intent. A state given with its value and its date reads cold;
+  *"as it is now"* does not.
+- **Names its subject only as the session knew it.** *the sweep, these routes, the new approach, the
+  migration* → name the component, module or area, in the words a later search would use. Not a
+  mechanism: the subject was askable before any alternative, so it passes the test above.

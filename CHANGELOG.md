@@ -24,7 +24,11 @@ matches — you are asked to update only when your pack genuinely stops working.
 
 ## Unreleased
 
-*Everything that has landed has shipped. This section is a placeholder.*
+- **Decisions say what they are about.** Your agent drafts what a decision must achieve by naming its
+  subject and the properties it must deliver, never "as it is today", so the record still makes sense,
+  and still turns up in search, years later.
+- **Changing course is routine.** When you move away from something already decided, your agent
+  offers to amend or replace that decision readily, without asking you to justify the change.
 
 ## 0.35.1-beta — 2026-10-15
 

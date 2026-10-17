@@ -4,8 +4,9 @@ description: >-
   Change a decision that is already sealed on the ledger — amend part of it, supersede it with
   a successor, uncommit and re-admit a retractable record, or settle a question an earlier record
   left open. Use when the user regrets a recent commitment, says a sealed record is now wrong or out
-  of date, says part of it no longer holds, wants to withdraw or replace a prior decision, or asks
-  how to fix something they already accepted.
+  of date, says part of it no longer holds, wants to withdraw or replace a prior decision, changes
+  direction on something the ledger already decided ("we're moving off X"), or asks how to fix
+  something they already accepted.
 argument-hint: "<record> <what changes>"
 ---
 
@@ -13,6 +14,11 @@ argument-hint: "<record> <what changes>"
 
 Sealed records cannot be edited in place. This skill picks the honest route: amend part of it,
 supersede with a successor, or uncommit and re-admit.
+
+Revising is the ledger working, not a confession. The original keeps the reasons it was made, which
+is exactly what lets the user change course without losing them — so offer the route readily, and
+never ask them to justify changing their mind. The costs this skill names decide *which* route, never
+*whether* to change.
 
 ## Usage
 

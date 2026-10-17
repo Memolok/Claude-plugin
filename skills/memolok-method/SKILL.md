@@ -28,8 +28,8 @@ user-invocable: false
 Shared substrate for every Memolok skill. Concepts live here once; task skills carry procedure only.
 
 Memolok records decisions as durable structure — need, options weighed, commitment, what was expected
-to follow. **Opinionated on how you record**, **agnostic on how you decide and on domain**. The *why*
-it preserves is what a wiki loses. Explaining that to a **person** → `help` skill, not this one.
+to follow. **Opinionated on how you record**, **agnostic on how you decide and on domain**.
+Explaining Memolok to a **person** → `help` skill.
 
 ## Vocabulary
 
@@ -145,7 +145,8 @@ The fish model, analysis, the Decision Transaction Principle, the lifecycle and 
 record or records a wake. Two of its rules bind even before it is loaded: **discussion is
 deliberation** — never mint at **Accepted** or **Rejected**, or transition to either, without the
 user's explicit ask in their own words; and **a committed record is never patched in place** —
-`retractable: true` means only that an uncommit is available.
+`retractable: true` means only that an uncommit is available. Changing course is a new record; this
+is routine, and should be embraced.
 
 ## Facilitation rules
 

@@ -98,7 +98,8 @@ Leave either region out when there is nothing to put in it. Never write "none" t
 **Label the head "Need".** In conversation it is also the head Claim, and the two may stand side by
 side there; in the preview the label is always **Need**. It comes first because everything else is
 answerable to it, and showing it first makes an over-sharpened Need obvious: if it already names the
-chosen mechanism, you will see it here.
+chosen mechanism, you will see it here. A Need that will not read cold shows up just as plainly:
+one that points at how things are *now*, or names its subject only as this session knew it.
 
 **Show alternatives as a table** when there are three or more, and as a list when there are one or
 two. An alternative with no `description` is fine; it means the user named the option without
