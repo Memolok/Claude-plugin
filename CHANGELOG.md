@@ -24,6 +24,10 @@ matches — you are asked to update only when your pack genuinely stops working.
 
 ## Unreleased
 
+*Everything that has landed has shipped. This section is a placeholder.*
+
+## 0.35.2-beta — 2026-10-17
+
 - **Decisions say what they are about.** Your agent drafts what a decision must achieve by naming its
   subject and the properties it must deliver, never "as it is today", so the record still makes sense,
   and still turns up in search, years later.
