@@ -159,7 +159,9 @@ before a write.
 **Phase 2 is a special case.** A recommended answer for a Need question is a recommended **scope or
 framing** — never a mechanism, technique, or state count, even if one has already come up. If your
 recommendation would only have made sense *after* an alternative was floated, it belongs in phase 3,
-not folded into the Need.
+not folded into the Need. It also has to read cold, to someone who was never in this interview: name
+what the Need is about, explicitly mentioning the relevant scope, and state the properties rather
+than pointing at how things are now (Rule G).
 
 ## Preview and persist
 

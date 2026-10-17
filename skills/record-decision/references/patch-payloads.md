@@ -99,7 +99,7 @@ not a retreat.
   "patch": {
     "hasNeed": {
       "description": {
-        "markdown": "The chosen language must have a mature, well-supported statistical-analysis library ecosystem.",
+        "markdown": "The stats pipeline's language must have a mature, well-supported statistical-analysis library ecosystem.",
         "lang": "en"
       }
     }

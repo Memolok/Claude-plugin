@@ -201,11 +201,15 @@ folding both into one body. A record that converges twice is malformed.
 **Head Claim.** Bad: *"we need better performance."* Good: *"P99 API latency must stay under 200ms at
 500 concurrent users."*
 
+**It is read cold.** Bad: *"the migration must keep search as fast as it is today."* Good:
+*"order-history search must return any order from the last seven years within two seconds."* The
+first names neither its subject nor its target in words that will mean anything later (Rule G).
+
 **Sharpen is not resolve.** When the honest need is mechanism-agnostic, keep it that way:
 
 - Over-sharpened: *"the project must use Python for its mature pandas/numpy/scipy stack."*
-- Correctly sharp: *"the chosen language must have a mature, well-supported statistical-analysis
-  library ecosystem."*
+- Correctly sharp: *"the stats pipeline's language must have a mature, well-supported
+  statistical-analysis library ecosystem."*
 
 The second is still falsifiable — a later observation can confirm or refute whether the ecosystem held
 up — without pre-committing to which language. The language choice is Verdict-shaped, and belongs in

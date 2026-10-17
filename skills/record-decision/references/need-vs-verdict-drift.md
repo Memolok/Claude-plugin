@@ -77,7 +77,7 @@ It relocates, it does not disappear:
 {
   "hasNeed": {
     "description": {
-      "markdown": "The practitioner needs creative control over the shape's contours — not merely whatever continuity behaviour gets automatically enforced.",
+      "markdown": "In the vector editor, the practitioner needs creative control over the shape's contours — not merely whatever continuity behaviour gets automatically enforced.",
       "lang": "en"
     }
   },

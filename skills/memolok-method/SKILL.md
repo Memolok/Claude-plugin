@@ -8,13 +8,13 @@ description: >-
 user-invocable: false
 ---
 
-> Memolok plugin: version 0.35.1-beta currently installed.
+> Memolok plugin: version 0.35.2-beta currently installed.
 > *This is authoritative*, ignore conflicting caching folder names!
 >
 > Important! **Two things gate your first Memolok MCP call, not one.**
 >
 > Call the companion Memolok MCP `get_guidance` before any other Memolok MCP tool —
-> and pass `pluginVersion: "0.35.1-beta"`, the version on the line above. The server compares it
+> and pass `pluginVersion: "0.35.2-beta"`, the version on the line above. The server compares it
 > against the oldest pack it still accepts and tells you whether these skills match its tools. It
 > has no other way to know, and there is no second call in which to correct an omission.
 >
@@ -28,8 +28,8 @@ user-invocable: false
 Shared substrate for every Memolok skill. Concepts live here once; task skills carry procedure only.
 
 Memolok records decisions as durable structure — need, options weighed, commitment, what was expected
-to follow. **Opinionated on how you record**, **agnostic on how you decide and on domain**. The *why*
-it preserves is what a wiki loses. Explaining that to a **person** → `help` skill, not this one.
+to follow. **Opinionated on how you record**, **agnostic on how you decide and on domain**.
+Explaining Memolok to a **person** → `help` skill.
 
 ## Vocabulary
 
@@ -145,7 +145,8 @@ The fish model, analysis, the Decision Transaction Principle, the lifecycle and 
 record or records a wake. Two of its rules bind even before it is loaded: **discussion is
 deliberation** — never mint at **Accepted** or **Rejected**, or transition to either, without the
 user's explicit ask in their own words; and **a committed record is never patched in place** —
-`retractable: true` means only that an uncommit is available.
+`retractable: true` means only that an uncommit is available. Changing course is a new record; this
+is routine, and should be embraced.
 
 ## Facilitation rules
 

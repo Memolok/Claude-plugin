@@ -54,7 +54,7 @@ or the head Claim where that reads better. The field name never appears, and nei
 > Head Claim: *"We needed to choose Python because it has excellent statistical analysis capabilities"*
 
 "Python" was an alternative just proposed, not something true before deliberation. Keep the Need at
-*"a language must be chosen for statistical analysis, with a mature, well-supported library
-ecosystem"* — still falsifiable, still mechanism-neutral — and move the choice to the belly and
-Verdict.
+*"a language must be chosen for the stats pipeline, with a mature, well-supported
+statistical-analysis library ecosystem"* — still falsifiable, still mechanism-neutral — and move the
+choice to the belly and Verdict.
 

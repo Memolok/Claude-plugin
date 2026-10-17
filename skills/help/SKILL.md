@@ -3,9 +3,9 @@ name: help
 description: >-
   Explain what Memolok is and why it records decisions the way it does — decision debt, what makes
   something a decision, why a sealed record cannot be edited, what the vocabulary means, and what the
-  product does not do yet. Use when someone asks "what is Memolok", "why can't I just fix that
-  record", "why do I have to say what I expect to happen", "isn't this just ADRs", "why not point an
-  LLM at our wiki", "what does t₀ / the wake / a matter actually mean", or "why is it even called that".
+  product does not do yet. Use when someone asks "what is Memolok", "why is it even called that", or
+  any other question about why the method works the way it does or what its words mean. Not for
+  getting something done on a ledger: that belongs to the skill that does it.
 argument-hint: "[what you want explained]"
 ---
 
@@ -186,6 +186,7 @@ what you say.
 | They asked | The short answer | Load |
 | --- | --- | --- |
 | Why can't I edit a sealed record | Hindsight destroys the evidence the record exists to hold | `references/why-records-are-sealed.md` |
+| Doesn't sealing make us rigid | The opposite: the reasons are kept, so changing course is safe | `references/why-records-are-sealed.md` |
 | So it is permanent the second I commit | No — until something relies on it, it can be withdrawn on the record | `references/retractable-vs-anchored.md` |
 | Can't I just mark it obsolete | Nothing stops being true on its own; someone decided to stop | `references/supersession-and-withdrawal.md` |
 | Only part of it is wrong now | Amend that part; the rest of the decision keeps governing | `references/supersession-and-withdrawal.md` |
