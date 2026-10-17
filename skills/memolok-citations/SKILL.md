@@ -105,22 +105,26 @@ Anchoring is member-level, so anyone who can write the citation can declare it.
 
 | Entry | Address |
 | --- | --- |
-| Decision record | `https://www.memolok.ai/mdl/<mdlGuid>/mdr/<mdrNumber>` |
-| Matter | `https://www.memolok.ai/mdl/<mdlGuid>/matter/<mt_…>` |
-| World Fact | `https://www.memolok.ai/mdl/<mdlGuid>/fact/<wf_…>` |
-| Observed Outcome | `https://www.memolok.ai/mdl/<mdlGuid>/outcome/<oo_…>` |
-| Analysis | `https://www.memolok.ai/mdl/<mdlGuid>/analysis/<an_…>` |
-| Scratchpad | `https://www.memolok.ai/mdl/<mdlGuid>/scratchpad/<msp_…>` — say it here, don't ship it |
+| Ledger | `https://app.memolok.ai/m/<mdlGuid>` |
+| Decision record | `https://app.memolok.ai/m/<mdlGuid>/MDR-<mdrNumber>` |
+| Matter | `https://app.memolok.ai/m/<mdlGuid>/<mt_…>` |
+| World Fact | `https://app.memolok.ai/m/<mdlGuid>/<wf_…>` |
+| Observed Outcome | `https://app.memolok.ai/m/<mdlGuid>/<oo_…>` |
+| Analysis | `https://app.memolok.ai/m/<mdlGuid>/<an_…>` |
+| Scratchpad | `https://app.memolok.ai/m/<msp_…>` — say it here, don't ship it |
 
-Identity sits in the path rather than the hostname, so the resolver can move without invalidating a
-citation already written.
+Every address is the identifier you already hold, under the ledger's own address where the
+identifier is the ledger's, and a record is its citation form exactly: `MDR-7` in prose,
+`…/MDR-7` in an address. Write identifiers in the case Memolok returned them. The `/m/` namespace
+holds these addresses and nothing else, and is kept apart from the application around it so that a
+reorganisation of the application never moves one: a citation written now stays good.
 
 > **Not built yet.** None of these addresses resolves — not the Markdown link below, not the bare
 > URL. Both are the correct thing to write and neither lands a reader on the entry today. Say so when
 > you hand one to somebody who will try it.
 
-**A ledger has no address of its own.** There is no landing page for `/mdl/<mdlGuid>` alone, so do not
-offer one; name the ledger by its title if a reader needs to know which one you mean.
+**Name a ledger by its title beside its address.** A reader then knows which one you mean without
+resolving anything.
 
 ## What binds a compact form
 
@@ -132,7 +136,7 @@ the form.
 | Code | `MDR-7`, bare |
 | A commit message in that repository | `MDR-7`, bare, in the body — never in the subject |
 | Markdown declaring `mdlGuid` in frontmatter | `MDR-7`, bare, anywhere in the document |
-| Markdown without that frontmatter | A link: `[MDR-7](https://www.memolok.ai/mdl/<mdlGuid>/mdr/7)` |
+| Markdown without that frontmatter | A link: `[MDR-7](https://app.memolok.ai/m/<mdlGuid>/MDR-7)` |
 | Anything else — email, chat, a ticket, another tool's payload | The address, written out |
 
 **In code the binding is the tree.** `.memolok/mdl.yml` names the ledger for everything below it, so

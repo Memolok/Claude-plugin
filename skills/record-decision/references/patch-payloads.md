@@ -140,8 +140,8 @@ and a write's reply carries identity and a `body` count, not the record.
   "mdlGuid": "<mdlGuid>",
   "mdrHandle": 1,
   "patch": {
-    "decidedBy": "https://www.memolok.ai/users/<userId>",
-    "consulted": ["https://www.memolok.ai/users/<otherUserId>"]
+    "decidedBy": "https://app.memolok.ai/m/<userId>#id",
+    "consulted": ["https://app.memolok.ai/m/<otherUserId>#id"]
   }
 }
 ```

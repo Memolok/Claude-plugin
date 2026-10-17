@@ -26,6 +26,18 @@ matches — you are asked to update only when your pack genuinely stops working.
 
 *Everything that has landed has shipped. This section is a placeholder.*
 
+## 0.36.0-beta — 2026-10-17
+
+- **A Memolok user is credited as `https://app.memolok.ai/m/<userId>#id`.** That is the default
+  author your agent states, and the form it writes when it names a Memolok user as deciding,
+  consulted or informed. The server refuses the old `https://www.memolok.ai/users/…` form, and the
+  error tells your agent what to write instead.
+- **Citation addresses move under `https://app.memolok.ai/m/`**: the ledger's identifier, then the
+  entry's, with a record written exactly as it is cited, `…/MDR-7`. They do not resolve yet.
+- **Request references read `mrq_…`**, as the server now sends them, wherever the skills quote what
+  a failed or refused call returns.
+- **Update required.** The server refuses the form older packs teach; they are told to update.
+
 ## 0.35.2-beta — 2026-10-17
 
 - **Decisions say what they are about.** Your agent drafts what a decision must achieve by naming its

@@ -67,7 +67,7 @@ permissions problem. `ping` succeeding tells you which one you are looking at.
 
 ## An error carrying a reference
 
-Several replies quote a `req_…` reference. They mean different things, and only one must not be
+Several replies quote a `mrq_…` reference. They mean different things, and only one must not be
 repeated.
 
 | Reply | What to do |

@@ -1,13 +1,13 @@
 # When a write fails
 
 A failed write reaches you in one of a few shapes, and they call for opposite responses. A trailing
-`Reference: req_…` does not tell you which: it is there so an administrator can find the call, and it
+`Reference: mrq_…` does not tell you which: it is there so an administrator can find the call, and it
 rides on replies you must repeat as well as on the one you must not.
 
 ## Internal error with a reference
 
 ```
-Memolok hit an internal error and could not complete this request. Reference: req_…
+Memolok hit an internal error and could not complete this request. Reference: mrq_…
 ```
 
 The write did **not** happen. Nothing was captured, and the record you were shaping does not exist on
@@ -28,7 +28,7 @@ an answer is the honest fallback.
 ## A change only partly made
 
 ```
-This change to the Memolok Decision Record was only partly made: this API lost its store part-way through. This is a fault here. Repeat the same call to complete it. Reference: req_…
+This change to the Memolok Decision Record was only partly made: this API lost its store part-way through. This is a fault here. Repeat the same call to complete it. Reference: mrq_…
 ```
 
 Only `transition_MDR_status` and `uncommit_MDR` answer this, with *lost its store* or *failed* in the
@@ -54,7 +54,7 @@ Repeat the named call first, then the one you were making.
 ## Data service unavailable
 
 ```
-Memolok's data service is temporarily unavailable. Try again shortly. Reference: req_…
+Memolok's data service is temporarily unavailable. Try again shortly. Reference: mrq_…
 ```
 
 An outage, not a fault in your call, and nothing was written. Repeat the same call after a short pause.
