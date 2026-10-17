@@ -115,7 +115,7 @@ beside them:
           "toolName": "update_MDR",
           "request": { "markdown": "```json\n{\"alternatives\": [{\"label\": \"A\"}]}\n```", "lang": "en" },
           "response": { "markdown": "200; acknowledged", "lang": "en" },
-          "requestId": "req_abc123"
+          "requestId": "mrq_8dnnfjkbt5dv"
         },
         {
           "occurredAt": "2026-08-18T09:12:59Z",

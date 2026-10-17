@@ -24,7 +24,8 @@ matches — you are asked to update only when your pack genuinely stops working.
 
 ## Unreleased
 
-*Everything that has landed has shipped. This section is a placeholder.*
+- **Request references read `mrq_…`**, as the server now sends them, wherever the skills quote what
+  a failed or refused call returns.
 
 ## 0.35.2-beta — 2026-10-17
 
