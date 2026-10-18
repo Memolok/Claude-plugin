@@ -15,8 +15,9 @@ The plugin ships one thing — the server URL:
 }
 ```
 
-Connecting registers the client automatically and opens a browser to sign in at `memolok.ai`. There is
-no client id, no client secret, and no token to paste.
+Connecting identifies the client automatically — it registers itself, or presents a metadata document
+it hosts — and opens a browser to sign in at `memolok.ai`. There is no client id, no client secret, and
+no token to paste.
 
 **Never ask the user for a client id or a client secret.** None exist in this system. If a client's
 Advanced settings offer those fields, they must be left empty — a stale value there causes the
@@ -25,25 +26,12 @@ connection to fail.
 An account is required, and there is no public sign-up. Accounts are provisioned by a Memolok
 administrator.
 
-## Clients without a browser sign-in
+## Editor and command-line clients
 
-Some clients cannot run a browser OAuth flow. They use a Personal Access Token instead:
-
-```json
-{
-  "mcpServers": {
-    "Memolok": {
-      "url": "https://www.memolok.ai/mcp",
-      "headers": {
-        "Authorization": "Bearer YOUR_PAT"
-      }
-    }
-  }
-}
-```
-
-Tokens are issued by a Memolok administrator. You cannot mint one, and the user should not be asked to
-paste one into a conversation — it belongs in their client configuration.
+Clients that run outside a browser — Cursor and other editors, command-line agents — sign in the same
+way. The client opens the sign-in page in the user's browser and receives the result on a loopback
+address on the user's own machine. Their configuration is the URL alone: there is no header to set and
+no credential to put in it.
 
 ## Diagnosing a failure
 
@@ -52,10 +40,9 @@ Start with `ping`. It is the only tool that tells you about the connection rathe
 | Symptom | Meaning | Fix |
 | --- | --- | --- |
 | Tools absent entirely | The server was never connected | Connect it in the client's settings |
-| Every call returns unauthorized | No valid credential | Re-run the browser sign-in, or check the token |
-| `Authenticated token has no linked Memolok user.` | The credential is valid but not linked to an account | Reconnect to sign in again, or the token needs an administrator |
-| `The access token carries a malformed Memolok user id.` | The credential is valid but its identity claim is unusable | Reconnect to sign in again; if it recurs, report it |
-| `This PAT's client id is malformed.` | The Personal Access Token is damaged or mistyped | Check the token, or an administrator issues a new one |
+| Every call returns unauthorized | No valid sign-in | Reconnect to run the browser sign-in again |
+| `The access token names a Memolok user that no longer exists.` | The sign-in is valid but its account is gone | Reconnect to sign in again; if it recurs, an administrator checks the account |
+| `The access token carries a malformed Memolok user id.` | The sign-in is valid but its identity claim is unusable | Reconnect to sign in again; if it recurs, report it |
 | `Memolok Decision Ledger not found.` | Does not distinguish a ledger the user cannot see from one that is not there. Report it as ambiguous: they may not be a member, or this address may be stale | `get_MDLs` to see what they can actually reach |
 | `You do not have the necessary permissions to create ledgers.` | Their account is not allowed to create a ledger | An administrator changes the account's role |
 | `You do not have the necessary permissions to …` on a write | Their role on the ledger does not allow that write | An administrator changes the role |
@@ -101,8 +88,7 @@ add it twice. If the tools are present, it is connected.
   advanced credential fields empty.
 - Signing in happens in a browser, against their Memolok account.
 - No account: an administrator creates one; there is no self-service sign-up.
-- On a client with no browser flow: they need a Personal Access Token from an administrator, set as an
-  `Authorization: Bearer` header in their own configuration.
+- Editors and command-line clients connect the same way: the URL alone, then a browser sign-in.
 
 ## Never
 

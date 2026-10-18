@@ -24,7 +24,10 @@ matches — you are asked to update only when your pack genuinely stops working.
 
 ## Unreleased
 
-*Everything that has landed has shipped. This section is a placeholder.*
+- **Every client connects with the URL alone and a browser sign-in.** Your agent no longer offers a
+  personal access token for Cursor and other editors or command-line clients, which sign in in a
+  browser like any other; personal access tokens are not accepted. Its connection diagnosis quotes
+  the errors the server sends today.
 
 ## 0.36.0-beta — 2026-10-17
 
