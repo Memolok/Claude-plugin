@@ -217,6 +217,16 @@ up — without pre-committing to which language. The language choice is Verdict-
 
 Full worked correction arc: `references/need-vs-verdict-drift.md`.
 
+## Anti-patterns
+
+**The Verdict smuggled into the head Claim.** Most frequent on the expert branch, where the record
+is negotiated with the user before you are asked to preview or save it: by then you know the whole
+reasoning, and the answer leaks into the Need. Run the drift test on the Claim before the preview.
+
+**Open questions from outside the record's scope.** The eager-to-please failure: each one widens the
+record instead of marking its edge. Rule D's first test rejects it — no reader would believe this
+record settled it.
+
 ## Tips
 
 - A complete fish body may sit at **Deliberating** indefinitely. Completeness is not commitment.

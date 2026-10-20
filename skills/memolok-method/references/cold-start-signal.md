@@ -79,10 +79,9 @@ If the Memolok skills are available, load `memolok-method` and establish the led
 `.memolok/mdl.yml` in the project folder, which names it and says what it is for. Do this now, even
 for a question that looks like it needs neither: you cannot tell in advance which turn will want the
 ledger, and finding it unreachable part-way through an answer is worse than finding it before one.
-Error response
-`Memolok Decision Ledger not found.` from the server does not distinguish a ledger the user cannot
-see from one that is not there. Report it as ambiguous: they may not be a member, or this address
-may be stale.
+The error response `Memolok Decision Ledger not found.` from the Memolok server does not
+distinguish a ledger the user cannot see from one that is not there. Report it as ambiguous: they
+may not be a member, or this address may be stale.
 
 If the Memolok skills are not available, ignore the paragraph above and don't go looking for them.
 ```

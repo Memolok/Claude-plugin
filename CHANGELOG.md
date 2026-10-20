@@ -28,6 +28,8 @@ matches — you are asked to update only when your pack genuinely stops working.
   personal access token for Cursor and other editors or command-line clients, which sign in in a
   browser like any other; personal access tokens are not accepted. Its connection diagnosis quotes
   the errors the server sends today.
+- **Recording a decision, your agent keeps the chosen answer out of the need it states**, and
+  proposes open questions only where they mark the edge of that record's scope.
 
 ## 0.36.0-beta — 2026-10-17
 
