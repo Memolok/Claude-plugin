@@ -18,10 +18,6 @@ server is deployed on ours, so the two cannot be held equal. The server publishe
 still accepts, and tells your agent at the start of a session whether the pack it is running still
 matches — you are asked to update only when your pack genuinely stops working.
 
-> Entries for `0.9.0-alpha` through `0.16.0-alpha` were written on 2026-08-25 from the release
-> history rather than at the time, so they are terser than the ones after them. Nothing in them is
-> reconstructed beyond what the tags and their contents show.
-
 ## Unreleased
 
 - **Every client connects with the URL alone and a browser sign-in.** Your agent no longer offers a
