@@ -96,6 +96,15 @@ sharpest way to misread a ledger.
 derivation never sees the expectation the entry tests. Report whether a promise held from
 `testResult`, never from how a heading sounds.
 
+**On a record's expected outcomes, report bets, not requirements.** An expected outcome is what the
+decision bet would follow, and its *Falsified by* names the observation that would lose the bet, not
+a rule later work must obey. Asked what constrains some work, report the **Verdict** as the course
+the record took, **why** it took it — the need, the alternatives it turned down and their reasons,
+the premises — and its expected outcomes as what that work would test or falsify. That question is
+a *why* question, so `get_MDR_details` is the read for each record that bears on the work. Never
+list a record as something the work must not violate: whether to keep a course is the caller's
+call, and the reasons you hand back are what the caller explains it from.
+
 **On world facts, be stricter about that attribution than anywhere else.** A world fact is a premise decisions are
 reasoned from, so handing back Memolok's paraphrase as the admitted claim misstates what the ledger
 rests on. Quote from `get_world_fact`.

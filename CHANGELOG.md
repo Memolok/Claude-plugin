@@ -20,7 +20,12 @@ matches — you are asked to update only when your pack genuinely stops working.
 
 ## Unreleased
 
-*Everything that has landed has shipped. This section is a placeholder.*
+- **Your agent explains why a decision was made before you change it.** When a change, its own or
+  yours, would contradict a sealed decision or lose one of its expected outcomes, it reads the
+  decision's reasoning first, tells you what the decision was protecting and whether that still
+  holds, and offers keeping to it and departing from it as options with their costs. It no longer
+  rules a departure out because a sealed decision would not have chosen it. The ledger reader
+  reports expected outcomes as bets the work tests, with the reasons behind each decision.
 
 ## 0.37.0-beta — 2026-10-20
 
