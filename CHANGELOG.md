@@ -18,13 +18,23 @@ server is deployed on ours, so the two cannot be held equal. The server publishe
 still accepts, and tells your agent at the start of a session whether the pack it is running still
 matches — you are asked to update only when your pack genuinely stops working.
 
-> Entries for `0.9.0-alpha` through `0.16.0-alpha` were written on 2026-08-25 from the release
-> history rather than at the time, so they are terser than the ones after them. Nothing in them is
-> reconstructed beyond what the tags and their contents show.
-
 ## Unreleased
 
 *Everything that has landed has shipped. This section is a placeholder.*
+
+## 0.37.0-beta — 2026-10-20
+
+- **Every client connects with the URL alone and a browser sign-in.** Your agent no longer offers a
+  personal access token for Cursor and other editors or command-line clients, which sign in in a
+  browser like any other; personal access tokens are not accepted. Its connection diagnosis quotes
+  the errors the server sends today.
+- **Recording a decision, your agent keeps the chosen answer out of the need it states**, and
+  proposes open questions only where they mark the edge of that record's scope.
+- **Your agent names a decision record to every tool by its citation**, `MDRh7` by its handle or
+  `MDR-7` by its number, in one `mdr` argument. Reading a record or its outcomes takes either; changing
+  a record takes the handle's. What the tools answer still carries both numbers.
+- **Update required.** The server no longer accepts the separate handle and number arguments older
+  packs teach; they are told to update.
 
 ## 0.36.0-beta — 2026-10-17
 

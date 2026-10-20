@@ -61,7 +61,7 @@ Sealing is not reversible in place, so the cost of asking is far lower than the 
 ### 1. Read the record
 
 ```
-get_MDR_details(mdlGuid, mdrHandle)
+get_MDR_details(mdlGuid, mdr)
 ```
 
 The whole record, because the gates and the ceremony both need what it argued and expected, not only
@@ -103,7 +103,7 @@ Ceremony variants — rejection, one-shot mint, terse mode: `references/ceremony
 ### 4. Transition
 
 ```json
-{ "mdlGuid": "<mdlGuid>", "mdrHandle": 1, "status": "Accepted" }
+{ "mdlGuid": "<mdlGuid>", "mdr": "MDRh1", "status": "Accepted" }
 ```
 
 Payloads and the formal-governance `Proposed` step: `references/transition-payloads.md`.

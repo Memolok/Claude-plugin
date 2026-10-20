@@ -55,7 +55,7 @@ reading invariant, applied — what stays inline:**
 
 | The read | Why it stays |
 | --- | --- |
-| The user named a number — `get_MDR(mdrNumber=7)` | One call; spawning costs more |
+| The user named a number — `get_MDR(mdr="MDR-7")` | One call; spawning costs more |
 | `get_MDL` for the ledger's purpose | One call, and the answer is the whole of it |
 | `retractable` before a revision | Hold this first-hand, not on report |
 | One record, handle already known | Bounded before you start |
@@ -84,17 +84,17 @@ anything.
 | --- | --- |
 | What this ledger is *for* | `get_MDL(mdlGuid)` |
 | Everything, or a status slice | `discover_MDRs(mdlGuid, status?)` |
-| What one record decided | `get_MDR(mdlGuid, mdrHandle)` |
-| One record the user named — "what did MDR-7 say?" | `get_MDR(mdlGuid, mdrNumber=7)` |
-| Why a record decided it — the options weighed, the arguments, what it expected to follow | `get_MDR_details(mdlGuid, mdrHandle)` |
+| What one record decided | `get_MDR(mdlGuid, mdr)` |
+| One record the user named — "what did MDR-7 say?" | `get_MDR(mdlGuid, mdr="MDR-7")` |
+| Why a record decided it — the options weighed, the arguments, what it expected to follow | `get_MDR_details(mdlGuid, mdr)` |
 | Unprocessed intake | `discover_matters(mdlGuid, untaken: true)` |
 | One matter | `get_matter(mdlGuid, matterId)` |
-| What came of a matter | `get_matter`, then `get_MDR(mdrHandle)` |
+| What came of a matter | `get_matter`, then `get_MDR(mdr)` |
 | Why a matter was dismissed | `get_analysis(mdlGuid, analysisId)` |
 | What a record's reasoning took up | `get_MDR` for `analysisId`, then `get_analysis` |
 | Premises the ledger reasons from | `discover_world_facts(mdlGuid)` |
-| What happened after a decision | `discover_observed_outcomes(mdlGuid, mdrNumber?)` |
-| Promises versus reality for one record | `get_MDR_learning_delta(mdlGuid, mdrNumber)` |
+| What happened after a decision | `discover_observed_outcomes(mdlGuid, mdr?)` |
+| Promises versus reality for one record | `get_MDR_learning_delta(mdlGuid, mdr)` |
 
 `get_MDR` answers what a record decided; `get_MDR_details` answers why and how. Start with `get_MDR`,
 and go deeper only when the question is about the reasoning: answering *why* from a Verdict alone
@@ -117,10 +117,10 @@ answering, and never let a first page stand in for the ledger.
 call. A filtered `total` quoted as a ledger size is wrong in the direction that makes the almanac look
 emptier than it is, which is how "I did not find it" becomes "it was never recorded".
 
-**When the user names a number, read it directly.** `get_MDR` takes `mdrNumber` in place of
-`mdrHandle` — exactly one of the two — so "what did MDR-7 say?" is one call, not a sweep to find a
-handle. Use the handle whenever you already have one, and use the handle the response carries
-for anything you do to the record afterwards. A number released by an uncommit can be taken by a
+**When the user names a number, read it directly.** `get_MDR` takes `mdr` as `MDR-7` as readily as
+`MDRh7`, so "what did MDR-7 say?" is one call, not a sweep to find a handle. Use the handle
+whenever you already have one, and cite the `mdrHandle` the response carries, as `MDRh`, for
+anything you do to the record afterwards. A number released by an uncommit can be taken by a
 later record, so read back what you got before answering on it.
 
 **The `status` filter is validated.** An unknown value is refused by name. A genuinely empty result
@@ -185,7 +185,7 @@ not an anomaly worth flagging: intent is revised in place and often lags the wor
 | --- | --- |
 | `takenUpBy: []` | Nobody has picked it up — still raw bait |
 | An entry with `producesDecision: []` | Somebody looked and concluded nothing needed deciding |
-| An entry with `producesDecision: [{ mdrHandle }]` | Read the record with `get_MDR(mdrHandle)` |
+| An entry with `producesDecision: [{ mdrHandle }]` | Read the record with `get_MDR`, citing that `mdrHandle` as `MDRh` |
 | An entry with `late: true` | Attached after that reasoning closed, so the rationale does not cover it |
 
 More than one entry is normal, not a defect: a matter can be taken up by several analyses.

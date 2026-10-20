@@ -118,6 +118,7 @@ note is authored fresh with no trail back, and the user should be told that once
 
 | Use | Not |
 | --- | --- |
+| `mdr: "MDRh7"`, `mdr: "MDR-7"` | a bare integer as a record argument |
 | `mdrHandle` | a database id as an address |
 | `mdrNumber` (`null` while staged) | `adrNumber` |
 | `matterId` | matter "number" |
@@ -125,7 +126,9 @@ note is authored fresh with no trail back, and the user should be told that once
 | `scratchpadId` (`msp_` + 26) | a bare id, or any other entity's prefix — every kind carries its own, so a category error is refused by name |
 | `mdlGuid` | `adlGuid` |
 
-Tools take `mdrHandle`; as a convenience, `get_MDR` and `get_MDR_details` also accept `mdrNumber` so
-a record someone cites by number can be read directly. Use the handle whenever you hold one. The exceptions take
-`mdrNumber` alone, since only a numbered record has anything for them: `get_MDR_learning_delta`,
-`discover_observed_outcomes` narrowed to one record, and `record_observed_outcome`.
+Every record tool takes one `mdr`, the record's citation: `MDRh7` by its handle or `MDR-7` by its
+number. A read takes either, so a record someone cites by number is read directly. A tool that
+changes a record takes `MDRh7` alone, because an uncommit can release a number for another record
+to take. Use the handle whenever you hold one. What only a sealed record has, its learning delta and
+its wake, finds no staged record whichever way it is cited. Answers carry both keys as integers,
+`mdrHandle` and `mdrNumber`, and links name records by number.

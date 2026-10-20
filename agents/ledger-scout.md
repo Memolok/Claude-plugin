@@ -118,10 +118,9 @@ subject of the question.
 record is anchored — `retractable: false`, a one-way transition. The one window where a number is not
 yet a stable address is while a record is still retractable: an uncommit releases it and a later
 admission can take it. Anchoring has four causes, three computed inside the ledger and one declared
-by `anchor_MDR` for a citation the ledger cannot see. `mdrHandle` is what most tools take, and
-`get_MDR` and `get_MDR_details` accept exactly one of the two; `get_MDR_learning_delta` and
-`discover_observed_outcomes`
-take the number, since only a numbered record has a wake. Report both, as raw values — this is a data hand-off, so
+by `anchor_MDR` for a citation the ledger cannot see. Every record tool takes one `mdr`, the
+record's citation: `MDRh7` by handle, or `MDR-7` by number on the reads. Only a sealed record has a
+wake or a learning delta, so a staged one is not found there. Report both, as raw integers — this is a data hand-off, so
 the `MDRh` prose form does not belong in it.
 
 **Do not fetch reasoning you were not asked for.** `get_MDR` answers what a record decided;

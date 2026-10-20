@@ -53,7 +53,7 @@ Principle is the whole subject of this skill.
 ### 1. Read the record
 
 ```
-get_MDR(mdlGuid, mdrHandle)
+get_MDR(mdlGuid, mdr)
 ```
 
 `get_MDR` answers what a record decided; `get_MDR_details` answers why and how. What it decided is
@@ -86,7 +86,7 @@ meant to be there — where nothing has come to depend on the record yet.
 1. **Say what it costs.** Uncommit is governance-visible: the commit and the uncommit both stay on the
    audit plane permanently, and re-admission assigns a **new** ledger number. The old number does not
    come back.
-2. `uncommit_MDR(mdlGuid, mdrHandle, reason)` — give a real reason; it is part of the record.
+2. `uncommit_MDR(mdlGuid, mdr, reason)` — give a real reason; it is part of the record.
 3. `update_MDR` while staged. Everything is patchable again.
 4. `transition_MDR_status` to re-admit, with the ceremony from **`commit-decision`**. This is a fresh
    t₀, not a resumption of the old one.

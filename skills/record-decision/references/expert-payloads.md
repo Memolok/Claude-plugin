@@ -161,7 +161,7 @@ The fish body only. `hasContext`, `settlesOpenQuestion` and the four inter-recor
 a follow-up `update_MDR` while the record is still staged:
 
 ```json
-{ "mdlGuid": "<mdlGuid>", "mdrHandle": 1, "patch": { "hasContext": ["<worldFactId>"], "amends": [7] } }
+{ "mdlGuid": "<mdlGuid>", "mdr": "MDRh1", "patch": { "hasContext": ["<worldFactId>"], "amends": [7] } }
 ```
 
 Worth knowing before you compose the call rather than after: a record that needs to cite a World Fact

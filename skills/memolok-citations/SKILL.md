@@ -66,7 +66,7 @@ reviewer meeting them in one diff cannot tell which of the two it is for.
 **Citing does not anchor. You must.**
 
 ```
-anchor_MDR(mdlGuid, mdrHandle, kind)
+anchor_MDR(mdlGuid, mdr, kind)
 ```
 
 `kind` is `project` for a citation living in a project artifact — a source file, a document in the

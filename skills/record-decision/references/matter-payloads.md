@@ -52,7 +52,7 @@ matter, and not the mechanism you expect to choose.
 ```json
 {
   "mdlGuid": "<mdlGuid>",
-  "mdrHandle": 1,
+  "mdr": "MDRh1",
   "status": "Deliberating"
 }
 ```

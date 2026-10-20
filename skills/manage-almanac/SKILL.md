@@ -136,7 +136,7 @@ To cite it as context, while the record is still **staged**:
 ```json
 {
   "mdlGuid": "<mdlGuid>",
-  "mdrHandle": 1,
+  "mdr": "MDRh1",
   "patch": {
     "hasContext": ["<worldFactId>", "<priorObservedOutcomeId>"]
   }

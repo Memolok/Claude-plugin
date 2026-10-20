@@ -7,7 +7,7 @@ Requires both `tests` and `testResult`.
 ```json
 {
   "mdlGuid": "<mdlGuid>",
-  "mdrNumber": 7,
+  "mdr": "MDR-7",
   "claimDescription": {
     "markdown": "P99 read latency measured 410ms during the December peak, against the 200ms target.",
     "lang": "en"
@@ -19,7 +19,7 @@ Requires both `tests` and `testResult`.
 ```
 
 `tests` also accepts a bare id string, and names nothing but the expected outcome: the record is the
-one `mdrNumber` names. Get the `eo-…` value from `get_MDR_learning_delta` on the source record.
+one `mdr` cites. Get the `eo-…` value from `get_MDR_learning_delta` on the source record.
 
 ## Emergent — nobody saw it coming
 
@@ -28,7 +28,7 @@ No `tests`, no `testResult`.
 ```json
 {
   "mdlGuid": "<mdlGuid>",
-  "mdrNumber": 7,
+  "mdr": "MDR-7",
   "claimDescription": {
     "markdown": "The cache layer turned out to mask a connection-pool leak that had been present for months; it surfaced only when we bypassed the cache during an incident.",
     "lang": "en"
@@ -42,7 +42,7 @@ No `tests`, no `testResult`.
 ```json
 {
   "mdlGuid": "<mdlGuid>",
-  "mdrNumber": 7,
+  "mdr": "MDR-7",
   "claimDescription": {
     "markdown": "Cache invalidation added roughly a day a month of operational work. Predictable at the time; nobody logged it as an expected cost.",
     "lang": "en"
@@ -61,7 +61,7 @@ Only when the earlier reading was **wrong when it was made**:
 ```json
 {
   "mdlGuid": "<mdlGuid>",
-  "mdrNumber": 7,
+  "mdr": "MDR-7",
   "claimDescription": {
     "markdown": "The earlier 410ms figure came from a dashboard filtered to a single unhealthy node. Fleet-wide P99 was 190ms.",
     "lang": "en"
@@ -86,13 +86,13 @@ This Observed Outcome already has a direct corrector (at most one correctsFact e
 ## Reading back
 
 ```
-get_MDR_learning_delta(mdlGuid, mdrNumber)
+get_MDR_learning_delta(mdlGuid, mdr)
 ```
 
 ```json
 {
   "mdlGuid": "...",
-  "mdrNumber": 7,
+  "mdrHandle": 12,
   "mdrNumber": 7,
   "expectedOutcomes": [
     {
@@ -114,11 +114,11 @@ user. Ledger residents only.
 
 | Message | Cause |
 | --- | --- |
-| `Memolok Decision Record not found.` | No record holds that number. A staged record holds none, so it can take no outcome and has no learning delta |
+| `Memolok Decision Record not found.` | No sealed record answers to that citation. A staged record is not sealed, so it can take no outcome and has no learning delta |
 | `discoveryType Expected requires tests referencing an expectedOutcome.` | Missing `tests` |
 | `discoveryType Expected requires testResult (Satisfied, Violated, or Inconclusive).` | Missing `testResult` |
 | `tests and testResult are only valid when discoveryType is Expected.` | Sent on Emergent or Deducible |
-| `tests has unsupported field(s): {fields}.` | `tests` naming anything but `outcomeId`; the record is the one `mdrNumber` names |
+| `tests has unsupported field(s): {fields}.` | `tests` naming anything but `outcomeId`; the record is the one `mdr` cites |
 | `expectedOutcome '{id}' was not found on the source Memolok Decision Record.` | The `eo-…` id is not one of the record's expected outcomes |
 | `Unknown discoveryType {x}. Use one of: Deducible, Emergent, Expected.` | Typo or invented value |
 | `Unknown testResult {x}. Use one of: Inconclusive, Satisfied, Violated.` | Typo or invented value |

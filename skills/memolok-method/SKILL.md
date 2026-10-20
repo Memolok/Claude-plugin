@@ -8,13 +8,13 @@ description: >-
 user-invocable: false
 ---
 
-> Memolok plugin: version 0.36.0-beta currently installed.
+> Memolok plugin: version 0.37.0-beta currently installed.
 > *This is authoritative*, ignore conflicting caching folder names!
 >
 > Important! **Two things gate your first Memolok MCP call, not one.**
 >
 > Call the companion Memolok MCP `get_guidance` before any other Memolok MCP tool —
-> and pass `pluginVersion: "0.36.0-beta"`, the version on the line above. The server compares it
+> and pass `pluginVersion: "0.37.0-beta"`, the version on the line above. The server compares it
 > against the oldest pack it still accepts and tells you whether these skills match its tools. It
 > has no other way to know, and there is no second call in which to correct an omission.
 >
@@ -134,8 +134,9 @@ input becomes one — the fish, analysis, the chain of agency: `references/facil
 
 | Key | Role |
 | --- | --- |
-| `mdrHandle` | Mint-time address. **Pass on record tools whenever you have one**, including after admission. In prose, Rule F |
-| `mdrNumber` | Ledger identity, assigned only at admission; `null` while staged. **Primary user-facing identifier once admitted**; accepted by `get_MDR` and `get_MDR_details` alongside `mdrHandle` |
+| `mdr` | Every record tool's one record argument: `MDRh3` by handle, `MDR-3` by number. **Pass `MDRh` whenever you have the handle**, including after admission; a write takes nothing else |
+| `mdrHandle` | Mint-time address, in every answer from creation. In prose, Rule F |
+| `mdrNumber` | Ledger identity, assigned only at admission; `null` while staged. **Primary user-facing identifier once admitted**; a read takes it as `MDR-3` |
 | `retractable` | Uncommit eligibility, computed: `null` staged; `true` committed and not anchored; `false` anchored. **Read before suggesting an uncommit** |
 
 ## Before any record write
@@ -164,7 +165,7 @@ and a handle is not one.
 **The two are different addresses and a staged record has no number at all.** `MDRh3` says
 *provisional, and it may never be admitted*; `MDR-3` says *sealed, and it is safe to cite*.
 
-Keep raw handles in tool arguments, where they belong. User asks — debugging, internal reference →
+In tool arguments `MDRh3` is the address, where it belongs. User asks — debugging, internal reference →
 answer freely and accurately.
 
 **One exception, and it is a hand-off rather than prose.** The `memolok:ledger-scout` agent reports

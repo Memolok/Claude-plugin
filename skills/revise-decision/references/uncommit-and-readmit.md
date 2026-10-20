@@ -12,7 +12,7 @@
 ## Step 0 — Verify eligibility
 
 ```
-get_MDR(mdlGuid, mdrHandle)
+get_MDR(mdlGuid, mdr)
 ```
 
 Confirm `retractable` is exactly `true`. Never call `uncommit_MDR` speculatively.
@@ -37,7 +37,7 @@ later, amend it later too.
 ```json
 {
   "mdlGuid": "<mdlGuid>",
-  "mdrHandle": 1,
+  "mdr": "MDRh1",
   "reason": "Verdict cited the wrong latency target; no other record references this yet."
 }
 ```
@@ -56,7 +56,7 @@ A fix touching `alternatives`, `deliberationFacts`, `expectedOutcomes` or `openQ
 ```json
 {
   "mdlGuid": "<mdlGuid>",
-  "mdrHandle": 1,
+  "mdr": "MDRh1",
   "patch": {
     "verdict": {
       "description": {
@@ -73,7 +73,7 @@ Every tier-1 field is patchable again, as are the graph edges.
 ## Step 3 — Re-admit
 
 ```json
-{ "mdlGuid": "<mdlGuid>", "mdrHandle": 1, "status": "Accepted" }
+{ "mdlGuid": "<mdlGuid>", "mdr": "MDRh1", "status": "Accepted" }
 ```
 
 Run the ceremony from **`commit-decision`** first. This is a fresh t₀ with a fresh `decidedAt`, not a

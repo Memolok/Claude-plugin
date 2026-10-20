@@ -186,4 +186,4 @@ Then hand off. Do not walk them through the whole list.
 
 | File | Load when |
 | --- | --- |
-| `references/connect-and-auth.md` | `ping` fails, sign-in loops, or the client has no browser flow |
+| `references/connect-and-auth.md` | `ping` fails, sign-in loops, or a call is refused — maps each refusal to its fix, and says which errors must not be retried |

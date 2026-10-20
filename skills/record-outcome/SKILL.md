@@ -91,7 +91,7 @@ The ledger is not a monitoring system. Do not funnel raw metrics into it.
 ```json
 {
   "mdlGuid": "<mdlGuid>",
-  "mdrNumber": 7,
+  "mdr": "MDR-7",
   "claimDescription": {
     "markdown": "P99 read latency measured 410ms during the December peak, against a 200ms target.",
     "lang": "en"
@@ -113,7 +113,7 @@ Payloads and error cases: `references/wake.md`.
 ### 5. Read the delta
 
 ```
-get_MDR_learning_delta(mdlGuid, mdrNumber)
+get_MDR_learning_delta(mdlGuid, mdr)
 ```
 
 It takes the record's number too, the one you recorded the outcome against.
@@ -167,7 +167,7 @@ If the user may still want to revise the sealed record, do that **first** — se
   year is worth surfacing.
 - A `Rejected` record can carry a wake too — what happened after deciding *not* to act is just as
   informative.
-- `discover_observed_outcomes(mdlGuid, mdrNumber)` shows everything already recorded against a
+- `discover_observed_outcomes(mdlGuid, mdr)` shows everything already recorded against a
   record, each with its summary — which is what tells you whether this observation is already
   there without opening every one.
 - **A derived heading on either read is Memolok's wording and never a verdict.** It comes from the

@@ -13,7 +13,7 @@ first.
 ```json
 {
   "mdlGuid": "<mdlGuid>",
-  "mdrHandle": 4,
+  "mdr": "MDRh4",
   "patch": {
     "settlesOpenQuestion": [
       { "hostMdrNumber": 7, "openQuestionId": "oq-manifold-safety" }
@@ -40,7 +40,7 @@ so only a later Accepted record can close it retroactively.
 ```json
 {
   "mdlGuid": "<mdlGuid>",
-  "mdrHandle": 9,
+  "mdr": "MDRh9",
   "patch": {
     "verdict": {
       "description": {
