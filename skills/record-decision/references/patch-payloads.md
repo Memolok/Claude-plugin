@@ -7,7 +7,7 @@
 ```json
 {
   "mdlGuid": "<mdlGuid>",
-  "mdrHandle": 1,
+  "mdr": "MDRh1",
   "patch": {
     "alternatives": [
       {
@@ -95,7 +95,7 @@ not a retreat.
 ```json
 {
   "mdlGuid": "<mdlGuid>",
-  "mdrHandle": 1,
+  "mdr": "MDRh1",
   "patch": {
     "hasNeed": {
       "description": {
@@ -114,7 +114,7 @@ not a retreat.
 ```json
 {
   "mdlGuid": "<mdlGuid>",
-  "mdrHandle": 1,
+  "mdr": "MDRh1",
   "patch": {
     "openQuestions": [
       {
@@ -138,7 +138,7 @@ and a write's reply carries identity and a `body` count, not the record.
 ```json
 {
   "mdlGuid": "<mdlGuid>",
-  "mdrHandle": 1,
+  "mdr": "MDRh1",
   "patch": {
     "decidedBy": "https://app.memolok.ai/m/<userId>#id",
     "consulted": ["https://app.memolok.ai/m/<otherUserId>#id"]

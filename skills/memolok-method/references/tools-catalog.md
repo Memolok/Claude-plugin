@@ -7,29 +7,30 @@ Every tool except `ping` and `get_guidance` requires authentication. All ledger 
 
 | Field | When | Role |
 | --- | --- | --- |
-| `mdrHandle` | Every mint | Addressing key for record tools, including after admission |
-| `mdrNumber` | Admission only | Ledger citation; `null` while staged. Accepted by both record reads, and taken alone by the tools that only a ledger resident has anything for |
+| `mdrHandle` | Every mint | Addressing key for record tools, as `MDRh7`, including after admission |
+| `mdrNumber` | Admission only | Ledger citation; `null` while staged. Taken as `MDR-7` by the tools that read a record or its wake |
 | `retractable` | Computed at read | `null` staged; `true` uncommit-eligible; `false` anchored |
 
 Never invent either value. Never address a record tool by a raw database id.
 
-**`mdrHandle` is the standard path whenever you have one** — it is what every tool that changes a
-record takes. `get_MDR` and `get_MDR_details` also accept `mdrNumber`, for the one journey where
-someone cites "MDR-7" and you hold no handle: read it directly rather than scanning `discover_MDRs`.
-Two things bound that exception:
+**Every record tool takes one `mdr`: the record's citation.** `MDRh7` cites it by its handle and
+`MDR-7` by its number, spelled exactly so, and answers carry both keys as plain integers. **The
+handle is the standard path whenever you have one** — `MDRh7` is what every tool that changes a
+record takes. A read takes `MDR-7` as well, for the journey where someone cites "MDR-7" and you hold
+no handle: read it directly rather than scanning `discover_MDRs`. Two things bound that:
 
 - **It is a read.** A number is not a durable address until anchoring — an uncommit releases it and the next
   admission takes it. A read that lands on the wrong record announces itself, because the response
   states both identifiers; a write would not, so no tool that changes a record accepts a number.
   **Anchoring is what makes a number safe to write down**, and `anchor_MDR` is how you cause it
   deliberately.
-- **The response carries `mdrHandle`.** Once you have read the record, use its handle for everything
-  else in that session — patches, transitions, an uncommit.
+- **The response carries `mdrHandle`.** Once you have read the record, cite its handle as `MDRh`
+  for everything else in that session — patches, transitions, an uncommit.
 
-**Three tools take `mdrNumber` alone**, because only a ledger resident has anything for them:
-`get_MDR_learning_delta`, `discover_observed_outcomes` narrowed to one record, and
-`record_observed_outcome`. Recording an outcome changes no record; it adds an entry beside one, and
-anchors it. Holding only a handle, read the number off `get_MDR`.
+**Only a ledger resident has a wake or a learning delta**, so `get_MDR_learning_delta`,
+`discover_observed_outcomes` narrowed to one record and `record_observed_outcome` find no staged
+record, however it is cited. Recording an outcome changes no record; it adds an entry beside one, and
+anchors it, so it takes either citation.
 
 **Read `retractable` before suggesting an uncommit.**
 
@@ -153,8 +154,7 @@ Per-tool filters and natural order are below. Nothing else about the shape varie
 | Param | Type | Required |
 | --- | --- | --- |
 | `mdlGuid` | string | yes |
-| `mdrHandle` | int | exactly one of the two |
-| `mdrNumber` | int | exactly one of the two |
+| `mdr` | string: `MDRh7` or `MDR-7` | yes |
 
 **`get_MDR` answers what a record decided; `get_MDR_details` answers why and how.** This is the read
 for finding out about a record. Returns `mdrHandle`, `mdlGuid`, `mdrNumber`, `status`, `retractable`,
@@ -162,9 +162,8 @@ for finding out about a record. Returns `mdrHandle`, `mdlGuid`, `mdrNumber`, `st
 `hasContext`, `analysisId`, `supersedes`, `supersededBy`, `amends`, `amendedBy`, `dependsOn`,
 `conflictsWith`, `settlesOpenQuestion` — plus a `details` key sizing the prose it leaves out.
 
-Pass the handle when you have one. **Exactly one of the two MUST be passed**; the identity section
-above says why a number is a read-only convenience, and the handle the response carries is what you
-use for every other tool.
+Cite the handle when you have one. The identity section above says why a number is a read-only
+convenience, and the handle the response carries, cited as `MDRh`, is what every other tool takes.
 
 ### `get_MDR_details`
 
@@ -232,7 +231,8 @@ nothing can yet answer that. Do not present an old premise as current merely bec
 
 ### `discover_observed_outcomes`
 
-Shared discovery params, plus `mdrNumber` (int, optional), which narrows to one record's wake.
+Shared discovery params, plus `mdr` (`MDRh7` or `MDR-7`, optional), which narrows to one record's
+wake.
 Observation order, oldest first. Per outcome: a heading, its id, the record it was realized from in
 both keys, how it was discovered, `testResult` where it tests a promise, `Observed:`, subjects and
 summary.
@@ -280,10 +280,9 @@ the derived `title`, `summary` and `subjects` where Memolok has produced them.
 | Param | Type | Required |
 | --- | --- | --- |
 | `mdlGuid` | string | yes |
-| `mdrNumber` | int | yes |
+| `mdr` | string: `MDRh7` or `MDR-7` | yes |
 
-Takes the record's number and no handle: only a ledger resident has a learning delta, and every one
-is numbered. Holding only a handle, read the number from `get_MDR` or any listing row first.
+Only a ledger resident has a learning delta, so a staged record is not found, however it is cited.
 
 Returns each expected outcome with the wakes that test it, plus every Emergent and Deducible wake
 again on its own, so one that tests an outcome appears in both places. Coexisting assessments are all
@@ -454,7 +453,7 @@ shape.
 | Param | Type | Required |
 | --- | --- | --- |
 | `mdlGuid` | string | yes |
-| `mdrHandle` | int | yes |
+| `mdr` | string: `MDRh7` | yes |
 | `patch` | object | yes |
 
 Patch keys: `hasNeed`, `hasContext`, `alternatives`, `deliberationFacts`, `expectedOutcomes`,
@@ -482,13 +481,13 @@ Returns the record acknowledgement. An array you did not just draft starts from 
 
 ### `transition_MDR_status`
 
-`mdlGuid`, `mdrHandle`, `status`. Admission to `Accepted` or `Rejected` sets `decidedAt`, assigns
+`mdlGuid`, `mdr` as `MDRh7`, `status`. Admission to `Accepted` or `Rejected` sets `decidedAt`, assigns
 `mdrNumber`, and mints reciprocals on the records it names. Returns the record acknowledgement, which
 carries all three of `status`, `decidedAt` and `mdrNumber` to confirm the move by.
 
 ### `uncommit_MDR`
 
-`mdlGuid`, `mdrHandle`, optional `reason`. Requires `admin` or `owner`, status `Accepted` or
+`mdlGuid`, `mdr` as `MDRh7`, optional `reason`. Requires `admin` or `owner`, status `Accepted` or
 `Rejected`, and `retractable: true`. Demotes to staged, clearing `mdrNumber` and `decidedAt`.
 Returns the record acknowledgement.
 
@@ -497,7 +496,7 @@ Returns the record acknowledgement.
 | Param | Type | Required |
 | --- | --- | --- |
 | `mdlGuid` | string | yes |
-| `mdrHandle` | int | yes — must be a ledger resident |
+| `mdr` | string: `MDRh7` | yes — must be a ledger resident |
 | `kind` | `project` \| `other` | yes |
 
 **Declares that something outside the ledger cites this record**, which stops an Uncommit releasing
@@ -529,7 +528,7 @@ body }`.
 | Param | Type | Required |
 | --- | --- | --- |
 | `mdlGuid` | string | yes |
-| `mdrNumber` | int | yes — a ledger resident's number |
+| `mdr` | string: `MDRh7` or `MDR-7` | yes — a ledger resident |
 | `claimDescription` | `{ markdown, lang? }` | yes |
 | `discoveryType` | `Expected` \| `Emergent` \| `Deducible` | yes |
 | `tests` | `{ outcomeId }` or an id string, and nothing else | Required when `Expected` |
@@ -665,6 +664,8 @@ modifiedAt, body }`; `get_feedback` shows what landed.
 
 | Message | Cause |
 | --- | --- |
+| `mdr must cite a record by its handle, as MDRh7: …` | A tool that changes a record was given `MDR-7`, or anything but `MDRh7`. Read the record and cite its `mdrHandle` |
+| `mdr must cite a record by its number, as MDR-12, or by its handle, as MDRh7: …` | A bare integer, or a citation misspelt: the prefix is matched exactly, case included, and the digits carry no leading zero |
 | `Memolok Decision Ledger not found.` | Does not distinguish a ledger the user cannot see from one that is not there. Report it as ambiguous: they may not be a member, or this address may be stale |
 | `You do not have the necessary permissions to … matters on this ledger.`, `… world facts …` | The role does not allow it: a visitor reads matters and world facts, and registers or admits neither |
 | `You do not have the necessary permissions to … scratchpads on this ledger.` | A visitor, who reads no notes and keeps none |

@@ -3,7 +3,7 @@
 ## Accepted — t₀
 
 ```json
-{ "mdlGuid": "<mdlGuid>", "mdrHandle": 1, "status": "Accepted" }
+{ "mdlGuid": "<mdlGuid>", "mdr": "MDRh1", "status": "Accepted" }
 ```
 
 Returns the record's acknowledgement: `status`, `decidedAt` set, `mdrNumber` assigned, and
@@ -12,7 +12,7 @@ Returns the record's acknowledgement: `status`, `decidedAt` set, `mdrNumber` ass
 ## Rejected — t₀
 
 ```json
-{ "mdlGuid": "<mdlGuid>", "mdrHandle": 1, "status": "Rejected" }
+{ "mdlGuid": "<mdlGuid>", "mdr": "MDRh1", "status": "Rejected" }
 ```
 
 Needs a head Claim and a non-empty Verdict. Alternatives, `chosenAlternative`, and expected outcomes
@@ -24,7 +24,7 @@ force, so it changes, retires and settles nothing.
 ## Proposed — formal governance only
 
 ```json
-{ "mdlGuid": "<mdlGuid>", "mdrHandle": 1, "status": "Proposed" }
+{ "mdlGuid": "<mdlGuid>", "mdr": "MDRh1", "status": "Proposed" }
 ```
 
 Requires alternatives, a valid `chosenAlternative`, and a Verdict. **This is not t₀** — no `decidedAt`,
@@ -73,7 +73,7 @@ A staged record can close a question left open on an **already-admitted** record
 ```json
 {
   "mdlGuid": "<mdlGuid>",
-  "mdrHandle": 4,
+  "mdr": "MDRh4",
   "patch": {
     "settlesOpenQuestion": [
       { "hostMdrNumber": 7, "openQuestionId": "oq-manifold-safety" }
