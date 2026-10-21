@@ -20,6 +20,9 @@ matches — you are asked to update only when your pack genuinely stops working.
 
 ## Unreleased
 
+- **A ledger's citation address now opens.** Your agent tells you that
+  `https://app.memolok.ai/m/<ledger>` leads to a sign-in and then to the ledger, and that every other
+  entry's address does not open yet.
 - **Your agent explains why a decision was made before you change it.** When a change, its own or
   yours, would contradict a sealed decision or lose one of its expected outcomes, it reads the
   decision's reasoning first, tells you what the decision was protecting and whether that still

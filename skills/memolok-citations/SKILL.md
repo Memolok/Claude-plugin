@@ -119,9 +119,11 @@ identifier is the ledger's, and a record is its citation form exactly: `MDR-7` i
 holds these addresses and nothing else, and is kept apart from the application around it so that a
 reorganisation of the application never moves one: a citation written now stays good.
 
-> **Not built yet.** None of these addresses resolves — not the Markdown link below, not the bare
-> URL. Both are the correct thing to write and neither lands a reader on the entry today. Say so when
-> you hand one to somebody who will try it.
+> **Not built yet, except for a ledger.** A ledger's address opens: anyone not signed in gets a
+> sign-in page, the same at every address, and a member who signs in lands on the ledger. Anyone else
+> gets a not-found, the same as for a ledger that does not exist. No other address in the table opens
+> yet, and neither does the Markdown link below. All of them are still the correct thing to write.
+> When you hand one to somebody who will try it, say whether it is a ledger's.
 
 **Name a ledger by its title beside its address.** A reader then knows which one you mean without
 resolving anything.
