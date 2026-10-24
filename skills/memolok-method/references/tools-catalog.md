@@ -473,9 +473,10 @@ target, and what anchors: `lifecycle-and-gates.md`. `amendedBy` and `supersededB
 and refused on write.
 
 You name every id on `alternatives`, `expectedOutcomes` and `openQuestions`: prefixed `alt-`, `eo-`,
-`oq-`, unique in its list, required on every item, and named for what it is — `prose-and-raci.md` has
-the rule and the refusals. `chosenAlternative` and `deliberationFacts[].onAlternative` must name an
-alternative that exists once the patch lands.
+`oq-`, then only lowercase letters, digits, hyphens and underscores, unique in its list, required on
+every item, and named for what it is — `prose-and-raci.md` has the rule and the refusals.
+`chosenAlternative` and `deliberationFacts[].onAlternative` must name an alternative that exists
+once the patch lands.
 
 Returns the record acknowledgement. An array you did not just draft starts from `get_MDR_details`.
 

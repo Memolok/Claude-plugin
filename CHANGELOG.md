@@ -20,9 +20,13 @@ matches — you are asked to update only when your pack genuinely stops working.
 
 ## Unreleased
 
-- **A ledger's citation address now opens.** Your agent tells you that
-  `https://app.memolok.ai/m/<ledger>` leads to a sign-in and then to the ledger, and that every other
-  entry's address does not open yet.
+- **Every entry's citation address opens.** Your agent tells you that any entry's
+  `https://app.memolok.ai/m/…` address leads to a sign-in and then to the entry, and gives a
+  scratchpad's address under its ledger, `…/m/<ledger>/msp_…`.
+- **A record's alternatives, expected outcomes and open questions have addresses of their own.**
+  Your agent cites one as its record's address, then `#`, then its id, `…/MDR-7#oq-backup`, or as
+  `MDR-7#oq-backup` wherever a bare `MDR-7` may stand. The ids it gives them hold only lowercase
+  letters, digits, hyphens and underscores after their prefix, as the server requires.
 - **Your agent explains why a decision was made before you change it.** When a change, its own or
   yours, would contradict a sealed decision or lose one of its expected outcomes, it reads the
   decision's reasoning first, tells you what the decision was protecting and whether that still

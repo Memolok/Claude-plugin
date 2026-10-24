@@ -149,7 +149,8 @@ helpful one.
 | `A chosen alternative must reference one of the record's alternatives.` | `chosenAlternative` does not match an `id`, at the admission gate |
 | `The chosen alternative '…' does not name one of the record's alternatives.` | The same mismatch, caught at the write instead |
 | `…id is required.` | An item on `alternatives`, `expectedOutcomes` or `openQuestions` carries no `id` |
-| `…id '…' must start with '…' — did you mean '…'?` | Missing the list's prefix; the message names the correction |
+| `…id '…' must start with '…'` | Missing the list's prefix; `did you mean '…'?` follows where an id would pass |
+| `…id '…' may hold only lowercase letters, digits, hyphens and underscores after '…'…` | Any other character after the prefix; `did you mean '…'?` follows where lowercasing fixes it |
 | `…id '…' is used twice in this list.` | Two items claiming one id |
 | `At least one expected outcome is required before accepting…` | Created at `Accepted` with no tail |
 | `verdict must be {description: {markdown, lang}}, not a flat {markdown, lang} object.` | Sent `verdict` as bare `{markdown, lang}`. The same sentence names `alternatives[n]` and the other wrapped lists |

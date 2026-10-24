@@ -111,7 +111,8 @@ Anchoring is member-level, so anyone who can write the citation can declare it.
 | World Fact | `https://app.memolok.ai/m/<mdlGuid>/<wf_…>` |
 | Observed Outcome | `https://app.memolok.ai/m/<mdlGuid>/<oo_…>` |
 | Analysis | `https://app.memolok.ai/m/<mdlGuid>/<an_…>` |
-| Scratchpad | `https://app.memolok.ai/m/<msp_…>` — say it here, don't ship it |
+| A record's alternative, expected outcome or open question | `https://app.memolok.ai/m/<mdlGuid>/MDR-<mdrNumber>#<id>` |
+| Scratchpad | `https://app.memolok.ai/m/<mdlGuid>/<msp_…>` — say it here, don't ship it |
 
 Every address is the identifier you already hold, under the ledger's own address where the
 identifier is the ledger's, and a record is its citation form exactly: `MDR-7` in prose,
@@ -119,11 +120,13 @@ identifier is the ledger's, and a record is its citation form exactly: `MDR-7` i
 holds these addresses and nothing else, and is kept apart from the application around it so that a
 reorganisation of the application never moves one: a citation written now stays good.
 
-> **Not built yet, except for a ledger.** A ledger's address opens: anyone not signed in gets a
-> sign-in page, the same at every address, and a member who signs in lands on the ledger. Anyone else
-> gets a not-found, the same as for a ledger that does not exist. No other address in the table opens
-> yet, and neither does the Markdown link below. All of them are still the correct thing to write.
-> When you hand one to somebody who will try it, say whether it is a ledger's.
+**A record's part is addressed under its record**: the record's address, then `#`, then the part's
+id exactly as the record holds it, `…/MDR-7#oq-backup`. Citing a part cites its record, so the
+record is what you anchor.
+
+**Every address in the table opens.** Anyone not signed in gets a sign-in page, the same at every
+address, and a member who signs in lands on the entry, a record's part in view and marked. Anyone
+else gets a not-found, the same as for an entry that does not exist.
 
 **Name a ledger by its title beside its address.** A reader then knows which one you mean without
 resolving anything.
@@ -141,89 +144,18 @@ the form.
 | Markdown without that frontmatter | A link: `[MDR-7](https://app.memolok.ai/m/<mdlGuid>/MDR-7)` |
 | Anything else — email, chat, a ticket, another tool's payload | The address, written out |
 
-**In code the binding is the tree.** `.memolok/mdl.yml` names the ledger for everything below it, so
-a bare `MDR-7` in a source file is complete and unambiguous. That is the same file you read to find
-out which ledger to talk to; it is doing double duty. Where there is more than one, the nearest above
-the file wins.
+**A record's part takes its record's form**: `MDR-7#oq-backup` wherever a bare `MDR-7` may stand,
+and its full address everywhere else.
 
-**Nearest for whoever reads the file next, not for you.** A repository that gets cloned on its own
-takes only what is inside it, so a declaration in the folder above it binds your working copy and
-nothing anybody else will hold. Before writing a bare identifier into a repository, check there is a
-`.memolok/mdl.yml` within that repository — and if there is not, say so and offer one rather than
-writing a reference that resolves only where you are sitting.
-
-**A commit message is bound by the same tree, and cannot be edited afterwards.** The message is
-stored in the repository whose history it belongs to, so what licenses a bare number in a source file
-licenses one here. It is a project artifact: anchor as `project` first, and take more care than usual,
-because a file can be corrected later and a message that has been pushed cannot.
-
-**Cite in the body, never in the subject.** A subject line tells somebody scanning history what the
-change does, before they have asked why, and an identifier there spends characters that sentence
-needs on an answer to a question nobody has put yet. The body is where they have put it.
-
-**In Markdown the binding is frontmatter.** A document whose frontmatter carries `mdlGuid` licenses
-bare identifiers throughout, meaning that ledger and no other, and it outranks any `.memolok/mdl.yml`
-above it — which is how a document kept in one project cites a decision recorded in another. Without
-it, every reference must carry the full address — one document, one rule, so a reader never has to
-work out which convention is in force. Where a document will carry several references, adding the
-frontmatter is cheaper than a link per citation — suggest it, and let the user decide; it is their
-document.
-
-```yaml
----
-mdlTitle: <the title>
-mdlGuid: <the guid>
----
-```
-
-`mdlTitle` is there so a reader can see which ledger without resolving anything, and it is optional.
-`mdlGuid` is what binds. Add them *in that order* alongside whatever keys the document already
-carries — the `mdl` prefix keeps them clear of the `title` a renderer has almost certainly claimed
-already.
-
-**Everywhere else there is no binding at all.** Mail, chat, tickets and word processors have nowhere
-to declare a ledger, so a bare identifier there means nothing to whoever reads it next. Write the
-address out.
-
-**A wrong binding fails quietly.** The prefixed ids are scoped to their ledger, so a bare `mt_…` read
-under the wrong one cannot be told apart from a reference to nothing. That is the reason the check
-above is worth doing at the moment of writing rather than trusting to how the tree looked last time.
+**What binds, in short:** in code and in a commit message, a `.memolok/mdl.yml` inside that same
+repository; in Markdown, `mdlGuid` in the document's frontmatter, which outranks it; anywhere else,
+nothing, so the address is written out. `references/binding.md` has the rest.
 
 ## How the citation reads
 
-**Trailing parenthetical, at the end of the clause it justifies.** `(MDR-7)`, closing the sentence or
-the clause whose shape the record explains. This is the default and most of what you will write: it
-reads as an aside, so the prose still parses with it deleted, and a reader who does not care about the
-ledger is never made to step over it mid-sentence.
-
-**Several entries share one parenthesis.** `(MDR-7, MDR-12)`, comma-separated, in the order the
-argument uses them. Two parentheticals in a row assert two asides about two different clauses, which
-is a claim about the sentence that is usually false.
-
-**A relationship goes inside the parenthesis.** Where one record narrows, settles or replaces another
-and a reader needs the pair to follow the line, say which is which in the same breath — `(MDR-12,
-narrowing MDR-7)`. The bare pair says only that both bear on this, and sends a reader to open two
-records to reconstruct a relationship you already had.
-
-**An identifier may open the line where the entry is the subject.** `MDR-7:` heading a docstring or a
-section banner, where what follows exists *because of* that record. That is a topic sentence rather
-than a citation beside one, so it is right only where it is true — a banner over code that merely
-shares the area claims a provenance the code has not got.
-
-**Backticks mark a token, never a citation.** Write `` `MDR-7` `` when the string itself is the
-subject: parsing it, printing it, telling it apart from something else. Write MDR-7 bare when you name
-the decision. A backticked citation reads as an identifier to go and find in the code, and the habit
-spreads — once one is in code font, the next one matches it.
-
-**Another project's decision numbers keep that project's own notation.** A number from a different
-decision-record system is never reshaped into a Memolok-looking one — `ADR-0007` stays `ADR-0007`,
-padding and all — and where the surrounding text does not already make the system obvious, its name
-goes in front. Reshaped to the local convention it reads as one of yours, and sends a reader to a real
-entry that says something else.
-
-Under all of them sits one placement rule: **put the citation where a reader asking "why is this line
-like this" would look, and not where the line already answers for itself.** One note in a module
-docstring beats the same parenthetical on six lines inside it.
+**A trailing parenthetical, at the end of the clause it justifies**: `(MDR-7)`, or `(MDR-7, MDR-12)`
+for several. Backticks only where the string itself is the subject, never around a citation.
+`references/citation-style.md` has the rest.
 
 ## Inside the session
 
@@ -255,3 +187,10 @@ not promised.
 That a citation exists, and roughly what kind of place it lives in. Not where, not how many, not
 whether it is still there. The ledger points outward; it does not hold the artifact, and reading an
 entry will not tell you which files mention it.
+
+## References
+
+| File | Load when |
+| --- | --- |
+| `references/binding.md` | Before the first bare identifier you write into a repository or a Markdown document — a declaration in the folder above a repository binds only your copy, and a wrong binding fails without a sound |
+| `references/citation-style.md` | Before writing a citation into prose — a relationship left out of the parenthesis sends a reader to open two records, and another system's number reshaped to `MDR-` names a real record that says something else |

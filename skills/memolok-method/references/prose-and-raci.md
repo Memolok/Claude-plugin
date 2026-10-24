@@ -62,8 +62,8 @@ read, so the read shape differs from what you wrote.
 ## Ids you choose, and later have to cite
 
 You name every id on `alternatives`, `expectedOutcomes` and `openQuestions`: prefixed `alt-`, `eo-`,
-`oq-`, unique in its list, required on every item, and named for what it is. The server mints none of
-them:
+`oq-`, then only lowercase letters, digits, hyphens and underscores, unique in its list, required on
+every item, and named for what it is. The server mints none of them:
 
 | Embed | Prefix | Cited later by |
 | --- | --- | --- |
@@ -76,7 +76,10 @@ for what they are. `alt-cache-layer` tells a reader what won; a generated id tel
 
 Omitting an id is refused: the lists replace wholesale, and an id-less item cannot say whether it is
 the old one or a new one. A missing prefix is refused with the correction rather than added, because
-rewriting an id would orphan references the patch does not carry.
+rewriting an id would orphan references the patch does not carry. So is any other character after
+the prefix, a capital, a space, an accent, with the lowercase form suggested where that alone would
+do: an id is also its item's address, the record's address, then `#`, then the id, and those
+characters are what an address carries as they are.
 
 ## Alternatives
 
