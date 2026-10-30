@@ -20,19 +20,21 @@ matches — you are asked to update only when your pack genuinely stops working.
 
 ## Unreleased
 
+*Everything that has landed has shipped. This section is a placeholder.*
+
+## 0.38.0-beta — 2026-10-30
+
 - **Every entry's citation address opens.** Your agent tells you that any entry's
   `https://app.memolok.ai/m/…` address leads to a sign-in and then to the entry, and gives a
   scratchpad's address under its ledger, `…/m/<ledger>/msp_…`.
 - **A record's alternatives, expected outcomes and open questions have addresses of their own.**
   Your agent cites one as its record's address, then `#`, then its id, `…/MDR-7#oq-backup`, or as
-  `MDR-7#oq-backup` wherever a bare `MDR-7` may stand. The ids it gives them hold only lowercase
-  letters, digits, hyphens and underscores after their prefix, as the server requires.
+  `MDR-7#oq-backup` wherever a bare `MDR-7` may stand.
 - **Your agent explains why a decision was made before you change it.** When a change, its own or
   yours, would contradict a sealed decision or lose one of its expected outcomes, it reads the
   decision's reasoning first, tells you what the decision was protecting and whether that still
-  holds, and offers keeping to it and departing from it as options with their costs. It no longer
-  rules a departure out because a sealed decision would not have chosen it. The ledger reader
-  reports expected outcomes as bets the work tests, with the reasons behind each decision.
+  holds, and offers keeping to it and departing from it as options with their costs. The ledger
+  reader reports expected outcomes as bets, with the reasons behind each decision.
 - **Your agent names who took part in a decision, not who is typing.** It leaves a record's author
   unset unless it knows who that was, names itself where it decided, and can clear any of the four
   roles. Naming an author hands nothing over: you edit the records your own account created. A
