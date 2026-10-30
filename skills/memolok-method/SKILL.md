@@ -8,13 +8,13 @@ description: >-
 user-invocable: false
 ---
 
-> Memolok plugin: version 0.37.0-beta currently installed.
+> Memolok plugin: version 0.38.0-beta currently installed.
 > *This is authoritative*, ignore conflicting caching folder names!
 >
 > Important! **Two things gate your first Memolok MCP call, not one.**
 >
 > Call the companion Memolok MCP `get_guidance` before any other Memolok MCP tool —
-> and pass `pluginVersion: "0.37.0-beta"`, the version on the line above. The server compares it
+> and pass `pluginVersion: "0.38.0-beta"`, the version on the line above. The server compares it
 > against the oldest pack it still accepts and tells you whether these skills match its tools. It
 > has no other way to know, and there is no second call in which to correct an omission.
 >
@@ -146,8 +146,27 @@ The fish model, analysis, the Decision Transaction Principle, the lifecycle and 
 record or records a wake. Two of its rules bind even before it is loaded: **discussion is
 deliberation** — never mint at **Accepted** or **Rejected**, or transition to either, without the
 user's explicit ask in their own words; and **a committed record is never patched in place** —
-`retractable: true` means only that an uncommit is available. Changing course is a new record; this
-is routine, and should be embraced.
+`retractable: true` means only that an uncommit is available.
+
+## When a change meets a sealed record
+
+**Memolok exists so a course can change safely, not to freeze it**: a sealed record is the brakes
+that let you carry speed into the corner, because the reasons for the old course are still there to
+check. A seal fixes what a record **says**, never what you do next. Its **Verdict** is a course
+taken; its expected outcomes are **bets** the work tests, not a spec it must meet.
+
+A plan, yours or the user's, would contradict a sealed **Verdict** or falsify an expected outcome:
+
+1. **Understand why first.** The need it answered, the alternatives it weighed and why they lost,
+   the premises it rested on: `get_MDR_details`, one known record, read inline.
+2. **Say why, in plain words**, when you discuss the change with the user: what the record was
+   protecting, and whether that still holds. That reason is what lets them judge; a departure made
+   without it is a guess, and a refusal made without it is formalism.
+3. **Put both options with their costs**: keep to it, or depart and record that, as an amendment, a
+   successor, or the lost bet as a wake. Changing course is routine.
+
+Never drop an option only because a sealed record would not have chosen it, and never make the user
+justify a departure: the record's reasons are context for their call, not a case they must answer.
 
 ## Facilitation rules
 
@@ -155,26 +174,23 @@ Rules A–E and G are in `references/facilitation.md`. Rule F applies to every j
 
 ### Rule F — Cite the number; a handle never leaves your sessions
 
-Admitted → cite **`mdrNumber`**: `MDR-3`. Unchanged and unmarked, because a number is the settled
-form.
+- Admitted → cite **`mdrNumber`**: `MDR-3`. Unchanged and unmarked, because a number is the
+  settled form.
+- Staged → **`MDRh3`** in chat and in session notes nobody commits or sends, or a head Claim
+  paraphrase where prose reads better.
 
-Staged → **`MDRh3`** in chat and in session notes nobody commits or sends, or a head Claim paraphrase
-where prose reads better. Never write a bare handle in prose — `MDR-3` and `3` both read as numbers,
-and a handle is not one.
-
-**The two are different addresses and a staged record has no number at all.** `MDRh3` says
-*provisional, and it may never be admitted*; `MDR-3` says *sealed, and it is safe to cite*.
+**The two are different addresses; a staged record has no number at all.** `MDRh3` says
+*provisional, and it may never be admitted*; `MDR-3` says *sealed, and it may be safe to cite*.
 
 In tool arguments `MDRh3` is the address, where it belongs. User asks — debugging, internal reference →
 answer freely and accurately.
 
 **One exception, and it is a hand-off rather than prose.** The `memolok:ledger-scout` agent reports
 both identifiers raw, because its output is data for you and not words for the user. Convert to
-`MDR-{n}` or `MDRh{handle}` when you pass any of it on; a bare handle reaching the user is still a
-bare handle.
+`MDR-{n}` or `MDRh{handle}` when you pass any of it on.
 
 **This rule is the session's half, and its breach has a symptom.** `MDRh` in text bound for a
-committed file or a sent message is always the mistake — however natural it looks beside a
+committed file or a sent message is always a mistake — however natural it looks beside
 `MDR-n` the file already carries. A staged record is not referenced there at all: no number, may
 never get one, cannot be anchored — nothing can protect a reference to it. Build, seal, then write
 the reference. What an **admitted** entry looks like there, and the anchoring and timing that precede

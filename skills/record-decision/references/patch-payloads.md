@@ -71,12 +71,14 @@ An alternative may carry only `id` and `label` when the user never elaborated on
 ## You name every id
 
 You name every id on `alternatives`, `expectedOutcomes` and `openQuestions`: prefixed `alt-`, `eo-`,
-`oq-`, unique in its list, required on every item, and named for what it is. The lists replace
-wholesale, so each item has to say which one it is, on `create_MDR` and `update_MDR` alike:
+`oq-`, then only lowercase letters, digits, hyphens and underscores, unique in its list, required on
+every item, and named for what it is. The lists replace wholesale, so each item has to say which one
+it is, on `create_MDR` and `update_MDR` alike:
 
 | Rule | |
 | --- | --- |
 | Prefix per list | `alt-` on alternatives, `eo-` on expected outcomes, `oq-` on open questions |
+| After the prefix | lowercase letters, digits, hyphens and underscores, since the id is also the item's address |
 | Unique within its list | two items sharing an id make `chosenAlternative` ambiguous |
 | Keeping an item | send the `id` it already has |
 | Adding one | send a new `id` you chose |
@@ -85,7 +87,8 @@ wholesale, so each item has to say which one it is, on `create_MDR` and `update_
 months later, and in every deliberation fact arguing about it. You know what the option is; a
 generated `alt-kmzp0u1f` would carry none of that.
 
-Omitting an id, or its prefix, is refused — `prose-and-raci.md` in the method says why.
+Omitting an id, or its prefix, or writing any other character after it, is refused —
+`prose-and-raci.md` in the method says why.
 
 ## Revising the Need
 
@@ -146,7 +149,10 @@ and a write's reply carries identity and a `body` count, not the record.
 }
 ```
 
-RACI fields stay patchable after t₀ — they are the only ones that do.
+RACI fields stay patchable after t₀ — they are the only ones that do. `null` clears one. Name who
+actually held each role, not whoever is recording it, and take a Memolok user's id from `whoami` or
+from a record that carries it: an IRI under `https://app.memolok.ai/m/` that names no account
+Memolok holds is refused. `prose-and-raci.md` in the method has the rule.
 
 ## Ids you will need later
 
@@ -169,7 +175,8 @@ calls, so pick names that will still mean something by then:
 | `The chosen alternative '…' does not name one of the record's alternatives.` | `chosenAlternative` names nothing the record has — resend both sides together |
 | `deliberationFacts[…].onAlternative '…' does not name one of the record's alternatives.` | Same, for an argument attached to an option that is gone |
 | `…id is required.` | An item on `alternatives`, `expectedOutcomes` or `openQuestions` carries no `id` |
-| `…id '…' must start with '…' — did you mean '…'?` | Missing the list's prefix; the message names the correction |
+| `…id '…' must start with '…'` | Missing the list's prefix; `did you mean '…'?` follows where an id would pass |
+| `…id '…' may hold only lowercase letters, digits, hyphens and underscores after '…'…` | Any other character after the prefix; `did you mean '…'?` follows where lowercasing fixes it |
 | `…id '…' is used twice in this list.` | Two items claiming one id — a reference to it could not say which |
 
 If a tier-1 patch is refused because the record is already admitted, that is the Decision Transaction

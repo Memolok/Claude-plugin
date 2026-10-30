@@ -473,9 +473,10 @@ target, and what anchors: `lifecycle-and-gates.md`. `amendedBy` and `supersededB
 and refused on write.
 
 You name every id on `alternatives`, `expectedOutcomes` and `openQuestions`: prefixed `alt-`, `eo-`,
-`oq-`, unique in its list, required on every item, and named for what it is — `prose-and-raci.md` has
-the rule and the refusals. `chosenAlternative` and `deliberationFacts[].onAlternative` must name an
-alternative that exists once the patch lands.
+`oq-`, then only lowercase letters, digits, hyphens and underscores, unique in its list, required on
+every item, and named for what it is — `prose-and-raci.md` has the rule and the refusals.
+`chosenAlternative` and `deliberationFacts[].onAlternative` must name an alternative that exists
+once the patch lands.
 
 Returns the record acknowledgement. An array you did not just draft starts from `get_MDR_details`.
 
@@ -694,6 +695,8 @@ modifiedAt, body }`; `get_feedback` shows what landed.
 | `Only a ledger-resident Memolok Decision Record can be Anchored. A staged record has no ledger number for anything to cite.` | `anchor_MDR` on a staged record — wait for admission |
 | `kind must be one of project, other.` | `anchor_MDR` with anything else; the vocabulary is closed |
 | `{field} names a user in the retired form https://www.memolok.ai/users/<user id>; …` | An agent written in a form Memolok no longer accepts. Write the user as `https://app.memolok.ai/m/<userId>#id` |
+| `{field} names no principal Memolok holds: {value}.` | A Memolok IRI naming no account Memolok holds, often an id misremembered. Take it from `whoami` or a record that carries it; nothing was written |
+| `{field} is under Memolok's namespace but is no principal's IRI; …` | A value under `https://app.memolok.ai/m/` that is not `…/m/<userId>#id`. Correct the form, or write someone outside Memolok without that prefix |
 | `discoveryType Expected requires tests referencing an expectedOutcome.` | Missing `tests` |
 | `An analysis must take up at least one input; motivatedBy is empty.` | Empty `motivatedBy` |
 | `motivatedBy[i] was not found in this Memolok Decision Ledger. An analysis input is a Matter, a World Fact or an Observed Outcome.` | An input the ledger does not hold. The index is the position in your list; nothing was written |

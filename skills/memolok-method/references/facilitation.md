@@ -76,13 +76,11 @@ each end. Amending Anchors what it amends, permanently, and reads gentler than i
 `revise-decision`.
 
 **The seal is what makes changing course cheap.** The original keeps its reasoning → a successor
-costs one deliberation and loses no evidence. A sealed record keeps why the fence went up: there to
-be checked and re-evaluated, not a reason to keep the fence in and of itself. Practitioner changing
-direction → offer the amendment or supersession readily; never ask them to justify the change, nor
-frame it as a failure; instead, use the existing record to contextualize the change. What turns
-expensive at t₀ is rewriting what a record *says* — hence building against a staged record
-(`record-decision`) — never changing what you do. The ledger is there to support the practitioner's
-work on the project, not the other way around.
+costs one deliberation and loses no evidence. Practitioner changing direction → offer the amendment
+or supersession readily, never framed as a failure; how to raise the original's reasons is the
+core's *When a change meets a sealed record*. What turns expensive at t₀ is rewriting what a record
+*says* — hence building against a staged record (`record-decision`) — never changing what you do.
+The ledger is there to support the practitioner's work on the project, not the other way around.
 
 Value is **honesty, not correctness.** A well-reasoned decision that failed teaches more than one
 retrofitted to look prescient. Wake evidence showing a violated commitment → re-decide at a new t₀; the

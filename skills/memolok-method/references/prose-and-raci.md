@@ -62,8 +62,8 @@ read, so the read shape differs from what you wrote.
 ## Ids you choose, and later have to cite
 
 You name every id on `alternatives`, `expectedOutcomes` and `openQuestions`: prefixed `alt-`, `eo-`,
-`oq-`, unique in its list, required on every item, and named for what it is. The server mints none of
-them:
+`oq-`, then only lowercase letters, digits, hyphens and underscores, unique in its list, required on
+every item, and named for what it is. The server mints none of them:
 
 | Embed | Prefix | Cited later by |
 | --- | --- | --- |
@@ -76,7 +76,10 @@ for what they are. `alt-cache-layer` tells a reader what won; a generated id tel
 
 Omitting an id is refused: the lists replace wholesale, and an id-less item cannot say whether it is
 the old one or a new one. A missing prefix is refused with the correction rather than added, because
-rewriting an id would orphan references the patch does not carry.
+rewriting an id would orphan references the patch does not carry. So is any other character after
+the prefix, a capital, a space, an accent, with the lowercase form suggested where that alone would
+do: an id is also its item's address, the record's address, then `#`, then the id, and those
+characters are what an address carries as they are.
 
 ## Alternatives
 
@@ -90,15 +93,31 @@ Non-empty strings identifying people or systems.
 
 | Field | Cardinality | Default |
 | --- | --- | --- |
-| `authoredBy` | 0–1 | `https://app.memolok.ai/m/{userId}#id` |
+| `authoredBy` | 0–1 | none |
 | `decidedBy` | 0–1 | none |
 | `consulted` | 0–n | `[]` |
 | `informed` | 0–n | `[]` |
-| `performedBy` (Analysis) | 1 | caller |
+| `observedBy` (Observed Outcome) | 0–1 | none |
+| `performedBy` (Analysis) | 1 | the caller; not a parameter |
 
-Get `userId` from `whoami` when attributing a Memolok user, and write them as
-`https://app.memolok.ai/m/{userId}#id` — the form their own records carry. Anyone else is written as
-whatever identifies them: a name, an address, their own URI.
+**The settable ones are testimony: what you tell Memolok about who took part, stored as you wrote
+it.** Memolok separately records which account made each write, from the credential, and nobody can
+set that. So name whoever actually held the role. An agent that decided names itself; recording
+somebody else's decision names that person, not the one recording it. Leave a role unset rather than
+guess who held it, and clear one with `null` in a patch.
+
+Get `userId` from `whoami` when naming a Memolok user, and write them as
+`https://app.memolok.ai/m/{userId}#id` — the form their own records carry. **A value under
+`https://app.memolok.ai/m/` must name an account Memolok holds**, or the write is refused naming the
+field, and nothing is written:
+
+```
+decidedBy names no principal Memolok holds: https://app.memolok.ai/m/…#id.
+```
+
+That holds for every value a write sends, one resent unchanged included. Take the id from `whoami` or
+from a record that already carries it, never from memory. Anyone else is written as whatever
+identifies them: a name, an address, their own URI — stored as written, and not checked.
 
 ## RACI is narrative, not permission
 
@@ -114,8 +133,9 @@ your role on the ledger:
 Notes differ: a visitor reads none, only a note's author replaces it, and its author or an `admin` or
 `owner` deletes it.
 
-If your role lets you create records, you can edit the ones you authored — `authoredBy` names you
-unless you set someone else, and a patch that changes it hands the record over. Whether you can edit
-anyone else's depends on your role. Changing a record's status and anchoring it count as editing.
+If your role lets you create records, you can edit the ones you created. That is the account whose
+credential created the record, never `authoredBy`, so setting or changing `authoredBy` hands nothing
+over. Whether you can edit anyone else's depends on your role. Changing a record's status and
+anchoring it count as editing.
 
 If no RACI roles are assigned, Memolok assumes the artifact's author is responsible and accountable.
