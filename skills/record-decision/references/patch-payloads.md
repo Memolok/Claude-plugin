@@ -149,7 +149,10 @@ and a write's reply carries identity and a `body` count, not the record.
 }
 ```
 
-RACI fields stay patchable after t₀ — they are the only ones that do.
+RACI fields stay patchable after t₀ — they are the only ones that do. `null` clears one. Name who
+actually held each role, not whoever is recording it, and take a Memolok user's id from `whoami` or
+from a record that carries it: an IRI under `https://app.memolok.ai/m/` that names no account
+Memolok holds is refused. `prose-and-raci.md` in the method has the rule.
 
 ## Ids you will need later
 

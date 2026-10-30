@@ -33,6 +33,11 @@ matches — you are asked to update only when your pack genuinely stops working.
   holds, and offers keeping to it and departing from it as options with their costs. It no longer
   rules a departure out because a sealed decision would not have chosen it. The ledger reader
   reports expected outcomes as bets the work tests, with the reasons behind each decision.
+- **Your agent names who took part in a decision, not who is typing.** It leaves a record's author
+  unset unless it knows who that was, names itself where it decided, and can clear any of the four
+  roles. Naming an author hands nothing over: you edit the records your own account created. A
+  Memolok user named in a role must be one Memolok holds, so your agent takes the id from your
+  account or an existing record, never from memory.
 
 ## 0.37.0-beta — 2026-10-20
 
