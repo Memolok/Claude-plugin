@@ -106,7 +106,8 @@ two. An alternative with no `description` is fine; it means the user named the o
 elaborating.
 
 **Mark the chosen alternative ✅ and the others ❌** once `chosenAlternative` is set. With none
-chosen, mark nothing. Keep the order the record holds them in, here and in the deliberation: the
+chosen, mark nothing, unless the intended status is Rejected: a rejection turned every alternative
+down, so mark each one ❌. Keep the order the record holds them in, here and in the deliberation: the
 chosen one need not be first, and a preview reordered around it no longer matches the record the
 user will read later.
 

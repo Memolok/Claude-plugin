@@ -20,7 +20,9 @@ matches — you are asked to update only when your pack genuinely stops working.
 
 ## Unreleased
 
-*Everything that has landed has shipped. This section is a placeholder.*
+- **A rejection's preview marks every alternative ❌.** When your agent shows you a draft it means to
+  record as Rejected, each alternative carries ❌, as a rejected record's page in the portal shows
+  them.
 
 ## 0.38.0-beta — 2026-10-30
 
