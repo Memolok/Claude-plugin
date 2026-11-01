@@ -140,6 +140,7 @@ the form.
 | --- | --- |
 | Code | `MDR-7`, bare |
 | A commit message in that repository | `MDR-7`, bare, in the body — never in the subject |
+| Notes only this project's sessions load, such as agent memory | `MDR-7`, bare, for an entry on the ledger the project's `.memolok/mdl.yml` names |
 | Markdown declaring `mdlGuid` in frontmatter | `MDR-7`, bare, anywhere in the document |
 | Markdown without that frontmatter | A link: `[MDR-7](https://app.memolok.ai/m/<mdlGuid>/MDR-7)` |
 | Anything else — email, chat, a ticket, another tool's payload | The address, written out |
@@ -148,8 +149,9 @@ the form.
 and its full address everywhere else.
 
 **What binds, in short:** in code and in a commit message, a `.memolok/mdl.yml` inside that same
-repository; in Markdown, `mdlGuid` in the document's frontmatter, which outranks it; anywhere else,
-nothing, so the address is written out. `references/binding.md` has the rest.
+repository; in notes only this project's sessions load, the project's own `.memolok/mdl.yml`; in
+Markdown, `mdlGuid` in the document's frontmatter, which outranks it; anywhere else, nothing, so
+the address is written out. `references/binding.md` has the rest.
 
 ## How the citation reads
 

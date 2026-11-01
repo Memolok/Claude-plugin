@@ -40,6 +40,12 @@ mdlGuid: <the guid>
 carries — the `mdl` prefix keeps them clear of the `title` a renderer has almost certainly claimed
 already.
 
+**Notes only this project's sessions load are bound by the project's tree.** Agent memory kept per
+project folder is read by no one but a session opened in that folder, and that session resolves its
+ledger from the folder's `.memolok/mdl.yml`. The reader next always holds the same binding you do,
+so a bare identifier there is as complete as one in code. An entry on any other ledger still takes
+its full address, and so does a note that leaves the project, such as a hand-off sent to someone.
+
 **Everywhere else there is no binding at all.** Mail, chat, tickets and word processors have nowhere
 to declare a ledger, so a bare identifier there means nothing to whoever reads it next. Write the
 address out.

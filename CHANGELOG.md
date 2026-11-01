@@ -26,6 +26,9 @@ matches — you are asked to update only when your pack genuinely stops working.
 - **References in notes kept for later sessions are anchored too.** Before your agent cites a
   decision record in its own memory or other notes that outlast the session, it anchors the record
   and writes the citation in a form that names the ledger, as it does for code and documents.
+- **Agent memory kept per project cites entries bare.** A note only your project's sessions load is
+  bound to the ledger your project folder names, so your agent writes a bare record number there as
+  it would in code, and the full address only for an entry on another ledger.
 
 ## 0.38.0-beta — 2026-10-30
 
