@@ -179,7 +179,7 @@ what you say.
 | --- | --- | --- |
 | What is this, why bother | Unrecorded decisions compound like technical debt | `references/decision-debt.md` |
 | Isn't this for big companies | Amnesia is not a team problem, it is a time problem | `references/solo-practitioners.md` |
-| Was that even a decision | No commitment, no decision — and no-choice situations are still choices | `references/what-counts-as-a-decision.md` |
+| Was that even a decision | No commitment, no decision — and no-choice situations are still choices; and not every choice earns a record | `references/what-counts-as-a-decision.md` |
 
 ### Why it is strict
 

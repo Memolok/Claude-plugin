@@ -28,8 +28,9 @@ Examples:
 
 ## Step 0 — Load the method
 
-Load the **`memolok-method`** skill and its `facilitation.md` reference. Rules A–G govern every turn
-of the interview, and Rule G governs the head-sharpening phase specifically.
+Load the **`memolok-method`** skill and its `facilitation.md` reference. Rules A–I govern every turn
+of the interview, your recommendations included, and Rule G governs the head-sharpening phase
+specifically.
 
 ## Non-negotiables
 
@@ -58,7 +59,10 @@ confirmed.
 Offer a specific recommended answer whenever the context reasonably supports one. Two constraints: the
 user has final agency on everything, and you are not obliged to have a view on everything.
 
-Help where you genuinely can. Do not manufacture a recommendation to fill the slot.
+Help where you genuinely can. Do not manufacture a recommendation to fill the slot. A recommended
+answer's reason starts from first principles and/or industry best practices, never current
+behaviour, another decision's draft or a vendor's guidance (Rule H). The answer may still match one
+of them; what it may not do is rest on one.
 
 Where the ledger states a purpose, recommendations should sit comfortably with it — that is most of
 what reading it buys you. But it informs your suggestions only; it never constrains the user's answers.
@@ -91,7 +95,8 @@ That is continue-versus-end theatre. The user knows how to say they are done.
    have to ask. This is the *look things up rather than asking* rule doing its job: never spend an
    interview turn asking what the ledger is for when a read answers it.
 3. `discover_MDRs(query="...")` — surface related prior decisions in the user's own words. Flag
-   duplicate head **Claim**s before grilling a question that is already settled. Search is lexical:
+   duplicate head **Claim**s before grilling a question that is already settled; a staged hit is
+   context, not a constraint (Rule H). Search is lexical:
    whitespace-separated terms, ORed, case-insensitive and English-stemmed; no operators, phrases or
    regex; a whole hyphenated token matches and a partial one does not. An empty result means no entry
    used those words — say which you tried. Absence here is weak evidence, worth one question rather

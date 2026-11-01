@@ -29,6 +29,21 @@ matches — you are asked to update only when your pack genuinely stops working.
 - **Agent memory kept per project cites entries bare.** A note only your project's sessions load is
   bound to the ledger your project folder names, so your agent writes a bare record number there as
   it would in code, and the full address only for an entry on another ledger.
+- **How things work today, and other people's drafts, are no longer offered as objections.** Your
+  agent treats current behaviour as a measurement, a vendor's guidance as input, and an unsealed
+  draft from another decision as binding nothing.
+- **Verdicts commit, and expected outcomes are bets someone could lose.** Your agent keeps present
+  state, deferrals and draft history out of a Verdict, and turns an expected outcome nobody could
+  disprove into an argument instead.
+- **Your agent offers to record a choice only when it will last.** Alternatives weighed about how to
+  carry out work are no longer proposed as decisions; a small choice with lasting effect still is.
+- **World facts exclude what your own decisions produce, and link public pages instead of copying
+  them.**
+- **A missing amendment is reported as weak evidence, and ledger summaries are checked before use.**
+  Your agent no longer calls a record current just because nothing amends it, and re-reads a record
+  before quoting it, citing an open question, or anchoring it.
+- **Identifiers are used only after the server returns them**, including in archived text your agent
+  commits verbatim.
 
 ## 0.38.0-beta — 2026-10-30
 

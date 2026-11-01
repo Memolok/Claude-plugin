@@ -50,13 +50,17 @@ A world fact is a claim about the world that is true whether or not anyone decid
 | *"Legal requires seven-year retention"* | *"We should add archival storage"* — a Verdict with no Need |
 | *"Nobody on the team writes Rust"* | *"Rust is too risky for us"* — a deliberation fact |
 | *"The vendor's SLA is 99.5%"* | *"The vendor is unreliable"* — a judgement, unless someone observed it |
+| *"The vendor publishes its version at `/openapi.json`"* | *"Our service publishes its version at `/openapi.json`"* — a consequence of our own decision |
 
 | | *"Here's their whole pricing page"* — source material: a **scratchpad**, via `manage-notes` |
 
-Two tests: **would this still be true if the decision it relates to had never come up?** and **is the
-user asserting it, or just keeping it?** A symptom is bait — **`save-matter`** or **`record-decision`**.
-Material nobody is asserting is a note; if it later turns out to matter, admit it *then*, freshly
-worded.
+Three tests: **would this still be true if the decision it relates to had never come up?**,
+**would it stop if this ledger decided to stop doing it?** and **is the user asserting it, or just
+keeping it?** A symptom is bait — **`save-matter`** or **`record-decision`**. Material nobody is
+asserting is a note; if it later turns out to matter, admit it *then*, freshly worded. What fails
+the second is a consequence of this ledger's own decisions, however well verified: name the
+admitted record in the prose, put the observation in the reasoning, or record it as an outcome if
+it is one. Another team's decision passes.
 
 ## Workflow
 
@@ -94,6 +98,12 @@ correction — step 4.
 
 Write it so it is checkable later. *"The budget is tight"* is not a premise anything can be reasoned
 from; *"the hardware budget is $10k"* is.
+
+For a fact that rests on a public page, state the durable property, link the page, give the date you
+read it, and say the contents are deliberately not restated: *"account-free contact routes are
+published at `<url>`, read 2026-11-01; the routes themselves are deliberately not restated"*. A copy
+of the page needs a successor fact every time the page changes, because a fact has no edit path.
+Exception: a fact whose subject is a measurement, or a quote from something impermanent.
 
 ### 4. Correcting versus drifting
 
@@ -165,7 +175,7 @@ were never cited cannot later be found when one of those premises turns out to b
 - There is no way to delete or edit a fact. Facts are immutable in substance once admitted; the only
   move is a correcting successor.
 - If the user states a premise while working through a decision, admit it and cite it rather than
-  folding it into the Verdict prose — it is reusable by every later record.
+  folding it into the record's prose — it is reusable by every later record.
 
 ## References
 

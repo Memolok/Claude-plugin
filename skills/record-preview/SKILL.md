@@ -26,8 +26,8 @@ to the user as though they were entries on their ledger.
 ---
 
 **Need:** Storage must hold a 500GB–2TB FLAC library with ongoing growth from continued
-digitization, run on hardware already owned, and survive a single drive failure without data loss via
-an off-device backup — full RAID-level redundancy is not required.
+digitization, run on hardware already owned, and survive a single drive failure without data loss —
+full RAID-level redundancy is not required.
 
 **Alternatives:**
 
@@ -41,8 +41,8 @@ an off-device backup — full RAID-level redundancy is not required.
 
 - `alt-raid` — Survives one drive failure locally. No protection against fire, theft, or accidental
   deletion; more complexity.
-- `alt-backup` — Works with hardware on hand; backup covers fire, theft, and deletion. Requires an
-  ongoing backup habit.
+- `alt-backup` — Works with hardware on hand while the drive has room for growth; backup covers
+  fire, theft, and deletion. Requires an ongoing backup habit.
 - `alt-naked` — Violates the survivability intent in the Need.
 
 **Verdict:** Run the library on a single repurposed drive and rely on a scheduled off-device backup
@@ -52,7 +52,8 @@ rather than RAID.
 
 **Expected outcomes:**
 
-- `eo-no-raid` — No RAID complexity; works with hardware already on hand
+- `eo-fits-one-drive` — The library stays on the repurposed drive for two years, with no array or
+  second library drive added
 - `eo-backup-habit` — A missed backup window is a loss-exposure gap, and none lasts longer than a week
 
 **Open questions (scope boundaries — they travel with the record):**
@@ -71,8 +72,8 @@ rather than RAID.
 **What it changes** goes directly under the Need, on a record that amends or supersedes another. It
 names the record and says how much of it this one replaces:
 
-> **What it changes:** Amends MDR-7, on the backup schedule only; everything else in MDR-7 still
-> governs.
+> **What it changes:** Amends MDR-7, on how long backups are kept only; everything else in MDR-7
+> still governs.
 
 > **What it changes:** Supersedes MDR-7 whole. The library moves off the repurposed drive.
 

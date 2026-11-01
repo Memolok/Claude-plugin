@@ -3,10 +3,11 @@ name: record-decision
 description: >-
   Record a decision on a Memolok ledger — work out whether you have a raw symptom or a sharpened
   need, capture the alternatives and reasoning behind the choice, and persist it as a Memolok
-  Decision Record (MDR). Use when the user makes or describes a consequential choice, reports a
-  problem they intend to act on, says "record this" or "log this decision", proposes a solution like
-  "we should switch to X", works through options they want kept, or acts on something the ledger
-  already holds — a world fact or a recorded outcome that now calls for a decision.
+  Decision Record (MDR). Use when the user makes or describes a choice between real alternatives
+  that will outlast the task, however small, reports a problem they intend to act on, says "record
+  this" or "log this decision", proposes a solution like "we should switch to X", works through
+  options they want kept, or acts on something the ledger already holds — a world fact or a recorded
+  outcome that now calls for a decision.
 argument-hint: "<the decision, problem, or choice>"
 ---
 
@@ -32,7 +33,7 @@ Examples:
 
 Load the **`memolok-method`** skill and its `facilitation.md` reference before any write. Between them
 they carry the fish model, the Decision Transaction Principle, the lifecycle gates, and facilitation
-Rules A–G.
+Rules A–I.
 
 ## Non-negotiables
 
@@ -84,6 +85,10 @@ come back: if it calls for a decision, that entry is the analysis input — pass
 Do **not** register a Matter restating it. That records neither the entry as the input nor that
 anything connected the two, and Matters are immutable, so it cannot be repaired afterwards. The
 scratchpad row is an exit: nothing about it calls for a record.
+
+**Not every choice earns a record.** Alternatives weighed about how to carry out work leave nothing
+behind but the result: no record. A small choice whose result lasts — a convention, a rule a
+document will state — earns one, and that document then cites it.
 
 **The discriminator is not who is speaking — it is whether a future observation could settle it.**
 *"P99 auth latency must stay under 50ms"* is a Claim. *"Login takes forever"* is bait, even when the
@@ -140,11 +145,11 @@ path has no acknowledgment of what else was in play; it is not a gate, and it is
 
 ### 5. Converge
 
-Draft the `verdict` and set `chosenAlternative`. Add `expectedOutcomes` — measurable tail commitments
-covering gains, costs, risks, and dependencies. These are required before a future Accept, and they
-are what the wake will later be tested against.
-
-Drafting all of this while the record sits at **Deliberating** is normal pre-commit work.
+Draft the `verdict` and set `chosenAlternative`. Add `expectedOutcomes` — falsifiable tail
+commitments covering gains, costs, risks, and dependencies. These are required before a future
+Accept, and they are what the wake will later be tested against. Rule I governs both: the Verdict
+adopts a rule and never narrates the present state, a resolved value or a deferral, and a tail item
+no observation could falsify moves to the belly.
 
 **Converging on a *no* is converging.** If the Verdict is turning into an explanation of what the user
 will **not** do, this is a **Rejected** record and `chosenAlternative` should stay unset. That holds
@@ -231,11 +236,10 @@ record settled it.
 ## Tips
 
 - A complete fish body may sit at **Deliberating** indefinitely. Completeness is not commitment.
-- Patches are incremental — send only the keys that changed.
 - The ids you chose come back from `get_MDR_details`, and the `eo-…` ones a later wake needs from
   `get_MDR_learning_delta` too.
-- If the user's need turns out to already be covered by an existing record, say so and offer
-  `review-ledger` instead of minting a duplicate.
+- If the user's need turns out to already be covered by an existing admitted record, say so and
+  offer `review-ledger` instead of minting a duplicate.
 
 ## References
 

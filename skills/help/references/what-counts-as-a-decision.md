@@ -11,8 +11,8 @@ things that do not.
 
 A four-hour meeting where everyone debated constructively, three good options were proposed, and the room
 agreed the second one looked strongest — that meeting produced no decision. It produced deliberation.
-Deliberation is valuable and worth recording, but until somebody commits, nothing has been decided and
-nothing is in force.
+Deliberation is valuable, and worth recording when what it was about will last; that said, until
+somebody commits, nothing has been decided and nothing is in force.
 
 This is why recording deliberation and recording a commitment are two separate acts. Conflating them
 produces a ledger full of decisions nobody actually made, which is worse than an empty one.
@@ -30,6 +30,18 @@ compliance function that costs more than the market it protects.
 
 Recording forced-looking decisions is not bureaucratic theatre. It is where a lot of the most expensive
 reasoning hides.
+
+## Not every choice earns a record
+
+Choosing is not enough. A choice earns a record when the outcome lasts, and real alternatives were
+weighed, however small the matter: it changes something people will live with, or its reasoning is
+worth finding again.
+
+Weighing how to *carry out* a plan is different. Whether to migrate a database table by table or
+over one weekend was real deliberation, yet once the migration is done only the migrated database
+remains. There is nothing left to be confused about, so nothing to record. By contrast, whether to
+move databases at all, or how to restructure the schema everyone will build on, is long lasting:
+the result stays in the world, and so does the question of why.
 
 ## Opinionated, and not
 

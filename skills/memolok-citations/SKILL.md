@@ -32,6 +32,10 @@ below, under *Inside the session*.
 Analysis is cited by the id the server minted for it — `mt_…`, `wf_…`, `oo_…`, `an_…` — which says
 what kind of thing it is as well as which one.
 
+**Write an id only once a call of yours has returned it**: never invented, completed or relayed
+unread from a report. Where a file needs it earlier, leave `wf_…` and grep for it before committing;
+a commit message or sent text takes no marker, so create first.
+
 **Scratchpads: freely here, not into artifacts on your own initiative.** Name a note by its `msp_…` id
 whenever it helps agree which note is meant; the address is deliberately untypeable to discourage the
 durable citation, not the spoken one. Do not write one into a project artifact unasked — a note is
@@ -79,9 +83,15 @@ Do it **before** the citation exists, not after. An unanchored number can be rel
 and taken by a later admission — at which point the reference you wrote silently names a different
 decision. Anchoring closes that off permanently: the record refuses an Uncommit from then on.
 
+`mdr` takes the handle. Read the record by its number first and take the handle from that response,
+which states both; one from a scout's report, memory or a neighbouring record may name another
+record, and a wrong anchor is permanent.
+
 **In a project artifact, this is mandatory.** Code, documentation, and commit messages all ship with
 the repository and are read for years, so a reference written into one is exactly the dependency the
-declaration exists to protect. *Anchor, then write.*
+declaration exists to protect. *Anchor, then write.* Text you did not write counts: an archive or
+quoted transcript committed verbatim cites each record it names, so anchor each as `project` first.
+Unedited, it binds through `mdlGuid` frontmatter, not links.
 
 > **Elsewhere, weigh it and ask.** An anchor cannot be withdrawn, so declaring one because a record
 > came up in conversation spends something permanent on a mention that may not outlast the afternoon.
@@ -121,8 +131,8 @@ holds these addresses and nothing else, and is kept apart from the application a
 reorganisation of the application never moves one: a citation written now stays good.
 
 **A record's part is addressed under its record**: the record's address, then `#`, then the part's
-id exactly as the record holds it, `…/MDR-7#oq-backup`. Citing a part cites its record, so the
-record is what you anchor.
+id exactly as the record holds it, from your own read, `…/MDR-7#oq-backup`. Citing a part cites its
+record, so the record is what you anchor.
 
 **Every address in the table opens.** Anyone not signed in gets a sign-in page, the same at every
 address, and a member who signs in lands on the entry, a record's part in view and marked. Anyone
@@ -157,7 +167,8 @@ the address is written out. `references/binding.md` has the rest.
 
 **A trailing parenthetical, at the end of the clause it justifies**: `(MDR-7)`, or `(MDR-7, MDR-12)`
 for several. Backticks only where the string itself is the subject, never around a citation.
-`references/citation-style.md` has the rest.
+`references/citation-style.md` has the rest. A line quoted from a record comes from your own
+`get_MDR` read, not a report: a summary drops what a sentence turns on.
 
 ## Inside the session
 
@@ -171,18 +182,14 @@ deliberate: a corrupted handle fails loudly instead of degrading into a citation
 
 The test is where the text will live, decided when you write it, not what kind of document it is. A
 hand-off that gets committed is a project artifact, and text a note drafts for copying into one is
-judged by where it will land.
+judged by where it will land. A verbatim archive naming a staged record by `MDRh…` is not
+committable as written: paraphrase its head Claim and mark the edit, or omit the passage.
 
-Three things make that a rule rather than a caution. It has no number. It may never acquire one, so
-the reference can end up naming something that never became a decision. And it cannot be anchored —
-the declaration that makes a citation safe is refused for a staged record, because there is no number
-for anything to cite — so a reference to one is a dependency nothing can protect, pointing at prose
-still free to change underneath it.
-
-None of the three binds a note that is thrown away: a handle stays a valid address to look the
-record up by, and nothing depends on the note. Where staged work has to be named in committed or
-sent text, paraphrase its head Claim. That carries the meaning and promises nothing the ledger has
-not promised.
+Rule F carries why: a staged record has no number, may never get one and cannot be anchored, so a
+reference to one is a dependency nothing can protect. None of that binds a note that is thrown away:
+a handle stays a valid address to look the record up by, and nothing depends on the note. Where
+staged work has to be named in committed or sent text, paraphrase its head Claim. That carries the
+meaning and promises nothing the ledger has not promised.
 
 ## What Memolok knows afterwards
 

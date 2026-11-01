@@ -59,6 +59,8 @@ get_MDR(mdlGuid, mdr)
 `get_MDR` answers what a record decided; `get_MDR_details` answers why and how. What it decided is
 enough to route. Read `get_MDR_details` before drafting an amendment or a successor: what it changes
 may sit in an alternative, an argument or an expected outcome, and `get_MDR` carries none of those.
+A missing `amendedBy` or `supersededBy` is weak evidence that a record still governs; an edge exists
+only if someone recorded it, so weigh the prose before routing on the graph.
 
 ### 2. Route on how much is wrong
 
@@ -163,7 +165,8 @@ question and no number to target.
 
 Settling a question **anchors** the holder, so it can no longer be uncommitted.
 
-Both patterns: `references/open-question-settlement.md`.
+Both patterns: `references/open-question-settlement.md` — it carries the id and wording check, and a
+wrong edge anchors the holder and cannot be undone.
 
 ## Which route is honest
 

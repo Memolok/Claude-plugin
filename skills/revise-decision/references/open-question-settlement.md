@@ -23,8 +23,10 @@ first.
 ```
 
 `hostMdrNumber` is the **holder's** number — the record that asked the question — not the resolver's.
-`openQuestionId` is the `oq-…` id the holder's author gave the question; read it from the holder with
-`get_MDR`.
+`openQuestionId` is the `oq-…` id the holder's author gave the question. Read the id and the
+question's full wording from the holder with your own `get_MDR`, never from a scout's report, which
+compresses. Settle only if the resolver answers every part of that wording; if it answers one half,
+leave the question open.
 
 This is the right mechanism because the holder crossed t₀. Its open question is frozen ledger history,
 so only a later Accepted record can close it retroactively.

@@ -63,7 +63,8 @@ its work, and it is worth including when real options were weighed.
 or `settlesOpenQuestion`: nothing it says is in force, so it changes, retires and settles nothing —
 and nothing can amend or supersede it in turn. So when a Rejection stands
 against another record, prose and `hasContext` are the only carriers, and they have to do that work
-deliberately: say in the Verdict what this declines and why, because no structure will say it for you.
+deliberately: say in the Verdict what this declines, and in the belly why, because no structure will
+say either for you.
 
 The tempting exception is *we declined X, so here's what that decline covers*. But that is not an
 amendment: a Rejection put nothing in force, so there is nothing in it to leave standing. It could
@@ -85,7 +86,8 @@ say so rather than leave the next reader to notice.
 
 **Give it a tail when it has one.** Expected outcomes and open questions are not required, but a
 rejection with consequences worth being wrong about should commit to them — *we expect nobody to raise
-this again this year*, *we expect the workaround to hold*. It accumulates wakes like any other
+this again this year*, *we expect the manual workaround to cost the team under an hour a week*. It
+accumulates wakes like any other
 resident, and a rejection that turns out to have been the wrong call is exactly as informative as an
 acceptance that did.
 

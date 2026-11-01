@@ -56,6 +56,14 @@ letters except `I`, `L`, `O`, `U` — lowercase on the wire, and a hyphen is ref
 ignored. **Never construct, truncate, complete or pattern-match one.** Pass back exactly what you
 were handed.
 
+**An id exists only once the call that creates it has returned.** Anything that cites an entry,
+whether a reference field (`motivatedBy`, `hasContext`, `correctsFact`, `tests`) or an id written
+into prose, goes out after that reply and uses the value it carries: never in the same parallel
+batch, never with a stand-in to fix later. A reference field refuses an unknown id; prose is not
+checked, and a Matter cannot be edited at all. A record's handle and number follow the same rule.
+Ids you name yourself (`alt-`, `eo-`, `oq-`) are yours to choose. Code, commits and documents:
+`memolok-citations`.
+
 All prose parameters use `{ markdown, lang? }` — see `prose-and-raci.md` for which are wrapped in a
 `description` key.
 
@@ -346,7 +354,8 @@ files are available, offer to update it.
 | `description` | `{ markdown, lang? }` | yes |
 
 Returns `{ id, mdlGuid, createdAt, body }`. Record the raiser's words **verbatim** — do not sharpen
-here.
+here. Cites another entry? Create it first and use the id it returns; a matter's words cannot be
+edited.
 
 `createdAt` and `raisedBy` are minted by the server from the call itself; there is no parameter
 for either. **`raisedBy` is the one thing here that cannot be recovered later** — the creation
