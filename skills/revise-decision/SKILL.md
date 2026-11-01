@@ -45,7 +45,7 @@ Principle is the whole subject of this skill.
 - **Read `retractable` before proposing anything** — it decides the route
 - Never tell the user a committed record can be patched in place
 - Say "captured" only after the write succeeded
-- Cite `MDR-{n}` once admitted (anywhere), `MDRh{handle}` or a head Claim paraphrase while staged (only in chat and in session notes nobody commits or sends); never a bare handle (Rule F)
+- Cite `MDR-{n}` once admitted (in the form **`memolok-citations`** gives for where it is written), `MDRh{handle}` or a head Claim paraphrase while staged (only in chat and in session notes nobody commits or sends); never a bare handle (Rule F)
 - **Never** propose a revision because a record no longer matches the ledger's stated purpose
 
 ## Workflow
@@ -92,6 +92,9 @@ meant to be there — where nothing has come to depend on the record yet.
 3. `update_MDR` while staged. Everything is patchable again.
 4. `transition_MDR_status` to re-admit, with the ceremony from **`commit-decision`**. This is a fresh
    t₀, not a resumption of the old one.
+5. **Rewrite what cited the old number.** `retractable: true` proves only that nobody declared a
+   citation. Ask whether you or the user wrote the old number anywhere, and rewrite each such
+   reference with the new one, through **`memolok-citations`**.
 
 Detail and payloads: `references/uncommit-and-readmit.md`.
 
@@ -149,6 +152,10 @@ record carries the new decision and names the old one.
 `supersedes` has the same requirement as amendment, for the same reason: an **Accepted** record at each
 end, since only one has content to retire. Once each, too: superseding flips the target to
 **Superseded**, so a second attempt finds nothing left.
+
+**After an amendment or a supersession is sealed, the project's references follow it.** Where code
+or documents cite the target, the new record is cited beside it, with the relationship inside the
+parenthesis; **`memolok-citations`** carries the form and the anchor.
 
 ### 6. Settle an open question
 

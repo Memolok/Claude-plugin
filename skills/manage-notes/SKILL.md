@@ -119,6 +119,10 @@ can be referred to without anybody having invented a name for it. Where a note h
 handle from its opening words and the date: *"the Redis quote from the 7th"*, *"the scraped
 pricing page"*. Do not volunteer the `msp_` id; cite it if the user asks.
 
+**Sharing a note.** Anyone working on the ledger reaches a note at its address under the ledger,
+`https://app.memolok.ai/m/<mdlGuid>/<msp_…>`; `…/m/<msp_…>` alone names nothing. Writing that address
+into anything that outlasts the session → **`memolok-citations`** owns where it may go.
+
 ## A note is its author's
 
 Everyone working on the ledger reads every note (not visitors). Only the person who created a note can

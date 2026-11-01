@@ -188,6 +188,7 @@ what you say.
 | Why can't I edit a sealed record | Hindsight destroys the evidence the record exists to hold | `references/why-records-are-sealed.md` |
 | Doesn't sealing make us rigid | The opposite: the reasons are kept, so changing course is safe | `references/why-records-are-sealed.md` |
 | So it is permanent the second I commit | No — until something relies on it, it can be withdrawn on the record | `references/retractable-vs-anchored.md` |
+| How do I refer to a decision in a document or a ticket | By its number once committed; a draft's handle is for working with your team | `references/retractable-vs-anchored.md` |
 | Can't I just mark it obsolete | Nothing stops being true on its own; someone decided to stop | `references/supersession-and-withdrawal.md` |
 | Only part of it is wrong now | Amend that part; the rest of the decision keeps governing | `references/supersession-and-withdrawal.md` |
 | Why must I say what I expect | An unfalsifiable decision can never teach you anything | `references/expected-outcomes.md` |

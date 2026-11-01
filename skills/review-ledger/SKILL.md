@@ -149,6 +149,8 @@ still governs, see *What the ledger cannot tell you*.
 - They want to seal something staged → **`commit-decision`**
 - Something is genuinely undecided → **`record-decision`**
 - Parked bait is worth picking up → **`record-decision`**, which sharpens it
+- The answer feeds a document, code or a message → **`memolok-citations`** owns the form and the
+  anchor; a staged record goes there only as a paraphrase of its head Claim
 
 ## Common reviews
 

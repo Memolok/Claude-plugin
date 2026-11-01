@@ -56,6 +56,18 @@ Amending a decision is a form of relying on it, so amending a decision anchors i
 Whether a specific record is still retractable is a fact the ledger computes rather than a judgment call.
 Read it before promising anyone that something can be taken back.
 
+## Referring to a decision from outside
+
+A committed decision is referred to by its number, such as `MDR-7`, and wherever a reader cannot
+tell which ledger is meant, by its address: `https://app.memolok.ai/m/<ledger>/MDR-7`. The address
+opens the decision for anyone who can read that ledger, once they sign in, and tells everyone else
+nothing — not even whether it exists.
+
+A draft has no number yet, only a handle such as `MDRh12`. Discussing a draft with your teammates by
+its handle, or sending them its link, is how deliberation works, and it is yours to judge. It is a
+working reference, though, never a citation: a document, a ticket or a commit meant to stand for the
+decision waits for the number, because a draft may never become one.
+
 ---
 
 When they want to withdraw or replace a sealed decision: **`revise-decision`**.

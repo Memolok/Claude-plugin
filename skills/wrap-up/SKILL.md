@@ -222,7 +222,7 @@ the first one.
 
 | The item is | Destination | Note |
 | --- | --- | --- |
-| Useful to you across sessions, not to the team | Agent memory | A tooling concern, not a ledger artifact |
+| Useful to you across sessions, not to the team | Agent memory | A tooling concern, not a ledger artifact. Naming a ledger entry there → **`memolok-citations`** owns the form and the anchor |
 | Friction with Memolok itself, hit this session | Memonos, the team behind Memolok | **`send-feedback`** — leaves the user's machine |
 | Anything another connected tool owns | That tool | Its rules, not yours |
 | No residue, or the residue is already written | **Nowhere** | Say so in the dropped list |

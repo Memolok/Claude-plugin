@@ -156,6 +156,10 @@ sees two ordinary responses and no reason they conflict.
 **`userVerbatim`** carries the practitioner's words when they dictated something. Copy them exactly.
 Your own write-up goes in `report`, beside it, never merged into it.
 
+**Name a record by whatever identifier you hold, a draft's handle included.** Memonos resolves an
+`MDRh…` reliably, so a report is the one text sent outside your sessions that may carry one; a
+call record quoting `"mdr": "MDRh7"` stays exactly as the call was made.
+
 ### 3. Preview, then send
 
 Show the payload — or a faithful summary of every report in it, including anything quoted from their

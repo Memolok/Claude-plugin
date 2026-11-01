@@ -29,6 +29,23 @@ matches — you are asked to update only when your pack genuinely stops working.
 - **Agent memory kept per project cites entries bare.** A note only your project's sessions load is
   bound to the ledger your project folder names, so your agent writes a bare record number there as
   it would in code, and the full address only for an entry on another ledger.
+- **Every citation your agent writes is anchored, and you hear first what that costs.** Before your
+  agent names a decision in code, a document, a message or a ticket, it tells you the decision will
+  be anchored, and so can never be withdrawn, and you choose between citing it and describing it in
+  words instead.
+- **Feedback to Memonos may name a draft by its handle.** A report about a decision still being
+  deliberated identifies it exactly; this is the one text sent outside your sessions that may.
+- **Every address your agent writes is one that opens.** A note's link sits under its ledger, a
+  draft's link is shared for working on it and never as a citation, and a feedback report's or a
+  person's address, which does not open yet, is given as its identifier instead. A matter, world
+  fact, outcome or analysis is written bare only where a record number may be.
+- **Changing a decision brings its references along.** Once an amendment or a replacement is sealed,
+  your agent cites the new decision beside the old one wherever your project cites it; after a
+  decision is withdrawn and committed again, it asks where the old number was written and rewrites it.
+- **Ask how to refer to a decision.** `help` explains a decision's number and address, and why a
+  draft's handle is for working with your team rather than for citing.
+- **A service account is no longer taken for a malformed person.** Your agent recognises a service
+  account's address in attribution as the valid form it is.
 - **How things work today, and other people's drafts, are no longer offered as objections.** Your
   agent treats current behaviour as a measurement, a vendor's guidance as input, and an unsealed
   draft from another decision as binding nothing.

@@ -37,7 +37,7 @@ skill: t₀ is a separate, explicit ceremony, never bundled into a recap.
 - All prose is `{ "markdown": "...", "lang": "en" }`
 - **Commit only when the user asked to, in their own words** — never because your draft reads firm
 - Say "captured" only after the write succeeded
-- Cite `MDR-{n}` once admitted (anywhere), `MDRh{handle}` or a head Claim paraphrase while staged (only in chat and in session notes nobody commits or sends); never a bare handle (Rule F)
+- Cite `MDR-{n}` once admitted (in the form **`memolok-citations`** gives for where it is written), `MDRh{handle}` or a head Claim paraphrase while staged (only in chat and in session notes nobody commits or sends); never a bare handle (Rule F)
 - Open questions do **not** block commit (Rule D)
 - The ledger's stated purpose bears on **nothing** here — never raise a mismatch with it before a seal
 
@@ -129,7 +129,8 @@ Offer **Rejected** as readily as Accept, and in more situations than an exhauste
 **The record receives a number at t₀ (in addition to its handle).** If anything outside the ledger is
 going to cite it — code, documentation, a commit message, a message to somebody, notes kept for later
 sessions — this is the moment that becomes possible, and the citation has to be anchored before it is
-written. The **`memolok-citations`** skill carries the order and the form.
+written, with the user told first that an anchored record can never be uncommitted. The
+**`memolok-citations`** skill carries the order and the form.
 
 ## Tips
 

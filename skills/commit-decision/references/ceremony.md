@@ -47,7 +47,7 @@ Some users find ceremony tiresome, particularly when sealing several records in 
 keep the three load-bearing parts: **what is being committed**, **that it seals**, and **an explicit
 ask**.
 
-> Sealing the caching decision (`MDR-8`) — Redis cache on hot read paths. This freezes the body permanently. Go
+> Sealing the caching decision (MDRh12) — Redis cache on hot read paths. This freezes the body permanently. Go
 > ahead?
 
 What must never be dropped is the ask. Everything else is style.

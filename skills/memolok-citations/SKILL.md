@@ -74,8 +74,9 @@ anchor_MDR(mdlGuid, mdr, kind)
 ```
 
 `kind` is `project` for a citation living in a project artifact — a source file, a document in the
-repository, a commit message — and `other` for anywhere else one can go: an email, a chat message, a
-ticket, a slide, a payload you hand to a tool on some entirely different connector. Only the kind is
+repository, a commit message, notes kept for later sessions such as agent memory — and `other` for
+anywhere else one can go: an email, a chat message, a ticket, a slide, a payload you hand to a tool
+on some entirely different connector. Only the kind is
 recorded. There is no location parameter, and that is deliberate: a stored path goes stale the moment
 a file moves, and a stale location reads as authoritative.
 
@@ -87,16 +88,22 @@ decision. Anchoring closes that off permanently: the record refuses an Uncommit 
 which states both; one from a scout's report, memory or a neighbouring record may name another
 record, and a wrong anchor is permanent.
 
-**In a project artifact, this is mandatory.** Code, documentation, and commit messages all ship with
-the repository and are read for years, so a reference written into one is exactly the dependency the
-declaration exists to protect. *Anchor, then write.* Text you did not write counts: an archive or
+**Every citation you write is anchored first, in a project artifact and everywhere else.** Code,
+documentation and commit messages ship with the repository and are read for years; a message, a
+ticket or a slide is read by people who act on it. Either way the reference is exactly the dependency
+the declaration exists to protect. *Anchor, then write.* Text you did not write counts: an archive or
 quoted transcript committed verbatim cites each record it names, so anchor each as `project` first.
-Unedited, it binds through `mdlGuid` frontmatter, not links.
+Unedited, it binds through `mdlGuid` frontmatter, not links. Notes kept for later sessions count
+too: the sessions that load them act on what they say, so a number there is anchored before it is
+written, exactly as in code.
 
-> **Elsewhere, weigh it and ask.** An anchor cannot be withdrawn, so declaring one because a record
-> came up in conversation spends something permanent on a mention that may not outlast the afternoon.
-> Ask whether this is a reference somebody will come back to. Where it plainly is — a ticket that
-> will outlive the sprint, a message a team will act on — anchor it, and say that you did.
+> **Tell the user first, and let them weigh it.** Before anchoring, say which records the reference
+> would anchor and what that means: an anchored record can never be uncommitted, so a mistake found
+> in it later — even an hour later, in a message nobody reread — is corrected by a new record, never
+> by a withdrawal. The choice is theirs: anchor and cite, or leave the record unnamed in that text
+> and say what it decided in words. A citation without its anchor is not one of the options. The
+> records one piece of work cites can be put to them together. Where a record already reads
+> `retractable: false`, nothing new is spent and there is nothing to explain: declare it and write.
 
 **Declare even when the record already looks anchored.** `retractable: false` does not say *why*. A
 record held by ledger topology is held by something that can change; a declared anchor is permanent.
@@ -117,6 +124,7 @@ Anchoring is member-level, so anyone who can write the citation can declare it.
 | --- | --- |
 | Ledger | `https://app.memolok.ai/m/<mdlGuid>` |
 | Decision record | `https://app.memolok.ai/m/<mdlGuid>/MDR-<mdrNumber>` |
+| Decision record, staged | `https://app.memolok.ai/m/<mdlGuid>/MDRh<mdrHandle>` — a working link people share while deliberating, never a citation; it moves to the number at admission |
 | Matter | `https://app.memolok.ai/m/<mdlGuid>/<mt_…>` |
 | World Fact | `https://app.memolok.ai/m/<mdlGuid>/<wf_…>` |
 | Observed Outcome | `https://app.memolok.ai/m/<mdlGuid>/<oo_…>` |
@@ -126,9 +134,20 @@ Anchoring is member-level, so anyone who can write the citation can declare it.
 
 Every address is the identifier you already hold, under the ledger's own address where the
 identifier is the ledger's, and a record is its citation form exactly: `MDR-7` in prose,
-`…/MDR-7` in an address. Write identifiers in the case Memolok returned them. The `/m/` namespace
-holds these addresses and nothing else, and is kept apart from the application around it so that a
-reorganisation of the application never moves one: a citation written now stays good.
+`…/MDR-7` in an address. Write identifiers in the case Memolok returned them. A note's `msp_…` is
+unique everywhere, but its address still sits under its ledger: `…/m/<msp_…>` alone names nothing.
+The `/m/` namespace holds Memolok's addresses and nothing else, and is kept apart from the
+application around it so that a reorganisation of the application never moves one: a citation
+written now stays good.
+
+> **Not built yet.** A feedback report, a user and a service principal have addresses too —
+> `https://app.memolok.ai/m/<mfb_…>`, and `…/m/<musr_…>#id` or `…/m/<msvc_…>#id` naming the
+> principal itself — but none of them opens yet. Give a reader the identifier rather than a link
+> that leads nowhere.
+
+**A record sealed before these addresses existed may quote older ones** —
+`https://www.memolok.ai/mdl/…`, a bare ledger guid, an `sp_…` note id. None was ever served and nothing redirects them: quote the
+record as it stands, and write the current address in your own reference.
 
 **A record's part is addressed under its record**: the record's address, then `#`, then the part's
 id exactly as the record holds it, from your own read, `…/MDR-7#oq-backup`. Citing a part cites its
@@ -156,7 +175,8 @@ the form.
 | Anything else — email, chat, a ticket, another tool's payload | The address, written out |
 
 **A record's part takes its record's form**: `MDR-7#oq-backup` wherever a bare `MDR-7` may stand,
-and its full address everywhere else.
+and its full address everywhere else. **So does every other ledger entry**: a bare `wf_…`, `mt_…`,
+`oo_…` or `an_…` where `MDR-7` may stand bare, and its address everywhere else.
 
 **What binds, in short:** in code and in a commit message, a `.memolok/mdl.yml` inside that same
 repository; in notes only this project's sessions load, the project's own `.memolok/mdl.yml`; in
@@ -178,7 +198,9 @@ deliberate: a corrupted handle fails loudly instead of degrading into a citation
 > **A staged record's handle stays in your sessions.** `MDRh7` names it in chat and in session notes
 > that are neither committed nor sent — a plan nobody commits, a hand-off pasted into the next
 > session. It never goes into anything committed to a repository or sent to anyone: not a source
-> file, a document, a commit message, a ticket, or a payload you hand to another tool.
+> file, a document, a commit message, a ticket, or a payload you hand to another tool. Feedback to
+> Memonos is the one exception: it may name a draft by its handle, because the team behind Memolok
+> resolves one reliably.
 
 The test is where the text will live, decided when you write it, not what kind of document it is. A
 hand-off that gets committed is a project artifact, and text a note drafts for copying into one is
