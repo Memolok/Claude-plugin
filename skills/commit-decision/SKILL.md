@@ -126,10 +126,10 @@ Offer **Rejected** as readily as Accept, and in more situations than an exhauste
 
 ## After t₀
 
-**The record now has a number, which is the thing the work could not name pre-t₀.** If anything
-outside the ledger is going to cite it — code, documentation, a commit message, a message to
-somebody — this is the moment that becomes possible, and the citation has to be anchored before it
-is written. The **`memolok-citations`** skill carries the order and the form.
+**The record receives a number at t₀ (in addition to its handle).** If anything outside the ledger is
+going to cite it — code, documentation, a commit message, a message to somebody, notes kept for later
+sessions — this is the moment that becomes possible, and the citation has to be anchored before it is
+written. The **`memolok-citations`** skill carries the order and the form.
 
 ## Tips
 

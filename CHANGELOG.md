@@ -23,6 +23,9 @@ matches — you are asked to update only when your pack genuinely stops working.
 - **A rejection's preview marks every alternative ❌.** When your agent shows you a draft it means to
   record as Rejected, each alternative carries ❌, as a rejected record's page in the portal shows
   them.
+- **References in notes kept for later sessions are anchored too.** Before your agent cites a
+  decision record in its own memory or other notes that outlast the session, it anchors the record
+  and writes the citation in a form that names the ledger, as it does for code and documents.
 
 ## 0.38.0-beta — 2026-10-30
 

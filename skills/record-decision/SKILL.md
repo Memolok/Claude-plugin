@@ -42,8 +42,9 @@ Rules A–G.
 - Say "captured" only after a write succeeded — before that, say *drafting* or *got it*
 - Cite `MDR-{n}` once admitted (anywhere), `MDRh{handle}` or a head Claim paraphrase while staged (only in chat and in session notes nobody commits or sends); never a bare handle (Rule F)
 - Check `retractable` before proposing an uncommit
-- Writing an identifier into anything committed or sent → load the **`memolok-citations`** skill
-  first; a record reference has to be anchored, and cannot be written before t₀ at all
+- Writing an identifier into anything that outlasts the session → load the **`memolok-citations`**
+  skill first; a committed or sent record reference has to be anchored, and cannot be written
+  before t₀ at all
 
 ## Workflow
 
