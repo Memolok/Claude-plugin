@@ -1,7 +1,7 @@
 # The world almanac
 
-Deciders do not only weigh options. They work against facts that are true regardless of what they choose:
-*the budget is $10,000*, *our team knows Java*, *legal requires seven-year retention*, *the wall is
+Deciders do not only weigh options. They work against facts that are outside their control: *the
+budget is $10,000*, *our team knows Java*, *legal requires seven-year retention*, *the wall is
 load-bearing*.
 
 These are not decisions. They are the boundaries of the possible — the signposts that make some options
@@ -20,7 +20,8 @@ place for it to live.
 And if ten decisions all leaned on the old figure, embedding gives you no way to find them.
 
 Referencing solves all three. The decision records that it relied on the budget as it stood; the almanac
-records what the budget was, and when that changed.
+records what the budget was, and when that changed; and the decisions that leaned on the old figure can
+be found by reading which ones cite it.
 
 ## A fact can also start the work
 
@@ -29,6 +30,18 @@ is often the reason somebody sits down to decide anything at all — and Memolok
 analysis names the admitted fact as the input it took up. The alternative would be retyping the fact as a
 raw complaint so that something could point at it, which would leave the ledger holding the same thing
 twice and no trace that either led to the other.
+
+## What your own decisions produce is not a fact
+
+The test is whether it would stop if this ledger decided to stop it. *The vendor publishes its
+version at a fixed address* is a world fact. *Our service publishes its version at a fixed address*
+is not, however well verified: it is there because somebody here decided it, so the honest way to
+lean on it is to name that decision, and what was observed after it belongs in its wake. Another
+team's decision passes the test — you cannot stop it, so to you it is part of the world.
+
+A fact that rests on a public page states the property that matters and links the page, with the
+date it was read, rather than copying the page in. A copy would need a correcting fact every time
+the page changed, because a fact is never edited.
 
 ## Corrections, not edits
 
@@ -48,6 +61,8 @@ shifting world and nobody's attention.
 > **Not built yet.** Admitting facts and recording corrections works today. Memolok does not yet scan the
 > ledger to tell you which decisions relied on a fact that was later corrected, or which have decayed. The
 > links are recorded faithfully, so the answer is recoverable by reading — but nothing surfaces it for you.
+> Nor can it yet tell you whether a given fact has since been corrected: a correction names the fact it
+> replaces, and the old fact does not point forward to it.
 
 ## Why it outlives the people
 

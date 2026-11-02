@@ -56,6 +56,14 @@ letters except `I`, `L`, `O`, `U` — lowercase on the wire, and a hyphen is ref
 ignored. **Never construct, truncate, complete or pattern-match one.** Pass back exactly what you
 were handed.
 
+**An id exists only once the call that creates it has returned.** Anything that cites an entry,
+whether a reference field (`motivatedBy`, `hasContext`, `correctsFact`, `tests`) or an id written
+into prose, goes out after that reply and uses the value it carries: never in the same parallel
+batch, never with a stand-in to fix later. A reference field refuses an unknown id; prose is not
+checked, and a Matter cannot be edited at all. A record's handle and number follow the same rule.
+Ids you name yourself (`alt-`, `eo-`, `oq-`) are yours to choose. Code, commits and documents:
+`memolok-citations`.
+
 All prose parameters use `{ markdown, lang? }` — see `prose-and-raci.md` for which are wrapped in a
 `description` key.
 
@@ -79,7 +87,8 @@ rather than proceeding and hitting write errors that read as data problems.
 
 ### `whoami`
 
-No parameters. Returns `{ userId, givenName, familyName, mbox }`.
+No parameters. Returns `{ userId, iri, givenName, familyName, mbox }`, the last three only when held.
+`iri` is the user as every record names them: write it as given, never assembled from `userId`.
 
 ### `get_MDLs`
 
@@ -158,9 +167,14 @@ Per-tool filters and natural order are below. Nothing else about the shape varie
 
 **`get_MDR` answers what a record decided; `get_MDR_details` answers why and how.** This is the read
 for finding out about a record. Returns `mdrHandle`, `mdlGuid`, `mdrNumber`, `status`, `retractable`,
-`title`, `createdAt`, `decidedAt`, `hasNeed`, `verdict`, every open question whole, and every edge —
-`hasContext`, `analysisId`, `supersedes`, `supersededBy`, `amends`, `amendedBy`, `dependsOn`,
-`conflictsWith`, `settlesOpenQuestion` — plus a `details` key sizing the prose it leaves out.
+`title`, `createdAt`, `createdBy`, `decidedAt`, `hasNeed`, `verdict`, every open question whole, and
+every edge — `hasContext`, `analysisId`, `supersedes`, `supersededBy`, `amends`, `amendedBy`,
+`dependsOn`, `conflictsWith`, `settlesOpenQuestion` — plus a `details` key sizing the prose it leaves
+out.
+
+`createdBy` is Memolok's own account of who created the record: its owner, and who answers for it.
+Nobody writes it. The four RACI fields are testimony, and `authoredBy` is not its creator. It is
+`null` where Memolok holds no account of the creation; never read `authoredBy` in its place.
 
 Cite the handle when you have one. The identity section above says why a number is a read-only
 convenience, and the handle the response carries, cited as `MDRh`, is what every other tool takes.
@@ -181,8 +195,8 @@ as it stands.
 
 Shared discovery params, plus `status` (string, optional; an unknown value is refused by name). Ledger
 order: by number, then handle. Per record: a heading, `MDR-7 (handle 11)` or `MDRh12 (staged — no
-number yet)`, `Decided:` (t₀ — absent while staged, and removed by an Uncommit), `Status:`, the terms
-it names, its summary and an excerpt of its head Claim.
+number yet)`, `Decided:` (t₀ — absent while staged, and removed by an Uncommit), `Status:`,
+`Created by:`, the terms it names, its summary and an excerpt of its head Claim.
 
 **Search covers the whole fish** — Claim, Verdict, alternatives, deliberation facts, expected
 outcomes, open questions — so a hit can look unrelated to its heading; the match window shows where it
@@ -234,8 +248,8 @@ nothing can yet answer that. Do not present an old premise as current merely bec
 Shared discovery params, plus `mdr` (`MDRh7` or `MDR-7`, optional), which narrows to one record's
 wake.
 Observation order, oldest first. Per outcome: a heading, its id, the record it was realized from in
-both keys, how it was discovered, `testResult` where it tests a promise, `Observed:`, subjects and
-summary.
+both keys, how it was discovered, `testResult` where it tests a promise, `Observed:`, `Created by:`,
+subjects and summary.
 
 **The heading never judges the decision**: the derivation sees the observer's claim alone, not the
 expectation the entry tests. Whether a promise held is `testResult`, nothing else.
@@ -273,7 +287,8 @@ rendered on a discovery page.
 ### `get_observed_outcome`
 
 `get_observed_outcome` takes `mdlGuid` + `observedOutcomeId` and returns the whole observation, plus
-the derived `title`, `summary` and `subjects` where Memolok has produced them.
+the derived `title`, `summary` and `subjects` where Memolok has produced them. `createdBy` is the
+account that recorded it, Memolok's own account; `observedBy` is testimony of who saw it.
 
 ### `get_MDR_learning_delta`
 
@@ -286,7 +301,8 @@ Only a ledger resident has a learning delta, so a staged record is not found, ho
 
 Returns each expected outcome with the wakes that test it, plus every Emergent and Deducible wake
 again on its own, so one that tests an outcome appears in both places. Coexisting assessments are all
-returned — there is no "current result" field.
+returned — there is no "current result" field. Each wake carries `createdBy` as
+`get_observed_outcome` does.
 
 ## Write tools
 
@@ -346,7 +362,8 @@ files are available, offer to update it.
 | `description` | `{ markdown, lang? }` | yes |
 
 Returns `{ id, mdlGuid, createdAt, body }`. Record the raiser's words **verbatim** — do not sharpen
-here.
+here. Cites another entry? Create it first and use the id it returns; a matter's words cannot be
+edited.
 
 `createdAt` and `raisedBy` are minted by the server from the call itself; there is no parameter
 for either. **`raisedBy` is the one thing here that cannot be recovered later** — the creation
@@ -506,8 +523,9 @@ carries when, and in what form the citation is written.
 Member-level, deliberately: gating it above the write it accompanies would leave the citation
 unanchored.
 
-`project` is a citation in a project artifact — a source file, a document in the repository. `other`
-is anywhere else one can go: an email, a chat message, a ticket, a slide. **Only the kind is
+`project` is a citation in a project artifact — a source file, a document in the repository, a commit
+message, notes kept for later sessions. `other` is anywhere else one can go: an email, a chat
+message, a ticket, a slide. **Only the kind is
 recorded, never where the citation lives**, so there is no location parameter to look for and none to
 supply. Declaring the same kind twice is a no-op.
 
@@ -683,7 +701,7 @@ modifiedAt, body }`; `get_feedback` shows what landed.
 | `The {field} reference belongs to a different Memolok Decision Ledger.` | Cross-ledger reference |
 | `Use transition_MDR_status to change Memolok Decision Record status.` | `status` in a patch |
 | `Cannot change the {label} on a ledger-resident Memolok Decision Record ({status}).` | Tier-1 patch after t₀ |
-| `Inter-record graph links may only be authored on staged Memolok Decision Records.` | Graph patch on a resident |
+| `Cannot change {field}: inter-record graph links may only be authored on staged Memolok Decision Records.` | Graph patch on a resident |
 | `No updatable fields were provided.` | Empty or no-op patch |
 | `Cannot transition a Memolok Decision Record from {from} to {to}.` | Illegal transition |
 | `supersedes may only target Accepted residents (MDR-{n} is {status}).` | Bad supersession target. A `Superseded` one has already been retired, so a second attempt has nothing to retire |
@@ -694,9 +712,9 @@ modifiedAt, body }`; `get_feedback` shows what landed.
 | `Only Accepted or Rejected Memolok Decision Records may be Uncommitted.` | Wrong status for uncommit |
 | `Only a ledger-resident Memolok Decision Record can be Anchored. A staged record has no ledger number for anything to cite.` | `anchor_MDR` on a staged record — wait for admission |
 | `kind must be one of project, other.` | `anchor_MDR` with anything else; the vocabulary is closed |
-| `{field} names a user in the retired form https://www.memolok.ai/users/<user id>; …` | An agent written in a form Memolok no longer accepts. Write the user as `https://app.memolok.ai/m/<userId>#id` |
+| `{field} names a user in the retired form https://www.memolok.ai/users/<user id>; …` | An agent written in a form Memolok no longer accepts. Write the user's `iri` from `whoami` |
 | `{field} names no principal Memolok holds: {value}.` | A Memolok IRI naming no account Memolok holds, often an id misremembered. Take it from `whoami` or a record that carries it; nothing was written |
-| `{field} is under Memolok's namespace but is no principal's IRI; …` | A value under `https://app.memolok.ai/m/` that is not `…/m/<userId>#id`. Correct the form, or write someone outside Memolok without that prefix |
+| `{field} is under Memolok's namespace but is no principal's IRI; …` | A value under `https://app.memolok.ai/m/` that is not a principal's `…/m/<musr_…>#id` or `…/m/<msvc_…>#id`. Correct the form, or write someone outside Memolok without that prefix |
 | `discoveryType Expected requires tests referencing an expectedOutcome.` | Missing `tests` |
 | `An analysis must take up at least one input; motivatedBy is empty.` | Empty `motivatedBy` |
 | `motivatedBy[i] was not found in this Memolok Decision Ledger. An analysis input is a Matter, a World Fact or an Observed Outcome.` | An input the ledger does not hold. The index is the position in your list; nothing was written |

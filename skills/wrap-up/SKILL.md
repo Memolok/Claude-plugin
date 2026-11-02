@@ -1,10 +1,11 @@
 ---
 name: wrap-up
 description: >-
-  Wrap up this interactive agent session by systematically saving what would be lost from
-  the agent context into a durable place. Use when the user says "wrap up", "we're
-  done here", "before I close this", "end of session", or asks "any loose ends?",
-  "anything else worth saving?", or is clearly preparing to finish up this work session.
+  Save what this session established to the Memolok ledger, the project or agent memory before the
+  session ends. Use when the user says "wrap up", "we're done here", "before I close this", "end of
+  session", or asks "any loose ends?", "anything else worth saving?", or is clearly preparing to
+  finish up this work session. A briefing for whoever picks the work up next is a hand-off, not
+  this.
 argument-hint: "(nothing — the session is the input)"
 ---
 
@@ -70,11 +71,13 @@ dynamic thing in the model, the world the most.
 | Recovery | Re-observe it | Re-run the whole exploration |
 | Cost of loss | One command | The deliberation, possibly to a different answer |
 | When noticed | Next time someone needs it | **Never** — the team simply re-decides |
-| Bias | Record when a persisting artifact *depends* on it | **Record.** There is no cheap path back |
+| Bias | Record when a persisting artifact *depends* on it | **Record.** There is no cheap path back — though alternatives weighed about how to carry out work leave nothing behind but the result, and need none |
 
-The asymmetry is the point. World facts look like findings and are the cheap class. Reasoned content
-never looks like a finding — it is merely what the session was talking about — and it is the half with
-no recovery path at all.
+The asymmetry is the point. Findings look like the cheap class. A probe of our own system is not a
+world fact: it fails the almanac's test, *would it stop if this ledger decided to stop doing it*, so
+it cites that record, or is a wake if it bears on that record's expectation. Reasoned content never
+looks like a finding — it is merely what the session was talking about — and it is the half with no
+recovery path at all.
 
 > **A wake is neither column, and question 2 will throw one away.** When what you are holding bears on
 > an expectation a sealed record already made, its value is not the fact and not the reasoning — it is
@@ -83,9 +86,9 @@ no recovery path at all.
 > command"* is not a reason to drop it: re-running it next month produces a **different** datum, not
 > this one. Skip question 2 and route it.
 
-A decision settled in conversation and never recorded does not stay neutral. It becomes a **phantom
-decision**: everyone glides over it as though it were resolved, and nobody can say who decided or why.
-Preventing that is the entire product.
+A decision that earns a record, settled in conversation and never recorded, does not stay neutral.
+It becomes a **phantom decision**: everyone glides over it as though it were resolved, and nobody
+can say who decided or why. Preventing that is the entire product.
 
 **Discard** is what remains when there is no residue, or the residue is already written somewhere that
 persists. It is never a verdict that something was not worth much.
@@ -191,9 +194,10 @@ not reimplement.
 
 | The item is | Destination | Owned by |
 | --- | --- | --- |
-| A choice made, with alternatives and a commitment | MDR | **`record-decision`**, then **`commit-decision`** |
+| A choice with alternatives weighed, a commitment, and a result that lasts or reasoning worth keeping | MDR | **`record-decision`**, then **`commit-decision`** |
 | Something someone should look at, nobody has yet | Matter | **`save-matter`** |
-| A premise decisions should rest on | World fact | **`manage-almanac`** |
+| A premise decisions should rest on, independent of this ledger's own decisions | World fact | **`manage-almanac`** |
+| A consequence of a sealed decision | A citation of that record from whatever depends on it | **`memolok-citations`** |
 | What actually happened after a sealed record | Observed outcome | **`record-outcome`** |
 | Worth keeping, nobody owes it anything | Scratchpad | **`manage-notes`** |
 
@@ -203,7 +207,7 @@ it, and a fact the project needs belongs *in the project*.
 | The item is | Destination |
 | --- | --- |
 | Operational knowledge someone on call will need | Runbook, README, docs |
-| A constraint the code should enforce or state | Code, config, comment |
+| A constraint the code should enforce or state | Code, config, comment — citing its record if one exists |
 | The *why* behind work already done | Commit message |
 | A record sealed this session that work in the repo implements, not cited there yet | Code, docs, commit message — **`memolok-citations`** owns the form and the anchor |
 | A draft record's `MDRh…` you remember writing into a file or a message this session — think back, don't search | Load **`memolok-citations`** and decide how to fix it |
@@ -219,7 +223,7 @@ the first one.
 
 | The item is | Destination | Note |
 | --- | --- | --- |
-| Useful to you across sessions, not to the team | Agent memory | A tooling concern, not a ledger artifact |
+| Useful to you across sessions, not to the team | Agent memory | A tooling concern, not a ledger artifact. Naming a ledger entry there → **`memolok-citations`** owns the form and the anchor |
 | Friction with Memolok itself, hit this session | Memonos, the team behind Memolok | **`send-feedback`** — leaves the user's machine |
 | Anything another connected tool owns | That tool | Its rules, not yours |
 | No residue, or the residue is already written | **Nowhere** | Say so in the dropped list |
@@ -235,7 +239,8 @@ Three calls that are easy to get wrong:
   would work. Where the working directory is discarded when the session ends, that inverts: the file
   is the half that does not survive, and routing the session's most durable material into it puts it
   in the one place guaranteed to lose it.
-- **World fact over scratchpad** when a decision might rest on it — the method's scratchpad rule.
+- **World fact over scratchpad** when a decision might rest on it — the method's scratchpad rule —
+  unless it is a consequence of this ledger's own decisions, which cites the record instead.
 - **Memolok friction is easy to miss, because much of it never errors.** `send-feedback` treats the end
   of a working session as its batching moment, so this is a handoff it expects, and it owns its own
   preview rules.
@@ -292,7 +297,7 @@ Writes, then drops. Nothing else.
 
 Against almanac spam the guard is: **record the premises and the gaps, not the work — if it is
 derivable from the diff, it belongs in the commit message.** Apply it to observed content only. Never
-to reasoned content, which is cheap-looking and expensive to lose.
+to reasoned content that earns a record, which is cheap-looking and expensive to lose.
 
 ## Limits
 

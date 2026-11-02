@@ -1,12 +1,13 @@
 ---
 name: manage-notes
 description: >-
-  The ledger's scratchpads: keep, find, revise and throw-away freeform working notes inside MDLs — pasted quotes,
-  scraped pages, rough figures, anything worth keeping that nobody is required to act on. Use when
-  the user wants to "keep this", "save this somewhere", "jot this down", "what did I save about X?",
-  "show me my notes", "add this to that note", "copy their note so I can change it", or "delete
-  that note". Also use when you have produced material that fits no typed entity and needs an
-  honest home.
+  Keep, find, revise or delete freeform working notes on a Memolok ledger: pasted quotes, scraped
+  pages, rough figures. Use when the user wants something kept with nobody expected to act on it:
+  "keep this", "save this somewhere", "jot this down", "what did I save about X?", "show me my
+  notes", "add this to that note", "copy their note so I can change it", "delete that note". Also
+  when you have produced material worth keeping that is not a decision, a premise, or something to
+  act on. Somebody should act on it later → `save-matter`; useful only to you across sessions →
+  agent memory; needed by the project → a file in the repo.
 argument-hint: "<what to keep, or what you're looking for>"
 ---
 
@@ -118,6 +119,10 @@ of the note's opening words, not a description of it: it will not tell you what 
 can be referred to without anybody having invented a name for it. Where a note has none yet, build a
 handle from its opening words and the date: *"the Redis quote from the 7th"*, *"the scraped
 pricing page"*. Do not volunteer the `msp_` id; cite it if the user asks.
+
+**Sharing a note.** Anyone working on the ledger reaches a note at its address under the ledger,
+`https://app.memolok.ai/m/<mdlGuid>/<msp_…>`; `…/m/<msp_…>` alone names nothing. Writing that address
+into anything that outlasts the session → **`memolok-citations`** owns where it may go.
 
 ## A note is its author's
 

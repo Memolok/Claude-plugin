@@ -43,6 +43,6 @@ the design threads, strategy chats, and meeting transcripts where choices actual
 can read and write as the conversation happens, so that practitioners never face a blank form.
 
 > **Not built yet.** That direction is the design intent, not a description of the product. Today Memolok
-> records decisions through this plugin and stores them dependably. There is no meeting capture, no
-> automatic distillation from conversation, and no browsing surface — recording still happens because a
-> person, or an agent working with them, decides to record it.
+> records decisions through this plugin and stores them dependably. There is no meeting capture and no
+> automatic distillation from conversation — recording still happens because a person, or an agent
+> working with them, decides to record it.

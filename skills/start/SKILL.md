@@ -4,7 +4,7 @@ description: >-
   Get set up with Memolok — check the connection, sign in, and pick or create a decision ledger. Use
   when someone is trying Memolok for the first time, when a Memolok tool returns an authentication
   error, when Memolok "isn't connecting", or when they need to choose between several ledgers or
-  create their first one.
+  create one.
 ---
 
 # /memolok:start — Get set up
@@ -44,8 +44,7 @@ ping → "pong"
 If that fails, the connection is not established — go to `references/connect-and-auth.md`. Do not
 attempt ledger calls; every one of them will fail the same way.
 
-Optionally `whoami` to confirm identity, which is also what supplies the `userId` in a user's IRI,
-`https://app.memolok.ai/m/{userId}#id`, for attribution.
+Optionally `whoami` to confirm identity. Its `iri` is how a record names the user, written as given.
 
 ## Step 3 — Find the ledger
 

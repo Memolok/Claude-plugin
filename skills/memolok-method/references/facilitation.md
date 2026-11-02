@@ -1,4 +1,4 @@
-# Facilitation — the fish, the transaction, the lifecycle, Rules A–E and G
+# Facilitation — the fish, the transaction, the lifecycle, Rules A–E and G–I
 
 > N.B.: This file is loaded by every skill that writes a record; it's deliberately terse for token economy. Do not emulate this writing style.
 
@@ -15,7 +15,7 @@ An **MDR** is one self-contained unit of reasoning — a fish:
     ╲──────────╱
       Verdict            ← waist: moment of agency ("we commit because…"); `verdict`, `chosenAlternative`
     ╱──────────╲
-   expectedOutcomes      ← tail: measurable bets at t₀ — gains, costs, risks, deps; assessed later
+   expectedOutcomes      ← tail: falsifiable bets at t₀ — gains, costs, risks, deps; assessed later
                             against the wake
    openQuestions         ← alongside: what this record explicitly does not settle
 ```
@@ -27,7 +27,8 @@ Silhouette is a diagnostic: starts wide, converges twice, or has no tail → aut
 **Falsifiable, precisely:** a Need is falsifiable if and only if some future admission — an observed
 outcome tested against a resulting expected outcome, or a corrected world fact — could confirm or
 refute whether the chosen path satisfied it. Property of the **Need's own testability**, not of how
-specific the chosen mechanism is.
+specific the chosen mechanism is. An **expected outcome** passes the same test on its own: some
+later observation must be able to refute it.
 
 **Analysis** = first-class bridge from raw input to sharpened need, preserving provenance:
 
@@ -54,6 +55,39 @@ its shape: who took it up, when, what they produced.
 commits the Verdict at t₀. In solo sessions **"Expert #1" is not your private drafting seat**: with
 no separate human there you inherit it by name only, and the head Claim is still co-discovered with
 the user, never authored by you and handed down.
+
+## Who held each role
+
+`authoredBy`, `decidedBy`, `consulted`, `informed`, `observedBy` = **testimony**: what you tell
+Memolok about who took part, stored as written. Memolok separately records the account behind every
+write, from its credential; nobody sets that, that account answers for the record, and reads show it
+as `createdBy`. So name whoever actually held each role, never whoever holds the credential by
+default.
+
+**Run mode sets the defaults.** Interactive, unless the user's instructions say to proceed without
+them or nobody can answer (a scheduled or headless run) → unattended.
+
+| Role | Holder | When |
+| --- | --- | --- |
+| `authoredBy` | Whoever wrote the record's text: you when you drafted it, which in facilitation is nearly always; the author of an existing document the record transcribes. Says who wrote it, not whose need it is | Creation |
+| `decidedBy` | Whoever made the choice. Interactive: the user, said aloud in the ceremony, unless they correct it; someone else's decision → that person. Unattended: you when you chose, the user when their brief made the choice. You are also the decider if the user only seals your choice, unless they changed it. Several deciders → one body in plain text, its members under `consulted` | Just before the seal, **Rejected** included |
+| `consulted`, `informed` | Only those the conversation or brief places in the role, if any | As they surface |
+| `observedBy` | Whoever saw the result; you if you measured it | With the wake |
+
+Holder unclear → interactive: ask once, at the moment of writing; unattended: leave the role unset.
+Never guess, and never stop an unattended run to ask.
+
+**How each is named:**
+
+- **Yourself:** your model's display name exactly as its vendor writes it, such as `Claude Opus 5.5`,
+  and nothing else: no model ID, task, role, date, session, product, or "on behalf of" (the
+  credential already says whose). Model unknown → use the generic brand name you know (`Claude`,
+  `Gemini`, `ChatGPT`, etc). Every session of one model must write the same string, so use the most
+  sensible option you'd expect unrelated sessions to use.
+- **A Memolok member:** their IRI as given, the `iri` from `whoami` or copied from a record that
+  already carries it; never assembled, never from memory: an IRI naming no account Memolok holds is
+  refused. `whoami` only when you will name the user.
+- **Anyone else:** whatever identifies them — a name, an address, their own URI.
 
 ## Decision Transaction Principle
 
@@ -230,3 +264,31 @@ them. Each symptom is a prompt to check, not a ban.
 - **Names its subject only as the session knew it.** *the sweep, these routes, the new approach, the
   migration* → name the component, module or area, in the words a later search would use. Not a
   mechanism: the subject was askable before any alternative, so it passes the test above.
+
+### Rule H — Neither the present nor another draft is an objection
+
+Governs what **you** offer; the user's reasons are theirs. **Current behaviour** is a measurement
+for the belly — what exists, what changing it costs — never a Claim or an objection: its inadequacy
+is usually why the decision is being taken. Before offering *"but today X"*, check: does it change
+the decision, or only describe what is being replaced? **A third party's published guidance** binds
+nothing; a limit that truly binds is a premise → **World Fact**. A course that matches the present,
+a draft or a vendor's advice is fine; resting on it is not.
+
+**Another decision's staged record binds nothing.** Read it only to learn whether the ground is
+contested, say that it binds nothing, move on; its open questions are not gaps to fill. The draft in
+hand is different: Rule E builds against it. Even sealed, a decision to *explore* commits an
+exploration, not an architecture. Sealed records → the core's *When a change meets a sealed
+record*.
+
+### Rule I — The waist commits, the tail bets
+
+**Verdict** = what is adopted and which rule is followed: the rule, never the string it resolves
+to. Naming what it replaces is fine; narrating the present state or the defect that prompted the
+work is not — Rule G's *Points at the present* places those. *Not settled here* → `openQuestions`
+if Rule D's test passes, else cut. **Tail**: each item falsifiable (above) → vague becomes a
+deliberation fact, never a softened bet. **Accepted** needs one → none left: ask the user what they
+would see if the choice failed; never invent a bet.
+
+**No draft history in any record prose.** A clause that exists only because of an earlier draft, a
+correction or an incident that impressed the author is a scar, permanent once sealed — *"this
+replaces an earlier question about…"* is the tell. A record's reason for existing is not one.

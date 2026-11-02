@@ -22,6 +22,30 @@ matches — you are asked to update only when your pack genuinely stops working.
 
 *Everything that has landed has shipped. This section is a placeholder.*
 
+## 0.39.0-beta — 2026-11-02
+
+- **Your agent tells you before it cites a decision.** Naming a decision in code, a document, a
+  ticket or the notes it keeps for later sessions anchors it, so it can never be withdrawn: your
+  agent says so first, and you can have it described in words instead. Every address it writes
+  opens, and a decision's references follow it when it is amended or replaced.
+- **Your agent records who took part.** It names itself, by its model's name, as the author of what
+  it drafts and you as the one who decided, saying so before it seals, and it can tell you which
+  account created an entry.
+- **Records say only what they can honestly carry.** A Verdict states what is adopted, an expected
+  outcome is one a later observation could disprove, and how things work today or another decision's
+  draft is no longer offered as an objection. Your agent offers to record a choice only when its
+  result will last.
+- **World facts exclude what your own decisions produce**, and a fact resting on a public page links
+  it instead of copying it.
+- **A decision with no amendment is reported as probably, not certainly, still in force**, and your
+  agent re-reads a record before quoting, citing or anchoring it.
+- **Your agent picks the right skill more often**, and loads the citations guidance before it writes
+  a decision's number anywhere lasting.
+- **`help` catches up** with all of this and corrects several overstatements; its glossary adds
+  handles, the almanac, ledger roles and Memonos.
+- **A rejection's preview marks every alternative ❌**, and a report to Memonos may name a draft by
+  its handle.
+
 ## 0.38.0-beta — 2026-10-30
 
 - **Every entry's citation address opens.** Your agent tells you that any entry's

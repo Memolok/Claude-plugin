@@ -1,12 +1,11 @@
 ---
 name: revise-decision
 description: >-
-  Change a decision that is already sealed on the ledger — amend part of it, supersede it with
-  a successor, uncommit and re-admit a retractable record, or settle a question an earlier record
-  left open. Use when the user regrets a recent commitment, says a sealed record is now wrong or out
-  of date, says part of it no longer holds, wants to withdraw or replace a prior decision, changes
-  direction on something the ledger already decided ("we're moving off X"), or asks how to fix
-  something they already accepted.
+  Change a decision already sealed on a Memolok ledger. Use when the user says a sealed decision is
+  wrong, out of date or only partly holds, regrets a recent commitment, wants to withdraw or replace
+  it, changes direction on something the ledger already decided ("we're moving off X", "we should
+  switch from X to Y"), asks how to fix something they already accepted, or answers a question an
+  earlier decision left open. They are reporting what happened since → `record-outcome` first.
 argument-hint: "<record> <what changes>"
 ---
 
@@ -45,7 +44,7 @@ Principle is the whole subject of this skill.
 - **Read `retractable` before proposing anything** — it decides the route
 - Never tell the user a committed record can be patched in place
 - Say "captured" only after the write succeeded
-- Cite `MDR-{n}` once admitted (anywhere), `MDRh{handle}` or a head Claim paraphrase while staged (only in chat and in session notes nobody commits or sends); never a bare handle (Rule F)
+- Cite `MDR-{n}` once admitted (in the form **`memolok-citations`** gives for where it is written), `MDRh{handle}` or a head Claim paraphrase while staged (only in chat and in session notes nobody commits or sends); never a bare handle (Rule F)
 - **Never** propose a revision because a record no longer matches the ledger's stated purpose
 
 ## Workflow
@@ -59,6 +58,8 @@ get_MDR(mdlGuid, mdr)
 `get_MDR` answers what a record decided; `get_MDR_details` answers why and how. What it decided is
 enough to route. Read `get_MDR_details` before drafting an amendment or a successor: what it changes
 may sit in an alternative, an argument or an expected outcome, and `get_MDR` carries none of those.
+A missing `amendedBy` or `supersededBy` is weak evidence that a record still governs; an edge exists
+only if someone recorded it, so weigh the prose before routing on the graph.
 
 ### 2. Route on how much is wrong
 
@@ -90,6 +91,9 @@ meant to be there — where nothing has come to depend on the record yet.
 3. `update_MDR` while staged. Everything is patchable again.
 4. `transition_MDR_status` to re-admit, with the ceremony from **`commit-decision`**. This is a fresh
    t₀, not a resumption of the old one.
+5. **Rewrite what cited the old number.** `retractable: true` proves only that nobody declared a
+   citation. Ask whether you or the user wrote the old number anywhere, and rewrite each such
+   reference with the new one, through **`memolok-citations`**.
 
 Detail and payloads: `references/uncommit-and-readmit.md`.
 
@@ -148,6 +152,10 @@ record carries the new decision and names the old one.
 end, since only one has content to retire. Once each, too: superseding flips the target to
 **Superseded**, so a second attempt finds nothing left.
 
+**After an amendment or a supersession is sealed, the project's references follow it.** Where code
+or documents cite the target, the new record is cited beside it, with the relationship inside the
+parenthesis; **`memolok-citations`** carries the form and the anchor.
+
 ### 6. Settle an open question
 
 Different from every route above. The earlier record is not changing — a question it deliberately left
@@ -163,7 +171,8 @@ question and no number to target.
 
 Settling a question **anchors** the holder, so it can no longer be uncommitted.
 
-Both patterns: `references/open-question-settlement.md`.
+Both patterns: `references/open-question-settlement.md` — it carries the id and wording check, and a
+wrong edge anchors the holder and cannot be undone.
 
 ## Which route is honest
 

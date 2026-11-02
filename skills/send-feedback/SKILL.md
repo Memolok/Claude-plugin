@@ -1,12 +1,12 @@
 ---
 name: send-feedback
 description: >-
-  Send feedback about Memolok to Memonos, the team behind the project — a bug you hit, an
-  inconsistency you noticed, a skill that contradicts a tool, something the user wanted
-  and could not find. Use when a Memolok tool fails or misbehaves mid-task, when the user
-  says "report this to Memolok", "tell them this is broken", "that's a bug", "they should add X",
-  or at the end of a session where Memolok itself got in the way.
-  Not for the user's own ledger — this only goes to Memonos.
+  Report a problem with Memolok itself to Memonos, the team behind it: a Memolok tool that fails or
+  misbehaves, an inconsistency, a skill that contradicts a tool, something the user wanted from
+  Memolok and could not find. Use when that happens mid-task, or when the user says "report this to
+  Memolok", "tell Memolok this is broken", "Memolok should add X". A bug in the user's own work →
+  `save-matter`; a sign-in or authentication error → `start`; the session is ending → `wrap-up`,
+  which routes here.
 argument-hint: "<what went wrong, or what should exist>"
 ---
 
@@ -155,6 +155,10 @@ sees two ordinary responses and no reason they conflict.
 
 **`userVerbatim`** carries the practitioner's words when they dictated something. Copy them exactly.
 Your own write-up goes in `report`, beside it, never merged into it.
+
+**Name a record by whatever identifier you hold, a draft's handle included.** Memonos resolves an
+`MDRh…` reliably, so a report is the one text sent outside your sessions that may carry one; a
+call record quoting `"mdr": "MDRh7"` stays exactly as the call was made.
 
 ### 3. Preview, then send
 

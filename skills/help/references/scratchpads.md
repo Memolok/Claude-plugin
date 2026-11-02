@@ -42,7 +42,7 @@ to lose.
 
 When it is genuinely unclear, a note is the safer choice. It can be turned into a fact or a matter
 later. A matter cannot be un-raised; matters are permanent, and the only way to close one you
-registered by mistake is to record that you looked at it and decided not to act.
+registered by mistake is an analysis recording that nothing in it needed deciding.
 
 ## Why nothing can cite one
 

@@ -35,9 +35,11 @@ permits remote work"* as a world fact, then opens its own fish for VPN architect
 
 Bridges run both ways: engineering constraints can flow back into the executive ledger as world facts.
 
-Practically, this means bridging is just `admit_world_fact` in the receiving ledger. There is no
-cross-ledger tool, and no way to reference another ledger's record by id — you restate the relevant
-claim as a premise in your own almanac.
+Practically, this means bridging is just `admit_world_fact` in the receiving ledger: you restate the
+relevant claim as a premise in your own almanac.
+
+> **Not built yet.** A cross-ledger tool, and a record field that references another ledger's record
+> by id.
 
 ## Project bridges
 
@@ -51,7 +53,7 @@ record — its kind only, never its location — which is what stops an Uncommit
 citation names. It is asserted by whoever writes the citation, not detected. Form and precondition:
 the **`memolok-citations`** skill.
 
-The second direction is not on the tool surface, and neither is freezing a cited artifact at t₀.
+> **Not built yet.** The second direction, and freezing a cited artifact at t₀.
 
 ## Choosing a ledger
 

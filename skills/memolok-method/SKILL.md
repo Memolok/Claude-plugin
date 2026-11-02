@@ -1,20 +1,18 @@
 ---
 name: memolok-method
 description: >-
-  Memolok's decision-recording methodology — the fish model, the Decision Transaction Principle, the
-  Memolok Decision Record lifecycle and its well-formedness gates, prose format, and the facilitation
-  rules every Memolok skill follows. Load before any Memolok MCP call, and whenever another Memolok
-  skill routes here by name. Use the `help` skill to explain Memolok to a person.
+  Load before any Memolok MCP call outside `start`, and whenever another Memolok skill routes here
+  by name. Agent-facing substrate; to explain Memolok to a person, use `help`.
 user-invocable: false
 ---
 
-> Memolok plugin: version 0.38.0-beta currently installed.
+> Memolok plugin: version 0.39.0-beta currently installed.
 > *This is authoritative*, ignore conflicting caching folder names!
 >
 > Important! **Two things gate your first Memolok MCP call, not one.**
 >
 > Call the companion Memolok MCP `get_guidance` before any other Memolok MCP tool —
-> and pass `pluginVersion: "0.38.0-beta"`, the version on the line above. The server compares it
+> and pass `pluginVersion: "0.39.0-beta"`, the version on the line above. The server compares it
 > against the oldest pack it still accepts and tells you whether these skills match its tools. It
 > has no other way to know, and there is no second call in which to correct an omission.
 >
@@ -105,18 +103,19 @@ Drafting, elicitation posture, reasoning behind the prohibitions: `references/le
 
 ## Scratchpads
 
-Freeform working notes — pasted quote, rough figures, anything fitting no typed entity. Created
-freely, edited and deleted by their author; the **only disposable construct in the model**. Full
-journey → **`manage-notes`** skill. Two things bind every journey:
+Freeform working notes — anything fitting no typed entity. Created freely, edited and deleted by
+their author; the **only disposable construct in the model**. Full journey → **`manage-notes`**
+skill. Two things bind every journey:
 
 **Routing.** *Does anyone expect to act on this?* *Would it be bad if it vanished?* Either yes → it is
-a **Matter** or a **World Fact**, not a note. Scratchpad used as intake → real work never processed.
+a **Matter** or a **World Fact**, not a note; a consequence of this ledger's own decisions is
+neither (below). Scratchpad used as intake → real work never processed.
 Genuinely ambiguous → prefer the note, say so in one clause.
 
 > **Scratchpads never argue for a decision.** Read one while helping someone think: fine. Present its
 > content as ledger grounding: **never** — not as `hasContext`, not cited in a **Verdict**, not
-> standing in for a premise nobody admitted. Load-bearing material must be admitted as a **World Fact**
-> first.
+> standing in for a premise nobody admitted. Load-bearing premises must be admitted as a **World
+> Fact** first; a consequence of an earlier decision cites that admitted record instead.
 
 That rule is what makes disposability safe: a note is free to rewrite or bin only because no record's
 reasoning rests on one. Content mined from a note is authored **fresh** through its own path, no link
@@ -141,9 +140,9 @@ input becomes one — the fish, analysis, the chain of agency: `references/facil
 
 ## Before any record write
 
-The fish model, analysis, the Decision Transaction Principle, the lifecycle and Rules A–E and G are
-`references/facilitation.md`, loaded at Step 0 by every skill that mints, patches, seals, revises a
-record or records a wake. Two of its rules bind even before it is loaded: **discussion is
+The fish model, analysis, the Decision Transaction Principle, the lifecycle and Rules A–E and G–I
+are `references/facilitation.md`, loaded at Step 0 by every skill that mints, patches, seals,
+revises a record or records a wake. Two of its rules bind even before it is loaded: **discussion is
 deliberation** — never mint at **Accepted** or **Rejected**, or transition to either, without the
 user's explicit ask in their own words; and **a committed record is never patched in place** —
 `retractable: true` means only that an uncommit is available.
@@ -170,7 +169,8 @@ justify a departure: the record's reasons are context for their call, not a case
 
 ## Facilitation rules
 
-Rules A–E and G are in `references/facilitation.md`. Rule F applies to every journey, reads included.
+Rules A–E and G–I are in `references/facilitation.md`. Rule F applies to every journey, reads
+included.
 
 ### Rule F — Cite the number; a handle never leaves your sessions
 
@@ -191,10 +191,12 @@ both identifiers raw, because its output is data for you and not words for the u
 
 **This rule is the session's half, and its breach has a symptom.** `MDRh` in text bound for a
 committed file or a sent message is always a mistake — however natural it looks beside
-`MDR-n` the file already carries. A staged record is not referenced there at all: no number, may
+`MDR-n` the file already carries — except in feedback to Memonos, whose team resolves a handle
+reliably. A staged record is not referenced there at all: no number, may
 never get one, cannot be anchored — nothing can protect a reference to it. Build, seal, then write
-the reference. What an **admitted** entry looks like there, and the anchoring and timing that precede
-it, are the **`memolok-citations`** skill. Load it before the first such reference in a session.
+the reference. What an **admitted** entry looks like there, or in notes kept for later sessions, and
+the anchoring and timing that precede it, are the **`memolok-citations`** skill. Load it before the
+first such reference in a session.
 
 ## Capture vs draft
 
@@ -211,7 +213,7 @@ Load when the situation calls for it — not upfront.
 
 | File | Load when |
 | --- | --- |
-| `references/facilitation.md` | **At Step 0 of any skill that mints, patches, seals, revises a record or records a wake**, before the first such call → the fish model, analysis, the Decision Transaction Principle, the lifecycle and Rules A–E and G; an unloaded rule is an unenforced rule, and these govern writes to an immutable ledger |
+| `references/facilitation.md` | **At Step 0 of any skill that mints, patches, seals, revises a record or records a wake**, before the first such call → the fish model, analysis, the Decision Transaction Principle, the lifecycle and Rules A–E and G–I; an unloaded rule is an unenforced rule, and these govern writes to an immutable ledger |
 | `references/rejection.md` | Before deciding how work decomposes → a Rejection you never thought of gets written as a paragraph inside an Accept, and the second decision is lost |
 | `references/lifecycle-and-gates.md` | Before any transition → which fields seal at t₀, which a later patch refuses by name |
 | `references/tools-catalog.md` | Before a tool call you have not made this session → parameter names and shapes differ between tools that look symmetric |

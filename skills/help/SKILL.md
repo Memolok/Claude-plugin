@@ -86,7 +86,7 @@ Inside a ledger:
 - a *Memolok Decision Record* (*MDR*) holds one decision — use it when you know what you are deciding about, before or after reaching a verdict; records have a specific structure worth getting familiar with;
 - *Matters* are things you know will need a decision but have not analyzed yet — a regulatory requirement, a request, a bug report; they prompt records into existence through analysis;
 - an *Analysis* is the recorded work of turning raw input into a sharpened need — who did the sharpening and why — and it may honestly conclude that no decision is warranted. Its inputs are matters, world facts and observed outcomes in any combination, taken up as themselves;
-- *World Facts* make up the ledger's *almanac*: things true in the world that this ledger reasons from. Admitting one is a deliberate act you are responsible for, since you are the domain expert who can judge which facts are relevant;
+- *World Facts* make up the ledger's *almanac*: things true in the world, outside this ledger's control, that it reasons from. Admitting one is a deliberate act you are responsible for, since you are the domain expert who can judge which facts are relevant;
 - *Observed Outcomes* are what the world did afterwards — *the wake* — recorded beside the sealed record rather than inside it, because the record froze at commitment;
 - *scratchpads* are disposable notes with no lifecycle at all; use them however you see fit.
 
@@ -179,7 +179,7 @@ what you say.
 | --- | --- | --- |
 | What is this, why bother | Unrecorded decisions compound like technical debt | `references/decision-debt.md` |
 | Isn't this for big companies | Amnesia is not a team problem, it is a time problem | `references/solo-practitioners.md` |
-| Was that even a decision | No commitment, no decision — and no-choice situations are still choices | `references/what-counts-as-a-decision.md` |
+| Was that even a decision | No commitment, no decision — and no-choice situations are still choices; and not every choice earns a record | `references/what-counts-as-a-decision.md` |
 
 ### Why it is strict
 
@@ -188,6 +188,7 @@ what you say.
 | Why can't I edit a sealed record | Hindsight destroys the evidence the record exists to hold | `references/why-records-are-sealed.md` |
 | Doesn't sealing make us rigid | The opposite: the reasons are kept, so changing course is safe | `references/why-records-are-sealed.md` |
 | So it is permanent the second I commit | No — until something relies on it, it can be withdrawn on the record | `references/retractable-vs-anchored.md` |
+| How do I refer to a decision in a document or a ticket | By its number once committed; a draft's handle is for working with your team | `references/retractable-vs-anchored.md` |
 | Can't I just mark it obsolete | Nothing stops being true on its own; someone decided to stop | `references/supersession-and-withdrawal.md` |
 | Only part of it is wrong now | Amend that part; the rest of the decision keeps governing | `references/supersession-and-withdrawal.md` |
 | Why must I say what I expect | An unfalsifiable decision can never teach you anything | `references/expected-outcomes.md` |
@@ -207,13 +208,14 @@ what you say.
 | They asked | The short answer | Load |
 | --- | --- | --- |
 | Why can't the bug report be the need | The person in pain rarely speaks the business domain | `references/matters-and-analysis.md` |
+| Who gets named as author or decider | Whoever actually held the seat, with an account or without | `references/matters-and-analysis.md` |
 | How do I close something we never did | Honestly, and there are several honest ways | `references/closing-issues-honestly.md` |
 
 ### Context and boundaries
 
 | They asked | The short answer | Load |
 | --- | --- | --- |
-| Where do facts and assumptions go | The almanac — true regardless of any one decision | `references/world-almanac.md` |
+| Where do facts and assumptions go | The almanac — what is true outside this ledger's control | `references/world-almanac.md` |
 | How many ledgers should we have | One per shared worldview, not one per person | `references/ledgers-and-scope.md` |
 | Why does a ledger say what it is for | Because every session starts with no memory of the last | `references/ledger-intent.md` |
 | Where do rough notes go / why can't I cite my note | Scratchpads — the one disposable thing, and why nothing may point at it | `references/scratchpads.md` |

@@ -1,10 +1,12 @@
 ---
 name: revise-intent
 description: >-
-  State or revise what a Memolok ledger is for — its purpose, who it serves, and roughly where it is
-  heading. Use when someone asks "what is this ledger for", says the team's focus or the project's
-  scope has shifted, wants to write down why a ledger exists, or wants to update a purpose that has
-  gone stale. Not for changing decisions — that is a different job.
+  State or revise what a Memolok ledger is for: its purpose, who it serves, and roughly where it is
+  heading. Use when someone says the team's focus or the project's scope has shifted, wants to write
+  down why a ledger exists, or wants to update a purpose that has gone stale. A shift that is itself
+  a choice the team made is a decision first (`record-decision`, or `revise-decision` when it
+  reverses a sealed one); this skill only rewords the purpose afterwards. A premise →
+  `manage-almanac`.
 argument-hint: "[the ledger's purpose]"
 ---
 
@@ -21,7 +23,7 @@ read at the top of a cold session by whoever picks the ledger up next.
 
 Examples:
 
-- `/memolok:revise-intent what is this ledger for?`
+- `/memolok:revise-intent this ledger now serves the whole support team, not just engineering`
 - `/memolok:revise-intent we've widened this from just the API to the whole platform`
 - `/memolok:revise-intent this ledger has never said what it's about — let's fix that`
 - `/memolok:revise-intent the purpose is out of date, we stopped doing the migration work`

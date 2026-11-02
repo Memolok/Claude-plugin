@@ -1,10 +1,10 @@
 ---
 name: commit-decision
 description: >-
-  Seal a Memolok Decision Record at t₀ as Accepted or Rejected, after checking the gates and marking
-  the moment with the user. Trigger with "lock it in", "accept this", "reject that path", "commit
-  it", "we're going with that", or when the user explicitly asks to finalize a staged record. Both
-  outcomes are real commitments and neither can be edited in place afterwards.
+  Seal a Memolok decision record as Accepted or Rejected. Use when the record is already written to
+  the ledger and not yet sealed, and the user says to make it final: "lock it in", "accept this",
+  "reject that path", "seal it", "we're going with that", etc. Not on the ledger yet →
+  `record-decision`; already sealed → `revise-decision`.
 argument-hint: "[accept | reject] <record>"
 ---
 
@@ -37,7 +37,7 @@ skill: t₀ is a separate, explicit ceremony, never bundled into a recap.
 - All prose is `{ "markdown": "...", "lang": "en" }`
 - **Commit only when the user asked to, in their own words** — never because your draft reads firm
 - Say "captured" only after the write succeeded
-- Cite `MDR-{n}` once admitted (anywhere), `MDRh{handle}` or a head Claim paraphrase while staged (only in chat and in session notes nobody commits or sends); never a bare handle (Rule F)
+- Cite `MDR-{n}` once admitted (in the form **`memolok-citations`** gives for where it is written), `MDRh{handle}` or a head Claim paraphrase while staged (only in chat and in session notes nobody commits or sends); never a bare handle (Rule F)
 - Open questions do **not** block commit (Rule D)
 - The ledger's stated purpose bears on **nothing** here — never raise a mismatch with it before a seal
 
@@ -84,9 +84,10 @@ State what is being committed, name what seals, and ask once:
 
 > **Ready to seal this on the ledger.**
 >
-> You're committing to **a single drive plus a scheduled off-device backup** for the FLAC library.
-> The moment I commit, the server stamps the decision time and the record seals — Verdict,
-> alternatives, expected outcomes and open questions all become immutable ledger evidence.
+> You're committing to **a single drive plus a scheduled off-device backup** for the FLAC library,
+> and I'll record you as the one who decided. The moment I commit, the server stamps the decision
+> time and the record seals — Verdict, alternatives, expected outcomes and open questions all become
+> immutable ledger evidence.
 >
 > **Still open by design:** backup destination and schedule. That travels with the record and can be
 > settled by a later decision.
@@ -98,9 +99,21 @@ Then wait for an explicit yes.
 Naming the open questions here is deliberate: it shows they are intended, so the user is not surprised
 to find them frozen on the record later.
 
+So is naming who decided: said aloud, a wrong decider gets corrected before it is recorded. Who that
+is, with a user present or in an unattended run, is *Who held each role* in the method's
+`facilitation.md`.
+
 Ceremony variants — rejection, one-shot mint, terse mode: `references/ceremony.md`.
 
 ### 4. Transition
+
+Unless the record already names the right decider, set it first, Rejected included:
+
+```json
+{ "mdlGuid": "<mdlGuid>", "mdr": "MDRh1", "patch": { "decidedBy": "<iri from whoami>" } }
+```
+
+Then the transition:
 
 ```json
 { "mdlGuid": "<mdlGuid>", "mdr": "MDRh1", "status": "Accepted" }
@@ -126,10 +139,11 @@ Offer **Rejected** as readily as Accept, and in more situations than an exhauste
 
 ## After t₀
 
-**The record now has a number, which is the thing the work could not name pre-t₀.** If anything
-outside the ledger is going to cite it — code, documentation, a commit message, a message to
-somebody — this is the moment that becomes possible, and the citation has to be anchored before it
-is written. The **`memolok-citations`** skill carries the order and the form.
+**The record receives a number at t₀ (in addition to its handle).** If anything outside the ledger is
+going to cite it — code, documentation, a commit message, a message to somebody, notes kept for later
+sessions — this is the moment that becomes possible, and the citation has to be anchored before it is
+written, with the user told first that an anchored record can never be uncommitted. The
+**`memolok-citations`** skill carries the order and the form.
 
 ## Tips
 

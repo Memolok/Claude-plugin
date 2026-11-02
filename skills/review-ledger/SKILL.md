@@ -1,13 +1,14 @@
 ---
 name: review-ledger
 description: >-
-  Read back what a Memolok ledger already holds — decisions, their status, unsettled deferrals, and
-  parked matters nobody has picked up. Use when the user asks "what did we decide about X", wants
-  a scan of records by status, asks which questions were left open, wants to know what is waiting to
-  be looked at, or needs a record's status before changing it. Also use before acting on any claim
-  that the ledger is missing something — importing material, checking whether a decision is already
-  recorded, working out what is still worth recording — including when the ledger is one input
-  among several in a larger task.
+  Answer what a Memolok ledger already holds: decisions and their status, questions left open,
+  matters nobody has picked up, how decisions turned out, what the ledger says it is for. Use when
+  the user asks "what did we decide about X", "what's still open", "what is waiting to be looked
+  at", "how did that turn out", or wants records listed by status. Also use before acting on any
+  claim that the ledger is missing something (importing material, checking whether a decision is
+  already recorded, working out what is still worth recording), including when the ledger is one
+  input among several in a larger task. Load it even when the `memolok:ledger-scout` agent does the
+  reading. Their own notes → `manage-notes`.
 argument-hint: "[status | topic]"
 ---
 
@@ -76,7 +77,8 @@ settled on.
 **Getting it back.** Name records to the user per Rule F. The scout reports its coverage — pages read
 out of `total`, bodies opened — and **that coverage is part of your answer**: "nothing about X in all
 68 records" and "nothing about X in the first 25" are different answers, and only one of them settles
-anything.
+anything. A scout's report is orientation: before a quote, an id or a handle from it goes into
+anything irreversible, read the record yourself.
 
 ### 3. Pick the read
 
@@ -138,7 +140,8 @@ Lead with the answer, then the evidence.
 > Still open on that record: the backup destination and schedule.
 
 Not a table dump the user has to read for themselves. The *grounds* in that answer came from
-`get_MDR_details`; `get_MDR` alone gives the Verdict and what is still open.
+`get_MDR_details`; `get_MDR` alone gives the Verdict and what is still open. Before saying a record
+still governs, see *What the ledger cannot tell you*.
 
 ### 5. Offer the next move
 
@@ -147,6 +150,8 @@ Not a table dump the user has to read for themselves. The *grounds* in that answ
 - They want to seal something staged → **`commit-decision`**
 - Something is genuinely undecided → **`record-decision`**
 - Parked bait is worth picking up → **`record-decision`**, which sharpens it
+- The answer feeds a document, code or a message → **`memolok-citations`** owns the form and the
+  anchor; a staged record goes there only as a paraphrase of its head Claim
 
 ## Common reviews
 
@@ -154,7 +159,7 @@ Not a table dump the user has to read for themselves. The *grounds* in that answ
 
 `discover_MDRs(status="Deliberating")` — records with a head Claim and no commitment yet. Some are live
 work; some are abandoned drafts that were never going anywhere. Both are legitimate; a staged record
-carries no obligation.
+binds nothing: report it as in flight, never as what was decided.
 
 ### What was left open
 
@@ -262,6 +267,13 @@ because one was used.
 You can often *reason* toward these by reading records — that is fine, and useful. What is not fine is
 implying the ledger computed it. Say "reading through these, three records lean on that assumption"
 rather than "the ledger flags three affected records".
+
+**A missing `amendedBy` or `supersededBy` is weak evidence that a record still governs; an edge
+exists only if someone recorded it.** A change made in later prose, in practice, or before the tool
+could express it leaves no edge. Weigh the prose above the graph, and say "this record carries no
+recorded amendment, which is weak evidence" rather than "it is still in force". A recorded edge or a
+`Superseded` status is strong. Where the answer bears on a decision, put the question to the user
+again on its merits.
 
 ## Tips
 

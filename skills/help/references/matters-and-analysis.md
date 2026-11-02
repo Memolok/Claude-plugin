@@ -60,6 +60,15 @@ Three seats, and in a small team one person may occupy all of them:
 Recording who did which is attribution, not permission. It documents the chain of agency; it does not
 control who may write to the ledger. Access is governed separately, by membership.
 
+Each seat is credited to whoever actually held it, who need not be a member of the ledger, or a
+person at all. A colleague can record a decision taken in a meeting by someone with no Memolok
+account, naming the person who made it. An agent working for you is named as the one that decided
+when it did, and as the author of a record it wrote, under its model's name, the same in every
+session. Memolok cannot check those names, beyond refusing a member it does not have. What it records
+on its own is which account made each change, and that account answers for what was written under
+it. Every entry shows the account that created it, beside the names recorded as taking part —
+except some matters raised before Memolok began recording who raised them.
+
 ## The loop closes
 
 Observations from an earlier decision are among the best sources of new work. Something you committed

@@ -9,6 +9,7 @@ word it is — the fish, the wake, matter rather than issue — see `why-these-w
 | --- | --- |
 | **Memolok Decision Record** (**MDR**) | One decision, complete: what it was for, what was considered, what was committed, what was expected. Sometimes called *the fish*, from its shape. You might have said "a decision record" or "an ADR" |
 | **Memolok Decision Ledger** (**MDL**) | The collection those records live in, together with the facts they reason from. An epistemic boundary, not a folder. You might have said "the project's decision log" |
+| **almanac** | A ledger's collection of World Facts. It only grows: a wrong fact is corrected by admitting a new one, and the old one stays |
 | **Ledger Intent** | A ledger's short statement of what it is for, who it serves, and roughly where it is heading. Rewritten freely; read for orientation before starting new work. No decision ever points at it |
 | **Scratchpad** | A freeform working note on a ledger — no category, no status, and no title you have to think of (Memolok derives one automatically from the note). The one thing here its author can edit and delete at will, which is exactly why nothing may ever cite one. You might have said "a sticky note" |
 
@@ -22,7 +23,7 @@ narrow at the commitment, wide again at the consequences.
 | **Claim** | A single statement that could be true or false. The **head Claim** is the sharpened need a decision exists to satisfy — *"authentication must complete in under 50ms"*, not *"login is slow"* |
 | **Matter** | Raw input in the raiser's own words, before anyone analyzed it. A bug report, a complaint, an idea, an opportunity, an unanswered question. Carries no truth value and no polarity — it is not yet a claim about anything |
 | **Analysis** | The expert step that turns raw input into a sharpened need, recorded with who did it and what they concluded. Its inputs are matters, world facts and observed outcomes, in any mix. It may also conclude that no decision is warranted |
-| **World Fact** | Something true regardless of this decision — the budget, the team's skills, a regulation. Lives in the almanac and is referenced, not copied in; a decision can cite it as context, and an analysis can take it up as the input that prompted the work |
+| **World Fact** | Something true outside this ledger's control — the budget, the team's skills, a regulation. Lives in the almanac and is referenced, not copied in; a decision can cite it as context, and an analysis can take it up as the input that prompted the work |
 | **Alternative** | An option that was considered. Includes the ones that lost, which are usually the informative ones |
 | **Deliberation Fact** | One argument about one option, for or against |
 | **Verdict** | The moment of agency: what was committed and why. Not the same as which option won — it is the reasoning that closed the deliberation |
@@ -41,6 +42,7 @@ narrow at the commitment, wide again at the consequences.
 | **Expected / Emergent / Deducible** | The three kinds of observation. **Expected**: it assesses something you committed to. **Emergent**: nobody could reasonably have predicted it. **Deducible**: it could have been predicted, and nobody wrote it down at the time |
 | **learning delta** | The comparison between what a decision promised and what the wake shows |
 | **staged** | Not yet committed — a draft. It has no ledger number, and nothing follows from it |
+| **handle** | A draft's working address, such as `MDRh12`, given the moment it is created. Fine for discussing the draft with your team; never a citation, because a draft may never get a number |
 | **ledger resident** | Committed: accepted, rejected, or superseded. Carries a number and can be cited |
 | **retractable** | Committed, but nothing relies on it yet, so it can still be withdrawn on the record |
 | **uncommit** | The act of withdrawing a retractable decision: it returns to draft, its number may be taken by a later decision, and both the commitment and the withdrawal stay visible. Not an edit — the substance is still not rewritten |
@@ -51,8 +53,16 @@ narrow at the commitment, wide again at the consequences.
 ## Statuses
 
 **New** and **Deliberating** are drafts. **Proposed** is a candidate awaiting formal ratification, used
-only where governance requires it. **Accepted** and **Rejected** are both commitments, and both are
-final. **Superseded** is what an accepted decision becomes when a later one replaces it.
+only where governance requires it. **Accepted** and **Rejected** are both commitments, and neither is
+ever edited; one that nothing relies on yet can still be withdrawn on the record. **Superseded** is what
+an accepted decision becomes when a later one replaces it.
+
+## People and access
+
+| Term | Meaning |
+| --- | --- |
+| **owner**, **admin**, **member**, **visitor** | A person's role on a ledger. Visitors read records but see no notes; members also write; admins and owners can also withdraw a retractable decision and change the ledger's title and purpose. Whoever creates a ledger owns it. A role says what you may do, never who decided anything |
+| **Memonos** | The team behind Memolok. Feedback about Memolok goes to them, never onto your own ledger |
 
 ## Review vocabulary
 

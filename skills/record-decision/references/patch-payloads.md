@@ -143,16 +143,16 @@ and a write's reply carries identity and a `body` count, not the record.
   "mdlGuid": "<mdlGuid>",
   "mdr": "MDRh1",
   "patch": {
-    "decidedBy": "https://app.memolok.ai/m/<userId>#id",
-    "consulted": ["https://app.memolok.ai/m/<otherUserId>#id"]
+    "decidedBy": "<iri from whoami>",
+    "consulted": ["<iri copied from a record that names them>"]
   }
 }
 ```
 
 RACI fields stay patchable after t₀ — they are the only ones that do. `null` clears one. Name who
-actually held each role, not whoever is recording it, and take a Memolok user's id from `whoami` or
+actually held each role, not whoever is recording it, and take a Memolok user's IRI from `whoami` or
 from a record that carries it: an IRI under `https://app.memolok.ai/m/` that names no account
-Memolok holds is refused. `prose-and-raci.md` in the method has the rule.
+Memolok holds is refused. *Who held each role* in the method's `facilitation.md` has the rule.
 
 ## Ids you will need later
 
@@ -170,7 +170,7 @@ calls, so pick names that will still mean something by then:
 | `Field {field} cannot be updated on a Memolok Decision Record.` | Unknown or frozen key |
 | `No updatable fields were provided.` | Empty or no-op patch |
 | `Cannot change the {label} on a ledger-resident Memolok Decision Record ({status}).` | Record already admitted — see `revise-decision` |
-| `Inter-record graph links may only be authored on staged Memolok Decision Records.` | `amends`, `supersedes`, `dependsOn`, `conflictsWith` or `settlesOpenQuestion` on a resident — **including an empty array**, since presence is what is refused |
+| `Cannot change {field}: inter-record graph links may only be authored on staged Memolok Decision Records.` | `amends`, `supersedes`, `dependsOn`, `conflictsWith` or `settlesOpenQuestion` on a resident — **including an empty array**, since presence is what is refused |
 | `openQuestions[].settledIn cannot be set via MCP…` | Settlement is minted at admission, not patched |
 | `The chosen alternative '…' does not name one of the record's alternatives.` | `chosenAlternative` names nothing the record has — resend both sides together |
 | `deliberationFacts[…].onAlternative '…' does not name one of the record's alternatives.` | Same, for an argument attached to an option that is gone |

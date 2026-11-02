@@ -1,10 +1,12 @@
 ---
 name: save-matter
 description: >-
-  Park something on a Memolok ledger without stopping to decide anything about it — register it in
-  the user's own words and get straight back to what they were doing. Use when the user notices a
-  bug, an annoyance, an idea, an opportunity, or an unanswered question mid-task and says "log this",
-  "note that for later", "park it", "don't do anything about it now", or "remind me about X".
+  Park something on a Memolok ledger for somebody to act on later, deciding nothing about it now.
+  Use when the user raises a bug, an annoyance, an idea, an opportunity or an unanswered question in
+  their own work and puts it off: "park it", "defer this", "someone should look at this", "don't do
+  anything about it now". Declining an offer of yours is not a matter. Kept with nobody
+  expected to act → `manage-notes`; to be decided now → `record-decision`; about Memolok itself →
+  `send-feedback`.
 argument-hint: "<what you noticed, in your own words>"
 ---
 

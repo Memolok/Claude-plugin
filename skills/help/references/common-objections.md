@@ -36,16 +36,21 @@ And the cost lands once, at commitment, while the saving lands every time somebo
 re-litigated the question, reconstructed the reasoning from memory, or repeated a mistake whose lesson
 walked out of the building.
 
-If it is genuinely producing overhead without producing answers, record less: the decisions that are
-expensive to reverse.
+If it is genuinely producing overhead without producing answers, record less: only the choices that
+weighed real alternatives and will outlast the week.
 
 ## "Our decisions are too small for this"
 
-Size is not the test. **Irreversibility** and the **cost of re-deciding** are.
+Size is not the test; two other things are. First, **real alternatives were weighed**, however small
+the matter: if nobody considered doing it another way, there was no choice to record. Second, **the
+result outlasts the moment** — it changes something people will live with, or its reasoning is
+worth finding again once the rules and documents built on it would otherwise stand without their
+why.
 
-A one-line configuration change you will never revisit needs no record. A choice of naming convention you
-will live with for three years, and which everyone will eventually forget the reason for, is exactly the
-kind of thing this catches — small, cheap to make, expensive to be confused about later.
+A one-line configuration change where you took the obvious value needs no record: nothing was
+weighed. A choice of naming convention you will live with for three years, and which everyone will
+eventually forget the reason for, is exactly the kind of thing this catches — small, cheap to make,
+expensive to be confused about later.
 
 ## "We'll write it up afterwards"
 

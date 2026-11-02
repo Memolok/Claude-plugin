@@ -84,6 +84,8 @@ The Verdict and the chosen option, or the reason for not proceeding.
 >
 > **Why:** This is the moment of commitment the record exists to capture.
 
+The Verdict states what is adopted, never status or a deferral (Rule I).
+
 Offer **Rejected** as readily as an Accept. A recorded "we will not" is a real decision — and not only
 when deliberation ran out of options. If the answer to the Claim is *no* while the user gets on with
 something else, that is still a Rejection, and it is a second record rather than a caveat inside the
@@ -95,13 +97,14 @@ Expected outcomes — the bets this decision makes.
 
 > **Question:** If this works out, what should be true in six months? And what's it going to cost you?
 >
-> **Recommended answer:** No data loss from a single drive failure, and roughly ten minutes a month
-> of backup babysitting.
+> **Recommended answer:** No data loss from a single drive failure, and under ten minutes a month of
+> backup babysitting — a bet, so put your own number on it if you have one.
 >
 > **Why:** These are what the record gets measured against later — the difference between a decision
 > you can learn from and one you can only remember.
 
-Push gently for something checkable. *"It'll be better"* is not a bet.
+Push gently for something checkable: ask what observation would prove it wrong (Rule I). *"It'll be
+better"* is not a bet.
 
 Cover gains, costs, risks, and dependencies — but as prose, one question, not a four-part form.
 
