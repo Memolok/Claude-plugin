@@ -84,9 +84,10 @@ State what is being committed, name what seals, and ask once:
 
 > **Ready to seal this on the ledger.**
 >
-> You're committing to **a single drive plus a scheduled off-device backup** for the FLAC library.
-> The moment I commit, the server stamps the decision time and the record seals — Verdict,
-> alternatives, expected outcomes and open questions all become immutable ledger evidence.
+> You're committing to **a single drive plus a scheduled off-device backup** for the FLAC library,
+> and I'll record you as the one who decided. The moment I commit, the server stamps the decision
+> time and the record seals — Verdict, alternatives, expected outcomes and open questions all become
+> immutable ledger evidence.
 >
 > **Still open by design:** backup destination and schedule. That travels with the record and can be
 > settled by a later decision.
@@ -98,9 +99,21 @@ Then wait for an explicit yes.
 Naming the open questions here is deliberate: it shows they are intended, so the user is not surprised
 to find them frozen on the record later.
 
+So is naming who decided: said aloud, a wrong decider gets corrected before it is recorded. Who that
+is, with a user present or in an unattended run, is *Who held each role* in the method's
+`facilitation.md`.
+
 Ceremony variants — rejection, one-shot mint, terse mode: `references/ceremony.md`.
 
 ### 4. Transition
+
+Unless the record already names the right decider, set it first, Rejected included:
+
+```json
+{ "mdlGuid": "<mdlGuid>", "mdr": "MDRh1", "patch": { "decidedBy": "<iri from whoami>" } }
+```
+
+Then the transition:
 
 ```json
 { "mdlGuid": "<mdlGuid>", "mdr": "MDRh1", "status": "Accepted" }

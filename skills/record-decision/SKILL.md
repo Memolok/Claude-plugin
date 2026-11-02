@@ -190,6 +190,9 @@ it carries whole, so an array you did not just draft starts from `get_MDR_detail
 `get_MDR` answers what a record decided; `get_MDR_details` answers why and how — and the arrays are the
 how.
 
+The body carries `authoredBy`: you, when you drafted the text, named as *Who held each role* in the
+method's `facilitation.md` has it. `decidedBy` waits for the seal.
+
 Confirming the preview is **not** t₀. Do not offer **Proposed** on informal work, and do not offer
 **Accepted** unless the user has raised sealing themselves.
 

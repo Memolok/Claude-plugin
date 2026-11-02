@@ -20,6 +20,16 @@ matches — you are asked to update only when your pack genuinely stops working.
 
 ## Unreleased
 
+- **Your agent records who wrote, decided and observed.** It names itself as the author of each
+  record it drafts and you as the one who decided, saying so before it seals, and credits whoever
+  actually saw an outcome. In a run you left it to do unattended, it names itself where it chose and
+  never stops to ask who held a role.
+- **Your agent names itself the same way in every session**: by its model's name, such as Claude
+  Opus 5.5, never by the task or the session it is in.
+- **`help` explains who a record credits**, including someone with no account and an agent working
+  for you.
+- **Your agent can tell you which account created a record or an outcome**, apart from the names
+  recorded as taking part, now that Memolok shows it.
 - **A rejection's preview marks every alternative ❌.** When your agent shows you a draft it means to
   record as Rejected, each alternative carries ❌, as a rejected record's page in the portal shows
   them.

@@ -102,22 +102,18 @@ Non-empty strings identifying people or systems.
 
 **The settable ones are testimony: what you tell Memolok about who took part, stored as you wrote
 it.** Memolok separately records which account made each write, from the credential, and nobody can
-set that. So name whoever actually held the role. An agent that decided names itself; recording
-somebody else's decision names that person, not the one recording it. Leave a role unset rather than
-guess who held it, and clear one with `null` in a patch.
+set that. Who to name in each role, and how to write yourself, a Memolok user and anyone else, is
+*Who held each role* in `facilitation.md`. Clear a role with `null` in a patch.
 
-Get `userId` from `whoami` when naming a Memolok user, and write them as
-`https://app.memolok.ai/m/{userId}#id` — the form their own records carry. **A value under
-`https://app.memolok.ai/m/` must name an account Memolok holds**, or the write is refused naming the
-field, and nothing is written:
+**A value under `https://app.memolok.ai/m/` must name an account Memolok holds**, or the write is
+refused naming the field, and nothing is written:
 
 ```
 decidedBy names no principal Memolok holds: https://app.memolok.ai/m/…#id.
 ```
 
-That holds for every value a write sends, one resent unchanged included. Take the id from `whoami` or
-from a record that already carries it, never from memory. Anyone else is written as whatever
-identifies them: a name, an address, their own URI — stored as written, and not checked.
+That holds for every value a write sends, one resent unchanged included. Any other value is stored as
+written, and not checked.
 
 ## RACI is narrative, not permission
 
@@ -138,4 +134,4 @@ credential created the record, never `authoredBy`, so setting or changing `autho
 over. Whether you can edit anyone else's depends on your role. Changing a record's status and
 anchoring it count as editing.
 
-If no RACI roles are assigned, Memolok assumes the artifact's author is responsible and accountable.
+The account that created a record answers for it, whatever its roles say.

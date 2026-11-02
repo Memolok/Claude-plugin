@@ -44,8 +44,7 @@ ping → "pong"
 If that fails, the connection is not established — go to `references/connect-and-auth.md`. Do not
 attempt ledger calls; every one of them will fail the same way.
 
-Optionally `whoami` to confirm identity, which is also what supplies the `userId` in a user's IRI,
-`https://app.memolok.ai/m/{userId}#id`, for attribution.
+Optionally `whoami` to confirm identity. Its `iri` is how a record names the user, written as given.
 
 ## Step 3 — Find the ledger
 
