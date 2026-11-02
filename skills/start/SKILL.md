@@ -4,7 +4,7 @@ description: >-
   Get set up with Memolok — check the connection, sign in, and pick or create a decision ledger. Use
   when someone is trying Memolok for the first time, when a Memolok tool returns an authentication
   error, when Memolok "isn't connecting", or when they need to choose between several ledgers or
-  create their first one.
+  create one.
 ---
 
 # /memolok:start — Get set up

@@ -1,12 +1,11 @@
 ---
 name: revise-decision
 description: >-
-  Change a decision that is already sealed on the ledger — amend part of it, supersede it with
-  a successor, uncommit and re-admit a retractable record, or settle a question an earlier record
-  left open. Use when the user regrets a recent commitment, says a sealed record is now wrong or out
-  of date, says part of it no longer holds, wants to withdraw or replace a prior decision, changes
-  direction on something the ledger already decided ("we're moving off X"), or asks how to fix
-  something they already accepted.
+  Change a decision already sealed on a Memolok ledger. Use when the user says a sealed decision is
+  wrong, out of date or only partly holds, regrets a recent commitment, wants to withdraw or replace
+  it, changes direction on something the ledger already decided ("we're moving off X", "we should
+  switch from X to Y"), asks how to fix something they already accepted, or answers a question an
+  earlier decision left open. They are reporting what happened since → `record-outcome` first.
 argument-hint: "<record> <what changes>"
 ---
 

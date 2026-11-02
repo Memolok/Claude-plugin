@@ -1,10 +1,11 @@
 ---
 name: wrap-up
 description: >-
-  Wrap up this interactive agent session by systematically saving what would be lost from
-  the agent context into a durable place. Use when the user says "wrap up", "we're
-  done here", "before I close this", "end of session", or asks "any loose ends?",
-  "anything else worth saving?", or is clearly preparing to finish up this work session.
+  Save what this session established to the Memolok ledger, the project or agent memory before the
+  session ends. Use when the user says "wrap up", "we're done here", "before I close this", "end of
+  session", or asks "any loose ends?", "anything else worth saving?", or is clearly preparing to
+  finish up this work session. A briefing for whoever picks the work up next is a hand-off, not
+  this.
 argument-hint: "(nothing — the session is the input)"
 ---
 

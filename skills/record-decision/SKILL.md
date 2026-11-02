@@ -1,13 +1,13 @@
 ---
 name: record-decision
 description: >-
-  Record a decision on a Memolok ledger — work out whether you have a raw symptom or a sharpened
-  need, capture the alternatives and reasoning behind the choice, and persist it as a Memolok
-  Decision Record (MDR). Use when the user makes or describes a choice between real alternatives
-  that will outlast the task, however small, reports a problem they intend to act on, says "record
-  this" or "log this decision", proposes a solution like "we should switch to X", works through
-  options they want kept, or acts on something the ledger already holds — a world fact or a recorded
-  outcome that now calls for a decision.
+  Record a decision on a Memolok ledger: the need, the alternatives weighed, and the reasoning
+  behind the choice. Use when the user makes or describes a choice between real alternatives that
+  will outlast the task, however small; proposes adopting one ("we should use X"); reports a problem
+  they mean to act on now; says "record this", "log this" or "log this decision"; or acts on a world
+  fact or recorded outcome the ledger already holds. It changes something the ledger may already
+  have decided → `revise-decision`; written to the ledger and ready to make final →
+  `commit-decision`; they want to be questioned → `grill-me`.
 argument-hint: "<the decision, problem, or choice>"
 ---
 
@@ -79,12 +79,14 @@ user's opening line decide it for you.
 | A premise true regardless of any choice | **World Fact** | Admit it via `manage-almanac` first |
 | An observation on an already-sealed record | **wake** | Record it via `record-outcome` first |
 | Material worth keeping that asserts nothing and asks nothing | **Scratchpad** | Keep it via `manage-notes`; there is nothing to decide |
+| A change to a decision already sealed on the ledger | **a revision** | Route to `revise-decision`; a staged one is edited here, at step 5 |
 
 The World Fact and wake rows are a **detour, not an exit.** Admit the fact or record the outcome, then
 come back: if it calls for a decision, that entry is the analysis input — pass its id in `motivatedBy`.
 Do **not** register a Matter restating it. That records neither the entry as the input nor that
 anything connected the two, and Matters are immutable, so it cannot be repaired afterwards. The
-scratchpad row is an exit: nothing about it calls for a record.
+scratchpad row is an exit: nothing about it calls for a record. So is the revision row: a new record
+beside the sealed one would stand with no amend or supersede edge to it.
 
 **Not every choice earns a record.** Alternatives weighed about how to carry out work leave nothing
 behind but the result: no record. A small choice whose result lasts — a convention, a rule a

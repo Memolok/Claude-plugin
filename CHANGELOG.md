@@ -20,6 +20,10 @@ matches — you are asked to update only when your pack genuinely stops working.
 
 ## Unreleased
 
+- **Your agent picks the right skill more often.**
+- **Your agent loads the citations guidance before it writes a decision's number anywhere lasting**,
+  including a number it remembers rather than one it just looked up.
+- **World facts are better defined.**
 - **Your agent records who wrote, decided and observed.** It names itself as the author of each
   record it drafts and you as the one who decided, saying so before it seals, and credits whoever
   actually saw an outcome. In a run you left it to do unattended, it names itself where it chose and

@@ -1,11 +1,11 @@
 ---
 name: manage-almanac
 description: >-
-  Admit and review the world facts a Memolok ledger reasons from — budgets, constraints, policies,
-  team capabilities, anything true independently of a particular decision. Use when the user states a
-  premise rather than a choice ("legal requires seven-year retention", "the budget is $10k", "nobody
-  here writes Rust"), wants to correct a fact that was wrong when admitted, wants a decision to cite
-  its context before it is sealed, or wants an admitted fact to prompt fresh decision work.
+  Admit, look up or correct the world facts a Memolok ledger reasons from: budgets, constraints,
+  policies, team capabilities, anything true whatever gets decided. Use when the user states a
+  premise rather than a choice ("legal requires seven-year retention", "the budget is $10k",
+  "nobody here writes Rust"), says an admitted fact was wrong, or wants a staged decision to cite a
+  fact as its context. A fact that now calls for a decision → `record-decision`.
 argument-hint: "<the fact>"
 ---
 

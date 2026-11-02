@@ -1,10 +1,10 @@
 ---
 name: grill-me
 description: >-
-  Run a relentless one-question-at-a-time decision interview, walking the decision tree branch by
-  branch and recording each decision as it settles. Trigger with "grill me", "interview me about
-  this", "help me think this through properly", "ask me what you need to know", or when the user
-  wants structured decision support on a problem they have not worked out yet.
+  Interview the user one question at a time about a decision, or a tangle of them, they have not
+  worked out yet, recording each as it settles. Use when they ask to be questioned rather than
+  state a choice: "grill me", "interview me about this", "ask me what you need to know", "question
+  me until it's clear". One choice already in view, options on the table → `record-decision`.
 argument-hint: "<topic or decision>"
 ---
 

@@ -1,10 +1,11 @@
 ---
 name: record-outcome
 description: >-
-  Record what actually happened after a decision, and compare it against what was promised at
-  commitment. Use when the user reports a result, a target that was met or missed, an unexpected side
-  effect of an earlier choice, or asks how prior decisions actually turned out — "that didn't work",
-  "we hit the number", "turns out nobody used it".
+  Record what actually happened after a decision. Use when the user reports a result of an earlier
+  choice: a target met or missed, a side effect nobody expected, "the switch didn't pay off", "we
+  hit the number", "turns out nobody used it". A failed command or build is not an outcome. They
+  want to change the decision because of it → here first, then `revise-decision`; asking how past
+  decisions turned out, with nothing new to report → `review-ledger`.
 argument-hint: "<what happened>"
 ---
 
@@ -24,7 +25,7 @@ Examples:
 - `/memolok:record-outcome the cache landed and P99 is at 140ms`
 - `/memolok:record-outcome we missed the latency target, still around 400ms`
 - `/memolok:record-outcome nobody has used the export feature since launch`
-- `/memolok:record-outcome how did the storage decision actually turn out?`
+- `/memolok:record-outcome the storage move cut our bill by half, not the third we expected`
 
 ## Step 0 — Load the method
 

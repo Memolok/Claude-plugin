@@ -1,12 +1,13 @@
 ---
 name: manage-notes
 description: >-
-  The ledger's scratchpads: keep, find, revise and throw-away freeform working notes inside MDLs — pasted quotes,
-  scraped pages, rough figures, anything worth keeping that nobody is required to act on. Use when
-  the user wants to "keep this", "save this somewhere", "jot this down", "what did I save about X?",
-  "show me my notes", "add this to that note", "copy their note so I can change it", or "delete
-  that note". Also use when you have produced material that fits no typed entity and needs an
-  honest home.
+  Keep, find, revise or delete freeform working notes on a Memolok ledger: pasted quotes, scraped
+  pages, rough figures. Use when the user wants something kept with nobody expected to act on it:
+  "keep this", "save this somewhere", "jot this down", "what did I save about X?", "show me my
+  notes", "add this to that note", "copy their note so I can change it", "delete that note". Also
+  when you have produced material worth keeping that is not a decision, a premise, or something to
+  act on. Somebody should act on it later → `save-matter`; useful only to you across sessions →
+  agent memory; needed by the project → a file in the repo.
 argument-hint: "<what to keep, or what you're looking for>"
 ---
 

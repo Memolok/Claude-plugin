@@ -1,10 +1,8 @@
 ---
 name: memolok-method
 description: >-
-  Memolok's decision-recording methodology — the fish model, the Decision Transaction Principle, the
-  Memolok Decision Record lifecycle and its well-formedness gates, prose format, and the facilitation
-  rules every Memolok skill follows. Load before any Memolok MCP call, and whenever another Memolok
-  skill routes here by name. Use the `help` skill to explain Memolok to a person.
+  Load before any Memolok MCP call outside `start`, and whenever another Memolok skill routes here
+  by name. Agent-facing substrate; to explain Memolok to a person, use `help`.
 user-invocable: false
 ---
 

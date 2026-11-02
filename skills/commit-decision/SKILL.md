@@ -1,10 +1,10 @@
 ---
 name: commit-decision
 description: >-
-  Seal a Memolok Decision Record at t₀ as Accepted or Rejected, after checking the gates and marking
-  the moment with the user. Trigger with "lock it in", "accept this", "reject that path", "commit
-  it", "we're going with that", or when the user explicitly asks to finalize a staged record. Both
-  outcomes are real commitments and neither can be edited in place afterwards.
+  Seal a Memolok decision record as Accepted or Rejected. Use when the record is already written to
+  the ledger and not yet sealed, and the user says to make it final: "lock it in", "accept this",
+  "reject that path", "seal it", "we're going with that", etc. Not on the ledger yet →
+  `record-decision`; already sealed → `revise-decision`.
 argument-hint: "[accept | reject] <record>"
 ---
 

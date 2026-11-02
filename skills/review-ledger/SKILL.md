@@ -1,13 +1,14 @@
 ---
 name: review-ledger
 description: >-
-  Read back what a Memolok ledger already holds — decisions, their status, unsettled deferrals, and
-  parked matters nobody has picked up. Use when the user asks "what did we decide about X", wants
-  a scan of records by status, asks which questions were left open, wants to know what is waiting to
-  be looked at, or needs a record's status before changing it. Also use before acting on any claim
-  that the ledger is missing something — importing material, checking whether a decision is already
-  recorded, working out what is still worth recording — including when the ledger is one input
-  among several in a larger task.
+  Answer what a Memolok ledger already holds: decisions and their status, questions left open,
+  matters nobody has picked up, how decisions turned out, what the ledger says it is for. Use when
+  the user asks "what did we decide about X", "what's still open", "what is waiting to be looked
+  at", "how did that turn out", or wants records listed by status. Also use before acting on any
+  claim that the ledger is missing something (importing material, checking whether a decision is
+  already recorded, working out what is still worth recording), including when the ledger is one
+  input among several in a larger task. Load it even when the `memolok:ledger-scout` agent does the
+  reading. Their own notes → `manage-notes`.
 argument-hint: "[status | topic]"
 ---
 

@@ -1,13 +1,12 @@
 ---
 name: memolok-citations
 description: >-
-  How to reference Memolok ledger entries from *anything* that outlasts this session: code, a
-  comment, a document, a commit message, a ticket, a message, or notes kept for later sessions,
-  such as agent memory. You MUST NOT write such a reference to any ledger entry without first
-  loading this skill, once per session. A draft decision record is never referenced in anything
-  committed or sent, not even as `MDRh…`; and `MDR-` is followed only by a record's number, never
-  by its handle. Naming entries in chat with the user, or in notes that end with this session, is
-  exempt — unless those notes draft text that will be copied into one.
+  Load before you write a Memolok ledger identifier, such as `MDR-12`, into anything that outlasts
+  this session: a file edit, a code comment, a document, a commit message, a ticket, a message you
+  send, or notes kept for later sessions such as agent memory. You MUST NOT write such a reference
+  without first loading this skill, once per session, even when the file already carries others.
+  Naming entries in chat with the user, or in notes that end with this session, is exempt, unless
+  those notes draft text that will be copied out.
 user-invocable: false
 ---
 

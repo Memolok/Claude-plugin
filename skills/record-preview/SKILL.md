@@ -1,12 +1,11 @@
 ---
 name: record-preview
 description: >-
-  How to show the user a Memolok Decision Record you have drafted, before it is written to a
-  ledger: a new record, one that amends, supersedes or settles another, or a correction to a draft
-  already shown. You MUST NOT present such a draft without first loading this skill, once per
-  session — users learn to read drafts from one layout repeated, and an improvised preview beside
-  the one in this layout teaches them two. The seal is not a preview; `commit-decision` has its
-  own words for that moment.
+  Load before you show the user drafted content for a Memolok decision record ahead of writing it:
+  a new record, a body or patch for one already on the ledger, one that amends, supersedes or
+  settles another, or a correction to a draft already shown. You MUST NOT present such a draft
+  without first loading this skill, once per session. Sealing a record is not a preview: that is
+  `commit-decision`.
 user-invocable: false
 ---
 
