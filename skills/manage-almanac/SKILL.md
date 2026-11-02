@@ -161,7 +161,8 @@ were never cited cannot later be found when one of those premises turns out to b
 
 > **Not built yet.** Asking which records rested on a premise that has since been corrected —
 > *polluted premises*, decision decay — has no tool. You can answer it by reading `hasContext` across
-> records, but say that you read it rather than implying the ledger computed it.
+> records, but say that you read it rather than implying the ledger computed it. Nor is there a lookup
+> from a fact to the fact correcting it, or a read that returns only facts still current.
 
 ## Tips
 

@@ -20,61 +20,31 @@ matches — you are asked to update only when your pack genuinely stops working.
 
 ## Unreleased
 
-- **Your agent picks the right skill more often.**
-- **Your agent loads the citations guidance before it writes a decision's number anywhere lasting**,
-  including a number it remembers rather than one it just looked up.
-- **World facts are better defined.**
-- **Your agent records who wrote, decided and observed.** It names itself as the author of each
-  record it drafts and you as the one who decided, saying so before it seals, and credits whoever
-  actually saw an outcome. In a run you left it to do unattended, it names itself where it chose and
-  never stops to ask who held a role.
-- **Your agent names itself the same way in every session**: by its model's name, such as Claude
-  Opus 5.5, never by the task or the session it is in.
-- **`help` explains who a record credits**, including someone with no account and an agent working
-  for you.
-- **Your agent can tell you which account created a record or an outcome**, apart from the names
-  recorded as taking part, now that Memolok shows it.
-- **A rejection's preview marks every alternative ❌.** When your agent shows you a draft it means to
-  record as Rejected, each alternative carries ❌, as a rejected record's page in the portal shows
-  them.
-- **References in notes kept for later sessions are anchored too.** Before your agent cites a
-  decision record in its own memory or other notes that outlast the session, it anchors the record
-  and writes the citation in a form that names the ledger, as it does for code and documents.
-- **Agent memory kept per project cites entries bare.** A note only your project's sessions load is
-  bound to the ledger your project folder names, so your agent writes a bare record number there as
-  it would in code, and the full address only for an entry on another ledger.
-- **Every citation your agent writes is anchored, and you hear first what that costs.** Before your
-  agent names a decision in code, a document, a message or a ticket, it tells you the decision will
-  be anchored, and so can never be withdrawn, and you choose between citing it and describing it in
-  words instead.
-- **Feedback to Memonos may name a draft by its handle.** A report about a decision still being
-  deliberated identifies it exactly; this is the one text sent outside your sessions that may.
-- **Every address your agent writes is one that opens.** A note's link sits under its ledger, a
-  draft's link is shared for working on it and never as a citation, and a feedback report's or a
-  person's address, which does not open yet, is given as its identifier instead. A matter, world
-  fact, outcome or analysis is written bare only where a record number may be.
-- **Changing a decision brings its references along.** Once an amendment or a replacement is sealed,
-  your agent cites the new decision beside the old one wherever your project cites it; after a
-  decision is withdrawn and committed again, it asks where the old number was written and rewrites it.
-- **Ask how to refer to a decision.** `help` explains a decision's number and address, and why a
-  draft's handle is for working with your team rather than for citing.
-- **A service account is no longer taken for a malformed person.** Your agent recognises a service
-  account's address in attribution as the valid form it is.
-- **How things work today, and other people's drafts, are no longer offered as objections.** Your
-  agent treats current behaviour as a measurement, a vendor's guidance as input, and an unsealed
-  draft from another decision as binding nothing.
-- **Verdicts commit, and expected outcomes are bets someone could lose.** Your agent keeps present
-  state, deferrals and draft history out of a Verdict, and turns an expected outcome nobody could
-  disprove into an argument instead.
-- **Your agent offers to record a choice only when it will last.** Alternatives weighed about how to
-  carry out work are no longer proposed as decisions; a small choice with lasting effect still is.
-- **World facts exclude what your own decisions produce, and link public pages instead of copying
-  them.**
-- **A missing amendment is reported as weak evidence, and ledger summaries are checked before use.**
-  Your agent no longer calls a record current just because nothing amends it, and re-reads a record
-  before quoting it, citing an open question, or anchoring it.
-- **Identifiers are used only after the server returns them**, including in archived text your agent
-  commits verbatim.
+*Everything that has landed has shipped. This section is a placeholder.*
+
+## 0.39.0-beta — 2026-11-02
+
+- **Your agent tells you before it cites a decision.** Naming a decision in code, a document, a
+  ticket or the notes it keeps for later sessions anchors it, so it can never be withdrawn: your
+  agent says so first, and you can have it described in words instead. Every address it writes
+  opens, and a decision's references follow it when it is amended or replaced.
+- **Your agent records who took part.** It names itself, by its model's name, as the author of what
+  it drafts and you as the one who decided, saying so before it seals, and it can tell you which
+  account created an entry.
+- **Records say only what they can honestly carry.** A Verdict states what is adopted, an expected
+  outcome is one a later observation could disprove, and how things work today or another decision's
+  draft is no longer offered as an objection. Your agent offers to record a choice only when its
+  result will last.
+- **World facts exclude what your own decisions produce**, and a fact resting on a public page links
+  it instead of copying it.
+- **A decision with no amendment is reported as probably, not certainly, still in force**, and your
+  agent re-reads a record before quoting, citing or anchoring it.
+- **Your agent picks the right skill more often**, and loads the citations guidance before it writes
+  a decision's number anywhere lasting.
+- **`help` catches up** with all of this and corrects several overstatements; its glossary adds
+  handles, the almanac, ledger roles and Memonos.
+- **A rejection's preview marks every alternative ❌**, and a report to Memonos may name a draft by
+  its handle.
 
 ## 0.38.0-beta — 2026-10-30
 

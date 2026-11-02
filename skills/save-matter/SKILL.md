@@ -3,8 +3,8 @@ name: save-matter
 description: >-
   Park something on a Memolok ledger for somebody to act on later, deciding nothing about it now.
   Use when the user raises a bug, an annoyance, an idea, an opportunity or an unanswered question in
-  their own work and puts it off: "park it", "log this for later", "someone should look at this",
-  "don't do anything about it now". Declining an offer of yours is not a matter. Kept with nobody
+  their own work and puts it off: "park it", "defer this", "someone should look at this", "don't do
+  anything about it now". Declining an offer of yours is not a matter. Kept with nobody
   expected to act → `manage-notes`; to be decided now → `record-decision`; about Memolok itself →
   `send-feedback`.
 argument-hint: "<what you noticed, in your own words>"

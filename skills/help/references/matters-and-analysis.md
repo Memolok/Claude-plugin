@@ -66,7 +66,8 @@ account, naming the person who made it. An agent working for you is named as the
 when it did, and as the author of a record it wrote, under its model's name, the same in every
 session. Memolok cannot check those names, beyond refusing a member it does not have. What it records
 on its own is which account made each change, and that account answers for what was written under
-it. Every entry shows the account that created it, beside the names recorded as taking part.
+it. Every entry shows the account that created it, beside the names recorded as taking part —
+except some matters raised before Memolok began recording who raised them.
 
 ## The loop closes
 

@@ -18,8 +18,8 @@ most confusion about what belongs where:
 - **Within a ledger** — how decisions relate to each other and to the almanac: supersession, dependency,
   conflict, fact corrections, the links from raw input to the decision that answered it. This is where
   portfolio-scale reading happens.
-- **Project** — the artifacts a decision produced or cited: files, deliverables, documents. Memolok points
-  at them; it does not own or store them.
+- **Project** — the artifacts a decision produced or cited: files, deliverables, documents. A decision
+  can name them in its own words; Memolok does not own or store them.
 - **World** — external reality, including the organization itself. Referenced, never modelled.
 
 The last two are outside the ledger on purpose. A decision ledger that starts absorbing project artifacts
@@ -57,7 +57,9 @@ somewhere you cannot see.
 > **Not built yet.** Formal bridging between ledgers, classification taxonomies for sorting decisions by
 > type or subject, and any cross-ledger view are modelled but not available. Today a ledger is a closed
 > world: what it knows, it knows on its own. Plan boundaries accordingly, and prefer fewer ledgers than
-> feels tidy.
+> feels tidy. Linking a decision to the files it produced, or freezing a cited document as it stood at
+> commitment, is not available either; a citation written outside can be declared, but nothing in
+> Memolok leads from a decision back to the file.
 
 ---
 

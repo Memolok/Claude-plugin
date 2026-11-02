@@ -701,7 +701,7 @@ modifiedAt, body }`; `get_feedback` shows what landed.
 | `The {field} reference belongs to a different Memolok Decision Ledger.` | Cross-ledger reference |
 | `Use transition_MDR_status to change Memolok Decision Record status.` | `status` in a patch |
 | `Cannot change the {label} on a ledger-resident Memolok Decision Record ({status}).` | Tier-1 patch after t₀ |
-| `Inter-record graph links may only be authored on staged Memolok Decision Records.` | Graph patch on a resident |
+| `Cannot change {field}: inter-record graph links may only be authored on staged Memolok Decision Records.` | Graph patch on a resident |
 | `No updatable fields were provided.` | Empty or no-op patch |
 | `Cannot transition a Memolok Decision Record from {from} to {to}.` | Illegal transition |
 | `supersedes may only target Accepted residents (MDR-{n} is {status}).` | Bad supersession target. A `Superseded` one has already been retired, so a second attempt has nothing to retire |

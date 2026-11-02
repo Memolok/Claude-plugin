@@ -40,8 +40,9 @@ asking whether this was ever settled.
 The reasoning matters as much as it does anywhere else. *"Rejected"* on its own is nearly worthless; what
 a future reader needs is what was considered, what ruled it out, and what would have to be different.
 
-One asymmetry is worth knowing: a rejected decision was never in force, so nothing follows from it and
-nothing can supersede it. It is a closed question, permanently answered as of the moment it was answered.
+One asymmetry is worth knowing: a rejected decision was never in force, so nothing it says can be
+amended or superseded. The rejection itself is still a real decision, so a later one can depend on it or
+conflict with it. It is a closed question, permanently answered as of the moment it was answered.
 
 A sealed rejection is often more honest than indefinite deliberation, and always more honest than a weak
 acceptance.

@@ -95,7 +95,7 @@ openQuestions[].settledIn cannot be set via MCP; use settlesOpenQuestion on a cl
 | `settlesOpenQuestion target MDR-{n} is not a ledger resident in this MDL.` | Holder is staged, or in another ledger |
 | `settlesOpenQuestion target MDR-{n} has no open question with id {id}.` | Wrong `openQuestionId` |
 | `...is already settled in MDR-{m}.` | Already closed by an earlier record |
-| `Inter-record graph links may only be authored on staged Memolok Decision Records.` | Patch attempted after the resolver admitted |
+| `Cannot change {field}: inter-record graph links may only be authored on staged Memolok Decision Records.` | Patch attempted after the resolver admitted |
 
 ## Do not
 

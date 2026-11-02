@@ -7,10 +7,10 @@ usually get wrong in both directions.
 
 **Retractable** — the decision is committed, but nothing else in the world has leaned on it yet. No other
 decision cites it, nobody has declared that something outside the ledger cites it, no evidence has been
-attached to it, none of
-its open questions have been settled. In that window, a privileged owner can withdraw the commitment: the
-record returns to draft, its public number may be taken by a later decision, and both the original commitment
-and its withdrawal stay permanently visible in the ledger's history.
+attached to it, none of its open questions have been settled. In that window, a ledger admin or owner
+can withdraw the commitment: the record returns to draft, its public number may be taken by a later
+decision, and both the original commitment and its withdrawal stay permanently visible in the ledger's
+history.
 
 **Anchored** — something now relies on it. From that point the decision's substance is sealed. Changing
 course means a new decision rather than a rewrite of this one: either amending the part that no longer
@@ -62,6 +62,11 @@ A committed decision is referred to by its number, such as `MDR-7`, and wherever
 tell which ledger is meant, by its address: `https://app.memolok.ai/m/<ledger>/MDR-7`. The address
 opens the decision for anyone who can read that ledger, once they sign in, and tells everyone else
 nothing — not even whether it exists.
+
+Writing that reference into a document, a ticket, a commit, or the notes your agent keeps for later
+sessions is the reliance described above, so it is declared first, and your agent tells you
+beforehand that the decision can then never be withdrawn. If you might still want to take it back,
+describe it in words instead. A decision that is already anchored has nothing left to weigh.
 
 A draft has no number yet, only a handle such as `MDRh12`. Discussing a draft with your teammates by
 its handle, or sending them its link, is how deliberation works, and it is yours to judge. It is a

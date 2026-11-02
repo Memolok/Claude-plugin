@@ -4,8 +4,8 @@ description: >-
   Record a decision on a Memolok ledger: the need, the alternatives weighed, and the reasoning
   behind the choice. Use when the user makes or describes a choice between real alternatives that
   will outlast the task, however small; proposes adopting one ("we should use X"); reports a problem
-  they mean to act on now; says "record this", "log this" or "log this decision"; or acts on a world
-  fact or recorded outcome the ledger already holds. It changes something the ledger may already
+  they mean to act on now; says "record this" or "save this decision"; or acts on a world fact or
+  recorded outcome the ledger already holds. It changes something the ledger may already
   have decided → `revise-decision`; written to the ledger and ready to make final →
   `commit-decision`; they want to be questioned → `grill-me`.
 argument-hint: "<the decision, problem, or choice>"

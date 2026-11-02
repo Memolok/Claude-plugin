@@ -18,6 +18,10 @@ Withdrawal is not always what you want. When a record still stands and part of i
 the honest move is to **amend** it: a new decision states the change, the original stays in force,
 and a reader who opens the original can see that something later modified it.
 
+That link exists only where someone recorded it. A change made in a later decision's wording, or
+simply in practice, leaves none behind, so a decision showing no amendment is probably still in
+force, not certainly. Where it matters, read what came after it.
+
 Any partial change is an amendment. Tightening a commitment, widening it, adding one that was missed,
 dropping one that no longer applies, or simply saying what a clause was always meant to mean — what
 kind of change it is does not matter.
@@ -60,4 +64,4 @@ it is worth naming because it is invisible from inside the conversation where it
 
 ---
 
-When they want to supersede one: **`revise-decision`**.
+When they want to amend or supersede one: **`revise-decision`**.
