@@ -124,6 +124,11 @@ Use the user's own phrasing. Do not:
 Light cleanup is fine: dropping a stray "ugh", fixing an obvious typo, expanding "it" when the referent
 would be lost. Preserving meaning is the bar, not preserving keystrokes.
 
+**Name who raised it, on this call.** `raisedBy` is whoever had the initiative: the user, by
+`whoami`'s `iri`, when it is theirs; the person they are passing it on from when it is not, found as
+the tool catalogue's `register_matter` says. `authoredBy` is whoever wrote the words you register,
+usually the user. Leave either out rather than guess: a matter cannot be changed afterwards.
+
 ### 4. Confirm and get out
 
 One line. Name what was saved and where it will resurface:

@@ -150,9 +150,9 @@ and a write's reply carries identity and a `body` count, not the record.
 ```
 
 RACI fields stay patchable after t₀ — they are the only ones that do. `null` clears one. Name who
-actually held each role, not whoever is recording it, and take a Memolok user's IRI from `whoami` or
-from a record that carries it: an IRI under `https://app.memolok.ai/m/` that names no account
-Memolok holds is refused. *Who held each role* in the method's `facilitation.md` has the rule.
+actually held each role, not whoever is recording it, and take a Memolok user's IRI from `whoami`,
+from `get_MDL`'s `members`, or from a record that carries it: an IRI under
+`https://app.memolok.ai/m/` that names no account Memolok holds is refused. *Who held each role* in the method's `facilitation.md` has the rule.
 
 ## Ids you will need later
 

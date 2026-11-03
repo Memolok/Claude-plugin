@@ -101,8 +101,12 @@ carry the Ledger Intent.
 | --- | --- | --- |
 | `mdlGuid` | string | yes |
 
-Returns `{ mdlGuid, title, role, ledgerIntent }`. `ledgerIntent` is `null` when the ledger has never
-stated a purpose — that is normal, not an error.
+Returns `{ mdlGuid, title, role, ledgerIntent, members }`. `ledgerIntent` is `null` when the ledger
+has never stated a purpose — that is normal, not an error.
+
+`members` is everyone holding a role on the ledger, each once: `{ iri, givenName, familyName, roles }`,
+a name `null` where the account holds none. **It is where a person named in conversation is found.**
+Absent where your role may not list them.
 
 **One ledger's own metadata, not its contents.** For what is inside, use `discover_MDRs`,
 `discover_matters`, `discover_world_facts` or `discover_observed_outcomes`.
@@ -136,7 +140,7 @@ never the author's: quote a person only from the `get_*` read that returns the e
 facts that matters most, because a paraphrase quoted as the admitted claim misstates what the ledger
 rests on.
 
-**Every page renders a date line** — `Decided:` on records, `Raised:` on matters, `Admitted:` on
+**Every page renders a date line** — `Decided:` on records, `Registered:` on matters, `Admitted:` on
 facts, `Observed:` on outcomes, `Touched:` on notes — so *"what came in this week"* is answerable without opening
 anything. It may be absent on an entry old enough to predate the field, and on a record it is absent
 whenever the record is staged, because `Decided:` is t₀ and a staged record has not reached one.
@@ -210,14 +214,14 @@ replaced this one**; neither is an unfinished record.
 | `mdlGuid` | string | yes |
 | `matterId` | string | yes |
 
-Returns `{ id, mdlGuid, description, createdAt, raisedBy, takenUpBy }`, plus `title`, `summary`
-and `subjects` where Memolok has derived them. Error: `Matter not found.`
+Returns `{ id, mdlGuid, description, createdAt, createdBy, raisedBy, authoredBy, takenUpBy }`, plus
+`title`, `summary` and `subjects` where Memolok has derived them. Error: `Matter not found.`
 
-**`raisedBy` absent means unrecorded, not anonymous.** Matters registered before the ledger
-recorded a raiser have none and never will — nothing in storage could recover one, so nothing
-was invented. Never read a missing `raisedBy` as evidence about who raised it.
+**`createdBy` is the account that registered it; `raisedBy` and `authoredBy` are what that caller
+stated** — who had the initiative, and who wrote the words. `raisedBy` empty or `authoredBy` `null`
+means unstated, never nobody, and never the registering account.
 
-**`description` is the raiser's words; the other three are Memolok's reading of them.** Nothing
+**`description` is its author's words; the other three are Memolok's reading of them.** Nothing
 in the response marks which is which. Quote `description` when you are quoting the person.
 
 `takenUpBy` is one entry per analysis that took this matter up — `{ analysisId, created,
@@ -231,8 +235,9 @@ not to this matter, and nothing says any of them answers it. No rationale here �
 Shared discovery params, plus `untaken` (bool, optional): `true` is the unprocessed-bait inbox — every
 matter no analysis references; `false` is the complement, which is not the same as no filter. There is
 no status filter, because **a matter has no status**. Registration order, oldest first. Per matter: a
-heading, its id, `Raised:`, subjects, summary, and which analyses took it up — each named by its
-`analysisId` — with what they produced. The match window prefers the raiser's own words.
+heading, its id, `Raised by:` (a member by name, anyone else as stated, `not recorded` where nobody
+was), `Registered:`, subjects, summary, and which analyses took it up — each named by its
+`analysisId` — with what they produced. The match window prefers the author's own words.
 
 ### `discover_world_facts`
 
@@ -278,17 +283,17 @@ Point read; there is no `list_analyses`. Reach it by `analysisId` from `get_matt
 ### `get_world_fact`
 
 `get_world_fact` takes `mdlGuid` + `worldFactId` and returns the whole admission —
-`worldFactId`, `manifests`, `createdAt`, `createdBy`, optional `correctsFact` — plus the derived
-`title`, `summary` and `subjects` where Memolok has produced them.
-
-A world fact says `createdBy` where a matter says `raisedBy`; the two mean the same thing. Neither is
-rendered on a discovery page.
+`worldFactId`, `manifests`, `createdAt`, `createdBy`, `authoredBy`, `observedBy`, optional
+`correctsFact` — plus the derived `title`, `summary` and `subjects` where Memolok has produced them.
+`createdBy` is the account that admitted it; `authoredBy` and `observedBy` are testimony of who wrote
+its words and who observed what it states.
 
 ### `get_observed_outcome`
 
 `get_observed_outcome` takes `mdlGuid` + `observedOutcomeId` and returns the whole observation, plus
 the derived `title`, `summary` and `subjects` where Memolok has produced them. `createdBy` is the
-account that recorded it, Memolok's own account; `observedBy` is testimony of who saw it.
+account that recorded it, Memolok's own account; `observedBy` and `authoredBy` are testimony of who
+saw it and who wrote its words.
 
 ### `get_MDR_learning_delta`
 
@@ -360,14 +365,21 @@ files are available, offer to update it.
 | --- | --- | --- |
 | `mdlGuid` | string | yes |
 | `description` | `{ markdown, lang? }` | yes |
+| `raisedBy` | string[] | no |
+| `authoredBy` | string | no |
 
-Returns `{ id, mdlGuid, createdAt, body }`. Record the raiser's words **verbatim** — do not sharpen
+Returns `{ id, mdlGuid, createdAt, body }`. Record the words **verbatim** — do not sharpen
 here. Cites another entry? Create it first and use the id it returns; a matter's words cannot be
 edited.
 
-`createdAt` and `raisedBy` are minted by the server from the call itself; there is no parameter
-for either. **`raisedBy` is the one thing here that cannot be recovered later** — the creation
-time survives in storage regardless, but who raised it is known only while the call is happening.
+`raisedBy` is whoever had the initiative — whose suggestion, report or request this is, however it
+reached you — and `authoredBy` whoever wrote the words. Neither is filled in for you, and **who raised
+it is known only now**: state it on this call. The registering account is recorded as `createdBy`.
+
+**Naming a person.** The user is `whoami`. Anyone else named in conversation: look up their given
+and family name in `get_MDL`'s `members` — one match → that `iri`; several → ask which; none → ask
+for something that identifies them, and write that. Unattended → an `iri` only when both names match
+exactly one member; otherwise the name as given.
 
 ### `create_analysis`
 
@@ -539,9 +551,16 @@ refuses one.
 
 ### `admit_world_fact`
 
-`mdlGuid`, `claimDescription`, optional `correctsFact`. Use `correctsFact` only for a fact that was
-wrong when admitted — never for ordinary world drift. Returns `{ worldFactId, mdlGuid, createdAt,
-body }`.
+`mdlGuid`, `claimDescription`, optional `correctsFact`, `authoredBy`, `observedBy`. Use
+`correctsFact` only for a fact that was wrong when admitted — never for ordinary world drift. Returns
+`{ worldFactId, mdlGuid, createdAt, body }`.
+
+`authoredBy` is whoever wrote the claim's words, typically you; `observedBy` whoever observed what it
+states. Neither is filled in for you, and any two of them and the admitting account may be one person.
+**Naming a person.** The user is `whoami`. Anyone else named in conversation: look up their given
+and family name in `get_MDL`'s `members` — one match → that `iri`; several → ask which; none → ask
+for something that identifies them, and write that. Unattended → an `iri` only when both names match
+exactly one member; otherwise the name as given.
 
 ### `record_observed_outcome`
 
@@ -553,7 +572,7 @@ body }`.
 | `discoveryType` | `Expected` \| `Emergent` \| `Deducible` | yes |
 | `tests` | `{ outcomeId }` or an id string, and nothing else | Required when `Expected` |
 | `testResult` | `Satisfied` \| `Violated` \| `Inconclusive` | Required when `Expected` |
-| `observedBy`, `correctsFact` | string | no |
+| `observedBy`, `authoredBy`, `correctsFact` | string | no |
 
 There is no `observedAt` parameter — the server stamps the current time, so a wake cannot be
 backdated. Recording one typically Anchors the source record. A visitor may read outcomes and may not

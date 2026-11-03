@@ -20,6 +20,14 @@ matches — you are asked to update only when your pack genuinely stops working.
 
 ## Unreleased
 
+- **Update required.** The Memolok server now records who raised a matter apart from who registered
+  it, and an older pack reads that field the old way.
+- **Your agent can name the people you mention.** It finds them among the ledger's members by name,
+  asks you when two match or none does, and writes the identifier Memolok credits them with.
+- **A suggestion someone else made is a matter they raised.** Your agent registers it with them as
+  its raiser, then records the decision with whoever made it.
+- **Entries say who wrote them and who observed them**: a matter its author, a fact its author and
+  observer, an outcome its author, beside who observed it.
 - **A decision named in another entry's text is anchored first.** When your agent mentions a
   decision by number in a record, matter, fact, outcome or note, it anchors that decision before
   writing, as it already did for code and documents, so the number can never come to name another

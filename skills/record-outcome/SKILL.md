@@ -110,8 +110,8 @@ outcome, and every ledger resident has one. Holding only a handle, read the numb
 assessed, not to the observation event.
 
 `observedBy` names whoever saw it: the person the user is passing it on from, the user when they saw
-it themselves, you when you measured it. *Who held each role* in the method's `facilitation.md` has
-how to write each.
+it themselves, you when you measured it. `authoredBy` names whoever wrote the claim's words, usually
+you. *Who held each role* in the method's `facilitation.md` has how to write each.
 
 Payloads and error cases: `references/wake.md`.
 

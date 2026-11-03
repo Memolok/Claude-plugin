@@ -99,6 +99,11 @@ correction — step 4.
 Write it so it is checkable later. *"The budget is tight"* is not a premise anything can be reasoned
 from; *"the hardware budget is $10k"* is.
 
+**Say who wrote it and who observed it.** `authoredBy` is whoever wrote the claim's words, you when you
+drafted them; `observedBy` is whoever observed what it states. *"Mary told me the budget went up to
+$50k"* is your words, Mary's observation and the user's admission. Name Mary as the tool catalogue's
+`admit_world_fact` says, and leave a role out rather than guess.
+
 For a fact that rests on a public page, state the durable property, link the page, give the date you
 read it, and say the contents are deliberately not restated: *"account-free contact routes are
 published at `<url>`, read 2026-11-01; the routes themselves are deliberately not restated"*. A copy

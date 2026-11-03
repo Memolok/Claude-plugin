@@ -58,21 +58,22 @@ the user, never authored by you and handed down.
 
 ## Who held each role
 
-`authoredBy`, `decidedBy`, `consulted`, `informed`, `observedBy` = **testimony**: what you tell
-Memolok about who took part, stored as written. Memolok separately records the account behind every
-write, from its credential; nobody sets that, that account answers for the record, and reads show it
-as `createdBy`. So name whoever actually held each role, never whoever holds the credential by
-default.
+`authoredBy`, `decidedBy`, `consulted`, `informed`, `observedBy`, a matter's `raisedBy` =
+**testimony**: what you tell Memolok about who took part, stored as written. Memolok separately
+records the account behind every write, from its credential; nobody sets that, that account answers
+for the record, and reads show it as `createdBy`. So name whoever actually held each role, never
+whoever holds the credential by default.
 
 **Run mode sets the defaults.** Interactive, unless the user's instructions say to proceed without
 them or nobody can answer (a scheduled or headless run) → unattended.
 
 | Role | Holder | When |
 | --- | --- | --- |
-| `authoredBy` | Whoever wrote the record's text: you when you drafted it, which in facilitation is nearly always; the author of an existing document the record transcribes. Says who wrote it, not whose need it is | Creation |
+| `authoredBy` | Whoever wrote the entry's text, on a record, a matter, a world fact or an outcome: you when you drafted it, which in facilitation is nearly always; the person whose words you register verbatim; the author of an existing document it transcribes. Says who wrote it, not whose need it is | Creation |
+| `raisedBy` | A matter's: whoever had the initiative, whose suggestion, report or request it is, however it reached you; several when several raised it together | Registering the matter, the one moment it is known |
 | `decidedBy` | Whoever made the choice. Interactive: the user, said aloud in the ceremony, unless they correct it; someone else's decision → that person. Unattended: you when you chose, the user when their brief made the choice. You are also the decider if the user only seals your choice, unless they changed it. Several deciders → one body in plain text, its members under `consulted` | Just before the seal, **Rejected** included |
 | `consulted`, `informed` | Only those the conversation or brief places in the role, if any | As they surface |
-| `observedBy` | Whoever saw the result; you if you measured it | With the wake |
+| `observedBy` | Whoever saw the result, or the premise a world fact states; you if you measured it | With the wake or the fact |
 
 Holder unclear → interactive: ask once, at the moment of writing; unattended: leave the role unset.
 Never guess, and never stop an unattended run to ask.
@@ -84,9 +85,13 @@ Never guess, and never stop an unattended run to ask.
   credential already says whose). Model unknown → use the generic brand name you know (`Claude`,
   `Gemini`, `ChatGPT`, etc). Every session of one model must write the same string, so use the most
   sensible option you'd expect unrelated sessions to use.
-- **A Memolok member:** their IRI as given, the `iri` from `whoami` or copied from a record that
-  already carries it; never assembled, never from memory: an IRI naming no account Memolok holds is
-  refused. `whoami` only when you will name the user.
+- **A Memolok member:** their IRI as given, the `iri` from `whoami` or `get_MDL`'s `members`, or
+  copied from an entry that already carries it; never assembled, never from memory: an IRI naming no
+  account Memolok holds is refused. `whoami` only when you will name the user.
+- **Someone named in conversation:** the user is `whoami`. Anyone else, look up by given and family
+  name in `get_MDL`'s `members`: one match → that `iri`; several → ask which; none → ask for
+  something that identifies them, and write that. Unattended → an `iri` only when both names match
+  exactly one member; otherwise the name as given.
 - **Anyone else:** whatever identifies them — a name, an address, their own URI.
 
 ## Decision Transaction Principle
