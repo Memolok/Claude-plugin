@@ -20,7 +20,10 @@ matches — you are asked to update only when your pack genuinely stops working.
 
 ## Unreleased
 
-*Everything that has landed has shipped. This section is a placeholder.*
+- **A decision named in another entry's text is anchored first.** When your agent mentions a
+  decision by number in a record, matter, fact, outcome or note, it anchors that decision before
+  writing, as it already did for code and documents, so the number can never come to name another
+  decision.
 
 ## 0.39.0-beta — 2026-11-02
 

@@ -517,7 +517,8 @@ Returns the record acknowledgement.
 | `mdr` | string: `MDRh7` | yes — must be a ledger resident |
 | `kind` | `project` \| `other` | yes |
 
-**Declares that something outside the ledger cites this record**, which stops an Uncommit releasing
+**Declares that something no typed link shows cites this record** (text outside the ledger, or prose
+on it), which stops an Uncommit releasing
 its number. Call it **before** writing the citation, not after — the **`memolok-citations`** skill
 carries when, and in what form the citation is written.
 Member-level, deliberately: gating it above the write it accompanies would leave the citation
@@ -525,7 +526,7 @@ unanchored.
 
 `project` is a citation in a project artifact — a source file, a document in the repository, a commit
 message, notes kept for later sessions. `other` is anywhere else one can go: an email, a chat
-message, a ticket, a slide. **Only the kind is
+message, a ticket, a slide, another entry's prose on the ledger. **Only the kind is
 recorded, never where the citation lives**, so there is no location parameter to look for and none to
 supply. Declaring the same kind twice is a no-op.
 

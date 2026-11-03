@@ -257,8 +257,9 @@ them. Each symptom is a prompt to check, not a ban.
 
 - **Points at the present.** *now, today, current, existing, as it is, keeps, still, no worse than*
   → the reference state is not on the record, so no later admission can test against it; fails the
-  falsifiability definition above. Name the properties themselves. Decided earlier → cite that
-  admitted record, `(MDR-n)`; staged → state the property outright. A premise → **World Fact** in
+  falsifiability definition above. Name the properties themselves. Decided earlier → anchor and cite
+  that admitted record, `(MDR-n)`, through **`memolok-citations`**: a number in prose is linked to
+  nothing; staged → state the property outright. A premise → **World Fact** in
   `hasContext`. Never the Ledger Intent. A state given with its value and its date reads cold;
   *"as it is now"* does not.
 - **Names its subject only as the session knew it.** *the sweep, these routes, the new approach, the

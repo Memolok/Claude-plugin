@@ -192,11 +192,11 @@ both identifiers raw, because its output is data for you and not words for the u
 **This rule is the session's half, and its breach has a symptom.** `MDRh` in text bound for a
 committed file or a sent message is always a mistake — however natural it looks beside
 `MDR-n` the file already carries — except in feedback to Memonos, whose team resolves a handle
-reliably. A staged record is not referenced there at all: no number, may
-never get one, cannot be anchored — nothing can protect a reference to it. Build, seal, then write
-the reference. What an **admitted** entry looks like there, or in notes kept for later sessions, and
-the anchoring and timing that precede it, are the **`memolok-citations`** skill. Load it before the
-first such reference in a session.
+reliably. A staged record is not referenced there at all: no number, may never get one, cannot
+be anchored — nothing can protect a reference to it. Build, seal, then write
+the reference. What an **admitted** entry looks like there, in another entry's prose on the ledger,
+or in notes kept for later sessions, and the anchoring and timing that precede it, are the
+**`memolok-citations`** skill. Load it before the first such reference in a session.
 
 ## Capture vs draft
 
