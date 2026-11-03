@@ -63,7 +63,7 @@ not said which, ask — rewriting the wrong ledger's purpose is silent and confu
 ### 2. Read what is there
 
 ```
-get_MDL(mdlGuid) → { mdlGuid, title, role, ledgerIntent }
+get_MDL(mdlGuid) → { mdlGuid, title, role, ledgerIntent, members }
 ```
 
 `ledgerIntent: null` means the ledger has never stated one. That is not a defect; it is most ledgers.

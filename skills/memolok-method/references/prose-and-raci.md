@@ -93,11 +93,12 @@ Non-empty strings identifying people or systems.
 
 | Field | Cardinality | Default |
 | --- | --- | --- |
-| `authoredBy` | 0–1 | none |
+| `authoredBy` (any entry but an analysis) | 0–1 | none |
 | `decidedBy` | 0–1 | none |
 | `consulted` | 0–n | `[]` |
 | `informed` | 0–n | `[]` |
-| `observedBy` (Observed Outcome) | 0–1 | none |
+| `observedBy` (Observed Outcome, World Fact) | 0–1 | none |
+| `raisedBy` (Matter) | 0–n | `[]` |
 | `performedBy` (Analysis) | 1 | the caller; not a parameter |
 
 **The settable ones are testimony: what you tell Memolok about who took part, stored as you wrote

@@ -43,9 +43,9 @@ Rules A–I.
 - Say "captured" only after a write succeeded — before that, say *drafting* or *got it*
 - Cite `MDR-{n}` once admitted (in the form **`memolok-citations`** gives for where it is written), `MDRh{handle}` or a head Claim paraphrase while staged (only in chat and in session notes nobody commits or sends); never a bare handle (Rule F)
 - Check `retractable` before proposing an uncommit
-- Writing an identifier into anything that outlasts the session → load the **`memolok-citations`**
-  skill first; a committed or sent record reference has to be anchored, the user told first what
-  that costs, and cannot be written before t₀ at all
+- Writing an identifier into anything that outlasts the session, this record's own prose included
+  → load the **`memolok-citations`** skill first; a committed, sent or ledger-held record reference
+  has to be anchored, the user told first what that costs, and cannot be written before t₀ at all
 
 ## Workflow
 
@@ -73,7 +73,7 @@ user's opening line decide it for you.
 
 | What the user brought | It is | Route |
 | --- | --- | --- |
-| A symptom, in someone's words, no target | **bait** | Step 3a |
+| A symptom or someone else's suggestion, in their words, no target | **bait** | Step 3a |
 | A target a future observation could settle | **head Claim** | Step 3b |
 | A mechanism with the need amputated | **a Verdict with no Need** | Back the need out, then re-sort |
 | A premise true regardless of any choice | **World Fact** | Admit it via `manage-almanac` first |
@@ -108,9 +108,10 @@ Worked examples of ambiguous intakes: `references/intake-fork.md`.
 
 ### 3a. Bait branch
 
-1. `register_matter` with the stakeholder's words **verbatim**. Do not sharpen, summarize, or
-   translate into a target — the raw input is the point, and matters are immutable. An already-admitted
-   world fact or observed outcome skips this step and goes into step 3 as itself.
+1. `register_matter` with the stakeholder's words **verbatim**, and who raised it in `raisedBy`. Do
+   not sharpen, summarize, or translate into a target — the raw input is the point, and matters are
+   immutable. An already-admitted world fact or observed outcome skips this step and goes into step 3
+   as itself.
 2. Sharpen the need **with the user**, not for them. The head Claim is a falsifiable objective, and it
    must not name the mechanism you are about to choose (Rule G).
 3. `create_analysis` with `producesDecision: true` and the sharpened `claimDescription`. Pass every

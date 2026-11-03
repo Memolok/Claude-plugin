@@ -52,10 +52,14 @@ Recover the need: *"what would switching fix?"* The answer routes it:
 Then Postgres becomes what it always was — an **alternative**, recorded in the belly with the reasoning
 that favoured it.
 
+**Relayed, it is bait.** *"A colleague suggested we switch to Postgres"* is that colleague's
+initiative: register the matter with `raisedBy` naming them, then recover the need the same way. The
+decision that follows names whoever decides in `decidedBy`.
+
 ### 4. "Support filed three tickets this week about checkout errors and I want to fix it."
 
 **Bait**, and the tickets are the reporters' words. Register the matter from the ticket content,
-not from the user's summary of it. "I want to fix it" states intent to decide, which is why you carry
+not from the user's summary of it, with the reporters in `raisedBy`. "I want to fix it" states intent to decide, which is why you carry
 straight on into sharpening — but it does not make the intake a Claim.
 
 ### 5. "I need to pick a language for the stats pipeline; it must have a mature stats library ecosystem."
@@ -123,9 +127,10 @@ the ledger keeps no trail back to the note.
 *and* usually over-sharpens the Need with a target that only exists because you invented it. Two rule
 violations in one call, and neither is reversible.
 
-**Registering a matter for a fully-formed decision.** The user arrived with a Claim and their
-reasoning; wrapping it in a fabricated raw input puts words in someone's mouth. Recoverable
-through Path B, but it pollutes the inbox.
+**Registering a matter for the user's own fully-formed decision.** The user arrived with a Claim and
+their reasoning; wrapping it in a fabricated raw input puts words in someone's mouth. Recoverable
+through Path B, but it pollutes the inbox. Someone else's suggestion is different, however complete:
+it is a matter they raised.
 
 **Routing on the opening verb.** "We should…", "I need…", "can you fix…" say nothing reliable about
 which side of the fork the content sits on. Route on falsifiability, not phrasing.

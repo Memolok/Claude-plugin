@@ -4,7 +4,9 @@
 
 ### 1. `register_matter`
 
-The source actor's verbatim words. No sharpening at this step.
+The source actor's verbatim words. No sharpening at this step. Name who raised it in `raisedBy`
+and who wrote the words in `authoredBy`, as *Who held each role* in the method's `facilitation.md`
+has it: this call is the only moment who raised it is known.
 
 ```json
 {
@@ -111,4 +113,4 @@ If the user weighed options and concluded "no", that is a **Rejected** record, n
 - Pass one `motivatedBy` where several apply — that records reasoning that did not happen
 - Split one act of reasoning into an analysis per input to route around the list
 - Decide which produced record "belongs to" which matter; nothing asks, and usually nothing is true
-- Register a matter the user did not actually raise, to justify a decision they brought fully formed
+- Register a matter nobody raised, to justify a decision the user brought fully formed

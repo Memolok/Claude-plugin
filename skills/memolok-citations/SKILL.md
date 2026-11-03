@@ -1,12 +1,15 @@
 ---
 name: memolok-citations
 description: >-
-  Load before you write a Memolok ledger identifier, such as `MDR-12`, into anything that outlasts
-  this session: a file edit, a code comment, a document, a commit message, a ticket, a message you
-  send, or notes kept for later sessions such as agent memory. You MUST NOT write such a reference
-  without first loading this skill, once per session, even when the file already carries others.
-  Naming entries in chat with the user, or in notes that end with this session, is exempt, unless
-  those notes draft text that will be copied out.
+  Load before you write a Memolok ledger identifier, such as `MDR-12`, into any text that outlasts
+  this session, the ledger's own included (another record, a matter, world fact, outcome or note),
+  and beyond the ledger (file edits, code comments, documents, commit messages, tickets, messages,
+  etc), or notes kept for later sessions such as agent memory.
+  
+  You MUST NOT write such a reference without first loading this skill, once per session, even when
+  the text already carries others: a number in prose is linked to nothing, so nothing protects it
+  unless its record is anchored first. Naming entries in chat with the user, or in notes that end
+  with this session, is exempt, unless those notes draft text that will be copied out.
 user-invocable: false
 ---
 
@@ -96,6 +99,15 @@ Unedited, it binds through `mdlGuid` frontmatter, not links. Notes kept for late
 too: the sessions that load them act on what they say, so a number there is anchored before it is
 written, exactly as in code.
 
+**The ledger's own text counts too.** A record's Need, Verdict, alternatives, arguments, expected
+outcomes and open questions, and a matter, world fact, observed outcome or note, all outlast the
+session that writes them. A typed link (`amends`, `supersedes`, `dependsOn`, `conflictsWith`,
+`settlesOpenQuestion`, a wake's `tests`) is a witness the ledger can see, count and act on, so it
+anchors its target by itself. A number in prose is none of those things: nothing reads it, so nothing
+stops its record being uncommitted and the number passing to another decision. That is why a record
+named in prose must be anchored, as `other`, before the prose is written: freeze the part of the
+ledger you cite.
+
 > **Tell the user first, and let them weigh it.** Before anchoring, say which records the reference
 > would anchor and what that means: an anchored record can never be uncommitted, so a mistake found
 > in it later — even an hour later, in a message nobody reread — is corrected by a new record, never
@@ -166,6 +178,8 @@ the form.
 
 | Where | Write |
 | --- | --- |
+| Another entry on the same ledger | `MDR-7`, bare |
+| An entry on a different ledger | The address, written out |
 | Code | `MDR-7`, bare |
 | A commit message in that repository | `MDR-7`, bare, in the body — never in the subject |
 | Notes only this project's sessions load, such as agent memory | `MDR-7`, bare, for an entry on the ledger the project's `.memolok/mdl.yml` names |

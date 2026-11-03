@@ -61,7 +61,7 @@ an accepted decision becomes when a later one replaces it.
 
 | Term | Meaning |
 | --- | --- |
-| **owner**, **admin**, **member**, **visitor** | A person's role on a ledger. Visitors read records but see no notes; members also write; admins and owners can also withdraw a retractable decision and change the ledger's title and purpose. Whoever creates a ledger owns it. A role says what you may do, never who decided anything |
+| **owner**, **admin**, **member**, **visitor** | A person's role on a ledger. Visitors read records but see no notes; members also write; admins and owners can also withdraw a retractable decision and change the ledger's title and purpose. Whoever creates a ledger owns it. Everyone on a ledger can see who else is on it, by name and role, but never their email address. A role says what you may do, never who decided anything |
 | **Memonos** | The team behind Memolok. Feedback about Memolok goes to them, never onto your own ledger |
 
 ## Review vocabulary

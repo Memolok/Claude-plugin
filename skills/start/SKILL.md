@@ -64,7 +64,7 @@ project's own answer and beats asking.
 Once the ledger is settled, read it:
 
 ```
-get_MDL(mdlGuid) → { mdlGuid, title, role, ledgerIntent }
+get_MDL(mdlGuid) → { mdlGuid, title, role, ledgerIntent, members }
 ```
 
 If it states a purpose, say it back in a line — that is the orientation the user came for. If
