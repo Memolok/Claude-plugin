@@ -20,6 +20,10 @@ matches — you are asked to update only when your pack genuinely stops working.
 
 ## Unreleased
 
+*Everything that has landed has shipped. This section is a placeholder.*
+
+## 0.40.0-beta — 2026-11-03
+
 - **Update required.** The Memolok server now records who raised a matter apart from who registered
   it, and an older pack reads that field the old way.
 - **Your agent can name the people you mention.** It finds them among the ledger's members by name,
