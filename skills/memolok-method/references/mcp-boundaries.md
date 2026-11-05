@@ -11,6 +11,7 @@ records, or invented calls. Tell the user it is not available yet.
 | Ledger discovery and creation | `get_MDLs`, `get_MDL`, `create_MDL` |
 | Ledger intent | `set_ledger_intent` (read it back with `get_MDL`) |
 | Rename a ledger | `set_MDL_title` (admin/owner; its identifier does not change) |
+| Share a ledger read-only | `share_MDL` (admin/owner; gives an existing account `visitor`, named by its IRI) |
 | Matter intake | `register_matter` |
 | Matter reads | `get_matter` (one, whole), `discover_matters` (the ledger's matters as prose, each with its summary, subjects and who took it up) |
 | Analysis, Path A and B | `create_analysis` |
@@ -80,13 +81,14 @@ Do not simulate the missing enumeration by keeping a local index of what you sen
 
 | Capability |
 | --- |
-| Managing membership |
+| Removing a member, changing a member's role, or giving any role but `visitor` |
+| Inviting someone who has no Memolok account |
 | Decision-record-type taxonomy |
 | Concern hierarchy |
 
 `create_MDL` is open to any user whose account allows it, which every account does from the day it
-is created, and the creator becomes owner. Everything else about membership is provisioned by a
-Memolok administrator.
+is created, and the creator becomes owner. An owner or admin shares the ledger read-only with
+`share_MDL`; every other change to membership is made by a Memolok administrator.
 
 ### Project bridges
 

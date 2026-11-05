@@ -359,6 +359,26 @@ Requires `admin` or `owner`. Returns the same shape as `get_MDL`.
 A `.memolok/mdl.yml` carrying `mdlTitle` holds the old name from this moment on — where project
 files are available, offer to update it.
 
+### `share_MDL`
+
+| Param | Type | Required |
+| --- | --- | --- |
+| `mdlGuid` | string | yes |
+| `iri` | string | yes |
+
+Gives another Memolok account the `visitor` role on the ledger: they read everything on it but
+notes, and change nothing. Requires `admin` or `owner`. Returns `{ iri, role }`, `role` being
+`visitor`.
+
+`iri` is the account's `…/m/<musr_…>#id`, exactly as `whoami` gives it to its holder or a ledger
+you share gives it in `get_MDL`'s `members`. There is no lookup by email or name, and no page shows
+it: ask the person to read theirs with `whoami` in their own session. Sharing with someone who
+already reads the ledger changes nothing; someone holding another role there keeps it, and the
+share is refused.
+
+**Confirm the ledger and the person with the user before the call.** No tool takes access back or
+gives a wider role; those are a Memolok administrator's.
+
 ### `register_matter`
 
 | Param | Type | Required |

@@ -279,7 +279,8 @@ again on its merits.
 
 - `Memolok Decision Ledger not found.` does not distinguish a ledger the user cannot see from one that
   is not there. Report it as ambiguous: they may not be a member, or this address may be stale. If the
-  user expected access, an administrator adds them.
+  user expected access, an owner or admin of the ledger can share it with them read-only
+  (`share_MDL`); any other role is a Memolok administrator's to give.
 - `visitor` role can read everything except for notes, and write nothing.
 - A `Superseded` record is history, not a mistake. It records what was true and in force at its own t₀.
 - When a search finds nothing, say so plainly and offer to record the decision now rather than

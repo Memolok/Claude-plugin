@@ -142,4 +142,5 @@ own reasoning, not on what the ledger says it is about today.
   one name. See `scopes-and-bridging.md` in **`memolok-method`**.
 - `Memolok Decision Ledger not found.` does not distinguish a ledger the user cannot see from one that
   is not there. Report it as ambiguous: they may not be a member, or this address may be stale. If
-  someone expected access, an administrator adds them.
+  someone expected access, an owner or admin of the ledger can share it with them read-only
+  (`share_MDL`); any other role is a Memolok administrator's to give.
