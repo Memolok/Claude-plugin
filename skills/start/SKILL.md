@@ -106,7 +106,8 @@ produces a stall or a generic sentence.
 }
 ```
 
-They become `owner`. Adding anyone else is done by a Memolok administrator, not through this plugin.
+They become `owner`, and can share the ledger read-only with anyone who has a Memolok account
+(`share_MDL`). Any other role is currently given by a Memolok administrator, on request.
 
 **The purpose is optional.** If the user does not want to write one now, create the ledger with the
 title alone and move on — they can state it any time with **`revise-intent`**, as owner, and so can
@@ -174,8 +175,9 @@ Then hand off. Do not walk them through the whole list.
   **`record-decision`** like any other — a decision made last year is still worth a record, and the
   reasoning is usually still recoverable from whoever made it.
 - Non-members get `Memolok Decision Ledger not found.` rather than a permission error, deliberately —
-  it does not reveal whether the ledger exists. If someone expected access, an administrator needs to
-  add them.
+  it does not reveal whether the ledger exists. If someone expected access, an owner or admin of the
+  ledger can share it with them read-only (`share_MDL`); any other role is a Memolok
+  administrator's to give.
 - The cold-start signal lands wherever a project's sessions actually read from, which differs by
   surface, and you do not need to know the place before offering. **Removing what was written is how
   they opt out**, and it only comes back if they accept the offer again. Uninstalling the plugin

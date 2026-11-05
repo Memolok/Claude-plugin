@@ -22,6 +22,14 @@ matches — you are asked to update only when your pack genuinely stops working.
 
 *Everything that has landed has shipped. This section is a placeholder.*
 
+## 0.41.0-beta — 2026-11-05
+
+- **Your agent can share a ledger.** An owner or admin gives another Memolok account read-only
+  access, as a visitor, named by the identifier their own agent reads for them. Your agent
+  confirms the ledger and the person with you first, because no tool takes the access back;
+  removing someone, or giving a wider role, is still a Memolok administrator's.
+- **No update required.** Older packs keep working; they just do not know about sharing.
+
 ## 0.40.0-beta — 2026-11-03
 
 - **Update required.** The Memolok server now records who raised a matter apart from who registered
