@@ -4,9 +4,7 @@
 
 `New`, `Deliberating`, `Proposed`, `Accepted`, `Rejected`, `Superseded`
 
-`Superseded` is never a transition target. A record reaches it when another record admits carrying
-`supersedes`. `supersedes` may only target `Accepted` residents, once each; `Rejected` and
-already-`Superseded` targets are refused, and a `Rejected` record may not carry `supersedes` at all.
+`Superseded` is never a transition target. A record reaches it when another record admits carrying `supersedes`. `supersedes` may only target `Accepted` residents, once each; `Rejected` and already-`Superseded` targets are refused, and a `Rejected` record may not carry `supersedes` at all.
 
 ## Transition matrix
 
@@ -30,14 +28,11 @@ already-`Superseded` targets are refused, and a `Rejected` record may not carry 
 | --- | --- |
 | `Decided`, `Settled`, `Committed` | `Accepted` |
 
-**`create_MDR` does not resolve aliases.** It converts `status` directly and raises a raw
-`ValueError` on anything else, which bypasses the friendly error mapping. Always send canonical
-values to `create_MDR`.
+**`create_MDR` does not resolve aliases.** It converts `status` directly and raises a raw `ValueError` on anything else, which bypasses the friendly error mapping. Always send canonical values to `create_MDR`.
 
 ## Well-formedness
 
-Evaluated on `create_MDR` (against the requested creation status), on `update_MDR` (against the
-merged document at its current status), and on `transition_MDR_status` (against the target).
+Evaluated on `create_MDR` (against the requested creation status), on `update_MDR` (against the merged document at its current status), and on `transition_MDR_status` (against the target).
 
 | Target status | Requirements |
 | --- | --- |
@@ -60,20 +55,15 @@ A Rejected Memolok Decision Record must not carry supersedes (every supersedes t
 A Rejected Memolok Decision Record must not carry amends (nothing it says is in force, so it changes nothing in the record it names).
 ```
 
-The practical ladder: **Deliberating** needs only a head Claim, so a fish can live there while the
-body fills in. **Proposed** forces alternatives, a chosen one, and a Verdict. **Accepted** adds
-expected outcomes.
+The practical ladder: **Deliberating** needs only a head Claim, so a fish can live there while the body fills in. **Proposed** forces alternatives, a chosen one, and a Verdict. **Accepted** adds expected outcomes.
 
 ## t₀ behaviour
 
-On transition to `Accepted` or `Rejected` the server sets `decidedAt`, assigns `mdrNumber` from the
-live high-water mark, publishes graph reciprocals, appends an audit event, and computes
-`retractable`. Tier-1 patches are refused from then on.
+On transition to `Accepted` or `Rejected` the server sets `decidedAt`, assigns `mdrNumber` from the live high-water mark, publishes graph reciprocals, appends an audit event, and computes `retractable`. Tier-1 patches are refused from then on.
 
 ## Tier-1 fields (sealed on ledger residents)
 
-`hasNeed`, `hasContext`, `alternatives`, `deliberationFacts`, `expectedOutcomes`, `openQuestions`,
-`chosenAlternative`, `verdict`, `decidedAt`, `status`
+`hasNeed`, `hasContext`, `alternatives`, `deliberationFacts`, `expectedOutcomes`, `openQuestions`, `chosenAlternative`, `verdict`, `decidedAt`, `status`
 
 ## Patchable
 
@@ -83,13 +73,11 @@ live high-water mark, publishes graph reciprocals, appends an audit event, and c
 | Any status | `authoredBy`, `decidedBy`, `consulted`, `informed` |
 | Never | `status` (use the transition tool), `openQuestions[].settledIn`, `mdrHandle`, `mdrNumber`, `amendedBy`, `supersededBy` |
 
-`hasContext` is `update_MDR`-only — it is not a `create_MDR` parameter — and takes an ordered list of
-World Fact or prior Observed Outcome ids.
+`hasContext` is `update_MDR`-only — it is not a `create_MDR` parameter — and takes an ordered list of World Fact or prior Observed Outcome ids.
 
 ## Post-admission correction
 
-Two questions, in this order. **How much of the record is wrong** picks the instrument; `retractable`
-only says whether one of them is still available.
+Two questions, in this order. **How much of the record is wrong** picks the instrument; `retractable` only says whether one of them is still available.
 
 | What is wrong | Instrument |
 | --- | --- |
@@ -103,28 +91,17 @@ only says whether one of them is still available.
 | `true` | Uncommit available (admin/owner): edit while staged, re-admit under a fresh number |
 | `false` | Anchored — amend or supersede |
 
-Amend and supersede work at either value. Only Uncommit needs `true`, so read it to route *that*
-decision and not the other one.
+Amend and supersede work at either value. Only Uncommit needs `true`, so read it to route *that* decision and not the other one.
 
-A record becomes Anchored four ways. Three the ledger computes for itself: another record's
-`amends`/`supersedes`/`dependsOn`/`conflictsWith` cites its number, one of its open questions has
-been settled, or an Observed Outcome was realized from it. Recording a wake therefore usually Anchors
-the source.
+A record becomes Anchored four ways. Three the ledger computes for itself: another record's `amends`/`supersedes`/`dependsOn`/`conflictsWith` cites its number, one of its open questions has been settled, or an Observed Outcome was realized from it. Recording a wake therefore usually Anchors the source.
 
-**Amending permanently anchors what you amend.** `conflictsWith` is heavier still: it
-is symmetric, so both records end up Anchored — *including the one that declares it* — and nothing
-dissolves the pair.
+**Amending permanently anchors what you amend.** `conflictsWith` is heavier still: it is symmetric, so both records end up Anchored — *including the one that declares it* — and nothing dissolves the pair.
 
-The fourth is **declared**, by `anchor_MDR`, and says something outside the ledger cites the record —
-the ledger cannot see that for itself. It is not inferred from anything you write; you declare it.
-Form and precondition: the **`memolok-citations`** skill.
+The fourth is **declared**, by `anchor_MDR`, and says something outside the ledger cites the record — the ledger cannot see that for itself. It is not inferred from anything you write; you declare it. Form and precondition: the **`memolok-citations`** skill.
 
 ## Graph edges on staged records
 
-`amends`, `supersedes`, `dependsOn` and `conflictsWith` take arrays of admitted `mdrNumber`s. Author
-them while the record is staged; once it is a resident, the field is refused, and that includes
-sending an empty `[]` — presence is what is refused, because clearing an edge after admission would
-undo something the ledger has published.
+`amends`, `supersedes`, `dependsOn` and `conflictsWith` take arrays of admitted `mdrNumber`s. Author them while the record is staged; once it is a resident, the field is refused, and that includes sending an empty `[]` — presence is what is refused, because clearing an edge after admission would undo something the ledger has published.
 
 | Edge | Says | Target's fate at your t₀ |
 | --- | --- | --- |
@@ -133,25 +110,15 @@ undo something the ledger has published.
 | `dependsOn` | this decision operationally relies on that one | Anchored |
 | `conflictsWith` | the two stand in tension | Anchored — **and so is this record** |
 
-**`amends` and `supersedes` both need an `Accepted` record at each end**, because both act on content,
-and only an Accepted record has content in force. Amendment is **opt-out** (everything in the
-amended record stays valid but the deltas), while supersession is **opt-in** (retiring everything). A
-`Rejected` record can carry neither, and can't be named by either. `supersedes` additionally targets
-a record only once — a `Superseded` target has nothing left.
+**`amends` and `supersedes` both need an `Accepted` record at each end**, because both act on content, and only an Accepted record has content in force. Amendment is **opt-out** (everything in the amended record stays valid but the deltas), while supersession is **opt-in** (retiring everything). A `Rejected` record can carry neither, and can't be named by either. `supersedes` additionally targets a record only once — a `Superseded` target has nothing left.
 
-`dependsOn` and `conflictsWith` assert a relation between records rather than operating on their
-contents, so they hold against any resident, including Rejected records — an Accepted record can rest
-on a rejection, or collide with one; `rejection.md` has the worked case.
+`dependsOn` and `conflictsWith` assert a relation between records rather than operating on their contents, so they hold against any resident, including Rejected records — an Accepted record can rest on a rejection, or collide with one; `rejection.md` has the worked case.
 
-For `settlesOpenQuestion`, the target is the **older open-question holder**, not the closing record.
-If the holder is still staged it has no number to target — update the holder in place instead.
-`amendedBy`, `supersededBy` and `openQuestions[].settledIn` are read-only; the server mints them at
-admission.
+For `settlesOpenQuestion`, the target is the **older open-question holder**, not the closing record. If the holder is still staged it has no number to target — update the holder in place instead. `amendedBy`, `supersededBy` and `openQuestions[].settledIn` are read-only; the server mints them at admission.
 
 ## Matter shape, not matter status
 
-A matter has no status field. There is no chain to walk and no value to set — the read is the
-topology:
+A matter has no status field. There is no chain to walk and no value to set — the read is the topology:
 
 | What you see | What it means |
 | --- | --- |
@@ -160,15 +127,9 @@ topology:
 | Reference → analysis with produced records | Decision work happened |
 | Reference `created` later than the analysis's `concludedAt` | Attached after the reasoning closed; the rationale does not account for it |
 
-Neither direction is bounded: an analysis may take up many inputs, and one input may be taken up by
-many analyses. Inputs need not be matters: an admitted World Fact or Observed Outcome is taken up by
-its own id, and the table above reads only for matters — almanac entries have no inbox and no
-"unused" state. Re-analysis does **not** need a new matter — open a second analysis over the same
-input.
+Neither direction is bounded: an analysis may take up many inputs, and one input may be taken up by many analyses. Inputs need not be matters: an admitted World Fact or Observed Outcome is taken up by its own id, and the table above reads only for matters — almanac entries have no inbox and no "unused" state. Re-analysis does **not** need a new matter — open a second analysis over the same input.
 
-An analysis concludes in the call that creates it. `reopen_analysis` clears that conclusion, and is
-refused once any record it produced carries `decidedAt`. Only a ledger's admins and owners may
-reopen an analysis or retract its inputs.
+An analysis concludes in the call that creates it. `reopen_analysis` clears that conclusion, and is refused once any record it produced carries `decidedAt`. Only a ledger's admins and owners may reopen an analysis or retract its inputs.
 
 ## Posture summary
 
@@ -177,5 +138,4 @@ reopen an analysis or retract its inputs.
 | Informal (default) | Deliberating → t₀ |
 | Formal | Deliberating → Proposed → t₀ |
 
-A fully populated fish — verdict, outcomes, open questions — may sit at `Deliberating` indefinitely.
-Only the head Claim is required at that status.
+A fully populated fish — verdict, outcomes, open questions — may sit at `Deliberating` indefinitely. Only the head Claim is required at that status.

@@ -2,695 +2,336 @@
 
 What changed in the Memolok pack, newest first, written for someone deciding whether to update.
 
-The pack is a set of skills: prose that changes what your agent does. So a wording change here is a
-behaviour change, and every shipped edit gets a version — including documentation-only ones.
+The pack is a set of skills: prose that changes what your agent does. So a wording change here is a behaviour change, and every shipped edit gets a version — including documentation-only ones.
 
-- **Patch** — changes that leave what you can ask your agent for as it was: corrections, and sharper
-  handling of the same work, including skills your agent loads on its own.
-- **Minor** — skills you can invoke, new tools reflected in the catalog, or facilitation of work your
-  agent did not do before.
-- **Major** — an installed invocation stops resolving. While the pack is pre-1.0 that rides in a
-  minor bump, on the ordinary 0.x convention; you are still told to update, because the server
-  publishes the oldest pack it accepts separately from the version number.
+- **Patch** — changes that leave what you can ask your agent for as it was: corrections, and sharper handling of the same work, including skills your agent loads on its own.
+- **Minor** — skills you can invoke, new tools reflected in the catalog, or facilitation of work your agent did not do before.
+- **Major** — an installed invocation stops resolving. While the pack is pre-1.0 that rides in a minor bump, on the ordinary 0.x convention; you are still told to update, because the server publishes the oldest pack it accepts separately from the version number.
 
-The pack version is independent of the Memolok server's. You install the pack on your schedule; the
-server is deployed on ours, so the two cannot be held equal. The server publishes the oldest pack it
-still accepts, and tells your agent at the start of a session whether the pack it is running still
-matches — you are asked to update only when your pack genuinely stops working.
+The pack version is independent of the Memolok server's. You install the pack on your schedule; the server is deployed on ours, so the two cannot be held equal. The server publishes the oldest pack it still accepts, and tells your agent at the start of a session whether the pack it is running still matches — you are asked to update only when your pack genuinely stops working.
 
 ## Unreleased
 
-*Everything that has landed has shipped. This section is a placeholder.*
+- **The pack's files are unwrapped.** Each paragraph is one line, however long. No wording changed, so nothing your agent does changes.
 
 ## 0.41.0-beta — 2026-11-05
 
-- **Your agent can share a ledger.** An owner or admin gives another Memolok account read-only
-  access, as a visitor, named by the identifier their own agent reads for them. Your agent
-  confirms the ledger and the person with you first, because no tool takes the access back;
-  removing someone, or giving a wider role, is still a Memolok administrator's.
+- **Your agent can share a ledger.** An owner or admin gives another Memolok account read-only access, as a visitor, named by the identifier their own agent reads for them. Your agent confirms the ledger and the person with you first, because no tool takes the access back; removing someone, or giving a wider role, is still a Memolok administrator's.
 - **No update required.** Older packs keep working; they just do not know about sharing.
 
 ## 0.40.0-beta — 2026-11-03
 
-- **Update required.** The Memolok server now records who raised a matter apart from who registered
-  it, and an older pack reads that field the old way.
-- **Your agent can name the people you mention.** It finds them among the ledger's members by name,
-  asks you when two match or none does, and writes the identifier Memolok credits them with.
-- **A suggestion someone else made is a matter they raised.** Your agent registers it with them as
-  its raiser, then records the decision with whoever made it.
-- **Entries say who wrote them and who observed them**: a matter its author, a fact its author and
-  observer, an outcome its author, beside who observed it.
-- **A decision named in another entry's text is anchored first.** When your agent mentions a
-  decision by number in a record, matter, fact, outcome or note, it anchors that decision before
-  writing, as it already did for code and documents, so the number can never come to name another
-  decision.
+- **Update required.** The Memolok server now records who raised a matter apart from who registered it, and an older pack reads that field the old way.
+- **Your agent can name the people you mention.** It finds them among the ledger's members by name, asks you when two match or none does, and writes the identifier Memolok credits them with.
+- **A suggestion someone else made is a matter they raised.** Your agent registers it with them as its raiser, then records the decision with whoever made it.
+- **Entries say who wrote them and who observed them**: a matter its author, a fact its author and observer, an outcome its author, beside who observed it.
+- **A decision named in another entry's text is anchored first.** When your agent mentions a decision by number in a record, matter, fact, outcome or note, it anchors that decision before writing, as it already did for code and documents, so the number can never come to name another decision.
 
 ## 0.39.0-beta — 2026-11-02
 
-- **Your agent tells you before it cites a decision.** Naming a decision in code, a document, a
-  ticket or the notes it keeps for later sessions anchors it, so it can never be withdrawn: your
-  agent says so first, and you can have it described in words instead. Every address it writes
-  opens, and a decision's references follow it when it is amended or replaced.
-- **Your agent records who took part.** It names itself, by its model's name, as the author of what
-  it drafts and you as the one who decided, saying so before it seals, and it can tell you which
-  account created an entry.
-- **Records say only what they can honestly carry.** A Verdict states what is adopted, an expected
-  outcome is one a later observation could disprove, and how things work today or another decision's
-  draft is no longer offered as an objection. Your agent offers to record a choice only when its
-  result will last.
-- **World facts exclude what your own decisions produce**, and a fact resting on a public page links
-  it instead of copying it.
-- **A decision with no amendment is reported as probably, not certainly, still in force**, and your
-  agent re-reads a record before quoting, citing or anchoring it.
-- **Your agent picks the right skill more often**, and loads the citations guidance before it writes
-  a decision's number anywhere lasting.
-- **`help` catches up** with all of this and corrects several overstatements; its glossary adds
-  handles, the almanac, ledger roles and Memonos.
-- **A rejection's preview marks every alternative ❌**, and a report to Memonos may name a draft by
-  its handle.
+- **Your agent tells you before it cites a decision.** Naming a decision in code, a document, a ticket or the notes it keeps for later sessions anchors it, so it can never be withdrawn: your agent says so first, and you can have it described in words instead. Every address it writes opens, and a decision's references follow it when it is amended or replaced.
+- **Your agent records who took part.** It names itself, by its model's name, as the author of what it drafts and you as the one who decided, saying so before it seals, and it can tell you which account created an entry.
+- **Records say only what they can honestly carry.** A Verdict states what is adopted, an expected outcome is one a later observation could disprove, and how things work today or another decision's draft is no longer offered as an objection. Your agent offers to record a choice only when its result will last.
+- **World facts exclude what your own decisions produce**, and a fact resting on a public page links it instead of copying it.
+- **A decision with no amendment is reported as probably, not certainly, still in force**, and your agent re-reads a record before quoting, citing or anchoring it.
+- **Your agent picks the right skill more often**, and loads the citations guidance before it writes a decision's number anywhere lasting.
+- **`help` catches up** with all of this and corrects several overstatements; its glossary adds handles, the almanac, ledger roles and Memonos.
+- **A rejection's preview marks every alternative ❌**, and a report to Memonos may name a draft by its handle.
 
 ## 0.38.0-beta — 2026-10-30
 
-- **Every entry's citation address opens.** Your agent tells you that any entry's
-  `https://app.memolok.ai/m/…` address leads to a sign-in and then to the entry, and gives a
-  scratchpad's address under its ledger, `…/m/<ledger>/msp_…`.
-- **A record's alternatives, expected outcomes and open questions have addresses of their own.**
-  Your agent cites one as its record's address, then `#`, then its id, `…/MDR-7#oq-backup`, or as
-  `MDR-7#oq-backup` wherever a bare `MDR-7` may stand.
-- **Your agent explains why a decision was made before you change it.** When a change, its own or
-  yours, would contradict a sealed decision or lose one of its expected outcomes, it reads the
-  decision's reasoning first, tells you what the decision was protecting and whether that still
-  holds, and offers keeping to it and departing from it as options with their costs. The ledger
-  reader reports expected outcomes as bets, with the reasons behind each decision.
-- **Your agent names who took part in a decision, not who is typing.** It leaves a record's author
-  unset unless it knows who that was, names itself where it decided, and can clear any of the four
-  roles. Naming an author hands nothing over: you edit the records your own account created. A
-  Memolok user named in a role must be one Memolok holds, so your agent takes the id from your
-  account or an existing record, never from memory.
+- **Every entry's citation address opens.** Your agent tells you that any entry's `https://app.memolok.ai/m/…` address leads to a sign-in and then to the entry, and gives a scratchpad's address under its ledger, `…/m/<ledger>/msp_…`.
+- **A record's alternatives, expected outcomes and open questions have addresses of their own.** Your agent cites one as its record's address, then `#`, then its id, `…/MDR-7#oq-backup`, or as `MDR-7#oq-backup` wherever a bare `MDR-7` may stand.
+- **Your agent explains why a decision was made before you change it.** When a change, its own or yours, would contradict a sealed decision or lose one of its expected outcomes, it reads the decision's reasoning first, tells you what the decision was protecting and whether that still holds, and offers keeping to it and departing from it as options with their costs. The ledger reader reports expected outcomes as bets, with the reasons behind each decision.
+- **Your agent names who took part in a decision, not who is typing.** It leaves a record's author unset unless it knows who that was, names itself where it decided, and can clear any of the four roles. Naming an author hands nothing over: you edit the records your own account created. A Memolok user named in a role must be one Memolok holds, so your agent takes the id from your account or an existing record, never from memory.
 
 ## 0.37.0-beta — 2026-10-20
 
-- **Every client connects with the URL alone and a browser sign-in.** Your agent no longer offers a
-  personal access token for Cursor and other editors or command-line clients, which sign in in a
-  browser like any other; personal access tokens are not accepted. Its connection diagnosis quotes
-  the errors the server sends today.
-- **Recording a decision, your agent keeps the chosen answer out of the need it states**, and
-  proposes open questions only where they mark the edge of that record's scope.
-- **Your agent names a decision record to every tool by its citation**, `MDRh7` by its handle or
-  `MDR-7` by its number, in one `mdr` argument. Reading a record or its outcomes takes either; changing
-  a record takes the handle's. What the tools answer still carries both numbers.
-- **Update required.** The server no longer accepts the separate handle and number arguments older
-  packs teach; they are told to update.
+- **Every client connects with the URL alone and a browser sign-in.** Your agent no longer offers a personal access token for Cursor and other editors or command-line clients, which sign in in a browser like any other; personal access tokens are not accepted. Its connection diagnosis quotes the errors the server sends today.
+- **Recording a decision, your agent keeps the chosen answer out of the need it states**, and proposes open questions only where they mark the edge of that record's scope.
+- **Your agent names a decision record to every tool by its citation**, `MDRh7` by its handle or `MDR-7` by its number, in one `mdr` argument. Reading a record or its outcomes takes either; changing a record takes the handle's. What the tools answer still carries both numbers.
+- **Update required.** The server no longer accepts the separate handle and number arguments older packs teach; they are told to update.
 
 ## 0.36.0-beta — 2026-10-17
 
-- **A Memolok user is credited as `https://app.memolok.ai/m/<userId>#id`.** That is the default
-  author your agent states, and the form it writes when it names a Memolok user as deciding,
-  consulted or informed. The server refuses the old `https://www.memolok.ai/users/…` form, and the
-  error tells your agent what to write instead.
-- **Citation addresses move under `https://app.memolok.ai/m/`**: the ledger's identifier, then the
-  entry's, with a record written exactly as it is cited, `…/MDR-7`. They do not resolve yet.
-- **Request references read `mrq_…`**, as the server now sends them, wherever the skills quote what
-  a failed or refused call returns.
+- **A Memolok user is credited as `https://app.memolok.ai/m/<userId>#id`.** That is the default author your agent states, and the form it writes when it names a Memolok user as deciding, consulted or informed. The server refuses the old `https://www.memolok.ai/users/…` form, and the error tells your agent what to write instead.
+- **Citation addresses move under `https://app.memolok.ai/m/`**: the ledger's identifier, then the entry's, with a record written exactly as it is cited, `…/MDR-7`. They do not resolve yet.
+- **Request references read `mrq_…`**, as the server now sends them, wherever the skills quote what a failed or refused call returns.
 - **Update required.** The server refuses the form older packs teach; they are told to update.
 
 ## 0.35.2-beta — 2026-10-17
 
-- **Decisions say what they are about.** Your agent drafts what a decision must achieve by naming its
-  subject and the properties it must deliver, never "as it is today", so the record still makes sense,
-  and still turns up in search, years later.
-- **Changing course is routine.** When you move away from something already decided, your agent
-  offers to amend or replace that decision readily, without asking you to justify the change.
+- **Decisions say what they are about.** Your agent drafts what a decision must achieve by naming its subject and the properties it must deliver, never "as it is today", so the record still makes sense, and still turns up in search, years later.
+- **Changing course is routine.** When you move away from something already decided, your agent offers to amend or replace that decision readily, without asking you to justify the change.
 
 ## 0.35.1-beta — 2026-10-15
 
-- **Creating a ledger can be refused.** If your account is not allowed to create one, your agent
-  says so and that an administrator can change it, rather than trying again. Every account is
-  allowed from the day it is created.
+- **Creating a ledger can be refused.** If your account is not allowed to create one, your agent says so and that an administrator can change it, rather than trying again. Every account is allowed from the day it is created.
 
 ## 0.35.0-beta — 2026-10-02
 
-- **Records are read at two depths.** Your agent reads what a decision decided by default, and
-  fetches the alternatives, the arguments and what it expected only when you ask why or how, before
-  quoting its reasoning, or before changing it. Answers about a record cost about a third of what
-  they did.
-- **Writes no longer send back what your agent just wrote.** Each save is confirmed with its
-  identifiers, its state and the size of what was saved, so recording a decision, a fact, an outcome
-  or a note no longer fills your agent's context with its own words.
-- **Renaming a ledger is covered.** Your agent knows a ledger's title can be changed, by its admins
-  and owners, and no longer tells you it cannot.
-- **Update required.** The server's new reads and replies need this version; older packs are told to
-  update.
+- **Records are read at two depths.** Your agent reads what a decision decided by default, and fetches the alternatives, the arguments and what it expected only when you ask why or how, before quoting its reasoning, or before changing it. Answers about a record cost about a third of what they did.
+- **Writes no longer send back what your agent just wrote.** Each save is confirmed with its identifiers, its state and the size of what was saved, so recording a decision, a fact, an outcome or a note no longer fills your agent's context with its own words.
+- **Renaming a ledger is covered.** Your agent knows a ledger's title can be changed, by its admins and owners, and no longer tells you it cannot.
+- **Update required.** The server's new reads and replies need this version; older packs are told to update.
 
 ## 0.34.1-beta — 2026-09-29
 
-- **Feedback reports now say which pack sent them.** `send-feedback` passes the pack version with
-  every batch, so Memonos can tell a fault in an old pack from one in the current pack.
-- **The tool catalog lists the refusal for a feedback batch that failed part-way**, and drops a
-  refusal no tool sends any more.
+- **Feedback reports now say which pack sent them.** `send-feedback` passes the pack version with every batch, so Memonos can tell a fault in an old pack from one in the current pack.
+- **The tool catalog lists the refusal for a feedback batch that failed part-way**, and drops a refusal no tool sends any more.
 
 ## 0.34.0-beta — 2026-09-29
 
-- **A note is its author's.** Everyone working on the ledger reads every note, but only the person who
-  created one can change it, and only they or the ledger's admins and owners can delete it. Your agent
-  checks whose a note is before changing it.
-- **To build on somebody else's note, your agent takes a copy**: it reads the note and saves your
-  version as a new note of yours, leaving theirs as it was.
+- **A note is its author's.** Everyone working on the ledger reads every note, but only the person who created one can change it, and only they or the ledger's admins and owners can delete it. Your agent checks whose a note is before changing it.
+- **To build on somebody else's note, your agent takes a copy**: it reads the note and saves your version as a new note of yours, leaving theirs as it was.
 - **Visitors no longer see notes.** Everything else stays readable to them.
 - The server refuses older packs, so an agent on one is told to update.
 
 ## 0.33.0-beta — 2026-09-29
 
-- **Only a ledger's admins and owners reopen an analysis or retract one of its inputs**, whoever
-  performed it. Your agent tells a member to ask one of them rather than trying.
-- **Attaching an input an analysis already took up is safe to repeat**: it answers the reference as
-  first attached instead of refusing.
-- **If creating an analysis fails part-way, your agent stops and tells you**, since repeating the call
-  would create a second analysis.
-- **Your agent no longer suggests leaving open a question your next step depends on.** It offers to
-  settle it in the decision now. If you defer it anyway, it says once what is left waiting, then
-  records it.
+- **Only a ledger's admins and owners reopen an analysis or retract one of its inputs**, whoever performed it. Your agent tells a member to ask one of them rather than trying.
+- **Attaching an input an analysis already took up is safe to repeat**: it answers the reference as first attached instead of refusing.
+- **If creating an analysis fails part-way, your agent stops and tells you**, since repeating the call would create a second analysis.
+- **Your agent no longer suggests leaving open a question your next step depends on.** It offers to settle it in the decision now. If you defer it anyway, it says once what is left waiting, then records it.
 - The server refuses older packs, so an agent on one is told to update.
 
 ## 0.32.0-beta — 2026-09-29
 
-- **Your agent records what happened after a decision, and lists it, by the record's number**, the
-  way the decision is cited. The server no longer accepts a handle for either, so an agent on an
-  older pack is refused and told to update.
-- **An observed outcome is read only by the identifier Memolok gave it**, and names the expected
-  outcome it tests and nothing else.
-- **Recording an outcome takes a role that writes to the ledger.** A visitor reads outcomes and is
-  told it may not record one.
+- **Your agent records what happened after a decision, and lists it, by the record's number**, the way the decision is cited. The server no longer accepts a handle for either, so an agent on an older pack is refused and told to update.
+- **An observed outcome is read only by the identifier Memolok gave it**, and names the expected outcome it tests and nothing else.
+- **Recording an outcome takes a role that writes to the ledger.** A visitor reads outcomes and is told it may not record one.
 
 ## 0.31.1-beta — 2026-09-28
 
-- **Every draft decision is shown to you in one layout**, from the first preview of a session, headed
-  by its **Need**. A record amending or superseding another is previewed too, saying what it changes,
-  and so are the world facts and records it rests on or points at.
-- **Open questions stay on what the decision itself leaves unsettled.** Your agent no longer proposes
-  ones about how other decisions might go later; anything like that worth keeping becomes a matter or
-  a decision of its own.
+- **Every draft decision is shown to you in one layout**, from the first preview of a session, headed by its **Need**. A record amending or superseding another is previewed too, saying what it changes, and so are the world facts and records it rests on or points at.
+- **Open questions stay on what the decision itself leaves unsettled.** Your agent no longer proposes ones about how other decisions might go later; anything like that worth keeping becomes a matter or a decision of its own.
 
 ## 0.31.0-beta — 2026-09-28
 
-- **Your agent compares a record's promises with what happened by the record's number**, the way
-  the decision is cited. The server no longer accepts a handle for it, so an agent on an older pack
-  asks by handle, is refused, and is told to update.
+- **Your agent compares a record's promises with what happened by the record's number**, the way the decision is cited. The server no longer accepts a handle for it, so an agent on an older pack asks by handle, is refused, and is told to update.
 
 ## 0.30.0-beta — 2026-09-28
 
-- **A seal or an uncommit that failed part-way is finished by repeating it.** Your agent repeats the
-  identical call rather than reporting a fault, and does not tell you the change happened until the
-  repeat succeeds. A reply saying the data service is unavailable is retried after a pause.
-- **Refusals that name what your role does not allow**, for creating, editing, sealing, anchoring or
-  uncommitting a decision record, and for configuring a ledger. Someone not on the ledger at all is
-  told it was not found.
-- **Your agent can rename a ledger.** Its address, and every citation of it, stay as they are.
-  Renaming it or changing its purpose takes an admin or owner; the pack had said a member could.
-- **Where a draft decision's handle may go, stated once.** Never into code, a document, a commit
-  message or anything sent; fine in chat and in session notes nobody commits or sends, such as a
-  hand-off pasted into the next session.
-- **Identifier refusals, as the server now words them:** one sentence for a malformed identifier,
-  and one naming the kind when an identifier of another kind arrives.
-- **Decision previews mark the chosen alternative** ✅ and the others ❌, in the order the record
-  holds them.
+- **A seal or an uncommit that failed part-way is finished by repeating it.** Your agent repeats the identical call rather than reporting a fault, and does not tell you the change happened until the repeat succeeds. A reply saying the data service is unavailable is retried after a pause.
+- **Refusals that name what your role does not allow**, for creating, editing, sealing, anchoring or uncommitting a decision record, and for configuring a ledger. Someone not on the ledger at all is told it was not found.
+- **Your agent can rename a ledger.** Its address, and every citation of it, stay as they are. Renaming it or changing its purpose takes an admin or owner; the pack had said a member could.
+- **Where a draft decision's handle may go, stated once.** Never into code, a document, a commit message or anything sent; fine in chat and in session notes nobody commits or sends, such as a hand-off pasted into the next session.
+- **Identifier refusals, as the server now words them:** one sentence for a malformed identifier, and one naming the kind when an identifier of another kind arrives.
+- **Decision previews mark the chosen alternative** ✅ and the others ❌, in the order the record holds them.
 
 ## 0.29.0-beta — 2026-09-13
 
-- **Every kind of Memolok identifier is now guaranteed to carry a prefix**, including two that did
-  not before: a ledger address becomes `mdl_` in front of the same sixteen characters it always had,
-  and a user id `musr_`. Scratchpads and feedback reports change prefix, `sp_` to `msp_` and `fb_` to
-  `mfb_`. Matters, World Facts, Observed Outcomes and Analyses are untouched.
-- **Why.** A ledger address and a user id were the same shape, so neither you nor your agent could
-  tell one from the other by looking. Now the string says what it is.
-- **The old forms stop resolving, deliberately** — rather than quietly finding the wrong thing. Where
-  a value is only missing its prefix, the error names the one to add and following it is safe,
-  because the part after the prefix never changed. Anything else your agent cannot tell apart from a
-  typo, so it will read the value back to you and ask instead of repairing it.
-- **Update your `.memolok/mdl.yml`**: the ledger address in it needs `mdl_` in front, or a session in
-  that folder cannot find your ledger. **And reconnect once** — sessions established beforehand carry
-  the old form of your user id and will be refused. Personal access tokens keep working.
+- **Every kind of Memolok identifier is now guaranteed to carry a prefix**, including two that did not before: a ledger address becomes `mdl_` in front of the same sixteen characters it always had, and a user id `musr_`. Scratchpads and feedback reports change prefix, `sp_` to `msp_` and `fb_` to `mfb_`. Matters, World Facts, Observed Outcomes and Analyses are untouched.
+- **Why.** A ledger address and a user id were the same shape, so neither you nor your agent could tell one from the other by looking. Now the string says what it is.
+- **The old forms stop resolving, deliberately** — rather than quietly finding the wrong thing. Where a value is only missing its prefix, the error names the one to add and following it is safe, because the part after the prefix never changed. Anything else your agent cannot tell apart from a typo, so it will read the value back to you and ask instead of repairing it.
+- **Update your `.memolok/mdl.yml`**: the ledger address in it needs `mdl_` in front, or a session in that folder cannot find your ledger. **And reconnect once** — sessions established beforehand carry the old form of your user id and will be refused. Personal access tokens keep working.
 
 ## 0.28.2-beta — 2026-09-12
 
-- **The references a build owes a decision no longer get dropped at the seal.** Where you have your
-  agent build against a decision still in draft, the code cannot name that decision — a draft has no
-  number — so writing the references in is a pass that follows sealing. Three places now say so where
-  only one did: the rule that licenses building against a draft, the wrap-up sweep, which lists a
-  build whose references were never written as a loose end, and the seal itself, which tells you the
-  number the work was waiting for has arrived.
+- **The references a build owes a decision no longer get dropped at the seal.** Where you have your agent build against a decision still in draft, the code cannot name that decision — a draft has no number — so writing the references in is a pass that follows sealing. Three places now say so where only one did: the rule that licenses building against a draft, the wrap-up sweep, which lists a build whose references were never written as a loose end, and the seal itself, which tells you the number the work was waiting for has arrived.
 
 ## 0.28.1-beta — 2026-09-11
 
-- **The ledger's name now sits above its id** in `.memolok/mdl.yml` and in a document's frontmatter,
-  so a file you open says which ledger it belongs to before it says the identifier. Nothing about how
-  either file works has changed, and one written in the old order keeps working.
+- **The ledger's name now sits above its id** in `.memolok/mdl.yml` and in a document's frontmatter, so a file you open says which ledger it belongs to before it says the identifier. Nothing about how either file works has changed, and one written in the old order keeps working.
 
 ## 0.28.0-beta — 2026-09-11
 
-**Corrections.** `help` no longer promises three things the ledger refuses: settling an open question
-between two sealed records, editing an observation, and a withdrawn number returning to circulation.
-The commit skill decodes two more refusals at the seal, and an anchored record is described as
-amendable, not only supersedable.
+**Corrections.** `help` no longer promises three things the ledger refuses: settling an open question between two sealed records, editing an observation, and a withdrawn number returning to circulation. The commit skill decodes two more refusals at the seal, and an anchored record is described as amendable, not only supersedable.
 
 **The scout can no longer spawn sub-agents.**
 
-**Less to read on every journey.** The method is split so that reading, parking and note-keeping load
-about half of it, the tool catalog is a fifth shorter, and search is described the same way
-everywhere, stemming included.
+**Less to read on every journey.** The method is split so that reading, parking and note-keeping load about half of it, the tool catalog is a fifth shorter, and search is described the same way everywhere, stemming included.
 
 ## 0.27.0-beta — 2026-09-10
 
-**Five listing tools are gone, and every collection now has one read for choosing.** `list_MDRs`,
-`list_matters`, `list_world_facts`, `list_observed_outcomes` and `list_scratchpads` have been removed
-from the server. In their place `discover_MDRs`, `discover_matters`, `discover_world_facts`,
-`discover_observed_outcomes` and `discover_scratchpads` each answer as a page to read rather than an
-envelope of rows, with `get_*` still the read that returns an entry whole. **You must update:** a
-pack older than this one names tools the server no longer has, and those calls fail.
+**Five listing tools are gone, and every collection now has one read for choosing.** `list_MDRs`, `list_matters`, `list_world_facts`, `list_observed_outcomes` and `list_scratchpads` have been removed from the server. In their place `discover_MDRs`, `discover_matters`, `discover_world_facts`, `discover_observed_outcomes` and `discover_scratchpads` each answer as a page to read rather than an envelope of rows, with `get_*` still the read that returns an entry whole. **You must update:** a pack older than this one names tools the server no longer has, and those calls fail.
 
-**The pages carry what you need to act on what you find.** A decision record shows its handle beside
-its number and the date it was decided; a matter names the analysis that took it up. Nothing has to
-be opened merely to get an identifier a write tool will ask for.
+**The pages carry what you need to act on what you find.** A decision record shows its handle beside its number and the date it was decided; a matter names the analysis that took it up. Nothing has to be opened merely to get an identifier a write tool will ask for.
 
-**Notes are findable by what they are about, not only by the words in them.** Each one now carries a
-title and a summary Memolok wrote, and search reaches those as well as the body — so a note can be
-found by a term nobody typed into it. Until a note has a title, its heading is its opening words, as
-before.
+**Notes are findable by what they are about, not only by the words in them.** Each one now carries a title and a summary Memolok wrote, and search reaches those as well as the body — so a note can be found by a term nobody typed into it. Until a note has a title, its heading is its opening words, as before.
 
-**Your agent now knows where a citation goes in a line, not just what it has to say.** It puts the
-identifier at the end of the clause it explains, groups several into one parenthesis, says out loud
-when one decision narrows another, and leaves another project's decision numbers in that project's
-own notation. Commit messages are covered for the first time: the identifier belongs in the body, not
-the subject line.
+**Your agent now knows where a citation goes in a line, not just what it has to say.** It puts the identifier at the end of the clause it explains, groups several into one parenthesis, says out loud when one decision narrows another, and leaves another project's decision numbers in that project's own notation. Commit messages are covered for the first time: the identifier belongs in the body, not the subject line.
 
-**And it knows that citing comes after sealing.** Where you have it build against a decision that is
-still a draft, the code cannot name that decision, because a draft has no number. Writing the
-references in is its own pass, begun once you have sealed — so your agent will tell you the build is
-done and the references are what remains, rather than sealing early to get itself a number it can
-type.
+**And it knows that citing comes after sealing.** Where you have it build against a decision that is still a draft, the code cannot name that decision, because a draft has no number. Writing the references in is its own pass, begun once you have sealed — so your agent will tell you the build is done and the references are what remains, rather than sealing early to get itself a number it can type.
 
-**Writing a reference into your project commits your agent to protecting it.** Putting an identifier
-into code, documentation or a commit message obliges it to tell Memolok, so the number cannot later
-be released while your reference still points at it. Mentioning a decision in a ticket or a message
-does not — that declaration cannot be undone, so your agent will ask you first.
+**Writing a reference into your project commits your agent to protecting it.** Putting an identifier into code, documentation or a commit message obliges it to tell Memolok, so the number cannot later be released while your reference still points at it. Mentioning a decision in a ticket or a message does not — that declaration cannot be undone, so your agent will ask you first.
 
-**A cut heading no longer leaves an asterisk showing.** A heading trimmed part-way through a bold
-run used to render two literal asterisks.
+**A cut heading no longer leaves an asterisk showing.** A heading trimmed part-way through a bold run used to render two literal asterisks.
 
 Every skill that used to reach for a listing tool now reaches for its page, `ledger-scout` included.
 
 ## 0.26.0-beta — 2026-09-08
 
-**Decision records can be read as prose, which completes the set.** `discover_MDRs` answers the same
-selection as `list_MDRs` — `status` filter included — as a page carrying each record's summary, the
-terms it names, and its head Claim beside them. All four listings that hold typed entries now have a
-prose sibling. `list_MDRs` rows gain a derived title, and `get_MDR` returns the summary and subjects
-alongside the record.
+**Decision records can be read as prose, which completes the set.** `discover_MDRs` answers the same selection as `list_MDRs` — `status` filter included — as a page carrying each record's summary, the terms it names, and its head Claim beside them. All four listings that hold typed entries now have a prose sibling. `list_MDRs` rows gain a derived title, and `get_MDR` returns the summary and subjects alongside the record.
 
-**A heading and summary on a record come from its spine**: the head Claim, the alternative it chose,
-and the Verdict. They have not read the options it rejected or the arguments about them, though search
-reaches all of those — so a record can match a query its summary never mentions, and the match window
-is what shows you why.
+**A heading and summary on a record come from its spine**: the head Claim, the alternative it chose, and the Verdict. They have not read the options it rejected or the arguments about them, though search reaches all of those — so a record can match a query its summary never mentions, and the match window is what shows you why.
 
-**And the pack now says plainly what a status means.** `Rejected` is a sealed commitment — the decision
-was not to proceed — and `Superseded` means a later record replaced this one while what it decided
-still happened. Reporting either as an unfinished record misreads the ledger, so the catalog, the
-review skill and the scout all carry it.
+**And the pack now says plainly what a status means.** `Rejected` is a sealed commitment — the decision was not to proceed — and `Superseded` means a later record replaced this one while what it decided still happened. Reporting either as an unfinished record misreads the ledger, so the catalog, the review skill and the scout all carry it.
 
-**The wake can be read as prose too.** `discover_observed_outcomes` answers the same selection as
-`list_observed_outcomes` — including narrowing to one record's wake with `mdrHandle` — as a page
-carrying each observation's summary and the terms it names. A record with a long tail of
-observations is the case this saves the most on. `list_observed_outcomes` rows now carry a derived
-title, and `get_observed_outcome` returns the summary and subjects alongside the claim.
+**The wake can be read as prose too.** `discover_observed_outcomes` answers the same selection as `list_observed_outcomes` — including narrowing to one record's wake with `mdrHandle` — as a page carrying each observation's summary and the terms it names. A record with a long tail of observations is the case this saves the most on. `list_observed_outcomes` rows now carry a derived title, and `get_observed_outcome` returns the summary and subjects alongside the claim.
 
-**A heading on an outcome describes what was observed and never judges the decision.** The derivation
-is shown the observer's claim and nothing else — not the expectation the entry tests, not the record
-it came from. Whether a promise held is `testResult`, which every read still carries. The skills and
-the scout say so, because a heading that reads like a verdict is the one way this could mislead.
+**A heading on an outcome describes what was observed and never judges the decision.** The derivation is shown the observer's claim and nothing else — not the expectation the entry tests, not the record it came from. Whether a promise held is `testResult`, which every read still carries. The skills and the scout say so, because a heading that reads like a verdict is the one way this could mislead.
 
-**World facts can be read the way matters can: as prose to choose from rather than rows to filter.**
-`discover_world_facts` answers the same selection as `list_world_facts`, in the same order, with the
-same identifiers — but as a page carrying each premise's summary and the terms it names. It is the
-read for *which of these bears on what I am doing*, and it saves opening every candidate to find out.
-`list_world_facts` rows now carry a derived title beside the admitter's excerpt, and `get_world_fact`
-returns the summary and subjects alongside the claim.
+**World facts can be read the way matters can: as prose to choose from rather than rows to filter.** `discover_world_facts` answers the same selection as `list_world_facts`, in the same order, with the same identifiers — but as a page carrying each premise's summary and the terms it names. It is the read for *which of these bears on what I am doing*, and it saves opening every candidate to find out. `list_world_facts` rows now carry a derived title beside the admitter's excerpt, and `get_world_fact` returns the summary and subjects alongside the claim.
 
-Search reaches the derived title, summary and subjects as well as the admitted claim, so a premise can
-now be found by a term nobody typed into it.
+Search reaches the derived title, summary and subjects as well as the admitted claim, so a premise can now be found by a term nobody typed into it.
 
-**A heading or summary on either read is Memolok's wording, not the admitter's — and on this
-collection that matters more than anywhere else.** A world fact is a premise decisions are reasoned
-from, so quoting a paraphrase of one back as the admitted claim misstates what the ledger rests on.
-Every page says which it is showing you, and where nothing has been derived the heading is the
-admitter's own opening rather than a placeholder. `get_world_fact` remains the only source for the
-words somebody actually wrote.
+**A heading or summary on either read is Memolok's wording, not the admitter's — and on this collection that matters more than anywhere else.** A world fact is a premise decisions are reasoned from, so quoting a paraphrase of one back as the admitted claim misstates what the ledger rests on. Every page says which it is showing you, and where nothing has been derived the heading is the admitter's own opening rather than a placeholder. `get_world_fact` remains the only source for the words somebody actually wrote.
 
-**Ledger reads now say when things came into being, and the tool catalog says so.** Every discovery
-row carries `createdAt`, so *"what came in this week"* is answerable by filtering rows rather than
-opening each entry. `get_matter` and matter rows carry `raisedBy`; world-fact reads carry
-`createdBy`.
+**Ledger reads now say when things came into being, and the tool catalog says so.** Every discovery row carries `createdAt`, so *"what came in this week"* is answerable by filtering rows rather than opening each entry. `get_matter` and matter rows carry `raisedBy`; world-fact reads carry `createdBy`.
 
-The catalog is explicit that an absent `raisedBy` means *unrecorded*, never *anonymous* — entries
-made before the server recorded a raiser have none and never will, because nothing in storage could
-recover one and nothing was invented to fill the gap.
+The catalog is explicit that an absent `raisedBy` means *unrecorded*, never *anonymous* — entries made before the server recorded a raiser have none and never will, because nothing in storage could recover one and nothing was invented to fill the gap.
 
-**Every routing row that means *choose* now points at a prose read.** The last one still sending the
-unprocessed-matter inbox to rows has moved: picking what to work on from a queue is choosing, and an
-agent that wants one matter whole has `get_matter` for exactly that.
+**Every routing row that means *choose* now points at a prose read.** The last one still sending the unprocessed-matter inbox to rows has moved: picking what to work on from a queue is choosing, and an agent that wants one matter whole has `get_matter` for exactly that.
 
-**Both duplicate checks now read as prose.** Registering a matter and admitting a world fact each begin
-by asking whether the same thing is already there, which is a judgement about what an entry is *about* —
-and two people parking the same trouble rarely open with the same words, so a positional excerpt is the
-wrong evidence. The almanac's check moved first; the matter one had been left behind.
+**Both duplicate checks now read as prose.** Registering a matter and admitting a world fact each begin by asking whether the same thing is already there, which is a judgement about what an entry is *about* — and two people parking the same trouble rarely open with the same words, so a positional excerpt is the wrong evidence. The almanac's check moved first; the matter one had been left behind.
 
-**The cold-start signal says what to do when it is already there.** The invariant asked whether anything
-in the session's own context said this project keeps a ledger, and only spelled out the *no* branch.
-A yes now says so: ignore the section and do not mention it, because a signal working as intended is
-not news, and reporting it spends the user's attention on a question they never asked.
+**The cold-start signal says what to do when it is already there.** The invariant asked whether anything in the session's own context said this project keeps a ledger, and only spelled out the *no* branch. A yes now says so: ignore the section and do not mention it, because a signal working as intended is not news, and reporting it spends the user's attention on a question they never asked.
 
-The almanac skill now checks for near-duplicates with the prose read rather than the row read, because
-that step is a judgement about whether a premise is already covered, and a row cannot support one.
+The almanac skill now checks for near-duplicates with the prose read rather than the row read, because that step is a judgement about whether a premise is already covered, and a row cannot support one.
 
 ## 0.25.0-beta — 2026-09-07
 
-**There are two ways to change a decision that is already sealed, and they differ in what happens to
-everything you did not mention.** An **amendment** keeps all of it, minus the part you changed. A
-**supersession** keeps none of it — the successor governs alone, and may say far less than the record
-it retired without that being an oversight. Whatever the new decision *adds* is valid either way, as
-in any record.
+**There are two ways to change a decision that is already sealed, and they differ in what happens to everything you did not mention.** An **amendment** keeps all of it, minus the part you changed. A **supersession** keeps none of it — the successor governs alone, and may say far less than the record it retired without that being an oversight. Whatever the new decision *adds* is valid either way, as in any record.
 
-**Amending is what is new here.** Until now a sealed record could only be taken back whole or
-replaced whole, so a decision that still stood with one part gone stale had no honest route: taking
-it back revised something nobody disputed, and replacing it retired something still in force. Now the
-original stays in force, and a reader who opens it can see that something later modified it.
+**Amending is what is new here.** Until now a sealed record could only be taken back whole or replaced whole, so a decision that still stood with one part gone stale had no honest route: taking it back revised something nobody disputed, and replacing it retired something still in force. Now the original stays in force, and a reader who opens it can see that something later modified it.
 
-Because everything you leave alone carries forward, **write only what changes.** An amendment that
-restates the original is nonsensical. Your agent knows this and will draft the difference rather than
-a rewrite.
+Because everything you leave alone carries forward, **write only what changes.** An amendment that restates the original is nonsensical. Your agent knows this and will draft the difference rather than a rewrite.
 
-That also settles which kind of change counts: all of them. Tightening a commitment, widening one,
-adding one that was missed, dropping one that no longer applies, or saying what a clause was always
-meant to mean are the same act. You never have to classify the change — only decide whether the rest
-of the record still governs.
+That also settles which kind of change counts: all of them. Tightening a commitment, widening one, adding one that was missed, dropping one that no longer applies, or saying what a clause was always meant to mean are the same act. You never have to classify the change — only decide whether the rest of the record still governs.
 
-The new route needs a recent enough Memolok server. Against an older one the write is refused, and
-your agent tells you rather than failing quietly.
+The new route needs a recent enough Memolok server. Against an older one the write is refused, and your agent tells you rather than failing quietly.
 
-- **`revise-decision` asks a different first question.** It used to route on whether a record could
-  still be withdrawn. It now asks how much of the record is wrong — nothing, part of it, or all of
-  it — and treats withdrawability as a separate fact that only rules one of the three answers in or
-  out. Asked the old way round, the ledger's state decided something only your situation can.
-- **The route that used to have no answer now has one.** *The decision stands and shipped, but
-  something it promised was wrong* previously landed on "neither route fits — record a separate
-  decision beside it and expect no link back". That's what amendment is for. It stays
-  link-less in one variant only: a follow-up that **declines** the promise rather than replacing it,
-  since a rejection puts nothing in force and so can change nothing.
-- **Amending is not the gentle option, and your agent now warns you before you take it.** Amending a
-  decision counts as relying on it, so from that moment it can no longer be withdrawn on the record
-  by anyone. It reads lighter than superseding and spends that option just as finally. If you might
-  want the original back, take it back first.
-- **Two more relationships can be recorded between decisions**: that one operationally relies on
-  another, and that two stand in tension. The second carries a sharp edge worth reading before you
-  use it — it applies to both records at once, including the one declaring it, and nothing undoes it.
-- **Both routes need a decision that is still in force, at each end** — which follows from the
-  distinction above, since one keeps that decision's content and the other retires it. So neither
-  applies to a rejection, which put nothing in force, or to an already-superseded record, which has
-  nothing left. The two new relationships are different: they relate the *decisions*, not
-  what those decisions put in force, so a rejection can carry them both. That is less strange than it
-  sounds — a decision to decline is still a decision, and later work can rest on it (*had we said yes
-  to that, we could not do this*) or collide with it (opening a store in Tokyo after declining the
-  Asian market).
-- **Corrected: a relationship that no longer exists was still being named** in two places listing
-  what makes a decision un-withdrawable. Your agent could have gone looking for something it would
-  never find.
+- **`revise-decision` asks a different first question.** It used to route on whether a record could still be withdrawn. It now asks how much of the record is wrong — nothing, part of it, or all of it — and treats withdrawability as a separate fact that only rules one of the three answers in or out. Asked the old way round, the ledger's state decided something only your situation can.
+- **The route that used to have no answer now has one.** *The decision stands and shipped, but something it promised was wrong* previously landed on "neither route fits — record a separate decision beside it and expect no link back". That's what amendment is for. It stays link-less in one variant only: a follow-up that **declines** the promise rather than replacing it, since a rejection puts nothing in force and so can change nothing.
+- **Amending is not the gentle option, and your agent now warns you before you take it.** Amending a decision counts as relying on it, so from that moment it can no longer be withdrawn on the record by anyone. It reads lighter than superseding and spends that option just as finally. If you might want the original back, take it back first.
+- **Two more relationships can be recorded between decisions**: that one operationally relies on another, and that two stand in tension. The second carries a sharp edge worth reading before you use it — it applies to both records at once, including the one declaring it, and nothing undoes it.
+- **Both routes need a decision that is still in force, at each end** — which follows from the distinction above, since one keeps that decision's content and the other retires it. So neither applies to a rejection, which put nothing in force, or to an already-superseded record, which has nothing left. The two new relationships are different: they relate the *decisions*, not what those decisions put in force, so a rejection can carry them both. That is less strange than it sounds — a decision to decline is still a decision, and later work can rest on it (*had we said yes to that, we could not do this*) or collide with it (opening a store in Tokyo after declining the Asian market).
+- **Corrected: a relationship that no longer exists was still being named** in two places listing what makes a decision un-withdrawable. Your agent could have gone looking for something it would never find.
 
 ## 0.24.1-beta — 2026-09-07
 
-**Wrapping up a session offers again to tell the next session this project uses Memolok** — but only
-where the first offer went unanswered. Declining it still settles it.
+**Wrapping up a session offers again to tell the next session this project uses Memolok** — but only where the first offer went unanswered. Declining it still settles it.
 
 ## 0.24.0-beta — 2026-09-07
 
-**Corrected: a ledger address and a user identifier are the same shape.** The tools catalog told
-your agent that `mdlGuid` was *not* the shape listed for the other identifiers. Since ledger
-addresses were re-minted it is exactly the shape of a `userId` — sixteen Crockford base32
-characters, no prefix — and nothing about either string says which one it is. The advice is
-unchanged and now has a reason behind it: treat it as opaque, and never substitute one for the
-other. Your agent is also told that a ledger address quoted from an older session can fail in two
-different ways, neither of which means you lack access.
+**Corrected: a ledger address and a user identifier are the same shape.** The tools catalog told your agent that `mdlGuid` was *not* the shape listed for the other identifiers. Since ledger addresses were re-minted it is exactly the shape of a `userId` — sixteen Crockford base32 characters, no prefix — and nothing about either string says which one it is. The advice is unchanged and now has a reason behind it: treat it as opaque, and never substitute one for the other. Your agent is also told that a ledger address quoted from an older session can fail in two different ways, neither of which means you lack access.
 
-**The project file that names your ledger can now carry the ledger's name and purpose as well, so a
-session that opens cold is oriented before it asks you anything.** `.memolok/mdl.yml` takes
-`mdlTitle` and `mdlIntent` beside `mdlGuid`. Only `mdlGuid` decides which ledger you are on; the
-other two are copies kept for reading, and where one disagrees with the ledger your agent believes
-the ledger and tells you the file has gone stale.
+**The project file that names your ledger can now carry the ledger's name and purpose as well, so a session that opens cold is oriented before it asks you anything.** `.memolok/mdl.yml` takes `mdlTitle` and `mdlIntent` beside `mdlGuid`. Only `mdlGuid` decides which ledger you are on; the other two are copies kept for reading, and where one disagrees with the ledger your agent believes the ledger and tells you the file has gone stale.
 
-- **Your agent reads the nearest one, and offers to write it where it will still be found.** A folder
-  holding several repositories used to bind all of them from a single file above — which works until
-  somebody clones one repository on its own and every bare `MDR-7` inside it stops naming anything.
-  Your agent now offers the file inside the repository instead, and says what the alternative costs
-  rather than deciding for you. Keeping one file above several projects is still yours to choose.
-- **A document's own frontmatter now outranks the project file**, so a document kept in one project
-  can cite a decision recorded in another. Frontmatter takes `mdlTitle` beside `mdlGuid` too.
-- **Rewriting what a ledger is for now offers to update the copy in the same breath.** Revising the
-  purpose is the one action that makes a project file wrong the moment it succeeds, so your agent
-  offers to refresh the file it can see rather than leaving a copy behind that quietly disagrees. It
-  will not go hunting through folders it was not working in.
+- **Your agent reads the nearest one, and offers to write it where it will still be found.** A folder holding several repositories used to bind all of them from a single file above — which works until somebody clones one repository on its own and every bare `MDR-7` inside it stops naming anything. Your agent now offers the file inside the repository instead, and says what the alternative costs rather than deciding for you. Keeping one file above several projects is still yours to choose.
+- **A document's own frontmatter now outranks the project file**, so a document kept in one project can cite a decision recorded in another. Frontmatter takes `mdlTitle` beside `mdlGuid` too.
+- **Rewriting what a ledger is for now offers to update the copy in the same breath.** Revising the purpose is the one action that makes a project file wrong the moment it succeeds, so your agent offers to refresh the file it can see rather than leaving a copy behind that quietly disagrees. It will not go hunting through folders it was not working in.
 
-**Your agent can offer to tell the next session that this project uses Memolok, so you do not have
-to.** With your say-so it puts a single paragraph wherever this project's sessions actually read
-from. A session then reaches for the ledger without being told to, and finds out early if it cannot
-reach it at all, rather than at the first decision worth recording.
+**Your agent can offer to tell the next session that this project uses Memolok, so you do not have to.** With your say-so it puts a single paragraph wherever this project's sessions actually read from. A session then reaches for the ledger without being told to, and finds out early if it cannot reach it at all, rather than at the first decision worth recording.
 
-- **Where it goes depends on where you work, because the same file is not read everywhere.** In
-  Claude Code it is a file of the plugin's own, `.claude/rules/memolok.md`. In a Cowork or chat
-  project your agent hands you the paragraph to paste into that project's instructions, and writes
-  nothing itself. In a Cowork session working from a bare connected folder it goes into that folder's
-  `CLAUDE.md`, between two marker comments, touching nothing else in the file. In a plain chat
-  nothing would reach a later session, so nothing is offered.
-- **You are asked separately, and told the cost.** One paragraph at the start of every session
-  in that project, whether or not that session touches Memolok. Agreeing to save a ledger id is not
-  agreeing to this; they are different questions and your agent asks them as two.
-- **Whatever it writes, it owns — and nothing beyond that.** A file of its own is rewritten whole; a
-  block in your `CLAUDE.md` is bounded by markers and nothing outside them is touched, ever.
-  **Removing what it wrote is how you turn it off.** It holds no ledger content — no name, no
-  purpose, no record numbers — so it never grows.
-- **It does nothing to anyone without the plugin.** A colleague who opens the project without Memolok
-  installed reads one clause that does not apply to them. Uninstalling leaves it in place,
-  harmlessly.
+- **Where it goes depends on where you work, because the same file is not read everywhere.** In Claude Code it is a file of the plugin's own, `.claude/rules/memolok.md`. In a Cowork or chat project your agent hands you the paragraph to paste into that project's instructions, and writes nothing itself. In a Cowork session working from a bare connected folder it goes into that folder's `CLAUDE.md`, between two marker comments, touching nothing else in the file. In a plain chat nothing would reach a later session, so nothing is offered.
+- **You are asked separately, and told the cost.** One paragraph at the start of every session in that project, whether or not that session touches Memolok. Agreeing to save a ledger id is not agreeing to this; they are different questions and your agent asks them as two.
+- **Whatever it writes, it owns — and nothing beyond that.** A file of its own is rewritten whole; a block in your `CLAUDE.md` is bounded by markers and nothing outside them is touched, ever. **Removing what it wrote is how you turn it off.** It holds no ledger content — no name, no purpose, no record numbers — so it never grows.
+- **It does nothing to anyone without the plugin.** A colleague who opens the project without Memolok installed reads one clause that does not apply to them. Uninstalling leaves it in place, harmlessly.
 
 ## 0.23.0-beta — 2026-09-05
 
-**Update required, and this pack and the Memolok server go together.** From this release the server
-stops accepting older packs: an earlier one describes a call it refuses outright, and — the half that
-matters more — reads several responses confidently wrong rather than failing. There is no version of
-this worth staying on. If your agent reports that its pack is too old, or a call fails in a way its
-examples do not predict, update.
+**Update required, and this pack and the Memolok server go together.** From this release the server stops accepting older packs: an earlier one describes a call it refuses outright, and — the half that matters more — reads several responses confidently wrong rather than failing. There is no version of this worth staying on. If your agent reports that its pack is too old, or a call fails in a way its examples do not predict, update.
 
-**A matter, world fact, observed outcome or analysis now carries a short identifier of its own** — a
-nine-character value like `mt_3kf9xq` instead of twenty-four hexadecimal characters, with the prefix
-saying what it addresses. Nothing you type changes; the values
-your agent quotes back to you do. An identifier written down during an older session may no longer
-resolve, and your agent will now tell you that rather than guessing.
+**A matter, world fact, observed outcome or analysis now carries a short identifier of its own** — a nine-character value like `mt_3kf9xq` instead of twenty-four hexadecimal characters, with the prefix saying what it addresses. Nothing you type changes; the values your agent quotes back to you do. An identifier written down during an older session may no longer resolve, and your agent will now tell you that rather than guessing.
 
-- **Withdrawing an analysis reference names the two things it joins** — the analysis and the input —
-  instead of a reference id. There is no reference id anywhere on the surface any more.
-- **A staged record can now be named `MDRh7`** instead of only described by its claim. An admitted one
-  is still `MDR-7`, exactly as before. The two are different addresses and routinely point at different records, so the
-  provisional form is marked to stop it being read as a citation.
-- **New: your agent can declare that something outside the ledger cites a record.** Once declared,
-  that record's number can never be released, so a reference you wrote into a file, a document or an
-  email cannot come to mean a different decision later. The declaration records only that a citation
-  exists and roughly what kind of place it lives in — never where. It is permanent and nothing
-  verifies it.
-- **Your agent now knows how to write a citation.** In code, the bare number is enough, because the
-  project file that names your ledger binds it. In a document, either the frontmatter names the
-  ledger or each reference carries the full address. In mail or chat, where nothing can bind it, the
-  full address is the only correct form. Following one of those addresses does not resolve to the
-  record yet, and your agent will say so.
+- **Withdrawing an analysis reference names the two things it joins** — the analysis and the input — instead of a reference id. There is no reference id anywhere on the surface any more.
+- **A staged record can now be named `MDRh7`** instead of only described by its claim. An admitted one is still `MDR-7`, exactly as before. The two are different addresses and routinely point at different records, so the provisional form is marked to stop it being read as a citation.
+- **New: your agent can declare that something outside the ledger cites a record.** Once declared, that record's number can never be released, so a reference you wrote into a file, a document or an email cannot come to mean a different decision later. The declaration records only that a citation exists and roughly what kind of place it lives in — never where. It is permanent and nothing verifies it.
+- **Your agent now knows how to write a citation.** In code, the bare number is enough, because the project file that names your ledger binds it. In a document, either the frontmatter names the ledger or each reference carries the full address. In mail or chat, where nothing can bind it, the full address is the only correct form. Following one of those addresses does not resolve to the record yet, and your agent will say so.
 
 ## 0.22.0-beta — 2026-09-02
 
-**Not every line on a matter row is the words somebody typed, and your agent now knows the
-difference.**
+**Not every line on a matter row is the words somebody typed, and your agent now knows the difference.**
 
-A `list_matters` row can carry a short label Memolok supplies alongside the raiser's own trimmed
-words, and `get_matter` carries more of the same beside the full text. That reads exactly like a
-short quotation and nothing in the response distinguishes them — so a skill told to present parked
-matters *"in the words they were logged in"* would have begun presenting a paraphrase as somebody's
-own utterance, confidently and invisibly. That is a wording problem, which is why it is a pack
-release.
+A `list_matters` row can carry a short label Memolok supplies alongside the raiser's own trimmed words, and `get_matter` carries more of the same beside the full text. That reads exactly like a short quotation and nothing in the response distinguishes them — so a skill told to present parked matters *"in the words they were logged in"* would have begun presenting a paraphrase as somebody's own utterance, confidently and invisibly. That is a wording problem, which is why it is a pack release.
 
-- **`review-ledger`** now keeps the two apart when it reports the unprocessed inbox: quote the
-  excerpt when quoting the raiser, and `get_matter` is where the exact wording lives.
+- **`review-ledger`** now keeps the two apart when it reports the unprocessed inbox: quote the excerpt when quoting the raiser, and `get_matter` is where the exact wording lives.
 - **The ledger scout** cites the excerpt rather than the label when reporting what a matter says.
-- **The tools reference** describes what a matter row and `get_matter` each carry, and states
-  plainly that a row is no longer shaped like a trimmed `get_matter`.
+- **The tools reference** describes what a matter row and `get_matter` each carry, and states plainly that a row is no longer shaped like a trimmed `get_matter`.
 
-**`discover_matters` is a new way to scan a queue.** It answers the same selection as `list_matters`
-— same arguments, same order, same ids — as prose rather than rows, so you can tell what is waiting
-without opening entries one at a time, and each page says which of its words are the raiser's.
-`review-ledger`, `record-decision`, `grill-me` and the ledger scout reach for it when they look for
-parked bait.
+**`discover_matters` is a new way to scan a queue.** It answers the same selection as `list_matters` — same arguments, same order, same ids — as prose rather than rows, so you can tell what is waiting without opening entries one at a time, and each page says which of its words are the raiser's. `review-ledger`, `record-decision`, `grill-me` and the ledger scout reach for it when they look for parked bait.
 
-**One thing you may notice.** Searching matters now reaches more than the raiser's own text, so a
-query can return a matter whose wording does not contain your term, and results come back in a
-different order than before. Nothing you do changes: no tool gained a parameter and no skill gained
-a step.
+**One thing you may notice.** Searching matters now reaches more than the raiser's own text, so a query can return a matter whose wording does not contain your term, and results come back in a different order than before. Nothing you do changes: no tool gained a parameter and no skill gained a step.
 
 ## 0.21.1-beta — 2026-08-27
 
-**Reading a ledger is now delegated by default.** The scout shipped in 0.21.0-beta and almost nothing
-called it, so reviews went on being read inline — into your conversation — exactly as before the
-agent existed. Sweeps now go to it whatever the wider task is; short, bounded reads stay inline.
+**Reading a ledger is now delegated by default.** The scout shipped in 0.21.0-beta and almost nothing called it, so reviews went on being read inline — into your conversation — exactly as before the agent existed. Sweeps now go to it whatever the wider task is; short, bounded reads stay inline.
 
-**The scout no longer tells you how to fix a record.** It reports whether a decision can still be
-uncommitted and leaves the choice to you. It had been recommending a path, and on a sealed record
-that advice was wrong.
+**The scout no longer tells you how to fix a record.** It reports whether a decision can still be uncommitted and leaves the choice to you. It had been recommending a path, and on a sealed record that advice was wrong.
 
 ## 0.21.0-beta — 2026-08-27
 
-**Reading a ledger back no longer floods the conversation, and on large ledgers it works again at
-all.** Reviews used to pull every record and every parked matter into the chat to answer one
-question. Past a certain size that stopped fitting, and the answer never arrived.
+**Reading a ledger back no longer floods the conversation, and on large ledgers it works again at all.** Reviews used to pull every record and every parked matter into the chat to answer one question. Past a certain size that stopped fitting, and the answer never arrived.
 
-- **Ask about a topic and Memolok searches for it.** Records, matters, almanac facts, recorded
-  outcomes and notes are all searchable by content now, and a record is found by the reasoning
-  inside it — its verdict, an argument that was weighed, a consequence that was expected — not
-  only by the need at its head.
-- **Search finds words, not meaning.** A record that discusses your topic in different words will
-  not come back, and the skills now say which words were tried rather than reporting "nothing was
-  decided". Treat an empty result as *nobody wrote it that way*.
-- **Results arrive a page at a time**, with a count of everything that matched. When an answer rests
-  on part of a ledger, you are told which part.
-- **Rows are excerpts.** Listings show the opening of each entry rather than all of it, and the full
-  text is one read away. For your own parked matters this matters most: the excerpt is a trim of
-  your words, so anything quoted back to you should come from the whole entry.
-- **A new agent does the reading.** `memolok:ledger-scout` sweeps a ledger in its own workspace and
-  returns the answer with its sources, so the sweep never reaches your conversation. It only reads,
-  and it cannot ask you anything — which is why it never handles the parts where you are present.
-  On surfaces without agents the skills read directly instead.
-- **A mistyped status is refused instead of answered.** Asking for records in a status that does not
-  exist used to come back empty, which read as *nothing was decided*.
-- **Finding a note is one tool now**, not two. Browsing and searching your notes were separate calls
-  that disagreed with each other about how many results there were.
+- **Ask about a topic and Memolok searches for it.** Records, matters, almanac facts, recorded outcomes and notes are all searchable by content now, and a record is found by the reasoning inside it — its verdict, an argument that was weighed, a consequence that was expected — not only by the need at its head.
+- **Search finds words, not meaning.** A record that discusses your topic in different words will not come back, and the skills now say which words were tried rather than reporting "nothing was decided". Treat an empty result as *nobody wrote it that way*.
+- **Results arrive a page at a time**, with a count of everything that matched. When an answer rests on part of a ledger, you are told which part.
+- **Rows are excerpts.** Listings show the opening of each entry rather than all of it, and the full text is one read away. For your own parked matters this matters most: the excerpt is a trim of your words, so anything quoted back to you should come from the whole entry.
+- **A new agent does the reading.** `memolok:ledger-scout` sweeps a ledger in its own workspace and returns the answer with its sources, so the sweep never reaches your conversation. It only reads, and it cannot ask you anything — which is why it never handles the parts where you are present. On surfaces without agents the skills read directly instead.
+- **A mistyped status is refused instead of answered.** Asking for records in a status that does not exist used to come back empty, which read as *nothing was decided*.
+- **Finding a note is one tool now**, not two. Browsing and searching your notes were separate calls that disagreed with each other about how many results there were.
 
 **Needs the matching Memolok server**, which ships alongside this pack.
 
-**An analysis can now take up a world fact or a recorded outcome directly.** Until now the only thing
-an analysis could be about was a *matter* — raw input in someone's own words. So when a new
-regulation, or a result that missed what a decision promised, was what actually prompted fresh
-thinking, the only way to record that was to retype it as a matter. The ledger then held the same
-thing twice and no trace that either led to the other, and matters cannot be edited, so it could not
-be put right later.
+**An analysis can now take up a world fact or a recorded outcome directly.** Until now the only thing an analysis could be about was a *matter* — raw input in someone's own words. So when a new regulation, or a result that missed what a decision promised, was what actually prompted fresh thinking, the only way to record that was to retype it as a matter. The ledger then held the same thing twice and no trace that either led to the other, and matters cannot be edited, so it could not be put right later.
 
 The skills now route those cases to the entry itself. What changes for you:
 
-- **Ask "what should we do about that?" of something already on your ledger, and the decision that
-  follows will point back at it.** A fact in the almanac, an observed outcome from an earlier
-  decision — the reasoning names it as what it took up, and a reader of the resulting record can
-  walk back to it.
-- **The intake fork stops treating premises and outcomes as exits.** Bringing up a world fact or a
-  wake used to end the decision conversation and hand you to a different skill. It is now a detour:
-  record it there, come back, decide.
-- **One analysis can still take up any number of things, and now in any mixture** — a fresh report,
-  the constraint that bounds the fix and the outcome that prompted someone to look, together in one
-  act of reasoning.
-- **Reviews are honest about the direction that is missing.** You can ask what a record's reasoning
-  took up; there is no read that answers "what did this fact lead to?", and the skills say so rather
-  than implying the ledger computed it.
+- **Ask "what should we do about that?" of something already on your ledger, and the decision that follows will point back at it.** A fact in the almanac, an observed outcome from an earlier decision — the reasoning names it as what it took up, and a reader of the resulting record can walk back to it.
+- **The intake fork stops treating premises and outcomes as exits.** Bringing up a world fact or a wake used to end the decision conversation and hand you to a different skill. It is now a detour: record it there, come back, decide.
+- **One analysis can still take up any number of things, and now in any mixture** — a fresh report, the constraint that bounds the fix and the outcome that prompted someone to look, together in one act of reasoning.
+- **Reviews are honest about the direction that is missing.** You can ask what a record's reasoning took up; there is no read that answers "what did this fact lead to?", and the skills say so rather than implying the ledger computed it.
 
-Needs a Memolok server carrying the widened tool — **not yet deployed**, so none of this works
-against the server running today. That ordering is not optional: skills that offer these inputs
-against the current server would produce a "not found" on a live, correct id.
+Needs a Memolok server carrying the widened tool — **not yet deployed**, so none of this works against the server running today. That ordering is not optional: skills that offer these inputs against the current server would produce a "not found" on a live, correct id.
 
-- **`wrap-up` now looks for observed outcomes**, not only for content the session originated. It will
-  offer to record what you have learned about decisions already on your ledger — including records you
-  only read in passing, and outcomes nothing in the session caused.
-- **`help` answers instead of describing its own lookup.** It had picked up the habit of saying which
-  reference it was about to open before getting to the point, which put the agent's process in front of
-  your question. The reading is now invisible by rule, and the skill carries worked examples of what an
-  answer sounds like — it had none, alone among the skills in the pack.
-- **`help` also says what the agent is there to do.** Someone asking what Memolok is usually meets the
-  rigour before they meet the reason for it: records that seal, a commitment ceremony of its own,
-  expectations stated before the fact. Explained defensively that sounds like bureaucracy; explained as
-  protection for the decider it sounds like the point. The skill now names closing that gap as the job.
+- **`wrap-up` now looks for observed outcomes**, not only for content the session originated. It will offer to record what you have learned about decisions already on your ledger — including records you only read in passing, and outcomes nothing in the session caused.
+- **`help` answers instead of describing its own lookup.** It had picked up the habit of saying which reference it was about to open before getting to the point, which put the agent's process in front of your question. The reading is now invisible by rule, and the skill carries worked examples of what an answer sounds like — it had none, alone among the skills in the pack.
+- **`help` also says what the agent is there to do.** Someone asking what Memolok is usually meets the rigour before they meet the reason for it: records that seal, a commitment ceremony of its own, expectations stated before the fact. Explained defensively that sounds like bureaucracy; explained as protection for the decider it sounds like the point. The skill now names closing that gap as the job.
 
 ## 0.20.0-beta — 2026-08-20
 
-First `-beta` pack; every earlier release was `-alpha`. The track change is a statement about
-maturity, not a mechanical difference.
+First `-beta` pack; every earlier release was `-alpha`. The track change is a statement about maturity, not a mechanical difference.
 
-- **New skill: `wrap-up`.** A working session establishes things that live nowhere but in the
-  conversation, and when it ends they go with it silently. `wrap-up` finds them and routes each to
-  whichever skill or tool already owns that kind of thing — it deliberately owns no procedure of its
-  own. Two ideas do the work: record the durable fact behind an observation rather than the
-  observation, and record reasoned content at the honesty of the session, never above it. Tidying
-  reads as better writing and is the exact failure a ledger exists to prevent.
+- **New skill: `wrap-up`.** A working session establishes things that live nowhere but in the conversation, and when it ends they go with it silently. `wrap-up` finds them and routes each to whichever skill or tool already owns that kind of thing — it deliberately owns no procedure of its own. Two ideas do the work: record the durable fact behind an observation rather than the observation, and record reasoned content at the honesty of the session, never above it. Tidying reads as better writing and is the exact failure a ledger exists to prevent.
 - **`help` substantially refreshed.** It had drifted into describing an older version of the product.
-- **Corrections to the tool boundaries reference.** Three live tools were missing from the
-  *Available* table. The matter-closure fields were also grouped as one case when they are two: some
-  exist and are refused at the surface, others do not exist at all — the advice not to invent fields
-  was right either way, but a reader who went looking found two different things.
+- **Corrections to the tool boundaries reference.** Three live tools were missing from the *Available* table. The matter-closure fields were also grouped as one case when they are two: some exist and are refused at the surface, others do not exist at all — the advice not to invent fields was right either way, but a reader who went looking found two different things.
 - **`send-feedback`** now names `wrap-up` as the natural occasion to batch a report.
 
 ## 0.19.0-alpha — 2026-08-19
 
-**You name every id; the server never mints one.** Required by a breaking change in the service, and
-this pack ships *before* that server so there is no window in which your installed skills contradict
-the server they reach. Payloads written to this pack's examples work against both.
+**You name every id; the server never mints one.** Required by a breaking change in the service, and this pack ships *before* that server so there is no window in which your installed skills contradict the server they reach. Payloads written to this pack's examples work against both.
 
-- Every item in `alternatives`, `expectedOutcomes` and `openQuestions` must carry an `id` that you
-  choose — a prefix per list, unique within it, present always. The patch examples now show it, and
-  the error table covers the refusals you can meet.
-- Why it is worth the keystrokes: these lists replace wholesale, so an item arriving without an `id`
-  is equally readable as *keep this one* and *add a new one*. The server used to guess the second,
-  minting a fresh id — which silently re-identified every option on the record and left the chosen
-  alternative pointing at something that no longer existed, after reporting success. A name like
-  `alt-cache-layer` is also what a reader meets months later; a minted `alt-kmzp0u1f` carries
-  nothing.
-- `get_guidance` now takes a `pluginVersion`, and the method skill instructs passing it. That is what
-  lets the server tell your agent its pack is out of date at the start of a session, instead of your
-  agent finding out from a refused write halfway through a task.
+- Every item in `alternatives`, `expectedOutcomes` and `openQuestions` must carry an `id` that you choose — a prefix per list, unique within it, present always. The patch examples now show it, and the error table covers the refusals you can meet.
+- Why it is worth the keystrokes: these lists replace wholesale, so an item arriving without an `id` is equally readable as *keep this one* and *add a new one*. The server used to guess the second, minting a fresh id — which silently re-identified every option on the record and left the chosen alternative pointing at something that no longer existed, after reporting success. A name like `alt-cache-layer` is also what a reader meets months later; a minted `alt-kmzp0u1f` carries nothing.
+- `get_guidance` now takes a `pluginVersion`, and the method skill instructs passing it. That is what lets the server tell your agent its pack is out of date at the start of a session, instead of your agent finding out from a refused write halfway through a task.
 
 ## 0.18.0-alpha — 2026-08-18
 
-- **New skill: `send-feedback`.** Report a Memolok bug or suggestion to the team behind Memolok,
-  directly from the session holding the evidence. It is the first skill whose destination is not your
-  own ledger, so the routing table says so up front.
-- **Preview-and-confirm is non-negotiable in it.** The skill sends prose about your session off your
-  machine, so it always shows you what it is about to send first.
-- `get_guidance` now reports **two** versions, the pack's and the server's. They move independently,
-  and a bug report naming only one of them is half a report — quote the server version for server
-  behaviour, the pack version for skill behaviour.
+- **New skill: `send-feedback`.** Report a Memolok bug or suggestion to the team behind Memolok, directly from the session holding the evidence. It is the first skill whose destination is not your own ledger, so the routing table says so up front.
+- **Preview-and-confirm is non-negotiable in it.** The skill sends prose about your session off your machine, so it always shows you what it is about to send first.
+- `get_guidance` now reports **two** versions, the pack's and the server's. They move independently, and a bug report naming only one of them is half a report — quote the server version for server behaviour, the pack version for skill behaviour.
 
 ## 0.17.0-alpha — 2026-08-18
 
 A vocabulary migration. Nothing is aliased, so this pack and the matching server go together.
 
 - An analysis now records each input it took up as its own reference, alongside when it concluded.
-- Matter status is **gone**, with all nine of its values. It was a cache over the graph's own shape
-  that could disagree with what it shadowed — the disposition of a matter is now read from the
-  topology, which cannot drift from itself.
-- `save-matter`, `record-decision`, `review-ledger` and `grill-me` all teach a different inbox query
-  as a result, and `record-decision` gains a rule against volunteering record-to-matter
-  correspondence.
-- **Update the server before this pack**, not after. An older pack against the new server gets a
-  clear parameter error; this pack against an older server fails at the first tool call in four
-  skills.
+- Matter status is **gone**, with all nine of its values. It was a cache over the graph's own shape that could disagree with what it shadowed — the disposition of a matter is now read from the topology, which cannot drift from itself.
+- `save-matter`, `record-decision`, `review-ledger` and `grill-me` all teach a different inbox query as a result, and `record-decision` gains a rule against volunteering record-to-matter correspondence.
+- **Update the server before this pack**, not after. An older pack against the new server gets a clear parameter error; this pack against an older server fails at the first tool call in four skills.
 
 ## 0.16.0-alpha — 2026-08-09
 
-Makes **rejection** a shape the agent reaches for rather than an edge case. A decision not to do
-something is a real commitment and deserves the same record as a decision to act.
+Makes **rejection** a shape the agent reaches for rather than an edge case. A decision not to do something is a real commitment and deserves the same record as a decision to act.
 
 - New reference on rejection, and one on write failures.
 - The method skill was substantially rewritten and shortened.
 
 ## 0.15.0-alpha — 2026-08-08
 
-- **New skill: `manage-notes`** — scratchpads, for freeform working material the ledger keeps but
-  stands behind no claim about. Fully mutable, unlike everything else in the model.
+- **New skill: `manage-notes`** — scratchpads, for freeform working material the ledger keeps but stands behind no claim about. Fully mutable, unlike everything else in the model.
 - `help` gains a scratchpads reference; the method, catalog and boundary docs cover the new tools.
 
 ## 0.14.0-alpha — 2026-08-07
@@ -704,8 +345,7 @@ Adds `get_analysis` and its companions to the catalog, and teaches `review-ledge
 ## 0.12.0-alpha — 2026-08-03
 
 - **New skill: `revise-intent`** — state or revise what a ledger is *for*.
-- Direct retrieval of a decision record by its ledger number, so an agent no longer has to list an
-  entire ledger to resolve a number a practitioner knows by heart.
+- Direct retrieval of a decision record by its ledger number, so an agent no longer has to list an entire ledger to resolve a number a practitioner knows by heart.
 
 ## 0.11.0-alpha — 2026-08-01
 
@@ -713,16 +353,12 @@ Version-check support in the method skill.
 
 ## 0.10.1-alpha — 2026-08-01
 
-Improvements to `help`, mostly on how to introduce Memolok's vocabulary without burying a newcomer in
-it. Adds the reference explaining why these particular words were chosen.
+Improvements to `help`, mostly on how to introduce Memolok's vocabulary without burying a newcomer in it. Adds the reference explaining why these particular words were chosen.
 
 ## 0.10.0-alpha — 2026-08-01
 
-- **New skill: `help`** — what Memolok is, why records are sealed, what the vocabulary means, and the
-  common objections, with a reference per topic.
+- **New skill: `help`** — what Memolok is, why records are sealed, what the vocabulary means, and the common objections, with a reference per topic.
 
 ## 0.9.0-alpha — 2026-08-01
 
-First published pack. Skills for getting started, recording decisions, committing and revising them,
-parking matters, managing the almanac, reviewing a ledger, recording outcomes, and the decision
-interview.
+First published pack. Skills for getting started, recording decisions, committing and revising them, parking matters, managing the almanac, reviewing a ledger, recording outcomes, and the decision interview.

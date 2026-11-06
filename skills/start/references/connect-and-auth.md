@@ -15,23 +15,15 @@ The plugin ships one thing — the server URL:
 }
 ```
 
-Connecting identifies the client automatically — it registers itself, or presents a metadata document
-it hosts — and opens a browser to sign in at `memolok.ai`. There is no client id, no client secret, and
-no token to paste.
+Connecting identifies the client automatically — it registers itself, or presents a metadata document it hosts — and opens a browser to sign in at `memolok.ai`. There is no client id, no client secret, and no token to paste.
 
-**Never ask the user for a client id or a client secret.** None exist in this system. If a client's
-Advanced settings offer those fields, they must be left empty — a stale value there causes the
-connection to fail.
+**Never ask the user for a client id or a client secret.** None exist in this system. If a client's Advanced settings offer those fields, they must be left empty — a stale value there causes the connection to fail.
 
-An account is required, and there is no public sign-up. Accounts are provisioned by a Memolok
-administrator.
+An account is required, and there is no public sign-up. Accounts are provisioned by a Memolok administrator.
 
 ## Editor and command-line clients
 
-Clients that run outside a browser — Cursor and other editors, command-line agents — sign in the same
-way. The client opens the sign-in page in the user's browser and receives the result on a loopback
-address on the user's own machine. Their configuration is the URL alone: there is no header to set and
-no credential to put in it.
+Clients that run outside a browser — Cursor and other editors, command-line agents — sign in the same way. The client opens the sign-in page in the user's browser and receives the result on a loopback address on the user's own machine. Their configuration is the URL alone: there is no header to set and no credential to put in it.
 
 ## Diagnosing a failure
 
@@ -49,13 +41,11 @@ Start with `ping`. It is the only tool that tells you about the connection rathe
 | Writes refused and notes unreadable, other reads fine | `visitor` role | An administrator changes the role |
 | "Automatic client registration isn't supported" | Server-side registration issue | Not fixable by the user; report it |
 
-The key distinction: **not authenticated** is a connection problem, while **not a member** is a
-permissions problem. `ping` succeeding tells you which one you are looking at.
+The key distinction: **not authenticated** is a connection problem, while **not a member** is a permissions problem. `ping` succeeding tells you which one you are looking at.
 
 ## An error carrying a reference
 
-Several replies quote a `mrq_…` reference. They mean different things, and only one must not be
-repeated.
+Several replies quote a `mrq_…` reference. They mean different things, and only one must not be repeated.
 
 | Reply | What to do |
 | --- | --- |
@@ -64,28 +54,19 @@ repeated.
 | `This change to the Memolok Decision Record was only partly made: …` | Part of a status change or an uncommit landed. Repeat the identical call to complete it |
 | `Memolok hit an internal error and could not complete this request.` | Something failed on the server. **Do not retry, and do not diagnose** |
 
-The internal-error reply is deliberately empty of detail — the server keeps the cause in its own logs
-and hands out only the reference. There is nothing in the message to reason from, so an explanation
-built on it would be invented. Say plainly that the operation failed, give the user the reference
-verbatim, and offer to continue with something else. An administrator can resolve a reference to the
-exact failure.
+The internal-error reply is deliberately empty of detail — the server keeps the cause in its own logs and hands out only the reference. There is nothing in the message to reason from, so an explanation built on it would be invented. Say plainly that the operation failed, give the user the reference verbatim, and offer to continue with something else. An administrator can resolve a reference to the exact failure.
 
-Retrying is worse than useless here. These are overwhelmingly deterministic faults — a rejected write
-shape, a misconfiguration — and an identical call fails identically while burning the user's time. If
-the same reference class appears twice in a session, stop and report rather than working around it.
+Retrying is worse than useless here. These are overwhelmingly deterministic faults — a rejected write shape, a misconfiguration — and an identical call fails identically while burning the user's time. If the same reference class appears twice in a session, stop and report rather than working around it.
 
-Do not let a failure here become a reason to write the user's decision somewhere else. A record that
-did not reach the ledger was not recorded.
+Do not let a failure here become a reason to write the user's decision somewhere else. A record that did not reach the ledger was not recorded.
 
 ## Connections made elsewhere
 
-A connector added in one Claude surface generally syncs to the others, so there is usually no need to
-add it twice. If the tools are present, it is connected.
+A connector added in one Claude surface generally syncs to the others, so there is usually no need to add it twice. If the tools are present, it is connected.
 
 ## What to tell the user
 
-- To connect: add Memolok in their client's connector settings using **the URL alone**, and leave any
-  advanced credential fields empty.
+- To connect: add Memolok in their client's connector settings using **the URL alone**, and leave any advanced credential fields empty.
 - Signing in happens in a browser, against their Memolok account.
 - No account: an administrator creates one; there is no self-service sign-up.
 - Editors and command-line clients connect the same way: the URL alone, then a browser sign-in.
@@ -95,5 +76,4 @@ add it twice. If the tools are present, it is connected.
 - Ask for, accept, or handle a password, a token, or a client secret in conversation
 - Suggest creating an account on the user's behalf
 - Retry a failing call repeatedly hoping authentication resolves itself
-- Fall back to local files when the server is unreachable — they are not the ledger, and a decision
-  written to a local file is a decision that was not recorded
+- Fall back to local files when the server is unreachable — they are not the ledger, and a decision written to a local file is a decision that was not recorded

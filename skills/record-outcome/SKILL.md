@@ -1,18 +1,13 @@
 ---
 name: record-outcome
 description: >-
-  Record what actually happened after a decision. Use when the user reports a result of an earlier
-  choice: a target met or missed, a side effect nobody expected, "the switch didn't pay off", "we
-  hit the number", "turns out nobody used it". A failed command or build is not an outcome. They
-  want to change the decision because of it → here first, then `revise-decision`; asking how past
-  decisions turned out, with nothing new to report → `review-ledger`.
+  Record what actually happened after a decision. Use when the user reports a result of an earlier choice: a target met or missed, a side effect nobody expected, "the switch didn't pay off", "we hit the number", "turns out nobody used it". A failed command or build is not an outcome. They want to change the decision because of it → here first, then `revise-decision`; asking how past decisions turned out, with nothing new to report → `review-ledger`.
 argument-hint: "<what happened>"
 ---
 
 # /memolok:record-outcome — Record the wake
 
-Registers an Observed Outcome against a decision already on the ledger, and reads the gap between what
-was promised at t₀ and what the world did.
+Registers an Observed Outcome against a decision already on the ledger, and reads the gap between what was promised at t₀ and what the world did.
 
 ## Usage
 
@@ -29,8 +24,7 @@ Examples:
 
 ## Step 0 — Load the method
 
-Load the **`memolok-method`** skill and its `facilitation.md` reference. The Decision Transaction
-Principle is what makes the wake a separate record instead of an edit.
+Load the **`memolok-method`** skill and its `facilitation.md` reference. The Decision Transaction Principle is what makes the wake a separate record instead of an edit.
 
 ## Non-negotiables
 
@@ -46,22 +40,15 @@ Principle is what makes the wake a separate record instead of an edit.
 
 The decision froze at t₀. The wake is what the world did afterwards, and it is a **separate record**.
 
-If a decision promised P99 under 200ms and the result was 400ms, you record an outcome saying 400ms.
-You do **not** edit the expected outcome to say 400ms. The gap between the two is the entire value —
-erasing it destroys the only evidence of how good the team's forecasting is.
+If a decision promised P99 under 200ms and the result was 400ms, you record an outcome saying 400ms. You do **not** edit the expected outcome to say 400ms. The gap between the two is the entire value — erasing it destroys the only evidence of how good the team's forecasting is.
 
 ## Workflow
 
 ### 1. Find the source record
 
-`discover_MDRs(query="...")` in the words the user used, or `get_MDR` if the record is known. Each
-entry carries a summary beside an excerpt of the head **Claim**, not the whole of it, so read the
-record before deciding it is the right one. It must be **Accepted**, **Rejected**, or **Superseded** — a wake cannot attach to a
-staged record.
+`discover_MDRs(query="...")` in the words the user used, or `get_MDR` if the record is known. Each entry carries a summary beside an excerpt of the head **Claim**, not the whole of it, so read the record before deciding it is the right one. It must be **Accepted**, **Rejected**, or **Superseded** — a wake cannot attach to a staged record.
 
-Ledger reads are delegated — the **reading invariant** in **`memolok-method`**. Read inline instead
-and the pages land in the practitioner's own context, where they cannot be taken back out. Searching
-for the record goes to the scout; a handle you already hold does not.
+Ledger reads are delegated — the **reading invariant** in **`memolok-method`**. Read inline instead and the pages land in the practitioner's own context, where they cannot be taken back out. Searching for the record goes to the scout; a handle you already hold does not.
 
 ### 2. Decide the discovery type
 
@@ -71,19 +58,15 @@ for the record goes to the scout; a handle you already hold does not.
 | **Deducible** | Could have been foreseen at t₀ but was not written down |
 | **Emergent** | Nobody could reasonably have predicted it |
 
-For **Expected**, read the outcome id (`eo-…`) from `get_MDR_learning_delta` — you need it for
-`tests`, and that read lists each expected outcome beside the wakes already testing it.
+For **Expected**, read the outcome id (`eo-…`) from `get_MDR_learning_delta` — you need it for `tests`, and that read lists each expected outcome beside the wakes already testing it.
 
-The split between Deducible and Emergent is an honest judgement, and it matters: a pattern of
-Deducible outcomes says the team's forecasting has a blind spot, while Emergent ones are just the world
-being the world. Do not label something Emergent to spare anyone's feelings.
+The split between Deducible and Emergent is an honest judgement, and it matters: a pattern of Deducible outcomes says the team's forecasting has a blind spot, while Emergent ones are just the world being the world. Do not label something Emergent to spare anyone's feelings.
 
 ### 3. Apply the observation test
 
 > Could this outcome exist without a human or an agent making an epistemic judgement?
 
-If yes, it is telemetry, not an observed outcome. *"CPU hit 91% at 14:03"* is a metric. *"The cache
-did not hold P99 under target during peak"* is an observation — someone assessed it.
+If yes, it is telemetry, not an observed outcome. *"CPU hit 91% at 14:03"* is a metric. *"The cache did not hold P99 under target during peak"* is an observation — someone assessed it.
 
 The ledger is not a monitoring system. Do not funnel raw metrics into it.
 
@@ -103,15 +86,11 @@ The ledger is not a monitoring system. Do not funnel raw metrics into it.
 }
 ```
 
-The record is named by its **number**, the way the decision is cited: only a ledger resident takes an
-outcome, and every ledger resident has one. Holding only a handle, read the number off `get_MDR`.
+The record is named by its **number**, the way the decision is cited: only a ledger resident takes an outcome, and every ledger resident has one. Holding only a handle, read the number off `get_MDR`.
 
-`testResult` is `Satisfied`, `Violated`, or `Inconclusive` — and it belongs to the **expectation** being
-assessed, not to the observation event.
+`testResult` is `Satisfied`, `Violated`, or `Inconclusive` — and it belongs to the **expectation** being assessed, not to the observation event.
 
-`observedBy` names whoever saw it: the person the user is passing it on from, the user when they saw
-it themselves, you when you measured it. `authoredBy` names whoever wrote the claim's words, usually
-you. *Who held each role* in the method's `facilitation.md` has how to write each.
+`observedBy` names whoever saw it: the person the user is passing it on from, the user when they saw it themselves, you when you measured it. `authoredBy` names whoever wrote the claim's words, usually you. *Who held each role* in the method's `facilitation.md` has how to write each.
 
 Payloads and error cases: `references/wake.md`.
 
@@ -123,61 +102,40 @@ get_MDR_learning_delta(mdlGuid, mdr)
 
 It takes the record's number too, the one you recorded the outcome against.
 
-Returns each expected outcome with the wakes that tested it, plus every Emergent and Deducible
-outcome again on its own. Coexisting assessments all come back — there is no single current result,
-by design, because two honest observations can disagree.
+Returns each expected outcome with the wakes that tested it, plus every Emergent and Deducible outcome again on its own. Coexisting assessments all come back — there is no single current result, by design, because two honest observations can disagree.
 
 ### 6. Offer what follows
 
-A `Violated` result is **evidence for re-evaluation, not an automatic supersession**. What it earns is
-a fresh look, at a new t₀.
+A `Violated` result is **evidence for re-evaluation, not an automatic supersession**. What it earns is a fresh look, at a new t₀.
 
-- The user wants to act on it → **`record-decision`**; the wake becomes the input for the next
-  fish. Hand over the `observedOutcomeId`: the next analysis takes the wake up by that id, and
-  must not restate it as a Matter
+- The user wants to act on it → **`record-decision`**; the wake becomes the input for the next fish. Hand over the `observedOutcomeId`: the next analysis takes the wake up by that id, and must not restate it as a Matter
 - They just want it noted → stop; recording it was the point
 - They want to change the original record → **`revise-decision`**, and expect it to be anchored now
 
-**The successor is often a Rejection, and that is easy to miss.** A `Violated` result frequently means
-the record's *promise* was wrong rather than the world — the decision shipped and stands, and what
-needs recording is that the organization declines the commitment it made. That is a **Rejected**
-record, even while the work it relates to proceeds untouched.
+**The successor is often a Rejection, and that is easy to miss.** A `Violated` result frequently means the record's *promise* was wrong rather than the world — the decision shipped and stands, and what needs recording is that the organization declines the commitment it made. That is a **Rejected** record, even while the work it relates to proceeds untouched.
 
-It cannot supersede the original: a Rejection carries no `supersedes`, so the two stand side by side
-and the prose has to do the linking. Cite this wake in the successor's `hasContext` — that is how a
-later reader gets from the violated commitment to the decision about it. The `memolok-method` skill
-carries the shape.
+It cannot supersede the original: a Rejection carries no `supersedes`, so the two stand side by side and the prose has to do the linking. Cite this wake in the successor's `hasContext` — that is how a later reader gets from the violated commitment to the decision about it. The `memolok-method` skill carries the shape.
 
 ## Conflicting observations
 
 Mint a new outcome. Never edit a prior one.
 
-Correct an earlier observation only when it was **wrong at the time it was made** — a mis-read
-instrument, a bad query — using `correctsFact`. The world simply moving on is not a correction; that is
-a new observation that coexists with the old one.
+Correct an earlier observation only when it was **wrong at the time it was made** — a mis-read instrument, a bad query — using `correctsFact`. The world simply moving on is not a correction; that is a new observation that coexists with the old one.
 
 ## Anchoring
 
-Recording a wake links it to the source record, which typically makes the record **anchored**
-(`retractable: false`). After that it is amended or superseded, never uncommitted.
+Recording a wake links it to the source record, which typically makes the record **anchored** (`retractable: false`). After that it is amended or superseded, never uncommitted.
 
 If the user may still want to revise the sealed record, do that **first** — see `revise-decision`.
 
 ## Tips
 
-- There is no `observedAt` parameter. The server stamps the current time, so wakes cannot be backdated.
-  If the observation is old, say so in the prose.
+- There is no `observedAt` parameter. The server stamps the current time, so wakes cannot be backdated. If the observation is old, say so in the prose.
 - A record can carry many wakes over time. That is the point of a long tail.
-- Long latency is not failure; **unmeasured** latency is. A commitment with no observations after a
-  year is worth surfacing.
-- A `Rejected` record can carry a wake too — what happened after deciding *not* to act is just as
-  informative.
-- `discover_observed_outcomes(mdlGuid, mdr)` shows everything already recorded against a
-  record, each with its summary — which is what tells you whether this observation is already
-  there without opening every one.
-- **A derived heading on either read is Memolok's wording and never a verdict.** It comes from the
-  observer's claim alone; nothing in the derivation has seen the expectation the entry tests. Read
-  `testResult` for whether a promise held, and quote the observer through `get_observed_outcome`.
+- Long latency is not failure; **unmeasured** latency is. A commitment with no observations after a year is worth surfacing.
+- A `Rejected` record can carry a wake too — what happened after deciding *not* to act is just as informative.
+- `discover_observed_outcomes(mdlGuid, mdr)` shows everything already recorded against a record, each with its summary — which is what tells you whether this observation is already there without opening every one.
+- **A derived heading on either read is Memolok's wording and never a verdict.** It comes from the observer's claim alone; nothing in the derivation has seen the expectation the entry tests. Read `testResult` for whether a promise held, and quote the observer through `get_observed_outcome`.
 
 ## References
 
