@@ -220,9 +220,7 @@ Returns each expected outcome with the wakes that test it, plus every Emergent a
 | `title` | string | yes |
 | `ledgerIntent` | `{ description: { markdown, lang? } }` | no |
 
-Caller becomes `owner`. Returns the same shape as `get_MDL`, plus `disclosureMailSent`.
-
-**The ledger works at once, but nobody can be invited to it until its creator consents** to what it shows of them, their name included. Memolok mails the creator a link to confirm that on their own Sharing and privacy page in the Memolok portal; no tool confirms it, for them or by you. `disclosureMailSent: false` means that mail did not go out: `request_MDL_disclosure` sends it.
+Caller becomes `owner`. Returns the same shape as `get_MDL`. Nothing is mailed and no consent is asked: a creator consents to what the ledger shows of them each time they confirm an invitation to it (`share_MDL`).
 
 Refused with `You do not have the necessary permissions to create ledgers.` when the user's account is not allowed to create one. Every account can from the day it is created, so this is an administrator's matter: say so, and do not retry.
 
@@ -257,19 +255,11 @@ A `.memolok/mdl.yml` carrying `mdlTitle` holds the old name from this moment on 
 | `mdlGuid` | string | yes |
 | `iri` | string | yes |
 
-**Prepares an invitation and grants nothing by itself.** Memolok mails the inviter to confirm it, then the invitee to accept it, each on their own Sharing and privacy page in the Memolok portal; only the acceptance gives them `visitor`, which reads everything on the ledger but notes and changes nothing. Neither step can be taken through any tool, by you or for them, and a request not confirmed within seven days lapses. Requires `admin` or `owner`. Returns `{ iri, role, invited }`: `invited` true for an invitation prepared, false only for a demo account, which is given the role at once or already holds it.
+**Prepares an invitation and grants nothing by itself.** The inviter confirms each invitation on their Memolok sharing and privacy page, from the mail Memolok sends them, and the invitee then accepts it on theirs. The inviter's confirmation is their consent: it tells them the invitation carries their name and details, and that whoever accepts reads everything on the ledger and, like everyone who joins, sees the people on it with their roles; only the acceptance gives them `visitor`, which reads everything on the ledger but notes and changes nothing. Neither step can be taken through any tool, by you or for them, and a request not confirmed within seven days lapses. Requires `admin` or `owner`. Returns `{ iri, role, invited }`: `invited` true for an invitation prepared, false only for a demo account, which is given the role at once or already holds it.
 
-`iri` is the account's `…/m/<musr_…>#id`, exactly as `whoami` gives it to its holder or a ledger you share gives it in `get_MDL`'s `members`. There is no lookup by email or name, and no page shows it: ask the person to read theirs with `whoami` in their own session.
+`iri` is the account's `…/m/<musr_…>#id`, exactly as `whoami` gives it to its holder or a ledger you share gives it in `get_MDL`'s `members`. There is no lookup by email or name, and no page shows it: ask the person to read theirs with `whoami` in their own session, as their Memolok identifier; never say "IRI" to a person.
 
-**Confirm the ledger and the person with the user before the call, then say what is still to do**: they confirm from their own mail, the invitee accepts from theirs. Refused with `not-disclosed` until the ledger's creator has consented to what it shows of them: the creator asks again with `request_MDL_disclosure`, and anyone else asks the creator. Also refused: `already-member` (they hold a role there, which an invitation never changes), `holds-another-role` (a demo account holding another role, which it keeps), `already-invited` (one of yours waits for them; it is withdrawn on the portal, not through any tool), `unknown-account` (no account, or an expired one). No tool takes someone else's access away or gives a wider role; those are a Memolok administrator's.
-
-### `request_MDL_disclosure`
-
-| Param | Type | Required |
-| --- | --- | --- |
-| `mdlGuid` | string | yes |
-
-Asks the ledger's creator again to consent to what it shows of them, without which it cannot be shared: for a ledger created before consent was asked, a request that lapsed after seven days, `disclosureMailSent: false`, or a share refused with `not-disclosed`. **Prepares only**; Memolok mails the creator, who confirms on the portal. A repeat while a request waits sends no second mail, unless the first never went out. Returns `{ mdlGuid, requested }`. Only the creator may ask; to anyone else it reads as not found. Refused with `already-disclosed` once they have confirmed.
+**Confirm the ledger and the person with the user before the call, then say what is still to do**: they confirm from their own mail, the invitee accepts from theirs. Refused: `already-member` (they hold a role there, which an invitation never changes), `holds-another-role` (a demo account holding another role, which it keeps), `already-invited` (one of yours waits for them; it is withdrawn on their Memolok sharing and privacy page, not through any tool), `unknown-account` (no account, or an expired one). No tool takes someone else's access away or gives a wider role; those are a Memolok administrator's.
 
 ### `leave_MDL`
 
@@ -278,7 +268,7 @@ Asks the ledger's creator again to consent to what it shows of them, without whi
 | `mdlGuid` | string | yes |
 | `leaveWithNoOwner` | bool | no (default false) |
 
-**Destructive, and at once**: gives up the caller's own role, so they no longer read or write the ledger, and only a new invitation brings them back. What they wrote there still names them; that is `request_MDL_vanish`. Returns `{ mdlGuid, left }`. The last owner is refused with `last-owner`: send `leaveWithNoOwner: true` **only after telling the person the ledger will be left with no owner and hearing them agree**, never on the refusal alone.
+**Destructive, and at once**: gives up the caller's own role, so they no longer read or write the ledger, and only a new invitation brings them back. What they wrote there still names them; that is `request_MDL_vanish`. Returns `{ mdlGuid, left }`. Memolok mails them a receipt. The last owner is refused with `last-owner`: send `leaveWithNoOwner: true` **only after telling the person the ledger will be left with no owner and hearing them agree**, never on the refusal alone.
 
 ### `request_MDL_vanish`
 
@@ -287,9 +277,9 @@ Asks the ledger's creator again to consent to what it shows of them, without whi
 | `mdlGuid` | string | yes |
 | `leaveWithNoOwner` | bool | no (default false) |
 
-**Prepares the caller's own vanishing, and nothing happens until they confirm it** from the mail Memolok sends, on their Sharing and privacy page; the request lapses after seven days. **Once confirmed it cannot be undone**: every read of the ledger shows a pseudonym in their place, with no name, on everything it held then, and they leave the ledger. Only a person can make themself vanish; there is no asking it for anyone else. Returns `{ mdlGuid, requested }`. Same `last-owner` rule as `leave_MDL`; `already-vanished` where they have vanished already and nothing has named them there since.
+**Prepares the caller's own vanishing, and nothing happens until they confirm it**: Memolok mails them a link to their Memolok sharing and privacy page, and only confirming there makes them vanish. The request lapses after seven days. A vanish the person starts on that page themself takes effect there at once. **Once confirmed it cannot be undone**: every read of the ledger shows a pseudonym in their place, with no name, on everything it held then, and they leave the ledger. Memolok then mails them a receipt. Only a person can make themself vanish; there is no asking it for anyone else. Returns `{ mdlGuid, requested }`. Same `last-owner` rule as `leave_MDL`; `already-vanished` where they have vanished already and nothing has named them there since.
 
-**`mail-unavailable`** on any of the three preparing tools (`share_MDL`, `request_MDL_disclosure`, `request_MDL_vanish`): the request stands, its mail did not go; the same call again sends it.
+**`mail-unavailable`** on either preparing tool (`share_MDL`, `request_MDL_vanish`): the request stands, its mail did not go; the same call again sends it.
 
 ### `register_matter`
 
@@ -559,8 +549,6 @@ Owner-only, no time limit. Patchable: `title`, `kind`, `report`, `userVerbatim`,
 | `incomplete` | `This change to the Memolok Decision Record was only partly made: …` | `transition_MDR_status` or `uncommit_MDR`: repeat the identical call to complete it (`write-failures.md`). **The same code on `create_analysis` or `submit_feedback` means the opposite**, as the rows above say: the tool decides which |
 | `change-pending` | `An earlier transition of this Memolok Decision Record to Accepted was only partly made. …` | Repeat the earlier call it names first, then this one |
 | `record-changed` | `This Memolok Decision Record changed while the change was being made, and nothing was written. …` | Read the record again, and repeat only if the change still applies |
-| `not-disclosed` | `This Memolok Decision Ledger cannot be shared until its creator confirms, … what it shows of them. …` | `share_MDL` before the ledger's creator consented to what it shows of them. The creator: `request_MDL_disclosure`; anyone else asks the creator |
-| `already-disclosed` | `You confirmed already what this Memolok Decision Ledger shows of you.` | `request_MDL_disclosure` after the creator confirmed. Nothing to do |
 | `already-member` | `That account already holds a role on this Memolok Decision Ledger.` | `share_MDL` for someone holding a role there already; an invitation never changes a role |
 | `holds-another-role` | `That account already holds another role on this Memolok Decision Ledger.` | `share_MDL` for a demo account holding a role other than `visitor`, which it keeps |
 | `already-invited` | `An invitation to this Memolok Decision Ledger already waits for that account. …` | One of your invitations waits for them already; withdrawn on the portal |
