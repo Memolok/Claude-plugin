@@ -56,7 +56,8 @@ Described by position, because the shape is the point: narrow at the need, wide 
 
 | Term | Meaning |
 | --- | --- |
-| **owner**, **admin**, **member**, **visitor** | A person's role on a ledger. Visitors read records but see no notes; members also write; admins and owners can also withdraw a retractable decision, change the ledger's title and purpose, and share it read-only with another account, as a visitor. Whoever creates a ledger owns it. Everyone on a ledger can see who else is on it, by name and role, but never their email address. A role says what you may do, never who decided anything |
+| **owner**, **admin**, **member**, **visitor** | A person's role on a ledger. Visitors read records but see no notes; members also write; admins and owners can also withdraw a retractable decision, change the ledger's title and purpose, and invite another account to read it, as a visitor, which takes effect once the invitation is confirmed and accepted on the Memolok portal. Whoever creates a ledger owns it, and nobody can be invited until they consent, on the portal, to the ledger showing their name. Everyone on a ledger can see who else is on it, by name and role, but never their email address. A role says what you may do, never who decided anything |
+| **leaving**, **vanishing** | Leaving a ledger gives up your role on it at once; what you wrote there still names you. Vanishing, which only you can ask for and only you confirm, on the Memolok portal, replaces your name with a pseudonym on everything the ledger held, for good, and you leave it. A ledger's last owner is warned that it will be left with no owner |
 | **Memonos** | The team behind Memolok. Feedback about Memolok goes to them, never onto your own ledger |
 
 ## Review vocabulary

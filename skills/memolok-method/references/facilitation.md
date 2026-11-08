@@ -64,6 +64,8 @@ Holder unclear → interactive: ask once, at the moment of writing; unattended: 
 - **Someone named in conversation:** the user is `whoami`. Anyone else, look up by given and family name in `get_MDL`'s `members`: one match → that `iri`; several → ask which; none → ask for something that identifies them, and write that. Unattended → an `iri` only when both names match exactly one member; otherwise the name as given.
 - **Anyone else:** whatever identifies them — a name, an address, their own URI.
 
+**Naming them back to the user.** An IRI you read off an entry, a `createdBy`, a role or a provenance `by`, is named with `resolve_names`, never off `members`: a name reaches people who share a ledger with that person, and being named in testimony gives nobody access to it. A `null` name says only that no name is known, never why; a person who vanished from the ledger shows as a pseudonym IRI that resolves to none. Who created or changed an entry, as Memolok saw it rather than as testimony states it, is `get_provenance`.
+
 ## Decision Transaction Principle
 
 Effects project **forward only**. **t₀** = admission, the transition to **Accepted** or **Rejected**. At t₀ the server sets `decidedAt`, assigns `mdrNumber`, seals tier-1 fields.

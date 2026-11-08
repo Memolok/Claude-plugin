@@ -193,6 +193,7 @@ Any question about a word lands here. Both files, if the question is both.
 | Amend, withdraw, supersede, or settle an earlier open question | **`revise-decision`** |
 | See what the ledger already holds | **`review-ledger`** |
 | Write down what a ledger is for | **`revise-intent`** |
+| Invite someone to a ledger, leave one, or take their name off it | **`sharing-and-privacy`** |
 | Save what this session worked out, before it is gone | **`wrap-up`** |
 | Tell Memonos something about Memolok is broken or missing | **`send-feedback`** |
 

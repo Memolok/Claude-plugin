@@ -24,6 +24,7 @@ Start with `/memolok:start`, or just describe a decision you are making. If you 
 | `/memolok:manage-almanac` | Admit the world facts your decisions reason from |
 | `/memolok:manage-notes` | Scratchpad management: save, find and destroy working notes |
 | `/memolok:revise-intent` | Say what a ledger is for, or update it when the focus shifts |
+| `/memolok:sharing-and-privacy` | Invite someone to read a ledger, leave one, or take your name off it for good |
 | `/memolok:send-feedback` | Report a Memolok bug or suggestion to Memonos, **not** to your own ledger! |
 | `/memolok:wrap-up` | Before a session ends, save what would otherwise be lost with it |
 

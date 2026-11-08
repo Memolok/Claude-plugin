@@ -87,7 +87,7 @@ Agree a title **and a purpose** before calling anything. This is the moment for 
 }
 ```
 
-They become `owner`, and can share the ledger read-only with anyone who has a Memolok account (`share_MDL`). Any other role is currently given by a Memolok administrator, on request.
+They become `owner`, and the ledger is theirs to use at once. **Before anyone else can be invited to it, they must consent to it showing their name**, and only they can: Memolok mails them a link to confirm that on their own Sharing and privacy page in the Memolok portal, unless `disclosureMailSent` is `false`, which means the mail did not go out. Say which in a sentence, and that you cannot confirm it for them; offer `request_MDL_disclosure` when the mail did not go. A ledger nobody else will read needs nothing more. Once they have confirmed, they can invite anyone with a Memolok account to read it, which is **`sharing-and-privacy`**; any other role is currently given by a Memolok administrator, on request.
 
 **The purpose is optional.** If the user does not want to write one now, create the ledger with the title alone and move on — they can state it any time with **`revise-intent`**, as owner, and so can an admin. Never hold up a ledger over it.
 
@@ -126,6 +126,7 @@ Suggest a starting point based on what they came for:
 | Say what the ledger itself is for, or update it | **`revise-intent`** |
 | Record how a past decision turned out | **`record-outcome`** |
 | State a premise the ledger should know | **`manage-almanac`** |
+| Invite someone, leave a ledger, or take their name off one | **`sharing-and-privacy`** |
 
 Then hand off. Do not walk them through the whole list.
 
@@ -134,7 +135,7 @@ Then hand off. Do not walk them through the whole list.
 - The plugin ships the server URL and nothing else. Connecting opens a browser sign-in — there is no token to paste and no client id to configure.
 - A ledger with no records is normal, not broken.
 - If the user has decisions already scattered in a repository or a wiki, recording them is **`record-decision`** like any other — a decision made last year is still worth a record, and the reasoning is usually still recoverable from whoever made it.
-- Non-members get `Memolok Decision Ledger not found.` rather than a permission error, deliberately — it does not reveal whether the ledger exists. If someone expected access, an owner or admin of the ledger can share it with them read-only (`share_MDL`); any other role is a Memolok administrator's to give.
+- Non-members get `Memolok Decision Ledger not found.` rather than a permission error, deliberately — it does not reveal whether the ledger exists. If someone expected access, an owner or admin of the ledger can invite them to read it (`share_MDL`), which takes effect once both have confirmed on the Memolok portal; any other role is a Memolok administrator's to give.
 - The cold-start signal lands wherever a project's sessions actually read from, which differs by surface, and you do not need to know the place before offering. **Removing what was written is how they opt out**, and it only comes back if they accept the offer again. Uninstalling the plugin leaves it in place, harmlessly — it instructs nothing without the skills to act on it.
 
 ## References

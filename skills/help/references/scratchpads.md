@@ -50,7 +50,7 @@ The practical consequence is worth knowing up front: after promotion, the fact s
 
 ## What it is not
 
-It is not a document store, a wiki, or a filing system. There are no folders, no tags, no versions, and no history of changes. You get the note as it is now, who wrote it, when it was made, and when it last changed.
+It is not a document store, a wiki, or a filing system. There are no folders, no tags and no versions: Memolok keeps who changed a note and when, never what it said before. You get the note as it is now, who wrote it, when it was made, and when it last changed.
 
 Nothing reviews notes. Nothing reminds you about them. Nothing marks one stale. A note untouched for a year is behaving exactly as intended — that is what a place for things that promise nothing means.
 

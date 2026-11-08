@@ -7,10 +7,14 @@
 | Capability | Tools |
 | --- | --- |
 | Auth and health | `ping`, `get_guidance`, `whoami` |
+| Names and provenance | `resolve_names` (the names an IRI may be shown by, or none, never saying why), `get_provenance` (who created an entry and every later write) |
 | Ledger discovery and creation | `get_MDLs`, `get_MDL`, `create_MDL` |
 | Ledger intent | `set_ledger_intent` (read it back with `get_MDL`) |
 | Rename a ledger | `set_MDL_title` (admin/owner; its identifier does not change) |
-| Share a ledger read-only | `share_MDL` (admin/owner; gives an existing account `visitor`, named by its IRI) |
+| Invite someone to read a ledger | `share_MDL` (admin/owner; prepares an invitation to an existing account, named by its IRI, which grants nothing until the inviter confirms and the invitee accepts on the portal) |
+| Ask a ledger's creator to consent to sharing it | `request_MDL_disclosure` (the creator only; prepares, and the creator confirms on the portal) |
+| Leave a ledger | `leave_MDL` (your own role, at once) |
+| Vanish from a ledger | `request_MDL_vanish` (yourself only; prepares, and you confirm on the portal, for good) |
 | Matter intake | `register_matter` |
 | Matter reads | `get_matter` (one, whole), `discover_matters` (the ledger's matters as prose, each with its summary, subjects and who took it up) |
 | Analysis, Path A and B | `create_analysis` |
@@ -63,16 +67,20 @@ Do not simulate the missing enumeration by keeping a local index of what you sen
 
 `get_MDR_learning_delta` covers one record at a time. For anything portfolio-wide, read with `discover_MDRs` and reason in conversation — do not claim the ledger surfaced it.
 
+### Confirming a consent
+
+**No tool confirms or accepts a consent, and an agent never can**: consenting to a ledger's disclosure, confirming or accepting an invitation, and confirming a vanish are the person's own act on their Sharing and privacy page in the Memolok portal, linked from the mail Memolok sends them, and Memolok accepts them from the portal alone. Withdrawing an invitation has no tool either; the inviter does it on the same page. The tools that prepare these say so; tell the person what is left for them to do, and never present a prepared request as done. Nobody can leave or vanish on someone else's behalf.
+
 ### Ledger administration
 
 | Capability |
 | --- |
-| Removing a member, changing a member's role, or giving any role but `visitor` |
+| Removing someone else, changing a member's role, or giving any role but `visitor` |
 | Inviting someone who has no Memolok account |
 | Decision-record-type taxonomy |
 | Concern hierarchy |
 
-`create_MDL` is open to any user whose account allows it, which every account does from the day it is created, and the creator becomes owner. An owner or admin shares the ledger read-only with `share_MDL`; every other change to membership is made by a Memolok administrator.
+`create_MDL` is open to any user whose account allows it, which every account does from the day it is created, and the creator becomes owner. An owner or admin invites someone to read it with `share_MDL`, and anyone may leave it with `leave_MDL`; every other change to membership is made by a Memolok administrator.
 
 ### Project bridges
 
@@ -88,7 +96,7 @@ Do not generalise from the scratchpad tool. It exists only because a note is the
 
 Nothing may reference a scratchpad, permanently and by design. Passing a `msp_…` id to `hasContext`, `correctsFact`, `motivatedBy`, `tests.outcomeId` or `evidence` is refused by name — as is an `mfb_…` feedback report id, which is not a ledger entity at all.
 
-There is also no link the other way — no "promoted from", no provenance edge. Content mined out of a note is authored fresh with no trail back, and the user should be told that once.
+There is also no link the other way — no "promoted from", no edge from a note to what was made of it; `get_provenance` says who wrote an entry, never what material it came from. Content mined out of a note is authored fresh with no trail back, and the user should be told that once.
 
 ## Naming
 

@@ -60,6 +60,24 @@ The reply names the newest pack available and the oldest this server accepts. If
 
 No parameters. Returns `{ userId, iri, givenName, familyName, mbox }`, the last three only when held. `iri` is the user as every record names them: write it as given, never assembled from `userId`.
 
+### `resolve_names`
+
+| Param | Type | Required |
+| --- | --- | --- |
+| `iris` | string[] | yes, up to 100 |
+
+Returns `{ names: [{ iri, givenName, familyName }] }`, each IRI once, a name `null` where none is given to you. **This is how a person an entry names is named to the user**: any IRI you meet, a `createdBy`, a RACI value, a provenance `by`. You are given a name where you share a ledger with that person, or where Memolok credits them with something on a ledger you may read; being named in testimony gives nobody a name. **A `null` never says why**: an IRI naming nobody, a person you may not see named, one with no name held, and a person who vanished from the ledger (who shows as a pseudonym IRI) all answer alike. Say only that no name is known; never guess one or offer a reason.
+
+### `get_provenance`
+
+| Param | Type | Required |
+| --- | --- | --- |
+| `kind` | `MDL` \| `MDR` \| `matter` \| `world_fact` \| `observed_outcome` \| `analysis` \| `scratchpad` \| `feedback` | yes |
+| `mdlGuid` | string | every kind but `feedback` |
+| `entry` | string: `MDRh7`, `MDR-7`, or the entry's own id | every kind but `MDL` |
+
+**Memolok's own account of who wrote what, and when** — the read for *"who created this?"*, *"who changed it?"*, *"who sealed it, with which roles named?"*. Returns `{ created, revisions, testimony, references, sealings }`: the creation's `by`, `at` and `basis` (the world fact a creation rests on where Memolok inferred its creator rather than witnessed it); every later write, oldest first, by `kind` (such as `edit`, `transition`, `share`, `accept`; new kinds appear as Memolok records them); each testimony value with the write that asserted it; for an analysis, every reference it has held, **retracted ones included**, which no other read shows; for a record, the roles it named at each sealing. Readable wherever what it describes is; a feedback report's is yours alone. Every `by` is an IRI: name it with `resolve_names`.
+
 ### `get_MDLs`
 
 No parameters. Returns `{ mdls: [{ mdlGuid, title, role }] }`. A chooser across ledgers — it does not carry the Ledger Intent.
@@ -145,7 +163,7 @@ Returns `{ id, mdlGuid, description, createdAt, createdBy, raisedBy, authoredBy,
 
 ### `discover_matters`
 
-Shared discovery params, plus `untaken` (bool, optional): `true` is the unprocessed-bait inbox — every matter no analysis references; `false` is the complement, which is not the same as no filter. There is no status filter, because **a matter has no status**. Registration order, oldest first. Per matter: a heading, its id, `Raised by:` (a member by name, anyone else as stated, `not recorded` where nobody was), `Registered:`, subjects, summary, and which analyses took it up — each named by its `analysisId` — with what they produced. The match window prefers the author's own words.
+Shared discovery params, plus `untaken` (bool, optional): `true` is the unprocessed-bait inbox — every matter no analysis references; `false` is the complement, which is not the same as no filter. There is no status filter, because **a matter has no status**. Registration order, oldest first. Per matter: a heading, its id, `Raised by:` (by name where Memolok gives you one, anyone else as stated, `not recorded` where nobody was), `Registered:`, subjects, summary, and which analyses took it up — each named by its `analysisId` — with what they produced. The match window prefers the author's own words.
 
 ### `discover_world_facts`
 
@@ -202,7 +220,9 @@ Returns each expected outcome with the wakes that test it, plus every Emergent a
 | `title` | string | yes |
 | `ledgerIntent` | `{ description: { markdown, lang? } }` | no |
 
-Caller becomes `owner`. Returns the same shape as `get_MDL`.
+Caller becomes `owner`. Returns the same shape as `get_MDL`, plus `disclosureMailSent`.
+
+**The ledger works at once, but nobody can be invited to it until its creator consents** to what it shows of them, their name included. Memolok mails the creator a link to confirm that on their own Sharing and privacy page in the Memolok portal; no tool confirms it, for them or by you. `disclosureMailSent: false` means that mail did not go out: `request_MDL_disclosure` sends it.
 
 Refused with `You do not have the necessary permissions to create ledgers.` when the user's account is not allowed to create one. Every account can from the day it is created, so this is an administrator's matter: say so, and do not retry.
 
@@ -215,7 +235,7 @@ Pass `ledgerIntent` when the user has agreed a purpose — one call, not create-
 | `mdlGuid` | string | yes |
 | `ledgerIntent` | `{ description: { markdown, lang? } }` | yes |
 
-**Full replacement, not an append.** There is no history and no version. Read the current statement with `get_MDL` first, then send the complete new one.
+**Full replacement, not an append.** No earlier wording can be read back; `get_provenance` says only who wrote it and when. Read the current statement with `get_MDL` first, then send the complete new one.
 
 Requires `admin` or `owner`. Returns the same shape as `get_MDL`.
 
@@ -237,11 +257,39 @@ A `.memolok/mdl.yml` carrying `mdlTitle` holds the old name from this moment on 
 | `mdlGuid` | string | yes |
 | `iri` | string | yes |
 
-Gives another Memolok account the `visitor` role on the ledger: they read everything on it but notes, and change nothing. Requires `admin` or `owner`. Returns `{ iri, role }`, `role` being `visitor`.
+**Prepares an invitation and grants nothing by itself.** Memolok mails the inviter to confirm it, then the invitee to accept it, each on their own Sharing and privacy page in the Memolok portal; only the acceptance gives them `visitor`, which reads everything on the ledger but notes and changes nothing. Neither step can be taken through any tool, by you or for them, and a request not confirmed within seven days lapses. Requires `admin` or `owner`. Returns `{ iri, role, invited }`: `invited` true for an invitation prepared, false only for a demo account, which is given the role at once or already holds it.
 
-`iri` is the account's `…/m/<musr_…>#id`, exactly as `whoami` gives it to its holder or a ledger you share gives it in `get_MDL`'s `members`. There is no lookup by email or name, and no page shows it: ask the person to read theirs with `whoami` in their own session. Sharing with someone who already reads the ledger changes nothing; someone holding another role there keeps it, and the share is refused.
+`iri` is the account's `…/m/<musr_…>#id`, exactly as `whoami` gives it to its holder or a ledger you share gives it in `get_MDL`'s `members`. There is no lookup by email or name, and no page shows it: ask the person to read theirs with `whoami` in their own session.
 
-**Confirm the ledger and the person with the user before the call.** No tool takes access back or gives a wider role; those are a Memolok administrator's.
+**Confirm the ledger and the person with the user before the call, then say what is still to do**: they confirm from their own mail, the invitee accepts from theirs. Refused with `not-disclosed` until the ledger's creator has consented to what it shows of them: the creator asks again with `request_MDL_disclosure`, and anyone else asks the creator. Also refused: `already-member` (they hold a role there, which an invitation never changes), `holds-another-role` (a demo account holding another role, which it keeps), `already-invited` (one of yours waits for them; it is withdrawn on the portal, not through any tool), `unknown-account` (no account, or an expired one). No tool takes someone else's access away or gives a wider role; those are a Memolok administrator's.
+
+### `request_MDL_disclosure`
+
+| Param | Type | Required |
+| --- | --- | --- |
+| `mdlGuid` | string | yes |
+
+Asks the ledger's creator again to consent to what it shows of them, without which it cannot be shared: for a ledger created before consent was asked, a request that lapsed after seven days, `disclosureMailSent: false`, or a share refused with `not-disclosed`. **Prepares only**; Memolok mails the creator, who confirms on the portal. A repeat while a request waits sends no second mail, unless the first never went out. Returns `{ mdlGuid, requested }`. Only the creator may ask; to anyone else it reads as not found. Refused with `already-disclosed` once they have confirmed.
+
+### `leave_MDL`
+
+| Param | Type | Required |
+| --- | --- | --- |
+| `mdlGuid` | string | yes |
+| `leaveWithNoOwner` | bool | no (default false) |
+
+**Destructive, and at once**: gives up the caller's own role, so they no longer read or write the ledger, and only a new invitation brings them back. What they wrote there still names them; that is `request_MDL_vanish`. Returns `{ mdlGuid, left }`. The last owner is refused with `last-owner`: send `leaveWithNoOwner: true` **only after telling the person the ledger will be left with no owner and hearing them agree**, never on the refusal alone.
+
+### `request_MDL_vanish`
+
+| Param | Type | Required |
+| --- | --- | --- |
+| `mdlGuid` | string | yes |
+| `leaveWithNoOwner` | bool | no (default false) |
+
+**Prepares the caller's own vanishing, and nothing happens until they confirm it** from the mail Memolok sends, on their Sharing and privacy page; the request lapses after seven days. **Once confirmed it cannot be undone**: every read of the ledger shows a pseudonym in their place, with no name, on everything it held then, and they leave the ledger. Only a person can make themself vanish; there is no asking it for anyone else. Returns `{ mdlGuid, requested }`. Same `last-owner` rule as `leave_MDL`; `already-vanished` where they have vanished already and nothing has named them there since.
+
+**`mail-unavailable`** on any of the three preparing tools (`share_MDL`, `request_MDL_disclosure`, `request_MDL_vanish`): the request stands, its mail did not go; the same call again sends it.
 
 ### `register_matter`
 
@@ -272,7 +320,7 @@ Returns `{ id, mdlGuid, createdAt, body }`. Record the words **verbatim** — do
 
 Returns `{ analysis, mdr? }`: `analysis` is `{ id, mdlGuid, createdAt, concludedAt, references, body }`, and `mdr` is the record acknowledgement `create_MDR` returns. Path A mints the record at `New`, naming the analysis in its `analysisId`; Path B omits `mdr` entirely (absent, not null). Performing an analysis is for members, admins and owners, and Path A also needs the permission to create decision records.
 
-**A call that fails part-way says so**: the analysis was only partly created, and repeating the call creates a separate analysis rather than finishing this one. Do not repeat it on your own. Tell the user, quote the Reference the error carries, and check `get_matter`'s `takenUpBy` for what was written before deciding anything.
+**A call that fails part-way says so**, with code `incomplete`: the analysis was only partly created, and repeating the call creates a separate analysis rather than finishing this one. Do not repeat it on your own. Tell the user, quote the Reference the error carries, and check `get_matter`'s `takenUpBy` for what was written before deciding anything.
 
 ### `attach_analysis_reference`
 
@@ -351,11 +399,11 @@ Returns the record acknowledgement. An array you did not just draft starts from 
 
 ### `transition_MDR_status`
 
-`mdlGuid`, `mdr` as `MDRh7`, `status`. Admission to `Accepted` or `Rejected` sets `decidedAt`, assigns `mdrNumber`, and mints reciprocals on the records it names. Returns the record acknowledgement, which carries all three of `status`, `decidedAt` and `mdrNumber` to confirm the move by.
+`mdlGuid`, `mdr` as `MDRh7`, `status`. Admission to `Accepted` or `Rejected` sets `decidedAt`, assigns `mdrNumber`, and mints reciprocals on the records it names. Returns the record acknowledgement, which carries all three of `status`, `decidedAt` and `mdrNumber` to confirm the move by. Refused with `incomplete` → **repeat the identical call**, which completes it (`write-failures.md`).
 
 ### `uncommit_MDR`
 
-`mdlGuid`, `mdr` as `MDRh7`, optional `reason`. Requires `admin` or `owner`, status `Accepted` or `Rejected`, and `retractable: true`. Demotes to staged, clearing `mdrNumber` and `decidedAt`. Returns the record acknowledgement.
+`mdlGuid`, `mdr` as `MDRh7`, optional `reason`. Requires `admin` or `owner`, status `Accepted` or `Rejected`, and `retractable: true`. Demotes to staged, clearing `mdrNumber` and `decidedAt`. Returns the record acknowledgement. Refused with `incomplete` → **repeat the identical call**, which completes it (`write-failures.md`).
 
 ### `anchor_MDR`
 
@@ -414,7 +462,7 @@ Returns `{ scratchpadId, mdlGuid, createdAt, modifiedAt, body }`.
 
 ### `get_scratchpad`
 
-`mdlGuid` + `scratchpadId`. The only tool that returns a full body.
+`mdlGuid` + `scratchpadId`. The only tool that returns a full body. `createdBy` and each of `contributors` are `{ iri, name }`, `name` `null` where none is given to you; the note is the user's when `createdBy.iri` is `whoami`'s `iri`.
 
 ### `replace_scratchpad`
 
@@ -468,7 +516,7 @@ There is no `outcome` field and no report-class field. A call that returned 200 
 
 **Never send** `submittedBy`, `submittedAt`, `serverVersion`, `modelVersion` or `apiVersion` in a report — the servers record those and refuse a caller that sets them. The pack's own version goes in `pluginVersion`, beside `reports` and never inside one; `artifacts[].version` is for anything else you can actually read, such as a skill's.
 
-Returns `{ reports: [{ feedbackId, title, kind, submittedAt }, …] }` in submission order — a digest, not the bodies. Keep the ids.
+Returns `{ reports: [{ feedbackId, title, kind, submittedAt }, …] }` in submission order — a digest, not the bodies. Keep the ids. Refused with `incomplete` → **never repeat it on your own**: some reports may be stored, and a repeat may store them twice. Tell the user.
 
 ### `get_feedback`
 
@@ -489,55 +537,73 @@ Owner-only, no time limit. Patchable: `title`, `kind`, `report`, `userVerbatim`,
 
 ## Common errors
 
-| Message | Cause |
-| --- | --- |
-| `mdr must cite a record by its handle, as MDRh7: …` | A tool that changes a record was given `MDR-7`, or anything but `MDRh7`. Read the record and cite its `mdrHandle` |
-| `mdr must cite a record by its number, as MDR-12, or by its handle, as MDRh7: …` | A bare integer, or a citation misspelt: the prefix is matched exactly, case included, and the digits carry no leading zero |
-| `Memolok Decision Ledger not found.` | Does not distinguish a ledger the user cannot see from one that is not there. Report it as ambiguous: they may not be a member, or this address may be stale |
-| `You do not have the necessary permissions to … matters on this ledger.`, `… world facts …` | The role does not allow it: a visitor reads matters and world facts, and registers or admits neither |
-| `You do not have the necessary permissions to … scratchpads on this ledger.` | A visitor, who reads no notes and keeps none |
-| `You do not have the necessary permissions to replace a scratchpad you did not create. Read it and create your own instead.` | `replace_scratchpad` on somebody else's note, whatever the caller's role. Offer the copy |
-| `You do not have the necessary permissions to delete a scratchpad you did not create.` | A member deleting somebody else's note. An admin or owner may |
-| `You do not have the necessary permissions to … analyses on this ledger.` | The role does not allow it. Performing and attaching need a member, admin or owner; retracting and reopening need an admin or owner, even on an analysis the caller performed |
-| `You do not have the necessary permissions to create decision records on this ledger.` | `create_MDR` by someone whose role on the ledger does not let them create records, such as a visitor |
-| `You do not have the necessary permissions to edit this decision record.` | `update_MDR`, `transition_MDR_status` or `anchor_MDR` by someone whose role does not let them edit that record |
-| `You do not have the necessary permissions to record observed outcomes on this ledger.` | `record_observed_outcome` by someone whose role does not let them record, such as a visitor |
-| `You do not have the necessary permissions to uncommit decision records on this ledger.` | `uncommit_MDR` by someone whose role does not let them uncommit, such as a member |
-| `You do not have the necessary permissions to configure this ledger.` | `set_MDL_title` or `set_ledger_intent` by someone on the ledger whose role does not let them configure it |
-| `You do not have the necessary permissions to create ledgers.` | `create_MDL` by someone whose account is not allowed to create one. Every account is from the day it is created, so an administrator changes it; do not retry |
-| `Memolok Decision Record not found.` | No record under that key on a ledger you can read. A ledger you cannot read answers `Memolok Decision Ledger not found.` instead |
-| `The {field} reference belongs to a different Memolok Decision Ledger.` | Cross-ledger reference |
-| `Use transition_MDR_status to change Memolok Decision Record status.` | `status` in a patch |
-| `Cannot change the {label} on a ledger-resident Memolok Decision Record ({status}).` | Tier-1 patch after t₀ |
-| `Cannot change {field}: inter-record graph links may only be authored on staged Memolok Decision Records.` | Graph patch on a resident |
-| `No updatable fields were provided.` | Empty or no-op patch |
-| `Cannot transition a Memolok Decision Record from {from} to {to}.` | Illegal transition |
-| `supersedes may only target Accepted residents (MDR-{n} is {status}).` | Bad supersession target. A `Superseded` one has already been retired, so a second attempt has nothing to retire |
-| `amends may only target Accepted residents (MDR-{n} is {status}).` | Same rule, same reason: only an `Accepted` record has content for the amendment to leave standing |
-| `A Rejected Memolok Decision Record must not carry amends (…).` | `amends` on a record admitting as `Rejected` — nothing it says is in force, so it changes nothing |
-| `Field {x} cannot be authored over MCP: it is either minted by the server at admission or not yet writable.` | `amendedBy` / `supersededBy` on a patch |
-| `This Memolok Decision Record is Anchored ({kind}) and cannot be Uncommitted.` | Uncommit on an anchored record. **The kind is named** — `project` or `other` for a declared anchor, `conflict pair` when the record is held only by a `conflictsWith` edge (which anchors both sides, with no way to dissolve it), otherwise `ledger` for a derived cause |
-| `Only Accepted or Rejected Memolok Decision Records may be Uncommitted.` | Wrong status for uncommit |
-| `Only a ledger-resident Memolok Decision Record can be Anchored. A staged record has no ledger number for anything to cite.` | `anchor_MDR` on a staged record — wait for admission |
-| `kind must be one of project, other.` | `anchor_MDR` with anything else; the vocabulary is closed |
-| `{field} names a user in the retired form https://www.memolok.ai/users/<user id>; …` | An agent written in a form Memolok no longer accepts. Write the user's `iri` from `whoami` |
-| `{field} names no principal Memolok holds: {value}.` | A Memolok IRI naming no account Memolok holds, often an id misremembered. Take it from `whoami` or a record that carries it; nothing was written |
-| `{field} is under Memolok's namespace but is no principal's IRI; …` | A value under `https://app.memolok.ai/m/` that is not a principal's `…/m/<musr_…>#id` or `…/m/<msvc_…>#id`. Correct the form, or write someone outside Memolok without that prefix |
-| `discoveryType Expected requires tests referencing an expectedOutcome.` | Missing `tests` |
-| `An analysis must take up at least one input; motivatedBy is empty.` | Empty `motivatedBy` |
-| `motivatedBy[i] was not found in this Memolok Decision Ledger. An analysis input is a Matter, a World Fact or an Observed Outcome.` | An input the ledger does not hold. The index is the position in your list; nothing was written |
-| `Analysis reference not found.` | Retracting a pair that is not attached, or no longer is |
-| `This analysis produced MDR-{n}, which has been committed. Uncommit that record before reopening the reasoning it was committed on.` | `reopen_analysis` once a produced record is sealed |
-| `This analysis was only partly created: …` | See `create_analysis` above: do not repeat it on your own |
-| `{field} is a scratchpad id.` | A `msp_…` value passed to a reference field. Nothing may cite a note — admit a World Fact instead |
-| `{field} is not a well-formed {kind} identifier. Pass it back exactly as Memolok returned it.` | The value is not an identifier of the kind the field takes: mistyped, truncated or edited. The sentence is the same whatever is wrong, so fetch the value again and pass it back unchanged |
-| `{field} is a {kind} identifier, which does not address {kind}.` | A real identifier of another kind — a Matter where a World Fact belongs, or a ledger id passed to a feedback tool. Pass the kind the field takes |
-| `Scratchpad not found.` | Missing note, wrong ledger, or already deleted |
-| `A scratchpad body may be at most 65536 bytes;…` | Paste too large — split it, or keep a pointer to the source |
-| `This Memolok Decision Ledger already holds {n} scratchpads, …` | The ledger's note limit. The user deletes notes of theirs they no longer need; an admin or owner can delete anyone's |
-| `claimDescription is required when analysis produces a Memolok Decision Record.` | Path A without a claim |
-| `A Memolok Decision Record cannot cite its own Observed Outcome in hasContext...` | DTP violation |
-| `Feedback report not found.` | Not yours, wrong id, or deleted during triage |
-| `reports[n] may not set serverVersion, …` | The server records the build; a caller cannot claim one |
-| `This batch of feedback reports was only partly written: …` | The service failed after sending the batch, so some reports may be stored. Tell the user; repeating may store them twice, which triage cleans up |
-| `reports[n].evidence[m] must carry either a response … or an excerpt` | An evidence item that asserts nothing |
+**A refusal names its code.** Every refusal passed on from Memolok reads as its sentence, then `Code: <code>.`, then `Reference: mrq_….` where there is one: `You are this Memolok Decision Ledger's last owner: … Code: last-owner.` Decide from the code, never from the sentence's words, and quote the sentence to the person. Messages the MCP server writes itself (an outage, an internal error, a refused sign-in, invalid tool arguments) carry no code: `write-failures.md`.
+
+**A specific code decides what you do**, whatever the sentence says; the first table. **`invalid-request` and `not-found` are generic on purpose**: Memolok deliberately does not tell their cases apart by code. For those, and only those, read the sentence and correct the call; the second table explains each sentence.
+
+| Code | Example | Cause |
+| --- | --- | --- |
+| `access-denied` | `You do not have the necessary permissions to … matters on this ledger.`, `… world facts …` | The role does not allow it: a visitor reads matters and world facts, and registers or admits neither |
+| `access-denied` | `You do not have the necessary permissions to … scratchpads on this ledger.` | A visitor, who reads no notes and keeps none |
+| `access-denied` | `You do not have the necessary permissions to replace a scratchpad you did not create. Read it and create your own instead.` | `replace_scratchpad` on somebody else's note, whatever the caller's role. Offer the copy |
+| `access-denied` | `You do not have the necessary permissions to delete a scratchpad you did not create.` | A member deleting somebody else's note. An admin or owner may |
+| `access-denied` | `You do not have the necessary permissions to … analyses on this ledger.` | The role does not allow it. Performing and attaching need a member, admin or owner; retracting and reopening need an admin or owner, even on an analysis the caller performed |
+| `access-denied` | `You do not have the necessary permissions to create decision records on this ledger.` | `create_MDR` by someone whose role on the ledger does not let them create records, such as a visitor |
+| `access-denied` | `You do not have the necessary permissions to edit this decision record.` | `update_MDR`, `transition_MDR_status` or `anchor_MDR` by someone whose role does not let them edit that record |
+| `access-denied` | `You do not have the necessary permissions to record observed outcomes on this ledger.` | `record_observed_outcome` by someone whose role does not let them record, such as a visitor |
+| `access-denied` | `You do not have the necessary permissions to uncommit decision records on this ledger.` | `uncommit_MDR` by someone whose role does not let them uncommit, such as a member |
+| `access-denied` | `You do not have the necessary permissions to configure this ledger.` | `set_MDL_title` or `set_ledger_intent` by someone on the ledger whose role does not let them configure it |
+| `create-ledger-closed` | `You do not have the necessary permissions to create ledgers.` | `create_MDL` by someone whose account is not allowed to create one. Every account is from the day it is created, so an administrator changes it; do not retry |
+| `incomplete` | `This analysis was only partly created: …` | See `create_analysis` above: do not repeat it on your own |
+| `incomplete` | `This batch of feedback reports was only partly written: …` | The service failed after sending the batch, so some reports may be stored. Tell the user; repeating may store them twice, which triage cleans up |
+| `incomplete` | `This change to the Memolok Decision Record was only partly made: …` | `transition_MDR_status` or `uncommit_MDR`: repeat the identical call to complete it (`write-failures.md`). **The same code on `create_analysis` or `submit_feedback` means the opposite**, as the rows above say: the tool decides which |
+| `change-pending` | `An earlier transition of this Memolok Decision Record to Accepted was only partly made. …` | Repeat the earlier call it names first, then this one |
+| `record-changed` | `This Memolok Decision Record changed while the change was being made, and nothing was written. …` | Read the record again, and repeat only if the change still applies |
+| `not-disclosed` | `This Memolok Decision Ledger cannot be shared until its creator confirms, … what it shows of them. …` | `share_MDL` before the ledger's creator consented to what it shows of them. The creator: `request_MDL_disclosure`; anyone else asks the creator |
+| `already-disclosed` | `You confirmed already what this Memolok Decision Ledger shows of you.` | `request_MDL_disclosure` after the creator confirmed. Nothing to do |
+| `already-member` | `That account already holds a role on this Memolok Decision Ledger.` | `share_MDL` for someone holding a role there already; an invitation never changes a role |
+| `holds-another-role` | `That account already holds another role on this Memolok Decision Ledger.` | `share_MDL` for a demo account holding a role other than `visitor`, which it keeps |
+| `already-invited` | `An invitation to this Memolok Decision Ledger already waits for that account. …` | One of your invitations waits for them already; withdrawn on the portal |
+| `unknown-account` | `No Memolok account has that IRI.` | The `iri` names no Memolok account, or one that expired. Ask them for theirs from `whoami` |
+| `last-owner` | `You are this Memolok Decision Ledger's last owner: … send leaveWithNoOwner: true.` | `leave_MDL` or `request_MDL_vanish` by the last owner. Tell them the ledger is left with no owner; only on their yes, the same call with `leaveWithNoOwner: true` |
+| `already-vanished` | `You vanished from this Memolok Decision Ledger already: …` | They vanished from it already, and nothing has named them there since |
+| `mail-unavailable` | `The request was made, but its message could not be sent just now. …` | The request stands; its mail did not go. The same call again sends it |
+
+| Message | Code | Cause |
+| --- | --- | --- |
+| `mdr must cite a record by its handle, as MDRh7: …` | `invalid-request` | A tool that changes a record was given `MDR-7`, or anything but `MDRh7`. Read the record and cite its `mdrHandle` |
+| `mdr must cite a record by its number, as MDR-12, or by its handle, as MDRh7: …` | `invalid-request` | A bare integer, or a citation misspelt: the prefix is matched exactly, case included, and the digits carry no leading zero |
+| `Memolok Decision Ledger not found.` | `not-found` | Does not distinguish a ledger the user cannot see from one that is not there. Report it as ambiguous: they may not be a member, or this address may be stale |
+| `Memolok Decision Record not found.` | `not-found` | No record under that key on a ledger you can read. A ledger you cannot read answers `Memolok Decision Ledger not found.` instead |
+| `Use transition_MDR_status to change Memolok Decision Record status.` | `invalid-request` | `status` in a patch |
+| `Cannot change the {label} on a ledger-resident Memolok Decision Record ({status}).` | `invalid-request` | Tier-1 patch after t₀ |
+| `Cannot change {field}: inter-record graph links may only be authored on staged Memolok Decision Records.` | `invalid-request` | Graph patch on a resident |
+| `No updatable fields were provided.` | `invalid-request` | Empty or no-op patch |
+| `Cannot transition a Memolok Decision Record from {from} to {to}.` | `invalid-request` | Illegal transition |
+| `supersedes may only target Accepted residents (MDR-{n} is {status}).` | `invalid-request` | Bad supersession target. A `Superseded` one has already been retired, so a second attempt has nothing to retire |
+| `amends may only target Accepted residents (MDR-{n} is {status}).` | `invalid-request` | Same rule, same reason: only an `Accepted` record has content for the amendment to leave standing |
+| `A Rejected Memolok Decision Record must not carry amends (…).` | `invalid-request` | `amends` on a record admitting as `Rejected` — nothing it says is in force, so it changes nothing |
+| `Field {x} cannot be authored over MCP: it is either minted by the server at admission or not yet writable.` | `invalid-request` | `amendedBy` / `supersededBy` on a patch |
+| `This Memolok Decision Record is Anchored ({kind}) and cannot be Uncommitted.` | `invalid-request` | Uncommit on an anchored record. **The kind is named** — `project` or `other` for a declared anchor, `conflict pair` when the record is held only by a `conflictsWith` edge (which anchors both sides, with no way to dissolve it), otherwise `ledger` for a derived cause |
+| `Only Accepted or Rejected Memolok Decision Records may be Uncommitted.` | `invalid-request` | Wrong status for uncommit |
+| `Only a ledger-resident Memolok Decision Record can be Anchored. A staged record has no ledger number for anything to cite.` | `invalid-request` | `anchor_MDR` on a staged record — wait for admission |
+| `kind must be one of project, other.` | `invalid-request` | `anchor_MDR` with anything else; the vocabulary is closed |
+| `{field} names a user in the retired form https://www.memolok.ai/users/<user id>; …` | `invalid-request` | An agent written in a form Memolok no longer accepts. Write the user's `iri` from `whoami` |
+| `{field} names no principal Memolok holds: {value}.` | `invalid-request` | A Memolok IRI naming no account Memolok holds, often an id misremembered. Take it from `whoami` or a record that carries it; nothing was written |
+| `{field} is under Memolok's namespace but is no principal's IRI; …` | `invalid-request` | A value under `https://app.memolok.ai/m/` that is not a principal's `…/m/<musr_…>#id` or `…/m/<msvc_…>#id`. Correct the form, or write someone outside Memolok without that prefix |
+| `discoveryType Expected requires tests referencing an expectedOutcome.` | `invalid-request` | Missing `tests` |
+| `An analysis must take up at least one input; motivatedBy is empty.` | `invalid-request` | Empty `motivatedBy` |
+| `motivatedBy[i] was not found in this Memolok Decision Ledger. An analysis input is a Matter, a World Fact or an Observed Outcome.` | `invalid-request`, `not-found` | An input the ledger does not hold, including another ledger's entry. The index is the position in your list; nothing was written. `hasContext` and `correctsFact` answer another ledger's entry the same way, worded for their field |
+| `Analysis reference not found.` | `not-found` | Retracting a pair that is not attached, or no longer is |
+| `This analysis produced MDR-{n}, which has been committed. Uncommit that record before reopening the reasoning it was committed on.` | `invalid-request` | `reopen_analysis` once a produced record is sealed |
+| `{field} is a scratchpad id.` | `invalid-request` | A `msp_…` value passed to a reference field. Nothing may cite a note — admit a World Fact instead |
+| `{field} is not a well-formed {kind} identifier. Pass it back exactly as Memolok returned it.` | `invalid-request` | The value is not an identifier of the kind the field takes: mistyped, truncated or edited. The sentence is the same whatever is wrong, so fetch the value again and pass it back unchanged |
+| `{field} is a {kind} identifier, which does not address {kind}.` | `invalid-request` | A real identifier of another kind — a Matter where a World Fact belongs, or a ledger id passed to a feedback tool. Pass the kind the field takes |
+| `Scratchpad not found.` | `not-found` | Missing note, wrong ledger, or already deleted |
+| `A scratchpad body may be at most 65536 bytes;…` | `invalid-request` | Paste too large — split it, or keep a pointer to the source |
+| `This Memolok Decision Ledger already holds {n} scratchpads, …` | `invalid-request` | The ledger's note limit. The user deletes notes of theirs they no longer need; an admin or owner can delete anyone's |
+| `claimDescription is required when analysis produces a Memolok Decision Record.` | `invalid-request` | Path A without a claim |
+| `A Memolok Decision Record cannot cite its own Observed Outcome in hasContext...` | `invalid-request` | DTP violation |
+| `Feedback report not found.` | `not-found` | Not yours, wrong id, or deleted during triage |
+| `reports[n] may not set serverVersion, …` | `invalid-request` | The server records the build; a caller cannot claim one |
+| `reports[n].evidence[m] must carry either a response … or an excerpt` | `invalid-request` | An evidence item that asserts nothing |

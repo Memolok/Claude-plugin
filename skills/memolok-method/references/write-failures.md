@@ -1,6 +1,6 @@
 # When a write fails
 
-A failed write reaches you in one of a few shapes, and they call for opposite responses. A trailing `Reference: mrq_…` does not tell you which: it is there so an administrator can find the call, and it rides on replies you must repeat as well as on the one you must not.
+A failed write reaches you in one of a few shapes, and they call for opposite responses. A trailing `Reference: mrq_…` does not tell you which: it is there so an administrator can find the call, and it rides on replies you must repeat as well as on the one you must not. A refusal passed on from Memolok carries `Code: <code>.` before the reference, and the code is what to decide on; the MCP server's own messages, the internal error and the outage below among them, carry none.
 
 ## Internal error with a reference
 
@@ -19,17 +19,17 @@ The message carries no detail on purpose — the cause is in the server's logs a
 ## A change only partly made
 
 ```
-This change to the Memolok Decision Record was only partly made: this API lost its store part-way through. This is a fault here. Repeat the same call to complete it. Reference: mrq_…
+This change to the Memolok Decision Record was only partly made: this API lost its store part-way through. This is a fault here. Repeat the same call to complete it. Code: incomplete. Reference: mrq_…
 ```
 
-Only `transition_MDR_status` and `uncommit_MDR` answer this, with *lost its store* or *failed* in the middle. Part of the change landed, and the record stays marked until the rest does. **Repeat the identical call** — same record, same status or reason. It completes exactly what was begun; it is not a second change. The seal or the uncommit has not happened until the repeat succeeds, so do not report it as done before then.
+Of the record tools, only `transition_MDR_status` and `uncommit_MDR` answer this, with code `incomplete`, whatever the sentence says in the middle. `create_analysis` and `submit_feedback` answer the same code with the opposite rule, never repeated on your own: the catalog's *Common errors* has both. Part of the change landed, and the record stays marked until the rest does. **Repeat the identical call** — same record, same status or reason. It completes exactly what was begun; it is not a second change. The seal or the uncommit has not happened until the repeat succeeds, so do not report it as done before then.
 
 Rarely, the first call did finish and only its answer was lost. The repeat is then refused as a fresh call would be — `Cannot transition a Memolok Decision Record from Accepted to Accepted.`, or an uncommit refused because the record is already staged. That refusal means the change landed: read the record to confirm, and report it done.
 
-Until it is repeated, any other change to that record is refused with a sentence naming the call:
+Until it is repeated, any other change to that record is refused with code `change-pending` and a sentence naming the call:
 
 ```
-An earlier transition of this Memolok Decision Record to Accepted was only partly made. Repeat that transition to complete it before changing the record in any other way.
+An earlier transition of this Memolok Decision Record to Accepted was only partly made. Repeat that transition to complete it before changing the record in any other way. Code: change-pending.
 ```
 
 The same holds for an earlier uncommit, and for sealing a record whose links name one left unfinished. Repeat the named call first, then the one you were making.

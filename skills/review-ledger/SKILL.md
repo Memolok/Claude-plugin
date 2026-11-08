@@ -73,6 +73,8 @@ Everything else on this journey — a topic search, the open-question sweep, an 
 | Premises the ledger reasons from | `discover_world_facts(mdlGuid)` |
 | What happened after a decision | `discover_observed_outcomes(mdlGuid, mdr?)` |
 | Promises versus reality for one record | `get_MDR_learning_delta(mdlGuid, mdr)` |
+| Who created or changed an entry, or which roles a record named when sealed | `get_provenance(kind, mdlGuid, entry)` |
+| The name behind an IRI in any of the above | `resolve_names(iris)`; a `null` is "no name is known", never a reason |
 
 `get_MDR` answers what a record decided; `get_MDR_details` answers why and how. Start with `get_MDR`, and go deeper only when the question is about the reasoning: answering *why* from a Verdict alone invents an argument the record may not make.
 
@@ -186,7 +188,7 @@ You can often *reason* toward these by reading records — that is fine, and use
 
 ## Tips
 
-- `Memolok Decision Ledger not found.` does not distinguish a ledger the user cannot see from one that is not there. Report it as ambiguous: they may not be a member, or this address may be stale. If the user expected access, an owner or admin of the ledger can share it with them read-only (`share_MDL`); any other role is a Memolok administrator's to give.
+- `Memolok Decision Ledger not found.` does not distinguish a ledger the user cannot see from one that is not there. Report it as ambiguous: they may not be a member, or this address may be stale. If the user expected access, an owner or admin of the ledger can invite them to read it (`share_MDL`), which takes effect once both have confirmed on the Memolok portal; any other role is a Memolok administrator's to give.
 - `visitor` role can read everything except for notes, and write nothing.
 - A `Superseded` record is history, not a mistake. It records what was true and in force at its own t₀.
 - When a search finds nothing, say so plainly and offer to record the decision now rather than speculating about what might have been decided elsewhere.

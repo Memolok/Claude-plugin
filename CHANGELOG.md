@@ -13,6 +13,12 @@ The pack version is independent of the Memolok server's. You install the pack on
 ## Unreleased
 
 - **The pack's files are unwrapped.** Each paragraph is one line, however long. No wording changed, so nothing your agent does changes.
+- **Update required.** Sharing a ledger now sends an invitation instead of giving access, and a note names its author differently; an older pack would tell you someone can read a ledger when they cannot yet.
+- **Sharing is an invitation, and you confirm it yourself.** Your agent prepares it; you confirm it and the person you invite accepts it, each from Memolok's mail, on the portal. Your agent cannot do either step, so it tells you what is left.
+- **A new ledger asks your consent before anyone can be invited.** Memolok mails you to agree to it showing your name; your agent can ask again if the mail did not arrive.
+- **You can leave a ledger, or vanish from it**, with the new `sharing-and-privacy` skill. Leaving takes you off it at once; vanishing, which you confirm on the portal and cannot undo, puts a pseudonym in place of your name on everything it held. Your agent warns you first if you are the last owner.
+- **Your agent names people only as Memolok lets it**, and can say who created or changed an entry.
+- **Your agent acts on a refusal's code, not its wording**, and still quotes you the sentence.
 
 ## 0.41.0-beta — 2026-11-05
 

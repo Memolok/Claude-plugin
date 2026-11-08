@@ -99,7 +99,7 @@ Everyone working on the ledger reads every note (not visitors). Only the person 
 
 > Their note stays as it is — I've saved your version as a new note of yours.
 
-`get_scratchpad` names a note's author in `createdBy`, so when the user asks to change a note, check whose it is first. If it is not theirs, offer the copy rather than attempting the replace; a replace is refused, whatever their role, with a sentence that says to read the note and create your own.
+`get_scratchpad` names a note's author in `createdBy`, so when the user asks to change a note, check whose it is first: theirs when `createdBy.iri` is the `iri` `whoami` gives them. If it is not theirs, offer the copy rather than attempting the replace; a replace is refused, whatever their role, with a sentence that says to read the note and create your own.
 
 ## Revising
 
