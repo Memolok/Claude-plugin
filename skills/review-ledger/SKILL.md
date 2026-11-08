@@ -1,21 +1,13 @@
 ---
 name: review-ledger
 description: >-
-  Answer what a Memolok ledger already holds: decisions and their status, questions left open,
-  matters nobody has picked up, how decisions turned out, what the ledger says it is for. Use when
-  the user asks "what did we decide about X", "what's still open", "what is waiting to be looked
-  at", "how did that turn out", or wants records listed by status. Also use before acting on any
-  claim that the ledger is missing something (importing material, checking whether a decision is
-  already recorded, working out what is still worth recording), including when the ledger is one
-  input among several in a larger task. Load it even when the `memolok:ledger-scout` agent does the
-  reading. Their own notes → `manage-notes`.
+  Answer what a Memolok ledger already holds: decisions and their status, questions left open, matters nobody has picked up, how decisions turned out, what the ledger says it is for. Use when the user asks "what did we decide about X", "what's still open", "what is waiting to be looked at", "how did that turn out", or wants records listed by status. Also use before acting on any claim that the ledger is missing something (importing material, checking whether a decision is already recorded, working out what is still worth recording), including when the ledger is one input among several in a larger task. Load it even when the `memolok:ledger-scout` agent does the reading. Their own notes → `manage-notes`.
 argument-hint: "[status | topic]"
 ---
 
 # /memolok:review-ledger — Read the ledger
 
-Read-only. Surfaces what has been decided, what is still in flight, what was deliberately deferred,
-and what pain is sitting unprocessed.
+Read-only. Surfaces what has been decided, what is still in flight, what was deliberately deferred, and what pain is sitting unprocessed.
 
 ## Usage
 
@@ -32,27 +24,21 @@ Examples:
 
 ## Step 0 — Load the method
 
-Load the **`memolok-method`** skill for the lifecycle vocabulary and Rule F, which governs how records
-are named back to the user.
+Load the **`memolok-method`** skill for the lifecycle vocabulary and Rule F, which governs how records are named back to the user.
 
 ## Workflow
 
 ### 1. Establish the ledger
 
-Use the `mdlGuid` in play, else `.memolok/mdl.yml`, else `get_MDLs`. If the user belongs to several
-and has not said which, ask — reading the wrong ledger produces a confidently wrong "we never decided
-that".
+Use the `mdlGuid` in play, else `.memolok/mdl.yml`, else `get_MDLs`. If the user belongs to several and has not said which, ask — reading the wrong ledger produces a confidently wrong "we never decided that".
 
 ### 2. Hand the sweep off, if you can
 
-**The ledger must be settled first.** That is why this step is here and not earlier: picking the
-ledger can need the user, and a scout cannot ask anyone anything.
+**The ledger must be settled first.** That is why this step is here and not earlier: picking the ledger can need the user, and a scout cannot ask anyone anything.
 
-Ledger reads are delegated — the **reading invariant** in **`memolok-method`**. Read inline instead
-and the pages land in the practitioner's own context, where they cannot be taken back out.
+Ledger reads are delegated — the **reading invariant** in **`memolok-method`**. Read inline instead and the pages land in the practitioner's own context, where they cannot be taken back out.
 
-Almost every read on this journey is a sweep, so the useful half of the rule here is its floor. **The
-reading invariant, applied — what stays inline:**
+Almost every read on this journey is a sweep, so the useful half of the rule here is its floor. **The reading invariant, applied — what stays inline:**
 
 | The read | Why it stays |
 | --- | --- |
@@ -62,23 +48,13 @@ reading invariant, applied — what stays inline:**
 | One record, handle already known | Bounded before you start |
 | A count — any discovery read with `limit: 1`, taken from the total it states | The answer is one number, and `limit: 1` buys it for one entry |
 
-**Illustrative, not exhaustive.** The test is whether you can bound the read before starting, not
-whether it appears above. A read you can state the size of in advance is inline whether or not this
-table names it; when in doubt about a read you cannot size, hand it off.
+**Illustrative, not exhaustive.** The test is whether you can bound the read before starting, not whether it appears above. A read you can state the size of in advance is inline whether or not this table names it; when in doubt about a read you cannot size, hand it off.
 
-Everything else on this journey — a topic search, the open-question sweep, an inbox past one page, a
-status slice past one page, chasing a parked matter through to its records — is unbounded, and goes
-to the scout.
+Everything else on this journey — a topic search, the open-question sweep, an inbox past one page, a status slice past one page, chasing a parked matter through to its records — is unbounded, and goes to the scout.
 
-**Handing off.** The scout has none of this conversation. Give it the `mdlGuid` explicitly, the
-user's question in their own words, and what you need back. Never hand it a ledger the user has not
-settled on.
+**Handing off.** The scout has none of this conversation. Give it the `mdlGuid` explicitly, the user's question in their own words, and what you need back. Never hand it a ledger the user has not settled on.
 
-**Getting it back.** Name records to the user per Rule F. The scout reports its coverage — pages read
-out of `total`, bodies opened — and **that coverage is part of your answer**: "nothing about X in all
-68 records" and "nothing about X in the first 25" are different answers, and only one of them settles
-anything. A scout's report is orientation: before a quote, an id or a handle from it goes into
-anything irreversible, read the record yourself.
+**Getting it back.** Name records to the user per Rule F. The scout reports its coverage — pages read out of `total`, bodies opened — and **that coverage is part of your answer**: "nothing about X in all 68 records" and "nothing about X in the first 25" are different answers, and only one of them settles anything. A scout's report is orientation: before a quote, an id or a handle from it goes into anything irreversible, read the record yourself.
 
 ### 3. Pick the read
 
@@ -97,51 +73,32 @@ anything irreversible, read the record yourself.
 | Premises the ledger reasons from | `discover_world_facts(mdlGuid)` |
 | What happened after a decision | `discover_observed_outcomes(mdlGuid, mdr?)` |
 | Promises versus reality for one record | `get_MDR_learning_delta(mdlGuid, mdr)` |
+| Who created or changed an entry, or which roles a record named when sealed | `get_provenance(kind, mdlGuid, entry)` |
+| The name behind an IRI in any of the above | `resolve_names(iris)`; a `null` is "no name is known", never a reason |
 
-`get_MDR` answers what a record decided; `get_MDR_details` answers why and how. Start with `get_MDR`,
-and go deeper only when the question is about the reasoning: answering *why* from a Verdict alone
-invents an argument the record may not make.
+`get_MDR` answers what a record decided; `get_MDR_details` answers why and how. Start with `get_MDR`, and go deeper only when the question is about the reasoning: answering *why* from a Verdict alone invents an argument the record may not make.
 
-**A topic search is `query`, not a page you read yourself.** `discover_MDRs(query="...")` searches the
-whole fish — head **Claim**, **Verdict**, alternatives, deliberation facts, expected outcomes, open
-questions — so a record is found by the reasoning inside it and not only by its Claim. The page
-carries an excerpt of the Claim rather than the whole of it, so `get_MDR` before quoting one back.
+**A topic search is `query`, not a page you read yourself.** `discover_MDRs(query="...")` searches the whole fish — head **Claim**, **Verdict**, alternatives, deliberation facts, expected outcomes, open questions — so a record is found by the reasoning inside it and not only by its Claim. The page carries an excerpt of the Claim rather than the whole of it, so `get_MDR` before quoting one back.
 
-Search is lexical: whitespace-separated terms, ORed, case-insensitive and English-stemmed; no
-operators, phrases or regex; a whole hyphenated token matches and a partial one does not. An empty
-result means no entry used those words — say which you tried. Treat it as weak evidence rather than
-as "we never decided that".
+Search is lexical: whitespace-separated terms, ORed, case-insensitive and English-stemmed; no operators, phrases or regex; a whole hyphenated token matches and a partial one does not. An empty result means no entry used those words — say which you tried. Treat it as weak evidence rather than as "we never decided that".
 
-Every read pages: `limit` defaults to 25, and `total` counts the whole match. Read `total` before
-answering, and never let a first page stand in for the ledger.
+Every read pages: `limit` defaults to 25, and `total` counts the whole match. Read `total` before answering, and never let a first page stand in for the ledger.
 
-**Under a `query`, `total` counts matches — not the ledger.** A size question needs an unfiltered
-call. A filtered `total` quoted as a ledger size is wrong in the direction that makes the almanac look
-emptier than it is, which is how "I did not find it" becomes "it was never recorded".
+**Under a `query`, `total` counts matches — not the ledger.** A size question needs an unfiltered call. A filtered `total` quoted as a ledger size is wrong in the direction that makes the almanac look emptier than it is, which is how "I did not find it" becomes "it was never recorded".
 
-**When the user names a number, read it directly.** `get_MDR` takes `mdr` as `MDR-7` as readily as
-`MDRh7`, so "what did MDR-7 say?" is one call, not a sweep to find a handle. Use the handle
-whenever you already have one, and cite the `mdrHandle` the response carries, as `MDRh`, for
-anything you do to the record afterwards. A number released by an uncommit can be taken by a
-later record, so read back what you got before answering on it.
+**When the user names a number, read it directly.** `get_MDR` takes `mdr` as `MDR-7` as readily as `MDRh7`, so "what did MDR-7 say?" is one call, not a sweep to find a handle. Use the handle whenever you already have one, and cite the `mdrHandle` the response carries, as `MDRh`, for anything you do to the record afterwards. A number released by an uncommit can be taken by a later record, so read back what you got before answering on it.
 
-**The `status` filter is validated.** An unknown value is refused by name. A genuinely empty result
-means what it says — though only for the page you asked for, so check `total` before concluding
-anything from it.
+**The `status` filter is validated.** An unknown value is refused by name. A genuinely empty result means what it says — though only for the page you asked for, so check `total` before concluding anything from it.
 
 ### 4. Answer the question that was asked
 
 Lead with the answer, then the evidence.
 
-> **Yes — MDR-7, Accepted.** You went with a single drive plus scheduled off-device backup, on the
-> grounds that RAID doesn't protect against the failure modes you actually cared about (fire, theft,
-> deletion).
+> **Yes — MDR-7, Accepted.** You went with a single drive plus scheduled off-device backup, on the grounds that RAID doesn't protect against the failure modes you actually cared about (fire, theft, deletion).
 >
 > Still open on that record: the backup destination and schedule.
 
-Not a table dump the user has to read for themselves. The *grounds* in that answer came from
-`get_MDR_details`; `get_MDR` alone gives the Verdict and what is still open. Before saying a record
-still governs, see *What the ledger cannot tell you*.
+Not a table dump the user has to read for themselves. The *grounds* in that answer came from `get_MDR_details`; `get_MDR` alone gives the Verdict and what is still open. Before saying a record still governs, see *What the ledger cannot tell you*.
 
 ### 5. Offer the next move
 
@@ -150,35 +107,25 @@ still governs, see *What the ledger cannot tell you*.
 - They want to seal something staged → **`commit-decision`**
 - Something is genuinely undecided → **`record-decision`**
 - Parked bait is worth picking up → **`record-decision`**, which sharpens it
-- The answer feeds a document, code or a message → **`memolok-citations`** owns the form and the
-  anchor; a staged record goes there only as a paraphrase of its head Claim
+- The answer feeds a document, code or a message → **`memolok-citations`** owns the form and the anchor; a staged record goes there only as a paraphrase of its head Claim
 
 ## Common reviews
 
 ### What is in flight
 
-`discover_MDRs(status="Deliberating")` — records with a head Claim and no commitment yet. Some are live
-work; some are abandoned drafts that were never going anywhere. Both are legitimate; a staged record
-binds nothing: report it as in flight, never as what was decided.
+`discover_MDRs(status="Deliberating")` — records with a head Claim and no commitment yet. Some are live work; some are abandoned drafts that were never going anywhere. Both are legitimate; a staged record binds nothing: report it as in flight, never as what was decided.
 
 ### What was left open
 
-There is no query for unsettled deferrals. Read the records and collect `openQuestions` where
-`settledIn` is absent; `get_MDR` carries every open question whole, so this sweep needs no deeper
-read.
+There is no query for unsettled deferrals. Read the records and collect `openQuestions` where `settledIn` is absent; `get_MDR` carries every open question whole, so this sweep needs no deeper read.
 
-Say plainly that you assembled this by reading, not that the ledger surfaced it — Memolok has no
-open-question registry yet.
+Say plainly that you assembled this by reading, not that the ledger surfaced it — Memolok has no open-question registry yet.
 
 ### What the ledger says it is for
 
-`get_MDL(mdlGuid)` returns the ledger's stated purpose alongside its title and your role. Read it back
-as what it is — the ledger's own account of itself, written by a practitioner and revisable at any
-time.
+`get_MDL(mdlGuid)` returns the ledger's stated purpose alongside its title and your role. Read it back as what it is — the ledger's own account of itself, written by a practitioner and revisable at any time.
 
-It is **not** evidence of what was decided. If someone asks what was decided about X, the answer comes
-from the records, never from the purpose. And a record that looks unrelated to the stated purpose is
-not an anomaly worth flagging: intent is revised in place and often lags the work.
+It is **not** evidence of what was decided. If someone asks what was decided about X, the answer comes from the records, never from the purpose. And a record that looks unrelated to the stated purpose is not an anomaly worth flagging: intent is revised in place and often lags the work.
 
 `ledgerIntent: null` means nobody has written one. Say so plainly and offer **`revise-intent`**.
 
@@ -195,93 +142,53 @@ not an anomaly worth flagging: intent is revised in place and often lags the wor
 
 More than one entry is normal, not a defect: a matter can be taken up by several analyses.
 
-`takenUpBy` exists on matters only, though a world fact or observed outcome can equally be an
-analysis input — see *What the ledger cannot tell you* below before answering "what did this fact
-lead to?".
+`takenUpBy` exists on matters only, though a world fact or observed outcome can equally be an analysis input — see *What the ledger cannot tell you* below before answering "what did this fact lead to?".
 
-**Answer with what the records decided, and do not claim any one of them was "for" this matter** —
-an analysis produces records for the reasoning as a whole, and one of them may exist because of
-something no raiser mentioned. Say what was decided and let the user draw the link. Call
-`get_analysis` only when asked *why* — fetching it per matter turns one review into a dozen calls.
+**Answer with what the records decided, and do not claim any one of them was "for" this matter** — an analysis produces records for the reasoning as a whole, and one of them may exist because of something no raiser mentioned. Say what was decided and let the user draw the link. Call `get_analysis` only when asked *why* — fetching it per matter turns one review into a dozen calls.
 
-A matter with `late: true` entries and nothing closing it is worth surfacing on its own: somebody
-assumed existing work covered it, and nothing has confirmed that.
+A matter with `late: true` entries and nothing closing it is worth surfacing on its own: somebody assumed existing work covered it, and nothing has confirmed that.
 
 ### The unprocessed inbox
 
-`discover_matters(untaken: true)` returns every **matter** no analysis references — mostly ones parked
-through **`save-matter`** during other work. Almanac entries never appear here, whether or not any
-analysis has taken them up: there is no unprocessed-almanac inbox, because an admitted fact is not
-waiting on anybody.
+`discover_matters(untaken: true)` returns every **matter** no analysis references — mostly ones parked through **`save-matter`** during other work. Almanac entries never appear here, whether or not any analysis has taken them up: there is no unprocessed-almanac inbox, because an admitted fact is not waiting on anybody.
 
-Present them as raw signal. Do not sharpen them into needs while summarizing; that is the pickup
-session's job, with the user present. **Raw signal means the raiser's own words, and those are not
-what the page hands you** — see below before quoting anything.
+Present them as raw signal. Do not sharpen them into needs while summarizing; that is the pickup session's job, with the user present. **Raw signal means the raiser's own words, and those are not what the page hands you** — see below before quoting anything.
 
-**The words on the page are not all the raiser's.** Where a matter has been summarised, its heading
-and summary are Memolok's own label for it — nobody typed them. Where it has not, the heading is the
-raiser's own opening, trimmed. Reading a heading back as what somebody logged presents a paraphrase
-as an utterance, which is the one thing this section exists to prevent; `get_matter` returns the
-body whole and is where a quotation comes from.
+**The words on the page are not all the raiser's.** Where a matter has been summarised, its heading and summary are Memolok's own label for it — nobody typed them. Where it has not, the heading is the raiser's own opening, trimmed. Reading a heading back as what somebody logged presents a paraphrase as an utterance, which is the one thing this section exists to prevent; `get_matter` returns the body whole and is where a quotation comes from.
 
-So: use the heading to say *which* matters are waiting, and **quote the raiser only from
-`get_matter`.** A summarised matter shows no opening words on the page at all — the summary stands
-where they would be — so there is nothing there to quote even when it looks like there is. The page
-says which of the two it is showing you.
+So: use the heading to say *which* matters are waiting, and **quote the raiser only from `get_matter`.** A summarised matter shows no opening words on the page at all — the summary stands where they would be — so there is nothing there to quote even when it looks like there is. The page says which of the two it is showing you.
 
 ### Scratchpads are not ledger contents
 
-A review covers decisions, deferrals and unprocessed bait. **Scratchpads are none of those** — they
-carry no assertion, no disposition and no expectation, so they never belong in a sweep.
+A review covers decisions, deferrals and unprocessed bait. **Scratchpads are none of those** — they carry no assertion, no disposition and no expectation, so they never belong in a sweep.
 
-Do not list them alongside matters as though they were waiting for something, and never surface one
-as stale, untouched or needing attention. **A note that has sat for a year is behaving correctly.**
-There is no review signal here to compute and none to invent.
+Do not list them alongside matters as though they were waiting for something, and never surface one as stale, untouched or needing attention. **A note that has sat for a year is behaving correctly.** There is no review signal here to compute and none to invent.
 
-If the user asks about their notes specifically, that is the **`manage-notes`** journey — reach for
-`discover_scratchpads` with a `query`, not a review.
+If the user asks about their notes specifically, that is the **`manage-notes`** journey — reach for `discover_scratchpads` with a `query`, not a review.
 
 ### Before changing a record
 
-`get_MDR` and read `mdrNumber` and `retractable`; the method's identity table says what each value
-means. This read is what decides between the routes in `revise-decision`. Do not guess it.
+`get_MDR` and read `mdrNumber` and `retractable`; the method's identity table says what each value means. This read is what decides between the routes in `revise-decision`. Do not guess it.
 
 ### How a decision actually turned out
 
-`get_MDR_learning_delta` joins expected outcomes against the wakes that tested them. Coexisting
-assessments all come back — there is no single current result, by design.
+`get_MDR_learning_delta` joins expected outcomes against the wakes that tested them. Coexisting assessments all come back — there is no single current result, by design.
 
 Ledger residents only; a staged record has made no bets yet.
 
 ## What the ledger cannot tell you
 
-> **Not built yet.** No tool exists for impact analysis, decision-decay or polluted-premise detection,
-> stale-constraint review, cross-record open-question queries, or portfolio-wide outcome latency. Nor
-> for reading an analysis input backwards: `get_matter` returns `takenUpBy`, but a world fact or an
-> observed outcome cannot report which analyses took *it* up.
+> **Not built yet.** No tool exists for impact analysis, decision-decay or polluted-premise detection, stale-constraint review, cross-record open-question queries, or portfolio-wide outcome latency. Nor for reading an analysis input backwards: `get_matter` returns `takenUpBy`, but a world fact or an observed outcome cannot report which analyses took *it* up.
 
-**Delegating a sweep moves its cost; it does not turn it into a query.** A scout reads and reasons
-exactly as you would, in a context you do not have to pay for. Nothing above becomes available
-because one was used.
+**Delegating a sweep moves its cost; it does not turn it into a query.** A scout reads and reasons exactly as you would, in a context you do not have to pay for. Nothing above becomes available because one was used.
 
-You can often *reason* toward these by reading records — that is fine, and useful. What is not fine is
-implying the ledger computed it. Say "reading through these, three records lean on that assumption"
-rather than "the ledger flags three affected records".
+You can often *reason* toward these by reading records — that is fine, and useful. What is not fine is implying the ledger computed it. Say "reading through these, three records lean on that assumption" rather than "the ledger flags three affected records".
 
-**A missing `amendedBy` or `supersededBy` is weak evidence that a record still governs; an edge
-exists only if someone recorded it.** A change made in later prose, in practice, or before the tool
-could express it leaves no edge. Weigh the prose above the graph, and say "this record carries no
-recorded amendment, which is weak evidence" rather than "it is still in force". A recorded edge or a
-`Superseded` status is strong. Where the answer bears on a decision, put the question to the user
-again on its merits.
+**A missing `amendedBy` or `supersededBy` is weak evidence that a record still governs; an edge exists only if someone recorded it.** A change made in later prose, in practice, or before the tool could express it leaves no edge. Weigh the prose above the graph, and say "this record carries no recorded amendment, which is weak evidence" rather than "it is still in force". A recorded edge or a `Superseded` status is strong. Where the answer bears on a decision, put the question to the user again on its merits.
 
 ## Tips
 
-- `Memolok Decision Ledger not found.` does not distinguish a ledger the user cannot see from one that
-  is not there. Report it as ambiguous: they may not be a member, or this address may be stale. If the
-  user expected access, an owner or admin of the ledger can share it with them read-only
-  (`share_MDL`); any other role is a Memolok administrator's to give.
+- `Memolok Decision Ledger not found.` does not distinguish a ledger the user cannot see from one that is not there. Report it as ambiguous: they may not be a member, or this address may be stale. If the user expected access, an owner or admin of the ledger can invite them to read it (`share_MDL`), which takes effect once both have confirmed on the Memolok portal; any other role is a Memolok administrator's to give.
 - `visitor` role can read everything except for notes, and write nothing.
 - A `Superseded` record is history, not a mistake. It records what was true and in force at its own t₀.
-- When a search finds nothing, say so plainly and offer to record the decision now rather than
-  speculating about what might have been decided elsewhere.
+- When a search finds nothing, say so plainly and offer to record the decision now rather than speculating about what might have been decided elsewhere.

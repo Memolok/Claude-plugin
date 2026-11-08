@@ -1,7 +1,6 @@
 # Settling an open question
 
-The route depends entirely on **the holder's status** — not on which record was created or admitted
-first.
+The route depends entirely on **the holder's status** — not on which record was created or admitted first.
 
 ## Normal path — the holder is already admitted
 
@@ -22,22 +21,16 @@ first.
 }
 ```
 
-`hostMdrNumber` is the **holder's** number — the record that asked the question — not the resolver's.
-`openQuestionId` is the `oq-…` id the holder's author gave the question. Read the id and the
-question's full wording from the holder with your own `get_MDR`, never from a scout's report, which
-compresses. Settle only if the resolver answers every part of that wording; if it answers one half,
-leave the question open.
+`hostMdrNumber` is the **holder's** number — the record that asked the question — not the resolver's. `openQuestionId` is the `oq-…` id the holder's author gave the question. Read the id and the question's full wording from the holder with your own `get_MDR`, never from a scout's report, which compresses. Settle only if the resolver answers every part of that wording; if it answers one half, leave the question open.
 
-This is the right mechanism because the holder crossed t₀. Its open question is frozen ledger history,
-so only a later Accepted record can close it retroactively.
+This is the right mechanism because the holder crossed t₀. Its open question is frozen ledger history, so only a later Accepted record can close it retroactively.
 
 ## Inverted path — the holder is still staged
 
 1. The resolver is already **Accepted** — say MDR-3.
 2. Another record still sits staged with a related open question.
 3. That holder has no number yet, so there is nothing frozen to settle.
-4. Update the **holder** directly: drop the resolved question, or fold the resolution into the Verdict,
-   citing the resolver in prose.
+4. Update the **holder** directly: drop the resolved question, or fold the resolution into the Verdict, citing the resolver in prose.
 
 ```json
 {
@@ -55,31 +48,24 @@ so only a later Accepted record can close it retroactively.
 }
 ```
 
-This is **not** a `settlesOpenQuestion` case, and forcing it produces an error — a staged record has no
-`mdrNumber` to target.
+This is **not** a `settlesOpenQuestion` case, and forcing it produces an error — a staged record has no `mdrNumber` to target.
 
 ## Both records authored in one sitting
 
-Common when one piece of work produces two decisions — one asking a question, one answering it. The
-holder's status still decides the route, but now you control that status, so sequence it deliberately:
+Common when one piece of work produces two decisions — one asking a question, one answering it. The holder's status still decides the route, but now you control that status, so sequence it deliberately:
 
 1. Draft **both** at `Deliberating`. Neither has a number yet.
 2. Seal the **holder** first. Admission mints its `mdrNumber` and freezes its `openQuestions`.
 3. Patch `settlesOpenQuestion` onto the still-staged resolver, using the number step 2 produced.
 4. Seal the resolver.
 
-Getting this backwards is the trap. Seal the resolver first and there is no number to name, the
-inverted path above is the only route left, and a genuine settlement edge has been lost to sequencing
-rather than to intent.
+Getting this backwards is the trap. Seal the resolver first and there is no number to name, the inverted path above is the only route left, and a genuine settlement edge has been lost to sequencing rather than to intent.
 
-The edge itself may be patched at any point while the resolver is staged — targets are resolved at
-the **resolver's admission**, not when the patch lands — so step 3 is not urgent. Step 2 preceding it
-is what matters.
+The edge itself may be patched at any point while the resolver is staged — targets are resolved at the **resolver's admission**, not when the patch lands — so step 3 is not urgent. Step 2 preceding it is what matters.
 
 ## Consequences
 
-Settling **anchors** the holder: `retractable` becomes `false`, and it can no longer be uncommitted —
-only amended or superseded.
+Settling **anchors** the holder: `retractable` becomes `false`, and it can no longer be uncommitted — only amended or superseded.
 
 `settledIn` is read-only. It is minted at the resolver's admission and cannot be patched:
 
@@ -103,12 +89,8 @@ openQuestions[].settledIn cannot be set via MCP; use settlesOpenQuestion on a cl
 
 > *"MDR-3 is admitted now, so I can link it back to settle that open question on your staged record."*
 
-A staged holder still has live, editable questions. There is nothing frozen to close, and the schema
-says so — `settlesOpenQuestion` targets a number the record does not have.
+A staged holder still has live, editable questions. There is nothing frozen to close, and the schema says so — `settlesOpenQuestion` targets a number the record does not have.
 
-**Do not treat open questions as a backlog to burn down.** They are scope boundaries that travel with
-the record on purpose. A record with three unsettled questions from a year ago is not neglected; it is
-a record that was honest about its edges.
+**Do not treat open questions as a backlog to burn down.** They are scope boundaries that travel with the record on purpose. A record with three unsettled questions from a year ago is not neglected; it is a record that was honest about its edges.
 
-**Do not settle a question just because a later record happens to touch the topic.** Settlement is a
-claim that this decision closed that question. If it did not, leave it open.
+**Do not settle a question just because a later record happens to touch the topic.** Settlement is a claim that this decision closed that question. If it did not, leave it open.

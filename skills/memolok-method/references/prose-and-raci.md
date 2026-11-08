@@ -29,8 +29,7 @@ Memolok commits to LaTeX maths inside Markdown across all prose fields:
 | Inline | `$...$` | `$P_{99} < 200\,\text{ms}$` |
 | Display | `$$...$$` | `$$\sum_i w_i = 1$$` |
 
-Use ordinary Markdown elsewhere — headings, lists, emphasis, links, fenced code. Falsifiable claims
-with numeric thresholds should be written as Markdown or LaTeX, not ad-hoc plain-text conventions.
+Use ordinary Markdown elsewhere — headings, lists, emphasis, links, fenced code. Falsifiable claims with numeric thresholds should be written as Markdown or LaTeX, not ad-hoc plain-text conventions.
 
 ## Wrapped vs bare — the one real trap
 
@@ -54,16 +53,11 @@ alternatives[0] must be {description: {markdown, lang}}, not a flat {markdown, l
 
 `update_MDR`'s `hasNeed` accepts **either** form.
 
-`expectedOutcomes[]` and `deliberationFacts[]` also accept a `manifests` wrapper instead of
-`description` — omit it unless you are attaching an existing Claim by id. The server auto-mints the
-Claim and sets `manifests` when you supply `description`, and hydrates it back to `description` on
-read, so the read shape differs from what you wrote.
+`expectedOutcomes[]` and `deliberationFacts[]` also accept a `manifests` wrapper instead of `description` — omit it unless you are attaching an existing Claim by id. The server auto-mints the Claim and sets `manifests` when you supply `description`, and hydrates it back to `description` on read, so the read shape differs from what you wrote.
 
 ## Ids you choose, and later have to cite
 
-You name every id on `alternatives`, `expectedOutcomes` and `openQuestions`: prefixed `alt-`, `eo-`,
-`oq-`, then only lowercase letters, digits, hyphens and underscores, unique in its list, required on
-every item, and named for what it is. The server mints none of them:
+You name every id on `alternatives`, `expectedOutcomes` and `openQuestions`: prefixed `alt-`, `eo-`, `oq-`, then only lowercase letters, digits, hyphens and underscores, unique in its list, required on every item, and named for what it is. The server mints none of them:
 
 | Embed | Prefix | Cited later by |
 | --- | --- | --- |
@@ -71,21 +65,13 @@ every item, and named for what it is. The server mints none of them:
 | `expectedOutcomes[]` | `eo-…` | `record_observed_outcome`'s `tests.outcomeId` |
 | `openQuestions[]` | `oq-…` | `settlesOpenQuestion.openQuestionId` |
 
-Two of those citations arrive in a *later* session, and one arrives in the same call — so name them
-for what they are. `alt-cache-layer` tells a reader what won; a generated id tells them nothing.
+Two of those citations arrive in a *later* session, and one arrives in the same call — so name them for what they are. `alt-cache-layer` tells a reader what won; a generated id tells them nothing.
 
-Omitting an id is refused: the lists replace wholesale, and an id-less item cannot say whether it is
-the old one or a new one. A missing prefix is refused with the correction rather than added, because
-rewriting an id would orphan references the patch does not carry. So is any other character after
-the prefix, a capital, a space, an accent, with the lowercase form suggested where that alone would
-do: an id is also its item's address, the record's address, then `#`, then the id, and those
-characters are what an address carries as they are.
+Omitting an id is refused: the lists replace wholesale, and an id-less item cannot say whether it is the old one or a new one. A missing prefix is refused with the correction rather than added, because rewriting an id would orphan references the patch does not carry. So is any other character after the prefix, a capital, a space, an accent, with the lowercase form suggested where that alone would do: an id is also its item's address, the record's address, then `#`, then the id, and those characters are what an address carries as they are.
 
 ## Alternatives
 
-`label` is a short handle; `description` is the option's **substance**; arguments *about* an option
-belong in `deliberationFacts`, paired with `onAlternative`. Schema: `{ id, label?, description,
-satisfies? }` and nothing else.
+`label` is a short handle; `description` is the option's **substance**; arguments *about* an option belong in `deliberationFacts`, paired with `onAlternative`. Schema: `{ id, label?, description, satisfies? }` and nothing else.
 
 ## Agent IRIs
 
@@ -101,25 +87,19 @@ Non-empty strings identifying people or systems.
 | `raisedBy` (Matter) | 0–n | `[]` |
 | `performedBy` (Analysis) | 1 | the caller; not a parameter |
 
-**The settable ones are testimony: what you tell Memolok about who took part, stored as you wrote
-it.** Memolok separately records which account made each write, from the credential, and nobody can
-set that. Who to name in each role, and how to write yourself, a Memolok user and anyone else, is
-*Who held each role* in `facilitation.md`. Clear a role with `null` in a patch.
+**The settable ones are testimony: what you tell Memolok about who took part, stored as you wrote it.** Memolok separately records which account made each write, from the credential, and nobody can set that. Who to name in each role, and how to write yourself, a Memolok user and anyone else, is *Who held each role* in `facilitation.md`. Clear a role with `null` in a patch.
 
-**A value under `https://app.memolok.ai/m/` must name an account Memolok holds**, or the write is
-refused naming the field, and nothing is written:
+**A value under `https://app.memolok.ai/m/` must name an account Memolok holds**, or the write is refused naming the field, and nothing is written:
 
 ```
 decidedBy names no principal Memolok holds: https://app.memolok.ai/m/…#id.
 ```
 
-That holds for every value a write sends, one resent unchanged included. Any other value is stored as
-written, and not checked.
+That holds for every value a write sends, one resent unchanged included. Any other value is stored as written, and not checked.
 
 ## RACI is narrative, not permission
 
-RACI fields are stored for governance narrative. They do **not** gate writes. Access is decided by
-your role on the ledger:
+RACI fields are stored for governance narrative. They do **not** gate writes. Access is decided by your role on the ledger:
 
 | Role | Reads | Writes | Uncommit | Title and intent |
 | --- | --- | --- | --- | --- |
@@ -127,12 +107,8 @@ your role on the ledger:
 | `member` | yes | yes | no | no |
 | `admin`, `owner` | yes | yes | yes | yes |
 
-Notes differ: a visitor reads none, only a note's author replaces it, and its author or an `admin` or
-`owner` deletes it.
+Notes differ: a visitor reads none, only a note's author replaces it, and its author or an `admin` or `owner` deletes it.
 
-If your role lets you create records, you can edit the ones you created. That is the account whose
-credential created the record, never `authoredBy`, so setting or changing `authoredBy` hands nothing
-over. Whether you can edit anyone else's depends on your role. Changing a record's status and
-anchoring it count as editing.
+If your role lets you create records, you can edit the ones you created. That is the account whose credential created the record, never `authoredBy`, so setting or changing `authoredBy` hands nothing over. Whether you can edit anyone else's depends on your role. Changing a record's status and anchoring it count as editing.
 
 The account that created a record answers for it, whatever its roles say.

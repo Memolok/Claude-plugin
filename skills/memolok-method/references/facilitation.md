@@ -24,11 +24,7 @@ Silhouette is a diagnostic: starts wide, converges twice, or has no tail → aut
 
 ## Falsifiability and analysis
 
-**Falsifiable, precisely:** a Need is falsifiable if and only if some future admission — an observed
-outcome tested against a resulting expected outcome, or a corrected world fact — could confirm or
-refute whether the chosen path satisfied it. Property of the **Need's own testability**, not of how
-specific the chosen mechanism is. An **expected outcome** passes the same test on its own: some
-later observation must be able to refute it.
+**Falsifiable, precisely:** a Need is falsifiable if and only if some future admission — an observed outcome tested against a resulting expected outcome, or a corrected world fact — could confirm or refute whether the chosen path satisfied it. Property of the **Need's own testability**, not of how specific the chosen mechanism is. An **expected outcome** passes the same test on its own: some later observation must be able to refute it.
 
 **Analysis** = first-class bridge from raw input to sharpened need, preserving provenance:
 
@@ -37,35 +33,19 @@ later observation must be able to refute it.
 | **A — mint** | `true` + `claimDescription` | **New** record(s); analysis concludes in the same call |
 | **B — honest dismissal** | `false` | No record; rationale explains why |
 
-`motivatedBy` = **list**: every input taken up. Input = **Matter | WorldFact | ObservedOutcome**, any
-mix; cite the entry itself, never a Matter restating it — that loses the link, unrepairably.
-Fan-in/fan-out independent — *n* in, *m* out. **Never ask which record answers which input**;
-ordinarily no such fact, none to invent. Input recognized later → `attach_analysis_reference`
-(post-conclusion, dated, reads as late).
+`motivatedBy` = **list**: every input taken up. Input = **Matter | WorldFact | ObservedOutcome**, any mix; cite the entry itself, never a Matter restating it — that loses the link, unrepairably. Fan-in/fan-out independent — *n* in, *m* out. **Never ask which record answers which input**; ordinarily no such fact, none to invent. Input recognized later → `attach_analysis_reference` (post-conclusion, dated, reads as late).
 
-**Expert path** bypasses analysis: `create_MDR` with a claim. Nothing on a record says which path
-minted it. Intake routing → `record-decision`. Parking unanalyzed → `save-matter`;
-`discover_matters(untaken: true)` = unprocessed-bait inbox, **matters only**, answered as prose
-carrying each matter's summary and subjects, so you can weigh candidates without opening one.
+**Expert path** bypasses analysis: `create_MDR` with a claim. Nothing on a record says which path minted it. Intake routing → `record-decision`. Parking unanalyzed → `save-matter`; `discover_matters(untaken: true)` = unprocessed-bait inbox, **matters only**, answered as prose carrying each matter's summary and subjects, so you can weigh candidates without opening one.
 
-**Matters carry no status** — no disposition, no vocabulary of endings. What became of one reads from
-its shape: who took it up, when, what they produced.
+**Matters carry no status** — no disposition, no vocabulary of endings. What became of one reads from its shape: who took it up, when, what they produced.
 
-**Chain of agency.** Anyone raises a Matter → Expert #1 analyzes it into a head Claim → Expert #2
-commits the Verdict at t₀. In solo sessions **"Expert #1" is not your private drafting seat**: with
-no separate human there you inherit it by name only, and the head Claim is still co-discovered with
-the user, never authored by you and handed down.
+**Chain of agency.** Anyone raises a Matter → Expert #1 analyzes it into a head Claim → Expert #2 commits the Verdict at t₀. In solo sessions **"Expert #1" is not your private drafting seat**: with no separate human there you inherit it by name only, and the head Claim is still co-discovered with the user, never authored by you and handed down.
 
 ## Who held each role
 
-`authoredBy`, `decidedBy`, `consulted`, `informed`, `observedBy`, a matter's `raisedBy` =
-**testimony**: what you tell Memolok about who took part, stored as written. Memolok separately
-records the account behind every write, from its credential; nobody sets that, that account answers
-for the record, and reads show it as `createdBy`. So name whoever actually held each role, never
-whoever holds the credential by default.
+`authoredBy`, `decidedBy`, `consulted`, `informed`, `observedBy`, a matter's `raisedBy` = **testimony**: what you tell Memolok about who took part, stored as written. Memolok separately records the account behind every write, from its credential; nobody sets that, that account answers for the record, and reads show it as `createdBy`. So name whoever actually held each role, never whoever holds the credential by default.
 
-**Run mode sets the defaults.** Interactive, unless the user's instructions say to proceed without
-them or nobody can answer (a scheduled or headless run) → unattended.
+**Run mode sets the defaults.** Interactive, unless the user's instructions say to proceed without them or nobody can answer (a scheduled or headless run) → unattended.
 
 | Role | Holder | When |
 | --- | --- | --- |
@@ -75,55 +55,30 @@ them or nobody can answer (a scheduled or headless run) → unattended.
 | `consulted`, `informed` | Only those the conversation or brief places in the role, if any | As they surface |
 | `observedBy` | Whoever saw the result, or the premise a world fact states; you if you measured it | With the wake or the fact |
 
-Holder unclear → interactive: ask once, at the moment of writing; unattended: leave the role unset.
-Never guess, and never stop an unattended run to ask.
+Holder unclear → interactive: ask once, at the moment of writing; unattended: leave the role unset. Never guess, and never stop an unattended run to ask.
 
 **How each is named:**
 
-- **Yourself:** your model's display name exactly as its vendor writes it, such as `Claude Opus 5.5`,
-  and nothing else: no model ID, task, role, date, session, product, or "on behalf of" (the
-  credential already says whose). Model unknown → use the generic brand name you know (`Claude`,
-  `Gemini`, `ChatGPT`, etc). Every session of one model must write the same string, so use the most
-  sensible option you'd expect unrelated sessions to use.
-- **A Memolok member:** their IRI as given, the `iri` from `whoami` or `get_MDL`'s `members`, or
-  copied from an entry that already carries it; never assembled, never from memory: an IRI naming no
-  account Memolok holds is refused. `whoami` only when you will name the user.
-- **Someone named in conversation:** the user is `whoami`. Anyone else, look up by given and family
-  name in `get_MDL`'s `members`: one match → that `iri`; several → ask which; none → ask for
-  something that identifies them, and write that. Unattended → an `iri` only when both names match
-  exactly one member; otherwise the name as given.
+- **Yourself:** your model's display name exactly as its vendor writes it, such as `Claude Opus 5.5`, and nothing else: no model ID, task, role, date, session, product, or "on behalf of" (the credential already says whose). Model unknown → use the generic brand name you know (`Claude`, `Gemini`, `ChatGPT`, etc). Every session of one model must write the same string, so use the most sensible option you'd expect unrelated sessions to use.
+- **A Memolok member:** their IRI as given, the `iri` from `whoami` or `get_MDL`'s `members`, or copied from an entry that already carries it; never assembled, never from memory: an IRI naming no account Memolok holds is refused. `whoami` only when you will name the user.
+- **Someone named in conversation:** the user is `whoami`. Anyone else, look up by given and family name in `get_MDL`'s `members`: one match → that `iri`; several → ask which; none → ask for something that identifies them, and write that. Unattended → an `iri` only when both names match exactly one member; otherwise the name as given.
 - **Anyone else:** whatever identifies them — a name, an address, their own URI.
+
+**Naming them back to the user.** An IRI you read off an entry, a `createdBy`, a role or a provenance `by`, is named with `resolve_names`, never off `members`: a name reaches people who share a ledger with that person, and being named in testimony gives nobody access to it. A `null` name says only that no name is known, never why; a person who vanished from the ledger shows as a pseudonym IRI that resolves to none. Who created or changed an entry, as Memolok saw it rather than as testimony states it, is `get_provenance`.
 
 ## Decision Transaction Principle
 
-Effects project **forward only**. **t₀** = admission, the transition to **Accepted** or **Rejected**.
-At t₀ the server sets `decidedAt`, assigns `mdrNumber`, seals tier-1 fields.
+Effects project **forward only**. **t₀** = admission, the transition to **Accepted** or **Rejected**. At t₀ the server sets `decidedAt`, assigns `mdrNumber`, seals tier-1 fields.
 
-**Stable fish stay sealed.** After admission tier-1 fields are immutable via `update_MDR`, retractable
-or anchored alike. **Retractable** means only that an uncommit can demote it to staged for editing and
-re-admission; **anchored** cannot be uncommitted at all. **Never** tell a user a committed record can
-be patched in place.
+**Stable fish stay sealed.** After admission tier-1 fields are immutable via `update_MDR`, retractable or anchored alike. **Retractable** means only that an uncommit can demote it to staged for editing and re-admission; **anchored** cannot be uncommitted at all. **Never** tell a user a committed record can be patched in place.
 
-Before t₀: handle, no number, `retractable: null`. Staged records may author `amends`, `supersedes`,
-`dependsOn`, `conflictsWith` and `settlesOpenQuestion`; targets are admitted numbers.
+Before t₀: handle, no number, `retractable: null`. Staged records may author `amends`, `supersedes`, `dependsOn`, `conflictsWith` and `settlesOpenQuestion`; targets are admitted numbers.
 
-**Correction path** turns on how much is wrong, not on `retractable`: nothing, it should never have
-said that → uncommit (needs `true`); part of it → `amends`, original stays **Accepted**; all of it →
-`supersedes`. **Amend keeps everything you don't change; supersede keeps none of it** — so an
-amendment states deltas only, and restating the original is not amending it. Both need `Accepted` at
-each end. Amending Anchors what it amends, permanently, and reads gentler than it is. Detail →
-`revise-decision`.
+**Correction path** turns on how much is wrong, not on `retractable`: nothing, it should never have said that → uncommit (needs `true`); part of it → `amends`, original stays **Accepted**; all of it → `supersedes`. **Amend keeps everything you don't change; supersede keeps none of it** — so an amendment states deltas only, and restating the original is not amending it. Both need `Accepted` at each end. Amending Anchors what it amends, permanently, and reads gentler than it is. Detail → `revise-decision`.
 
-**The seal is what makes changing course cheap.** The original keeps its reasoning → a successor
-costs one deliberation and loses no evidence. Practitioner changing direction → offer the amendment
-or supersession readily, never framed as a failure; how to raise the original's reasons is the
-core's *When a change meets a sealed record*. What turns expensive at t₀ is rewriting what a record
-*says* — hence building against a staged record (`record-decision`) — never changing what you do.
-The ledger is there to support the practitioner's work on the project, not the other way around.
+**The seal is what makes changing course cheap.** The original keeps its reasoning → a successor costs one deliberation and loses no evidence. Practitioner changing direction → offer the amendment or supersession readily, never framed as a failure; how to raise the original's reasons is the core's *When a change meets a sealed record*. What turns expensive at t₀ is rewriting what a record *says* — hence building against a staged record (`record-decision`) — never changing what you do. The ledger is there to support the practitioner's work on the project, not the other way around.
 
-Value is **honesty, not correctness.** A well-reasoned decision that failed teaches more than one
-retrofitted to look prescient. Wake evidence showing a violated commitment → re-decide at a new t₀; the
-wake becomes bait for the next fish.
+Value is **honesty, not correctness.** A well-reasoned decision that failed teaches more than one retrofitted to look prescient. Wake evidence showing a violated commitment → re-decide at a new t₀; the wake becomes bait for the next fish.
 
 ## Lifecycle
 
@@ -134,8 +89,7 @@ wake becomes bait for the next fish.
 | Proposed | Accepted, Rejected |
 | Accepted, Rejected, Superseded | *terminal for transitions; retractable records may be uncommitted* |
 
-**Superseded** is never a transition target — a record reaches it when another admits carrying
-`supersedes`.
+**Superseded** is never a transition target — a record reaches it when another admits carrying `supersedes`.
 
 | Target | Requires |
 | --- | --- |
@@ -144,35 +98,25 @@ wake becomes bait for the next fish.
 | Accepted | the above, plus ≥1 expected outcome |
 | Rejected | head Claim, Verdict; carries no `amends`, `supersedes` or `settlesOpenQuestion` |
 
-**Two commitment thresholds.** **Proposed** = formal governance waist gate, **not t₀**; informal work
-skips it. **Accepted** / **Rejected** = t₀.
+**Two commitment thresholds.** **Proposed** = formal governance waist gate, **not t₀**; informal work skips it. **Accepted** / **Rejected** = t₀.
 
-**Rejection is one of the two things a decision becomes at t₀** — not a failed draft, and available in
-far more situations than "we explored everything and nothing worked", including while other work
-proceeds perfectly well:
+**Rejection is one of the two things a decision becomes at t₀** — not a failed draft, and available in far more situations than "we explored everything and nothing worked", including while other work proceeds perfectly well:
 
-> A Verdict that spends a paragraph on what you are **not** doing, inside a record about what you
-> **are** doing, is two records.
+> A Verdict that spends a paragraph on what you are **not** doing, inside a record about what you **are** doing, is two records.
 
-A Rejection is easy to not think of at all → open `rejection.md` *before* deciding how work
-decomposes, not after.
+A Rejection is easy to not think of at all → open `rejection.md` *before* deciding how work decomposes, not after.
 
 Full matrix and validator behaviour: `lifecycle-and-gates.md`.
 
 ## Facilitation rules
 
-Apply in **every** mode — casual conversation, expert mint, matter path, portfolio review, grill-me.
-Rule F, naming records, is in the method's core and applies to reads as well.
+Apply in **every** mode — casual conversation, expert mint, matter path, portfolio review, grill-me. Rule F, naming records, is in the method's core and applies to reads as well.
 
 ### Rule A — Discussion is deliberation; default persist status is Deliberating
 
-Shaping a fish *with* the user is deliberation. Unless formal governance applies (Rule B): do not mint
-or transition to **Proposed**, and do not offer **Accepted** or **Rejected**, without explicit user
-commitment (Rule C).
+Shaping a fish *with* the user is deliberation. Unless formal governance applies (Rule B): do not mint or transition to **Proposed**, and do not offer **Accepted** or **Rejected**, without explicit user commitment (Rule C).
 
-**New** is exceptional — external import and analysis Path A only, never a conversational outcome. A
-complete fish body may sit at **Deliberating**; completeness is not commitment. Never infer commitment
-from agent-authored Verdict prose, a firm-sounding draft, or a confirmed read-back.
+**New** is exceptional — external import and analysis Path A only, never a conversational outcome. A complete fish body may sit at **Deliberating**; completeness is not commitment. Never infer commitment from agent-authored Verdict prose, a firm-sounding draft, or a confirmed read-back.
 
 ### Rule B — Proposed is the formal governance path
 
@@ -181,42 +125,25 @@ from agent-authored Verdict prose, a firm-sounding draft, or a confirmed read-ba
 | **Informal** (default) | Solo decider, hobby, small team without ratification | Deliberating → t₀; **skip Proposed** |
 | **Formal** | Distinct RACI deciders, committee vote, compliance sign-off | Deliberating → Proposed → t₀ |
 
-Infer posture from context. Unclear → **default informal**, and do not surface **Proposed** in
-user-facing choices.
+Infer posture from context. Unclear → **default informal**, and do not surface **Proposed** in user-facing choices.
 
 ### Rule C — t₀ is a separate, explicit ceremony
 
-Two steps, never collapsed: **persist / recap** at Deliberating → **commit**, only when the user
-explicitly asks to seal.
+Two steps, never collapsed: **persist / recap** at Deliberating → **commit**, only when the user explicitly asks to seal.
 
-**Narrow exception:** one-shot mint at **Accepted** or **Rejected** when the user has unambiguously
-stated commitment in their own words ("accept this", "lock it in", "reject this path") — never because
-you drafted a convincing Verdict.
+**Narrow exception:** one-shot mint at **Accepted** or **Rejected** when the user has unambiguously stated commitment in their own words ("accept this", "lock it in", "reject this path") — never because you drafted a convincing Verdict.
 
-Rejection deserves equal facilitation, in more situations than an exhausted deliberation — a Claim
-declined while other work proceeds is the case most often missed (`rejection.md`).
+Rejection deserves equal facilitation, in more situations than an exhausted deliberation — a Claim declined while other work proceeds is the case most often missed (`rejection.md`).
 
 ### Rule D — Open questions mark this record's edges; they do not block commit
 
-Open questions name what a record deliberately leaves unsettled — *"we have not validated vendor B's
-SLA under peak load"*. Negative epistemic space of **this** decision at t₀: an edge of its own scope,
-an unknown its commitment carries, a topic consciously left undiscussed. Not unfinished deliberation.
-Settlement requires a **later Accepted** record, never an edit to this one.
+Open questions name what a record deliberately leaves unsettled — *"we have not validated vendor B's SLA under peak load"*. Negative epistemic space of **this** decision at t₀: an edge of its own scope, an unknown its commitment carries, a topic consciously left undiscussed. Not unfinished deliberation. Settlement requires a **later Accepted** record, never an edit to this one.
 
-**The test, two parts:** would a reader of this record plausibly believe it settled this — and can
-acting on the decision go ahead without the answer? Both yes → name it and proceed; prefer a
-correctly scoped Accepted record with open questions over scope creep.
+**The test, two parts:** would a reader of this record plausibly believe it settled this — and can acting on the decision go ahead without the answer? Both yes → name it and proceed; prefer a correctly scoped Accepted record with open questions over scope creep.
 
-No to the first → not an open question, however near the topic: how another decision will go, whether
-a rule will bind other things later, what a future change might replace. Each open question joins the
-ledger's unsettled deferrals, so one this decision never held open is debt it never incurred. If it
-matters, it is a **Matter** or a record of its own.
+No to the first → not an open question, however near the topic: how another decision will go, whether a rule will bind other things later, what a future change might replace. Each open question joins the ledger's unsettled deferrals, so one this decision never held open is debt it never incurred. If it matters, it is a **Matter** or a record of its own.
 
-No to the second → flag it to the user as something that should probably be settled now and folded
-into this record: the next thing the practitioner means to do waits on it. Offer to deliberate it in
-this record, and don't propose it yourself as an open question. Deferring it anyway is the
-practitioner's call — maybe they need time to research, or they want a deliberation of its own. Say
-once what it leaves waiting, but don't push.
+No to the second → flag it to the user as something that should probably be settled now and folded into this record: the next thing the practitioner means to do waits on it. Offer to deliberate it in this record, and don't propose it yourself as an open question. Deferring it anyway is the practitioner's call — maybe they need time to research, or they want a deliberation of its own. Say once what it leaves waiting, but don't push.
 
 **Never** treat a remaining open question as a gate.
 
@@ -224,77 +151,35 @@ once what it leaves waiting, but don't push.
 
 Record the **user's** decisional process; do not run a workshop that invents a fuller-looking belly.
 
-**Draft first.** Mine what the user already said or implied — favoured path, discarded options, "vs
-doing nothing", constraints that ruled things out. Never invent options they did not explore.
+**Draft first.** Mine what the user already said or implied — favoured path, discarded options, "vs doing nothing", constraints that ruled things out. Never invent options they did not explore.
 
-**Probe lightly, only for honesty gaps.** One short check suffices when a single favoured path has no
-acknowledgment of what else was in play. Not a gate. **Never stage the section** — no "now we move to
-alternatives" as form-filling.
+**Probe lightly, only for honesty gaps.** One short check suffices when a single favoured path has no acknowledgment of what else was in play. Not a gate. **Never stage the section** — no "now we move to alternatives" as form-filling.
 
-**Deliberation is not only conversational.** Building a spike, reading the implementation, probing a
-running system: real exploration, and what they establish belongs in the belly exactly as spoken
-reasoning does. The prohibition is on options nobody explored, wherever the exploring happened.
-Decision about something buildable → draft at **Deliberating**, build against it, correct before t₀,
-**then** write the references in — a staged record has no number, so nothing you build can cite the
-decision it implements, and sealing early to buy one spends the correction window. Build loop →
-`record-decision`; the reference pass and the anchoring before it → **`memolok-citations`**.
+**Deliberation is not only conversational.** Building a spike, reading the implementation, probing a running system: real exploration, and what they establish belongs in the belly exactly as spoken reasoning does. The prohibition is on options nobody explored, wherever the exploring happened. Decision about something buildable → draft at **Deliberating**, build against it, correct before t₀, **then** write the references in — a staged record has no number, so nothing you build can cite the decision it implements, and sealing early to buy one spends the correction window. Build loop → `record-decision`; the reference pass and the anchoring before it → **`memolok-citations`**.
 
 ### Rule G — The Need is not a running summary
 
-Rule E guards the belly against over-*invention*. This guards the head against over-*enrichment* with
-content that exists only because of downstream deliberation.
+Rule E guards the belly against over-*invention*. This guards the head against over-*enrichment* with content that exists only because of downstream deliberation.
 
-**Proof analogy.** Need = hypothesis, Verdict = conclusion, belly = the proof connecting them. Two
-symmetric failures: **over-sharpening** smuggles the conclusion into the hypothesis, making everything
-downstream circular; **under-sharpening** leaves a hypothesis with no determinate truth conditions.
+**Proof analogy.** Need = hypothesis, Verdict = conclusion, belly = the proof connecting them. Two symmetric failures: **over-sharpening** smuggles the conclusion into the hypothesis, making everything downstream circular; **under-sharpening** leaves a hypothesis with no determinate truth conditions.
 
-**The test:** would this clause have been askable, word for word, before any alternative was discussed?
-A mechanism, technique, or scope boundary that became known only through exploring alternatives belongs
-in the belly or the Verdict — **no matter who said the words**.
+**The test:** would this clause have been askable, word for word, before any alternative was discussed? A mechanism, technique, or scope boundary that became known only through exploring alternatives belongs in the belly or the Verdict — **no matter who said the words**.
 
-The Need is expected to be **walked back** as belly work proceeds; de-sharpening an over-specific Claim
-is correct, not a failure to hold a line. Caught the conflation after already restating it once →
-re-derive from *"what did we know before we explored anything?"*; it survives light rewording.
+The Need is expected to be **walked back** as belly work proceeds; de-sharpening an over-specific Claim is correct, not a failure to hold a line. Caught the conflation after already restating it once → re-derive from *"what did we know before we explored anything?"*; it survives light rewording.
 
-**Under-sharpening's two common shapes.** A head Claim is read cold — years on, by someone who was
-not in this session, usually arriving by search. Both shapes read fine to the session that wrote
-them. Each symptom is a prompt to check, not a ban.
+**Under-sharpening's two common shapes.** A head Claim is read cold — years on, by someone who was not in this session, usually arriving by search. Both shapes read fine to the session that wrote them. Each symptom is a prompt to check, not a ban.
 
-- **Points at the present.** *now, today, current, existing, as it is, keeps, still, no worse than*
-  → the reference state is not on the record, so no later admission can test against it; fails the
-  falsifiability definition above. Name the properties themselves. Decided earlier → anchor and cite
-  that admitted record, `(MDR-n)`, through **`memolok-citations`**: a number in prose is linked to
-  nothing; staged → state the property outright. A premise → **World Fact** in
-  `hasContext`. Never the Ledger Intent. A state given with its value and its date reads cold;
-  *"as it is now"* does not.
-- **Names its subject only as the session knew it.** *the sweep, these routes, the new approach, the
-  migration* → name the component, module or area, in the words a later search would use. Not a
-  mechanism: the subject was askable before any alternative, so it passes the test above.
+- **Points at the present.** *now, today, current, existing, as it is, keeps, still, no worse than* → the reference state is not on the record, so no later admission can test against it; fails the falsifiability definition above. Name the properties themselves. Decided earlier → anchor and cite that admitted record, `(MDR-n)`, through **`memolok-citations`**: a number in prose is linked to nothing; staged → state the property outright. A premise → **World Fact** in `hasContext`. Never the Ledger Intent. A state given with its value and its date reads cold; *"as it is now"* does not.
+- **Names its subject only as the session knew it.** *the sweep, these routes, the new approach, the migration* → name the component, module or area, in the words a later search would use. Not a mechanism: the subject was askable before any alternative, so it passes the test above.
 
 ### Rule H — Neither the present nor another draft is an objection
 
-Governs what **you** offer; the user's reasons are theirs. **Current behaviour** is a measurement
-for the belly — what exists, what changing it costs — never a Claim or an objection: its inadequacy
-is usually why the decision is being taken. Before offering *"but today X"*, check: does it change
-the decision, or only describe what is being replaced? **A third party's published guidance** binds
-nothing; a limit that truly binds is a premise → **World Fact**. A course that matches the present,
-a draft or a vendor's advice is fine; resting on it is not.
+Governs what **you** offer; the user's reasons are theirs. **Current behaviour** is a measurement for the belly — what exists, what changing it costs — never a Claim or an objection: its inadequacy is usually why the decision is being taken. Before offering *"but today X"*, check: does it change the decision, or only describe what is being replaced? **A third party's published guidance** binds nothing; a limit that truly binds is a premise → **World Fact**. A course that matches the present, a draft or a vendor's advice is fine; resting on it is not.
 
-**Another decision's staged record binds nothing.** Read it only to learn whether the ground is
-contested, say that it binds nothing, move on; its open questions are not gaps to fill. The draft in
-hand is different: Rule E builds against it. Even sealed, a decision to *explore* commits an
-exploration, not an architecture. Sealed records → the core's *When a change meets a sealed
-record*.
+**Another decision's staged record binds nothing.** Read it only to learn whether the ground is contested, say that it binds nothing, move on; its open questions are not gaps to fill. The draft in hand is different: Rule E builds against it. Even sealed, a decision to *explore* commits an exploration, not an architecture. Sealed records → the core's *When a change meets a sealed record*.
 
 ### Rule I — The waist commits, the tail bets
 
-**Verdict** = what is adopted and which rule is followed: the rule, never the string it resolves
-to. Naming what it replaces is fine; narrating the present state or the defect that prompted the
-work is not — Rule G's *Points at the present* places those. *Not settled here* → `openQuestions`
-if Rule D's test passes, else cut. **Tail**: each item falsifiable (above) → vague becomes a
-deliberation fact, never a softened bet. **Accepted** needs one → none left: ask the user what they
-would see if the choice failed; never invent a bet.
+**Verdict** = what is adopted and which rule is followed: the rule, never the string it resolves to. Naming what it replaces is fine; narrating the present state or the defect that prompted the work is not — Rule G's *Points at the present* places those. *Not settled here* → `openQuestions` if Rule D's test passes, else cut. **Tail**: each item falsifiable (above) → vague becomes a deliberation fact, never a softened bet. **Accepted** needs one → none left: ask the user what they would see if the choice failed; never invent a bet.
 
-**No draft history in any record prose.** A clause that exists only because of an earlier draft, a
-correction or an incident that impressed the author is a scar, permanent once sealed — *"this
-replaces an earlier question about…"* is the tell. A record's reason for existing is not one.
+**No draft history in any record prose.** A clause that exists only because of an earlier draft, a correction or an incident that impressed the author is a scar, permanent once sealed — *"this replaces an earlier question about…"* is the tell. A record's reason for existing is not one.

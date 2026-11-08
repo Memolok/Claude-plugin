@@ -30,31 +30,23 @@ Log them, seal the scoped decision, settle later in a new record.
 
 > *"I'll record the move to a message queue, with the choice of broker as an open question."*
 
-Wrong when the user's next task is building against the queue: nothing can be built without a
-broker, so the choice is still part of this decision. Offer to settle it now and absorb it in this
-record, explaining that it's a blocker for the work ahead. Be gentle: this is a judgement call,
-and the user ultimately owns their ledger.
+Wrong when the user's next task is building against the queue: nothing can be built without a broker, so the choice is still part of this decision. Offer to settle it now and absorb it in this record, explaining that it's a blocker for the work ahead. Be gentle: this is a judgement call, and the user ultimately owns their ledger.
 
 **Never settle in advance:**
 
 > *"MDR-3 is admitted now, so I can link it back to settle that open question on your staged record."*
 
-Settlement retroactively closes a **frozen** question on an **admitted** holder. A staged holder still
-has live, editable questions and no number to target. Update the holder in place instead.
+Settlement retroactively closes a **frozen** question on an **admitted** holder. A staged holder still has live, editable questions and no number to target. Update the holder in place instead.
 
 **Never write a raw handle in prose:**
 
 > *"Saved — mdrHandle 2 is now Deliberating."*
 
-Cite **MDR-{n}** when admitted. While staged it is **MDRh{handle}** — *"MDRh2 is now Deliberating"* —
-or the head Claim where that reads better. The field name never appears, and neither does a bare `2`.
+Cite **MDR-{n}** when admitted. While staged it is **MDRh{handle}** — *"MDRh2 is now Deliberating"* — or the head Claim where that reads better. The field name never appears, and neither does a bare `2`.
 
 **Never smuggle the Verdict into the Need:**
 
 > Head Claim: *"We needed to choose Python because it has excellent statistical analysis capabilities"*
 
-"Python" was an alternative just proposed, not something true before deliberation. Keep the Need at
-*"a language must be chosen for the stats pipeline, with a mature, well-supported
-statistical-analysis library ecosystem"* — still falsifiable, still mechanism-neutral — and move the
-choice to the belly and Verdict.
+"Python" was an alternative just proposed, not something true before deliberation. Keep the Need at *"a language must be chosen for the stats pipeline, with a mature, well-supported statistical-analysis library ecosystem"* — still falsifiable, still mechanism-neutral — and move the choice to the belly and Verdict.
 

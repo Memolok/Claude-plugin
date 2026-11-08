@@ -6,8 +6,7 @@
 { "mdlGuid": "<mdlGuid>", "mdr": "MDRh1", "status": "Accepted" }
 ```
 
-Returns the record's acknowledgement: `status`, `decidedAt` set, `mdrNumber` assigned, and
-`retractable` computed, beside its identity — not its prose.
+Returns the record's acknowledgement: `status`, `decidedAt` set, `mdrNumber` assigned, and `retractable` computed, beside its identity — not its prose.
 
 ## Rejected — t₀
 
@@ -15,11 +14,9 @@ Returns the record's acknowledgement: `status`, `decidedAt` set, `mdrNumber` ass
 { "mdlGuid": "<mdlGuid>", "mdr": "MDRh1", "status": "Rejected" }
 ```
 
-Needs a head Claim and a non-empty Verdict. Alternatives, `chosenAlternative`, and expected outcomes
-are **not** required — though belly content from real deliberation is welcome evidence.
+Needs a head Claim and a non-empty Verdict. Alternatives, `chosenAlternative`, and expected outcomes are **not** required — though belly content from real deliberation is welcome evidence.
 
-A Rejected record carries no `amends`, `supersedes` or `settlesOpenQuestion`: nothing it says is in
-force, so it changes, retires and settles nothing.
+A Rejected record carries no `amends`, `supersedes` or `settlesOpenQuestion`: nothing it says is in force, so it changes, retires and settles nothing.
 
 ## Proposed — formal governance only
 
@@ -27,15 +24,13 @@ force, so it changes, retires and settles nothing.
 { "mdlGuid": "<mdlGuid>", "mdr": "MDRh1", "status": "Proposed" }
 ```
 
-Requires alternatives, a valid `chosenAlternative`, and a Verdict. **This is not t₀** — no `decidedAt`,
-no number, still fully editable. Skip it entirely on informal work.
+Requires alternatives, a valid `chosenAlternative`, and a Verdict. **This is not t₀** — no `decidedAt`, no number, still fully editable. Skip it entirely on informal work.
 
 ## Aliases
 
 `transition_MDR_status` resolves `Decided`, `Settled`, and `Committed` to `Accepted`.
 
-`create_MDR` does **not**. Sending `"status": "Committed"` there fails with a raw error that bypasses
-the friendly error mapping, so always send canonical values at creation.
+`create_MDR` does **not**. Sending `"status": "Committed"` there fails with a raw error that bypasses the friendly error mapping, so always send canonical values at creation.
 
 ## Gate errors
 
@@ -53,18 +48,11 @@ the friendly error mapping, so always send canonical values at creation.
 | `Only Accepted Memolok Decision Records may carry settlesOpenQuestion.` | Clear `settlesOpenQuestion`, or admit as Accepted |
 | `Cannot transition a Memolok Decision Record from {from} to {to}.` | The matrix is the method's lifecycle table. The usual case is Proposed back to Deliberating, which is not allowed: patch it in place — it is still staged — or reject it and mint a fresh record |
 
-Every one of these is fixable with an `update_MDR` while the record is still staged. Patch, then
-return to the ceremony.
+Every one of these is fixable with an `update_MDR` while the record is still staged. Patch, then return to the ceremony.
 
-`You do not have the necessary permissions to edit this decision record.` is not a gate. The caller's
-role does not let them change this record's status, and no patch fixes that — an administrator
-changes the role.
+`You do not have the necessary permissions to edit this decision record.` is not a gate. The caller's role does not let them change this record's status, and no patch fixes that — an administrator changes the role.
 
-A reply saying the change was **only partly made** is not a gate either, and not a fault to report:
-repeat the identical call, and it completes the seal. The record is not sealed until it does — unless
-the repeat is refused as a transition to the status it already has, which means the first call
-finished: read the record to confirm.
-`write-failures.md` in the method has the refusals that name an earlier call to repeat first.
+A reply saying the change was **only partly made** is not a gate either, and not a fault to report: repeat the identical call, and it completes the seal. The record is not sealed until it does — unless the repeat is refused as a transition to the status it already has, which means the first call finished: read the record to confirm. `write-failures.md` in the method has the refusals that name an earlier call to repeat first.
 
 ## Settling an open question at admission
 
@@ -82,12 +70,9 @@ A staged record can close a question left open on an **already-admitted** record
 }
 ```
 
-The edge is authored while staged and takes effect when *this* record admits, minting `settledIn` on
-the older host.
+The edge is authored while staged and takes effect when *this* record admits, minting `settledIn` on the older host.
 
-`hostMdrNumber` is the **holder's** number, not this record's. If the holder is still staged it has no
-number and nothing frozen to settle — update the holder directly instead. Full treatment lives in the
-`revise-decision` skill.
+`hostMdrNumber` is the **holder's** number, not this record's. If the holder is still staged it has no number and nothing frozen to settle — update the holder directly instead. Full treatment lives in the `revise-decision` skill.
 
 ## Verifying the seal
 
@@ -100,5 +85,4 @@ Check the transition's own reply:
 | `decidedAt` | A timestamp |
 | `retractable` | `true` if nothing anchors it yet; `false` if something already does |
 
-A tier-1 `update_MDR` should now fail. That failure is the Decision Transaction Principle working
-correctly, not a bug to route around.
+A tier-1 `update_MDR` should now fail. That failure is the Decision Transaction Principle working correctly, not a bug to route around.

@@ -18,8 +18,7 @@ Requires both `tests` and `testResult`.
 }
 ```
 
-`tests` also accepts a bare id string, and names nothing but the expected outcome: the record is the
-one `mdr` cites. Get the `eo-…` value from `get_MDR_learning_delta` on the source record.
+`tests` also accepts a bare id string, and names nothing but the expected outcome: the record is the one `mdr` cites. Get the `eo-…` value from `get_MDR_learning_delta` on the source record.
 
 ## Emergent — nobody saw it coming
 
@@ -51,8 +50,7 @@ No `tests`, no `testResult`.
 }
 ```
 
-The honest label matters. A run of Deducible outcomes across a ledger says the team's expected-outcome
-discipline is thin — useful, and only visible if the labels are truthful.
+The honest label matters. A run of Deducible outcomes across a ledger says the team's expected-outcome discipline is thin — useful, and only visible if the labels are truthful.
 
 ## Correcting a prior observation
 
@@ -73,11 +71,9 @@ Only when the earlier reading was **wrong when it was made**:
 }
 ```
 
-Do **not** use `correctsFact` because the world changed. Latency that was genuinely 410ms in December
-and 190ms in March is two honest observations that coexist.
+Do **not** use `correctsFact` because the world changed. Latency that was genuinely 410ms in December and 190ms in March is two honest observations that coexist.
 
-Each prior admission accepts at most one direct corrector, and a second is refused naming what it
-would correct:
+Each prior admission accepts at most one direct corrector, and a second is refused naming what it would correct:
 
 ```
 This Observed Outcome already has a direct corrector (at most one correctsFact edge per prior admission).
@@ -107,8 +103,7 @@ get_MDR_learning_delta(mdlGuid, mdr)
 }
 ```
 
-An expected outcome with an empty `wakes` array is an **unmeasured commitment** — worth naming to the
-user. Ledger residents only.
+An expected outcome with an empty `wakes` array is an **unmeasured commitment** — worth naming to the user. Ledger residents only.
 
 ## Errors
 
@@ -133,14 +128,8 @@ Matter₁ → Analysis₁ → MDR₁ → expected outcome → observed outcome (
   Matter₂ ──┘
 ```
 
-Drawn as a single file for legibility only. The second analysis may take up the wake itself — pass
-`observedOutcomeId` in `motivatedBy` — fresh matters raised since, or both together, and may produce
-any number of records. Taking up the wake directly is what keeps the arrow into Analysis₂ real: a
-Matter retyping the observation would draw the same picture and record none of it.
+Drawn as a single file for legibility only. The second analysis may take up the wake itself — pass `observedOutcomeId` in `motivatedBy` — fresh matters raised since, or both together, and may produce any number of records. Taking up the wake directly is what keeps the arrow into Analysis₂ real: a Matter retyping the observation would draw the same picture and record none of it.
 
-The wake becomes bait for the next fish. The original record stays exactly as it was at its own t₀ —
-that is what makes the loop legible in hindsight.
+The wake becomes bait for the next fish. The original record stays exactly as it was at its own t₀ — that is what makes the loop legible in hindsight.
 
-MDR₂ closes as **Accepted**, carrying `supersedes: [MDR₁]` when it replaces the decision, or as
-**Rejected** when it declines the commitment — step 6 of the skill says how the second is linked, since
-a Rejection carries no edge.
+MDR₂ closes as **Accepted**, carrying `supersedes: [MDR₁]` when it replaces the decision, or as **Rejected** when it declines the commitment — step 6 of the skill says how the second is linked, since a Rejection carries no edge.

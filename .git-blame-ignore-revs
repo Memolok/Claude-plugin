@@ -3,3 +3,6 @@
 
 # Normalise line endings to LF (whitespace only, no content change)
 b66fd61770625bfc6c36f539e119410b48b053cc
+
+# Unwrap Markdown prose to one line per paragraph (line breaks only)
+31d972c5155e67bb949d49714b658a667fe9101c

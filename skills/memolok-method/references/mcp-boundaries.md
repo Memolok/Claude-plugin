@@ -1,17 +1,20 @@
 # MCP boundaries
 
-**Rule:** if no tool exists for something below, do not simulate it with local files, prose-only
-records, or invented calls. Tell the user it is not available yet.
+**Rule:** if no tool exists for something below, do not simulate it with local files, prose-only records, or invented calls. Tell the user it is not available yet.
 
 ## Available
 
 | Capability | Tools |
 | --- | --- |
 | Auth and health | `ping`, `get_guidance`, `whoami` |
+| Names and provenance | `resolve_names` (the names an IRI may be shown by, or none, never saying why), `get_provenance` (who created an entry and every later write) |
 | Ledger discovery and creation | `get_MDLs`, `get_MDL`, `create_MDL` |
 | Ledger intent | `set_ledger_intent` (read it back with `get_MDL`) |
 | Rename a ledger | `set_MDL_title` (admin/owner; its identifier does not change) |
-| Share a ledger read-only | `share_MDL` (admin/owner; gives an existing account `visitor`, named by its IRI) |
+| Invite someone to read a ledger | `share_MDL` (admin/owner; prepares an invitation to an existing account, named by its IRI, which grants nothing until the inviter confirms and the invitee accepts on the portal) |
+| Ask a ledger's creator to consent to sharing it | `request_MDL_disclosure` (the creator only; prepares, and the creator confirms on the portal) |
+| Leave a ledger | `leave_MDL` (your own role, at once) |
+| Vanish from a ledger | `request_MDL_vanish` (yourself only; prepares, and you confirm on the portal, for good) |
 | Matter intake | `register_matter` |
 | Matter reads | `get_matter` (one, whole), `discover_matters` (the ledger's matters as prose, each with its summary, subjects and who took it up) |
 | Analysis, Path A and B | `create_analysis` |
@@ -32,33 +35,21 @@ records, or invented calls. Tell the user it is not available yet.
 
 ### Graph edges, almanac context, `retractable`
 
-The boundaries: the five graph keys and `hasContext` are patchable while a record is staged and refused
-on a resident, `[]` included; `amends` and `supersedes` need an **Accepted** record at each end; a
-record cannot cite its own wake; a resident's tier-1 fields are never patchable, whatever `retractable`
-says — `true` means only that an uncommit is available. What each edge does to its target, and what
-anchors: `lifecycle-and-gates.md`.
+The boundaries: the five graph keys and `hasContext` are patchable while a record is staged and refused on a resident, `[]` included; `amends` and `supersedes` need an **Accepted** record at each end; a record cannot cite its own wake; a resident's tier-1 fields are never patchable, whatever `retractable` says — `true` means only that an uncommit is available. What each edge does to its target, and what anchors: `lifecycle-and-gates.md`.
 
 ## Not available — do not invent
 
 ### Closing a matter as refused, blocked, or overtaken
 
-Analysis reaches two endings: it produces records, or it produces none. Recording that a matter was
-**refused** (valid, and we commit to not acting), **externally blocked**, or **overtaken by events**
-has no tool. **Do not invent fields for any of these.**
+Analysis reaches two endings: it produces records, or it produces none. Recording that a matter was **refused** (valid, and we commit to not acting), **externally blocked**, or **overtaken by events** has no tool. **Do not invent fields for any of these.**
 
-Record refusal or blockage rationale in the Verdict prose at t₀ instead, and do not substitute a
-Path B dismissal — "no decision warranted" says the investigation found nothing to decide, which is
-weaker and different from refusing a problem you agree is real.
+Record refusal or blockage rationale in the Verdict prose at t₀ instead, and do not substitute a Path B dismissal — "no decision warranted" says the investigation found nothing to decide, which is weaker and different from refusing a problem you agree is real.
 
-Re-analysis, by contrast, **is** available: open a second analysis over the same input, or attach it
-to an existing one. Nothing limits an input to one analysis.
+Re-analysis, by contrast, **is** available: open a second analysis over the same input, or attach it to an existing one. Nothing limits an input to one analysis.
 
 ### Feedback reports are not ledger entities
 
-`submit_feedback` sends the feedback to Memonos, not to the user's own ledger. A report has no `mdlGuid` tenancy,
-carries no Claim, cannot be cited, and never becomes a Matter. Mental model: write-only — there is
-**no list and no search**: a report is reachable only by an id its submitter still holds, and it may be
-deleted server-side during triage, so `get_feedback` legitimately returns not-found for something that existed.
+`submit_feedback` sends the feedback to Memonos, not to the user's own ledger. A report has no `mdlGuid` tenancy, carries no Claim, cannot be cited, and never becomes a Matter. Mental model: write-only — there is **no list and no search**: a report is reachable only by an id its submitter still holds, and it may be deleted server-side during triage, so `get_feedback` legitimately returns not-found for something that existed.
 
 Do not simulate the missing enumeration by keeping a local index of what you sent.
 
@@ -74,47 +65,38 @@ Do not simulate the missing enumeration by keeping a local index of what you sen
 | Open-question settlement registry queries |
 | Automatic supersession on a `Violated` result |
 
-`get_MDR_learning_delta` covers one record at a time. For anything portfolio-wide, read with
-`discover_MDRs` and reason in conversation — do not claim the ledger surfaced it.
+`get_MDR_learning_delta` covers one record at a time. For anything portfolio-wide, read with `discover_MDRs` and reason in conversation — do not claim the ledger surfaced it.
+
+### Confirming a consent
+
+**No tool confirms or accepts a consent, and an agent never can**: consenting to a ledger's disclosure, confirming or accepting an invitation, and confirming a vanish are the person's own act on their Sharing and privacy page in the Memolok portal, linked from the mail Memolok sends them, and Memolok accepts them from the portal alone. Withdrawing an invitation has no tool either; the inviter does it on the same page. The tools that prepare these say so; tell the person what is left for them to do, and never present a prepared request as done. Nobody can leave or vanish on someone else's behalf.
 
 ### Ledger administration
 
 | Capability |
 | --- |
-| Removing a member, changing a member's role, or giving any role but `visitor` |
+| Removing someone else, changing a member's role, or giving any role but `visitor` |
 | Inviting someone who has no Memolok account |
 | Decision-record-type taxonomy |
 | Concern hierarchy |
 
-`create_MDL` is open to any user whose account allows it, which every account does from the day it
-is created, and the creator becomes owner. An owner or admin shares the ledger read-only with
-`share_MDL`; every other change to membership is made by a Memolok administrator.
+`create_MDL` is open to any user whose account allows it, which every account does from the day it is created, and the creator becomes owner. An owner or admin invites someone to read it with `share_MDL`, and anyone may leave it with `leave_MDL`; every other change to membership is made by a Memolok administrator.
 
 ### Project bridges
 
-Linking records to repository files, and freezing cited artifacts at t₀, are not on the tool surface.
-`anchor_MDR` is not that link: it records that an external citation exists and what kind of place it
-lives in, never where, so nothing resolves from a record back to a file.
+Linking records to repository files, and freezing cited artifacts at t₀, are not on the tool surface. `anchor_MDR` is not that link: it records that an external citation exists and what kind of place it lives in, never where, so nothing resolves from a record back to a file.
 
 ### Deletion
 
-**`delete_scratchpad` is the only delete tool, for the only deletable entity.** Everything else is
-immutable on admission (`Matter`, `WorldFact` substance) or sealed at t₀ (`DecisionRecord`), and
-there is no delete for any of them — a matter registered by mistake is left unreferenced or closed
-through Path B, a wrong fact gets a correcting successor, a regretted record is uncommitted or
-superseded.
+**`delete_scratchpad` is the only delete tool, for the only deletable entity.** Everything else is immutable on admission (`Matter`, `WorldFact` substance) or sealed at t₀ (`DecisionRecord`), and there is no delete for any of them — a matter registered by mistake is left unreferenced or closed through Path B, a wrong fact gets a correcting successor, a regretted record is uncommitted or superseded.
 
-Do not generalise from the scratchpad tool. It exists only because a note is the one thing nothing
-else can depend on.
+Do not generalise from the scratchpad tool. It exists only because a note is the one thing nothing else can depend on.
 
 ### Scratchpad references
 
-Nothing may reference a scratchpad, permanently and by design. Passing a `msp_…` id to `hasContext`,
-`correctsFact`, `motivatedBy`, `tests.outcomeId` or `evidence` is refused by name — as is an `mfb_…`
-feedback report id, which is not a ledger entity at all.
+Nothing may reference a scratchpad, permanently and by design. Passing a `msp_…` id to `hasContext`, `correctsFact`, `motivatedBy`, `tests.outcomeId` or `evidence` is refused by name — as is an `mfb_…` feedback report id, which is not a ledger entity at all.
 
-There is also no link the other way — no "promoted from", no provenance edge. Content mined out of a
-note is authored fresh with no trail back, and the user should be told that once.
+There is also no link the other way — no "promoted from", no edge from a note to what was made of it; `get_provenance` says who wrote an entry, never what material it came from. Content mined out of a note is authored fresh with no trail back, and the user should be told that once.
 
 ## Naming
 
@@ -128,9 +110,4 @@ note is authored fresh with no trail back, and the user should be told that once
 | `scratchpadId` (`msp_` + 26) | a bare id, or any other entity's prefix — every kind carries its own, so a category error is refused by name |
 | `mdlGuid` | `adlGuid` |
 
-Every record tool takes one `mdr`, the record's citation: `MDRh7` by its handle or `MDR-7` by its
-number. A read takes either, so a record someone cites by number is read directly. A tool that
-changes a record takes `MDRh7` alone, because an uncommit can release a number for another record
-to take. Use the handle whenever you hold one. What only a sealed record has, its learning delta and
-its wake, finds no staged record whichever way it is cited. Answers carry both keys as integers,
-`mdrHandle` and `mdrNumber`, and links name records by number.
+Every record tool takes one `mdr`, the record's citation: `MDRh7` by its handle or `MDR-7` by its number. A read takes either, so a record someone cites by number is read directly. A tool that changes a record takes `MDRh7` alone, because an uncommit can release a number for another record to take. Use the handle whenever you hold one. What only a sealed record has, its learning delta and its wake, finds no staged record whichever way it is cited. Answers carry both keys as integers, `mdrHandle` and `mdrNumber`, and links name records by number.

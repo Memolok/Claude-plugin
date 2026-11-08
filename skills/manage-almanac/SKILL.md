@@ -1,18 +1,13 @@
 ---
 name: manage-almanac
 description: >-
-  Admit, look up or correct the world facts a Memolok ledger reasons from: budgets, constraints,
-  policies, team capabilities, anything true whatever gets decided. Use when the user states a
-  premise rather than a choice ("legal requires seven-year retention", "the budget is $10k",
-  "nobody here writes Rust"), says an admitted fact was wrong, or wants a staged decision to cite a
-  fact as its context. A fact that now calls for a decision → `record-decision`.
+  Admit, look up or correct the world facts a Memolok ledger reasons from: budgets, constraints, policies, team capabilities, anything true whatever gets decided. Use when the user states a premise rather than a choice ("legal requires seven-year retention", "the budget is $10k", "nobody here writes Rust"), says an admitted fact was wrong, or wants a staged decision to cite a fact as its context. A fact that now calls for a decision → `record-decision`.
 argument-hint: "<the fact>"
 ---
 
 # /memolok:manage-almanac — The world almanac
 
-Admits premises to the ledger's almanac and cites them from staged records. World facts are minted
-independently of any decision, so correcting one never means editing a sealed record.
+Admits premises to the ledger's almanac and cites them from staged records. World facts are minted independently of any decision, so correcting one never means editing a sealed record.
 
 ## Usage
 
@@ -54,20 +49,13 @@ A world fact is a claim about the world that is true whether or not anyone decid
 
 | | *"Here's their whole pricing page"* — source material: a **scratchpad**, via `manage-notes` |
 
-Three tests: **would this still be true if the decision it relates to had never come up?**,
-**would it stop if this ledger decided to stop doing it?** and **is the user asserting it, or just
-keeping it?** A symptom is bait — **`save-matter`** or **`record-decision`**. Material nobody is
-asserting is a note; if it later turns out to matter, admit it *then*, freshly worded. What fails
-the second is a consequence of this ledger's own decisions, however well verified: name the
-admitted record in the prose, put the observation in the reasoning, or record it as an outcome if
-it is one. Another team's decision passes.
+Three tests: **would this still be true if the decision it relates to had never come up?**, **would it stop if this ledger decided to stop doing it?** and **is the user asserting it, or just keeping it?** A symptom is bait — **`save-matter`** or **`record-decision`**. Material nobody is asserting is a note; if it later turns out to matter, admit it *then*, freshly worded. What fails the second is a consequence of this ledger's own decisions, however well verified: name the admitted record in the prose, put the observation in the reasoning, or record it as an outcome if it is one. Another team's decision passes.
 
 ## Workflow
 
 ### 1. Establish the ledger
 
-The `mdlGuid` in play, else `.memolok/mdl.yml`, else `get_MDLs`. Facts are ledger-scoped, so a fact
-admitted in one ledger is invisible in another.
+The `mdlGuid` in play, else `.memolok/mdl.yml`, else `get_MDLs`. Facts are ledger-scoped, so a fact admitted in one ledger is invisible in another.
 
 ### 2. Check what is already there
 
@@ -75,14 +63,9 @@ admitted in one ledger is invisible in another.
 discover_world_facts(mdlGuid, query: "<the terms your fact would name>")
 ```
 
-**This step is a judgement, and the read is built for it.** `discover_world_facts` answers as prose
-carrying each fact's summary and the terms it names, so you can tell a near-duplicate
-from a neighbour without opening every candidate. Search reaches the derived summary and subjects as
-well as the admitted claim, so a fact can match a term nobody typed into it — which is exactly what
-finds the duplicate you were about to create.
+**This step is a judgement, and the read is built for it.** `discover_world_facts` answers as prose carrying each fact's summary and the terms it names, so you can tell a near-duplicate from a neighbour without opening every candidate. Search reaches the derived summary and subjects as well as the admitted claim, so a fact can match a term nobody typed into it — which is exactly what finds the duplicate you were about to create.
 
-Avoid admitting a near-duplicate. If a prior fact covers the same ground but is now wrong, that is a
-correction — step 4.
+Avoid admitting a near-duplicate. If a prior fact covers the same ground but is now wrong, that is a correction — step 4.
 
 ### 3. Admit the fact
 
@@ -96,19 +79,11 @@ correction — step 4.
 }
 ```
 
-Write it so it is checkable later. *"The budget is tight"* is not a premise anything can be reasoned
-from; *"the hardware budget is $10k"* is.
+Write it so it is checkable later. *"The budget is tight"* is not a premise anything can be reasoned from; *"the hardware budget is $10k"* is.
 
-**Say who wrote it and who observed it.** `authoredBy` is whoever wrote the claim's words, you when you
-drafted them; `observedBy` is whoever observed what it states. *"Mary told me the budget went up to
-$50k"* is your words, Mary's observation and the user's admission. Name Mary as the tool catalogue's
-`admit_world_fact` says, and leave a role out rather than guess.
+**Say who wrote it and who observed it.** `authoredBy` is whoever wrote the claim's words, you when you drafted them; `observedBy` is whoever observed what it states. *"Mary told me the budget went up to $50k"* is your words, Mary's observation and the user's admission. Name Mary as the tool catalogue's `admit_world_fact` says, and leave a role out rather than guess.
 
-For a fact that rests on a public page, state the durable property, link the page, give the date you
-read it, and say the contents are deliberately not restated: *"account-free contact routes are
-published at `<url>`, read 2026-11-01; the routes themselves are deliberately not restated"*. A copy
-of the page needs a successor fact every time the page changes, because a fact has no edit path.
-Exception: a fact whose subject is a measurement, or a quote from something impermanent.
+For a fact that rests on a public page, state the durable property, link the page, give the date you read it, and say the contents are deliberately not restated: *"account-free contact routes are published at `<url>`, read 2026-11-01; the routes themselves are deliberately not restated"*. A copy of the page needs a successor fact every time the page changes, because a fact has no edit path. Exception: a fact whose subject is a measurement, or a quote from something impermanent.
 
 ### 4. Correcting versus drifting
 
@@ -130,21 +105,15 @@ This distinction is the one that matters here.
 }
 ```
 
-A correction says *we were wrong*. Drift says *it changed*. Conflating them makes the ledger unable to
-distinguish "we reasoned from bad information" from "we reasoned correctly and the world moved" — and
-those call for very different responses.
+A correction says *we were wrong*. Drift says *it changed*. Conflating them makes the ledger unable to distinguish "we reasoned from bad information" from "we reasoned correctly and the world moved" — and those call for very different responses.
 
 Each prior admission accepts at most one direct corrector.
 
 ### 5. Cite it from a decision
 
-A fact reaches reasoning two ways, and they answer different questions. **`hasContext`** says the
-record reasoned *from* this premise. **`motivatedBy`** on an analysis says this entry is what the
-reasoning took up — the thing that prompted the work. A fact can be both, and a fact that starts new
-work is often only the second.
+A fact reaches reasoning two ways, and they answer different questions. **`hasContext`** says the record reasoned *from* this premise. **`motivatedBy`** on an analysis says this entry is what the reasoning took up — the thing that prompted the work. A fact can be both, and a fact that starts new work is often only the second.
 
-To make a fact the input to fresh reasoning, hand the `worldFactId` to `record-decision` and pass it
-in `motivatedBy` — as itself, never as a Matter restating it.
+To make a fact the input to fresh reasoning, hand the `worldFactId` to `record-decision` and pass it in `motivatedBy` — as itself, never as a Matter restating it.
 
 To cite it as context, while the record is still **staged**:
 
@@ -158,32 +127,20 @@ To cite it as context, while the record is still **staged**:
 }
 ```
 
-An ordered list of world fact and prior observed outcome ids from the same ledger. It **freezes at
-t₀** — this is the record's epistemic snapshot, the premises it actually reasoned from.
+An ordered list of world fact and prior observed outcome ids from the same ledger. It **freezes at t₀** — this is the record's epistemic snapshot, the premises it actually reasoned from.
 
-Do this **before** committing. There is no way to add context afterwards, and a record whose premises
-were never cited cannot later be found when one of those premises turns out to be wrong.
+Do this **before** committing. There is no way to add context afterwards, and a record whose premises were never cited cannot later be found when one of those premises turns out to be wrong.
 
-> **Not built yet.** Asking which records rested on a premise that has since been corrected —
-> *polluted premises*, decision decay — has no tool. You can answer it by reading `hasContext` across
-> records, but say that you read it rather than implying the ledger computed it. Nor is there a lookup
-> from a fact to the fact correcting it, or a read that returns only facts still current.
+> **Not built yet.** Asking which records rested on a premise that has since been corrected — *polluted premises*, decision decay — has no tool. You can answer it by reading `hasContext` across records, but say that you read it rather than implying the ledger computed it. Nor is there a lookup from a fact to the fact correcting it, or a read that returns only facts still current.
 
 ## Tips
 
-- `get_world_fact(mdlGuid, worldFactId)` fetches one, and is the only source for the words somebody
-  actually wrote. **Corrected facts stay in the read** beside the ones correcting them, so finding a
-  premise there is not evidence that it is still current.
-- Observed outcomes are a **kind** of world fact — a record's `hasContext` can cite a prior wake, just
-  never its own, and an analysis can take either up as an input by id.
-- Cross-team handoff works through this skill: admit another team's decision as a world fact in your
-  ledger. A reference, not a merge. See `scopes-and-bridging.md` in **`memolok-method`**.
-- There is no way to delete or edit a fact. Facts are immutable in substance once admitted; the only
-  move is a correcting successor.
-- If the user states a premise while working through a decision, admit it and cite it rather than
-  folding it into the record's prose — it is reusable by every later record.
+- `get_world_fact(mdlGuid, worldFactId)` fetches one, and is the only source for the words somebody actually wrote. **Corrected facts stay in the read** beside the ones correcting them, so finding a premise there is not evidence that it is still current.
+- Observed outcomes are a **kind** of world fact — a record's `hasContext` can cite a prior wake, just never its own, and an analysis can take either up as an input by id.
+- Cross-team handoff works through this skill: admit another team's decision as a world fact in your ledger. A reference, not a merge. See `scopes-and-bridging.md` in **`memolok-method`**.
+- There is no way to delete or edit a fact. Facts are immutable in substance once admitted; the only move is a correcting successor.
+- If the user states a premise while working through a decision, admit it and cite it rather than folding it into the record's prose — it is reusable by every later record.
 
 ## References
 
-The wake side of the almanac — observed outcomes and the learning delta — lives in the
-**`record-outcome`** skill.
+The wake side of the almanac — observed outcomes and the learning delta — lives in the **`record-outcome`** skill.

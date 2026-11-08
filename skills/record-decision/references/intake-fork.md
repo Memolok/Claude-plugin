@@ -16,124 +16,81 @@ Then three further exits, because not everything a user says is a decision at al
 
 ## Why this is worth getting right
 
-A record minted on the expert path cannot be given matter provenance afterwards. Not because
-anything is frozen on the record — it carries no matter link at all — but because an analysis names
-the records it produces at the moment *it* creates them, and nothing attaches an existing record to an
-analysis later. Register the matter afterwards and analyze it, and you get a *second* record. So the
-raiser's own words end up nowhere near the decision they caused.
+A record minted on the expert path cannot be given matter provenance afterwards. Not because anything is frozen on the record — it carries no matter link at all — but because an analysis names the records it produces at the moment *it* creates them, and nothing attaches an existing record to an analysis later. Register the matter afterwards and analyze it, and you get a *second* record. So the raiser's own words end up nowhere near the decision they caused.
 
-The reverse error is cheap: a matter registered by mistake can be found with `discover_matters`, taken up
-whenever somebody gets to it, or closed honestly through Path B. That asymmetry is a reason to ask
-rather than guess, not a licence to register matters speculatively.
+The reverse error is cheap: a matter registered by mistake can be found with `discover_matters`, taken up whenever somebody gets to it, or closed honestly through Path B. That asymmetry is a reason to ask rather than guess, not a licence to register matters speculatively.
 
 ## Worked examples
 
 ### 1. "Login takes forever, users are furious."
 
-**Bait.** A symptom, in someone's words, with no target. Register verbatim. Do not translate it into
-*"auth latency must be under 200ms"* at intake — that target is the *output* of sharpening, and
-inventing it now destroys the raw signal while smuggling in a number nobody agreed to.
+**Bait.** A symptom, in someone's words, with no target. Register verbatim. Do not translate it into *"auth latency must be under 200ms"* at intake — that target is the *output* of sharpening, and inventing it now destroys the raw signal while smuggling in a number nobody agreed to.
 
 ### 2. "P99 auth latency must stay under 50ms."
 
-**Head Claim.** A future measurement settles it either way, and it names no mechanism. Expert branch,
-`create_MDR` at Deliberating.
+**Head Claim.** A future measurement settles it either way, and it names no mechanism. Expert branch, `create_MDR` at Deliberating.
 
 ### 3. "We should switch to Postgres."
 
-**Neither.** This is a Verdict with the Need cut off. Nothing here is falsifiable, because "switching
-to Postgres" is something you *do*, not something that turns out to be true or false.
+**Neither.** This is a Verdict with the Need cut off. Nothing here is falsifiable, because "switching to Postgres" is something you *do*, not something that turns out to be true or false.
 
 Recover the need: *"what would switching fix?"* The answer routes it:
 
 - *"Our joins are getting unmanageable in Dynamo"* → likely a Claim about query expressiveness.
 - *"The team keeps hitting bugs nobody can debug"* → bait.
 
-Then Postgres becomes what it always was — an **alternative**, recorded in the belly with the reasoning
-that favoured it.
+Then Postgres becomes what it always was — an **alternative**, recorded in the belly with the reasoning that favoured it.
 
-**Relayed, it is bait.** *"A colleague suggested we switch to Postgres"* is that colleague's
-initiative: register the matter with `raisedBy` naming them, then recover the need the same way. The
-decision that follows names whoever decides in `decidedBy`.
+**Relayed, it is bait.** *"A colleague suggested we switch to Postgres"* is that colleague's initiative: register the matter with `raisedBy` naming them, then recover the need the same way. The decision that follows names whoever decides in `decidedBy`.
 
 ### 4. "Support filed three tickets this week about checkout errors and I want to fix it."
 
-**Bait**, and the tickets are the reporters' words. Register the matter from the ticket content,
-not from the user's summary of it, with the reporters in `raisedBy`. "I want to fix it" states intent to decide, which is why you carry
-straight on into sharpening — but it does not make the intake a Claim.
+**Bait**, and the tickets are the reporters' words. Register the matter from the ticket content, not from the user's summary of it, with the reporters in `raisedBy`. "I want to fix it" states intent to decide, which is why you carry straight on into sharpening — but it does not make the intake a Claim.
 
 ### 5. "I need to pick a language for the stats pipeline; it must have a mature stats library ecosystem."
 
-**Head Claim.** Falsifiable — a later observation can confirm or refute whether the ecosystem held up —
-and mechanism-neutral, since it does not say *which* language. Expert branch.
+**Head Claim.** Falsifiable — a later observation can confirm or refute whether the ecosystem held up — and mechanism-neutral, since it does not say *which* language. Expert branch.
 
-Note what would have made this the wrong call: *"it must use Python for pandas and numpy"* names the
-answer, and would need backing out per example 3.
+Note what would have made this the wrong call: *"it must use Python for pandas and numpy"* names the answer, and would need backing out per example 3.
 
 ### 6. "The build is flaky." — said by the only engineer on the project
 
 **Bait.** Still a symptom, still no target. Being solo does not promote it.
 
-This is the most commonly missed case, because with no second person around it is tempting to treat
-your own observation as expert framing and mint directly. The `memolok-method` rule applies: with no
-separate human in the Expert #1 seat you inherit it by name only, and the head Claim is still
-co-discovered with the user.
+This is the most commonly missed case, because with no second person around it is tempting to treat your own observation as expert framing and mint directly. The `memolok-method` rule applies: with no separate human in the Expert #1 seat you inherit it by name only, and the head Claim is still co-discovered with the user.
 
 ### 7. "Legal says we must retain records for seven years."
 
-**World Fact.** True whether or not anyone decides anything about it, so it is a premise rather than a
-decision. Admit it through `manage-almanac` first.
+**World Fact.** True whether or not anyone decides anything about it, so it is a premise rather than a decision. Admit it through `manage-almanac` first.
 
-The decision it *provokes* — what to change so retention is met — is a separate fish, and the
-admitted fact is its **input**: pass the `worldFactId` in `motivatedBy`. Do not register a Matter
-saying "legal wants seven-year retention"; the fact is already recorded, and restating it loses the
-link permanently. Cite it through `hasContext` as well while the record is staged if the reasoning
-rests on it — being an input and being context are different claims, and a premise can be both.
+The decision it *provokes* — what to change so retention is met — is a separate fish, and the admitted fact is its **input**: pass the `worldFactId` in `motivatedBy`. Do not register a Matter saying "legal wants seven-year retention"; the fact is already recorded, and restating it loses the link permanently. Cite it through `hasContext` as well while the record is staged if the reasoning rests on it — being an input and being context are different claims, and a premise can be both.
 
 ### 8. "We decided last quarter to use Kafka and it's not working out."
 
-**A wake**, on a record already on the ledger. Hand off to `record-outcome` to register the observed
-outcome against the expected outcome it tests.
+**A wake**, on a record already on the ledger. Hand off to `record-outcome` to register the observed outcome against the expected outcome it tests.
 
-Then it may well start the next fish: a `Violated` result is exactly that kind of signal. The wake
-itself is the input — pass the `observedOutcomeId` in `motivatedBy` — not a Matter retyping it,
-which would record neither the outcome as the input nor that anything connected the two. What it is
-*not* is a reason to edit the original record — that record was honest at its t₀, and rewriting the
-tail to match what happened is ledger fraud.
+Then it may well start the next fish: a `Violated` result is exactly that kind of signal. The wake itself is the input — pass the `observedOutcomeId` in `motivatedBy` — not a Matter retyping it, which would record neither the outcome as the input nor that anything connected the two. What it is *not* is a reason to edit the original record — that record was honest at its t₀, and rewriting the tail to match what happened is ledger fraud.
 
 ### 9. "Just noting that the CSV export mangles unicode — don't do anything about it now."
 
-**Bait, parked.** The user has explicitly declined to decide. Use `save-matter`: register verbatim,
-confirm, stop. Do not analyze it, do not sharpen it, and do not offer to open a decision.
+**Bait, parked.** The user has explicitly declined to decide. Use `save-matter`: register verbatim, confirm, stop. Do not analyze it, do not sharpen it, and do not offer to open a decision.
 
 Nothing references it, so it shows up later in `discover_matters(untaken: true)`.
 
 ### 10. "Here's the quote they sent — 3 nodes at $412/mo, 12-month term."
 
-**A scratchpad.** No assertion the ledger should stand behind, and no request. Hand off to
-`manage-notes`: save it, say *saved*, carry on.
+**A scratchpad.** No assertion the ledger should stand behind, and no request. Hand off to `manage-notes`: save it, say *saved*, carry on.
 
-The two questions that place it: *does the user expect anyone to act on this?* (no) and *would it be
-bad if this vanished?* (no — the quote is still in their inbox). Either yes would move it.
+The two questions that place it: *does the user expect anyone to act on this?* (no) and *would it be bad if this vanished?* (no — the quote is still in their inbox). Either yes would move it.
 
-Contrast with **"the vendor's SLA is 99.5%"**, which *is* a World Fact — an assertion a decision
-could rest on. The quote is source material; the SLA figure drawn out of it is a premise. If the
-figure later turns out to matter, admit it as a fact **then**, freshly worded, and say plainly that
-the ledger keeps no trail back to the note.
+Contrast with **"the vendor's SLA is 99.5%"**, which *is* a World Fact — an assertion a decision could rest on. The quote is source material; the SLA figure drawn out of it is a premise. If the figure later turns out to matter, admit it as a fact **then**, freshly worded, and say plainly that the ledger keeps no trail back to the note.
 
 ## Common failures
 
-**Paraphrasing bait into a Claim and expert-minting it.** The dominant one. It destroys the raw signal
-*and* usually over-sharpens the Need with a target that only exists because you invented it. Two rule
-violations in one call, and neither is reversible.
+**Paraphrasing bait into a Claim and expert-minting it.** The dominant one. It destroys the raw signal *and* usually over-sharpens the Need with a target that only exists because you invented it. Two rule violations in one call, and neither is reversible.
 
-**Registering a matter for the user's own fully-formed decision.** The user arrived with a Claim and
-their reasoning; wrapping it in a fabricated raw input puts words in someone's mouth. Recoverable
-through Path B, but it pollutes the inbox. Someone else's suggestion is different, however complete:
-it is a matter they raised.
+**Registering a matter for the user's own fully-formed decision.** The user arrived with a Claim and their reasoning; wrapping it in a fabricated raw input puts words in someone's mouth. Recoverable through Path B, but it pollutes the inbox. Someone else's suggestion is different, however complete: it is a matter they raised.
 
-**Routing on the opening verb.** "We should…", "I need…", "can you fix…" say nothing reliable about
-which side of the fork the content sits on. Route on falsifiability, not phrasing.
+**Routing on the opening verb.** "We should…", "I need…", "can you fix…" say nothing reliable about which side of the fork the content sits on. Route on falsifiability, not phrasing.
 
-**Treating the fork as a menu to read aloud.** Sort it yourself from what they said. Ask only when it
-is genuinely ambiguous, and ask one question — not five.
+**Treating the fork as a menu to read aloud.** Sort it yourself from what they said. Ask only when it is genuinely ambiguous, and ask one question — not five.

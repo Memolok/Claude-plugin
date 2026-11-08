@@ -1,29 +1,19 @@
 ---
 name: wrap-up
 description: >-
-  Save what this session established to the Memolok ledger, the project or agent memory before the
-  session ends. Use when the user says "wrap up", "we're done here", "before I close this", "end of
-  session", or asks "any loose ends?", "anything else worth saving?", or is clearly preparing to
-  finish up this work session. A briefing for whoever picks the work up next is a hand-off, not
-  this.
+  Save what this session established to the Memolok ledger, the project or agent memory before the session ends. Use when the user says "wrap up", "we're done here", "before I close this", "end of session", or asks "any loose ends?", "anything else worth saving?", or is clearly preparing to finish up this work session. A briefing for whoever picks the work up next is a hand-off, not this.
 argument-hint: "(nothing — the session is the input)"
 ---
 
 # /memolok:wrap-up — Before the context is gone
 
-This context is about to disappear, and with it everything the session established that was never
-written down. Nobody will find out. That is *decision debt* at session scale.
+This context is about to disappear, and with it everything the session established that was never written down. Nobody will find out. That is *decision debt* at session scale.
 
-You are the reason this skill exists. A human's amnesia is partial and slow; **yours is total and
-immediate** — every session starts cold, with no memory beyond what the ledger and the project hold.
-The user's is worse than they think: even in a solo project, the person reading this project
-two weeks from now is effectively a different colleague, working from whatever you two leave behind today.
+You are the reason this skill exists. A human's amnesia is partial and slow; **yours is total and immediate** — every session starts cold, with no memory beyond what the ledger and the project hold. The user's is worse than they think: even in a solo project, the person reading this project two weeks from now is effectively a different colleague, working from whatever you two leave behind today.
 
-Memolok's premise is that skills mint ledger entries *from the conversation where the choice actually happened*
-rather than from a form somebody fills in afterwards. This is that conversation, at the edge of "afterwards".
+Memolok's premise is that skills mint ledger entries *from the conversation where the choice actually happened* rather than from a form somebody fills in afterwards. This is that conversation, at the edge of "afterwards".
 
-This skill teaches you **what to look for** — not what to do about it; you will have to use your judgement for that.
-Every destination is owned by a skill or a tool that already knows its own rules. You decide, per item, with the user.
+This skill teaches you **what to look for** — not what to do about it; you will have to use your judgement for that. Every destination is owned by a skill or a tool that already knows its own rules. You decide, per item, with the user.
 
 ## Usage
 
@@ -31,39 +21,30 @@ Every destination is owned by a skill or a tool that already knows its own rules
 /memolok:wrap-up
 ```
 
-The session is the argument. Any text the user adds is a steer ("just the infra stuff"), not a scope
-they have to supply.
+The session is the argument. Any text the user adds is a steer ("just the infra stuff"), not a scope they have to supply.
 
 ## Non-negotiables
 
 - **This skill writes nothing itself.** Every write goes through whatever owns that destination.
 - **Never restate another skill's rules.** Name it and hand over. Two copies drift.
-- **Record the durable admission, never the event.** Memolok is a witness: it records admissions about
-  the world, not replicas of it. An entry already false when written is worse than no entry.
-- **Never tidy reasoning.** See *Honesty over coherence* below. This is the one that looks like good
-  writing and is actually the failure the ledger exists to prevent.
-- **The output is writes plus an explicit dropped list.** A run that ends in a summary has failed,
-  however good the summary is.
-- Scope is what is in this context now. No watermark, nothing to look up — **this skill persists
-  nothing about itself.**
+- **Record the durable admission, never the event.** Memolok is a witness: it records admissions about the world, not replicas of it. An entry already false when written is worse than no entry.
+- **Never tidy reasoning.** See *Honesty over coherence* below. This is the one that looks like good writing and is actually the failure the ledger exists to prevent.
+- **The output is writes plus an explicit dropped list.** A run that ends in a summary has failed, however good the summary is.
+- Scope is what is in this context now. No watermark, nothing to look up — **this skill persists nothing about itself.**
 - Say "captured" only after a write succeeded.
 
 ## The core: extraction, not triage
 
 The question is never *is this worth keeping?* It is *what durable thing is this evidence of?*
 
-`alice wasn't in adm` is disqualified for being true for ten minutes, not for being unimportant.
-Behind it sits `/var/log/mail.log` is `root:adm 0640` — true before the session, during it, and after.
-The fix did not create that fact; it revealed one. The event is bait. Ask what it is bait for.
+`alice wasn't in adm` is disqualified for being true for ten minutes, not for being unimportant. Behind it sits `/var/log/mail.log` is `root:adm 0640` — true before the session, during it, and after. The fix did not create that fact; it revealed one. The event is bait. Ask what it is bait for.
 
 Two questions, in order:
 
 1. **What is the durable fact behind this?** No residue → nothing to record.
 2. **Is it already recoverable from something that outlives the session — and at what cost?**
 
-The second is a cost, not a yes/no, because the two kinds of content sit at opposite ends of the four
-scopes' own ordering (`scopes-and-bridging.md` in the method) — the fish sealed at t₀ is the least
-dynamic thing in the model, the world the most.
+The second is a cost, not a yes/no, because the two kinds of content sit at opposite ends of the four scopes' own ordering (`scopes-and-bridging.md` in the method) — the fish sealed at t₀ is the least dynamic thing in the model, the world the most.
 
 | | **Observed** | **Reasoned** |
 | --- | --- | --- |
@@ -73,25 +54,13 @@ dynamic thing in the model, the world the most.
 | When noticed | Next time someone needs it | **Never** — the team simply re-decides |
 | Bias | Record when a persisting artifact *depends* on it | **Record.** There is no cheap path back — though alternatives weighed about how to carry out work leave nothing behind but the result, and need none |
 
-The asymmetry is the point. Findings look like the cheap class. A probe of our own system is not a
-world fact: it fails the almanac's test, *would it stop if this ledger decided to stop doing it*, so
-it cites that record, or is a wake if it bears on that record's expectation. Reasoned content never
-looks like a finding — it is merely what the session was talking about — and it is the half with no
-recovery path at all.
+The asymmetry is the point. Findings look like the cheap class. A probe of our own system is not a world fact: it fails the almanac's test, *would it stop if this ledger decided to stop doing it*, so it cites that record, or is a wake if it bears on that record's expectation. Reasoned content never looks like a finding — it is merely what the session was talking about — and it is the half with no recovery path at all.
 
-> **A wake is neither column, and question 2 will throw one away.** When what you are holding bears on
-> an expectation a sealed record already made, its value is not the fact and not the reasoning — it is
-> that *someone assessed it, at a time, against a prediction made before the outcome was known*.
-> `observedAt` is stamped by the server and cannot be backdated, so *"we could just re-run that
-> command"* is not a reason to drop it: re-running it next month produces a **different** datum, not
-> this one. Skip question 2 and route it.
+> **A wake is neither column, and question 2 will throw one away.** When what you are holding bears on an expectation a sealed record already made, its value is not the fact and not the reasoning — it is that *someone assessed it, at a time, against a prediction made before the outcome was known*. `observedAt` is stamped by the server and cannot be backdated, so *"we could just re-run that command"* is not a reason to drop it: re-running it next month produces a **different** datum, not this one. Skip question 2 and route it.
 
-A decision that earns a record, settled in conversation and never recorded, does not stay neutral.
-It becomes a **phantom decision**: everyone glides over it as though it were resolved, and nobody
-can say who decided or why. Preventing that is the entire product.
+A decision that earns a record, settled in conversation and never recorded, does not stay neutral. It becomes a **phantom decision**: everyone glides over it as though it were resolved, and nobody can say who decided or why. Preventing that is the entire product.
 
-**Discard** is what remains when there is no residue, or the residue is already written somewhere that
-persists. It is never a verdict that something was not worth much.
+**Discard** is what remains when there is no residue, or the residue is already written somewhere that persists. It is never a verdict that something was not worth much.
 
 | Observed in session | Residue | Verdict |
 | --- | --- | --- |
@@ -103,14 +72,9 @@ persists. It is never a verdict that something was not worth much.
 
 ## Honesty over coherence
 
-When you extract reasoned content, you will be tempted to write the *clean* version — the reasoning as
-it would have gone if everybody had been sharp, with the false starts filed off and the conclusion
-made to look inevitable. Resist it completely.
+When you extract reasoned content, you will be tempted to write the *clean* version — the reasoning as it would have gone if everybody had been sharp, with the false starts filed off and the conclusion made to look inevitable. Resist it completely.
 
-A ledger's value is not correctness, it is honesty. A record showing a well-reasoned decision that
-failed teaches something; a record smoothed to look prescient teaches nothing, because it is fiction.
-The deliberation was messy, some options were rejected for unflattering reasons, and some of it was
-guesswork — **that is the content**, not noise to be cleaned up on the way to storage.
+A ledger's value is not correctness, it is honesty. A record showing a well-reasoned decision that failed teaches something; a record smoothed to look prescient teaches nothing, because it is fiction. The deliberation was messy, some options were rejected for unflattering reasons, and some of it was guesswork — **that is the content**, not noise to be cleaned up on the way to storage.
 
 Concretely, when persisting a decision this session produced:
 
@@ -123,72 +87,38 @@ The user is writing for their future self, who needs to know what they were afra
 
 ## Where to look
 
-Three sweeps. Not a procedure to execute in order — two are the places durable content comes from,
-matching the two rows above; the third is the one they structurally cannot reach.
+Three sweeps. Not a procedure to execute in order — two are the places durable content comes from, matching the two rows above; the third is the one they structurally cannot reach.
 
-**Tool trace → mostly observed.** Walk the non-trivial commands run and files read. For each: did its
-*finding* land anywhere durable, or was it reported in prose and abandoned? Unpushed commits,
-permission surprises, version drift and tooling gaps hide here.
+**Tool trace → mostly observed.** Walk the non-trivial commands run and files read. For each: did its *finding* land anywhere durable, or was it reported in prose and abandoned? Unpushed commits, permission surprises, version drift and tooling gaps hide here.
 
-**User utterances → mostly reasoned.** Walk what the user said that exists nowhere else. Constraints,
-preferences, corrections, options ruled out, calls made in passing, things decided while talking about
-something else.
+**User utterances → mostly reasoned.** Walk what the user said that exists nowhere else. Constraints, preferences, corrections, options ruled out, calls made in passing, things decided while talking about something else.
 
-The mapping is not clean — reading an implementation produces reasoned conclusions, and users report
-observations. Use both sweeps on everything.
+The mapping is not clean — reading an implementation produces reasoned conclusions, and users report observations. Use both sweeps on everything.
 
-**Sealed records → wakes.** The other two sweeps sort what the session *produced*. This one sorts what
-the session **came to know**, which is a wider thing, and no amount of walking the trace will surface
-it: a wake is not something you noticed but a *join* between something you now know and a commitment
-made before you knew it. Half the candidate lives on the ledger, and that half is why neither other
-sweep can reach it.
+**Sealed records → wakes.** The other two sweeps sort what the session *produced*. This one sorts what the session **came to know**, which is a wider thing, and no amount of walking the trace will surface it: a wake is not something you noticed but a *join* between something you now know and a commitment made before you knew it. Half the candidate lives on the ledger, and that half is why neither other sweep can reach it.
 
-Run it from the ledger side, not the session side — and resist the two narrowings, because both are
-wrong and both feel like common sense.
+Run it from the ledger side, not the session side — and resist the two narrowings, because both are wrong and both feel like common sense.
 
-**Any sealed record you are holding evidence about is eligible.** Records read for *background* are
-the easiest to miss, because consulting one feels like taking input rather than like looking at a
-subject.
+**Any sealed record you are holding evidence about is eligible.** Records read for *background* are the easiest to miss, because consulting one feels like taking input rather than like looking at a subject.
 
-**The outcome need not be anything this session caused.** A commitment realized months ago and never
-assessed still has no wake on the ledger, and that is exactly what this sweep is for — the wake is the
-assessment, not the event. *"Nothing we did today bears on this"* is the wrong question — the right
-one is *"Do I now know something about this that nobody has written down?"*
+**The outcome need not be anything this session caused.** A commitment realized months ago and never assessed still has no wake on the ledger, and that is exactly what this sweep is for — the wake is the assessment, not the event. *"Nothing we did today bears on this"* is the wrong question — the right one is *"Do I now know something about this that nobody has written down?"*
 
-This is **eligibility, not an inventory.** You are not being asked to walk the whole ledger; that
-instruction would be ignored, and rightly. The cheaper thing is to stop filtering: when you find
-yourself holding something that bears on a commitment, **recognise it as a candidate rather than
-discarding it as out of scope.** Where a record names its own test, notice when that test happens to
-run today, for whatever unrelated reason.
+This is **eligibility, not an inventory.** You are not being asked to walk the whole ledger; that instruction would be ignored, and rightly. The cheaper thing is to stop filtering: when you find yourself holding something that bears on a commitment, **recognise it as a candidate rather than discarding it as out of scope.** Where a record names its own test, notice when that test happens to run today, for whatever unrelated reason.
 
-Reading a record to do this is fine. The *"nothing to look up"* rule above is about this skill keeping
-no state of its own between runs; it does not stop you calling `get_MDR_learning_delta` on any
-record you have reason to think you can now speak to — it lists what the record promised and what has
-been observed against it.
+Reading a record to do this is fine. The *"nothing to look up"* rule above is about this skill keeping no state of its own between runs; it does not stop you calling `get_MDR_learning_delta` on any record you have reason to think you can now speak to — it lists what the record promised and what has been observed against it.
 
 Four traps to look out for:
 
-- **A met expectation looks like nothing at all.** *"The thing we predicted happened"* reads as a
-  non-event and produces no sense of discovery. Violated ones announce themselves; satisfied ones are
-  silent — but a ledger that only ever records disappointments is not measuring forecasting, it is a
-  filter for grievances.
-- **The record you didn't open.** Evidence about an old commitment arrives disguised as an unrelated
-  observation. It bears on a record you're just driving by, which is exactly why nothing prompts you
-  to make the connection.
-- **The obvious phrasing is not a wake.** *"Four of these five expectations are still untested"*
-  belongs in your closing report **and** means four candidates you have not yet checked. Writing the
-  sentence is not the same as running the join.
-- **A record's own test can be too narrow.** Running it and finding it passes while something adjacent
-  is wrong is itself the observation worth recording — more useful than the pass.
+- **A met expectation looks like nothing at all.** *"The thing we predicted happened"* reads as a non-event and produces no sense of discovery. Violated ones announce themselves; satisfied ones are silent — but a ledger that only ever records disappointments is not measuring forecasting, it is a filter for grievances.
+- **The record you didn't open.** Evidence about an old commitment arrives disguised as an unrelated observation. It bears on a record you're just driving by, which is exactly why nothing prompts you to make the connection.
+- **The obvious phrasing is not a wake.** *"Four of these five expectations are still untested"* belongs in your closing report **and** means four candidates you have not yet checked. Writing the sentence is not the same as running the join.
+- **A record's own test can be too narrow.** Running it and finding it passes while something adjacent is wrong is itself the observation worth recording — more useful than the pass.
 
-If you find nothing, say so and move on. That's as legitimate a result as any, and it is different
-from not having looked.
+If you find nothing, say so and move on. That's as legitimate a result as any, and it is different from not having looked.
 
 ## Routing
 
-The method's four scopes are the routing question: **is this about the fish, the ledger, the project,
-or the world?** Each destination is owned by something else. Hand over; do
-not reimplement.
+The method's four scopes are the routing question: **is this about the fish, the ledger, the project, or the world?** Each destination is owned by something else. Hand over; do not reimplement.
 
 **Ledger — MDR and MDL scope.** Sealed reasoning and the epistemic substrate around it.
 
@@ -201,8 +131,7 @@ not reimplement.
 | What actually happened after a sealed record | Observed outcome | **`record-outcome`** |
 | Worth keeping, nobody owes it anything | Scratchpad | **`manage-notes`** |
 
-**Project scope — the deliverable.** The repo and everything in it. The ledger is not a substitute for
-it, and a fact the project needs belongs *in the project*.
+**Project scope — the deliverable.** The repo and everything in it. The ledger is not a substitute for it, and a fact the project needs belongs *in the project*.
 
 | The item is | Destination |
 | --- | --- |
@@ -213,11 +142,7 @@ it, and a fact the project needs belongs *in the project*.
 | A draft record's `MDRh…` you remember writing into a file or a message this session — think back, don't search | Load **`memolok-citations`** and decide how to fix it |
 | The cold-start signal, offered this session and never answered | The project — **`memolok-method`** invariant 3 owns it |
 
-**An ignored offer is not a declined one.** Invariant 3 suppresses *repeating* the offer during the
-session — but the wrap-up is intended as a recap for the user, too. If they explicitly declined your
-offer, don't repeat it now — but if they just ignored it, raise it one last time during the wrap-up,
-as a soft reminder. If there are multiple wrap-up calls during the session, only remind them during
-the first one.
+**An ignored offer is not a declined one.** Invariant 3 suppresses *repeating* the offer during the session — but the wrap-up is intended as a recap for the user, too. If they explicitly declined your offer, don't repeat it now — but if they just ignored it, raise it one last time during the wrap-up, as a soft reminder. If there are multiple wrap-up calls during the session, only remind them during the first one.
 
 **Outside both.** Neither scope covers these; be honest about that rather than forcing them in.
 
@@ -228,59 +153,41 @@ the first one.
 | Anything another connected tool owns | That tool | Its rules, not yours |
 | No residue, or the residue is already written | **Nowhere** | Say so in the dropped list |
 
-**Destinations are not exclusive.** One item may legitimately go to two places — a Memolok fault worth
-reporting may also be worth a matter on the user's own ledger, and they serve different readers.
-Propose both rather than picking.
+**Destinations are not exclusive.** One item may legitimately go to two places — a Memolok fault worth reporting may also be worth a matter on the user's own ledger, and they serve different readers. Propose both rather than picking.
 
 Three calls that are easy to get wrong:
 
-- **Project over memory** when anyone but you benefits — **and the project outlives the session**.
-  Memory helps you; a file in the repo helps whoever is on call at 3am. Prefer the file whenever both
-  would work. Where the working directory is discarded when the session ends, that inverts: the file
-  is the half that does not survive, and routing the session's most durable material into it puts it
-  in the one place guaranteed to lose it.
-- **World fact over scratchpad** when a decision might rest on it — the method's scratchpad rule —
-  unless it is a consequence of this ledger's own decisions, which cites the record instead.
-- **Memolok friction is easy to miss, because much of it never errors.** `send-feedback` treats the end
-  of a working session as its batching moment, so this is a handoff it expects, and it owns its own
-  preview rules.
+- **Project over memory** when anyone but you benefits — **and the project outlives the session**. Memory helps you; a file in the repo helps whoever is on call at 3am. Prefer the file whenever both would work. Where the working directory is discarded when the session ends, that inverts: the file is the half that does not survive, and routing the session's most durable material into it puts it in the one place guaranteed to lose it.
+- **World fact over scratchpad** when a decision might rest on it — the method's scratchpad rule — unless it is a consequence of this ledger's own decisions, which cites the record instead.
+- **Memolok friction is easy to miss, because much of it never errors.** `send-feedback` treats the end of a working session as its batching moment, so this is a handoff it expects, and it owns its own preview rules.
 
 ## Workflow
 
 ### 1. Sweep
 
-All three sweeps, silently. Do not narrate the sweep. The third is the one that gets skipped,
-because the first two feel like they covered everything.
+All three sweeps, silently. Do not narrate the sweep. The third is the one that gets skipped, because the first two feel like they covered everything.
 
 ### 2. Extract
 
-Per candidate, run the two questions — except for wake candidates, where question 2 does not apply.
-Write down the *residue*, not what happened. If you cannot state a durable fact, there isn't one — a
-legitimate result, not a failure to try harder.
+Per candidate, run the two questions — except for wake candidates, where question 2 does not apply. Write down the *residue*, not what happened. If you cannot state a durable fact, there isn't one — a legitimate result, not a failure to try harder.
 
 ### 3. Propose, once
 
-The whole list in one pass — item, residue, proposed destination. One batched proposal, not per-item
-interrogation: the user is finishing up, and twenty questions is why they will not run this again.
+The whole list in one pass — item, residue, proposed destination. One batched proposal, not per-item interrogation: the user is finishing up, and twenty questions is why they will not run this again.
 
-> Six things here that live nowhere. Proposing: two world facts (`mail.log` permissions, model tag
-> drift), one matter (no linter on the web service), one runbook edit, one memory. Dropping two —
-> `redeploy.bash` assumptions (in the script) and the container timing (nothing depends on it).
-> Change anything?
+> Six things here that live nowhere. Proposing: two world facts (`mail.log` permissions, model tag drift), one matter (no linter on the web service), one runbook edit, one memory. Dropping two — `redeploy.bash` assumptions (in the script) and the container timing (nothing depends on it). Change anything?
 
 Let them add, remove and re-route. They will keep things you dropped; that is the safety net working.
 
 ### 4. Write
 
-Through the owning skill or tool, one at a time. If a write fails, say which and stop — never claim a
-capture you did not get.
+Through the owning skill or tool, one at a time. If a write fails, say which and stop — never claim a capture you did not get.
 
 ### 5. Report
 
 Writes, then drops. Nothing else.
 
-> Captured: MDR-14, two world facts, one matter. Runbook updated with the `adm` requirement.
-> Dropped, deliberately: `redeploy.bash` assumptions, container start timing.
+> Captured: MDR-14, two world facts, one matter. Runbook updated with the `adm` requirement. Dropped, deliberately: `redeploy.bash` assumptions, container start timing.
 
 ## Failure modes
 
@@ -295,26 +202,17 @@ Writes, then drops. Nothing else.
 | **Rule duplication** | Being helpful about another skill's mechanics | This file explains how `send-feedback` previews |
 | **Interrogation** | Routing item by item | The user stops running the skill |
 
-Against almanac spam the guard is: **record the premises and the gaps, not the work — if it is
-derivable from the diff, it belongs in the commit message.** Apply it to observed content only. Never
-to reasoned content that earns a record, which is cheap-looking and expensive to lose.
+Against almanac spam the guard is: **record the premises and the gaps, not the work — if it is derivable from the diff, it belongs in the commit message.** Apply it to observed content only. Never to reasoned content that earns a record, which is cheap-looking and expensive to lose.
 
 ## Limits
 
-- **Compaction is out of scope.** On a session long enough to have been summarized, some sweep material
-  is already gone and this skill cannot tell. Expect it to underperform on exactly the long sessions
-  where it is worth the most.
-- **Nothing makes this fire.** It runs when someone types it. The most common failure by count will be
-  sessions where it would have helped and nobody ran it.
-- Running it twice in a session is fine and cheap — the second pass sees the first pass's writes in
-  context and simply finds less.
+- **Compaction is out of scope.** On a session long enough to have been summarized, some sweep material is already gone and this skill cannot tell. Expect it to underperform on exactly the long sessions where it is worth the most.
+- **Nothing makes this fire.** It runs when someone types it. The most common failure by count will be sessions where it would have helped and nobody ran it.
+- Running it twice in a session is fine and cheap — the second pass sees the first pass's writes in context and simply finds less.
 
 ## Tips
 
-- A session with nothing to persist is normal. Say so in one line and stop; never manufacture
-  candidates to look useful.
+- A session with nothing to persist is normal. Say so in one line and stop; never manufacture candidates to look useful.
 - Run it mid-session too. The trigger is "this would be lost", not "we are finishing".
-- If the user starts reasoning about an item rather than routing it, that is a decision emerging —
-  offer **`record-decision`** rather than filing their reasoning as a note.
-- Working solo is not an exemption. A solo project is a team of one across time, and the future member
-  of that team has no access to this context at all.
+- If the user starts reasoning about an item rather than routing it, that is a decision emerging — offer **`record-decision`** rather than filing their reasoning as a note.
+- Working solo is not an exemption. A solo project is a team of one across time, and the future member of that team has no access to this context at all.

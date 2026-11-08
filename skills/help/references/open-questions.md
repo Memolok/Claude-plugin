@@ -1,53 +1,31 @@
 # What a decision deliberately does not settle
 
-Alongside what a decision commits to, it can record what it explicitly leaves unsettled. This is
-**negative epistemic space**: naming the gap rather than pretending there is not one.
+Alongside what a decision commits to, it can record what it explicitly leaves unsettled. This is **negative epistemic space**: naming the gap rather than pretending there is not one.
 
-*"We have not validated vendor B's service levels under peak load; we are proceeding on vendor A's
-published figures only."*
+*"We have not validated vendor B's service levels under peak load; we are proceeding on vendor A's published figures only."*
 
 ## What it is not
 
-It is not an argument still being weighed — that belongs with the deliberation. It is not a bet about the
-chosen path — that belongs with the expected outcomes. And it is not a substitute for honest reasoning; a
-record cannot defer the actual decision it exists to make. Nor does it comfortably hold what the very
-next piece of work waits on: your agent will point that out and offer to settle it now, though
-deferring it stays your call.
+It is not an argument still being weighed — that belongs with the deliberation. It is not a bet about the chosen path — that belongs with the expected outcomes. And it is not a substitute for honest reasoning; a record cannot defer the actual decision it exists to make. Nor does it comfortably hold what the very next piece of work waits on: your agent will point that out and offer to settle it now, though deferring it stays your call.
 
-It is a boundary marker: this record settles *this*, and consciously not *that*. The *that* is always
-something a reader could have taken this record to settle. How some other decision will go later is
-not a gap in this one; if it matters, it is a question of its own.
+It is a boundary marker: this record settles *this*, and consciously not *that*. The *that* is always something a reader could have taken this record to settle. How some other decision will go later is not a gap in this one; if it matters, it is a question of its own.
 
 ## It never blocks commitment
 
-This is the rule people most often get backwards. An acknowledged gap is not an unfinished task and not a
-reason to keep a decision in draft. A correctly scoped commitment with three honest deferrals beats a
-sprawling one that tried to settle everything and committed to nothing.
+This is the rule people most often get backwards. An acknowledged gap is not an unfinished task and not a reason to keep a decision in draft. A correctly scoped commitment with three honest deferrals beats a sprawling one that tried to settle everything and committed to nothing.
 
-If something this decision could be taken to settle stays unsettled, name it and proceed. Waiting until
-nothing is unsettled means waiting forever, and the waiting is not free — the alternative to deciding
-with acknowledged gaps is usually deciding with unacknowledged ones.
+If something this decision could be taken to settle stays unsettled, name it and proceed. Waiting until nothing is unsettled means waiting forever, and the waiting is not free — the alternative to deciding with acknowledged gaps is usually deciding with unacknowledged ones.
 
 ## How one gets settled
 
-Not by editing the original record, and not by attaching later evidence to it. A deferral is settled when
-a **later committed decision** covers it, and the ledger records the forward link from the question to the
-decision that answered it.
+Not by editing the original record, and not by attaching later evidence to it. A deferral is settled when a **later committed decision** covers it, and the ledger records the forward link from the question to the decision that answered it.
 
-The covering decision names the question while it is still being drafted, and the link takes effect
-when it commits; neither record's wording changes. Once both are sealed the link is what it is — a
-later reader who notices that one decision answered another's question has found something worth a
-new decision, not a link to add.
+The covering decision names the question while it is still being drafted, and the link takes effect when it commits; neither record's wording changes. Once both are sealed the link is what it is — a later reader who notices that one decision answered another's question has found something worth a new decision, not a link to add.
 
-Deferrals on a rejected decision work differently: they are archaeology, not live topology. They tell you
-what *would* have been left open had you gone ahead, which is genuinely useful when a topic comes back
-around — *yes, we discussed this, and here is exactly what we did not discuss* — but they are not
-questions waiting to be answered.
+Deferrals on a rejected decision work differently: they are archaeology, not live topology. They tell you what *would* have been left open had you gone ahead, which is genuinely useful when a topic comes back around — *yes, we discussed this, and here is exactly what we did not discuss* — but they are not questions waiting to be answered.
 
-> **Not built yet.** There is no query that lists every unsettled deferral across a ledger. The links are
-> recorded faithfully; assembling the picture means reading the records.
+> **Not built yet.** There is no query that lists every unsettled deferral across a ledger. The links are recorded faithfully; assembling the picture means reading the records.
 
 ---
 
-When they want to name one on a decision: **`record-decision`**. When a later decision settles one:
-**`revise-decision`**.
+When they want to name one on a decision: **`record-decision`**. When a later decision settles one: **`revise-decision`**.

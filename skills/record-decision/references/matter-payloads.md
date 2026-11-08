@@ -4,9 +4,7 @@
 
 ### 1. `register_matter`
 
-The source actor's verbatim words. No sharpening at this step. Name who raised it in `raisedBy`
-and who wrote the words in `authoredBy`, as *Who held each role* in the method's `facilitation.md`
-has it: this call is the only moment who raised it is known.
+The source actor's verbatim words. No sharpening at this step. Name who raised it in `raisedBy` and who wrote the words in `authoredBy`, as *Who held each role* in the method's `facilitation.md` has it: this call is the only moment who raised it is known.
 
 ```json
 {
@@ -18,8 +16,7 @@ has it: this call is the only moment who raised it is known.
 }
 ```
 
-Returns `{ id, mdlGuid, createdAt, body }`. Keep the `id` — the next call needs it. If it is lost,
-`discover_matters(untaken: true)` finds it again.
+Returns `{ id, mdlGuid, createdAt, body }`. Keep the `id` — the next call needs it. If it is lost, `discover_matters(untaken: true)` finds it again.
 
 ### 2. `create_analysis`
 
@@ -39,15 +36,11 @@ Returns `{ id, mdlGuid, createdAt, body }`. Keep the `id` — the next call need
 }
 ```
 
-Returns `{ analysis, mdr }`, each an acknowledgement rather than the entry. The record is at **New**
-with `mdrNumber: null`. Read `mdr.mdrHandle` from the response.
+Returns `{ analysis, mdr }`, each an acknowledgement rather than the entry. The record is at **New** with `mdrNumber: null`. Read `mdr.mdrHandle` from the response.
 
-`motivatedBy` is a **list** of `mt_`, `wf_` and `oo_` ids in any mix. Pass every input this reasoning
-took up — three reports of one fault go in one call, not three. The analysis concludes here, and
-`analysis.references` comes back with each input dated and `late: false`.
+`motivatedBy` is a **list** of `mt_`, `wf_` and `oo_` ids in any mix. Pass every input this reasoning took up — three reports of one fault go in one call, not three. The analysis concludes here, and `analysis.references` comes back with each input dated and `late: false`.
 
-**The `claimDescription` here is the sharpened need, agreed with the user** — not a restatement of the
-matter, and not the mechanism you expect to choose.
+**The `claimDescription` here is the sharpened need, agreed with the user** — not a restatement of the matter, and not the mechanism you expect to choose.
 
 ### 3. Open deliberation
 
@@ -77,13 +70,11 @@ Same `register_matter`, then:
 }
 ```
 
-Returns `{ analysis }` with no `mdr`. Nothing is written on the matter itself — the concluded
-analysis producing no record *is* the account.
+Returns `{ analysis }` with no `mdr`. Nothing is written on the matter itself — the concluded analysis producing no record *is* the account.
 
 Omit `claimDescription` entirely — sending it with `producesDecision: false` is incoherent.
 
-The rationale must actually explain **why no decision is warranted**. A dismissed matter with a
-real rationale is useful evidence; inputs that go nowhere are data, not noise.
+The rationale must actually explain **why no decision is warranted**. A dismissed matter with a real rationale is useful evidence; inputs that go nowhere are data, not noise.
 
 ## Path B is not the same as a Rejected record
 

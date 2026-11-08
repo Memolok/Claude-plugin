@@ -1,20 +1,13 @@
 ---
 name: record-decision
 description: >-
-  Record a decision on a Memolok ledger: the need, the alternatives weighed, and the reasoning
-  behind the choice. Use when the user makes or describes a choice between real alternatives that
-  will outlast the task, however small; proposes adopting one ("we should use X"); reports a problem
-  they mean to act on now; says "record this" or "save this decision"; or acts on a world fact or
-  recorded outcome the ledger already holds. It changes something the ledger may already
-  have decided → `revise-decision`; written to the ledger and ready to make final →
-  `commit-decision`; they want to be questioned → `grill-me`.
+  Record a decision on a Memolok ledger: the need, the alternatives weighed, and the reasoning behind the choice. Use when the user makes or describes a choice between real alternatives that will outlast the task, however small; proposes adopting one ("we should use X"); reports a problem they mean to act on now; says "record this" or "save this decision"; or acts on a world fact or recorded outcome the ledger already holds. It changes something the ledger may already have decided → `revise-decision`; written to the ledger and ready to make final → `commit-decision`; they want to be questioned → `grill-me`.
 argument-hint: "<the decision, problem, or choice>"
 ---
 
 # /memolok:record-decision — Record a decision
 
-Produces a Memolok Decision Record persisted at **Deliberating**, with the head Claim, the options the
-user actually weighed, the reasoning, a Verdict, expected outcomes, and any acknowledged deferrals.
+Produces a Memolok Decision Record persisted at **Deliberating**, with the head Claim, the options the user actually weighed, the reasoning, a Verdict, expected outcomes, and any acknowledged deferrals.
 
 ## Usage
 
@@ -31,9 +24,7 @@ Examples:
 
 ## Step 0 — Load the method
 
-Load the **`memolok-method`** skill and its `facilitation.md` reference before any write. Between them
-they carry the fish model, the Decision Transaction Principle, the lifecycle gates, and facilitation
-Rules A–I.
+Load the **`memolok-method`** skill and its `facilitation.md` reference before any write. Between them they carry the fish model, the Decision Transaction Principle, the lifecycle gates, and facilitation Rules A–I.
 
 ## Non-negotiables
 
@@ -43,33 +34,21 @@ Rules A–I.
 - Say "captured" only after a write succeeded — before that, say *drafting* or *got it*
 - Cite `MDR-{n}` once admitted (in the form **`memolok-citations`** gives for where it is written), `MDRh{handle}` or a head Claim paraphrase while staged (only in chat and in session notes nobody commits or sends); never a bare handle (Rule F)
 - Check `retractable` before proposing an uncommit
-- Writing an identifier into anything that outlasts the session, this record's own prose included
-  → load the **`memolok-citations`** skill first; a committed, sent or ledger-held record reference
-  has to be anchored, the user told first what that costs, and cannot be written before t₀ at all
+- Writing an identifier into anything that outlasts the session, this record's own prose included → load the **`memolok-citations`** skill first; a committed, sent or ledger-held record reference has to be anchored, the user told first what that costs, and cannot be written before t₀ at all
 
 ## Workflow
 
 ### 1. Establish the ledger
 
-Per the method's invariants. `get_MDL` gives the ledger's stated purpose, which helps sharpen the Claim
-in the user's own domain language; it is background, never a test. A missing ledger is created with a
-title and a one-line drafted purpose, taking a "skip" without asking twice — never delay the record
-for it.
+Per the method's invariants. `get_MDL` gives the ledger's stated purpose, which helps sharpen the Claim in the user's own domain language; it is background, never a test. A missing ledger is created with a title and a one-line drafted purpose, taking a "skip" without asking twice — never delay the record for it.
 
-If there may be parked bait, `discover_matters(untaken: true)` shows what nobody has picked up, with
-enough of each to tell whether it is the same thing. If one matches what the user just raised, take
-that matter up rather than registering a duplicate — and if several do, take up all of them in one
-analysis.
+If there may be parked bait, `discover_matters(untaken: true)` shows what nobody has picked up, with enough of each to tell whether it is the same thing. If one matches what the user just raised, take that matter up rather than registering a duplicate — and if several do, take up all of them in one analysis.
 
-The same goes for the almanac. If what prompted this is a fact or an outcome already admitted —
-`discover_world_facts`, `discover_observed_outcomes` — take that entry up **as itself**. There is no inbox
-for the almanac and no "unused" state to scan for, so this is a lookup you do when the conversation
-points at one, not a sweep.
+The same goes for the almanac. If what prompted this is a fact or an outcome already admitted — `discover_world_facts`, `discover_observed_outcomes` — take that entry up **as itself**. There is no inbox for the almanac and no "unused" state to scan for, so this is a lookup you do when the conversation points at one, not a sweep.
 
 ### 2. Sort the intake
 
-**This is the step that most often goes wrong.** Do not skip it, and do not let the phrasing of the
-user's opening line decide it for you.
+**This is the step that most often goes wrong.** Do not skip it, and do not let the phrasing of the user's opening line decide it for you.
 
 | What the user brought | It is | Route |
 | --- | --- | --- |
@@ -81,123 +60,73 @@ user's opening line decide it for you.
 | Material worth keeping that asserts nothing and asks nothing | **Scratchpad** | Keep it via `manage-notes`; there is nothing to decide |
 | A change to a decision already sealed on the ledger | **a revision** | Route to `revise-decision`; a staged one is edited here, at step 5 |
 
-The World Fact and wake rows are a **detour, not an exit.** Admit the fact or record the outcome, then
-come back: if it calls for a decision, that entry is the analysis input — pass its id in `motivatedBy`.
-Do **not** register a Matter restating it. That records neither the entry as the input nor that
-anything connected the two, and Matters are immutable, so it cannot be repaired afterwards. The
-scratchpad row is an exit: nothing about it calls for a record. So is the revision row: a new record
-beside the sealed one would stand with no amend or supersede edge to it.
+The World Fact and wake rows are a **detour, not an exit.** Admit the fact or record the outcome, then come back: if it calls for a decision, that entry is the analysis input — pass its id in `motivatedBy`. Do **not** register a Matter restating it. That records neither the entry as the input nor that anything connected the two, and Matters are immutable, so it cannot be repaired afterwards. The scratchpad row is an exit: nothing about it calls for a record. So is the revision row: a new record beside the sealed one would stand with no amend or supersede edge to it.
 
-**Not every choice earns a record.** Alternatives weighed about how to carry out work leave nothing
-behind but the result: no record. A small choice whose result lasts — a convention, a rule a
-document will state — earns one, and that document then cites it.
+**Not every choice earns a record.** Alternatives weighed about how to carry out work leave nothing behind but the result: no record. A small choice whose result lasts — a convention, a rule a document will state — earns one, and that document then cites it.
 
-**The discriminator is not who is speaking — it is whether a future observation could settle it.**
-*"P99 auth latency must stay under 50ms"* is a Claim. *"Login takes forever"* is bait, even when the
-user saying it is the only engineer on the project. Being solo does not convert a symptom into a need.
+**The discriminator is not who is speaking — it is whether a future observation could settle it.** *"P99 auth latency must stay under 50ms"* is a Claim. *"Login takes forever"* is bait, even when the user saying it is the only engineer on the project. Being solo does not convert a symptom into a need.
 
-**When it is ambiguous, ask — one question, then proceed.** Something like *"is that your own read of
-what needs to be true, or is it what someone reported was wrong?"* Guessing is recoverable here: a
-matter you registered can be taken up later, and an analysis can take up an input of any kind it did
-not start with. What you cannot recover is the raiser's wording once you have sharpened it away.
+**When it is ambiguous, ask — one question, then proceed.** Something like *"is that your own read of what needs to be true, or is it what someone reported was wrong?"* Guessing is recoverable here: a matter you registered can be taken up later, and an analysis can take up an input of any kind it did not start with. What you cannot recover is the raiser's wording once you have sharpened it away.
 
-**If the user only wants to park it** — they noticed a problem but do not want to leave what they are
-doing — that is the `save-matter` skill. Do not drag them through a decision they did not ask for.
+**If the user only wants to park it** — they noticed a problem but do not want to leave what they are doing — that is the `save-matter` skill. Do not drag them through a decision they did not ask for.
 
 Worked examples of ambiguous intakes: `references/intake-fork.md`.
 
 ### 3a. Bait branch
 
-1. `register_matter` with the stakeholder's words **verbatim**, and who raised it in `raisedBy`. Do
-   not sharpen, summarize, or translate into a target — the raw input is the point, and matters are
-   immutable. An already-admitted world fact or observed outcome skips this step and goes into step 3
-   as itself.
-2. Sharpen the need **with the user**, not for them. The head Claim is a falsifiable objective, and it
-   must not name the mechanism you are about to choose (Rule G).
-3. `create_analysis` with `producesDecision: true` and the sharpened `claimDescription`. Pass every
-   input this reasoning took up in `motivatedBy` — not just the one that prompted the conversation,
-   and in whatever mix of matters, world facts and observed outcomes actually applies. This mints
-   the record at **New** and concludes the analysis in the same call.
+1. `register_matter` with the stakeholder's words **verbatim**, and who raised it in `raisedBy`. Do not sharpen, summarize, or translate into a target — the raw input is the point, and matters are immutable. An already-admitted world fact or observed outcome skips this step and goes into step 3 as itself.
+2. Sharpen the need **with the user**, not for them. The head Claim is a falsifiable objective, and it must not name the mechanism you are about to choose (Rule G).
+3. `create_analysis` with `producesDecision: true` and the sharpened `claimDescription`. Pass every input this reasoning took up in `motivatedBy` — not just the one that prompted the conversation, and in whatever mix of matters, world facts and observed outcomes actually applies. This mints the record at **New** and concludes the analysis in the same call.
 4. `transition_MDR_status` to **Deliberating**, then continue at step 4.
 
-If sharpening shows there is no decision to make, that is **Path B**: `create_analysis` with
-`producesDecision: false` and a rationale explaining why. Confirm with the user first. No record is
-minted, and that is an honest outcome, not a failure.
+If sharpening shows there is no decision to make, that is **Path B**: `create_analysis` with `producesDecision: false` and a rationale explaining why. Confirm with the user first. No record is minted, and that is an honest outcome, not a failure.
 
-Payloads: `references/matter-payloads.md`. How a matter comes to rest, and what is not yet
-recordable: `references/matter-closure.md`.
+Payloads: `references/matter-payloads.md`. How a matter comes to rest, and what is not yet recordable: `references/matter-closure.md`.
 
 ### 3b. Expert branch
 
-`create_MDR` with `claimDescription` and `status: "Deliberating"` — the default, even when you already
-have most of the body. Reserve `Accepted` or `Rejected` at creation for the narrow case in Rule C
-where the user has already stated commitment in their own words.
+`create_MDR` with `claimDescription` and `status: "Deliberating"` — the default, even when you already have most of the body. Reserve `Accepted` or `Rejected` at creation for the narrow case in Rule C where the user has already stated commitment in their own words.
 
 Payloads: `references/expert-payloads.md`.
 
 ### 4. Deliberate
 
-**Draft from what the user already said before asking anything** (Rule E). Mine the conversation for
-the favoured path, discarded options, "versus doing nothing", and constraints that ruled things out.
+**Draft from what the user already said before asking anything** (Rule E). Mine the conversation for the favoured path, discarded options, "versus doing nothing", and constraints that ruled things out.
 
 - `alternatives` — `label` is a short handle, `description` is the option's substance
 - `deliberationFacts` — arguments the user actually made, each paired with `onAlternative`
 
-Do not invent options to make the belly look fuller. One short honesty check is fine when a single
-path has no acknowledgment of what else was in play; it is not a gate, and it is not a brainstorm.
+Do not invent options to make the belly look fuller. One short honesty check is fine when a single path has no acknowledgment of what else was in play; it is not a gate, and it is not a brainstorm.
 
 ### 5. Converge
 
-Draft the `verdict` and set `chosenAlternative`. Add `expectedOutcomes` — falsifiable tail
-commitments covering gains, costs, risks, and dependencies. These are required before a future
-Accept, and they are what the wake will later be tested against. Rule I governs both: the Verdict
-adopts a rule and never narrates the present state, a resolved value or a deferral, and a tail item
-no observation could falsify moves to the belly.
+Draft the `verdict` and set `chosenAlternative`. Add `expectedOutcomes` — falsifiable tail commitments covering gains, costs, risks, and dependencies. These are required before a future Accept, and they are what the wake will later be tested against. Rule I governs both: the Verdict adopts a rule and never narrates the present state, a resolved value or a deferral, and a tail item no observation could falsify moves to the belly.
 
-**Converging on a *no* is converging.** If the Verdict is turning into an explanation of what the user
-will **not** do, this is a **Rejected** record and `chosenAlternative` should stay unset. That holds
-even when other work is proceeding perfectly well — a Claim can be declined while something else
-ships, and that pair is two records, not one. The full set of situations, and the shaping rules the
-validators do not enforce, are in the `memolok-method` skill.
+**Converging on a *no* is converging.** If the Verdict is turning into an explanation of what the user will **not** do, this is a **Rejected** record and `chosenAlternative` should stay unset. That holds even when other work is proceeding perfectly well — a Claim can be declined while something else ships, and that pair is two records, not one. The full set of situations, and the shaping rules the validators do not enforce, are in the `memolok-method` skill.
 
 #### Building against a staged record
 
-Where the decision is about something you can build, a spike is deliberation and belongs in the belly.
-The loop: draft to **Deliberating**, build against it, fold what building taught back into the record,
-*then* seal. Nothing about a staged record is fixed, so this costs only the patch.
+Where the decision is about something you can build, a spike is deliberation and belongs in the belly. The loop: draft to **Deliberating**, build against it, fold what building taught back into the record, *then* seal. Nothing about a staged record is fixed, so this costs only the patch.
 
-It is worth the round trip because a Verdict can name a mechanism the implementation then contradicts
-— and after t₀ that is a successor, not an edit. Finding it while staged costs one `update_MDR`.
+It is worth the round trip because a Verdict can name a mechanism the implementation then contradicts — and after t₀ that is a successor, not an edit. Finding it while staged costs one `update_MDR`.
 
-When building shows the draft was wrong, record the correction as a deliberation fact **if the wrong
-turn teaches something** — if it shows why the obvious approach fails. Otherwise just edit the draft;
-staged records are freely editable and most corrections are not interesting.
+When building shows the draft was wrong, record the correction as a deliberation fact **if the wrong turn teaches something** — if it shows why the obvious approach fails. Otherwise just edit the draft; staged records are freely editable and most corrections are not interesting.
 
-**The loop ends at the seal, not at the last commit.** The references the work will carry are a
-separate pass after t₀ — the **`memolok-citations`** skill has the ordering.
+**The loop ends at the seal, not at the last commit.** The references the work will carry are a separate pass after t₀ — the **`memolok-citations`** skill has the ordering.
 
 ### 6. Name the open questions
 
-Record what this decision deliberately leaves unsettled as `openQuestions`, rather than expanding the
-record to settle it. Rule D's test decides what qualifies: something a reader of this record could
-believe it settled, and that acting on the decision can go ahead without. A question the user's next
-step waits on naturally belongs in this deliberation; if they defer it anyway, say once what it leaves
-waiting, then record it. Open questions never block the seal.
+Record what this decision deliberately leaves unsettled as `openQuestions`, rather than expanding the record to settle it. Rule D's test decides what qualifies: something a reader of this record could believe it settled, and that acting on the decision can go ahead without. A question the user's next step waits on naturally belongs in this deliberation; if they defer it anyway, say once what it leaves waiting, then record it. Open questions never block the seal.
 
 ### 7. Preview and persist
 
 Show the draft back in the shape the **`record-preview`** skill fixes, and wait for a yes.
 
-Then `update_MDR` with the body. Payloads: `references/patch-payloads.md`. A patch replaces each array
-it carries whole, so an array you did not just draft starts from `get_MDR_details`, not from memory.
-`get_MDR` answers what a record decided; `get_MDR_details` answers why and how — and the arrays are the
-how.
+Then `update_MDR` with the body. Payloads: `references/patch-payloads.md`. A patch replaces each array it carries whole, so an array you did not just draft starts from `get_MDR_details`, not from memory. `get_MDR` answers what a record decided; `get_MDR_details` answers why and how — and the arrays are the how.
 
-The body carries `authoredBy`: you, when you drafted the text, named as *Who held each role* in the
-method's `facilitation.md` has it. `decidedBy` waits for the seal.
+The body carries `authoredBy`: you, when you drafted the text, named as *Who held each role* in the method's `facilitation.md` has it. `decidedBy` waits for the seal.
 
-Confirming the preview is **not** t₀. Do not offer **Proposed** on informal work, and do not offer
-**Accepted** unless the user has raised sealing themselves.
+Confirming the preview is **not** t₀. Do not offer **Proposed** on informal work, and do not offer **Accepted** unless the user has raised sealing themselves.
 
 ### 8. Offer next steps
 
@@ -205,47 +134,34 @@ Confirming the preview is **not** t₀. Do not offer **Proposed** on informal wo
 - They want to check what landed → **`review-ledger`**
 - Another decision surfaced → start again at step 2 for that one, as its own record
 
-If deliberation revealed a **second distinct decision**, open a separate record for it rather than
-folding both into one body. A record that converges twice is malformed.
+If deliberation revealed a **second distinct decision**, open a separate record for it rather than folding both into one body. A record that converges twice is malformed.
 
 ## Field quality
 
-**Head Claim.** Bad: *"we need better performance."* Good: *"P99 API latency must stay under 200ms at
-500 concurrent users."*
+**Head Claim.** Bad: *"we need better performance."* Good: *"P99 API latency must stay under 200ms at 500 concurrent users."*
 
-**It is read cold.** Bad: *"the migration must keep search as fast as it is today."* Good:
-*"order-history search must return any order from the last seven years within two seconds."* The
-first names neither its subject nor its target in words that will mean anything later (Rule G).
+**It is read cold.** Bad: *"the migration must keep search as fast as it is today."* Good: *"order-history search must return any order from the last seven years within two seconds."* The first names neither its subject nor its target in words that will mean anything later (Rule G).
 
 **Sharpen is not resolve.** When the honest need is mechanism-agnostic, keep it that way:
 
 - Over-sharpened: *"the project must use Python for its mature pandas/numpy/scipy stack."*
-- Correctly sharp: *"the stats pipeline's language must have a mature, well-supported
-  statistical-analysis library ecosystem."*
+- Correctly sharp: *"the stats pipeline's language must have a mature, well-supported statistical-analysis library ecosystem."*
 
-The second is still falsifiable — a later observation can confirm or refute whether the ecosystem held
-up — without pre-committing to which language. The language choice is Verdict-shaped, and belongs in
-`alternatives` and `verdict`.
+The second is still falsifiable — a later observation can confirm or refute whether the ecosystem held up — without pre-committing to which language. The language choice is Verdict-shaped, and belongs in `alternatives` and `verdict`.
 
 Full worked correction arc: `references/need-vs-verdict-drift.md`.
 
 ## Anti-patterns
 
-**The Verdict smuggled into the head Claim.** Most frequent on the expert branch, where the record
-is negotiated with the user before you are asked to preview or save it: by then you know the whole
-reasoning, and the answer leaks into the Need. Run the drift test on the Claim before the preview.
+**The Verdict smuggled into the head Claim.** Most frequent on the expert branch, where the record is negotiated with the user before you are asked to preview or save it: by then you know the whole reasoning, and the answer leaks into the Need. Run the drift test on the Claim before the preview.
 
-**Open questions from outside the record's scope.** The eager-to-please failure: each one widens the
-record instead of marking its edge. Rule D's first test rejects it — no reader would believe this
-record settled it.
+**Open questions from outside the record's scope.** The eager-to-please failure: each one widens the record instead of marking its edge. Rule D's first test rejects it — no reader would believe this record settled it.
 
 ## Tips
 
 - A complete fish body may sit at **Deliberating** indefinitely. Completeness is not commitment.
-- The ids you chose come back from `get_MDR_details`, and the `eo-…` ones a later wake needs from
-  `get_MDR_learning_delta` too.
-- If the user's need turns out to already be covered by an existing admitted record, say so and
-  offer `review-ledger` instead of minting a duplicate.
+- The ids you chose come back from `get_MDR_details`, and the `eo-…` ones a later wake needs from `get_MDR_learning_delta` too.
+- If the user's need turns out to already be covered by an existing admitted record, say so and offer `review-ledger` instead of minting a duplicate.
 
 ## References
 

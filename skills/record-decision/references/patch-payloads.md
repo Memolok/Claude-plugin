@@ -65,15 +65,11 @@
 }
 ```
 
-An alternative may carry only `id` and `label` when the user never elaborated on it —
-`alt-scale-out` above. Do not invent substance they did not articulate.
+An alternative may carry only `id` and `label` when the user never elaborated on it — `alt-scale-out` above. Do not invent substance they did not articulate.
 
 ## You name every id
 
-You name every id on `alternatives`, `expectedOutcomes` and `openQuestions`: prefixed `alt-`, `eo-`,
-`oq-`, then only lowercase letters, digits, hyphens and underscores, unique in its list, required on
-every item, and named for what it is. The lists replace wholesale, so each item has to say which one
-it is, on `create_MDR` and `update_MDR` alike:
+You name every id on `alternatives`, `expectedOutcomes` and `openQuestions`: prefixed `alt-`, `eo-`, `oq-`, then only lowercase letters, digits, hyphens and underscores, unique in its list, required on every item, and named for what it is. The lists replace wholesale, so each item has to say which one it is, on `create_MDR` and `update_MDR` alike:
 
 | Rule | |
 | --- | --- |
@@ -83,17 +79,13 @@ it is, on `create_MDR` and `update_MDR` alike:
 | Keeping an item | send the `id` it already has |
 | Adding one | send a new `id` you chose |
 
-**Name them for what they are.** `alt-cache-layer` is what a reader meets in `chosenAlternative`
-months later, and in every deliberation fact arguing about it. You know what the option is; a
-generated `alt-kmzp0u1f` would carry none of that.
+**Name them for what they are.** `alt-cache-layer` is what a reader meets in `chosenAlternative` months later, and in every deliberation fact arguing about it. You know what the option is; a generated `alt-kmzp0u1f` would carry none of that.
 
-Omitting an id, or its prefix, or writing any other character after it, is refused —
-`prose-and-raci.md` in the method says why.
+Omitting an id, or its prefix, or writing any other character after it, is refused — `prose-and-raci.md` in the method says why.
 
 ## Revising the Need
 
-Legal and expected while staged. De-sharpening a Need that absorbed the answer is the correct move,
-not a retreat.
+Legal and expected while staged. De-sharpening a Need that absorbed the answer is the correct move, not a retreat.
 
 ```json
 {
@@ -132,9 +124,7 @@ not a retreat.
 }
 ```
 
-Array fields **replace**, they do not append. Send the full intended list for any array you touch,
-starting from `get_MDR_details` for any you did not just draft: `get_MDR` carries only `openQuestions`,
-and a write's reply carries identity and a `body` count, not the record.
+Array fields **replace**, they do not append. Send the full intended list for any array you touch, starting from `get_MDR_details` for any you did not just draft: `get_MDR` carries only `openQuestions`, and a write's reply carries identity and a `body` count, not the record.
 
 ## Attribution
 
@@ -149,15 +139,11 @@ and a write's reply carries identity and a `body` count, not the record.
 }
 ```
 
-RACI fields stay patchable after t₀ — they are the only ones that do. `null` clears one. Name who
-actually held each role, not whoever is recording it, and take a Memolok user's IRI from `whoami`,
-from `get_MDL`'s `members`, or from a record that carries it: an IRI under
-`https://app.memolok.ai/m/` that names no account Memolok holds is refused. *Who held each role* in the method's `facilitation.md` has the rule.
+RACI fields stay patchable after t₀ — they are the only ones that do. `null` clears one. Name who actually held each role, not whoever is recording it, and take a Memolok user's IRI from `whoami`, from `get_MDL`'s `members`, or from a record that carries it: an IRI under `https://app.memolok.ai/m/` that names no account Memolok holds is refused. *Who held each role* in the method's `facilitation.md` has the rule.
 
 ## Ids you will need later
 
-The ids you chose are stored verbatim and come back from `get_MDR_details`. Two of them are cited by later
-calls, so pick names that will still mean something by then:
+The ids you chose are stored verbatim and come back from `get_MDR_details`. Two of them are cited by later calls, so pick names that will still mean something by then:
 
 - `expectedOutcomes[].id` (`eo-…`) — cited by a later wake's `tests.outcomeId`
 - `openQuestions[].id` (`oq-…`) — cited by a later `settlesOpenQuestion`
@@ -179,5 +165,4 @@ calls, so pick names that will still mean something by then:
 | `…id '…' may hold only lowercase letters, digits, hyphens and underscores after '…'…` | Any other character after the prefix; `did you mean '…'?` follows where lowercasing fixes it |
 | `…id '…' is used twice in this list.` | Two items claiming one id — a reference to it could not say which |
 
-If a tier-1 patch is refused because the record is already admitted, that is the Decision Transaction
-Principle working. Do not retry — route to **`revise-decision`**.
+If a tier-1 patch is refused because the record is already admitted, that is the Decision Transaction Principle working. Do not retry — route to **`revise-decision`**.

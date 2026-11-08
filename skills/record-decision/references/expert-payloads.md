@@ -15,16 +15,13 @@ The default. Head Claim only, everything else patched in as deliberation proceed
 }
 ```
 
-Returns an acknowledgement — `mdrHandle`, `mdlGuid`, `mdrNumber: null`, `status`, `retractable`,
-`createdAt`, `decidedAt` and a `body` sizing the prose — not the record. Keep the `mdrHandle`.
+Returns an acknowledgement — `mdrHandle`, `mdlGuid`, `mdrNumber: null`, `status`, `retractable`, `createdAt`, `decidedAt` and a `body` sizing the prose — not the record. Keep the `mdrHandle`.
 
-`claimDescription` takes the prose object **directly** — no `description` wrapper. It is the one
-parameter shaped that way on this tool.
+`claimDescription` takes the prose object **directly** — no `description` wrapper. It is the one parameter shaped that way on this tool.
 
 ## Pre-populated mint
 
-When the conversation already produced most of the body, send it at create. **Status is still
-`Deliberating`** — having a full body is not commitment.
+When the conversation already produced most of the body, send it at create. **Status is still `Deliberating`** — having a full body is not commitment.
 
 ```json
 {
@@ -96,13 +93,11 @@ When the conversation already produced most of the body, send it at create. **St
 }
 ```
 
-Note the Need names no language. The choice lives in `chosenAlternative` and `verdict` — that is
-Rule G holding.
+Note the Need names no language. The choice lives in `chosenAlternative` and `verdict` — that is Rule G holding.
 
 ## One-shot t₀
 
-Only when the user has stated commitment in their own words. Run the ceremony from
-**`commit-decision`** first.
+Only when the user has stated commitment in their own words. Run the ceremony from **`commit-decision`** first.
 
 ```json
 {
@@ -121,8 +116,7 @@ Only when the user has stated commitment in their own words. Run the ceremony fr
 }
 ```
 
-Creating at `Accepted` additionally needs alternatives, a valid `chosenAlternative`, and at least one
-expected outcome — the same gates a transition would enforce.
+Creating at `Accepted` additionally needs alternatives, a valid `chosenAlternative`, and at least one expected outcome — the same gates a transition would enforce.
 
 ## Allowed creation statuses
 
@@ -136,9 +130,7 @@ expected outcome — the same gates a transition would enforce.
 
 `Superseded` is not creatable.
 
-**Send canonical status values.** `create_MDR` does not resolve the `Decided` / `Settled` /
-`Committed` aliases that `transition_MDR_status` accepts, and fails with a raw error rather than a
-helpful one.
+**Send canonical status values.** `create_MDR` does not resolve the `Decided` / `Settled` / `Committed` aliases that `transition_MDR_status` accepts, and fails with a raw error rather than a helpful one.
 
 ## Errors
 
@@ -157,18 +149,13 @@ helpful one.
 
 ## What create_MDR cannot carry
 
-The fish body only. `hasContext`, `settlesOpenQuestion` and the four inter-record edges — `amends`,
-`supersedes`, `dependsOn`, `conflictsWith` — have **no parameter** on this tool. They are authored by
-a follow-up `update_MDR` while the record is still staged:
+The fish body only. `hasContext`, `settlesOpenQuestion` and the four inter-record edges — `amends`, `supersedes`, `dependsOn`, `conflictsWith` — have **no parameter** on this tool. They are authored by a follow-up `update_MDR` while the record is still staged:
 
 ```json
 { "mdlGuid": "<mdlGuid>", "mdr": "MDRh1", "patch": { "hasContext": ["<worldFactId>"], "amends": [7] } }
 ```
 
-Worth knowing before you compose the call rather than after: a record that needs to cite a World Fact
-or a prior wake as context, or to name what it amends, settles, supersedes, depends on or conflicts
-with, is a **two-call mint**. Discover it by trying and you will have already committed to a body
-that reads as if the context were there.
+Worth knowing before you compose the call rather than after: a record that needs to cite a World Fact or a prior wake as context, or to name what it amends, settles, supersedes, depends on or conflicts with, is a **two-call mint**. Discover it by trying and you will have already committed to a body that reads as if the context were there.
 
 ## Do not
 

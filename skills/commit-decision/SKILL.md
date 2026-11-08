@@ -1,17 +1,13 @@
 ---
 name: commit-decision
 description: >-
-  Seal a Memolok decision record as Accepted or Rejected. Use when the record is already written to
-  the ledger and not yet sealed, and the user says to make it final: "lock it in", "accept this",
-  "reject that path", "seal it", "we're going with that", etc. Not on the ledger yet →
-  `record-decision`; already sealed → `revise-decision`.
+  Seal a Memolok decision record as Accepted or Rejected. Use when the record is already written to the ledger and not yet sealed, and the user says to make it final: "lock it in", "accept this", "reject that path", "seal it", "we're going with that", etc. Not on the ledger yet → `record-decision`; already sealed → `revise-decision`.
 argument-hint: "[accept | reject] <record>"
 ---
 
 # /memolok:commit-decision — Seal at t₀
 
-Takes a staged record across t₀. The server stamps `decidedAt`, assigns the ledger number, and seals
-the body permanently.
+Takes a staged record across t₀. The server stamps `decidedAt`, assigns the ledger number, and seals the body permanently.
 
 ## Usage
 
@@ -28,8 +24,7 @@ Examples:
 
 ## Step 0 — Load the method
 
-Load the **`memolok-method`** skill and its `facilitation.md` reference. Rule C governs this entire
-skill: t₀ is a separate, explicit ceremony, never bundled into a recap.
+Load the **`memolok-method`** skill and its `facilitation.md` reference. Rule C governs this entire skill: t₀ is a separate, explicit ceremony, never bundled into a recap.
 
 ## Non-negotiables
 
@@ -43,8 +38,7 @@ skill: t₀ is a separate, explicit ceremony, never bundled into a recap.
 
 ## The one precondition that matters
 
-The user must have **explicitly** asked to seal. "Accept this", "lock it in", "reject that path", "yes
-commit it".
+The user must have **explicitly** asked to seal. "Accept this", "lock it in", "reject that path", "yes commit it".
 
 These are **not** commitment:
 
@@ -53,8 +47,7 @@ These are **not** commitment:
 - The record looking complete
 - The user saying "sounds good" about your summary
 
-If you are not certain, ask plainly: *"do you want this sealed on the ledger now, or left editable?"*
-Sealing is not reversible in place, so the cost of asking is far lower than the cost of guessing.
+If you are not certain, ask plainly: *"do you want this sealed on the ledger now, or left editable?"* Sealing is not reversible in place, so the cost of asking is far lower than the cost of guessing.
 
 ## Workflow
 
@@ -64,17 +57,13 @@ Sealing is not reversible in place, so the cost of asking is far lower than the 
 get_MDR_details(mdlGuid, mdr)
 ```
 
-The whole record, because the gates and the ceremony both need what it argued and expected, not only
-what it decided. Confirm it is still staged. If `mdrNumber` is already set, it was sealed previously —
-route to **`revise-decision`** instead.
+The whole record, because the gates and the ceremony both need what it argued and expected, not only what it decided. Confirm it is still staged. If `mdrNumber` is already set, it was sealed previously — route to **`revise-decision`** instead.
 
 ### 2. Check the gates for the target
 
-The gates are the method's lifecycle table. Anything missing gets patched **before** the ceremony, via
-`update_MDR` — see the `record-decision` skill. Do not start a ceremony you will have to interrupt.
+The gates are the method's lifecycle table. Anything missing gets patched **before** the ceremony, via `update_MDR` — see the `record-decision` skill. Do not start a ceremony you will have to interrupt.
 
-Open questions are never a gate. If the user wants to clear one first, that is their call, but do not
-propose it.
+Open questions are never a gate. If the user wants to clear one first, that is their call, but do not propose it.
 
 ### 3. Run the ceremony
 
@@ -84,24 +73,17 @@ State what is being committed, name what seals, and ask once:
 
 > **Ready to seal this on the ledger.**
 >
-> You're committing to **a single drive plus a scheduled off-device backup** for the FLAC library,
-> and I'll record you as the one who decided. The moment I commit, the server stamps the decision
-> time and the record seals — Verdict, alternatives, expected outcomes and open questions all become
-> immutable ledger evidence.
+> You're committing to **a single drive plus a scheduled off-device backup** for the FLAC library, and I'll record you as the one who decided. The moment I commit, the server stamps the decision time and the record seals — Verdict, alternatives, expected outcomes and open questions all become immutable ledger evidence.
 >
-> **Still open by design:** backup destination and schedule. That travels with the record and can be
-> settled by a later decision.
+> **Still open by design:** backup destination and schedule. That travels with the record and can be settled by a later decision.
 >
 > Shall I commit this as **Accepted**?
 
 Then wait for an explicit yes.
 
-Naming the open questions here is deliberate: it shows they are intended, so the user is not surprised
-to find them frozen on the record later.
+Naming the open questions here is deliberate: it shows they are intended, so the user is not surprised to find them frozen on the record later.
 
-So is naming who decided: said aloud, a wrong decider gets corrected before it is recorded. Who that
-is, with a user present or in an unattended run, is *Who held each role* in the method's
-`facilitation.md`.
+So is naming who decided: said aloud, a wrong decider gets corrected before it is recorded. Who that is, with a user present or in an unattended run, is *Who held each role* in the method's `facilitation.md`.
 
 Ceremony variants — rejection, one-shot mint, terse mode: `references/ceremony.md`.
 
@@ -123,9 +105,7 @@ Payloads and the formal-governance `Proposed` step: `references/transition-paylo
 
 ### 5. Verify and mark it
 
-The transition's reply carries `status`, `decidedAt`, `mdrNumber` and `retractable`: confirm them
-there, with no further read. Then one positive beat,
-citing the number the record now has:
+The transition's reply carries `status`, `decidedAt`, `mdrNumber` and `retractable`: confirm them there, with no further read. Then one positive beat, citing the number the record now has:
 
 > **MDR-7 is Accepted** — sealed just now. That's on the ledger.
 
@@ -133,27 +113,17 @@ Then carry on with whatever the user was doing. Do not offer to end the session.
 
 ## Rejection is a real outcome
 
-Offer **Rejected** as readily as Accept, and in more situations than an exhausted deliberation — the
-`memolok-method` skill carries the full set. A Rejected record carries no `amends`, `supersedes` or
-`settlesOpenQuestion`: nothing it says is in force, so it changes, retires and settles nothing.
+Offer **Rejected** as readily as Accept, and in more situations than an exhausted deliberation — the `memolok-method` skill carries the full set. A Rejected record carries no `amends`, `supersedes` or `settlesOpenQuestion`: nothing it says is in force, so it changes, retires and settles nothing.
 
 ## After t₀
 
-**The record receives a number at t₀ (in addition to its handle).** If anything outside the ledger is
-going to cite it — code, documentation, a commit message, a message to somebody, notes kept for later
-sessions — this is the moment that becomes possible, and the citation has to be anchored before it is
-written, with the user told first that an anchored record can never be uncommitted. The
-**`memolok-citations`** skill carries the order and the form.
+**The record receives a number at t₀ (in addition to its handle).** If anything outside the ledger is going to cite it — code, documentation, a commit message, a message to somebody, notes kept for later sessions — this is the moment that becomes possible, and the citation has to be anchored before it is written, with the user told first that an anchored record can never be uncommitted. The **`memolok-citations`** skill carries the order and the form.
 
 ## Tips
 
-- One-shot mint at `Accepted` or `Rejected` through `create_MDR` triggers the same seal. Run the
-  ceremony first — the shortcut is in the tool call, not in the conversation.
-- If the transition is refused, the message names the missing gate. Patch it and return to step 3 —
-  unless it names your permissions, which no patch fixes, or says the change was only partly made,
-  which only repeating the identical call completes.
-- The `eo-…` ids you chose come back from `get_MDR_details` and `get_MDR_learning_delta`; a later
-  wake needs them.
+- One-shot mint at `Accepted` or `Rejected` through `create_MDR` triggers the same seal. Run the ceremony first — the shortcut is in the tool call, not in the conversation.
+- If the transition is refused, the message names the missing gate. Patch it and return to step 3 — unless it names your permissions, which no patch fixes, or says the change was only partly made, which only repeating the identical call completes.
+- The `eo-…` ids you chose come back from `get_MDR_details` and `get_MDR_learning_delta`; a later wake needs them.
 
 ## References
 

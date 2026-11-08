@@ -4,15 +4,11 @@
 
 > **Ready to seal this on the ledger.**
 >
-> You're committing to **a Redis read-through cache on the hot read paths**, on the grounds that it
-> addresses P99 latency directly where horizontal scaling would not.
+> You're committing to **a Redis read-through cache on the hot read paths**, on the grounds that it addresses P99 latency directly where horizontal scaling would not.
 >
-> The moment I commit, the server stamps the decision time and the record seals — Verdict,
-> alternatives, expected outcomes and open questions become immutable ledger evidence. Your expected
-> outcome, *P99 under 200ms within 30 days*, becomes the bet this record gets measured against later.
+> The moment I commit, the server stamps the decision time and the record seals — Verdict, alternatives, expected outcomes and open questions become immutable ledger evidence. Your expected outcome, *P99 under 200ms within 30 days*, becomes the bet this record gets measured against later.
 >
-> **Still open by design:** whether the write path needs separate treatment. That travels with the
-> record.
+> **Still open by design:** whether the write path needs separate treatment. That travels with the record.
 >
 > Shall I commit this as **Accepted**?
 
@@ -22,33 +18,25 @@ Rejection deserves the same weight. Do not apologize for it or frame it as a fai
 
 > **Ready to close this out as Rejected.**
 >
-> You're committing that the team will **not** migrate the monolith to microservices under this need —
-> the cost exceeds the benefit, the operational maturity isn't there, and the modular monolith is
-> meeting its SLOs.
+> You're committing that the team will **not** migrate the monolith to microservices under this need — the cost exceeds the benefit, the operational maturity isn't there, and the modular monolith is meeting its SLOs.
 >
-> This is a real ledger entry, not an abandoned draft: it gets a number, and it records who decided
-> and why. Next time this comes up, the reasoning is already there.
+> This is a real ledger entry, not an abandoned draft: it gets a number, and it records who decided and why. Next time this comes up, the reasoning is already there.
 >
 > Shall I commit this as **Rejected**?
 
 ## One-shot mint
 
-When the user committed before any record existed, surface the same implication *before* calling
-`create_MDR` at `Accepted` or `Rejected`:
+When the user committed before any record existed, surface the same implication *before* calling `create_MDR` at `Accepted` or `Rejected`:
 
-> Before I write this — minting it as **Accepted** seals it immediately. The Verdict and the expected
-> outcomes become immutable the moment it lands, same as any commitment. Happy to go ahead?
+> Before I write this — minting it as **Accepted** seals it immediately. The Verdict and the expected outcomes become immutable the moment it lands, same as any commitment. Happy to go ahead?
 
 Then mint, then verify from what the mint returns: `status`, `decidedAt` and `mdrNumber` are in it.
 
 ## Terse mode
 
-Some users find ceremony tiresome, particularly when sealing several records in a row. Compress, but
-keep the three load-bearing parts: **what is being committed**, **that it seals**, and **an explicit
-ask**.
+Some users find ceremony tiresome, particularly when sealing several records in a row. Compress, but keep the three load-bearing parts: **what is being committed**, **that it seals**, and **an explicit ask**.
 
-> Sealing the caching decision (`MDRh12`) as yours — Redis cache on hot read paths. This freezes the
-> body permanently. Go ahead?
+> Sealing the caching decision (`MDRh12`) as yours — Redis cache on hot read paths. This freezes the body permanently. Go ahead?
 
 What must never be dropped is the ask. Everything else is style.
 
@@ -60,20 +48,15 @@ One beat, using the number the record just received:
 
 Occasionally a little more, when the decision was hard-won or long-running:
 
-> **MDR-7 is Accepted.** That's the storage question closed after three sessions of going back and
-> forth — and the reasoning is on the record now, not just the answer.
+> **MDR-7 is Accepted.** That's the storage question closed after three sessions of going back and forth — and the reasoning is on the record now, not just the answer.
 
-Then continue. Do not offer to end the session, and do not follow a seal with a menu of what to do
-next unless the user asked for one.
+Then continue. Do not offer to end the session, and do not follow a seal with a menu of what to do next unless the user asked for one.
 
-**A build waiting on its references is not a menu.** Where work already written is going to cite this
-record, the number it was waiting for has just arrived, and saying so belongs in the same beat — the
-skill's *After t₀* section has it.
+**A build waiting on its references is not a menu.** Where work already written is going to cite this record, the number it was waiting for has just arrived, and saying so belongs in the same beat — the skill's *After t₀* section has it.
 
 ## What ceremony is for
 
-Not formalism. It exists because t₀ is the one irreversible moment in the whole model, and a user who
-did not realize they were crossing it has been badly served.
+Not formalism. It exists because t₀ is the one irreversible moment in the whole model, and a user who did not realize they were crossing it has been badly served.
 
 Three things it must do:
 

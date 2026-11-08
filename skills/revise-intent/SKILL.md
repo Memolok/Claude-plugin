@@ -1,19 +1,13 @@
 ---
 name: revise-intent
 description: >-
-  State or revise what a Memolok ledger is for: its purpose, who it serves, and roughly where it is
-  heading. Use when someone says the team's focus or the project's scope has shifted, wants to write
-  down why a ledger exists, or wants to update a purpose that has gone stale. A shift that is itself
-  a choice the team made is a decision first (`record-decision`, or `revise-decision` when it
-  reverses a sealed one); this skill only rewords the purpose afterwards. A premise →
-  `manage-almanac`.
+  State or revise what a Memolok ledger is for: its purpose, who it serves, and roughly where it is heading. Use when someone says the team's focus or the project's scope has shifted, wants to write down why a ledger exists, or wants to update a purpose that has gone stale. A shift that is itself a choice the team made is a decision first (`record-decision`, or `revise-decision` when it reverses a sealed one); this skill only rewords the purpose afterwards. A premise → `manage-almanac`.
 argument-hint: "[the ledger's purpose]"
 ---
 
 # /memolok:revise-intent — What this ledger is for
 
-Writes or rewrites a ledger's stated purpose. One short piece of prose per ledger, revised freely,
-read at the top of a cold session by whoever picks the ledger up next.
+Writes or rewrites a ledger's stated purpose. One short piece of prose per ledger, revised freely, read at the top of a cold session by whoever picks the ledger up next.
 
 ## Usage
 
@@ -30,8 +24,7 @@ Examples:
 
 ## Step 0 — Load the method
 
-Load the **`memolok-method`** skill, then its `ledger-intent.md` reference for how a purpose is
-drafted — the three elements, the two shapes, and the length.
+Load the **`memolok-method`** skill, then its `ledger-intent.md` reference for how a purpose is drafted — the three elements, the two shapes, and the length.
 
 ## Non-negotiables
 
@@ -50,15 +43,13 @@ drafted — the three elements, the two shapes, and the length.
 | A decision already sealed on the ledger | **`revise-decision`** |
 | A premise the ledger reasons from | **`manage-almanac`** |
 
-A stated purpose is not a decision. It is not sealed, it has no t₀, nothing depends on it, and
-rewriting it costs nothing — which is exactly why it is a separate job from revising a record.
+A stated purpose is not a decision. It is not sealed, it has no t₀, nothing depends on it, and rewriting it costs nothing — which is exactly why it is a separate job from revising a record.
 
 ## Workflow
 
 ### 1. Establish the ledger
 
-The `mdlGuid` in play, else `.memolok/mdl.yml`, else `get_MDLs`. If the user belongs to several and has
-not said which, ask — rewriting the wrong ledger's purpose is silent and confusing.
+The `mdlGuid` in play, else `.memolok/mdl.yml`, else `get_MDLs`. If the user belongs to several and has not said which, ask — rewriting the wrong ledger's purpose is silent and confusing.
 
 ### 2. Read what is there
 
@@ -66,17 +57,13 @@ not said which, ask — rewriting the wrong ledger's purpose is silent and confu
 get_MDL(mdlGuid) → { mdlGuid, title, role, ledgerIntent, members }
 ```
 
-`ledgerIntent: null` means the ledger has never stated one. That is not a defect; it is most ledgers.
-Say so plainly and offer to write the first.
+`ledgerIntent: null` means the ledger has never stated one. That is not a defect; it is most ledgers. Say so plainly and offer to write the first.
 
-Read the existing statement back to the user before changing it. They are usually revising one clause,
-not the whole thing, and they cannot tell you which clause if they cannot see it.
+Read the existing statement back to the user before changing it. They are usually revising one clause, not the whole thing, and they cannot tell you which clause if they cannot see it.
 
 ### 3. Draft the replacement with them
 
-Follow `ledger-intent.md` in **`memolok-method`**. The thing that goes wrong here is **sending a
-fragment**: the tool replaces everything, so if the user says *"add that we also cover billing now"*,
-you send the whole statement with billing in it — not the clause.
+Follow `ledger-intent.md` in **`memolok-method`**. The thing that goes wrong here is **sending a fragment**: the tool replaces everything, so if the user says *"add that we also cover billing now"*, you send the whole statement with billing in it — not the clause.
 
 Show them the full replacement and get agreement before writing.
 
@@ -94,53 +81,34 @@ Show them the full replacement and get agreement before writing.
 }
 ```
 
-Requires `admin` or `owner`. A `member` or `visitor` cannot write one — say so rather than letting
-them draft one first.
+Requires `admin` or `owner`. A `member` or `visitor` cannot write one — say so rather than letting them draft one first.
 
 ### 5. Refresh the project file, if one carries a copy
 
-`.memolok/mdl.yml` may hold an `mdlIntent` copy of the statement you have just replaced, which is
-wrong from this moment on. Where project files are available and a file carries one, offer to update
-it in the same breath — the new markdown verbatim, one line per paragraph, keeping the `|-`:
+`.memolok/mdl.yml` may hold an `mdlIntent` copy of the statement you have just replaced, which is wrong from this moment on. Where project files are available and a file carries one, offer to update it in the same breath — the new markdown verbatim, one line per paragraph, keeping the `|-`:
 
 ```yaml
 mdlIntent: |-
   <the statement you just wrote, verbatim>
 ```
 
-This is the only moment in a session where a copy goes stale because of something you just did, which
-is why it is worth a step of its own. Ask before writing, as ever. Do not go hunting past the project
-in front of you: the same ledger may be named from trees you cannot see, and the file is a
-convenience rather than a record — a stale one misleads nobody who checks `get_MDL`.
+This is the only moment in a session where a copy goes stale because of something you just did, which is why it is worth a step of its own. Ask before writing, as ever. Do not go hunting past the project in front of you: the same ledger may be named from trees you cannot see, and the file is a convenience rather than a record — a stale one misleads nobody who checks `get_MDL`.
 
-Nothing else needs chasing. Document frontmatter carries no intent, so `mdlIntent` in a project file
-is the only copy this step can invalidate. A purpose that moved often takes the title with it; if the
-user renames the ledger too, that is `set_MDL_title`, and an `mdlTitle` copy in the project file or in
-a document's frontmatter goes stale the same way.
+Nothing else needs chasing. Document frontmatter carries no intent, so `mdlIntent` in a project file is the only copy this step can invalidate. A purpose that moved often takes the title with it; if the user renames the ledger too, that is `set_MDL_title`, and an `mdlTitle` copy in the project file or in a document's frontmatter goes stale the same way.
 
 Confirm briefly and stop. This is a small job; it does not need a summary of the whole ledger.
 
 ## When the purpose and the ledger have drifted apart
 
-Sometimes the reason someone is here is that the records no longer look like the stated purpose. Both
-readings are legitimate and it is the user's call which:
+Sometimes the reason someone is here is that the records no longer look like the stated purpose. Both readings are legitimate and it is the user's call which:
 
 - **The purpose is stale** — the work moved and nobody updated the sentence. Revise it.
-- **The purpose is right and the work wandered** — that is worth noticing, but it is not something this
-  skill fixes, and it is **not** a finding you deliver as a judgement.
+- **The purpose is right and the work wandered** — that is worth noticing, but it is not something this skill fixes, and it is **not** a finding you deliver as a judgement.
 
-What you must not do is treat the mismatch as a problem with the *records*. A decision that diverges
-from stated intent needed no justification when it was made and needs none now. Never suggest revising
-or superseding a record because it does not match the ledger's current purpose — a record stands on its
-own reasoning, not on what the ledger says it is about today.
+What you must not do is treat the mismatch as a problem with the *records*. A decision that diverges from stated intent needed no justification when it was made and needs none now. Never suggest revising or superseding a record because it does not match the ledger's current purpose — a record stands on its own reasoning, not on what the ledger says it is about today.
 
 ## Tips
 
-- There is no way to remove a purpose once stated — only to replace it. If the user wants it gone,
-  the honest move is prose that says the ledger's scope is currently open.
-- If a ledger's purpose has to be long to be accurate, that is usually a sign of two ledgers wearing
-  one name. See `scopes-and-bridging.md` in **`memolok-method`**.
-- `Memolok Decision Ledger not found.` does not distinguish a ledger the user cannot see from one that
-  is not there. Report it as ambiguous: they may not be a member, or this address may be stale. If
-  someone expected access, an owner or admin of the ledger can share it with them read-only
-  (`share_MDL`); any other role is a Memolok administrator's to give.
+- There is no way to remove a purpose once stated — only to replace it. If the user wants it gone, the honest move is prose that says the ledger's scope is currently open.
+- If a ledger's purpose has to be long to be accurate, that is usually a sign of two ledgers wearing one name. See `scopes-and-bridging.md` in **`memolok-method`**.
+- `Memolok Decision Ledger not found.` does not distinguish a ledger the user cannot see from one that is not there. Report it as ambiguous: they may not be a member, or this address may be stale. If someone expected access, an owner or admin of the ledger can invite them to read it (`share_MDL`), which takes effect once both have confirmed on the Memolok portal; any other role is a Memolok administrator's to give.
