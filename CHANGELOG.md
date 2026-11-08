@@ -12,6 +12,10 @@ The pack version is independent of the Memolok server's. You install the pack on
 
 ## Unreleased
 
+*Everything that has landed has shipped. This section is a placeholder.*
+
+## 0.42.0-beta — 2026-11-08
+
 - **The pack's files are unwrapped.** Each paragraph is one line, however long. No wording changed, so nothing your agent does changes.
 - **Update required.** Sharing a ledger now sends an invitation instead of giving access, and a note names its author differently; an older pack would tell you someone can read a ledger when they cannot yet.
 - **Sharing is an invitation, and you confirm it yourself.** Your agent prepares it; you confirm it and the person you invite accepts it, each from Memolok's mail, on the portal. Your agent cannot do either step, so it tells you what is left.
