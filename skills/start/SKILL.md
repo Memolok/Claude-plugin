@@ -87,7 +87,7 @@ Agree a title **and a purpose** before calling anything. This is the moment for 
 }
 ```
 
-They become `owner`, and the ledger is theirs to use at once. **Before anyone else can be invited to it, they must consent to it showing their name**, and only they can: Memolok mails them a link to confirm that on their own Sharing and privacy page in the Memolok portal, unless `disclosureMailSent` is `false`, which means the mail did not go out. Say which in a sentence, and that you cannot confirm it for them; offer `request_MDL_disclosure` when the mail did not go. A ledger nobody else will read needs nothing more. Once they have confirmed, they can invite anyone with a Memolok account to read it, which is **`sharing-and-privacy`**; any other role is currently given by a Memolok administrator, on request.
+They become `owner`, and the ledger is theirs to use at once; nothing is mailed. They can invite anyone with a Memolok account to read it, which is **`sharing-and-privacy`**; any other role is currently given by a Memolok administrator, on request.
 
 **The purpose is optional.** If the user does not want to write one now, create the ledger with the title alone and move on — they can state it any time with **`revise-intent`**, as owner, and so can an admin. Never hold up a ledger over it.
 

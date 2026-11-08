@@ -12,9 +12,8 @@
 | Ledger intent | `set_ledger_intent` (read it back with `get_MDL`) |
 | Rename a ledger | `set_MDL_title` (admin/owner; its identifier does not change) |
 | Invite someone to read a ledger | `share_MDL` (admin/owner; prepares an invitation to an existing account, named by its IRI, which grants nothing until the inviter confirms and the invitee accepts on the portal) |
-| Ask a ledger's creator to consent to sharing it | `request_MDL_disclosure` (the creator only; prepares, and the creator confirms on the portal) |
 | Leave a ledger | `leave_MDL` (your own role, at once) |
-| Vanish from a ledger | `request_MDL_vanish` (yourself only; prepares, and you confirm on the portal, for good) |
+| Vanish from a ledger | `request_MDL_vanish` (yourself only; prepares, and you confirm from the mail, for good; started on the portal instead, it takes effect there at once) |
 | Matter intake | `register_matter` |
 | Matter reads | `get_matter` (one, whole), `discover_matters` (the ledger's matters as prose, each with its summary, subjects and who took it up) |
 | Analysis, Path A and B | `create_analysis` |
@@ -69,7 +68,7 @@ Do not simulate the missing enumeration by keeping a local index of what you sen
 
 ### Confirming a consent
 
-**No tool confirms or accepts a consent, and an agent never can**: consenting to a ledger's disclosure, confirming or accepting an invitation, and confirming a vanish are the person's own act on their Sharing and privacy page in the Memolok portal, linked from the mail Memolok sends them, and Memolok accepts them from the portal alone. Withdrawing an invitation has no tool either; the inviter does it on the same page. The tools that prepare these say so; tell the person what is left for them to do, and never present a prepared request as done. Nobody can leave or vanish on someone else's behalf.
+**No tool confirms or accepts a consent, and an agent never can**: confirming an invitation, which is the inviter's consent to what it shows of them, accepting one, and confirming or starting a vanish are the person's own act on their Memolok sharing and privacy page in the portal, linked from the mail Memolok sends them, and Memolok accepts them from the portal alone. Withdrawing an invitation has no tool either; the inviter does it on the same page. The tools that prepare these say so; tell the person what is left for them to do, and never present a prepared request as done. Nobody can leave or vanish on someone else's behalf.
 
 ### Ledger administration
 

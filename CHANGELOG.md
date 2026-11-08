@@ -14,6 +14,13 @@ The pack version is independent of the Memolok server's. You install the pack on
 
 *Everything that has landed has shipped. This section is a placeholder.*
 
+## 0.43.0-beta — 2026-11-08
+
+- **Update required.** The Memolok server no longer has the tool that asked a ledger's creator for consent, and an older pack still offers it.
+- **A new ledger asks nothing.** You consent to what a ledger shows of you each time you confirm an invitation to it: the confirmation says the invitation carries your name and details, and that whoever accepts reads the ledger and sees the people on it.
+- **You can vanish from your own sharing and privacy page at once.** A vanish your agent prepares still waits for you to confirm it from the mail.
+- **Memolok mails you a receipt** when you leave a ledger or vanish from it.
+
 ## 0.42.0-beta — 2026-11-08
 
 - **The pack's files are unwrapped.** Each paragraph is one line, however long. No wording changed, so nothing your agent does changes.
