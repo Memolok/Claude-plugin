@@ -14,6 +14,11 @@ The pack version is independent of the Memolok server's. You install the pack on
 
 *Everything that has landed has shipped. This section is a placeholder.*
 
+## 0.44.0-beta — 2026-11-15
+
+- **Correct a matter until someone takes it up.** Your agent can replace a parked matter's words, or who raised it, with the new `replace_matter`, as long as nothing on the ledger has taken it up. You may correct a matter you registered; a ledger admin or owner may correct anyone's. Once a matter has been taken up it stays as raised, and your agent registers a new matter instead.
+- **No update required.** Older packs keep working; they just do not know that a matter can be corrected.
+
 ## 0.43.0-beta — 2026-11-08
 
 - **Update required.** The Memolok server no longer has the tool that asked a ledger's creator for consent, and an older pack still offers it.
