@@ -26,7 +26,7 @@ They settle almost every case.
 
 **Would it be bad if this vanished?** If yes, it is not a note — a note is something you can afford to lose.
 
-When it is genuinely unclear, a note is the safer choice. It can be turned into a fact or a matter later. A matter cannot be un-raised; matters are permanent, and the only way to close one you registered by mistake is an analysis recording that nothing in it needed deciding.
+When it is genuinely unclear, a note is the safer choice. It can be turned into a fact or a matter later. A matter cannot be un-raised: its words can be corrected until somebody takes it up, but it is never deleted, and the only way to close one you registered by mistake is an analysis recording that nothing in it needed deciding.
 
 ## Why nothing can cite one
 

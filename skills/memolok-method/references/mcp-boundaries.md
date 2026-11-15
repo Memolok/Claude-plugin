@@ -14,7 +14,7 @@
 | Invite someone to read a ledger | `share_MDL` (admin/owner; prepares an invitation to an existing account, named by its IRI, which grants nothing until the inviter confirms and the invitee accepts on the portal) |
 | Leave a ledger | `leave_MDL` (your own role, at once) |
 | Vanish from a ledger | `request_MDL_vanish` (yourself only; prepares, and you confirm from the mail, for good; started on the portal instead, it takes effect there at once) |
-| Matter intake | `register_matter` |
+| Matter intake | `register_matter`, `replace_matter` (whole, while nothing has taken it up; its creator, or an admin/owner) |
 | Matter reads | `get_matter` (one, whole), `discover_matters` (the ledger's matters as prose, each with its summary, subjects and who took it up) |
 | Analysis, Path A and B | `create_analysis` |
 | Analysis reads | `get_analysis` (point read) |
@@ -87,7 +87,7 @@ Linking records to repository files, and freezing cited artifacts at t₀, are n
 
 ### Deletion
 
-**`delete_scratchpad` is the only delete tool, for the only deletable entity.** Everything else is immutable on admission (`Matter`, `WorldFact` substance) or sealed at t₀ (`DecisionRecord`), and there is no delete for any of them — a matter registered by mistake is left unreferenced or closed through Path B, a wrong fact gets a correcting successor, a regretted record is uncommitted or superseded.
+**`delete_scratchpad` is the only delete tool, for the only deletable entity.** Everything else is frozen once taken up (`Matter`), immutable on admission (`WorldFact` substance) or sealed at t₀ (`DecisionRecord`), and there is no delete for any of them — a matter registered by mistake is corrected with `replace_matter` while nothing has taken it up, otherwise left unreferenced or closed through Path B, a wrong fact gets a correcting successor, a regretted record is uncommitted or superseded.
 
 Do not generalise from the scratchpad tool. It exists only because a note is the one thing nothing else can depend on.
 

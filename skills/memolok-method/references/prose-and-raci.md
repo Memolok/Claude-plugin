@@ -40,7 +40,7 @@ Some parameters take the prose atom **directly**; others take it wrapped in a `d
 | `create_MDR.claimDescription` | `verdict` |
 | `admit_world_fact.claimDescription` | `openQuestions[]` |
 | `record_observed_outcome.claimDescription` | `expectedOutcomes[]` |
-| `register_matter.description` | `deliberationFacts[]` |
+| `register_matter.description`, `replace_matter.description` | `deliberationFacts[]` |
 | `create_analysis.analysisRationale` | `alternatives[]` |
 | `create_analysis.claimDescription` | |
 
@@ -107,7 +107,7 @@ RACI fields are stored for governance narrative. They do **not** gate writes. Ac
 | `member` | yes | yes | no | no |
 | `admin`, `owner` | yes | yes | yes | yes |
 
-Notes differ: a visitor reads none, only a note's author replaces it, and its author or an `admin` or `owner` deletes it.
+Notes differ: a visitor reads none, only a note's author replaces it, and its author or an `admin` or `owner` deletes it. So do matters: its creator replaces one while nothing has taken it up, and an `admin` or `owner` replaces anyone's.
 
 If your role lets you create records, you can edit the ones you created. That is the account whose credential created the record, never `authoredBy`, so setting or changing `authoredBy` hands nothing over. Whether you can edit anyone else's depends on your role. Changing a record's status and anchoring it count as editing.
 

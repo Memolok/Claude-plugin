@@ -30,7 +30,7 @@ Load the **`memolok-method`** skill for the bait-versus-Claim distinction and pr
 
 - Never invent `mdlGuid` or `matterId` — the server mints them
 - All prose is `{ "markdown": "...", "lang": "en" }`
-- Register the user's words **verbatim** — matters are immutable, and the raw input is the point
+- Register the user's words **verbatim** — the raw input is the point, and once anything takes the matter up its words are frozen
 - Do **not** call `create_analysis` in this journey
 - Say "captured" only after the write succeeded
 - One short confirmation, then stop — the user is in the middle of something else
@@ -77,7 +77,7 @@ discover_matters(mdlGuid, untaken: true, query: "<the words the user just used>"
 
 **This is a judgement about what a matter is *about*** — two people parking the same trouble rarely open the same way. The page carries each matter's summary and the terms it names, and search reaches those, so a duplicate surfaces on a word neither person typed.
 
-If the same thing is already parked, say so and stop — do not register a second one. Matters are immutable, and there is no way to merge or delete them.
+If the same thing is already parked, say so and stop — do not register a second one. There is no way to merge or delete matters.
 
 A duplicate that does get registered is not a disaster, and there is nothing to clean up: one analysis can take up every copy at once, which records what actually happened better than a merge would. Checking first is still cheaper than explaining three identical matters later.
 
@@ -103,7 +103,7 @@ Use the user's own phrasing. Do not:
 
 Light cleanup is fine: dropping a stray "ugh", fixing an obvious typo, expanding "it" when the referent would be lost. Preserving meaning is the bar, not preserving keystrokes.
 
-**Name who raised it, on this call.** `raisedBy` is whoever had the initiative: the user, by `whoami`'s `iri`, when it is theirs; the person they are passing it on from when it is not, found as the tool catalogue's `register_matter` says. `authoredBy` is whoever wrote the words you register, usually the user. Leave either out rather than guess: a matter cannot be changed afterwards.
+**Name who raised it, on this call.** `raisedBy` is whoever had the initiative: the user, by `whoami`'s `iri`, when it is theirs; the person they are passing it on from when it is not, found as the tool catalogue's `register_matter` says. `authoredBy` is whoever wrote the words you register, usually the user. Leave either out rather than guess: an unstated name can be added while nothing has taken the matter up, and a wrong one is frozen once something has.
 
 ### 4. Confirm and get out
 
@@ -112,6 +112,10 @@ One line. Name what was saved and where it will resurface:
 > Saved on **{ledger title}** — it'll show up in the unprocessed list next time you go looking.
 
 Then return to whatever the user was doing. Do not offer to sharpen it, do not ask whether they want to decide now, and do not summarize the methodology.
+
+## Correcting a parked matter
+
+The user says the words were wrong, or the wrong person is named as raising it. While nothing has taken the matter up — `get_matter`'s `takenUpBy` is `[]` — correct it with `replace_matter`, which replaces it whole: read it, compose the full body, and send `raisedBy` and `authoredBy` again, since anything left out is unset. You may replace a matter you registered; an admin or owner may replace anyone's. Refused `matter-taken-up`, something on the ledger rests on it, and it stays as it is: register a new matter with the corrected words. That is a changed matter, not a repaired one.
 
 ## What happens next
 
