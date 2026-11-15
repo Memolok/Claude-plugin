@@ -9,7 +9,7 @@ argument-hint: "<what to keep, or what you're looking for>"
 
 A **scratchpad** is a freeform Markdown note on a ledger. It makes no promise: no assertion the ledger stands behind, no expectation that anyone will act on it, nothing downstream depending on it. Write it, rewrite it, delete it, at any time.
 
-It is the **only disposable thing in Memolok**. Everything else is immutable once admitted or sealed at t₀.
+It is the **only disposable thing in Memolok**. Nothing else can be deleted: a Matter can be replaced only until something takes it up, and everything else is immutable once admitted or sealed at t₀.
 
 ## Usage
 

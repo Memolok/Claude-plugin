@@ -8,7 +8,7 @@ These are honest expressions of a situation that might need a decision, in the w
 
 ## Why they are kept separate
 
-A matter carries no truth value and no emotional charge. It is not a claim about the world and not a problem statement — it is raw material, the thing someone raised, preserved verbatim.
+A matter carries no truth value and no emotional charge. It is not a claim about the world and not a problem statement — it is raw material, the thing someone raised, preserved verbatim. Until somebody takes it up, whoever registered it, or the ledger's admins and owners, can correct its words; once something rests on it, it stays as raised, and a changed version of it is a new matter.
 
 Anchoring a decision directly on that raw wording is the mistake the separation exists to prevent. *"Login is slow"* is not falsifiable, cannot be assessed later, and quietly smuggles a diagnosis into the framing: maybe login is fine and the network is not, maybe the user's expectation is the thing that changed.
 

@@ -38,7 +38,7 @@ Never invent either value. Never address a record tool by a raw database id.
 
 Every kind can be told apart by its prefix. Bodies are Crockford base32 — the ten digits and the letters except `I`, `L`, `O`, `U` — lowercase on the wire, and a hyphen is refused rather than ignored. **Never construct, truncate, complete or pattern-match one.** Pass back exactly what you were handed.
 
-**An id exists only once the call that creates it has returned.** Anything that cites an entry, whether a reference field (`motivatedBy`, `hasContext`, `correctsFact`, `tests`) or an id written into prose, goes out after that reply and uses the value it carries: never in the same parallel batch, never with a stand-in to fix later. A reference field refuses an unknown id; prose is not checked, and a Matter cannot be edited at all. A record's handle and number follow the same rule. Ids you name yourself (`alt-`, `eo-`, `oq-`) are yours to choose. Code, commits and documents: `memolok-citations`.
+**An id exists only once the call that creates it has returned.** Anything that cites an entry, whether a reference field (`motivatedBy`, `hasContext`, `correctsFact`, `tests`) or an id written into prose, goes out after that reply and uses the value it carries: never in the same parallel batch, never with a stand-in to fix later. A reference field refuses an unknown id; prose is not checked, and a Matter is frozen once anything takes it up. A record's handle and number follow the same rule. Ids you name yourself (`alt-`, `eo-`, `oq-`) are yours to choose. Code, commits and documents: `memolok-citations`.
 
 All prose parameters use `{ markdown, lang? }` — see `prose-and-raci.md` for which are wrapped in a `description` key.
 
@@ -153,7 +153,7 @@ Shared discovery params, plus `status` (string, optional; an unknown value is re
 | `mdlGuid` | string | yes |
 | `matterId` | string | yes |
 
-Returns `{ id, mdlGuid, description, createdAt, createdBy, raisedBy, authoredBy, takenUpBy }`, plus `title`, `summary` and `subjects` where Memolok has derived them. Error: `Matter not found.`
+Returns `{ id, mdlGuid, description, createdAt, createdBy, raisedBy, authoredBy, takenUpBy }`, plus `modifiedAt` once it has been replaced, and `title`, `summary` and `subjects` where Memolok has derived them. Error: `Matter not found.`
 
 **`createdBy` is the account that registered it; `raisedBy` and `authoredBy` are what that caller stated** — who had the initiative, and who wrote the words. `raisedBy` empty or `authoredBy` `null` means unstated, never nobody, and never the registering account.
 
@@ -290,11 +290,27 @@ A `.memolok/mdl.yml` carrying `mdlTitle` holds the old name from this moment on 
 | `raisedBy` | string[] | no |
 | `authoredBy` | string | no |
 
-Returns `{ id, mdlGuid, createdAt, body }`. Record the words **verbatim** — do not sharpen here. Cites another entry? Create it first and use the id it returns; a matter's words cannot be edited.
+Returns `{ id, mdlGuid, createdAt, body }`. Record the words **verbatim** — do not sharpen here. Cites another entry? Create it first and use the id it returns; a matter's words can be replaced only until something takes it up.
 
-`raisedBy` is whoever had the initiative — whose suggestion, report or request this is, however it reached you — and `authoredBy` whoever wrote the words. Neither is filled in for you, and **who raised it is known only now**: state it on this call. The registering account is recorded as `createdBy`.
+`raisedBy` is whoever had the initiative — whose suggestion, report or request this is, however it reached you — and `authoredBy` whoever wrote the words. Neither is filled in for you, so **state them on this call**: `replace_matter` can correct them only until the matter is taken up. The registering account is recorded as `createdBy`.
 
 **Naming a person.** The user is `whoami`. Anyone else named in conversation: look up their given and family name in `get_MDL`'s `members` — one match → that `iri`; several → ask which; none → ask for something that identifies them, and write that. Unattended → an `iri` only when both names match exactly one member; otherwise the name as given.
+
+### `replace_matter`
+
+| Param | Type | Required |
+| --- | --- | --- |
+| `mdlGuid` | string | yes |
+| `matterId` | string | yes |
+| `description` | `{ markdown, lang? }` | yes |
+| `raisedBy` | string[] | no |
+| `authoredBy` | string | no |
+
+**Full replacement, not a patch**, while nothing has taken the matter up. Same body as `register_matter`, and whatever you leave out is unset, testimony included: read it with `get_matter`, compose the whole body, send `raisedBy` and `authoredBy` again. Returns `{ id, mdlGuid, createdAt, modifiedAt, body }`. Its `title` and `summary` are not served until Memolok derives them again from the new words.
+
+**Taken up** = an analysis references it (`takenUpBy` non-empty). Then refused `matter-taken-up`: something rests on it, and a changed version of it is a new Matter, so register one. Retracting its last analysis reference makes it replaceable again; that is for a reference attached in error, never a way round the freeze.
+
+Its creator may replace it; an admin or owner may replace anyone's. A member replacing someone else's is refused, as is a visitor.
 
 ### `create_analysis`
 
@@ -306,11 +322,13 @@ Returns `{ id, mdlGuid, createdAt, body }`. Record the words **verbatim** — do
 | `producesDecision` | bool | no (default `true`) |
 | `claimDescription` | `{ markdown, lang? }` | Path A only |
 
-`motivatedBy` is a list: pass **every** input this reasoning took up, in any mix of the three kinds. Empty raises. An admitted World Fact or Observed Outcome goes in as itself — do not register a Matter restating it, which records neither the entry as the input nor the link, and cannot be repaired later because Matters are immutable. Repeats of one id attach once, across kinds as within one. The analysis concludes in this call, stamping `concludedAt` with the same instant it dates the references, so they read as on time. The whole body is checked before anything is written, so a refused call leaves nothing behind.
+`motivatedBy` is a list: pass **every** input this reasoning took up, in any mix of the three kinds. Empty raises. An admitted World Fact or Observed Outcome goes in as itself — do not register a Matter restating it, which records neither the entry as the input nor the link, and cannot be repaired later because this analysis freezes the Matter it takes up. Repeats of one id attach once, across kinds as within one. The analysis concludes in this call, stamping `concludedAt` with the same instant it dates the references, so they read as on time. The whole body is checked before anything is written, so a refused call leaves nothing behind.
 
 Returns `{ analysis, mdr? }`: `analysis` is `{ id, mdlGuid, createdAt, concludedAt, references, body }`, and `mdr` is the record acknowledgement `create_MDR` returns. Path A mints the record at `New`, naming the analysis in its `analysisId`; Path B omits `mdr` entirely (absent, not null). Performing an analysis is for members, admins and owners, and Path A also needs the permission to create decision records.
 
 **A call that fails part-way says so**, with code `incomplete`: the analysis was only partly created, and repeating the call creates a separate analysis rather than finishing this one. Do not repeat it on your own. Tell the user, quote the Reference the error carries, and check `get_matter`'s `takenUpBy` for what was written before deciding anything.
+
+**Code `change-pending`** means a Matter it takes up was being replaced at that moment, and nothing was written: read the Matter again, and repeat the call if it still applies.
 
 ### `attach_analysis_reference`
 
@@ -322,7 +340,7 @@ Returns `{ analysis, mdr? }`: `analysis` is `{ id, mdlGuid, createdAt, concluded
 
 Takes up an input the analysis did not originally reference. **Allowed after the analysis concluded** — that is what it is for. The reference is dated now, so it reads as `late: true` and the sealed rationale is untouched. Returns the reference.
 
-At most one reference per (input, analysis) pair. Attaching an input the analysis already references changes nothing and answers the reference as it stands, with the time it was first attached, so a repeated call is safe.
+At most one reference per (input, analysis) pair. Attaching an input the analysis already references changes nothing and answers the reference as it stands, with the time it was first attached, so a repeated call is safe. Code `change-pending` means the Matter was being replaced at that moment: read it again, and repeat if it still applies.
 
 ### `retract_analysis_reference`
 
@@ -533,7 +551,8 @@ Owner-only, no time limit. Patchable: `title`, `kind`, `report`, `userVerbatim`,
 
 | Code | Example | Cause |
 | --- | --- | --- |
-| `access-denied` | `You do not have the necessary permissions to … matters on this ledger.`, `… world facts …` | The role does not allow it: a visitor reads matters and world facts, and registers or admits neither |
+| `access-denied` | `You do not have the necessary permissions to … matters on this ledger.`, `… world facts …` | The role does not allow it: a visitor reads matters and world facts, and registers, replaces or admits none |
+| `access-denied` | `You do not have the necessary permissions to replace a Matter you did not register. Register a new Matter instead.` | `replace_matter` by a member on somebody else's matter. Its creator or an admin or owner may; otherwise register a new one |
 | `access-denied` | `You do not have the necessary permissions to … scratchpads on this ledger.` | A visitor, who reads no notes and keeps none |
 | `access-denied` | `You do not have the necessary permissions to replace a scratchpad you did not create. Read it and create your own instead.` | `replace_scratchpad` on somebody else's note, whatever the caller's role. Offer the copy |
 | `access-denied` | `You do not have the necessary permissions to delete a scratchpad you did not create.` | A member deleting somebody else's note. An admin or owner may |
@@ -548,6 +567,8 @@ Owner-only, no time limit. Patchable: `title`, `kind`, `report`, `userVerbatim`,
 | `incomplete` | `This batch of feedback reports was only partly written: …` | The service failed after sending the batch, so some reports may be stored. Tell the user; repeating may store them twice, which triage cleans up |
 | `incomplete` | `This change to the Memolok Decision Record was only partly made: …` | `transition_MDR_status` or `uncommit_MDR`: repeat the identical call to complete it (`write-failures.md`). **The same code on `create_analysis` or `submit_feedback` means the opposite**, as the rows above say: the tool decides which |
 | `change-pending` | `An earlier transition of this Memolok Decision Record to Accepted was only partly made. …` | Repeat the earlier call it names first, then this one |
+| `change-pending` | `This Matter is being replaced by another call, and nothing was written. …`, `A Matter this call takes up was being replaced at the same moment, and nothing was written. …` | `replace_matter`, `create_analysis` or `attach_analysis_reference` met another call replacing that Matter. Read it again, and repeat shortly if the call still applies |
+| `matter-taken-up` | `This Matter has been taken up, so it can no longer be replaced, and nothing was written. Register a new Matter instead.` | `replace_matter` on a matter something rests on. Register a new Matter with the corrected words |
 | `record-changed` | `This Memolok Decision Record changed while the change was being made, and nothing was written. …` | Read the record again, and repeat only if the change still applies |
 | `already-member` | `That account already holds a role on this Memolok Decision Ledger.` | `share_MDL` for someone holding a role there already; an invitation never changes a role |
 | `holds-another-role` | `That account already holds another role on this Memolok Decision Ledger.` | `share_MDL` for a demo account holding a role other than `visitor`, which it keeps |

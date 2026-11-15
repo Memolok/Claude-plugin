@@ -60,7 +60,7 @@ The same goes for the almanac. If what prompted this is a fact or an outcome alr
 | Material worth keeping that asserts nothing and asks nothing | **Scratchpad** | Keep it via `manage-notes`; there is nothing to decide |
 | A change to a decision already sealed on the ledger | **a revision** | Route to `revise-decision`; a staged one is edited here, at step 5 |
 
-The World Fact and wake rows are a **detour, not an exit.** Admit the fact or record the outcome, then come back: if it calls for a decision, that entry is the analysis input — pass its id in `motivatedBy`. Do **not** register a Matter restating it. That records neither the entry as the input nor that anything connected the two, and Matters are immutable, so it cannot be repaired afterwards. The scratchpad row is an exit: nothing about it calls for a record. So is the revision row: a new record beside the sealed one would stand with no amend or supersede edge to it.
+The World Fact and wake rows are a **detour, not an exit.** Admit the fact or record the outcome, then come back: if it calls for a decision, that entry is the analysis input — pass its id in `motivatedBy`. Do **not** register a Matter restating it. That records neither the entry as the input nor that anything connected the two, and once the analysis takes that Matter up it is frozen, so it cannot be repaired afterwards. The scratchpad row is an exit: nothing about it calls for a record. So is the revision row: a new record beside the sealed one would stand with no amend or supersede edge to it.
 
 **Not every choice earns a record.** Alternatives weighed about how to carry out work leave nothing behind but the result: no record. A small choice whose result lasts — a convention, a rule a document will state — earns one, and that document then cites it.
 
@@ -74,7 +74,7 @@ Worked examples of ambiguous intakes: `references/intake-fork.md`.
 
 ### 3a. Bait branch
 
-1. `register_matter` with the stakeholder's words **verbatim**, and who raised it in `raisedBy`. Do not sharpen, summarize, or translate into a target — the raw input is the point, and matters are immutable. An already-admitted world fact or observed outcome skips this step and goes into step 3 as itself.
+1. `register_matter` with the stakeholder's words **verbatim**, and who raised it in `raisedBy`. Do not sharpen, summarize, or translate into a target — the raw input is the point, and the analysis in step 3 freezes it. An already-admitted world fact or observed outcome skips this step and goes into step 3 as itself.
 2. Sharpen the need **with the user**, not for them. The head Claim is a falsifiable objective, and it must not name the mechanism you are about to choose (Rule G).
 3. `create_analysis` with `producesDecision: true` and the sharpened `claimDescription`. Pass every input this reasoning took up in `motivatedBy` — not just the one that prompted the conversation, and in whatever mix of matters, world facts and observed outcomes actually applies. This mints the record at **New** and concludes the analysis in the same call.
 4. `transition_MDR_status` to **Deliberating**, then continue at step 4.
