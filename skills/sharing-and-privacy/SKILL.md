@@ -7,7 +7,7 @@ argument-hint: "[who to invite, or which ledger to leave]"
 
 # /memolok:sharing-and-privacy — Who reads a ledger, and what it shows of you
 
-Prepares the requests that change who is on a ledger and what it shows of a person: an invitation, leaving, and vanishing. **Leaving takes effect at once; an invitation, and a vanish prepared here, are finished by the person themself**, on their Memolok sharing and privacy page in the portal, from the mail Memolok sends them. This skill gets them that far and tells them what is left.
+Prepares the requests that change who is on a ledger and what it shows of a person: an invitation, leaving, and vanishing. **Leaving takes effect at once; an invitation, and a vanish prepared here, are finished by the person themself**, on their [Memolok consent page](https://app.memolok.ai/settings/consent) in the portal, from the mail Memolok sends them. This skill gets them that far and tells them what is left.
 
 ## Usage
 
@@ -57,12 +57,12 @@ Only an `owner` or `admin` can, and only as `visitor`: reads everything but note
 1. **Get their Memolok identifier**, the `iri` `whoami` gives them in their own session; there is no lookup by email or name. Ask for it in those words, never as an "IRI". A member of another ledger you share is in that ledger's `members`.
 2. **Say what an invitation shows, then confirm the ledger and the person**: the invitation carries the user's name and details, and whoever accepts reads everything on the ledger and, like everyone on it, sees the people on it with their roles. Memolok says the same when the user confirms; saying it first spares them a surprise there. Then `share_MDL(mdlGuid, iri)`.
 3. **Say what happens next**, from `invited`:
-   - `true`: *"I've prepared the invitation. Memolok will mail you to confirm it on your Memolok sharing and privacy page, then mail them to accept; nothing changes until both of you have, and an invitation you don't confirm within seven days lapses."*
+   - `true`: *"I've prepared the invitation. Memolok will mail you to confirm it on your [Memolok consent page](https://app.memolok.ai/settings/consent), then mail them to accept; nothing changes until both of you have, and an invitation you don't confirm within seven days lapses."*
    - `false`: a demo account, which reads the ledger now.
 
 | Code | Say and do |
 | --- | --- |
-| `already-invited` | An invitation of theirs waits for that person already; to send another, they withdraw it on their Memolok sharing and privacy page |
+| `already-invited` | An invitation of theirs waits for that person already; to send another, they withdraw it in their Memolok settings |
 | `already-member`, `holds-another-role` | That person holds a role there already, which an invitation never changes |
 | `unknown-account` | No account has that identifier: ask for it again, from their `whoami` |
 | `mail-unavailable` | The invitation stands but its mail did not go: the same call again sends it |
@@ -73,7 +73,7 @@ Only an `owner` or `admin` can, and only as `visitor`: reads everything but note
 
 | | Leaving | Vanishing |
 | --- | --- | --- |
-| Takes effect | At once | From their Memolok sharing and privacy page, at once; prepared here, only when they confirm from the mail, within seven days |
+| Takes effect | At once | In their Memolok settings, at once; prepared here, only when they confirm from the mail, within seven days |
 | Their role | Gone; only a new invitation brings it back | Gone |
 | Their name on what they wrote | Stays | A pseudonym in its place, on everything the ledger held then |
 | Undone by | Being invited again | **Nothing, ever** |
@@ -83,10 +83,10 @@ Either way, once it has happened, Memolok mails them a receipt.
 Put the table's substance to them in two sentences and ask which, unless their words already settle it (*"remove my name"* is vanishing). Then confirm the ledger by title.
 
 - **Leaving:** `leave_MDL(mdlGuid)`. Destructive and immediate: after it, this session cannot read the ledger either. Say it is done only once it returned `left`, and that Memolok mails them a receipt.
-- **Vanishing:** they can do it themself, at once, on their Memolok sharing and privacy page; say so first. If they want it prepared here, `request_MDL_vanish(mdlGuid)`: *"Memolok has mailed you a link. Nothing happens until you confirm it, within seven days, and once you do it cannot be undone."* `already-vanished`: they vanished already, and nothing names them there since.
+- **Vanishing:** they can do it themself, at once, in their Memolok settings; say so first. If they want it prepared here, `request_MDL_vanish(mdlGuid)`: *"Memolok has mailed you a link. Nothing happens until you confirm it, within seven days, and once you do it cannot be undone."* `already-vanished`: they vanished already, and nothing names them there since.
 
 **The last owner.** Either call is refused with `last-owner` when the user is the ledger's only owner. Say it plainly: *"You're this ledger's last owner. If you go, it is left with no owner, and only a Memolok administrator can make someone else one. Go anyway?"* Only on a clear yes, the same call again with `leaveWithNoOwner: true`. Where `members` shows they are the only owner, say so before the first call rather than waiting for the refusal.
 
 ## Tips
 
-- Withdrawing an invitation, confirming one and accepting one all happen on the Memolok sharing and privacy page. Point there; there is nothing to call.
+- Confirming an invitation happens on the inviter's [Memolok consent page](https://app.memolok.ai/settings/consent), and accepting it on the invitee's; withdrawing one, in the inviter's Memolok settings. Point there; there is nothing to call.
