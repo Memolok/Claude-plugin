@@ -12,6 +12,10 @@ The pack version is independent of the Memolok server's. You install the pack on
 
 ## Unreleased
 
+*Everything that has landed has shipped. This section is a placeholder.*
+
+## 0.44.1-beta — 2026-11-17
+
 - **Your agent knows Memolok's new settings.** The portal now gathers your settings in one place, with a consent page of its own. Your agent points you to your Memolok consent page to confirm or accept an invitation, or to confirm a vanish it prepared, and to your Memolok settings to withdraw an invitation or to vanish on your own.
 
 ## 0.44.0-beta — 2026-11-15
