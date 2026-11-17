@@ -68,7 +68,7 @@ Do not simulate the missing enumeration by keeping a local index of what you sen
 
 ### Confirming a consent
 
-**No tool confirms or accepts a consent, and an agent never can**: confirming an invitation, which is the inviter's consent to what it shows of them, accepting one, and confirming or starting a vanish are the person's own act on their Memolok sharing and privacy page in the portal, linked from the mail Memolok sends them, and Memolok accepts them from the portal alone. Withdrawing an invitation has no tool either; the inviter does it on the same page. The tools that prepare these say so; tell the person what is left for them to do, and never present a prepared request as done. Nobody can leave or vanish on someone else's behalf.
+**No tool confirms or accepts a consent, and an agent never can**: confirming an invitation, which is the inviter's consent to what it shows of them, accepting one, and confirming or starting a vanish are the person's own act in the portal, and Memolok accepts them from the portal alone. Confirming and accepting happen on their [Memolok consent page](https://app.memolok.ai/settings/consent), linked from the mail Memolok sends them; a vanish they start themself happens in their Memolok settings. Withdrawing an invitation has no tool either; the inviter does it in their Memolok settings. The tools that prepare these say so; tell the person what is left for them to do, and never present a prepared request as done. Nobody can leave or vanish on someone else's behalf.
 
 ### Ledger administration
 
