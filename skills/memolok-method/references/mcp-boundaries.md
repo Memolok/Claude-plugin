@@ -70,6 +70,10 @@ Do not simulate the missing enumeration by keeping a local index of what you sen
 
 **No tool confirms or accepts a consent, and an agent never can**: confirming an invitation, which is the inviter's consent to what it shows of them, accepting one, and confirming or starting a vanish are the person's own act in the portal, and Memolok accepts them from the portal alone. Confirming and accepting happen on their [Memolok consent page](https://app.memolok.ai/settings/consent), linked from the mail Memolok sends them; a vanish they start themself happens in their Memolok settings. Withdrawing an invitation has no tool either; the inviter does it in their Memolok settings. The tools that prepare these say so; tell the person what is left for them to do, and never present a prepared request as done. Nobody can leave or vanish on someone else's behalf.
 
+### Profiles
+
+No tool reads or changes a profile, or which ledgers' members see a person's email address. The person sets both in their Memolok settings, [Profile](https://app.memolok.ai/settings/profile) and [Sharing](https://app.memolok.ai/settings/sharing); widening who sees something is a consent there, like the others above. `whoami`, `get_MDL`'s `members` and `resolve_names` carry no profile field: no position, no bio, nothing about who sees what.
+
 ### Ledger administration
 
 | Capability |

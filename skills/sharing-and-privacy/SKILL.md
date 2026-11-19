@@ -7,7 +7,7 @@ argument-hint: "[who to invite, or which ledger to leave]"
 
 # /memolok:sharing-and-privacy — Who reads a ledger, and what it shows of you
 
-Prepares the requests that change who is on a ledger and what it shows of a person: an invitation, leaving, and vanishing. **Leaving takes effect at once; an invitation, and a vanish prepared here, are finished by the person themself**, on their [Memolok consent page](https://app.memolok.ai/settings/consent) in the portal, from the mail Memolok sends them. This skill gets them that far and tells them what is left.
+Prepares the requests that change who is on a ledger and what it shows of a person: an invitation, leaving, and vanishing. **Leaving takes effect at once; an invitation, and a vanish prepared here, are finished by the person themself**, on their [Memolok consent page](https://app.memolok.ai/settings/consent) in the portal, from the mail Memolok sends them. This skill gets them that far and tells them what is left. What a person's profile shows, and to whom, they set in their Memolok settings: [Profile](https://app.memolok.ai/settings/profile) for each field, [Sharing](https://app.memolok.ai/settings/sharing) for which ledgers' members see their email address. No tool reads or changes either.
 
 ## Usage
 
@@ -41,6 +41,7 @@ Load the **`memolok-method`** skill. The tools' contract (`share_MDL`, `leave_MD
 | Pick, find or create a ledger | **`start`** |
 | Remove someone else, change a role, or give one wider than `visitor` | No tool: a Memolok administrator's |
 | Know who created or changed an entry | **`review-ledger`** |
+| Change what their profile shows, or who sees their email address | No tool: their [Profile](https://app.memolok.ai/settings/profile) and [Sharing](https://app.memolok.ai/settings/sharing) settings |
 
 ## Workflow
 
@@ -55,7 +56,7 @@ The `mdlGuid` in play, else `.memolok/mdl.yml`, else `get_MDLs`. `get_MDL` gives
 Only an `owner` or `admin` can, and only as `visitor`: reads everything but notes, changes nothing.
 
 1. **Get their Memolok identifier**, the `iri` `whoami` gives them in their own session; there is no lookup by email or name. Ask for it in those words, never as an "IRI". A member of another ledger you share is in that ledger's `members`.
-2. **Say what an invitation shows, then confirm the ledger and the person**: the invitation carries the user's name and details, and whoever accepts reads everything on the ledger and, like everyone on it, sees the people on it with their roles. Memolok says the same when the user confirms; saying it first spares them a surprise there. Then `share_MDL(mdlGuid, iri)`.
+2. **Say what an invitation shows, then confirm the ledger and the person**: the invitation carries the user's name and details, and whoever accepts reads everything on the ledger and, like everyone on it, sees the people on it with their roles and what each shows on their profile to the people they share a ledger with. Memolok says the same when the user confirms; saying it first spares them a surprise there. Whoever accepts also chooses whether that ledger's members see their email address, and the user is asked the same on confirming, unless they show it there already. Then `share_MDL(mdlGuid, iri)`.
 3. **Say what happens next**, from `invited`:
    - `true`: *"I've prepared the invitation. Memolok will mail you to confirm it on your [Memolok consent page](https://app.memolok.ai/settings/consent), then mail them to accept; nothing changes until both of you have, and an invitation you don't confirm within seven days lapses."*
    - `false`: a demo account, which reads the ledger now.
@@ -76,6 +77,7 @@ Only an `owner` or `admin` can, and only as `visitor`: reads everything but note
 | Takes effect | At once | In their Memolok settings, at once; prepared here, only when they confirm from the mail, within seven days |
 | Their role | Gone; only a new invitation brings it back | Gone |
 | Their name on what they wrote | Stays | A pseudonym in its place, on everything the ledger held then |
+| Their email address, if they showed it there | Hidden from the ledger's members | Hidden from the ledger's members |
 | Undone by | Being invited again | **Nothing, ever** |
 
 Either way, once it has happened, Memolok mails them a receipt.

@@ -58,7 +58,7 @@ The reply names the newest pack available and the oldest this server accepts. If
 
 ### `whoami`
 
-No parameters. Returns `{ userId, iri, givenName, familyName, mbox }`, the last three only when held. `iri` is the user as every record names them: write it as given, never assembled from `userId`.
+No parameters. Returns `{ userId, iri, givenName, familyName, mbox }`, the last three only when held. `iri` is the user as every record names them: write it as given, never assembled from `userId`. It is also their address, which opens their profile in the portal; no tool reads or changes a profile.
 
 ### `resolve_names`
 
@@ -90,7 +90,7 @@ No parameters. Returns `{ mdls: [{ mdlGuid, title, role }] }`. A chooser across 
 
 Returns `{ mdlGuid, title, role, ledgerIntent, members }`. `ledgerIntent` is `null` when the ledger has never stated a purpose — that is normal, not an error.
 
-`members` is everyone holding a role on the ledger, each once: `{ iri, givenName, familyName, roles }`, a name `null` where the account holds none. **It is where a person named in conversation is found.** Absent where your role may not list them.
+`members` is everyone holding a role on the ledger, each once: `{ iri, givenName, familyName, roles }`, a name `null` where the account holds none, and no email address: a person shows theirs only on their profile, to the ledgers they choose. **It is where a person named in conversation is found.** Absent where your role may not list them.
 
 **One ledger's own metadata, not its contents.** For what is inside, use `discover_MDRs`, `discover_matters`, `discover_world_facts` or `discover_observed_outcomes`.
 
@@ -255,9 +255,9 @@ A `.memolok/mdl.yml` carrying `mdlTitle` holds the old name from this moment on 
 | `mdlGuid` | string | yes |
 | `iri` | string | yes |
 
-**Prepares an invitation and grants nothing by itself.** The inviter confirms each invitation on their [Memolok consent page](https://app.memolok.ai/settings/consent), from the mail Memolok sends them, and the invitee then accepts it on theirs. The inviter's confirmation is their consent: it tells them the invitation carries their name and details, and that whoever accepts reads everything on the ledger and, like everyone who joins, sees the people on it with their roles; only the acceptance gives them `visitor`, which reads everything on the ledger but notes and changes nothing. Neither step can be taken through any tool, by you or for them, and a request not confirmed within seven days lapses. Requires `admin` or `owner`. Returns `{ iri, role, invited }`: `invited` true for an invitation prepared, false only for a demo account, which is given the role at once or already holds it.
+**Prepares an invitation and grants nothing by itself.** The inviter confirms each invitation on their [Memolok consent page](https://app.memolok.ai/settings/consent), from the mail Memolok sends them, and the invitee then accepts it on theirs. The inviter's confirmation is their consent: it tells them the invitation carries their name and details, and that whoever accepts reads everything on the ledger and, like everyone who joins, sees the people on it with their roles and what each shows on their profile to the people they share a ledger with; only the acceptance gives them `visitor`, which reads everything on the ledger but notes and changes nothing. Neither step can be taken through any tool, by you or for them, and a request not confirmed within seven days lapses. Requires `admin` or `owner`. Returns `{ iri, role, invited }`: `invited` true for an invitation prepared, false only for a demo account, which is given the role at once or already holds it.
 
-`iri` is the account's `…/m/<musr_…>#id`, exactly as `whoami` gives it to its holder or a ledger you share gives it in `get_MDL`'s `members`. There is no lookup by email or name, and no page shows it: ask the person to read theirs with `whoami` in their own session, as their Memolok identifier; never say "IRI" to a person.
+`iri` is the account's `…/m/<musr_…>#id`, exactly as `whoami` gives it to its holder or a ledger you share gives it in `get_MDL`'s `members`. There is no lookup by email or name, and no page lists it: ask the person to read theirs with `whoami` in their own session, as their Memolok identifier; never say "IRI" to a person.
 
 **Confirm the ledger and the person with the user before the call, then say what is still to do**: they confirm from their own mail, the invitee accepts from theirs. Refused: `already-member` (they hold a role there, which an invitation never changes), `holds-another-role` (a demo account holding another role, which it keeps), `already-invited` (one of yours waits for them; the inviter withdraws it in their Memolok settings, not through any tool), `unknown-account` (no account, or an expired one). No tool takes someone else's access away or gives a wider role; those are a Memolok administrator's.
 
