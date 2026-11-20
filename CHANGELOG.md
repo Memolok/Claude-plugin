@@ -12,7 +12,7 @@ The pack version is independent of the Memolok server's. You install the pack on
 
 ## Unreleased
 
-- **Your agent knows about profiles.** Your Memolok address now opens your profile in the portal, and you choose who sees each part of it, and which ledgers' members see your email address. Your agent tells you what an invitation shows of you, what leaving or vanishing does to your email address, and points you to Settings › Profile and Sharing to change either; no tool reads or changes a profile.
+- **Your agent knows about profiles.** Your Memolok address now opens your profile in the portal, and you choose who sees each part of it, and which ledgers' members see your contact details, so far your email address. Your agent tells you what an invitation shows of you, what leaving or vanishing does to your contact details, and points you to Settings › Profile and Sharing to change either; no tool reads or changes a profile.
 - **No update required.** Older packs keep working; they just describe what ledger members see of each other as it was before profiles.
 
 ## 0.44.1-beta — 2026-11-17

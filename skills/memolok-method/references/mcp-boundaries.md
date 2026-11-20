@@ -72,7 +72,7 @@ Do not simulate the missing enumeration by keeping a local index of what you sen
 
 ### Profiles
 
-No tool reads or changes a profile, or which ledgers' members see a person's email address. The person sets both in their Memolok settings, [Profile](https://app.memolok.ai/settings/profile) and [Sharing](https://app.memolok.ai/settings/sharing); widening who sees something is a consent there, like the others above. `whoami`, `get_MDL`'s `members` and `resolve_names` carry no profile field: no position, no bio, nothing about who sees what.
+No tool reads or changes a profile, or which ledgers' members see a person's contact details. The person sets both in their Memolok settings, [Profile](https://app.memolok.ai/settings/profile) and [Sharing](https://app.memolok.ai/settings/sharing); widening who sees something is a consent there, like the others above. `whoami`, `get_MDL`'s `members` and `resolve_names` carry no profile field: no position, no bio, nothing about who sees what.
 
 ### Ledger administration
 
