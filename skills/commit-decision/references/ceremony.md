@@ -6,7 +6,7 @@
 >
 > You're committing to **a Redis read-through cache on the hot read paths**, on the grounds that it addresses P99 latency directly where horizontal scaling would not.
 >
-> The moment I commit, the server stamps the decision time and the record seals — Verdict, alternatives, expected outcomes and open questions become immutable ledger evidence. Your expected outcome, *P99 under 200ms within 30 days*, becomes the bet this record gets measured against later.
+> The moment I commit, the record seals — Verdict, alternatives, expected outcomes and open questions become immutable ledger evidence. Your expected outcome, *P99 under 200ms within 30 days*, becomes the bet this record gets measured against later.
 >
 > **Still open by design:** whether the write path needs separate treatment. That travels with the record.
 >
@@ -30,7 +30,7 @@ When the user committed before any record existed, surface the same implication 
 
 > Before I write this — minting it as **Accepted** seals it immediately. The Verdict and the expected outcomes become immutable the moment it lands, same as any commitment. Happy to go ahead?
 
-Then mint, then verify from what the mint returns: `status`, `decidedAt` and `mdrNumber` are in it.
+Then mint, then verify from what the mint returns: `status`, `decidedAt`, `sealedAt` and `mdrNumber` are in it.
 
 ## Terse mode
 
@@ -39,6 +39,18 @@ Some users find ceremony tiresome, particularly when sealing several records in 
 > Sealing the caching decision (`MDRh12`) as yours — Redis cache on hot read paths. This freezes the body permanently. Go ahead?
 
 What must never be dropped is the ask. Everything else is style.
+
+## Written after the fact
+
+When the record captures a decision already made, every variant above, rejection and terse included, settles one more thing beside the decider. Where the source or brief states the date, say it aloud for correction:
+
+> You're recording that **the team decided to move the nightly export to object storage**, and I'll name Ana as the one who decided, on 28 October, as the notes say.
+
+Where nothing states it, ask once, and say what no answer means:
+
+> You're recording that **the team decided to move the nightly export to object storage**, and I'll name Ana as the one who decided. When was that decided? A date is enough — without one, it will read as decided today.
+
+Pass the answer as `decidedAt` on the transition, or on `create_MDR` for a one-shot mint. No answer → leave it out, and the record carries the sealing moment.
 
 ## Marking the moment afterwards
 

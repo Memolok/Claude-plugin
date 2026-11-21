@@ -6,7 +6,15 @@
 { "mdlGuid": "<mdlGuid>", "mdr": "MDRh1", "status": "Accepted" }
 ```
 
-Returns the record's acknowledgement: `status`, `decidedAt` set, `mdrNumber` assigned, and `retractable` computed, beside its identity — not its prose.
+Returns the record's acknowledgement: `status`, `decidedAt` and `sealedAt` set, `mdrNumber` assigned, and `retractable` computed, beside its identity — not its prose.
+
+A record written after the fact states when the decision was made, on this move or the one to Rejected, as a date or a date-time with seconds and an explicit offset; it may not be later than the sealing:
+
+```json
+{ "mdlGuid": "<mdlGuid>", "mdr": "MDRh1", "status": "Accepted", "decidedAt": "2026-10-28T10:00:00+03:00" }
+```
+
+Left out, `decidedAt` is the sealing instant. A date comes back as sent, a date-time in UTC to the millisecond.
 
 ## Rejected — t₀
 
@@ -24,7 +32,7 @@ A Rejected record carries no `amends`, `supersedes` or `settlesOpenQuestion`: no
 { "mdlGuid": "<mdlGuid>", "mdr": "MDRh1", "status": "Proposed" }
 ```
 
-Requires alternatives, a valid `chosenAlternative`, and a Verdict. **This is not t₀** — no `decidedAt`, no number, still fully editable. Skip it entirely on informal work.
+Requires alternatives, a valid `chosenAlternative`, and a Verdict. **This is not t₀** — no `decidedAt`, no number, still fully editable, and a `decidedAt` sent with it is refused. Skip it entirely on informal work.
 
 ## Aliases
 
@@ -46,13 +54,16 @@ Requires alternatives, a valid `chosenAlternative`, and a Verdict. **This is not
 | `A Rejected Memolok Decision Record must not carry supersedes…` | Clear `supersedes`, or admit as Accepted |
 | `A Rejected Memolok Decision Record must not carry amends…` | Clear `amends`, or admit as Accepted |
 | `Only Accepted Memolok Decision Records may carry settlesOpenQuestion.` | Clear `settlesOpenQuestion`, or admit as Accepted |
+| `decidedAt can be stated only when sealing a Memolok Decision Record at Accepted or Rejected.` | Sent with a move to `Proposed` or any other staged status: leave it out |
+| `decidedAt must be a date, YYYY-MM-DD, or a date-time with seconds and an offset…` | Send `2026-10-28`, or the date-time with its seconds and offset |
+| `decidedAt … is later than now…` | A decision is never dated after its seal: check the date with the user, or against the source where no user is present |
 | `Cannot transition a Memolok Decision Record from {from} to {to}.` | The matrix is the method's lifecycle table. The usual case is Proposed back to Deliberating, which is not allowed: patch it in place — it is still staged — or reject it and mint a fresh record |
 
-Every one of these is fixable with an `update_MDR` while the record is still staged. Patch, then return to the ceremony.
+Every one of these is fixable with an `update_MDR` while the record is still staged, except the three `decidedAt` rows, which are fixed in the transition itself. Patch, then return to the ceremony.
 
 `You do not have the necessary permissions to edit this decision record.` is not a gate. The caller's role does not let them change this record's status, and no patch fixes that — an administrator changes the role.
 
-A reply saying the change was **only partly made** is not a gate either, and not a fault to report: repeat the identical call, and it completes the seal. The record is not sealed until it does — unless the repeat is refused as a transition to the status it already has, which means the first call finished: read the record to confirm. `write-failures.md` in the method has the refusals that name an earlier call to repeat first.
+A reply saying the change was **only partly made** is not a gate either, and not a fault to report: repeat the identical call, and it completes the seal. The record is not sealed until it does — unless the repeat is refused as a transition to the status it already has, which means the first call finished: read the record to confirm. `write-failures.md` in the method has the refusals that name an earlier call to repeat first. The repeat may also leave out `decidedAt`: it keeps the moment the first call stored.
 
 ## Settling an open question at admission
 
@@ -82,7 +93,8 @@ Check the transition's own reply:
 | --- | --- |
 | `status` | `Accepted` or `Rejected` |
 | `mdrNumber` | An integer — this is now the user-facing name |
-| `decidedAt` | A timestamp |
+| `decidedAt` | The moment stated — a date as sent, a date-time in UTC — or else the sealing instant |
+| `sealedAt` | The sealing instant; compare a date-time `decidedAt` with it as instants, never as text |
 | `retractable` | `true` if nothing anchors it yet; `false` if something already does |
 
 A tier-1 `update_MDR` should now fail. That failure is the Decision Transaction Principle working correctly, not a bug to route around.

@@ -58,7 +58,7 @@ The reply names the newest pack available and the oldest this server accepts. If
 
 ### `whoami`
 
-No parameters. Returns `{ userId, iri, givenName, familyName, mbox }`, the last three only when held. `iri` is the user as every record names them: write it as given, never assembled from `userId`.
+No parameters. Returns `{ userId, iri, givenName, familyName, mbox }`, the last three only when held. `iri` is the user as every record names them: write it as given, never assembled from `userId`. It is also their address, which opens their profile in the portal; no tool reads or changes a profile.
 
 ### `resolve_names`
 
@@ -90,7 +90,7 @@ No parameters. Returns `{ mdls: [{ mdlGuid, title, role }] }`. A chooser across 
 
 Returns `{ mdlGuid, title, role, ledgerIntent, members }`. `ledgerIntent` is `null` when the ledger has never stated a purpose — that is normal, not an error.
 
-`members` is everyone holding a role on the ledger, each once: `{ iri, givenName, familyName, roles }`, a name `null` where the account holds none. **It is where a person named in conversation is found.** Absent where your role may not list them.
+`members` is everyone holding a role on the ledger, each once: `{ iri, givenName, familyName, roles }`, a name `null` where the account holds none, and no email address: a person shows theirs only on their profile, to the ledgers they choose. **It is where a person named in conversation is found.** Absent where your role may not list them.
 
 **One ledger's own metadata, not its contents.** For what is inside, use `discover_MDRs`, `discover_matters`, `discover_world_facts` or `discover_observed_outcomes`.
 
@@ -111,7 +111,7 @@ Returns `{ mdlGuid, title, role, ledgerIntent, members }`. `ledgerIntent` is `nu
 
 Each returns **Markdown, not an envelope**: a heading per entry, an identity line, the metadata lines that collection carries, and its derived summary. The page states its own totals, says when you are holding part of the ledger, and gives you the `offset` for the next one. Where an entry has nothing derived the heading is the writer's own opening instead, and every page says which it is showing you. On `discover_scratchpads` that fallback is a trim of whatever was pasted rather than an opening somebody wrote, because nobody types a title for a note. **A heading or summary is Memolok's wording, never the author's: quote a person only from the `get_*` read that returns the entry whole.** On world facts that matters most, because a paraphrase quoted as the admitted claim misstates what the ledger rests on.
 
-**Every page renders a date line** — `Decided:` on records, `Registered:` on matters, `Admitted:` on facts, `Observed:` on outcomes, `Touched:` on notes — so *"what came in this week"* is answerable without opening anything. It may be absent on an entry old enough to predate the field, and on a record it is absent whenever the record is staged, because `Decided:` is t₀ and a staged record has not reached one.
+**Every page renders a date line** — `Decided:` on records, `Registered:` on matters, `Admitted:` on facts, `Observed:` on outcomes, `Touched:` on notes — so *"what was decided this week"* is answerable without opening anything. It may be absent on an entry old enough to predate the field, and on a record it is absent whenever the record is staged, because a staged record has not been decided. A record's `Decided:` is when the decision was made, which a record written after the fact states as earlier than its arrival: when it reached the ledger is its `sealedAt`, from `get_MDR`.
 
 **The total is the whole match, not the page.** Holding fewer entries than it states means you have not seen the ledger, and an answer that does not say so is claiming coverage it does not have.
 
@@ -128,7 +128,7 @@ Per-tool filters and natural order are below. Nothing else about the shape varie
 | `mdlGuid` | string | yes |
 | `mdr` | string: `MDRh7` or `MDR-7` | yes |
 
-**`get_MDR` answers what a record decided; `get_MDR_details` answers why and how.** This is the read for finding out about a record. Returns `mdrHandle`, `mdlGuid`, `mdrNumber`, `status`, `retractable`, `title`, `createdAt`, `createdBy`, `decidedAt`, `hasNeed`, `verdict`, every open question whole, and every edge — `hasContext`, `analysisId`, `supersedes`, `supersededBy`, `amends`, `amendedBy`, `dependsOn`, `conflictsWith`, `settlesOpenQuestion` — plus a `details` key sizing the prose it leaves out.
+**`get_MDR` answers what a record decided; `get_MDR_details` answers why and how.** This is the read for finding out about a record. Returns `mdrHandle`, `mdlGuid`, `mdrNumber`, `status`, `retractable`, `title`, `createdAt`, `createdBy`, `decidedAt`, `sealedAt`, `hasNeed`, `verdict`, every open question whole, and every edge — `hasContext`, `analysisId`, `supersedes`, `supersededBy`, `amends`, `amendedBy`, `dependsOn`, `conflictsWith`, `settlesOpenQuestion` — plus a `details` key sizing the prose it leaves out.
 
 `createdBy` is Memolok's own account of who created the record: its owner, and who answers for it. Nobody writes it. The four RACI fields are testimony, and `authoredBy` is not its creator. It is `null` where Memolok holds no account of the creation; never read `authoredBy` in its place.
 
@@ -138,11 +138,11 @@ Cite the handle when you have one. The identity section above says why a number 
 
 Same parameters and rule as `get_MDR`. Returns the whole record: `get_MDR`'s fields less `details`, plus `alternatives`, `deliberationFacts`, `chosenAlternative`, `expectedOutcomes`, the four RACI fields, and the derived `summary` and `subjects` — those two only on a sealed record, since a staged one's prose may still change.
 
-**Read it when the question is why or how** — the options weighed, the arguments, what was expected — never reconstructing an argument from the Verdict's wording; and **before patching an array you did not just draft**, since a patch replaces it whole. Its output can be sent back through `update_MDR` as it stands.
+**Read it when the question is why or how** — the options weighed, the arguments, what was expected — never reconstructing an argument from the Verdict's wording; and **before patching an array you did not just draft**, since a patch replaces it whole. Its patchable fields come in the form `update_MDR` takes, beside read-only ones such as `status`, `mdrHandle`, `createdAt`, `decidedAt` and `sealedAt`, which a patch refuses: send only the fields you change, never the read echoed back.
 
 ### `discover_MDRs`
 
-Shared discovery params, plus `status` (string, optional; an unknown value is refused by name). Ledger order: by number, then handle. Per record: a heading, `MDR-7 (handle 11)` or `MDRh12 (staged — no number yet)`, `Decided:` (t₀ — absent while staged, and removed by an Uncommit), `Status:`, `Created by:`, the terms it names, its summary and an excerpt of its head Claim.
+Shared discovery params, plus `status` (string, optional; an unknown value is refused by name). Ledger order: by number, then handle. Per record: a heading, `MDR-7 (handle 11)` or `MDRh12 (staged — no number yet)`, `Decided:` (`decidedAt`, when the decision was made — absent while staged, and removed by an Uncommit), `Status:`, `Created by:`, the terms it names, its summary and an excerpt of its head Claim.
 
 **Search covers the whole fish** — Claim, Verdict, alternatives, deliberation facts, expected outcomes, open questions — so a hit can look unrelated to its heading; the match window shows where it came from. **`Rejected` is a sealed commitment not to proceed and `Superseded` means a later record replaced this one**; neither is an unfinished record.
 
@@ -211,7 +211,7 @@ Returns each expected outcome with the wakes that test it, plus every Emergent a
 
 ## Write tools
 
-**A write answers with an acknowledgement, never the entry it wrote**: the entry's identifiers, its lifecycle state, the times the server stamped, and a `body` key — `"2,432 characters, not echoed; get_MDR reads it"` — giving how much prose the entry now holds. The count is a sanity check: roughly what you sent, or whether a patch grew or shrank the record. Read the entry with the tool `body` names when you need what landed; a field missing from an acknowledgement is not a fault. The exceptions are named where they occur.
+**A write answers with an acknowledgement, never the entry it wrote**: the entry's identifiers, its lifecycle state, its times, and a `body` key — `"2,432 characters, not echoed; get_MDR reads it"` — giving how much prose the entry now holds. The count is a sanity check: roughly what you sent, or whether a patch grew or shrank the record. Read the entry with the tool `body` names when you need what landed; a field missing from an acknowledgement is not a fault. The exceptions are named where they occur.
 
 ### `create_MDL`
 
@@ -255,9 +255,9 @@ A `.memolok/mdl.yml` carrying `mdlTitle` holds the old name from this moment on 
 | `mdlGuid` | string | yes |
 | `iri` | string | yes |
 
-**Prepares an invitation and grants nothing by itself.** The inviter confirms each invitation on their [Memolok consent page](https://app.memolok.ai/settings/consent), from the mail Memolok sends them, and the invitee then accepts it on theirs. The inviter's confirmation is their consent: it tells them the invitation carries their name and details, and that whoever accepts reads everything on the ledger and, like everyone who joins, sees the people on it with their roles; only the acceptance gives them `visitor`, which reads everything on the ledger but notes and changes nothing. Neither step can be taken through any tool, by you or for them, and a request not confirmed within seven days lapses. Requires `admin` or `owner`. Returns `{ iri, role, invited }`: `invited` true for an invitation prepared, false only for a demo account, which is given the role at once or already holds it.
+**Prepares an invitation and grants nothing by itself.** The inviter confirms each invitation on their [Memolok consent page](https://app.memolok.ai/settings/consent), from the mail Memolok sends them, and the invitee then accepts it on theirs. The inviter's confirmation is their consent: it tells them the invitation carries their name and details, and that whoever accepts reads everything on the ledger and, like everyone who joins, sees the people on it with their roles and what each shows on their profile to the people they share a ledger with; only the acceptance gives them `visitor`, which reads everything on the ledger but notes and changes nothing. Neither step can be taken through any tool, by you or for them, and a request not confirmed within seven days lapses. Requires `admin` or `owner`. Returns `{ iri, role, invited }`: `invited` true for an invitation prepared, false only for a demo account, which is given the role at once or already holds it.
 
-`iri` is the account's `…/m/<musr_…>#id`, exactly as `whoami` gives it to its holder or a ledger you share gives it in `get_MDL`'s `members`. There is no lookup by email or name, and no page shows it: ask the person to read theirs with `whoami` in their own session, as their Memolok identifier; never say "IRI" to a person.
+`iri` is the account's `…/m/<musr_…>#id`, exactly as `whoami` gives it to its holder or a ledger you share gives it in `get_MDL`'s `members`. There is no lookup by email or name, and no page lists it: ask the person to read theirs with `whoami` in their own session, as their Memolok identifier; never say "IRI" to a person.
 
 **Confirm the ledger and the person with the user before the call, then say what is still to do**: they confirm from their own mail, the invitee accepts from theirs. Refused: `already-member` (they hold a role there, which an invitation never changes), `holds-another-role` (a demo account holding another role, which it keeps), `already-invited` (one of yours waits for them; the inviter withdraws it in their Memolok settings, not through any tool), `unknown-account` (no account, or an expired one). No tool takes someone else's access away or gives a wider role; those are a Memolok administrator's.
 
@@ -380,8 +380,11 @@ Clears `concludedAt`. Refused once any produced record carries `decidedAt` — u
 | `chosenAlternative` | string | no |
 | `authoredBy`, `decidedBy` | string | no |
 | `consulted`, `informed` | string[] | no |
+| `decidedAt` | string | no — at `Accepted` or `Rejected` only |
 
-Expert path only — there is no matter parameter. Returns the **record acknowledgement**, `{ mdrHandle, mdlGuid, mdrNumber, status, retractable, createdAt, decidedAt, body }`, with a minted `mdrHandle`; `mdrNumber` only if created at `Accepted` or `Rejected`. Every record write returns this shape.
+Expert path only — there is no matter parameter. Returns the **record acknowledgement**, `{ mdrHandle, mdlGuid, mdrNumber, status, retractable, createdAt, decidedAt, sealedAt, body }`, with a minted `mdrHandle`; `mdrNumber`, `decidedAt` and `sealedAt` only if created at `Accepted` or `Rejected`. Every record write returns this shape.
+
+**`decidedAt` is when the decision was made**, testimony like `decidedBy`, stated by whoever seals the record: a date, `YYYY-MM-DD`, or a date-time with seconds and an explicit offset, `2026-10-28T10:00:00+03:00`, kept in UTC to the millisecond. Never later than the sealing; left out, it is the sealing instant. `sealedAt` is the sealing itself, which the server records and no call sets. A stated date comes back as sent; compare a date-time `decidedAt` with `sealedAt` as instants, never as text. Any other call carrying `decidedAt` is refused, `update_MDR` included.
 
 ### `update_MDR`
 
@@ -407,11 +410,11 @@ Returns the record acknowledgement. An array you did not just draft starts from 
 
 ### `transition_MDR_status`
 
-`mdlGuid`, `mdr` as `MDRh7`, `status`. Admission to `Accepted` or `Rejected` sets `decidedAt`, assigns `mdrNumber`, and mints reciprocals on the records it names. Returns the record acknowledgement, which carries all three of `status`, `decidedAt` and `mdrNumber` to confirm the move by. Refused with `incomplete` → **repeat the identical call**, which completes it (`write-failures.md`).
+`mdlGuid`, `mdr` as `MDRh7`, `status`, optional `decidedAt` on a move to `Accepted` or `Rejected` only, in the form `create_MDR` gives. Admission records `sealedAt`, sets `decidedAt` to the moment stated or else to the sealing instant, assigns `mdrNumber`, and mints reciprocals on the records it names. Returns the record acknowledgement, which carries `status`, `decidedAt`, `sealedAt` and `mdrNumber` to confirm the move by. Refused with `incomplete` → **repeat the identical call**, which completes it (`write-failures.md`); the repeat may also leave out `decidedAt`; a different moment on the repeat is ignored, the first call's stands, and an invalid one is refused.
 
 ### `uncommit_MDR`
 
-`mdlGuid`, `mdr` as `MDRh7`, optional `reason`. Requires `admin` or `owner`, status `Accepted` or `Rejected`, and `retractable: true`. Demotes to staged, clearing `mdrNumber` and `decidedAt`. Returns the record acknowledgement. Refused with `incomplete` → **repeat the identical call**, which completes it (`write-failures.md`).
+`mdlGuid`, `mdr` as `MDRh7`, optional `reason`. Requires `admin` or `owner`, status `Accepted` or `Rejected`, and `retractable: true`. Demotes to staged, clearing `mdrNumber`, `decidedAt` and `sealedAt`; a re-admission may state the moment again. Returns the record acknowledgement. Refused with `incomplete` → **repeat the identical call**, which completes it (`write-failures.md`).
 
 ### `anchor_MDR`
 
@@ -589,6 +592,10 @@ Owner-only, no time limit. Patchable: `title`, `kind`, `report`, `userVerbatim`,
 | `Cannot change {field}: inter-record graph links may only be authored on staged Memolok Decision Records.` | `invalid-request` | Graph patch on a resident |
 | `No updatable fields were provided.` | `invalid-request` | Empty or no-op patch |
 | `Cannot transition a Memolok Decision Record from {from} to {to}.` | `invalid-request` | Illegal transition |
+| `decidedAt can be stated only when sealing a Memolok Decision Record at Accepted or Rejected.` | `invalid-request` | `decidedAt` on `create_MDR` at a staged status, or on a move to one; on `update_MDR` it is refused as a field that cannot be updated |
+| `decidedAt must be a string.` | `invalid-request` | A number, object or `null` sent as the moment |
+| `decidedAt must be a date, YYYY-MM-DD, or a date-time with seconds and an offset, such as 2026-10-28T07:00:00Z or 2026-10-28T10:00:00+03:00.` | `invalid-request` | Any other form: a date-time without seconds or offset, a month, a year |
+| `decidedAt {moment} is later than now: a decision is never dated after its record is sealed.` | `invalid-request` | A moment after the sealing |
 | `supersedes may only target Accepted residents (MDR-{n} is {status}).` | `invalid-request` | Bad supersession target. A `Superseded` one has already been retired, so a second attempt has nothing to retire |
 | `amends may only target Accepted residents (MDR-{n} is {status}).` | `invalid-request` | Same rule, same reason: only an `Accepted` record has content for the amendment to leave standing |
 | `A Rejected Memolok Decision Record must not carry amends (…).` | `invalid-request` | `amends` on a record admitting as `Rejected` — nothing it says is in force, so it changes nothing |

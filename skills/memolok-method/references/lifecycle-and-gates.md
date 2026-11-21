@@ -38,8 +38,8 @@ Evaluated on `create_MDR` (against the requested creation status), on `update_MD
 | --- | --- |
 | All statuses | `hasNeed.description.markdown` non-empty |
 | Proposed, Accepted | ≥1 `alternatives`; `chosenAlternative` matches an `alternatives[].id`; non-empty `verdict.description.markdown` |
-| Accepted | ≥1 `expectedOutcomes`, each with `manifests.description.markdown`; `decidedAt` (server-stamped) |
-| Rejected | Verdict present; `decidedAt`; carries no `amends`, `supersedes` or `settlesOpenQuestion` |
+| Accepted | ≥1 `expectedOutcomes`, each with `manifests.description.markdown`; at the seal, `decidedAt` as stated or else the sealing instant, and `sealedAt` |
+| Rejected | Verdict present; `decidedAt` and `sealedAt` as for Accepted; carries no `amends`, `supersedes` or `settlesOpenQuestion` |
 
 Gate messages:
 
@@ -59,11 +59,11 @@ The practical ladder: **Deliberating** needs only a head Claim, so a fish can li
 
 ## t₀ behaviour
 
-On transition to `Accepted` or `Rejected` the server sets `decidedAt`, assigns `mdrNumber` from the live high-water mark, publishes graph reciprocals, appends an audit event, and computes `retractable`. Tier-1 patches are refused from then on.
+On transition to `Accepted` or `Rejected` the server records `sealedAt`, keeps the `decidedAt` the call stated or else sets it to the sealing instant, assigns `mdrNumber` from the live high-water mark, publishes graph reciprocals, appends an audit event, and computes `retractable`. Tier-1 patches are refused from then on.
 
 ## Tier-1 fields (sealed on ledger residents)
 
-`hasNeed`, `hasContext`, `alternatives`, `deliberationFacts`, `expectedOutcomes`, `openQuestions`, `chosenAlternative`, `verdict`, `decidedAt`, `status`
+`hasNeed`, `hasContext`, `alternatives`, `deliberationFacts`, `expectedOutcomes`, `openQuestions`, `chosenAlternative`, `verdict`
 
 ## Patchable
 
@@ -71,7 +71,7 @@ On transition to `Accepted` or `Rejected` the server sets `decidedAt`, assigns `
 | --- | --- |
 | Staged only | All tier-1 fish fields, plus `amends`, `supersedes`, `dependsOn`, `conflictsWith` and `settlesOpenQuestion` |
 | Any status | `authoredBy`, `decidedBy`, `consulted`, `informed` |
-| Never | `status` (use the transition tool), `openQuestions[].settledIn`, `mdrHandle`, `mdrNumber`, `amendedBy`, `supersededBy` |
+| Never | `status` (use the transition tool), `decidedAt` (stated only on the sealing call), `sealedAt`, `openQuestions[].settledIn`, `mdrHandle`, `mdrNumber`, `amendedBy`, `supersededBy` |
 
 `hasContext` is `update_MDR`-only — it is not a `create_MDR` parameter — and takes an ordered list of World Fact or prior Observed Outcome ids.
 

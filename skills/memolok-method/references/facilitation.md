@@ -57,6 +57,8 @@ Silhouette is a diagnostic: starts wide, converges twice, or has no tail → aut
 
 Holder unclear → interactive: ask once, at the moment of writing; unattended: leave the role unset. Never guess, and never stop an unattended run to ask.
 
+**When it was decided** = `decidedAt`, testimony beside `decidedBy`, set with the seal, **Rejected** included. Live seal → leave it out: it is the sealing instant. Record written after the fact — an import, meeting notes, *"we decided this last week"*, re-admitting an unchanged choice (`revise-decision`) → source or brief states the date: say it aloud beside the decider, for correction; interactive and nothing states it: ask once, in the ceremony, never as a routine question; unattended: state it only from the brief or the source. Never guess: padding a month or a year to a day, or inventing a time zone, is guessing → only the day known: send the date alone; less: leave it out, and tell the user. Form and limits: the catalog's `create_MDR`.
+
 **How each is named:**
 
 - **Yourself:** your model's display name exactly as its vendor writes it, such as `Claude Opus 5.5`, and nothing else: no model ID, task, role, date, session, product, or "on behalf of" (the credential already says whose). Model unknown → use the generic brand name you know (`Claude`, `Gemini`, `ChatGPT`, etc). Every session of one model must write the same string, so use the most sensible option you'd expect unrelated sessions to use.
@@ -68,7 +70,7 @@ Holder unclear → interactive: ask once, at the moment of writing; unattended: 
 
 ## Decision Transaction Principle
 
-Effects project **forward only**. **t₀** = admission, the transition to **Accepted** or **Rejected**. At t₀ the server sets `decidedAt`, assigns `mdrNumber`, seals tier-1 fields.
+Effects project **forward only**. **t₀** = admission, the transition to **Accepted** or **Rejected**. At t₀ the server records `sealedAt`, keeps `decidedAt` as stated or else sets it to the sealing instant, assigns `mdrNumber`, seals tier-1 fields.
 
 **Stable fish stay sealed.** After admission tier-1 fields are immutable via `update_MDR`, retractable or anchored alike. **Retractable** means only that an uncommit can demote it to staged for editing and re-admission; **anchored** cannot be uncommitted at all. **Never** tell a user a committed record can be patched in place.
 

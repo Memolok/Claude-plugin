@@ -75,13 +75,15 @@ Anchoring is member-level, so anyone who can write the citation can declare it.
 
 Every address is the identifier you already hold, under the ledger's own address where the identifier is the ledger's, and a record is its citation form exactly: `MDR-7` in prose, `…/MDR-7` in an address. Write identifiers in the case Memolok returned them. A note's `msp_…` is unique everywhere, but its address still sits under its ledger: `…/m/<msp_…>` alone names nothing. The `/m/` namespace holds Memolok's addresses and nothing else, and is kept apart from the application around it so that a reorganisation of the application never moves one: a citation written now stays good.
 
-> **Not built yet.** A feedback report, a user and a service principal have addresses too — `https://app.memolok.ai/m/<mfb_…>`, and `…/m/<musr_…>#id` or `…/m/<msvc_…>#id` naming the principal itself — but none of them opens yet. Give a reader the identifier rather than a link that leads nowhere.
+**A user's address is `…/m/<musr_…>#id`**, the `iri` Memolok gives for them, and it opens their profile in the portal: each reader sees what that person shows them, and a reader shown nothing gets exactly what an address naming no one gives.
+
+> **Not built yet.** A feedback report and a service principal have addresses too — `https://app.memolok.ai/m/<mfb_…>`, and `…/m/<msvc_…>#id` naming the principal itself — but neither opens yet. Give a reader the identifier rather than a link that leads nowhere.
 
 **A record sealed before these addresses existed may quote older ones** — `https://www.memolok.ai/mdl/…`, a bare ledger guid, an `sp_…` note id. None was ever served and nothing redirects them: quote the record as it stands, and write the current address in your own reference.
 
 **A record's part is addressed under its record**: the record's address, then `#`, then the part's id exactly as the record holds it, from your own read, `…/MDR-7#oq-backup`. Citing a part cites its record, so the record is what you anchor.
 
-**Every address in the table opens.** Anyone not signed in gets a sign-in page, the same at every address, and a member who signs in lands on the entry, a record's part in view and marked. Anyone else gets a not-found, the same as for an entry that does not exist.
+**Every address in the table opens.** Anyone not signed in gets a sign-in page, the same at every address, and a member who signs in lands on the entry, a record's part in view and marked. Anyone else gets a not-found, the same as for an entry that does not exist. A user's address differs in one way: whatever its owner shows everyone is shown to anyone, signed in or not.
 
 **Name a ledger by its title beside its address.** A reader then knows which one you mean without resolving anything.
 

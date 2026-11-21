@@ -15,7 +15,7 @@ The default. Head Claim only, everything else patched in as deliberation proceed
 }
 ```
 
-Returns an acknowledgement — `mdrHandle`, `mdlGuid`, `mdrNumber: null`, `status`, `retractable`, `createdAt`, `decidedAt` and a `body` sizing the prose — not the record. Keep the `mdrHandle`.
+Returns an acknowledgement — `mdrHandle`, `mdlGuid`, `mdrNumber: null`, `status`, `retractable`, `createdAt`, `decidedAt` and `sealedAt` (both `null` while staged) and a `body` sizing the prose — not the record. Keep the `mdrHandle`.
 
 `claimDescription` takes the prose object **directly** — no `description` wrapper. It is the one parameter shaped that way on this tool.
 
@@ -118,6 +118,8 @@ Only when the user has stated commitment in their own words. Run the ceremony fr
 
 Creating at `Accepted` additionally needs alternatives, a valid `chosenAlternative`, and at least one expected outcome — the same gates a transition would enforce.
 
+A decision made before this record carries the moment the ceremony established, beside `status`: `"decidedAt": "2026-10-28"`, or a date-time with seconds and an explicit offset. Left out, it is the sealing instant, which is what a live seal wants.
+
 ## Allowed creation statuses
 
 | Status | When |
@@ -145,6 +147,9 @@ Creating at `Accepted` additionally needs alternatives, a valid `chosenAlternati
 | `…id '…' may hold only lowercase letters, digits, hyphens and underscores after '…'…` | Any other character after the prefix; `did you mean '…'?` follows where lowercasing fixes it |
 | `…id '…' is used twice in this list.` | Two items claiming one id |
 | `At least one expected outcome is required before accepting…` | Created at `Accepted` with no tail |
+| `decidedAt can be stated only when sealing a Memolok Decision Record at Accepted or Rejected.` | `decidedAt` sent with a staged status |
+| `decidedAt must be a date, YYYY-MM-DD, or a date-time with seconds and an offset…` | A date-time without seconds or offset, or any other form |
+| `decidedAt … is later than now…` | A moment after the sealing |
 | `verdict must be {description: {markdown, lang}}, not a flat {markdown, lang} object.` | Sent `verdict` as bare `{markdown, lang}`. The same sentence names `alternatives[n]` and the other wrapped lists |
 
 ## What create_MDR cannot carry

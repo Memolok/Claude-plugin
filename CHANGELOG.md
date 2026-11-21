@@ -14,6 +14,12 @@ The pack version is independent of the Memolok server's. You install the pack on
 
 *Everything that has landed has shipped. This section is a placeholder.*
 
+## 0.45.0-beta — 2026-11-21
+
+- **A decision recorded after the fact keeps its own date.** When you import decisions, or record one from meeting notes or a choice made last week, your agent takes the date from the source or asks you, and the record carries that date, while the ledger still shows when it was sealed. On a decision you are making now, nothing changes and nothing extra is asked. Older packs keep working, but read such a record's date as when it reached the ledger, so updating is recommended.
+- **Your agent knows about profiles.** Your Memolok address now opens your profile in the portal, and you choose who sees each part of it, and which ledgers' members see your contact details, so far your email address. Your agent tells you what an invitation shows of you, what leaving or vanishing does to your contact details, and points you to Settings › Profile and Sharing to change either; no tool reads or changes a profile.
+- **Profiles need no update.** Older packs keep working; they just describe what ledger members see of each other as it was before profiles.
+
 ## 0.44.1-beta — 2026-11-17
 
 - **Your agent knows Memolok's new settings.** The portal now gathers your settings in one place, with a consent page of its own. Your agent points you to your Memolok consent page to confirm or accept an invitation, or to confirm a vanish it prepared, and to your Memolok settings to withdraw an invitation or to vanish on your own.
