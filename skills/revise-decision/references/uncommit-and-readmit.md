@@ -15,7 +15,7 @@
 get_MDR(mdlGuid, mdr)
 ```
 
-Confirm `retractable` is exactly `true`. Never call `uncommit_MDR` speculatively.
+Confirm `retractable` is exactly `true`. Never call `uncommit_MDR` speculatively. The reply also holds `decidedAt`: keep it, since nothing holds it after the uncommit and the re-admission may need to state it again.
 
 | `retractable` | Meaning |
 | --- | --- |
@@ -37,7 +37,7 @@ Note the first of those: **amending a record Anchors it.** If you may want to Un
 }
 ```
 
-The record drops back to a staged status, and `mdrNumber`, `decidedAt`, and `retractable` all clear. The response comes back with `retractable: null` and `mdrNumber: null`.
+The record drops back to a staged status, and `mdrNumber`, `decidedAt`, `sealedAt` and `retractable` all clear. The response comes back with `retractable: null` and `mdrNumber: null`.
 
 `reason` is optional in the schema and mandatory in practice — the audit plane keeps both the commit and the uncommit permanently, and a blank reason makes that history useless.
 
@@ -68,7 +68,7 @@ Every tier-1 field is patchable again, as are the graph edges.
 { "mdlGuid": "<mdlGuid>", "mdr": "MDRh1", "status": "Accepted" }
 ```
 
-Run the ceremony from **`commit-decision`** first. This is a fresh t₀ with a fresh `decidedAt`, not a resumption of the original commitment.
+Run the ceremony from **`commit-decision`** first. This is a fresh t₀ with a fresh `sealedAt`, not a resumption of the original commitment. Its `decidedAt`: a correction that leaves the choice as it was restates the moment noted before the uncommit, or the corrected one where the date was what was wrong, said aloud beside the decider and passed on the re-admitting transition; a choice that changed in substance leaves it out, because it is decided now. In an unattended run the noted moment is the source.
 
 A **new** number is assigned from the live high-water mark. Uncommitting the most recent record and re-admitting it usually returns the same number; uncommitting an older one leaves its original number permanently unused.
 
@@ -101,4 +101,4 @@ Then wait.
 
 **Uncommitting an anchored record because `retractable` was not read.** The error message is clear, but by then the user has been offered something that was never available.
 
-**Treating re-admission as resuming the original commitment.** It is a new t₀ with a new timestamp and a new number. Anything that cited the old number now cites nothing — or worse, comes to cite whichever record takes that number next. **This is what `anchor_MDR` exists to prevent**: a record declared as cited outside the ledger refuses the uncommit outright, so the citation can never go wrong. Declaring it is the writer's job at the moment of citing, not something anyone can add afterwards.
+**Treating re-admission as resuming the original commitment.** It is a new t₀ with a new sealing and a new number. Anything that cited the old number now cites nothing — or worse, comes to cite whichever record takes that number next. **This is what `anchor_MDR` exists to prevent**: a record declared as cited outside the ledger refuses the uncommit outright, so the citation can never go wrong. Declaring it is the writer's job at the moment of citing, not something anyone can add afterwards.

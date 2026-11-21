@@ -16,7 +16,7 @@ There is no undoing a declaration, which is the point of making one. Nothing ver
 
 In law and accounting, a transaction is a single dated entry recording a commitment made at a specific moment: at time *t*, we did this. Once later work depends on that line, it is never rewritten in place. If a posting was premature and nothing has yet depended on it, the books can retract it — but the journal still shows that it was posted and withdrawn.
 
-Decisions are treated exactly that way. The commitment date is the posting date, the record is the entry, and the ledger history is the journal that cannot be quietly tidied.
+Decisions are treated exactly that way. The commitment date is the posting date, the record is the entry, and the ledger history is the journal that cannot be quietly tidied. A decision recorded after the fact also carries the date it was actually made, earlier than its posting, as a journal entry's transaction date can precede the day it was posted.
 
 Engineers will recognize the family resemblance to a database commit, with one addition: a governed withdrawal path that stays open only while nothing has taken a dependency.
 

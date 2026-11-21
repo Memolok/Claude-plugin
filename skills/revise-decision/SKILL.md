@@ -154,7 +154,7 @@ If the user wants to erase an embarrassing decision rather than correct a record
 - Un-anchoring anything. Amending a record spends its Uncommit path for good.
 - Dissolving a `conflictsWith` pair. It Anchors both records, including the one that declared it.
 - Recovering the old number after re-admission.
-- Backdating anything. `decidedAt` is server-stamped.
+- Changing when a sealed record says it was decided. `decidedAt` is stated only at the seal, and only an uncommit clears it.
 
 ## Tips
 

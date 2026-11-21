@@ -7,7 +7,7 @@ argument-hint: "[accept | reject] <record>"
 
 # /memolok:commit-decision — Seal at t₀
 
-Takes a staged record across t₀. The server stamps `decidedAt`, assigns the ledger number, and seals the body permanently.
+Takes a staged record across t₀. The server records when it sealed, assigns the ledger number, and seals the body permanently; when the decision was made is the sealing moment unless you state an earlier one.
 
 ## Usage
 
@@ -73,7 +73,7 @@ State what is being committed, name what seals, and ask once:
 
 > **Ready to seal this on the ledger.**
 >
-> You're committing to **a single drive plus a scheduled off-device backup** for the FLAC library, and I'll record you as the one who decided. The moment I commit, the server stamps the decision time and the record seals — Verdict, alternatives, expected outcomes and open questions all become immutable ledger evidence.
+> You're committing to **a single drive plus a scheduled off-device backup** for the FLAC library, and I'll record you as the one who decided. The moment I commit, the record seals — Verdict, alternatives, expected outcomes and open questions all become immutable ledger evidence.
 >
 > **Still open by design:** backup destination and schedule. That travels with the record and can be settled by a later decision.
 >
@@ -84,6 +84,8 @@ Then wait for an explicit yes.
 Naming the open questions here is deliberate: it shows they are intended, so the user is not surprised to find them frozen on the record later.
 
 So is naming who decided: said aloud, a wrong decider gets corrected before it is recorded. Who that is, with a user present or in an unattended run, is *Who held each role* in the method's `facilitation.md`.
+
+**When it was decided** is stated or asked only for a record written after the fact, re-admission of an unchanged choice included: the rule is the same section of `facilitation.md`, the worked ask is in `references/ceremony.md`, and re-admission's case is `uncommit-and-readmit.md` in `revise-decision`. On a live seal, state no moment.
 
 Ceremony variants — rejection, one-shot mint, terse mode: `references/ceremony.md`.
 
@@ -101,11 +103,17 @@ Then the transition:
 { "mdlGuid": "<mdlGuid>", "mdr": "MDRh1", "status": "Accepted" }
 ```
 
+A moment stated for a record written after the fact goes on the transition, never in the `decidedBy` patch, as a date or a date-time with seconds and an offset:
+
+```json
+{ "mdlGuid": "<mdlGuid>", "mdr": "MDRh1", "status": "Accepted", "decidedAt": "2026-10-28" }
+```
+
 Payloads and the formal-governance `Proposed` step: `references/transition-payloads.md`.
 
 ### 5. Verify and mark it
 
-The transition's reply carries `status`, `decidedAt`, `mdrNumber` and `retractable`: confirm them there, with no further read. Then one positive beat, citing the number the record now has:
+The transition's reply carries `status`, `decidedAt`, `sealedAt`, `mdrNumber` and `retractable`: confirm them there, with no further read. A stated date comes back as sent; a date-time comes back in UTC, so compare it with what you sent, or with `sealedAt`, as instants, never as text. Then one positive beat, citing the number the record now has:
 
 > **MDR-7 is Accepted** — sealed just now. That's on the ledger.
 
@@ -122,12 +130,12 @@ Offer **Rejected** as readily as Accept, and in more situations than an exhauste
 ## Tips
 
 - One-shot mint at `Accepted` or `Rejected` through `create_MDR` triggers the same seal. Run the ceremony first — the shortcut is in the tool call, not in the conversation.
-- If the transition is refused, the message names the missing gate. Patch it and return to step 3 — unless it names your permissions, which no patch fixes, or says the change was only partly made, which only repeating the identical call completes.
+- If the transition is refused, the message names the missing gate. Patch it and return to step 3 — unless it names your permissions, which no patch fixes, or says the change was only partly made, which only repeating the identical call completes. The repeat may also leave out `decidedAt`; the moment the first call stored stands.
 - The `eo-…` ids you chose come back from `get_MDR_details` and `get_MDR_learning_delta`; a later wake needs them.
 
 ## References
 
 | File | Load when |
 | --- | --- |
-| `references/ceremony.md` | Before sealing anything but a routine Accept — a rejection ceremony reads differently, and the terse variant still has one part that must never be dropped |
+| `references/ceremony.md` | Before sealing anything but a routine Accept, or a record written after the fact, whose date ask is there — a rejection ceremony reads differently, and the terse variant still has one part that must never be dropped |
 | `references/transition-payloads.md` | A gate error needs decoding — the message names the missing field, and the fix is rarely the one the wording first suggests |

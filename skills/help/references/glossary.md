@@ -32,7 +32,7 @@ Described by position, because the shape is the point: narrow at the need, wide 
 
 | Term | Meaning |
 | --- | --- |
-| **t₀** | The moment of commitment. The record seals here and its substance is not rewritten afterwards |
+| **t₀** | The moment of commitment. The record seals here and its substance is not rewritten afterwards. A decision recorded after the fact also keeps the date it was actually made, so its record shows both when it was decided and when it was sealed |
 | **tₙ** | Any later moment, when the world has responded and can be observed |
 | **the wake** | Everything observed after the decision, recorded beside it rather than inside it |
 | **Observed Outcome** | One thing that actually happened, recorded as a dated fact and linked to the decision that caused it |
