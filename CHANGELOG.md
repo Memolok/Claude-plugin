@@ -14,6 +14,11 @@ The pack version is independent of the Memolok server's. You install the pack on
 
 *Everything that has landed has shipped. This section is a placeholder.*
 
+## 0.46.0-beta — 2026-11-22
+
+- **Memolok has moved to a new server address, `https://mcp.memolok.ai/`.** The pack now connects there. The former address, `https://www.memolok.ai/mcp`, no longer serves Memolok: an older pack gets at most a notice there saying Memolok has moved, so this update is required.
+- **Reconnect after updating, and remove the old connector.** Connect Memolok again and sign in when your client asks. In Claude, the new address arrives as a new Memolok connector beside the old one: remove the one for `https://www.memolok.ai/mcp`. If you added Memolok by hand anywhere else, replace its address the same way.
+
 ## 0.45.0-beta — 2026-11-21
 
 - **A decision recorded after the fact keeps its own date.** When you import decisions, or record one from meeting notes or a choice made last week, your agent takes the date from the source or asks you, and the record carries that date, while the ledger still shows when it was sealed. On a decision you are making now, nothing changes and nothing extra is asked. Older packs keep working, but read such a record's date as when it reached the ledger, so updating is recommended.

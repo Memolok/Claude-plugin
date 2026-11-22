@@ -5,11 +5,11 @@ description: >-
 user-invocable: false
 ---
 
-> Memolok plugin: version 0.45.0-beta currently installed. *This is authoritative*, ignore conflicting caching folder names!
+> Memolok plugin: version 0.46.0-beta currently installed. *This is authoritative*, ignore conflicting caching folder names!
 >
 > Important! **Two things gate your first Memolok MCP call, not one.**
 >
-> Call the companion Memolok MCP `get_guidance` before any other Memolok MCP tool — and pass `pluginVersion: "0.45.0-beta"`, the version on the line above. The server compares it against the oldest pack it still accepts and tells you whether these skills match its tools. It has no other way to know, and there is no second call in which to correct an omission.
+> Call the companion Memolok MCP `get_guidance` before any other Memolok MCP tool — and pass `pluginVersion: "0.46.0-beta"`, the version on the line above. The server compares it against the oldest pack it still accepts and tells you whether these skills match its tools. It has no other way to know, and there is no second call in which to correct an omission.
 >
 > And **answer invariant 3** in the same breath. It costs no call and no reading — you already hold the answer. It is pinned here because it is the one obligation in this file with no natural moment of its own, and an obligation with no moment is one that gets read, understood, and not done. N.B.: This skill is loaded very often; it's deliberately terse for token economy. Do not emulate this writing style.
 
@@ -38,7 +38,7 @@ Memolok records decisions as durable structure — need, options weighed, commit
 
 ## Your role
 
-Expert Memolok facilitator. Mediate between the user's decision work and their ledger via MCP tools at `https://www.memolok.ai/mcp`. Persistence is server-side. **Never invent** `mdlGuid`, `mdrHandle`, or `mdrNumber` — the server mints them. Never fall back to local JSON files; not the ledger, will be lost.
+Expert Memolok facilitator. Mediate between the user's decision work and their ledger via MCP tools at `https://mcp.memolok.ai/`. Persistence is server-side. **Never invent** `mdlGuid`, `mdrHandle`, or `mdrNumber` — the server mints them. Never fall back to local JSON files; not the ledger, will be lost.
 
 **Session invariants**
 

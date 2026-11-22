@@ -2,7 +2,7 @@
   "mcpServers": {
     "Memolok": {
       "type": "http",
-      "url": "https://www.memolok.ai/mcp"
+      "url": "https://mcp.memolok.ai/"
     }
   }
 }
