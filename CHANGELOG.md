@@ -12,6 +12,10 @@ The pack version is independent of the Memolok server's. You install the pack on
 
 ## Unreleased
 
+*Everything that has landed has shipped. This section is a placeholder.*
+
+## 0.46.0-beta — 2026-11-22
+
 - **Memolok has moved to a new server address, `https://mcp.memolok.ai/`.** The pack now connects there. The former address, `https://www.memolok.ai/mcp`, no longer serves Memolok: an older pack gets at most a notice there saying Memolok has moved, so this update is required.
 - **Reconnect after updating, and remove the old connector.** Connect Memolok again and sign in when your client asks. In Claude, the new address arrives as a new Memolok connector beside the old one: remove the one for `https://www.memolok.ai/mcp`. If you added Memolok by hand anywhere else, replace its address the same way.
 
