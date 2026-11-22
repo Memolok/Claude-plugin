@@ -9,7 +9,7 @@ The plugin ships one thing — the server URL:
   "mcpServers": {
     "Memolok": {
       "type": "http",
-      "url": "https://www.memolok.ai/mcp"
+      "url": "https://mcp.memolok.ai/"
     }
   }
 }
@@ -32,6 +32,7 @@ Start with `ping`. It is the only tool that tells you about the connection rathe
 | Symptom | Meaning | Fix |
 | --- | --- | --- |
 | Tools absent entirely | The server was never connected | Connect it in the client's settings |
+| A connector for `https://www.memolok.ai/mcp` offers only a notice saying Memolok has moved, or fails to connect | That is Memolok's former address, and it no longer serves Memolok | Update the pack, remove that connector, and connect `https://mcp.memolok.ai/` instead |
 | Every call returns unauthorized | No valid sign-in | Reconnect to run the browser sign-in again |
 | `The access token names a Memolok user that no longer exists.` | The sign-in is valid but its account is gone | Reconnect to sign in again; if it recurs, an administrator checks the account |
 | `The access token carries a malformed Memolok user id.` | The sign-in is valid but its identity claim is unusable | Reconnect to sign in again; if it recurs, report it |
