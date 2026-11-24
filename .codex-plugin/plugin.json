@@ -1,0 +1,25 @@
+{
+  "name": "memolok",
+  "version": "0.46.0-beta",
+  "description": "Memolok is the Decision Record platform. Capture decisions as Memolok Decision Records (MDRs): the need, the alternatives, and the reasoning behind a choice, sealed so people and AI agents can rely on them. Skills for capture, commitment, review, and outcomes, plus authenticated MCP tools.",
+  "author": {
+    "name": "Memonos",
+    "url": "https://www.memolok.ai"
+  },
+  "homepage": "https://www.memolok.ai",
+  "keywords": ["memolok", "mdr", "decision-ledger", "decision-records", "mcp"],
+  "skills": "./skills/",
+  "mcpServers": "./mcp.json",
+  "interface": {
+    "displayName": "Memolok",
+    "shortDescription": "Record decisions as durable, sealed records.",
+    "longDescription": "Memolok is the Decision Record platform. Capture decisions as Memolok Decision Records (MDRs): the need, the alternatives, and the reasoning behind a choice, sealed so people and AI agents can rely on them.",
+    "developerName": "Memolok",
+    "category": "Productivity",
+    "capabilities": ["Interactive", "Write"],
+    "websiteURL": "https://www.memolok.ai",
+    "supportURL": "https://www.memolok.ai/contact/",
+    "composerIcon": "./assets/icon.png",
+    "logo": "./assets/icon.png"
+  }
+}
