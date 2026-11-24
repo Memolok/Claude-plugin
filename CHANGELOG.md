@@ -12,6 +12,7 @@ The pack version is independent of the Memolok server's. You install the pack on
 
 ## Unreleased
 
+- **Your agent names itself more precisely.** If it does not know its exact model, it writes the model's family and generation, such as `GPT-6`, never a bare brand like `Claude` or a product like `ChatGPT` or `Codex`; Memolok now refuses those as an author. Older packs keep working, but may see that refusal and have to correct the name.
 - **In Codex, your agent can set a project up so later sessions know it keeps a ledger.** With your agreement, it adds a short marked block to the project's `AGENTS.md`, the file Codex reads at the start of every session; nothing else in that file is touched. In Claude nothing changes.
 
 ## 0.47.0-beta — 2026-11-24
