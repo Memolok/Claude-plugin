@@ -1,10 +1,10 @@
 # Memolok
 
-**Memolok is the Decision Record platform**, and this is its plugin for Claude and Claude Code. Memolok records decisions as Memolok Decision Records: structured, immutable entries capturing the need, the alternatives, and the reasoning behind a choice. Each record lands in your **Memolok Decision Ledger** (**MDL**) and commits to its *expected outcomes* when it is sealed, after which it cannot be edited. What is *observed* later is recorded separately and linked back to the record it tests.
+**Memolok is the Decision Record platform**, and this is its plugin for Claude, Claude Code and OpenAI's Codex. Memolok records decisions as Memolok Decision Records: structured, immutable entries capturing the need, the alternatives, and the reasoning behind a choice. Each record lands in your **Memolok Decision Ledger** (**MDL**) and commits to its *expected outcomes* when it is sealed, after which it cannot be edited. What is *observed* later is recorded separately and linked back to the record it tests.
 
 Architecture Decision Records inspired the idea but stayed semi-structured and software-only. Memolok generalizes the same discipline, a Decision Record, to any decision an organization or its AI agents need to remember why.
 
-Installing the plugin adds the Memolok skills and connects Claude to the Memolok server. Connecting opens a browser to sign in: there is no token to configure and nothing to paste. You will need a Memolok account; the plugin will offer to create your first **MDL** if you do not have one yet.
+Installing the plugin adds the Memolok skills and connects your agent to the Memolok server. Connecting opens a browser to sign in: there is no token to configure and nothing to paste. You will need a Memolok account; the plugin will offer to create your first **MDL** if you do not have one yet.
 
 Start with `/memolok:start`, or just describe a decision you are making. If you would rather understand the thinking first, `/memolok:help` explains it.
 
@@ -39,6 +39,12 @@ Reviewing a ledger of any size means paging through records and reading a lot of
 It **only ever reads.** It cannot record a decision, cannot change one, and cannot ask you anything, so it never stands in for the part of Memolok where you are present. Where agents are not available the skills simply do the reading themselves, and you should notice no difference beyond a longer conversation.
 
 Memolok's methodology (the decision lifecycle, what seals at commitment, and how records are written) and its rules for referring to a decision outside Memolok, in your code and documents and messages, are loaded automatically by the skills above; you do not invoke them directly.
+
+## Codex
+
+The same release zip installs in OpenAI's Codex. In ChatGPT, open Plugins and choose *Upload plugin archive* with the zip, then install the plugin in the Codex desktop app. Codex connects to the Memolok server from your machine and opens a browser to sign in, as Claude does.
+
+In Codex the skills carry no `/memolok:` prefix: ask for `start` or `help`, or just describe a decision. The ledger scout is not available there, so the skills do their own reading, as described above.
 
 ## Learn More
 

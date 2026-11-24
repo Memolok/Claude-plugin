@@ -1,0 +1,8 @@
+{
+  "mcpServers": {
+    "Memolok": {
+      "type": "streamable-http",
+      "url": "https://mcp.memolok.ai/"
+    }
+  }
+}

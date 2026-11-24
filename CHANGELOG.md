@@ -14,6 +14,10 @@ The pack version is independent of the Memolok server's. You install the pack on
 
 *Everything that has landed has shipped. This section is a placeholder.*
 
+## 0.47.0-beta — 2026-11-24
+
+- **Memolok also installs in OpenAI's Codex, from the same zip.** Upload the release zip under ChatGPT's Plugins, then install it in the Codex desktop app; it brings the same skills and connects to the same server. Nothing changes in Claude, and no update is required.
+
 ## 0.46.0-beta — 2026-11-22
 
 - **Memolok has moved to a new server address, `https://mcp.memolok.ai/`.** The pack now connects there. The former address, `https://www.memolok.ai/mcp`, no longer serves Memolok: an older pack gets at most a notice there saying Memolok has moved, so this update is required.
