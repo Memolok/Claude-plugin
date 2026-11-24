@@ -44,7 +44,7 @@ Memolok's methodology (the decision lifecycle, what seals at commitment, and how
 
 The same release zip installs in OpenAI's Codex. In ChatGPT, open Plugins and choose *Upload plugin archive* with the zip, then install the plugin in the Codex desktop app. Codex connects to the Memolok server from your machine and opens a browser to sign in, as Claude does.
 
-In Codex the skills carry no `/memolok:` prefix: ask for `start` or `help`, or just describe a decision. The ledger scout is not available there, so the skills do their own reading, as described above.
+In Codex the skills carry no `/memolok:` prefix: ask for `start` or `help`, or just describe a decision. The ledger scout runs there as an ordinary Codex subagent, following the same instructions on the model Codex gives it.
 
 ## Learn More
 
