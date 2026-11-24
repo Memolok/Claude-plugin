@@ -11,7 +11,7 @@ The objective: a session opening in this project learns it records decisions in 
 | | Ask | If yes |
 | --- | --- | --- |
 | **1** | Does this session carry an instructions field the practitioner maintains — prose that arrived with no path, that they can edit and you cannot? | **Hand it to them.** You write nothing at all |
-| **2** | Is the project a tree you read and write directly, the same one a later session here would open? | **`.claude/rules/memolok.md`**, a file that is entirely yours |
+| **2** | Is the project a tree you read and write directly, the same one a later session here would open? | In Claude, **`.claude/rules/memolok.md`**, a file that is entirely yours. In Codex, which loads no file of that kind, a delimited block in the project's `AGENTS.md` — `agents-md-block.md` |
 | **3** | Do you reach the project's files only through a bridge, or as a copy staged for you? | A delimited block in the project's `CLAUDE.md` — `claude-md-block.md` |
 | **4** | None of those | **Nothing.** Say nothing about it |
 
@@ -29,7 +29,7 @@ Rung 4 is not a special case. Where nothing reaches a later session, the most is
 
 That disclosure *is* the consent. Without the cost stated, the answer is uninformed.
 
-**Rung 1 needs no disclosure of that kind** — they are pasting it into their own instructions, so the cost is visible in the act. Show them the paragraph, say where it goes, and leave it with them. **Rung 3's disclosure is different and heavier**; `claude-md-block.md` carries it.
+**Rung 1 needs no disclosure of that kind** — they are pasting it into their own instructions, so the cost is visible in the act. Show them the paragraph, say where it goes, and leave it with them. **A block's disclosure is different and heavier**; `claude-md-block.md` carries it at rung 3, and `agents-md-block.md` in Codex.
 
 ## Repeating, declining, and staying quiet
 
@@ -41,7 +41,7 @@ Nothing persists a decline. **A no is a no for this session**, and the next sess
 
 ## The paragraph
 
-Copy this exactly. At rung 2 it is the whole file; at rung 3 it is what goes between the markers; at rung 1 it is what you show them to paste. Do not rewrite it in this skill's register, do not improve it, and do not personalise it:
+Copy this exactly. At rung 2 in Claude it is the whole file; in a block it is what goes between the markers; at rung 1 it is what you show them to paste. Do not rewrite it in this skill's register, do not improve it, and do not personalise it:
 
 ```markdown
 # Memolok
@@ -78,11 +78,11 @@ At rung 1 drop the heading and the comment — they are file furniture, and an i
 
 ## Replacing and removing
 
-**At rung 2 the file is yours.** Rewrite it wholesale when it differs from the text above — read it, judge whether it says the same thing, replace it entirely if not. Never merge, never append.
+**At rung 2 in Claude the file is yours.** Rewrite it wholesale when it differs from the text above — read it, judge whether it says the same thing, replace it entirely if not. Never merge, never append.
 
 If it is gone, the practitioner removed it. That is an answer, not an omission: offer again on the ordinary trigger, and take a second no the same way you took the first.
 
-**At rung 1 nothing is yours.** They pasted it; they can change or delete it, and you neither maintain it nor go looking for it. **Rung 3 has its own rules** — `claude-md-block.md`.
+**At rung 1 nothing is yours.** They pasted it; they can change or delete it, and you neither maintain it nor go looking for it. **A block has its own rules** — `claude-md-block.md`, or `agents-md-block.md` in Codex.
 
 ## What Memolok knows afterwards
 

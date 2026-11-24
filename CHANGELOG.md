@@ -12,7 +12,7 @@ The pack version is independent of the Memolok server's. You install the pack on
 
 ## Unreleased
 
-*Everything that has landed has shipped. This section is a placeholder.*
+- **In Codex, your agent can set a project up so later sessions know it keeps a ledger.** With your agreement, it adds a short marked block to the project's `AGENTS.md`, the file Codex reads at the start of every session; nothing else in that file is touched. In Claude nothing changes.
 
 ## 0.47.0-beta — 2026-11-24
 
