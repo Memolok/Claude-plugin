@@ -12,6 +12,10 @@ The pack version is independent of the Memolok server's. You install the pack on
 
 ## Unreleased
 
+*Everything that has landed has shipped. This section is a placeholder.*
+
+## 0.47.0-beta — 2026-11-24
+
 - **Memolok also installs in OpenAI's Codex, from the same zip.** Upload the release zip under ChatGPT's Plugins, then install it in the Codex desktop app; it brings the same skills and connects to the same server. Nothing changes in Claude, and no update is required.
 
 ## 0.46.0-beta — 2026-11-22
