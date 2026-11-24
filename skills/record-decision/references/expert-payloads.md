@@ -2,7 +2,7 @@
 
 ## Minimal mint
 
-The default. Head Claim only, everything else patched in as deliberation proceeds.
+Only when the user asks to save a head Claim before anything else is worked out, and only after previewing it. Everything else is patched in as deliberation proceeds.
 
 ```json
 {
@@ -21,7 +21,7 @@ Returns an acknowledgement — `mdrHandle`, `mdlGuid`, `mdrNumber: null`, `statu
 
 ## Pre-populated mint
 
-When the conversation already produced most of the body, send it at create. **Status is still `Deliberating`** — having a full body is not commitment.
+The default: after the preview, send the whole drafted body at create. **Status is still `Deliberating`** — having a full body is not commitment.
 
 ```json
 {

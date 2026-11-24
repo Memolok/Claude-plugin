@@ -76,8 +76,7 @@ Worked examples of ambiguous intakes: `references/intake-fork.md`.
 
 1. `register_matter` with the stakeholder's words **verbatim**, and who raised it in `raisedBy`. Do not sharpen, summarize, or translate into a target — the raw input is the point, and the analysis in step 3 freezes it. An already-admitted world fact or observed outcome skips this step and goes into step 3 as itself.
 2. Sharpen the need **with the user**, not for them. The head Claim is a falsifiable objective, and it must not name the mechanism you are about to choose (Rule G).
-3. `create_analysis` with `producesDecision: true` and the sharpened `claimDescription`. Pass every input this reasoning took up in `motivatedBy` — not just the one that prompted the conversation, and in whatever mix of matters, world facts and observed outcomes actually applies. This mints the record at **New** and concludes the analysis in the same call.
-4. `transition_MDR_status` to **Deliberating**, then continue at step 4.
+3. Continue at step 4. The record is drafted and previewed before anything mints it; the analysis is written at step 7, after the yes, with `producesDecision: true` and the sharpened `claimDescription`. Pass every input this reasoning took up in `motivatedBy` — not just the one that prompted the conversation, and in whatever mix of matters, world facts and observed outcomes actually applies. That call mints the record at **New** and concludes the analysis.
 
 If sharpening shows there is no decision to make, that is **Path B**: `create_analysis` with `producesDecision: false` and a rationale explaining why. Confirm with the user first. No record is minted, and that is an honest outcome, not a failure.
 
@@ -85,7 +84,7 @@ Payloads: `references/matter-payloads.md`. How a matter comes to rest, and what 
 
 ### 3b. Expert branch
 
-`create_MDR` with `claimDescription` and `status: "Deliberating"` — the default, even when you already have most of the body. Reserve `Accepted` or `Rejected` at creation for the narrow case in Rule C where the user has already stated commitment in their own words.
+Nothing is written yet: draft the record (steps 4–6) and preview it (step 7). After the yes, one `create_MDR` carries the whole body with `status: "Deliberating"` — the default, however complete the body is. Reserve `Accepted` or `Rejected` at creation for the narrow case in Rule C where the user has already stated commitment in their own words.
 
 Payloads: `references/expert-payloads.md`.
 
@@ -120,9 +119,9 @@ Record what this decision deliberately leaves unsettled as `openQuestions`, rath
 
 ### 7. Preview and persist
 
-Show the draft back in the shape the **`record-preview`** skill fixes, and wait for a yes.
+Show the draft back in the shape the **`record-preview`** skill fixes, and wait for a yes. **Nothing about the record is written before that yes**: not the head Claim, not a minimal record to fill in later.
 
-Then `update_MDR` with the body. Payloads: `references/patch-payloads.md`. A patch replaces each array it carries whole, so an array you did not just draft starts from `get_MDR_details`, not from memory. `get_MDR` answers what a record decided; `get_MDR_details` answers why and how — and the arrays are the how.
+Then write it. Expert branch: one `create_MDR` with the body at **Deliberating** (`references/expert-payloads.md`). Bait branch: `create_analysis` as step 3a describes, `transition_MDR_status` to **Deliberating**, then `update_MDR` with the body. Any later change to a written draft is previewed the same way, then sent as `update_MDR`. Payloads: `references/patch-payloads.md`. A patch replaces each array it carries whole, so an array you did not just draft starts from `get_MDR_details`, not from memory. `get_MDR` answers what a record decided; `get_MDR_details` answers why and how — and the arrays are the how.
 
 The body carries `authoredBy`: you, when you drafted the text, named as *Who held each role* in the method's `facilitation.md` has it. `decidedBy` waits for the seal.
 

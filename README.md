@@ -1,6 +1,6 @@
 # Memolok
 
-**Memolok is the Decision Record platform**, and this is its plugin for Claude, Claude Code and OpenAI's Codex. Memolok records decisions as Memolok Decision Records: structured, immutable entries capturing the need, the alternatives, and the reasoning behind a choice. Each record lands in your **Memolok Decision Ledger** (**MDL**) and commits to its *expected outcomes* when it is sealed, after which it cannot be edited. What is *observed* later is recorded separately and linked back to the record it tests.
+**Memolok is the Decision Record platform**, and this is its plugin for Claude and Claude Code, with experimental support for OpenAI's Codex. Memolok records decisions as Memolok Decision Records: structured, immutable entries capturing the need, the alternatives, and the reasoning behind a choice. Each record lands in your **Memolok Decision Ledger** (**MDL**) and commits to its *expected outcomes* when it is sealed, after which it cannot be edited. What is *observed* later is recorded separately and linked back to the record it tests.
 
 Architecture Decision Records inspired the idea but stayed semi-structured and software-only. Memolok generalizes the same discipline, a Decision Record, to any decision an organization or its AI agents need to remember why.
 
@@ -40,11 +40,11 @@ It **only ever reads.** It cannot record a decision, cannot change one, and cann
 
 Memolok's methodology (the decision lifecycle, what seals at commitment, and how records are written) and its rules for referring to a decision outside Memolok, in your code and documents and messages, are loaded automatically by the skills above; you do not invoke them directly.
 
-## Codex
+## Codex (experimental)
 
 The same release zip installs in OpenAI's Codex. In ChatGPT, open Plugins and choose *Upload plugin archive* with the zip, then install the plugin in the Codex desktop app. Codex connects to the Memolok server from your machine and opens a browser to sign in, as Claude does.
 
-In Codex the skills carry no `/memolok:` prefix: ask for `start` or `help`, or just describe a decision. The ledger scout is not available there, so the skills do their own reading, as described above.
+In Codex, call a skill with `$` where Claude uses `/`: `$memolok:start`, or just `$start`. You can also just describe a decision. The ledger scout runs there as an ordinary Codex subagent, following the same instructions on the model Codex gives it.
 
 ## Learn More
 
