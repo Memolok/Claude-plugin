@@ -12,6 +12,10 @@ The pack version is independent of the Memolok server's. You install the pack on
 
 ## Unreleased
 
+*Everything that has landed has shipped. This section is a placeholder.*
+
+## 0.48.0-beta — 2026-11-24
+
 - **In Codex, the ledger scout runs as a subagent.** Where the scout cannot be installed as an agent, your agent starts an ordinary subagent that follows the scout's own instructions, so long ledger reads still stay out of your conversation.
 - **Your agent shows you a decision before writing it.** It drafts the whole record, previews it, and writes nothing to the ledger until you confirm; before, it could create the record first and preview it afterwards.
 - **Your agent names itself more precisely.** If it does not know its exact model, it writes the model's family and generation, such as `GPT-6`, never a bare brand like `Claude` or a product like `ChatGPT` or `Codex`; Memolok now refuses those as an author. Older packs keep working, but may see that refusal and have to correct the name.
