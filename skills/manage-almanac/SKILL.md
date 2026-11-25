@@ -1,13 +1,13 @@
 ---
 name: manage-almanac
 description: >-
-  Admit, look up or correct the world facts a Memolok ledger reasons from: budgets, constraints, policies, team capabilities, anything true whatever gets decided. Use when the user states a premise rather than a choice ("legal requires seven-year retention", "the budget is $10k", "nobody here writes Rust"), says an admitted fact was wrong, or wants a staged decision to cite a fact as its context. A fact that now calls for a decision → `record-decision`.
+  Admit, look up or correct the world facts a Memolok ledger reasons from: things that are true independently of this ledger's decisions. In a project that keeps a Memolok ledger, load before you research or measure how something behaves: the almanac may already hold the answer; if not, a finding of that kind belongs there once you learn it (not in a record's prose). Also use this skill when the user states an independent premise rather than a choice ("legal requires seven-year retention" in a ledger that didn't decide the retention policy), says that a previously admitted fact was wrong, or wants to cite a fact, in a decision or elsewhere; in any text beyond a decision's own links, also see `memolok-citations`. A fact already admitted that calls for a decision → `record-decision`.
 argument-hint: "<the fact>"
 ---
 
 # /memolok:manage-almanac — The world almanac
 
-Admits premises to the ledger's almanac and cites them from staged records. World facts are minted independently of any decision, so correcting one never means editing a sealed record.
+Admits premises to the ledger's almanac, where any decision, analysis or text can cite them. World facts are minted independently of any decision, so correcting one never means editing a sealed record.
 
 ## Usage
 
@@ -79,7 +79,7 @@ Avoid admitting a near-duplicate. If a prior fact covers the same ground but is 
 }
 ```
 
-Write it so it is checkable later. *"The budget is tight"* is not a premise anything can be reasoned from; *"the hardware budget is $10k"* is.
+Write it so it is checkable later. *"The budget is tight"* is not a premise anything can be reasoned from; *"the hardware budget is $10k"* is. A finding of your own: show the user its words before admitting it; facts are immutable.
 
 **Say who wrote it and who observed it.** `authoredBy` is whoever wrote the claim's words, you when you drafted them; `observedBy` is whoever observed what it states. *"Mary told me the budget went up to $50k"* is your words, Mary's observation and the user's admission. Name Mary as the tool catalogue's `admit_world_fact` says, and leave a role out rather than guess.
 
@@ -139,7 +139,7 @@ Do this **before** committing. There is no way to add context afterwards, and a 
 - Observed outcomes are a **kind** of world fact — a record's `hasContext` can cite a prior wake, just never its own, and an analysis can take either up as an input by id.
 - Cross-team handoff works through this skill: admit another team's decision as a world fact in your ledger. A reference, not a merge. See `scopes-and-bridging.md` in **`memolok-method`**.
 - There is no way to delete or edit a fact. Facts are immutable in substance once admitted; the only move is a correcting successor.
-- If the user states a premise while working through a decision, admit it and cite it rather than folding it into the record's prose — it is reusable by every later record.
+- If a premise surfaces while working through a decision, stated by the user or measured by you, admit it and cite it rather than folding it into the record's prose: a fact is its own entry so that later decisions can find it, and prose inside one record is found by none.
 
 ## References
 
