@@ -14,6 +14,12 @@ The pack version is independent of the Memolok server's. You install the pack on
 
 *Everything that has landed has shipped. This section is a placeholder.*
 
+## 0.48.1-beta — 2026-11-25
+
+- **Your agent checks the almanac before it researches.** In a project that keeps a ledger, before measuring or looking up how something behaves, it looks for a world fact that already answers the question. What it learns that holds whatever you decide, it offers to admit as a fact, showing you the wording first, since an admitted fact cannot be deleted.
+- **Facts found while deciding become facts, not arguments.** A premise that turns up mid-decision, whether you state it or your agent measures it, is admitted to the almanac and cited by the decision, so later decisions can find it. The decision's preview lists it as *to admit*, and nothing is admitted before your yes.
+- **No update is required.** Older packs keep working; they just leave such findings inside a decision's reasoning.
+
 ## 0.48.0-beta — 2026-11-24
 
 - **In Codex, the ledger scout runs as a subagent.** Where the scout cannot be installed as an agent, your agent starts an ordinary subagent that follows the scout's own instructions, so long ledger reads still stay out of your conversation.

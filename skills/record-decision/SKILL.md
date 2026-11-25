@@ -93,7 +93,7 @@ Payloads: `references/expert-payloads.md`.
 **Draft from what the user already said before asking anything** (Rule E). Mine the conversation for the favoured path, discarded options, "versus doing nothing", and constraints that ruled things out.
 
 - `alternatives` — `label` is a short handle, `description` is the option's substance
-- `deliberationFacts` — arguments the user actually made, each paired with `onAlternative`
+- `deliberationFacts` — arguments the user actually made, each paired with `onAlternative`. A premise surfacing here, said or measured, is not one: it is a World Fact (`manage-almanac`), shown on the preview as *to admit* and cited in `hasContext` once admitted, and the argument keeps only what the premise means for its option
 
 Do not invent options to make the belly look fuller. One short honesty check is fine when a single path has no acknowledgment of what else was in play; it is not a gate, and it is not a brainstorm.
 
