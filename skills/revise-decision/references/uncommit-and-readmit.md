@@ -76,7 +76,7 @@ A **new** number is assigned from the live high-water mark. Uncommitting the mos
 
 Before step 1, three things:
 
-> Uncommitting **MDR-7** takes it back to editable so we can fix the Verdict. Two things worth knowing: the ledger keeps both the original commitment and the uncommit permanently — this is visible governance history, not an undo — and when we re-admit it, it gets a **new** number. MDR-7 as a reference goes away.
+> Uncommitting **[MDR-7](https://app.memolok.ai/m/<mdlGuid>/MDR-7)** takes it back to editable so we can fix the Verdict. Two things worth knowing: the ledger keeps both the original commitment and the uncommit permanently — this is visible governance history, not an undo — and when we re-admit it, it gets a **new** number. MDR-7 as a reference goes away.
 >
 > Go ahead?
 

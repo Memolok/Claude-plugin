@@ -118,7 +118,7 @@ Review, the user agrees, persist at **Deliberating**. Then straight into the nex
 
 **Continuing after a seal:**
 
-> That's MDR-7 sealed. You left the backup destination open on it — let's take that one now. What are you actually backing up to?
+> That's [MDR-7](https://app.memolok.ai/m/<mdlGuid>/MDR-7) sealed. You left the backup destination open on it — let's take that one now. What are you actually backing up to?
 
 Note the last one: no menu, no asking whether to continue. Straight into the next fish.
 

@@ -187,7 +187,7 @@ Through the owning skill or tool, one at a time. If a write fails, say which and
 
 Writes, then drops. Nothing else.
 
-> Captured: MDR-14, two world facts, one matter. Runbook updated with the `adm` requirement. Dropped, deliberately: `redeploy.bash` assumptions, container start timing.
+> Captured: [MDR-14](https://app.memolok.ai/m/<mdlGuid>/MDR-14), two world facts, [wf_…](https://app.memolok.ai/m/<mdlGuid>/wf_…) and [wf_…](https://app.memolok.ai/m/<mdlGuid>/wf_…), and one matter, [mt_…](https://app.memolok.ai/m/<mdlGuid>/mt_…). Runbook updated with the `adm` requirement. Dropped, deliberately: `redeploy.bash` assumptions, container start timing.
 
 ## Failure modes
 

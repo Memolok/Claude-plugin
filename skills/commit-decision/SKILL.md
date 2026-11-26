@@ -115,7 +115,7 @@ Payloads and the formal-governance `Proposed` step: `references/transition-paylo
 
 The transition's reply carries `status`, `decidedAt`, `sealedAt`, `mdrNumber` and `retractable`: confirm them there, with no further read. A stated date comes back as sent; a date-time comes back in UTC, so compare it with what you sent, or with `sealedAt`, as instants, never as text. Then one positive beat, citing the number the record now has:
 
-> **MDR-7 is Accepted** — sealed just now. That's on the ledger.
+> **[MDR-7](https://app.memolok.ai/m/<mdlGuid>/MDR-7) is Accepted** — sealed just now. That's on the ledger.
 
 Then carry on with whatever the user was doing. Do not offer to end the session.
 

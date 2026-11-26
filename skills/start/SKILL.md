@@ -63,8 +63,8 @@ If it states a purpose, say it back in a line — that is the orientation the us
 
 | Role | Means |
 | --- | --- |
-| `owner`, `admin` | Full access, including uncommitting records and changing the ledger's title and purpose |
-| `member` | Can read and write, but not change the ledger's title or purpose |
+| `owner`, `admin` | Full access, including uncommitting records, sharing the ledger, reopening an analysis or retracting its inputs, and changing the ledger's title and purpose |
+| `member` | Can read and write, but not uncommit records, share the ledger, reopen an analysis or retract its inputs, or change the ledger's title or purpose |
 | `visitor` | Read-only, and sees no notes — writes will be refused |
 
 If they are a `visitor`, say so now rather than letting them build a decision they cannot save.

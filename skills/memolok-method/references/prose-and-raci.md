@@ -107,7 +107,7 @@ RACI fields are stored for governance narrative. They do **not** gate writes. Ac
 | `member` | yes | yes | no | no |
 | `admin`, `owner` | yes | yes | yes | yes |
 
-Notes differ: a visitor reads none, only a note's author replaces it, and its author or an `admin` or `owner` deletes it. So do matters: its creator replaces one while nothing has taken it up, and an `admin` or `owner` replaces anyone's.
+Notes differ: a visitor reads none, only a note's author replaces it, and its author or an `admin` or `owner` deletes it. So do matters: its creator replaces one while nothing has taken it up, and an `admin` or `owner` replaces anyone's. Sharing the ledger takes an `admin` or `owner`, and so does reopening an analysis or retracting its inputs, even for the analysis's own performer.
 
 If your role lets you create records, you can edit the ones you created. That is the account whose credential created the record, never `authoredBy`, so setting or changing `authoredBy` hands nothing over. Whether you can edit anyone else's depends on your role. Changing a record's status and anchoring it count as editing.
 
