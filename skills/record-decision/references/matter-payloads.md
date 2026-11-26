@@ -4,7 +4,7 @@
 
 ### 1. `register_matter`
 
-The source actor's verbatim words. No sharpening at this step. Name who raised it in `raisedBy` and who wrote the words in `authoredBy`, as *Who held each role* in the method's `facilitation.md` has it: this call is the only moment who raised it is known.
+The source actor's verbatim words, reviewed as `get_guidance`'s Drafts paragraph says: the words, or the matter's portal address. No sharpening at this step. Name who raised it in `raisedBy` and who wrote the words in `authoredBy`, as *Who held each role* in the method's `facilitation.md` has it: this call is the only moment who raised it is known.
 
 ```json
 {

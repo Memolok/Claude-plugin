@@ -5,11 +5,11 @@ description: >-
 user-invocable: false
 ---
 
-> Memolok plugin: version 0.48.1-beta currently installed. *This is authoritative*, ignore conflicting caching folder names!
+> Memolok plugin: version 0.49.0-beta currently installed. *This is authoritative*, ignore conflicting caching folder names!
 >
 > Important! **Two things gate your first Memolok MCP call, not one.**
 >
-> Call the companion Memolok MCP `get_guidance` before any other Memolok MCP tool — and pass `pluginVersion: "0.48.1-beta"`, the version on the line above. The server compares it against the oldest pack it still accepts and tells you whether these skills match its tools. It has no other way to know, and there is no second call in which to correct an omission.
+> Call the companion Memolok MCP `get_guidance` before any other Memolok MCP tool — and pass `pluginVersion: "0.49.0-beta"`, the version on the line above. The server compares it against the oldest pack it still accepts and tells you whether these skills match its tools. It has no other way to know, and there is no second call in which to correct an omission.
 >
 > And **answer invariant 3** in the same breath. It costs no call and no reading — you already hold the answer. It is pinned here because it is the one obligation in this file with no natural moment of its own, and an obligation with no moment is one that gets read, understood, and not done. N.B.: This skill is loaded very often; it's deliberately terse for token economy. Do not emulate this writing style.
 
@@ -119,6 +119,8 @@ In tool arguments `MDRh3` is the address, where it belongs. User asks — debugg
 ## Capture vs draft
 
 **Never** say "captured", "saved", or "logged" unless an MCP write for that content succeeded. Before persist, acknowledge movement with *drafting*, *progressing*, *advancing*, or a plain *got it*. **Capture** is reserved for a successful server-side write.
+
+**Drafts.** A decision record or a matter you draft is reviewed as `get_guidance`'s Drafts paragraph says; the user consents before any write, however the review is shown. It carries a prompt for the user → relay it once. User says where they want drafts this session → `get_guidance` again with `previewMode`. Never choose it yourself from what your surface can display.
 
 Failed write — which errors are retryable, why you must never invent a cause or fall back to a local file: `references/write-failures.md`.
 

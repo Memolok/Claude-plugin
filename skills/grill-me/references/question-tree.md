@@ -100,7 +100,7 @@ Frame these as **scope protection**, never as a to-do list. If the user starts t
 
 ## Phase 8 — Persist
 
-Preview, confirm, persist at **Deliberating**. Then straight into the next branch.
+Review, the user agrees, persist at **Deliberating**. Then straight into the next branch.
 
 ## Worked openers
 
@@ -124,7 +124,7 @@ Note the last one: no menu, no asking whether to continue. Straight into the nex
 
 ## When the user pushes back
 
-**"Just record what I said."** Fine — that is the point of the tool. Drop to a preview and persist. Grill-me is a service, not a toll.
+**"Just record what I said."** Fine — that is the point of the tool. Drop to the review and persist. Grill-me is a service, not a toll.
 
 **"I don't know."** Legitimate. Either it is a fact you should look up, or it is a genuine open question — record it as one and move on.
 

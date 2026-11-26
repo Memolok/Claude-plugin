@@ -33,7 +33,7 @@ Load the **`memolok-method`** skill for the bait-versus-Claim distinction and pr
 - Register the user's words **verbatim** — the raw input is the point, and once anything takes the matter up its words are frozen
 - Do **not** call `create_analysis` in this journey
 - Say "captured" only after the write succeeded
-- One short confirmation, then stop — the user is in the middle of something else
+- Review it as `get_guidance`'s Drafts paragraph says, nothing written before the user agrees; then one short confirmation, then stop — the user is in the middle of something else
 
 ## When this skill applies
 
@@ -105,9 +105,11 @@ Light cleanup is fine: dropping a stray "ugh", fixing an obvious typo, expanding
 
 **Name who raised it, on this call.** `raisedBy` is whoever had the initiative: the user, by `whoami`'s `iri`, when it is theirs; the person they are passing it on from when it is not, found as the tool catalogue's `register_matter` says. `authoredBy` is whoever wrote the words you register, usually the user. Leave either out rather than guess: an unstated name can be added while nothing has taken the matter up, and a wrong one is frozen once something has.
 
+**Review it as `get_guidance`'s Drafts paragraph says** — its text, or its portal address. One short review, not a chance to reopen what the user said.
+
 ### 4. Confirm and get out
 
-One line. Name what was saved and where it will resurface:
+One line. Name what was saved and where it will resurface, with its portal address if the review gave one:
 
 > Saved on **{ledger title}** — it'll show up in the unprocessed list next time you go looking.
 
@@ -115,7 +117,7 @@ Then return to whatever the user was doing. Do not offer to sharpen it, do not a
 
 ## Correcting a parked matter
 
-The user says the words were wrong, or the wrong person is named as raising it. While nothing has taken the matter up — `get_matter`'s `takenUpBy` is `[]` — correct it with `replace_matter`, which replaces it whole: read it, compose the full body, and send `raisedBy` and `authoredBy` again, since anything left out is unset. You may replace a matter you registered; an admin or owner may replace anyone's. Refused `matter-taken-up`, something on the ledger rests on it, and it stays as it is: register a new matter with the corrected words. That is a changed matter, not a repaired one.
+The user says the words were wrong, or the wrong person is named as raising it. While nothing has taken the matter up — `get_matter`'s `takenUpBy` is `[]` — correct it with `replace_matter`, reviewed the same way, which replaces it whole: read it, compose the full body, and send `raisedBy` and `authoredBy` again, since anything left out is unset. You may replace a matter you registered; an admin or owner may replace anyone's. Refused `matter-taken-up`, something on the ledger rests on it, and it stays as it is: register a new matter with the corrected words. That is a changed matter, not a repaired one.
 
 ## What happens next
 

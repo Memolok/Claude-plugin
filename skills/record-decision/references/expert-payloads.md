@@ -2,7 +2,7 @@
 
 ## Minimal mint
 
-Only when the user asks to save a head Claim before anything else is worked out, and only after previewing it. Everything else is patched in as deliberation proceeds.
+Only when the user asks to save a head Claim before anything else is worked out, and only once they agree to it as `get_guidance`'s Drafts paragraph says. Everything else is patched in as deliberation proceeds.
 
 ```json
 {
@@ -21,7 +21,7 @@ Returns an acknowledgement — `mdrHandle`, `mdlGuid`, `mdrNumber: null`, `statu
 
 ## Pre-populated mint
 
-The default: after the preview, send the whole drafted body at create. **Status is still `Deliberating`** — having a full body is not commitment.
+The default: once the user agrees to the draft, send the whole drafted body at create. **Status is still `Deliberating`** — having a full body is not commitment.
 
 ```json
 {
@@ -97,7 +97,7 @@ Note the Need names no language. The choice lives in `chosenAlternative` and `ve
 
 ## One-shot t₀
 
-Only when the user has stated commitment in their own words. Run the ceremony from **`commit-decision`** first.
+Only when the user has stated commitment in their own words, and has reviewed the draft before this write. A review that comes after the write needs the record at `Deliberating` first, sealed afterwards by `transition_MDR_status`. Run the ceremony from **`commit-decision`** first.
 
 ```json
 {

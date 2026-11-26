@@ -30,7 +30,7 @@ Load the **`memolok-method`** skill and its `facilitation.md` reference. Rules A
 
 - Never invent `mdlGuid`, `mdrHandle`, or `mdrNumber` — the server mints them
 - All prose is `{ "markdown": "...", "lang": "en" }`
-- **No writes until the user confirms a record preview** — reads are fine throughout
+- **No writes until the user agrees to the draft** — reads are fine throughout
 - Default persist status is **Deliberating**; t₀ only on explicit request (Rule C)
 - Say "captured" only after a write succeeded — mid-interview, say *drafting* or *got it*
 - **Never offer to end the session**
@@ -56,7 +56,7 @@ Where the ledger states a purpose, recommendations should sit comfortably with i
 ## Session loop
 
 ```
-grill one fish → preview → confirm → persist at Deliberating → next fish → …
+grill one fish → review → user agrees → persist at Deliberating → next fish → …
 ```
 
 t₀ is separate, and only when the user asks.
@@ -80,7 +80,7 @@ Ledger reads are delegated — the **reading invariant** in **`memolok-method`**
 
 **Allowed throughout:** every read tool, plus the filesystem and anything else that answers a factual question.
 
-**Forbidden until preview confirm:** `register_matter`, `create_analysis`, `create_MDR`, `update_MDR`, `transition_MDR_status`, `admit_world_fact`, `record_observed_outcome`.
+**Forbidden until the user agrees to the draft:** `register_matter`, `create_analysis`, `create_MDR`, `update_MDR`, `transition_MDR_status`, `admit_world_fact`, `record_observed_outcome`.
 
 Hold the draft in conversation until then.
 
@@ -97,7 +97,7 @@ Walk the fish regions in dependency order. **Draft from what the user already sa
 | 5 | Waist | Verdict and chosen alternative, or the reason not to proceed | Non-empty Verdict |
 | 6 | Tail | Expected outcomes — gains, costs, risks, dependencies | Drafted |
 | 7 | Alongside | What this decision does *not* settle | Scope boundaries named |
-| 8 | Persist | Default Deliberating | Preview confirmed |
+| 8 | Persist | Default Deliberating | User agreed to the draft |
 
 Phase 1 is the intake fork — the full routing lives in **`record-decision`**, and it applies here unchanged.
 
@@ -121,11 +121,11 @@ Mid-interview acknowledgements use *drafting*, *progressing*, or a plain *got it
 
 **Phase 2 is a special case.** A recommended answer for a Need question is a recommended **scope or framing** — never a mechanism, technique, or state count, even if one has already come up. If your recommendation would only have made sense *after* an alternative was floated, it belongs in phase 3, not folded into the Need. It also has to read cold, to someone who was never in this interview: name what the Need is about, explicitly mentioning the relevant scope, and state the properties rather than pointing at how things are now (Rule G).
 
-## Preview and persist
+## Review and persist
 
-Present the draft in the shape the **`record-preview`** skill fixes, and wait for an explicit yes. If no, return to the region that was wrong.
+Review the draft as `get_guidance`'s Drafts paragraph says, and nothing is written before the user agrees — to the preview, or to writing it for review; a preview in the chat is in the shape the **`record-preview`** skill fixes. Wait for an explicit yes. If no, return to the region that was wrong.
 
-Then persist through **`record-decision`**, at **Deliberating**. Do not offer Proposed or Accepted in the preview footer unless the user has already raised sealing.
+Then persist through **`record-decision`**, at **Deliberating**. Do not offer Proposed or Accepted when you ask unless the user has already raised sealing.
 
 If the user asks to seal, that is **`commit-decision`** — ceremony first.
 

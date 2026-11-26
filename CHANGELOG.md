@@ -14,6 +14,11 @@ The pack version is independent of the Memolok server's. You install the pack on
 
 *Everything that has landed has shipped. This section is a placeholder.*
 
+## 0.49.0-beta — 2026-11-26
+
+- **You choose where your agent shows you its drafts: in the Memolok portal or in the chat.** Set it in the portal's Agents settings, or tell your agent for one session. In the portal, your agent tells you in a sentence or two what it will write, writes it once you agree, and gives you the link to review it there; in the chat, it shows you the whole draft first and writes it after your yes. Either way nothing is written without your agreement. Until you choose, drafts go to the portal.
+- **Parked matters are reviewed the same way** when your agent writes or corrects one.
+
 ## 0.48.1-beta — 2026-11-25
 
 - **Your agent checks the almanac before it researches.** In a project that keeps a ledger, before measuring or looking up how something behaves, it looks for a world fact that already answers the question. What it learns that holds whatever you decide, it offers to admit as a fact, showing you the wording first, since an admitted fact cannot be deleted.
