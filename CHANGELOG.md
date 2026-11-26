@@ -12,6 +12,11 @@ The pack version is independent of the Memolok server's. You install the pack on
 
 ## Unreleased
 
+*Everything that has landed has shipped. This section is a placeholder.*
+
+## 0.50.0-beta — 2026-11-26
+
+- **Your agent names every ledger entry as a link you can open in the portal.** A decision, a draft, a matter, a fact, an outcome, the ledger itself and the people on it each come as a link to their page.
 - **Your agent describes ledger roles and refusals more accurately.** It knows a member cannot share a ledger, reopen an analysis or retract its inputs, and that a demo account cannot create ledgers, and it recognises four refusals it could not explain before.
 
 ## 0.49.0-beta — 2026-11-26

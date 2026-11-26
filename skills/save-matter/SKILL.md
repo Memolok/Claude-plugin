@@ -109,9 +109,9 @@ Light cleanup is fine: dropping a stray "ugh", fixing an obvious typo, expanding
 
 ### 4. Confirm and get out
 
-One line. Name what was saved and where it will resurface, with its portal address if the review gave one:
+One line. Name what was saved, as a link to its address, and where it will resurface:
 
-> Saved on **{ledger title}** — it'll show up in the unprocessed list next time you go looking.
+> Saved as [mt_3kf9xq](https://app.memolok.ai/m/<mdlGuid>/mt_3kf9xq) on [{ledger title}](https://app.memolok.ai/m/<mdlGuid>) — it'll show up in the unprocessed list next time you go looking.
 
 Then return to whatever the user was doing. Do not offer to sharpen it, do not ask whether they want to decide now, and do not summarize the methodology.
 

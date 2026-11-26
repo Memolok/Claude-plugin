@@ -38,7 +38,7 @@ That holds when the draft is reviewed before it is written. When the review come
 
 Some users find ceremony tiresome, particularly when sealing several records in a row. Compress, but keep the three load-bearing parts: **what is being committed**, **that it seals**, and **an explicit ask**.
 
-> Sealing the caching decision (`MDRh12`) as yours — Redis cache on hot read paths. This freezes the body permanently. Go ahead?
+> Sealing the caching decision ([MDRh12](https://app.memolok.ai/m/<mdlGuid>/MDRh12)) as yours — Redis cache on hot read paths. This freezes the body permanently. Go ahead?
 
 What must never be dropped is the ask. Everything else is style.
 
@@ -58,11 +58,11 @@ Pass the answer as `decidedAt` on the transition, or on `create_MDR` for a one-s
 
 One beat, using the number the record just received:
 
-> **MDR-7 is Accepted** — sealed just now. That's on the ledger.
+> **[MDR-7](https://app.memolok.ai/m/<mdlGuid>/MDR-7) is Accepted** — sealed just now. That's on the ledger.
 
 Occasionally a little more, when the decision was hard-won or long-running:
 
-> **MDR-7 is Accepted.** That's the storage question closed after three sessions of going back and forth — and the reasoning is on the record now, not just the answer.
+> **[MDR-7](https://app.memolok.ai/m/<mdlGuid>/MDR-7) is Accepted.** That's the storage question closed after three sessions of going back and forth — and the reasoning is on the record now, not just the answer.
 
 Then continue. Do not offer to end the session, and do not follow a seal with a menu of what to do next unless the user asked for one.
 
@@ -106,6 +106,6 @@ They are scope boundaries. Name them in the ceremony, seal anyway.
 
 **Ceremony with no ask:**
 
-> *"Committing this now — the record seals at this point. MDR-7 is Accepted."*
+> *"Committing this now — the record seals at this point. [MDR-7](https://app.memolok.ai/m/<mdlGuid>/MDR-7) is Accepted."*
 
 Narrating the ceremony while doing it regardless. The pause is the entire point.

@@ -94,7 +94,7 @@ Every read pages: `limit` defaults to 25, and `total` counts the whole match. Re
 
 Lead with the answer, then the evidence.
 
-> **Yes — MDR-7, Accepted.** You went with a single drive plus scheduled off-device backup, on the grounds that RAID doesn't protect against the failure modes you actually cared about (fire, theft, deletion).
+> **Yes — [MDR-7](https://app.memolok.ai/m/<mdlGuid>/MDR-7), Accepted.** You went with a single drive plus scheduled off-device backup, on the grounds that RAID doesn't protect against the failure modes you actually cared about (fire, theft, deletion).
 >
 > Still open on that record: the backup destination and schedule.
 

@@ -42,7 +42,7 @@ Settlement retroactively closes a **frozen** question on an **admitted** holder.
 
 > *"Saved — mdrHandle 2 is now Deliberating."*
 
-Cite **MDR-{n}** when admitted. While staged it is **MDRh{handle}** — *"MDRh2 is now Deliberating"* — or the head Claim where that reads better. The field name never appears, and neither does a bare `2`.
+Cite **MDR-{n}** when admitted. While staged it is **MDRh{handle}** — *"[MDRh2](https://app.memolok.ai/m/<mdlGuid>/MDRh2) is now Deliberating"* — or the head Claim where that reads better. A number or a handle goes to the user as a link to its address (Rule F). The field name never appears, and neither does a bare `2`.
 
 **Never smuggle the Verdict into the Need:**
 

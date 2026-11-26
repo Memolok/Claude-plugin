@@ -3,7 +3,7 @@ name: memolok-citations
 description: >-
   Load before you write a Memolok ledger identifier, such as `MDR-12`, into any text that outlasts this session, the ledger's own included (another record, a matter, world fact, outcome or note), and beyond the ledger (file edits, code comments, documents, commit messages, tickets, messages, etc), or notes kept for later sessions such as agent memory.
   
-  You MUST NOT write such a reference without first loading this skill, once per session, even when the text already carries others: a number in prose is linked to nothing, so nothing protects it unless its record is anchored first. Naming entries in chat with the user, or in notes that end with this session, is exempt, unless those notes draft text that will be copied out.
+  You MUST NOT write such a reference without first loading this skill, once per session, even when the text already carries others: a number in prose is linked to nothing, so nothing protects it unless its record is anchored first. Naming entries in chat with the user, as the links Rule F in `memolok-method` gives, or in notes that end with this session, is exempt, unless those notes draft text that will be copied out.
 user-invocable: false
 ---
 
@@ -21,7 +21,7 @@ A decision worth recording gets referred to somewhere else — in the code it ju
 
 **Write an id only once a call of yours has returned it**: never invented, completed or relayed unread from a report. Where a file needs it earlier, leave `wf_…` and grep for it before committing; a commit message or sent text takes no marker, so create first.
 
-**Scratchpads: freely here, not into artifacts on your own initiative.** Name a note by its `msp_…` id whenever it helps agree which note is meant; the address is deliberately untypeable to discourage the durable citation, not the spoken one. Do not write one into a project artifact unasked — a note is free to be rewritten or binned, so an artifact resting on one rests on something the ledger will not defend. The practitioner may overrule that whenever they like; say once that a note carries no promise of still saying the same thing later, and leave it with them. "Never citable" is about the ledger's own reference fields, which is what keeps a note disposable; it is not a rule against naming one.
+**Scratchpads: freely here, not into artifacts on your own initiative.** In chat, name a note through a link on descriptive words, its `msp_…` id only when asked (Rule F); the address is deliberately untypeable to discourage the durable citation, not the spoken one. Do not write one into a project artifact unasked — a note is free to be rewritten or binned, so an artifact resting on one rests on something the ledger will not defend. The practitioner may overrule that whenever they like; say once that a note carries no promise of still saying the same thing later, and leave it with them. "Never citable" is about the ledger's own reference fields, which is what keeps a note disposable; it is not a rule against naming one.
 
 ## Build, seal, then cite
 
@@ -77,8 +77,6 @@ Every address is the identifier you already hold, under the ledger's own address
 
 **A user's address is `…/m/<musr_…>#id`**, the `iri` Memolok gives for them, and it opens their profile in the portal: each reader sees what that person shows them, and a reader shown nothing gets exactly what an address naming no one gives.
 
-> **Not built yet.** A feedback report and a service principal have addresses too — `https://app.memolok.ai/m/<mfb_…>`, and `…/m/<msvc_…>#id` naming the principal itself — but neither opens yet. Give a reader the identifier rather than a link that leads nowhere.
-
 **A record sealed before these addresses existed may quote older ones** — `https://www.memolok.ai/mdl/…`, a bare ledger guid, an `sp_…` note id. None was ever served and nothing redirects them: quote the record as it stands, and write the current address in your own reference.
 
 **A record's part is addressed under its record**: the record's address, then `#`, then the part's id exactly as the record holds it, from your own read, `…/MDR-7#oq-backup`. Citing a part cites its record, so the record is what you anchor.
@@ -100,7 +98,8 @@ What binds a bare identifier to a ledger differs by where you are writing, and t
 | Notes only this project's sessions load, such as agent memory | `MDR-7`, bare, for an entry on the ledger the project's `.memolok/mdl.yml` names |
 | Markdown declaring `mdlGuid` in frontmatter | `MDR-7`, bare, anywhere in the document |
 | Markdown without that frontmatter | A link: `[MDR-7](https://app.memolok.ai/m/<mdlGuid>/MDR-7)` |
-| Anything else — email, chat, a ticket, another tool's payload | The address, written out |
+| Chat with the user, in this session | A link, as Rule F in the method gives it; no anchor |
+| Anything else — email, a chat message to anyone else, a ticket, another tool's payload | The address, written out |
 
 **A record's part takes its record's form**: `MDR-7#oq-backup` wherever a bare `MDR-7` may stand, and its full address everywhere else. **So does every other ledger entry**: a bare `wf_…`, `mt_…`, `oo_…` or `an_…` where `MDR-7` may stand bare, and its address everywhere else.
 
@@ -114,7 +113,7 @@ What binds a bare identifier to a ledger differs by where you are writing, and t
 
 Rule F in the method governs naming here. The inserted `h` and the missing separator in `MDRh7` are deliberate: a corrupted handle fails loudly instead of degrading into a citation that looks valid.
 
-> **A staged record's handle stays in your sessions.** `MDRh7` names it in chat and in session notes that are neither committed nor sent — a plan nobody commits, a hand-off pasted into the next session. It never goes into anything committed to a repository or sent to anyone: not a source file, a document, a commit message, a ticket, or a payload you hand to another tool. Feedback to Memonos is the one exception: it may name a draft by its handle, because the team behind Memolok resolves one reliably.
+> **A staged record's handle stays in your sessions.** `MDRh7` names it in chat, as a link to its address, and in session notes that are neither committed nor sent — a plan nobody commits, a hand-off pasted into the next session. It never goes into anything committed to a repository or sent to anyone: not a source file, a document, a commit message, a ticket, or a payload you hand to another tool. Feedback to Memonos is the one exception: it may name a draft by its handle, because the team behind Memolok resolves one reliably.
 
 The test is where the text will live, decided when you write it, not what kind of document it is. A hand-off that gets committed is a project artifact, and text a note drafts for copying into one is judged by where it will land. A verbatim archive naming a staged record by `MDRh…` is not committable as written: paraphrase its head Claim and mark the edit, or omit the passage.
 

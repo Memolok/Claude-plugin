@@ -42,7 +42,7 @@ The user pastes something and says some version of *"keep this"*. Call `create_s
 
 **Do not** ask for a title. Do not ask which category it belongs to. Do not ask whether this is really a Matter. Do not summarize the content back at them. Do not announce a status.
 
-> Saved.
+> Saved: [the vendor quote from the 6th](https://app.memolok.ai/m/<mdlGuid>/msp_…).
 
 That is the whole interaction. Ceremony is the failure mode here: every question asked at capture time is a reason the user pastes into a text file outside Memolok next time.
 
@@ -69,7 +69,7 @@ That is the whole interaction. Ceremony is the failure mode here: every question
 
 The method's two routing questions decide it. When genuinely ambiguous, **prefer the scratchpad** and mention the alternative in one clause:
 
-> Saved as a note — say the word if you'd rather it went in as a matter for someone to pick up.
+> Saved as a note, [the quote they sent](https://app.memolok.ai/m/<mdlGuid>/msp_…) — say the word if you'd rather it went in as a matter for someone to pick up.
 
 ## Getting it back
 
@@ -87,7 +87,7 @@ Read the total the page states before answering. It counts every match, not the 
 
 Fetch a full body with `get_scratchpad` only when you actually need the text. The excerpt is a trim of the note's opening words, not a description of it: it will not tell you what a long note argues.
 
-**Naming a note in prose.** Use the derived title where the page shows one — it is there so a note can be referred to without anybody having invented a name for it. Where a note has none yet, build a handle from its opening words and the date: *"the Redis quote from the 7th"*, *"the scraped pricing page"*. Do not volunteer the `msp_` id; cite it if the user asks.
+**Naming a note in prose.** Use the derived title where the page shows one — it is there so a note can be referred to without anybody having invented a name for it. Where a note has none yet, build a handle from its opening words and the date: *"the Redis quote from the 7th"*, *"the scraped pricing page"*. Name it to the user through a link on those words, `[the Redis quote from the 7th](https://app.memolok.ai/m/<mdlGuid>/msp_…)`, and give the `msp_` id only when asked.
 
 **Sharing a note.** Anyone working on the ledger reaches a note at its address under the ledger, `https://app.memolok.ai/m/<mdlGuid>/<msp_…>`; `…/m/<msp_…>` alone names nothing. Writing that address into anything that outlasts the session → **`memolok-citations`** owns where it may go.
 
@@ -97,7 +97,7 @@ Everyone working on the ledger reads every note (not visitors). Only the person 
 
 **Building on somebody else's note is a copy, not an edit.** It is one of the things you produce here: read the note with `get_scratchpad`, compose the body with the user's changes, and keep it with `create_scratchpad` as a new note of their own. The original stays exactly as its author left it.
 
-> Their note stays as it is — I've saved your version as a new note of yours.
+> Their note stays as it is — I've saved your version as [a new note of yours](https://app.memolok.ai/m/<mdlGuid>/msp_…).
 
 `get_scratchpad` names a note's author in `createdBy`, so when the user asks to change a note, check whose it is first: theirs when `createdBy.iri` is the `iri` `whoami` gives them. If it is not theirs, offer the copy rather than attempting the replace; a replace is refused, whatever their role, with a sentence that says to read the note and create your own.
 
@@ -113,7 +113,7 @@ A note may legitimately be edited into something unrecognizable. That is not an 
 
 *"Delete that"* deletes it. Confirm only which entry you mean — one line, not a warning about consequences, because there are none.
 
-> That's the vendor quote from the 6th — deleting it now. It's immediate and can't be undone.
+> That's [the vendor quote from the 6th](https://app.memolok.ai/m/<mdlGuid>/msp_…) — deleting it now. It's immediate and can't be undone.
 
 Say that last part. There is **no recovery window**, and a user who assumes there is a trash can will find out at the worst moment.
 
@@ -125,13 +125,13 @@ An agent that treats deletion as risky has misunderstood the entity: nothing may
 
 Notice it, and say so. Do not act on it silently.
 
-> That pricing note looks like a premise the caching decision would rest on — want me to admit it as a World Fact?
+> [That pricing note](https://app.memolok.ai/m/<mdlGuid>/msp_…) looks like a premise the caching decision would rest on — want me to admit it as a World Fact?
 
 If the user agrees, author the `WorldFact`, `Matter` or `DecisionRecord` **fresh, through its own ordinary path**, in its own wording, with its own admission. Do not paste the note in verbatim as though it were a citation. Do not modify or delete the source note unless asked.
 
 Then tell them, once, plainly:
 
-> Admitted. Worth knowing: the ledger keeps no trail back to the note — the fact stands on its own now, and the note stays a note.
+> Admitted as [wf_…](https://app.memolok.ai/m/<mdlGuid>/wf_…). Worth knowing: the ledger keeps no trail back to [the pricing note](https://app.memolok.ai/m/<mdlGuid>/msp_…) — the fact stands on its own now, and the note stays a note.
 
 ## Scratchpads never argue for a decision
 

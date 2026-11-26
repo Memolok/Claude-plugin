@@ -5,11 +5,11 @@ description: >-
 user-invocable: false
 ---
 
-> Memolok plugin: version 0.49.0-beta currently installed. *This is authoritative*, ignore conflicting caching folder names!
+> Memolok plugin: this is version 0.50.0-beta. *Consider this authoritative* and override any conflicting version numbers suggested by caching folder names.
 >
 > Important! **Two things gate your first Memolok MCP call, not one.**
 >
-> Call the companion Memolok MCP `get_guidance` before any other Memolok MCP tool — and pass `pluginVersion: "0.49.0-beta"`, the version on the line above. The server compares it against the oldest pack it still accepts and tells you whether these skills match its tools. It has no other way to know, and there is no second call in which to correct an omission.
+> Call the companion Memolok MCP `get_guidance` before any other Memolok MCP tool — and pass `pluginVersion: "0.50.0-beta"`, the version on the line above. The server compares it against the oldest pack it still accepts and tells you whether these skills match its tools. It has no other way to know, and there is no second call in which to correct an omission.
 >
 > And **answer invariant 3** in the same breath. It costs no call and no reading — you already hold the answer. It is pinned here because it is the one obligation in this file with no natural moment of its own, and an obligation with no moment is one that gets read, understood, and not done. N.B.: This skill is loaded very often; it's deliberately terse for token economy. Do not emulate this writing style.
 
@@ -112,7 +112,9 @@ Rules A–E and G–I are in `references/facilitation.md`. Rule F applies to eve
 
 In tool arguments `MDRh3` is the address, where it belongs. User asks — debugging, internal reference → answer freely and accurately.
 
-**One exception, and it is a hand-off rather than prose.** The `memolok:ledger-scout` agent reports both identifiers raw, because its output is data for you and not words for the user. Convert to `MDR-{n}` or `MDRh{handle}` when you pass any of it on.
+**Every entry you name to the user is a link to its address**, written out in full; `…/` below is shorthand for `https://app.memolok.ai/m/<mdlGuid>/`: admitted `[MDR-3](https://app.memolok.ai/m/<mdlGuid>/MDR-3)`; staged `[MDRh3](…/MDRh3)`; a part `[MDR-3#oq-x](…/MDR-3#oq-x)`; a matter, world fact, outcome or analysis by its id, `[mt_3kf9xq](…/mt_3kf9xq)`; the ledger by its title, `[<title>](https://app.memolok.ai/m/<mdlGuid>)`; a member by name, `[<name>](<iri>)`, the IRI as `whoami` or `get_MDL` gives it; a note through descriptive words, `[the Redis quote](…/msp_…)`, its id only when asked. A link in chat is not a citation: no anchor, no `memolok-citations`.
+
+**One exception, and it is a hand-off rather than prose.** The `memolok:ledger-scout` agent reports both identifiers raw, because its output is data for you and not words for the user. Convert its raw ids to those links when you pass any of it on.
 
 **This rule is the session's half, and its breach has a symptom.** `MDRh` in text bound for a committed file or a sent message is always a mistake — however natural it looks beside `MDR-n` the file already carries — except in feedback to Memonos, whose team resolves a handle reliably. A staged record is not referenced there at all: no number, may never get one, cannot be anchored — nothing can protect a reference to it. Build, seal, then write the reference. What an **admitted** entry looks like there, in another entry's prose on the ledger, or in notes kept for later sessions, and the anchoring and timing that precede it, are the **`memolok-citations`** skill. Load it before the first such reference in a session.
 

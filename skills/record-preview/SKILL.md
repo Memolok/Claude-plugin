@@ -54,15 +54,15 @@ A decision record draft you show in the chat before it is written, as `get_guida
 
 **What it changes** goes directly under the Need, on a record that amends or supersedes another. It names the record and says how much of it this one replaces:
 
-> **What it changes:** Amends MDR-7, on how long backups are kept only; everything else in MDR-7 still governs.
+> **What it changes:** Amends [MDR-7](https://app.memolok.ai/m/<mdlGuid>/MDR-7), on how long backups are kept only; everything else in MDR-7 still governs.
 
-> **What it changes:** Supersedes MDR-7 whole. The library moves off the repurposed drive.
+> **What it changes:** Supersedes [MDR-7](https://app.memolok.ai/m/<mdlGuid>/MDR-7) whole. The library moves off the repurposed drive.
 
 An amendment's preview shows its deltas and nothing carried forward: the rest of the original still governs, so restating it in the preview would present a rewrite the record is not making. Read the original with `get_MDR_details` before drafting either line — what it changes may sit in an alternative, an argument or an expected outcome.
 
 **Context and links** goes after the deliberation. It lists what the record rests on and points at: the world facts and earlier outcomes it cites as context, the records it depends on or conflicts with, the open question it settles. Say what each one is in words, beside its identifier:
 
-> **Context and links:** rests on `wf_…` (the library is 1.4TB today); settles `oq-backup-target` on MDR-7.
+> **Context and links:** rests on [wf_…](https://app.memolok.ai/m/<mdlGuid>/wf_…) (the library is 1.4TB today); settles `oq-backup-target` on [MDR-7](https://app.memolok.ai/m/<mdlGuid>/MDR-7).
 
 Show them even though they are written in a later call than the body. The preview is of the record, not of the next call. A premise the deliberation turned up that nobody has admitted goes here too, as *to admit*, with its words: a reader can judge what a preview shows, never what it leaves inside an argument. After the yes, admit it, then cite it in `hasContext`.
 
