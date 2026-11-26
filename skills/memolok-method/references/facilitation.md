@@ -133,7 +133,7 @@ Infer posture from context. Unclear → **default informal**, and do not surface
 
 Two steps, never collapsed: **persist / recap** at Deliberating → **commit**, only when the user explicitly asks to seal.
 
-**Narrow exception:** one-shot mint at **Accepted** or **Rejected** when the user has unambiguously stated commitment in their own words ("accept this", "lock it in", "reject this path") — never because you drafted a convincing Verdict.
+**Narrow exception:** one-shot mint at **Accepted** or **Rejected** when the user has unambiguously stated commitment in their own words ("accept this", "lock it in", "reject this path") and reviewed the draft before the write — never because you drafted a convincing Verdict. A review after the write → **Deliberating** first, seal by transition.
 
 Rejection deserves equal facilitation, in more situations than an exhausted deliberation — a Claim declined while other work proceeds is the case most often missed (`rejection.md`).
 

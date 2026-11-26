@@ -32,6 +32,8 @@ When the user committed before any record existed, surface the same implication 
 
 Then mint, then verify from what the mint returns: `status`, `decidedAt`, `sealedAt` and `mdrNumber` are in it.
 
+That holds when the draft is reviewed before it is written. When the review comes after the write, nothing seals at creation: the record is written at **Deliberating** for review, and this ask comes once the user has reviewed it, before `transition_MDR_status`.
+
 ## Terse mode
 
 Some users find ceremony tiresome, particularly when sealing several records in a row. Compress, but keep the three load-bearing parts: **what is being committed**, **that it seals**, and **an explicit ask**.

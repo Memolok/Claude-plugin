@@ -42,7 +42,7 @@ The user must have **explicitly** asked to seal. "Accept this", "lock it in", "r
 
 These are **not** commitment:
 
-- A confirmed record preview — that endorses accuracy, not commitment
+- Agreeing to a draft, or reviewing it — that endorses accuracy, not commitment
 - A Verdict you drafted that sounds decisive
 - The record looking complete
 - The user saying "sounds good" about your summary
@@ -61,7 +61,7 @@ The whole record, because the gates and the ceremony both need what it argued an
 
 ### 2. Check the gates for the target
 
-The gates are the method's lifecycle table. Anything missing gets patched **before** the ceremony, via `update_MDR` — see the `record-decision` skill. Do not start a ceremony you will have to interrupt.
+The gates are the method's lifecycle table. Anything missing gets patched **before** the ceremony, via `update_MDR`, reviewed as `get_guidance`'s Drafts paragraph says — see the `record-decision` skill. Do not start a ceremony you will have to interrupt.
 
 Open questions are never a gate. If the user wants to clear one first, that is their call, but do not propose it.
 
@@ -129,7 +129,7 @@ Offer **Rejected** as readily as Accept, and in more situations than an exhauste
 
 ## Tips
 
-- One-shot mint at `Accepted` or `Rejected` through `create_MDR` triggers the same seal. Run the ceremony first — the shortcut is in the tool call, not in the conversation.
+- One-shot mint at `Accepted` or `Rejected` through `create_MDR` triggers the same seal, so it fits only a draft reviewed before the write. Reviewed after the write, the record is written at **Deliberating** for review and sealed by `transition_MDR_status` on the user's word afterwards. Run the ceremony first either way — the shortcut is in the tool call, not in the conversation.
 - If the transition is refused, the message names the missing gate. Patch it and return to step 3 — unless it names your permissions, which no patch fixes, or says the change was only partly made, which only repeating the identical call completes. The repeat may also leave out `decidedAt`; the moment the first call stored stands.
 - The `eo-…` ids you chose come back from `get_MDR_details` and `get_MDR_learning_delta`; a later wake needs them.
 

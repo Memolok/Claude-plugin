@@ -1,6 +1,6 @@
 # MCP tools catalog
 
-Every tool except `ping` and `get_guidance` requires authentication. All ledger tools are scoped by `mdlGuid`.
+Every tool requires authentication, `ping` and `get_guidance` included. All ledger tools are scoped by `mdlGuid`.
 
 ## Identity keys
 
@@ -53,8 +53,9 @@ All prose parameters use `{ markdown, lang? }` — see `prose-and-raci.md` for w
 | Param | Type | Required |
 | --- | --- | --- |
 | `pluginVersion` | string | Send it always; older packs that cannot are still served |
+| `previewMode` | `"portal"` \| `"chat"` | no — only when the user says where they want drafts this session; never your own choice |
 
-The reply names the newest pack available and the oldest this server accepts. If it says your pack is too old, its skills describe payloads the server now refuses — say so and recommend updating, rather than proceeding and hitting write errors that read as data problems.
+The reply ends with a Drafts paragraph: where the user reviews a decision record or matter you draft this session, and what to do before and after each write. The reply names the newest pack available and the oldest this server accepts. If it says your pack is too old, its skills describe payloads the server now refuses — say so and recommend updating, rather than proceeding and hitting write errors that read as data problems.
 
 ### `whoami`
 

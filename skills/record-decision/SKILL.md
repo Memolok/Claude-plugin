@@ -74,9 +74,9 @@ Worked examples of ambiguous intakes: `references/intake-fork.md`.
 
 ### 3a. Bait branch
 
-1. `register_matter` with the stakeholder's words **verbatim**, and who raised it in `raisedBy`. Do not sharpen, summarize, or translate into a target — the raw input is the point, and the analysis in step 3 freezes it. An already-admitted world fact or observed outcome skips this step and goes into step 3 as itself.
+1. `register_matter` with the stakeholder's words **verbatim**, and who raised it in `raisedBy`, reviewed as `get_guidance`'s Drafts paragraph says: one short review of those words. Do not sharpen, summarize, or translate into a target — the raw input is the point, and the analysis in step 3 freezes it. An already-admitted world fact or observed outcome skips this step and goes into step 3 as itself.
 2. Sharpen the need **with the user**, not for them. The head Claim is a falsifiable objective, and it must not name the mechanism you are about to choose (Rule G).
-3. Continue at step 4. The record is drafted and previewed before anything mints it; the analysis is written at step 7, after the yes, with `producesDecision: true` and the sharpened `claimDescription`. Pass every input this reasoning took up in `motivatedBy` — not just the one that prompted the conversation, and in whatever mix of matters, world facts and observed outcomes actually applies. That call mints the record at **New** and concludes the analysis.
+3. Continue at step 4. The record is drafted and reviewed before anything mints it; the analysis is written at step 7, once the user agrees, with `producesDecision: true` and the sharpened `claimDescription`. Pass every input this reasoning took up in `motivatedBy` — not just the one that prompted the conversation, and in whatever mix of matters, world facts and observed outcomes actually applies. That call mints the record at **New** and concludes the analysis.
 
 If sharpening shows there is no decision to make, that is **Path B**: `create_analysis` with `producesDecision: false` and a rationale explaining why. Confirm with the user first. No record is minted, and that is an honest outcome, not a failure.
 
@@ -84,7 +84,7 @@ Payloads: `references/matter-payloads.md`. How a matter comes to rest, and what 
 
 ### 3b. Expert branch
 
-Nothing is written yet: draft the record (steps 4–6) and preview it (step 7). After the yes, one `create_MDR` carries the whole body with `status: "Deliberating"` — the default, however complete the body is. Reserve `Accepted` or `Rejected` at creation for the narrow case in Rule C where the user has already stated commitment in their own words.
+Nothing is written yet: draft the record (steps 4–6) and review it (step 7). Once the user agrees, one `create_MDR` carries the whole body with `status: "Deliberating"` — the default, however complete the body is. Reserve `Accepted` or `Rejected` at creation for the narrow case in Rule C where the user has already stated commitment in their own words.
 
 Payloads: `references/expert-payloads.md`.
 
@@ -93,7 +93,7 @@ Payloads: `references/expert-payloads.md`.
 **Draft from what the user already said before asking anything** (Rule E). Mine the conversation for the favoured path, discarded options, "versus doing nothing", and constraints that ruled things out.
 
 - `alternatives` — `label` is a short handle, `description` is the option's substance
-- `deliberationFacts` — arguments the user actually made, each paired with `onAlternative`. A premise surfacing here, said or measured, is not one: it is a World Fact (`manage-almanac`), shown on the preview as *to admit* and cited in `hasContext` once admitted, and the argument keeps only what the premise means for its option
+- `deliberationFacts` — arguments the user actually made, each paired with `onAlternative`. A premise surfacing here, said or measured, is not one: it is a World Fact (`manage-almanac`), named in the draft's review as *to admit* and cited in `hasContext` once admitted, and the argument keeps only what the premise means for its option
 
 Do not invent options to make the belly look fuller. One short honesty check is fine when a single path has no acknowledgment of what else was in play; it is not a gate, and it is not a brainstorm.
 
@@ -117,15 +117,15 @@ When building shows the draft was wrong, record the correction as a deliberation
 
 Record what this decision deliberately leaves unsettled as `openQuestions`, rather than expanding the record to settle it. Rule D's test decides what qualifies: something a reader of this record could believe it settled, and that acting on the decision can go ahead without. A question the user's next step waits on naturally belongs in this deliberation; if they defer it anyway, say once what it leaves waiting, then record it. Open questions never block the seal.
 
-### 7. Preview and persist
+### 7. Review and persist
 
-Show the draft back in the shape the **`record-preview`** skill fixes, and wait for a yes. **Nothing about the record is written before that yes**: not the head Claim, not a minimal record to fill in later.
+Review the draft as `get_guidance`'s Drafts paragraph says, and nothing is written before the user agrees — to the preview, or to writing it for review; a preview in the chat is in the shape the **`record-preview`** skill fixes. Nothing means nothing: not the head Claim, not a minimal record to fill in later.
 
-Then write it. Expert branch: one `create_MDR` with the body at **Deliberating** (`references/expert-payloads.md`). Bait branch: `create_analysis` as step 3a describes, `transition_MDR_status` to **Deliberating**, then `update_MDR` with the body. Any later change to a written draft is previewed the same way, then sent as `update_MDR`. Payloads: `references/patch-payloads.md`. A patch replaces each array it carries whole, so an array you did not just draft starts from `get_MDR_details`, not from memory. `get_MDR` answers what a record decided; `get_MDR_details` answers why and how — and the arrays are the how.
+Then write it. Expert branch: one `create_MDR` with the body at **Deliberating** (`references/expert-payloads.md`). Bait branch: `create_analysis` as step 3a describes, `transition_MDR_status` to **Deliberating**, then `update_MDR` with the body. Any later change to a written draft is reviewed the same way, then sent as `update_MDR`. Payloads: `references/patch-payloads.md`. A patch replaces each array it carries whole, so an array you did not just draft starts from `get_MDR_details`, not from memory. `get_MDR` answers what a record decided; `get_MDR_details` answers why and how — and the arrays are the how.
 
 The body carries `authoredBy`: you, when you drafted the text, named as *Who held each role* in the method's `facilitation.md` has it. `decidedBy` waits for the seal.
 
-Confirming the preview is **not** t₀. Do not offer **Proposed** on informal work, and do not offer **Accepted** unless the user has raised sealing themselves.
+Agreeing to the draft is **not** t₀. Do not offer **Proposed** on informal work, and do not offer **Accepted** unless the user has raised sealing themselves.
 
 ### 8. Offer next steps
 
@@ -152,7 +152,7 @@ Full worked correction arc: `references/need-vs-verdict-drift.md`.
 
 ## Anti-patterns
 
-**The Verdict smuggled into the head Claim.** Most frequent on the expert branch, where the record is negotiated with the user before you are asked to preview or save it: by then you know the whole reasoning, and the answer leaks into the Need. Run the drift test on the Claim before the preview.
+**The Verdict smuggled into the head Claim.** Most frequent on the expert branch, where the record is negotiated with the user before you are asked to review or save it: by then you know the whole reasoning, and the answer leaks into the Need. Run the drift test on the Claim before the review.
 
 **Open questions from outside the record's scope.** The eager-to-please failure: each one widens the record instead of marking its edge. Rule D's first test rejects it — no reader would believe this record settled it.
 

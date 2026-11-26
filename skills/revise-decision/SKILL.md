@@ -88,7 +88,7 @@ Two things follow, and the second is the one that gets missed:
 
 The original stays **Accepted** and keeps governing. A new record states the change and names what it changes.
 
-1. Mint a staged successor through **`record-decision`**. Its Need is the specific question — *what should this part say now* — not a restatement of the original decision. Its preview is in the shape the **`record-preview`** skill fixes, and names what it amends.
+1. Mint a staged successor through **`record-decision`**. Its Need is the specific question — *what should this part say now* — not a restatement of the original decision. Review it as `get_guidance`'s Drafts paragraph says, and nothing is written before the user agrees — to the preview, or to writing it for review; a preview in the chat is in the shape the **`record-preview`** skill fixes. The review names what it amends.
 2. Patch `amends: [7]` on the successor while it is still staged.
 3. Commit it. At admission the target gains `amendedBy` pointing back, so a reader who opens the original sees that something later qualified it.
 
@@ -102,7 +102,7 @@ The honest route whenever the world moved on rather than the record being wrong,
 
 The original stays exactly as it is — it was true at its own t₀, and that history is the point. A new record carries the new decision and names the old one.
 
-1. Mint a staged successor through **`record-decision`**, with its own Need, alternatives, and Verdict. A supersession is a real decision and needs real deliberation — including when the intent is simply to retire something with no replacement. Its preview is in the shape the **`record-preview`** skill fixes, and names what it supersedes.
+1. Mint a staged successor through **`record-decision`**, with its own Need, alternatives, and Verdict. A supersession is a real decision and needs real deliberation — including when the intent is simply to retire something with no replacement. Review it as `get_guidance`'s Drafts paragraph says, and nothing is written before the user agrees — to the preview, or to writing it for review; a preview in the chat is in the shape the **`record-preview`** skill fixes. The review names what it supersedes.
 2. Patch `supersedes: [7]` on the successor while it is still staged.
 3. Commit it. At admission the target flips to **Superseded** and reciprocals publish.
 

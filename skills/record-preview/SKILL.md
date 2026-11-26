@@ -1,13 +1,13 @@
 ---
 name: record-preview
 description: >-
-  Load before you show the user drafted content for a Memolok decision record ahead of writing it: a new record, a body or patch for one already on the ledger, one that amends, supersedes or settles another, or a correction to a draft already shown. You MUST NOT present such a draft without first loading this skill, once per session. Sealing a record is not a preview: that is `commit-decision`.
+  Load before you show the user, in the chat, drafted content for a Memolok decision record ahead of writing it: a new record, a body or patch for one already on the ledger, one that amends, supersedes or settles another, or a correction to a draft already shown. You MUST NOT present such a draft in the chat without first loading this skill, once per session. Sealing a record is not a preview: that is `commit-decision`.
 user-invocable: false
 ---
 
 # Record preview
 
-Every decision record you draft is shown to the user before it is written, and **every one is shown in the layout below**: the first preview of a session and the tenth, a new record and one correcting a sealed record alike. The user comes to know where the Need sits, where the choice is marked and where the scope boundaries are, and reads a preview by looking in those places. A preview laid out from memory beside one laid out here teaches two layouts, even when both say the same thing.
+A decision record draft you show in the chat before it is written, as `get_guidance`'s Drafts paragraph may call for, is **always shown in the layout below**: the first preview of a session and the tenth, a new record and one correcting a sealed record alike. The user comes to know where the Need sits, where the choice is marked and where the scope boundaries are, and reads a preview by looking in those places. A preview laid out from memory beside one laid out here teaches two layouts, even when both say the same thing.
 
 **Every number in this file is illustrative.** `MDR-7` names nothing; do not repeat these examples to the user as though they were entries on their ledger.
 
