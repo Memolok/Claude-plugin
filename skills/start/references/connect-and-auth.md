@@ -37,7 +37,7 @@ Start with `ping`. It is the only tool that tells you about the connection rathe
 | `The access token names a Memolok user that no longer exists.` | The sign-in is valid but its account is gone | Reconnect to sign in again; if it recurs, an administrator checks the account |
 | `The access token carries a malformed Memolok user id.` | The sign-in is valid but its identity claim is unusable | Reconnect to sign in again; if it recurs, report it |
 | `Memolok Decision Ledger not found.` | Does not distinguish a ledger the user cannot see from one that is not there. Report it as ambiguous: they may not be a member, or this address may be stale | `get_MDLs` to see what they can actually reach |
-| `You do not have the necessary permissions to create ledgers.` | Their account is not allowed to create a ledger | An administrator changes the account's role |
+| `You do not have the necessary permissions to create ledgers.` | Their account is not allowed to create a ledger | An administrator changes the account's role; a demo account creates none |
 | `You do not have the necessary permissions to …` on a write | Their role on the ledger does not allow that write | An administrator changes the role |
 | Writes refused and notes unreadable, other reads fine | `visitor` role | An administrator changes the role |
 | "Automatic client registration isn't supported" | Server-side registration issue | Not fixable by the user; report it |
