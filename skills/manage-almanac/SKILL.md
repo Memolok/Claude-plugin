@@ -1,7 +1,7 @@
 ---
 name: manage-almanac
 description: >-
-  Admit, look up or correct the world facts a Memolok ledger reasons from: things that are true independently of this ledger's decisions. In a project that keeps a Memolok ledger, load before you research or measure something, yourself or through a subagent: the almanac may already hold the answer. If not, when you learn things that hold independently of this ledger's decisions, negative findings expressely included, belong there once you learn them: a finding left in a chat reply or a record's prose is found by no later session. Also use this skill when the user states an independent premise rather than a choice ("legal requires seven-year retention" in a ledger that didn't decide the retention policy), says that a previously admitted fact was wrong, or wants to cite a fact, in a decision or elsewhere; in any text beyond a decision's own links, also see `memolok-citations`. A fact already admitted that calls for a decision → `record-decision`.
+  Admit, look up or correct the world facts a Memolok ledger reasons from: things that are true independently of this ledger's decisions. In a project that keeps a Memolok ledger, load before you research or measure something, yourself or through a subagent: the almanac may already hold the answer. If not, what you learn that holds independently of this ledger's decisions and that a choice could be reasoned from, negative findings expressly included, belongs there once you learn it, whatever you learned it for: a finding left in a chat reply or a record's prose is found by no later session. Also use this skill when the user states an independent premise rather than a choice ("legal requires seven-year retention" in a ledger that didn't decide the retention policy), says that a previously admitted fact was wrong, or wants to cite a fact, in a decision or elsewhere; in any text beyond a decision's own links, also see `memolok-citations`. A fact already admitted that calls for a decision → `record-decision`.
 argument-hint: "<the fact>"
 ---
 
@@ -50,7 +50,13 @@ A world fact is a claim about the world that is true whether or not anyone decid
 
 | | *"Here's their whole pricing page"* — source material: a **scratchpad**, via `manage-notes` |
 
-Three tests: **would this still be true if the decision it relates to had never come up?**, **would it stop if this ledger decided to stop doing it?** and **is the user asserting it, or just keeping it?** A symptom is bait — **`save-matter`** or **`record-decision`**. Material nobody is asserting is a note; if it later turns out to matter, admit it *then*, freshly worded. What fails the second is a consequence of this ledger's own decisions, however well verified: name the admitted record in the prose, put the observation in the reasoning, or record it as an outcome if it is one. Another team's decision passes.
+Four tests:
+1. Could anyone reason a choice from it, now or later?
+2. Would this still be true if the decision it relates to had never come up?
+3. Would it stop if this ledger decided to stop doing it?
+4. Is the user asserting it, or just keeping it?
+
+What fails the first, however true and well checked, is detail: a fact that only explains why one piece of code is written as it is goes in that code's comment or its commit message, beside what it explains. *Could* is the test, not *does*: a premise no decision has used yet still passes, and so does a negative a choice would turn on. A symptom is bait — **`save-matter`** or **`record-decision`**. Material nobody is asserting is a note; if it later turns out to matter, admit it *then*, freshly worded. What fails the third is a consequence of this ledger's own decisions, however well verified: name the admitted record in the prose, put the observation in the reasoning, or record it as an outcome if it is one. Another team's decision passes.
 
 ## Workflow
 
@@ -82,7 +88,7 @@ Avoid admitting a near-duplicate. If a prior fact covers the same ground but is 
 
 Write it so it is checkable later. *"The budget is tight"* is not a premise anything can be reasoned from; *"the hardware budget is $10k"* is. A finding of your own: show the user its words before admitting it; facts are immutable.
 
-**Offer it when you learn it**, in a review of its own: admission waits on the user's yes to its words, never on the question it answered or a decision it argues for, which can be put off or dropped. A finding that something does not exist is a fact too, and the likeliest to be searched for again: say what was searched. A subagent's finding is yours to offer; when you send one to research, ask it to report what it established apart from what it recommends, each with its source, marking what it did not check. Admit only what was checked.
+**Offer a finding that passes the tests in *What belongs here* when you learn it**, in a review of its own: admission waits on the user's yes to its words, never on the question it answered or a decision it argues for, which can be put off or dropped. A finding that something does not exist is a fact too, and the likeliest to be searched for again: say what was searched. A subagent's finding is yours to offer; when you send one to research, ask it to report what it established apart from what it recommends, each with its source, marking what it did not check. Admit only what was checked.
 
 **Say who wrote it and who observed it.** `authoredBy` is whoever wrote the claim's words, you when you drafted them; `observedBy` is whoever observed what it states. *"Mary told me the budget went up to $50k"* is your words, Mary's observation and the user's admission. Name Mary as the tool catalogue's `admit_world_fact` says, and leave a role out rather than guess.
 

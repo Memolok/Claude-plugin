@@ -14,6 +14,11 @@ The pack version is independent of the Memolok server's. You install the pack on
 
 *Everything that has landed has shipped. This section is a placeholder.*
 
+## 0.50.2-beta — 2026-11-27
+
+- **Your agent offers a finding for the almanac whatever it learned it for**, including to answer your question or to make the case for a choice, and the wording that tells it when is clearer.
+- **Your agent offers only findings a choice could be reasoned from.** A detail that only explains why some code is written as it is goes in that code's comment or commit message instead.
+
 ## 0.50.1-beta — 2026-11-27
 
 - **Your agent offers what it learns as a fact when it learns it.** Whether it reads documentation, reads source, measures something or sends a subagent to find out, it offers the finding for the almanac then, showing you the wording, rather than waiting for a decision that rests on it, which you may put off. A finding that something does not exist counts too.
