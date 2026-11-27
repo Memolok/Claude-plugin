@@ -14,6 +14,10 @@ The pack version is independent of the Memolok server's. You install the pack on
 
 *Everything that has landed has shipped. This section is a placeholder.*
 
+## 0.50.1-beta — 2026-11-27
+
+- **Your agent offers what it learns as a fact when it learns it.** Whether it reads documentation, reads source, measures something or sends a subagent to find out, it offers the finding for the almanac then, showing you the wording, rather than waiting for a decision that rests on it, which you may put off. A finding that something does not exist counts too.
+
 ## 0.50.0-beta — 2026-11-26
 
 - **Your agent names every ledger entry as a link you can open in the portal.** A decision, a draft, a matter, a fact, an outcome, the ledger itself and the people on it each come as a link to their page.

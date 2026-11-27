@@ -1,7 +1,7 @@
 ---
 name: manage-almanac
 description: >-
-  Admit, look up or correct the world facts a Memolok ledger reasons from: things that are true independently of this ledger's decisions. In a project that keeps a Memolok ledger, load before you research or measure how something behaves: the almanac may already hold the answer; if not, a finding of that kind belongs there once you learn it (not in a record's prose). Also use this skill when the user states an independent premise rather than a choice ("legal requires seven-year retention" in a ledger that didn't decide the retention policy), says that a previously admitted fact was wrong, or wants to cite a fact, in a decision or elsewhere; in any text beyond a decision's own links, also see `memolok-citations`. A fact already admitted that calls for a decision → `record-decision`.
+  Admit, look up or correct the world facts a Memolok ledger reasons from: things that are true independently of this ledger's decisions. In a project that keeps a Memolok ledger, load before you research or measure something, yourself or through a subagent: the almanac may already hold the answer. If not, when you learn things that hold independently of this ledger's decisions, negative findings expressely included, belong there once you learn them: a finding left in a chat reply or a record's prose is found by no later session. Also use this skill when the user states an independent premise rather than a choice ("legal requires seven-year retention" in a ledger that didn't decide the retention policy), says that a previously admitted fact was wrong, or wants to cite a fact, in a decision or elsewhere; in any text beyond a decision's own links, also see `memolok-citations`. A fact already admitted that calls for a decision → `record-decision`.
 argument-hint: "<the fact>"
 ---
 
@@ -46,6 +46,7 @@ A world fact is a claim about the world that is true whether or not anyone decid
 | *"Nobody on the team writes Rust"* | *"Rust is too risky for us"* — a deliberation fact |
 | *"The vendor's SLA is 99.5%"* | *"The vendor is unreliable"* — a judgement, unless someone observed it |
 | *"The vendor publishes its version at `/openapi.json`"* | *"Our service publishes its version at `/openapi.json`"* — a consequence of our own decision |
+| *"The vendor's API reference, read 2026-11-01, documents no bulk export"* | *"Bulk export can't be done"* — a judgement that outruns the search |
 
 | | *"Here's their whole pricing page"* — source material: a **scratchpad**, via `manage-notes` |
 
@@ -80,6 +81,8 @@ Avoid admitting a near-duplicate. If a prior fact covers the same ground but is 
 ```
 
 Write it so it is checkable later. *"The budget is tight"* is not a premise anything can be reasoned from; *"the hardware budget is $10k"* is. A finding of your own: show the user its words before admitting it; facts are immutable.
+
+**Offer it when you learn it**, in a review of its own: admission waits on the user's yes to its words, never on the question it answered or a decision it argues for, which can be put off or dropped. A finding that something does not exist is a fact too, and the likeliest to be searched for again: say what was searched. A subagent's finding is yours to offer; when you send one to research, ask it to report what it established apart from what it recommends, each with its source, marking what it did not check. Admit only what was checked.
 
 **Say who wrote it and who observed it.** `authoredBy` is whoever wrote the claim's words, you when you drafted them; `observedBy` is whoever observed what it states. *"Mary told me the budget went up to $50k"* is your words, Mary's observation and the user's admission. Name Mary as the tool catalogue's `admit_world_fact` says, and leave a role out rather than guess.
 
