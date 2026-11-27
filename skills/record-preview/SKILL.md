@@ -64,7 +64,7 @@ An amendment's preview shows its deltas and nothing carried forward: the rest of
 
 > **Context and links:** rests on [wf_…](https://app.memolok.ai/m/<mdlGuid>/wf_…) (the library is 1.4TB today); settles `oq-backup-target` on [MDR-7](https://app.memolok.ai/m/<mdlGuid>/MDR-7).
 
-Show them even though they are written in a later call than the body. The preview is of the record, not of the next call. A premise the deliberation turned up that nobody has admitted goes here too, as *to admit*, with its words: a reader can judge what a preview shows, never what it leaves inside an argument. After the yes, admit it, then cite it in `hasContext`.
+Show them even though they are written in a later call than the body. The preview is of the record, not of the next call. A premise the deliberation turned up that nobody has admitted goes here too, as *to admit*, with its words: a reader can judge what a preview shows, never what it leaves inside an argument. After the yes, admit it, then cite it in `hasContext`. A record put off or dropped does not take the premise with it: offer it on its own then.
 
 Leave either region out when there is nothing to put in it. Never write "none" there.
 
