@@ -12,7 +12,7 @@ The pack version is independent of the Memolok server's. You install the pack on
 
 ## Unreleased
 
-*Everything that has landed has shipped. This section is a placeholder.*
+- **Your agent offers a finding for the almanac whatever it learned it for**, including to answer your question or to make the case for a choice, and the wording that tells it when is clearer.
 
 ## 0.50.1-beta — 2026-11-27
 
